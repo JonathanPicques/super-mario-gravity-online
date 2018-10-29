@@ -184,6 +184,9 @@ func tick_move_turn(delta):
 		return set_state(PlayerState.fall)
 	if has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.walk)
+	if input_jump_once:
+		set_direction(-direction)
+		return set_state(PlayerState.jump)
 	if velocity.x == 0:
 		set_direction(-direction)
 		return set_state(PlayerState.walk)
