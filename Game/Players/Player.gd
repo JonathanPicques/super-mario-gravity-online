@@ -13,6 +13,7 @@ const FLOOR = Vector2(0, -1)
 const FLOOR_SNAP = Vector2(0, 1)
 const FLOOR_SNAP_DISABLED = Vector2()
 const FLOOR_SNAP_DISABLE_TIME = 0.1
+const INPUT_DOUBLE_TAP_THRESHOLD = 0.25
 
 enum PlayerState {
 	none,
@@ -42,13 +43,20 @@ enum PlayerState {
 
 var state = PlayerState.none
 
-var input_up = 0
-var input_down = 0
-var input_left = 0
-var input_right = 0
-var input_velocity = Vector2()
+var input_up = false
+var input_down = false
+var input_left = false
 var input_jump = false
-var input_jump_held = false
+var input_right = false
+var input_up_once = false
+var input_down_once = false
+var input_left_once = false
+var input_jump_once = false
+var input_right_once = false
+var input_double_down_once = false
+
+var input_velocity = Vector2()
+var last_time_input_down = 0
 
 var velocity = Vector2()
 var velocity_prev = Vector2()
@@ -62,13 +70,27 @@ var disable_snap = 0
 # @param(float) delta
 # @impure
 func process_input(delta):
-	input_up = 1 if Input.is_action_pressed("player_0_up") else 0
-	input_down = 1 if Input.is_action_pressed("player_0_down") else 0
-	input_left = 1 if Input.is_action_pressed("player_0_left") else 0
-	input_right = 1 if Input.is_action_pressed("player_0_right") else 0
-	input_velocity = Vector2(input_right - input_left, input_down - input_up)
-	input_jump = Input.is_action_just_pressed("player_0_jump")
-	input_jump_held = Input.is_action_pressed("player_0_jump")
+	input_up = Input.is_action_pressed("player_0_up")
+	input_down = Input.is_action_pressed("player_0_down")
+	input_left = Input.is_action_pressed("player_0_left")
+	input_jump = Input.is_action_pressed("player_0_jump")
+	input_right = Input.is_action_pressed("player_0_right")
+	
+	input_up_once = Input.is_action_just_pressed("player_0_up")
+	input_down_once = Input.is_action_just_pressed("player_0_down")
+	input_left_once = Input.is_action_just_pressed("player_0_left")
+	input_jump_once = Input.is_action_just_pressed("player_0_jump")
+	input_right_once = Input.is_action_just_pressed("player_0_right")
+	
+	input_double_down_once = false
+	last_time_input_down = max(last_time_input_down - delta, 0)
+	if input_down_once:
+		if last_time_input_down > 0:
+			input_double_down_once = true
+			last_time_input_down = 0
+		last_time_input_down = INPUT_DOUBLE_TAP_THRESHOLD
+	
+	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
 
 # process_velocity updates position after applying velocity
 # @param(float) delta
@@ -84,6 +106,12 @@ func process_velocity(delta):
 		0 if is_nearly(offset.x, 0) else velocity.x,
 		0 if is_nearly(offset.y, 0) else velocity.y
 	)
+
+# set_state changes the current player state to the new given state.
+# @param(PlayerState) new_state
+# @impure
+func set_state(new_state):
+	state = new_state
 
 # set_direction changes the player direction and flips the sprite accordingly.
 # @param(float) new_direction

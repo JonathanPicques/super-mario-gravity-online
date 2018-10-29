@@ -55,7 +55,7 @@ func _physics_process(delta):
 # @param(PlayerState) new_state
 # @impure
 func set_state(new_state):
-	state = new_state
+	.set_state(new_state)
 	match state:
 		PlayerState.stand: pre_stand()
 		PlayerState.stand_turn: pre_stand_turn()
@@ -84,7 +84,7 @@ func tick_stand(delta):
 	handle_deceleration_move(delta, WALK_MAX_SPEED)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	if input_jump:
+	if input_jump_once:
 		return set_state(PlayerState.jump)
 	if input_down:
 		return set_state(PlayerState.crouch)
@@ -124,7 +124,7 @@ func tick_walk(delta):
 		return set_state(PlayerState.fall)
 	if is_on_wall():
 		return set_state(PlayerState.walk_push_wall)
-	if input_jump:
+	if input_jump_once:
 		return set_state(PlayerState.jump)
 	if input_down:
 		return set_state(PlayerState.crouch)
@@ -164,7 +164,7 @@ func tick_walk_push_wall(delta):
 		return set_state(PlayerState.fall)
 	if not is_on_wall():
 		return set_state(PlayerState.stand)
-	if input_jump:
+	if input_jump_once:
 		return set_state(PlayerState.jump)
 
 ###
@@ -172,7 +172,7 @@ func tick_walk_push_wall(delta):
 ###
 
 func pre_fall():
-	start_timer(0.12)
+	start_timer(0.2)
 	set_animation("fall")
 
 func tick_fall(delta):
@@ -182,7 +182,7 @@ func tick_fall(delta):
 		return set_state(PlayerState.fall_to_stand)
 	if is_on_wall_passive() and is_timer_finished():
 		return set_state(PlayerState.wallslide)
-	if input_down:
+	if input_double_down_once:
 		return set_state(PlayerState.ground_pound)
 
 func pre_fall_to_stand():
@@ -194,7 +194,7 @@ func tick_fall_to_stand(delta):
 	handle_deceleration_move(delta, WALK_DECELERATION)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	if input_jump:
+	if input_jump_once:
 		return set_state(PlayerState.jump)
 	if is_timer_finished():
 		if has_invert_direction(direction, velocity.x):
@@ -207,30 +207,30 @@ func pre_jump():
 	play_sound_effect(JumpSFX)
 
 func tick_jump(delta):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump_held else GRAVITY_ACCELERATION * 0.75)
+	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
 	handle_airborne_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
 	if is_on_floor():
 		return set_state(PlayerState.stand)
-	if input_down:
-		return set_state(PlayerState.ground_pound)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
+	if input_double_down_once:
+		return set_state(PlayerState.ground_pound)
 
 ###
 # Mario movement wall states
 ###
 
 func pre_wallslide():
-	velocity.y = velocity.y / 10
+	velocity.y = velocity.y * 0.1
 	set_animation("wallslide")
 
 func tick_wallslide(delta):
-	handle_gravity(delta, GRAVITY_MAX_SPEED / 2, GRAVITY_ACCELERATION / 4)
+	handle_gravity(delta, GRAVITY_MAX_SPEED * 0.5, GRAVITY_ACCELERATION * 0.25)
 	if is_on_floor():
 		return set_state(PlayerState.fall_to_stand)
 	if not is_on_wall_passive():
 		return set_state(PlayerState.fall)
-	if input_jump:
+	if input_jump_once:
 		return set_state(PlayerState.walljump)
 
 func pre_walljump():
@@ -240,7 +240,14 @@ func pre_walljump():
 	play_sound_effect(WalljumpSFX)
 
 func tick_walljump(delta):
-	tick_jump(delta)
+	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
+	handle_airborne_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION * 0.25)
+	if is_on_floor():
+		return set_state(PlayerState.stand)
+	if velocity.y > 0:
+		return set_state(PlayerState.fall)
+	if input_double_down_once:
+		return set_state(PlayerState.ground_pound)
 
 ###
 # Mario attack states
