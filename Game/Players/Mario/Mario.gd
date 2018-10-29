@@ -3,6 +3,7 @@ extends "res://Game/Players/Player.gd"
 onready var JumpSFX = preload("res://Game/Players/Mario/Sounds/smb_jump.ogg")
 onready var SkidSFX = preload("res://Game/Players/Mario/Sounds/smas_skid.ogg")
 onready var StepSFX = preload("res://Game/Players/Mario/Sounds/step_default.ogg")
+onready var CrouchSFX = preload("res://Game/Players/Mario/Sounds/crouch.ogg")
 onready var WalljumpSFX = preload("res://Game/Players/Mario/Sounds/smas_kick.ogg")
 onready var GroundPoundSFX = preload("res://Game/Players/Mario/Sounds/yi_poundbegin.ogg")
 onready var GroundPoundFallToStandSFX = preload("res://Game/Players/Mario/Sounds/yi_poundend.ogg")
@@ -108,6 +109,7 @@ func tick_stand_turn(delta):
 
 func pre_crouch():
 	set_animation("crouch")
+	play_sound_effect(CrouchSFX)
 
 func tick_crouch(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
