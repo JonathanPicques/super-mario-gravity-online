@@ -22,6 +22,8 @@ const AIRBORNE_DECELERATION = 100
 const GRAVITY_MAX_SPEED = Vector2(0, 500)
 const GRAVITY_ACCELERATION = Vector2(0, 500)
 
+var wallslide_cancelled = false # reset on stand or walljump
+
 # _physics_process is called when the player node is ready.
 # @driven(lifecycle)
 # @impure
@@ -78,6 +80,7 @@ func set_state(new_state):
 
 func pre_stand():
 	set_animation("stand")
+	wallslide_cancelled = false
 
 func tick_stand(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
@@ -180,7 +183,11 @@ func tick_fall(delta):
 	handle_airborne_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
 	if is_on_floor():
 		return set_state(PlayerState.fall_to_stand)
-	if is_on_wall_passive() and is_timer_finished():
+	if is_on_wall_passive() and not input_down and (\
+		(not wallslide_cancelled and is_timer_finished()) or \
+		(not wallslide_cancelled and has_same_direction(direction, input_velocity.x)) or \
+		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x))
+	):
 		return set_state(PlayerState.wallslide)
 	if input_double_down_once:
 		return set_state(PlayerState.ground_pound)
@@ -230,6 +237,9 @@ func tick_wallslide(delta):
 		return set_state(PlayerState.fall_to_stand)
 	if not is_on_wall_passive():
 		return set_state(PlayerState.fall)
+	if input_down_once:
+		wallslide_cancelled = true
+		return set_state(PlayerState.fall)
 	if input_jump_once:
 		return set_state(PlayerState.walljump)
 
@@ -238,6 +248,7 @@ func pre_walljump():
 	set_direction(-direction)
 	handle_walljump(JUMP_STRENGTH, sign(direction) * WALL_JUMP_PUSH_STRENGTH)
 	play_sound_effect(WalljumpSFX)
+	wallslide_cancelled = false
 
 func tick_walljump(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
