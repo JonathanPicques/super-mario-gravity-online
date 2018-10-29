@@ -195,6 +195,15 @@ func get_sound_effect_player():
 			return sound_effect_player
 	return null
 
+# is_colliding_with_group returns true if the player is colliding with the given group
+# @returns(boolean)
+# @pure
+func is_colliding_with_group(group):
+	var collision = get_slide_collision(0)
+	if collision:
+		return collision.collider.is_in_group(group)
+	return false
+
 # handle_jump jumps
 # @param(float) jump_strength
 # @impure

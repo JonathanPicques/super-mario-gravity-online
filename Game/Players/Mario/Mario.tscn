@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/Players/Mario/Mario.gd" type="Script" id=1]
-[ext_resource path="res://Game/Players/Mario/Textures/Run/run_01.png" type="Texture" id=2]
+[ext_resource path="res://Game/Players/Mario/Textures/Stand/stand_01.png" type="Texture" id=2]
 [ext_resource path="res://Game/Players/Mario/Anims/crouch.tres" type="Animation" id=3]
 [ext_resource path="res://Game/Players/Mario/Anims/fall.tres" type="Animation" id=4]
 [ext_resource path="res://Game/Players/Mario/Anims/ground_pound.tres" type="Animation" id=5]
@@ -58,7 +58,7 @@ collision_mask = 14
 collision/safe_margin = 0.001
 motion/sync_to_physics = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "collision" ]
+_sections_unfolded = [ "Collision" ]
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 0
@@ -70,7 +70,7 @@ autostart = false
 position = Vector2( -10, -29 )
 texture = ExtResource( 2 )
 centered = false
-offset = Vector2( -2, 1 )
+offset = Vector2( 1, 0 )
 _sections_unfolded = [ "Offset" ]
 
 [node name="EveryTimer" type="Timer" parent="."]

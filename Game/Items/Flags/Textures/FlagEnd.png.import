@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FlagEnd.png-38887f0dcde9843709923680f26d85b8.stex"
+path="res://.import/FlagEnd.png-ceae8abdc411fee07f01708b9f4d7b85.stex"
 
 [deps]
 
-source_file="res://Game/Items/Flag/Textures/FlagEnd.png"
-dest_files=[ "res://.import/FlagEnd.png-38887f0dcde9843709923680f26d85b8.stex" ]
+source_file="res://Game/Items/Flags/Textures/FlagEnd.png"
+dest_files=[ "res://.import/FlagEnd.png-ceae8abdc411fee07f01708b9f4d7b85.stex" ]
 
 [params]
 
