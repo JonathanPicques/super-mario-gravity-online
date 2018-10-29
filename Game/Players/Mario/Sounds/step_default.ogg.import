@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/step_default.ogg-59e1356579f738638138a3e581ec4936.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Mario/Sounds/step_default.ogg"
+dest_files=[ "res://.import/step_default.ogg-59e1356579f738638138a3e581ec4936.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,5 +1,12 @@
 extends "res://Game/Players/Player.gd"
 
+onready var JumpSFX = preload("res://Game/Players/Mario/Sounds/smb_jump.ogg")
+onready var SkidSFX = preload("res://Game/Players/Mario/Sounds/smas_skid.ogg")
+onready var StepSFX = preload("res://Game/Players/Mario/Sounds/step_default.ogg")
+onready var WalljumpSFX = preload("res://Game/Players/Mario/Sounds/smas_kick.ogg")
+onready var GroundPoundSFX = preload("res://Game/Players/Mario/Sounds/yi_poundbegin.ogg")
+onready var GroundPoundFallToStandSFX = preload("res://Game/Players/Mario/Sounds/yi_poundend.ogg")
+
 const JUMP_STRENGTH = -180
 const WALL_JUMP_STRENGTH = -120
 const WALL_JUMP_PUSH_STRENGTH = 80
@@ -125,6 +132,9 @@ func tick_walk(delta):
 		return set_state(PlayerState.walk_turn)
 	if input_velocity.x == 0 and velocity.x == 0:
 		return set_state(PlayerState.stand)
+	# special effects
+	if every_seconds(0.35, "walk"):
+		play_sound_effect(StepSFX)
 
 func pre_walk_turn():
 	set_animation("skid")
@@ -140,6 +150,9 @@ func tick_walk_turn(delta):
 	if velocity.x == 0:
 		set_direction(-direction)
 		return set_state(PlayerState.walk)
+	# special effects
+	if every_seconds(0.1, "walk_turn"):
+		play_sound_effect(SkidSFX)
 
 func pre_walk_push_wall():
 	set_animation("push")
@@ -191,6 +204,7 @@ func tick_fall_to_stand(delta):
 func pre_jump():
 	handle_jump(JUMP_STRENGTH)
 	set_animation("jump")
+	play_sound_effect(JumpSFX)
 
 func tick_jump(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump_held else GRAVITY_ACCELERATION * 0.75)
@@ -223,6 +237,7 @@ func pre_walljump():
 	set_animation("jump")
 	set_direction(-direction)
 	handle_walljump(JUMP_STRENGTH, sign(direction) * WALL_JUMP_PUSH_STRENGTH)
+	play_sound_effect(WalljumpSFX)
 
 func tick_walljump(delta):
 	tick_jump(delta)
@@ -235,6 +250,7 @@ func pre_ground_pound():
 	velocity.x = 0
 	velocity.y = 0
 	set_animation("ground_pound")
+	play_sound_effect(GroundPoundSFX)
 
 func tick_ground_pound(delta):
 	if is_on_floor():
@@ -252,6 +268,7 @@ func tick_ground_pound_fall(delta):
 
 func pre_ground_pound_fall_to_stand():
 	set_animation("ground_pound_fall_to_stand")
+	play_sound_effect(GroundPoundFallToStandSFX)
 
 func tick_ground_pound_fall_to_stand(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)

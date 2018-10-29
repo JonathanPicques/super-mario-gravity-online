@@ -2,10 +2,12 @@ extends KinematicBody2D
 
 onready var PlayerTimer = $"Timer"
 onready var PlayerSprite = $"Sprite"
+onready var PlayerEveryTimer = $"EveryTimer"
 onready var PlayerWallChecker = $"WallChecker"
 onready var PlayerCollisionBody = $"CollisionBody"
 onready var PlayerCollisionFloor = $"CollisionFloor"
 onready var PlayerAnimationPlayer = $"AnimationPlayer"
+onready var PlayerSoundEffectPlayers = [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
 
 const FLOOR = Vector2(0, -1)
 const FLOOR_SNAP = Vector2(0, 1)
@@ -115,6 +117,47 @@ func start_timer(duration):
 # @pure
 func is_timer_finished():
 	return PlayerTimer.is_stopped()
+
+# every_seconds returns true every given number of seconds.
+# @impure
+# @param(float) seconds
+# @param(string) timer_tag
+var _every_timer_tag = null
+func every_seconds(seconds, timer_tag = "default"):
+	if _every_timer_tag != timer_tag or PlayerEveryTimer.is_stopped():
+		_every_timer_tag = timer_tag
+		PlayerEveryTimer.wait_time = seconds
+		PlayerEveryTimer.start()
+		return true
+	return false
+
+# play_sound_effect plays a sound effect.
+# @param(AudioStreamSample) stream
+# @impure
+func play_sound_effect(stream):
+	var sound_effect_player = get_sound_effect_player()
+	if sound_effect_player != null:
+		sound_effect_player.stream = stream
+		sound_effect_player.play()
+
+# is_sound_effect_playing returns true if the given stream is playing.
+# @param(AudioStreamSample) stream
+# @returns(boolean)
+# @pure
+func is_sound_effect_playing(stream):
+	for sound_effect_player in PlayerSoundEffectPlayers:
+		if sound_effect_player.stream == stream and sound_effect_player.is_playing():
+			return true
+	return false
+
+# get_sound_effect_player returns the next available (non-playing) audio stream for sound effects or null.
+# @returns(AudioStreamPlayer3D)
+# @pure
+func get_sound_effect_player():
+	for sound_effect_player in PlayerSoundEffectPlayers:
+		if not sound_effect_player.is_playing():
+			return sound_effect_player
+	return null
 
 # handle_jump jumps
 # @param(float) jump_strength
