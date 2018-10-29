@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game/Players/Mario/Mario.gd" type="Script" id=1]
-[ext_resource path="res://Game/Players/Mario/Textures/Stand/stand_01.png" type="Texture" id=2]
+[ext_resource path="res://Game/Players/Mario/Textures/Run/run_01.png" type="Texture" id=2]
 [ext_resource path="res://Game/Players/Mario/Anims/crouch.tres" type="Animation" id=3]
 [ext_resource path="res://Game/Players/Mario/Anims/fall.tres" type="Animation" id=4]
 [ext_resource path="res://Game/Players/Mario/Anims/ground_pound.tres" type="Animation" id=5]
@@ -9,10 +9,11 @@
 [ext_resource path="res://Game/Players/Mario/Anims/ground_pound_fall_to_stand.tres" type="Animation" id=7]
 [ext_resource path="res://Game/Players/Mario/Anims/jump.tres" type="Animation" id=8]
 [ext_resource path="res://Game/Players/Mario/Anims/push.tres" type="Animation" id=9]
-[ext_resource path="res://Game/Players/Mario/Anims/skid.tres" type="Animation" id=10]
-[ext_resource path="res://Game/Players/Mario/Anims/stand.tres" type="Animation" id=11]
-[ext_resource path="res://Game/Players/Mario/Anims/walk.tres" type="Animation" id=12]
-[ext_resource path="res://Game/Players/Mario/Textures/Wallslide/wallslide_01.png" type="Texture" id=13]
+[ext_resource path="res://Game/Players/Mario/Anims/run.tres" type="Animation" id=10]
+[ext_resource path="res://Game/Players/Mario/Anims/skid.tres" type="Animation" id=11]
+[ext_resource path="res://Game/Players/Mario/Anims/stand.tres" type="Animation" id=12]
+[ext_resource path="res://Game/Players/Mario/Anims/walk.tres" type="Animation" id=13]
+[ext_resource path="res://Game/Players/Mario/Textures/Wallslide/wallslide_01.png" type="Texture" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -34,7 +35,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ ExtResource( 14 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:offset")
@@ -69,7 +70,7 @@ autostart = false
 position = Vector2( -10, -29 )
 texture = ExtResource( 2 )
 centered = false
-offset = Vector2( 1, 0 )
+offset = Vector2( -2, 1 )
 _sections_unfolded = [ "Offset" ]
 
 [node name="EveryTimer" type="Timer" parent="."]
@@ -99,7 +100,7 @@ autoplay = false
 stream_paused = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "SFX"
+bus = "Master"
 area_mask = 1
 
 [node name="SFX2" type="AudioStreamPlayer2D" parent="SoundEffects"]
@@ -110,7 +111,7 @@ autoplay = false
 stream_paused = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "SFX"
+bus = "Master"
 area_mask = 1
 
 [node name="SFX3" type="AudioStreamPlayer2D" parent="SoundEffects"]
@@ -121,7 +122,7 @@ autoplay = false
 stream_paused = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "SFX"
+bus = "Master"
 area_mask = 1
 
 [node name="SFX4" type="AudioStreamPlayer2D" parent="SoundEffects"]
@@ -132,7 +133,7 @@ autoplay = false
 stream_paused = false
 max_distance = 2000.0
 attenuation = 1.0
-bus = "SFX"
+bus = "Master"
 area_mask = 1
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
@@ -152,9 +153,10 @@ anims/ground_pound_fall = ExtResource( 6 )
 anims/ground_pound_fall_to_stand = ExtResource( 7 )
 anims/jump = ExtResource( 8 )
 anims/push = ExtResource( 9 )
-anims/skid = ExtResource( 10 )
-anims/stand = ExtResource( 11 )
-anims/walk = ExtResource( 12 )
+anims/run = ExtResource( 10 )
+anims/skid = ExtResource( 11 )
+anims/stand = ExtResource( 12 )
+anims/walk = ExtResource( 13 )
 anims/wallslide = SubResource( 2 )
 blend_times = [  ]
 

@@ -24,9 +24,13 @@ enum PlayerState {
 	crouch,
 
 	walk,
-	walk_turn,
 	walk_skid,
-	walk_push_wall,
+	
+	run,
+	run_turn,
+	
+	move_turn,
+	push_wall,
 	
 	fall,
 	fall_to_stand,
@@ -44,11 +48,13 @@ enum PlayerState {
 var state = PlayerState.none
 
 var input_up = false
+var input_run = false
 var input_down = false
 var input_left = false
 var input_jump = false
 var input_right = false
 var input_up_once = false
+var input_run_once = false
 var input_down_once = false
 var input_left_once = false
 var input_jump_once = false
@@ -71,12 +77,14 @@ var disable_snap = 0
 # @impure
 func process_input(delta):
 	input_up = Input.is_action_pressed("player_0_up")
+	input_run = Input.is_action_pressed("player_0_run")
 	input_down = Input.is_action_pressed("player_0_down")
 	input_left = Input.is_action_pressed("player_0_left")
 	input_jump = Input.is_action_pressed("player_0_jump")
 	input_right = Input.is_action_pressed("player_0_right")
 	
 	input_up_once = Input.is_action_just_pressed("player_0_up")
+	input_run_once = Input.is_action_just_pressed("player_0_run")
 	input_down_once = Input.is_action_just_pressed("player_0_down")
 	input_left_once = Input.is_action_just_pressed("player_0_left")
 	input_jump_once = Input.is_action_just_pressed("player_0_jump")
