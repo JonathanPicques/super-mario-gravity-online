@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/Players/Mario/Mario.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/Players/PlayerCamera2D.gd" type="Script" id=5]
-[ext_resource path="res://Game/Items/Platforms/MovingPlatform.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Game/Items/Blocks/Block.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Players/Mario/Mario.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Players/PlayerCamera2D.gd" type="Script" id=4]
+[ext_resource path="res://Game/Items/Platforms/MovingPlatform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=6]
 
 [node name="Base" type="Node2D"]
 
@@ -33,10 +32,7 @@ _sections_unfolded = [ "Collision" ]
 [node name="FlagStart" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 128 )
 
-[node name="FlagEnd" parent="." instance=ExtResource( 3 )]
-position = Vector2( 544, 144 )
-
-[node name="Mario" parent="." instance=ExtResource( 4 )]
+[node name="Mario" parent="." instance=ExtResource( 3 )]
 editor/display_folded = true
 position = Vector2( 64, 128 )
 _sections_unfolded = [ "Collision", "collision", "motion" ]
@@ -65,16 +61,16 @@ drag_margin_bottom = 0.5
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = true
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Drag Margin" ]
 tile_map = NodePath("../../Map")
 restrict_tile_map = true
 
-[node name="MovingPlatform" parent="." instance=ExtResource( 6 )]
+[node name="MovingPlatform" parent="." instance=ExtResource( 5 )]
 position = Vector2( 336, 144 )
 motion/sync_to_physics = false
 
-[node name="MovingPlatform2" parent="." instance=ExtResource( 6 )]
+[node name="MovingPlatform2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 240, 128 )
 motion/sync_to_physics = false
 direction = 1
@@ -99,12 +95,6 @@ format = 1
 tile_data = PoolIntArray( 458759, 1, 65541, 524318, 1, 131075, 524319, 1, 131076, 524320, 1, 65540, 524321, 1, 131076, 524322, 1, 65540, 524323, 1, 131076, 524324, 1, 131077, 917528, 1, 65541, 917529, 1, 131075, 917530, 1, 131076, 917531, 1, 131076, 917532, 1, 131076, 917533, 1, 131077, 1441790, 1, 65539, 1441791, 1, 4 )
 _sections_unfolded = [ "Cell" ]
 
-[node name="Block" parent="." instance=ExtResource( 7 )]
-position = Vector2( 80, 80 )
-
-[node name="Block2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 96, 80 )
-
-[node name="Block3" parent="." instance=ExtResource( 7 )]
-position = Vector2( 112, 80 )
+[node name="FlagEnd" parent="." instance=ExtResource( 6 )]
+position = Vector2( 544, 144 )
 

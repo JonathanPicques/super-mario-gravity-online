@@ -21,20 +21,15 @@ enum PlayerState {
 	stand,
 	stand_turn,
 	
-	crouch,
 
-	walk,
-	walk_skid,
-	
 	run,
-	run_turn,
-	
+	walk,
+	crouch,
 	move_turn,
 	push_wall,
 	
 	fall,
 	fall_to_stand,
-	
 	jump,
 	
 	ground_pound,

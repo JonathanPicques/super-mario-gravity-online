@@ -43,9 +43,9 @@ func _physics_process(delta):
 	match state:
 		PlayerState.stand: tick_stand(delta)
 		PlayerState.stand_turn: tick_stand_turn(delta)
-		PlayerState.crouch: tick_crouch(delta)
-		PlayerState.walk: tick_walk(delta)
 		PlayerState.run: tick_run(delta)
+		PlayerState.walk: tick_walk(delta)
+		PlayerState.crouch: tick_crouch(delta)
 		PlayerState.move_turn: tick_move_turn(delta)
 		PlayerState.push_wall: tick_push_wall(delta)
 		PlayerState.fall: tick_fall(delta)
@@ -65,9 +65,9 @@ func set_state(new_state):
 	match state:
 		PlayerState.stand: pre_stand()
 		PlayerState.stand_turn: pre_stand_turn()
-		PlayerState.crouch: pre_crouch()
-		PlayerState.walk: pre_walk()
 		PlayerState.run: pre_run()
+		PlayerState.walk: pre_walk()
+		PlayerState.crouch: pre_crouch()
 		PlayerState.move_turn: pre_move_turn()
 		PlayerState.push_wall: pre_push_wall()
 		PlayerState.fall: pre_fall()
@@ -111,17 +111,29 @@ func tick_stand_turn(delta):
 		return set_state(PlayerState.fall)
 	return set_state(PlayerState.stand)
 
-func pre_crouch():
-	set_animation("crouch")
-	play_sound_effect(CrouchSFX)
+func pre_run():
+	set_animation("run")
 
-func tick_crouch(delta):
+func tick_run(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, WALK_DECELERATION * 2)
+	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	if is_animation_finished() and not input_down:
+	if is_on_wall():
+		return set_state(PlayerState.push_wall)
+	if input_down:
+		return set_state(PlayerState.crouch)
+	if input_jump_once:
+		return set_state(PlayerState.jump)
+	if not input_run:
+		return set_state(PlayerState.walk)
+	if input_velocity.x != 0 and has_invert_direction(direction, input_velocity.x):
+		return set_state(PlayerState.move_turn)
+	if input_velocity.x == 0 and velocity.x == 0:
 		return set_state(PlayerState.stand)
+	# special effects
+	if every_seconds(0.30, "run"):
+		play_sound_effect(StepSFX)
 
 func pre_walk():
 	set_animation("walk")
@@ -147,29 +159,17 @@ func tick_walk(delta):
 	if every_seconds(0.35, "walk"):
 		play_sound_effect(StepSFX)
 
-func pre_run():
-	set_animation("run")
+func pre_crouch():
+	set_animation("crouch")
+	play_sound_effect(CrouchSFX)
 
-func tick_run(delta):
+func tick_crouch(delta):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
+	handle_deceleration_move(delta, WALK_DECELERATION * 2)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	if is_on_wall():
-		return set_state(PlayerState.push_wall)
-	if input_down:
-		return set_state(PlayerState.crouch)
-	if input_jump_once:
-		return set_state(PlayerState.jump)
-	if not input_run:
-		return set_state(PlayerState.walk)
-	if input_velocity.x != 0 and has_invert_direction(direction, input_velocity.x):
-		return set_state(PlayerState.move_turn)
-	if input_velocity.x == 0 and velocity.x == 0:
+	if is_animation_finished() and not input_down:
 		return set_state(PlayerState.stand)
-	# special effects
-	if every_seconds(0.30, "run"):
-		play_sound_effect(StepSFX)
 
 func pre_move_turn():
 	set_animation("skid")
