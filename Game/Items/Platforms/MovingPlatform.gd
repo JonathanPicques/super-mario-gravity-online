@@ -5,14 +5,17 @@ enum MovingPlatformDirection {
 	Horizontal,
 }
 
-export(float) var speed = 1
-export(float) var amplitude = 30
-export(MovingPlatformDirection) var direction = MovingPlatformDirection.Vertical
+export var speed = 1.0
+export var amplitude = 30.0
+export var direction = MovingPlatformDirection.Vertical
 
 onready var start_pos = position
 
 var accumulator = 0
 
+# _physics_process is called to move the platform around.
+# @driven(lifecycle)
+# @impure
 func _physics_process(delta):
 	accumulator += delta * speed
 	if direction == MovingPlatformDirection.Horizontal:

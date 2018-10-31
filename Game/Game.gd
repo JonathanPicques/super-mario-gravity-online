@@ -36,9 +36,8 @@ func _ready():
 # @param(int) port
 # @param(int) max_players
 # @param(boolean) listen_server
-# @returns(bool)
 # @impure
-func host_game(port, max_players, listen_server = true):
+func host_game(port, max_players, listen_server = true) -> bool:
 	var peer = NetworkedMultiplayerENet.new()
 	if peer.create_server(port, max_players) == 0:
 		current_port = port
@@ -52,8 +51,7 @@ func host_game(port, max_players, listen_server = true):
 # @param(string) ip
 # @param(int) port
 # @impure
-# @returns(bool)
-func join_game(ip, port):
+func join_game(ip, port) -> bool:
 	var peer = NetworkedMultiplayerENet.new()
 	if peer.create_client(ip, port) == 0:
 		current_ip = ip
@@ -129,8 +127,7 @@ master func net_player_configure(new_player_config):
 # @impure
 remote func net_player_configured(player_config):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		print("net_other_player_configured(): warning sender is not server")
-		return
+		return print("net_other_player_configured(): warning sender is not server")
 	if player_config.id == self_player.id:
 		self_player = player_config
 	else:
@@ -141,8 +138,7 @@ remote func net_player_configured(player_config):
 # @impure
 remote func net_player_disconnected(player_id):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		print("net_other_player_disconnected(): warning sender is not server")
-		return
+		return print("net_other_player_disconnected(): warning sender is not server")
 	if self_player.id == player_id:
 		# we got ourselves kicked...
 		pass

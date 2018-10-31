@@ -1,8 +1,11 @@
 extends Camera2D
 
-export(NodePath) var tile_map
-export(bool) var restrict_tile_map = true
+export var tile_map: NodePath
+export var restrict_tile_map = true
 
+# _ready is called to restrict the camera bounds to the tilemap bounds.
+# @driven(lifecycle)
+# @impure
 func _ready():
 	if restrict_tile_map:
 		var tile_map_node = get_node(tile_map)

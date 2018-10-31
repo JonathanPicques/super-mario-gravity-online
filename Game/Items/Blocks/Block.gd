@@ -4,8 +4,8 @@ signal block_hit
 
 onready var start_pos = position
 
-export(float) var speed = 10
-export(float) var amplitude = 5
+export var speed = 10.0
+export var amplitude = 5.0
 
 var active = false
 var accumulator = 0
