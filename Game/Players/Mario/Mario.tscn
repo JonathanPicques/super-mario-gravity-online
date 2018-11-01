@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Game/Players/Mario/Mario.gd" type="Script" id=1]
+[ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Players/Mario/Textures/Stand/stand_01.png" type="Texture" id=2]
 [ext_resource path="res://Game/Players/Mario/Anims/crouch.tres" type="Animation" id=3]
 [ext_resource path="res://Game/Players/Mario/Anims/fall.tres" type="Animation" id=4]
@@ -13,139 +13,23 @@
 [ext_resource path="res://Game/Players/Mario/Anims/skid.tres" type="Animation" id=11]
 [ext_resource path="res://Game/Players/Mario/Anims/stand.tres" type="Animation" id=12]
 [ext_resource path="res://Game/Players/Mario/Anims/walk.tres" type="Animation" id=13]
-[ext_resource path="res://Game/Players/Mario/Textures/Wallslide/wallslide_01.png" type="Texture" id=14]
+[ext_resource path="res://Game/Players/Mario/Anims/wallslide.tres" type="Animation" id=14]
 
-[sub_resource type="RectangleShape2D" id=1]
+[node name="Mario" index="0" instance=ExtResource( 1 )]
 
-custom_solver_bias = 0.0
-extents = Vector2( 7, 14 )
-
-[sub_resource type="Animation" id=2]
-
-length = 0.2
-loop = true
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 14 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( -3, -1 ) ]
-}
-
-[node name="Mario" type="KinematicBody2D"]
-position = Vector2( 2, 0 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 14
-collision/safe_margin = 0.001
-motion/sync_to_physics = false
-script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
-
-[node name="Timer" type="Timer" parent="."]
-process_mode = 0
-wait_time = 1.0
-one_shot = true
-autostart = false
-
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" parent="." index="1"]
 position = Vector2( -10, -29 )
 texture = ExtResource( 2 )
-centered = false
 offset = Vector2( 1, 0 )
-_sections_unfolded = [ "Offset" ]
 
-[node name="EveryTimer" type="Timer" parent="."]
-process_mode = 0
-wait_time = 1.0
-one_shot = true
-autostart = false
+[node name="WallChecker" parent="." index="3"]
+position = Vector2( 0, -13 )
 
-[node name="WallChecker" type="RayCast2D" parent="."]
-position = Vector2( 0, -17 )
-enabled = true
-exclude_parent = true
-cast_to = Vector2( 8, 0 )
-collision_mask = 2
-collide_with_areas = false
-collide_with_bodies = true
-_sections_unfolded = [ "Transform" ]
-
-[node name="SoundEffects" type="Node2D" parent="."]
-editor/display_folded = true
-
-[node name="SFX1" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-
-[node name="SFX2" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-
-[node name="SFX3" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-
-[node name="SFX4" type="AudioStreamPlayer2D" parent="SoundEffects"]
-stream = null
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-
-[node name="CollisionBody" type="CollisionShape2D" parent="."]
+[node name="CollisionBody" parent="." index="5"]
 position = Vector2( 0, -14 )
-shape = SubResource( 1 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("..")
+[node name="AnimationPlayer" parent="." index="6"]
 autoplay = "stand"
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
 anims/crouch = ExtResource( 3 )
 anims/fall = ExtResource( 4 )
 anims/ground_pound = ExtResource( 5 )
@@ -157,6 +41,5 @@ anims/run = ExtResource( 10 )
 anims/skid = ExtResource( 11 )
 anims/stand = ExtResource( 12 )
 anims/walk = ExtResource( 13 )
-anims/wallslide = SubResource( 2 )
-blend_times = [  ]
+anims/wallslide = ExtResource( 14 )
 
