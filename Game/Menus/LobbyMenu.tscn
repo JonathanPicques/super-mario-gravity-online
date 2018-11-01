@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Menus/LobbyMenu.gd" type="Script" id=1]
-[ext_resource path="res://Game/Menus/Background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Menus/Common/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Menus/Textures/WaitingRoom.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/LobbyPlayerMenu.tscn" type="PackedScene" id=4]
 

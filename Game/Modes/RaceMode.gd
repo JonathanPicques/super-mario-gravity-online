@@ -1,1 +1,1 @@
-extends "res://Game/Modes/BaseMode.gd"
+extends "res://Game/Modes/GameMode.gd"
