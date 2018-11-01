@@ -76,13 +76,13 @@ func goto_lobby_menu_scene():
 
 # host_game hosts a game on the given port with the given number of max players.
 # @impure
-func host_game(port: int, max_players: int, listen_server = true) -> bool:
+func host_game(port: int, max_players: int, listen_server = true, player_name: String = "server") -> bool:
 	var peer = NetworkedMultiplayerENet.new()
 	if peer.create_server(port, max_players) == 0:
 		current_port = port
 		current_max_players = max_players
 		current_listen_server = listen_server
-		setup_self(peer)
+		setup_self(peer, player_name)
 		set_state(GameState.Lobby)
 		goto_lobby_menu_scene()
 		return true
@@ -90,12 +90,12 @@ func host_game(port: int, max_players: int, listen_server = true) -> bool:
 
 # join_game joins a game on the given ip:port.
 # @impure
-func join_game(ip: String, port: int) -> bool:
+func join_game(ip: String, port: int, player_name: String = "client") -> bool:
 	var peer = NetworkedMultiplayerENet.new()
 	if peer.create_client(ip, port) == 0:
 		current_ip = ip
 		current_port = port
-		setup_self(peer)
+		setup_self(peer, player_name)
 		set_state(GameState.Connecting)
 		goto_error_menu_scene()
 		return true
@@ -109,13 +109,17 @@ func stop_game():
 		peer.close_connection()
 		get_tree().set_meta("network_peer", null)
 		self_player.id = 0
+	# return to home menu scene
+	set_state(GameState.Home)
+	goto_home_menu_scene()
 
 # setup_self is called when successfully hosted or joined.
 # @impure
-func setup_self(peer: NetworkedMultiplayerPeer):
+func setup_self(peer: NetworkedMultiplayerPeer, player_name: String):
 	get_tree().set_network_peer(peer)
 	get_tree().set_meta("network_peer", peer)
 	self_player.id = get_tree().get_network_unique_id()
+	self_player.name = player_name
 
 # on_connected_to_server is called when joining (not hosting) successfully.
 # @driven(signal)
@@ -137,11 +141,7 @@ func on_connection_failed():
 # @driven(signal)
 # @impure
 func on_connecting_aborted():
-	# stop networking
 	stop_game()
-	# return to home menu scene
-	set_state(GameState.Home)
-	goto_home_menu_scene()
 
 # on_network_peer_connected is called when another peer is connected.
 # @driven(signal)
@@ -158,16 +158,6 @@ func on_network_peer_disconnected(peer_id: int):
 		rpc("net_player_disconnected", peer_id)
 		# removes the player from the players list
 		net_player_disconnected(peer_id)
-
-# get_next_player_index returns the next player index available.
-# @pure
-func get_next_player_index() -> int:
-	var index = 1 if current_listen_server else 0
-	for other_player_id in other_players:
-		var other_player_index = other_players[other_player_id].index
-		if index == other_player_index:
-			index += 1
-	return index
 
 # net_player_configure is called on the server when a new player sends its config.
 # @driven(client_to_server)
@@ -205,6 +195,7 @@ remote func net_player_configured(player_config: Dictionary):
 		goto_lobby_menu_scene()
 	else:
 		other_players[player_config.id] = player_config
+	print("net_player_configured: ", player_config)
 
 # net_other_player_disconnected is called when the server tells us another player has disconnected.
 # @driven(server_to_client)
@@ -219,3 +210,14 @@ remote func net_player_disconnected(player_id: int):
 		goto_error_menu_scene()
 		current_scene.set_state(current_scene.ErrorState.ConnectionKicked)
 	other_players.erase(player_id)
+	print("net_player_disconnected: ", player_id)
+
+# get_next_player_index returns the next player index available.
+# @pure
+func get_next_player_index() -> int:
+	var index = 1 if current_listen_server else 0
+	for other_player_id in other_players:
+		var other_player_index = other_players[other_player_id].index
+		if index == other_player_index:
+			index += 1
+	return index
