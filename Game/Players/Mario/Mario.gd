@@ -22,8 +22,8 @@ const RUN_MAX_SPEED = 160
 const RUN_ACCELERATION = 290
 const RUN_DECELERATION = 340
 
-const GRAVITY_MAX_SPEED = Vector2(0, 500)
-const GRAVITY_ACCELERATION = Vector2(0, 500)
+const GRAVITY_MAX_SPEED = 500
+const GRAVITY_ACCELERATION =  500
 
 var wallslide_cancelled = false # reset on stand or walljump
 
@@ -37,7 +37,7 @@ func _ready():
 # _physics_process is called every process tick and updates player state.
 # @driven(lifecycle)
 # @impure
-func _physics_process(delta):
+func _physics_process(delta: float):
 	process_input(delta)
 	process_velocity(delta)
 	match state:
@@ -58,9 +58,8 @@ func _physics_process(delta):
 		PlayerState.ground_pound_fall_to_stand: tick_ground_pound_fall_to_stand(delta)
 
 # set_state changes the current player state to the new given state.
-# @param(PlayerState) new_state
 # @impure
-func set_state(new_state):
+func set_state(new_state: int):
 	.set_state(new_state)
 	match state:
 		PlayerState.stand: pre_stand()
@@ -87,7 +86,7 @@ func pre_stand():
 	set_animation("stand")
 	wallslide_cancelled = false
 
-func tick_stand(delta):
+func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, WALK_MAX_SPEED)
 	if not is_on_floor():
@@ -104,7 +103,7 @@ func tick_stand(delta):
 func pre_stand_turn():
 	set_direction(-direction)
 
-func tick_stand_turn(delta):
+func tick_stand_turn(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
 	if not is_on_floor():
@@ -114,7 +113,7 @@ func tick_stand_turn(delta):
 func pre_run():
 	set_animation("run")
 
-func tick_run(delta):
+func tick_run(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if not is_on_floor():
@@ -138,7 +137,7 @@ func tick_run(delta):
 func pre_walk():
 	set_animation("walk")
 
-func tick_walk(delta):
+func tick_walk(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
 	if not is_on_floor():
@@ -163,7 +162,7 @@ func pre_crouch():
 	set_animation("crouch")
 	play_sound_effect(CrouchSFX)
 
-func tick_crouch(delta):
+func tick_crouch(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, WALK_DECELERATION * 2)
 	if not is_on_floor():
@@ -174,7 +173,7 @@ func tick_crouch(delta):
 func pre_move_turn():
 	set_animation("skid")
 
-func tick_move_turn(delta):
+func tick_move_turn(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, \
 		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
@@ -199,7 +198,7 @@ func tick_move_turn(delta):
 func pre_push_wall():
 	set_animation("push")
 
-func tick_push_wall(delta):
+func tick_push_wall(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
 	if not is_on_floor():
@@ -217,7 +216,7 @@ func pre_fall():
 	start_timer(0.2)
 	set_animation("fall")
 
-func tick_fall(delta):
+func tick_fall(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_airborne_move(delta, \
 		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
@@ -239,7 +238,7 @@ func pre_fall_to_stand():
 	start_timer(0.05)
 	set_animation("stand")
 
-func tick_fall_to_stand(delta):
+func tick_fall_to_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, WALK_DECELERATION if not input_run else RUN_DECELERATION)
 	if not is_on_floor():
@@ -256,7 +255,7 @@ func pre_jump():
 	set_animation("jump")
 	play_sound_effect(JumpSFX)
 
-func tick_jump(delta):
+func tick_jump(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
 	handle_airborne_move(delta, \
 		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
@@ -283,7 +282,7 @@ func pre_wallslide():
 	velocity.y = velocity.y * 0.1
 	set_animation("wallslide")
 
-func tick_wallslide(delta):
+func tick_wallslide(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED * 0.5, GRAVITY_ACCELERATION * 0.25)
 	if is_on_floor():
 		return set_state(PlayerState.fall_to_stand)
@@ -302,7 +301,7 @@ func pre_walljump():
 	play_sound_effect(WalljumpSFX)
 	wallslide_cancelled = false
 
-func tick_walljump(delta):
+func tick_walljump(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
 	handle_airborne_move(delta,
 		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
@@ -331,7 +330,7 @@ func pre_ground_pound():
 	set_animation("ground_pound")
 	play_sound_effect(GroundPoundSFX)
 
-func tick_ground_pound(delta):
+func tick_ground_pound(delta: float):
 	if is_on_floor():
 		return set_state(PlayerState.stand)
 	if is_animation_finished():
@@ -340,7 +339,7 @@ func tick_ground_pound(delta):
 func pre_ground_pound_fall():
 	set_animation("ground_pound_fall")
 
-func tick_ground_pound_fall(delta):
+func tick_ground_pound_fall(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED * 2, GRAVITY_ACCELERATION * 4)
 	if is_on_floor():
 		return set_state(PlayerState.ground_pound_fall_to_stand)
@@ -349,7 +348,7 @@ func pre_ground_pound_fall_to_stand():
 	set_animation("ground_pound_fall_to_stand")
 	play_sound_effect(GroundPoundFallToStandSFX)
 
-func tick_ground_pound_fall_to_stand(delta):
+func tick_ground_pound_fall_to_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)

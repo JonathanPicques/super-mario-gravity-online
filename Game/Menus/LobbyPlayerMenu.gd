@@ -8,7 +8,7 @@ export var host = false
 export var joined = false
 export var self_player = false
 
-func _process(delta):
+func _process(delta: float):
 	$Background.texture = CharacterSelect if joined else CharacterSelectDisabled
 	$HostCrown.visible = joined and host
 	$PlayerName.visible = joined

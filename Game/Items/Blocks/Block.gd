@@ -14,7 +14,7 @@ var number_hits = 0
 # _physics_process moves the block upside and down after hit.
 # @driven(lifecycle)
 # @impure
-func _physics_process(delta):
+func _physics_process(delta: float):
 	if active:
 		accumulator += speed * delta
 		position.y = start_pos.y - sin(accumulator) * amplitude
@@ -24,17 +24,15 @@ func _physics_process(delta):
 			accumulator = 0
 
 # on_block_hit is called when a body collides with the block.
-# @param(PhysicsBody2D) body
 # @driven(signal)
 # @impure
-func on_block_hit(body):
+func on_block_hit(body: PhysicsBody2D):
 	active = true
 	number_hits += 1
 	on_hit(body)
 	emit_signal("block_hit")
 
 # on_hit is called when this block is hit.
-# @param(PhysicsBody2D) body
 # @pure
-func on_hit(body):
+func on_hit(body: PhysicsBody2D):
 	pass

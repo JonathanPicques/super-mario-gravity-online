@@ -33,11 +33,8 @@ func _ready():
 			print("joining")
 
 # host_game hosts a game on the given port with the given number of max players.
-# @param(int) port
-# @param(int) max_players
-# @param(boolean) listen_server
 # @impure
-func host_game(port, max_players, listen_server = true) -> bool:
+func host_game(port: int, max_players: int, listen_server = true) -> bool:
 	var peer = NetworkedMultiplayerENet.new()
 	if peer.create_server(port, max_players) == 0:
 		current_port = port
@@ -48,10 +45,8 @@ func host_game(port, max_players, listen_server = true) -> bool:
 	return false
 
 # join_game joins a game on the given ip:port.
-# @param(string) ip
-# @param(int) port
 # @impure
-func join_game(ip, port) -> bool:
+func join_game(ip: String, port: int) -> bool:
 	var peer = NetworkedMultiplayerENet.new()
 	if peer.create_client(ip, port) == 0:
 		current_ip = ip
@@ -68,9 +63,8 @@ func stop_game():
 		peer.close_connection()
 
 # setup_self is called when successfully hosted or joined.
-# @param(NetworkedMultiplayerPeer) peer
 # @impure
-func setup_self(peer):
+func setup_self(peer: NetworkedMultiplayerPeer):
 	get_tree().set_network_peer(peer)
 	get_tree().set_meta("network_peer", peer)
 	self_player.id = get_tree().get_network_unique_id()
@@ -83,17 +77,15 @@ func on_connected_to_server():
 	rpc_id(1, "net_player_configure", self_player)
 
 # on_network_peer_connected is called when another peer is connected.
-# @param(int) peer_id
 # @driven(signal)
 # @impure
-func on_network_peer_connected(peer_id):
+func on_network_peer_connected(peer_id: int):
 	pass
 
 # on_network_peer_disconnected is called when another peer is disconnected.
-# @param(int) peer_id
 # @driven(signal)
 # @impure
-func on_network_peer_disconnected(peer_id):
+func on_network_peer_disconnected(peer_id: int):
 	if get_tree().is_network_server():
 		# send to other players the disconnected player id
 		rpc("net_player_disconnected", peer_id)
@@ -101,10 +93,9 @@ func on_network_peer_disconnected(peer_id):
 		net_player_disconnected(peer_id)
 
 # net_player_configure is called on the server when a new player sends its config.
-# @param(object) new_player_config
 # @driven(client_to_server)
 # @impure
-master func net_player_configure(new_player_config):
+master func net_player_configure(new_player_config: Object):
 	# check if rpc sender id match player config
 	if get_tree().get_rpc_sender_id() != new_player_config.id:
 		print("net_player_configure(): warning: player id mismatch")
@@ -125,7 +116,7 @@ master func net_player_configure(new_player_config):
 # net_other_player_configured is called when the server tells us the given player is correctly configured.
 # @driven(server_to_client)
 # @impure
-remote func net_player_configured(player_config):
+remote func net_player_configured(player_config: Object):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_other_player_configured(): warning sender is not server")
 	if player_config.id == self_player.id:
@@ -136,7 +127,7 @@ remote func net_player_configured(player_config):
 # net_other_player_disconnected is called when the server tells us another player has disconnected.
 # @driven(server_to_client)
 # @impure
-remote func net_player_disconnected(player_id):
+remote func net_player_disconnected(player_id: int):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_other_player_disconnected(): warning sender is not server")
 	if self_player.id == player_id:

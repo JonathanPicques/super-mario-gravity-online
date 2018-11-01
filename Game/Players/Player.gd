@@ -67,9 +67,8 @@ var disable_snap = 0.0
 var direction = 1
 
 # process_input updates player inputs.
-# @param(float) delta
 # @impure
-func process_input(delta):
+func process_input(delta: float):
 	input_up = Input.is_action_pressed("player_0_up")
 	input_run = Input.is_action_pressed("player_0_run")
 	input_down = Input.is_action_pressed("player_0_down")
@@ -95,9 +94,8 @@ func process_input(delta):
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
 
 # process_velocity updates position after applying velocity.
-# @param(float) delta
 # @impure
-func process_velocity(delta):
+func process_velocity(delta: float):
 	if disable_snap > 0:
 		disable_snap = max(disable_snap - delta, 0)
 	var old_position = position
@@ -110,15 +108,13 @@ func process_velocity(delta):
 	)
 
 # set_state changes the current player state to the new given state.
-# @param(PlayerState) new_state
 # @impure
-func set_state(new_state):
+func set_state(new_state: int):
 	state = new_state
 
 # set_direction changes the player direction and flips the sprite accordingly.
-# @param(float) new_direction
 # @impure
-func set_direction(new_direction):
+func set_direction(new_direction: int):
 	direction = new_direction
 	PlayerSprite.scale.x = abs(PlayerSprite.scale.x) * sign(direction)
 	PlayerSprite.position.x = 9 if direction < 0 else -9
@@ -126,7 +122,7 @@ func set_direction(new_direction):
 
 # set_animation changes the player animation.
 # @impure
-func set_animation(new_animation):
+func set_animation(new_animation: String):
 	PlayerAnimationPlayer.play(new_animation)
 
 # is_animation_finished returns true if the animation is finished (and not looping).
@@ -135,24 +131,20 @@ func is_animation_finished() -> bool:
 	return not PlayerAnimationPlayer.is_playing()
 
 # start_timer starts a timer for the given duration in seconds.
-# @param(float) duration
 # @impure
-func start_timer(duration):
+func start_timer(duration: float):
 	PlayerTimer.wait_time = duration
 	PlayerTimer.start()
 
 # is_timer_finished returns true if the timer is finished.
-# @param(float) duration
 # @pure
 func is_timer_finished() -> bool:
 	return PlayerTimer.is_stopped()
 
 # every_seconds returns true every given number of seconds.
 # @impure
-# @param(float) seconds
-# @param(string) timer_tag
 var _every_timer_tag = null
-func every_seconds(seconds, timer_tag = "default") -> bool:
+func every_seconds(seconds: float, timer_tag = "default") -> bool:
 	if _every_timer_tag != timer_tag or PlayerEveryTimer.is_stopped():
 		_every_timer_tag = timer_tag
 		PlayerEveryTimer.wait_time = seconds
@@ -161,18 +153,16 @@ func every_seconds(seconds, timer_tag = "default") -> bool:
 	return false
 
 # play_sound_effect plays a sound effect.
-# @param(AudioStreamSample) stream
 # @impure
-func play_sound_effect(stream):
+func play_sound_effect(stream: AudioStream):
 	var sound_effect_player = get_sound_effect_player()
 	if sound_effect_player != null:
 		sound_effect_player.stream = stream
 		sound_effect_player.play()
 
 # is_sound_effect_playing returns true if the given stream is playing.
-# @param(AudioStreamSample) stream
 # @pure
-func is_sound_effect_playing(stream) -> bool:
+func is_sound_effect_playing(stream: AudioStream) -> bool:
 	for sound_effect_player in PlayerSoundEffectPlayers:
 		if sound_effect_player.stream == stream and sound_effect_player.is_playing():
 			return true
@@ -188,90 +178,64 @@ func get_sound_effect_player() -> AudioStreamPlayer2D:
 
 # is_colliding_with_group returns true if the player is colliding with the given group.
 # @pure
-func is_colliding_with_group(group) -> bool:
+func is_colliding_with_group(group: String) -> bool:
 	var collision = get_slide_collision(0)
 	if collision:
 		return collision.collider.is_in_group(group)
 	return false
 
 # handle_jump jumps.
-# @param(float) jump_strength
 # @impure
-func handle_jump(jump_strength):
+func handle_jump(jump_strength: float):
 	velocity.y = jump_strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
 # handle_walljump walljumps.
-# @param(float) walljump_strength
-# @param(float) walljump_push_strength
 # @impure
-func handle_walljump(walljump_strength, walljump_push_strength):
+func handle_walljump(walljump_strength: float, walljump_push_strength: float):
 	velocity.y = walljump_strength
 	velocity.x = walljump_push_strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
 # handle_gravity applies gravity to the velocity.
-# @param(float) delta
-# @param(Vector2) max_speed
-# @param(Vector2) acceleration
 # @impure
-func handle_gravity(delta, max_speed, acceleration):
-	velocity.y = min(velocity.y + delta * acceleration.y, max_speed.y)
+func handle_gravity(delta: float, max_speed: float, acceleration: float):
+	velocity.y = min(velocity.y + delta * acceleration, max_speed)
 
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
-# @param(float) delta
-# @param(float) max_speed
-# @param(float) acceleration
-# @param(float) deceleration
 # @impure
-func handle_floor_move(delta, max_speed, acceleration, deceleration):
+func handle_floor_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if has_same_direction(direction, input_velocity.x):
 		velocity.x = get_acceleration(delta, velocity.x, max_speed, acceleration)
 	else:
 		velocity.x = get_deceleration(delta, velocity.x, deceleration)
 
 # handle_airborne_move applies acceleration or deceleration depending on the input_velocity while airborne.
-# @param(float) delta
-# @param(float) max_speed
-# @param(float) acceleration
-# @param(float) deceleration
 # @impure
-func handle_airborne_move(delta, max_speed, acceleration, deceleration):
+func handle_airborne_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if input_velocity.x != 0:
 		velocity.x = clamp(velocity.x + delta * sign(input_velocity.x) * acceleration, -max_speed, max_speed)
 	else:
 		handle_deceleration_move(delta, deceleration)
 
 # handle_deceleration_move applies deceleration.
-# @param(float) delta
-# @param(float) deceleration
 # @impure
-func handle_deceleration_move(delta, deceleration):
+func handle_deceleration_move(delta: float, deceleration: float):
 	velocity.x = get_deceleration(delta, velocity.x, deceleration)
 
 # get_acceleration returns the next value after acceleration is applied.
-# @param(float) delta
-# @param(float) value
-# @param(Vector2) max_speed
-# @param(Vector2) acceleration
 # @pure
-func get_acceleration(delta, value, max_speed, acceleration, override_direction = direction) -> float:
+func get_acceleration(delta: float, value: float, max_speed: float, acceleration: float, override_direction = direction) -> float:
 	return min(abs(value) + delta * acceleration, max_speed) * sign(override_direction)
 
 # get_deceleration returns the next value after deceleration is applied.
-# @param(float) delta
-# @param(float) value
-# @param(Vector2) acceleration
 # @pure
-func get_deceleration(delta, value, deceleration) -> float:
+func get_deceleration(delta: float, value: float, deceleration: float) -> float:
 	return max(abs(value) - delta * deceleration, 0) * sign(value)
 
 # is_nearly returns true if the first given value nearly equals the second given value.
-# @param(float) value1
-# @param(float) value2
-# @param(float) epsilon
 # @pure
-func is_nearly(value1, value2, epsilon = 0.001) -> bool:
+func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 	return abs(value1 - value2) < epsilon
 
 # is_on_wall_passive returns true if there is a wall on the side.
@@ -280,15 +244,11 @@ func is_on_wall_passive() -> bool:
 	return PlayerWallChecker.is_colliding()
 
 # has_same_direction returns true if the two given numbers are non-zero and of the same sign.
-# @param(float) a
-# @param(float) b
 # @pure
-func has_same_direction(a, b) -> bool:
-	return a != 0 and b != 0 and sign(a) == sign(b)
+func has_same_direction(dir1: float, dir2: float) -> bool:
+	return dir1 != 0 and dir2 != 0 and sign(dir1) == sign(dir2)
 
 # has_invert_direction returns true if the two given numbers are non-zero and of the opposed sign.
-# @param(float) a
-# @param(float) b
 # @pure
-func has_invert_direction(a, b) -> bool:
-	return a != 0 and b != 0 and sign(a) != sign(b)
+func has_invert_direction(dir1: float, dir2: float) -> bool:
+	return dir1 != 0 and dir2 != 0 and sign(dir1) != sign(dir2)

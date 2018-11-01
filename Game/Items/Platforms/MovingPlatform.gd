@@ -16,7 +16,7 @@ var accumulator = 0
 # _physics_process is called to move the platform around.
 # @driven(lifecycle)
 # @impure
-func _physics_process(delta):
+func _physics_process(delta: float):
 	accumulator += delta * speed
 	if direction == MovingPlatformDirection.Horizontal:
 		position.x = start_pos.x + cos(accumulator) * amplitude
