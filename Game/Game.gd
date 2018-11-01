@@ -2,18 +2,18 @@ extends Control
 
 const Base = preload("res://Game/Maps/Base/Base.tscn")
 const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
-const ErrorMenu = preload("res://Game/Menus/ErrorMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
+const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 
 enum GameState {
 	None,
 	Home,
 	Lobby,
-	Error,
 	LoadMap,
 	InGameMap,
 	Connecting,
-	ResultScreen
+	ConnectError,
+	ResultScreen,
 }
 
 var state = GameState.None
@@ -24,8 +24,8 @@ var current_scene: Node = null
 var current_max_players = 0
 var current_listen_server = false
 
-var self_player = {id = 0, index = 0, name = "root", skin = "mario"}
-var other_players = {}
+var player = {id = 0, index = 0, name = "root", skin = "mario"}
+var players = {}
 
 # _ready is called when the node is ready.
 # @driven(lifecycle)
@@ -33,7 +33,7 @@ var other_players = {}
 func _ready():
 	get_tree().connect("connection_failed", self, "on_connection_failed")
 	get_tree().connect("connected_to_server", self, "on_connected_to_server")
-	# get_tree().connect("server_disconnected", self, "on_server_disconnected")
+	get_tree().connect("server_disconnected", self, "on_server_disconnected")
 	get_tree().connect("network_peer_connected", self, "on_network_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "on_network_peer_disconnected")
 	# go to home menu scene
@@ -63,9 +63,9 @@ func goto_home_menu_scene():
 
 # goto_error_menu loads the error menu.
 # @impure
-func goto_error_menu_scene():
-	var error_menu_scene = ErrorMenu.instance()
-	error_menu_scene.connect("connecting_aborted", self, "on_connecting_aborted")
+func goto_connect_menu_scene():
+	var error_menu_scene = ConnectMenu.instance()
+	error_menu_scene.connect("stop_game", self, "stop_game")
 	set_scene(error_menu_scene)
 
 # goto_home_menu loads the lobby menu.
@@ -83,8 +83,7 @@ func host_game(port: int, max_players: int, listen_server = true, player_name: S
 		current_max_players = max_players
 		current_listen_server = listen_server
 		setup_self(peer, player_name)
-		set_state(GameState.Lobby)
-		goto_lobby_menu_scene()
+		net_player_configured(player)
 		return true
 	return false
 
@@ -95,9 +94,9 @@ func join_game(ip: String, port: int, player_name: String = "client") -> bool:
 	if peer.create_client(ip, port) == 0:
 		current_ip = ip
 		current_port = port
-		setup_self(peer, player_name)
 		set_state(GameState.Connecting)
-		goto_error_menu_scene()
+		setup_self(peer, player_name)
+		goto_connect_menu_scene()
 		return true
 	return false
 
@@ -107,8 +106,9 @@ func stop_game():
 	var peer = get_tree().get_meta("network_peer")
 	if peer != null:
 		peer.close_connection()
+		player.id = 0
+		player.index = 0
 		get_tree().set_meta("network_peer", null)
-		self_player.id = 0
 	# return to home menu scene
 	set_state(GameState.Home)
 	goto_home_menu_scene()
@@ -118,30 +118,35 @@ func stop_game():
 func setup_self(peer: NetworkedMultiplayerPeer, player_name: String):
 	get_tree().set_network_peer(peer)
 	get_tree().set_meta("network_peer", peer)
-	self_player.id = get_tree().get_network_unique_id()
-	self_player.name = player_name
+	player.id = get_tree().get_network_unique_id()
+	player.name = player_name
+
+# on_connection_failed is called when joining (not hosting) failed.
+# @driven(signal)
+# @impure
+func on_connection_failed():
+	# connect error state
+	set_state(GameState.ConnectError)
+	# display connection failed error
+	current_scene.set_state(current_scene.ConnectState.ConnectionFailed)
 
 # on_connected_to_server is called when joining (not hosting) successfully.
 # @driven(signal)
 # @impure
 func on_connected_to_server():
 	# send our configuration to the server
-	rpc_id(1, "net_player_configure", self_player)
+	rpc_id(1, "net_player_configure", player)
 
-# on_connection_failed is called when joining (not hosting) failed.
+# on_server_disconnected is called when the connection to the server is lost.
 # @driven(signal)
 # @impure
-func on_connection_failed():
+func on_server_disconnected():
 	# error state
-	set_state(GameState.Error)
-	# display connection failed error
-	current_scene.set_state(current_scene.ErrorState.ConnectionFailed)
-
-# on_connecting_aborted is called when aborting joining (not hosting).
-# @driven(signal)
-# @impure
-func on_connecting_aborted():
-	stop_game()
+	set_state(GameState.ConnectError)
+	# load error menu scene
+	goto_connect_menu_scene()
+	# display connection lost error
+	current_scene.set_state(current_scene.ConnectState.ConnectionLost)
 
 # on_network_peer_connected is called when another peer is connected.
 # @driven(signal)
@@ -174,11 +179,11 @@ master func net_player_configure(new_player_config: Dictionary):
 	rpc_id(new_player_config.id, "net_player_configured", new_player_config)
 	# if the server is playing, send its info too to the new player
 	if current_listen_server:
-		rpc_id(new_player_config.id, "net_player_configured", self_player)
+		rpc_id(new_player_config.id, "net_player_configured", player)
 	# send new player info to the other connected players and the other way around
-	for other_player_id in other_players:
+	for other_player_id in players:
 		rpc_id(other_player_id, "net_player_configured", new_player_config)
-		rpc_id(new_player_config.id, "net_player_configured", other_players[other_player_id])
+		rpc_id(new_player_config.id, "net_player_configured", players[other_player_id])
 	# add the new player to the players list
 	net_player_configured(new_player_config)
 
@@ -188,13 +193,17 @@ master func net_player_configure(new_player_config: Dictionary):
 remote func net_player_configured(player_config: Dictionary):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_other_player_configured(): warning sender is not server")
-	if player_config.id == self_player.id:
-		self_player = player_config
+	if player_config.id == player.id:
+		# save our config
+		player = player_config
 		# go to lobby menu scene upon successful connection
 		set_state(GameState.Lobby)
 		goto_lobby_menu_scene()
-	else:
-		other_players[player_config.id] = player_config
+	# add the configured player to the players
+	players[player_config.id] = player_config
+	# update lobby
+	if state == GameState.Lobby:
+		current_scene.set_players(players)
 	print("net_player_configured: ", player_config)
 
 # net_other_player_disconnected is called when the server tells us another player has disconnected.
@@ -203,21 +212,27 @@ remote func net_player_configured(player_config: Dictionary):
 remote func net_player_disconnected(player_id: int):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_other_player_disconnected(): warning sender is not server")
-	if self_player.id == player_id:
-		# error state
-		set_state(GameState.Error)
-		# display kick
-		goto_error_menu_scene()
-		current_scene.set_state(current_scene.ErrorState.ConnectionKicked)
-	other_players.erase(player_id)
+	# if our player is disconnected, we got kicked
+	if player.id == player_id:
+		# connect error state
+		set_state(GameState.ConnectError)
+		# go to connect menu scene and ...
+		goto_connect_menu_scene()
+		# ... display kick message
+		current_scene.set_state(current_scene.ConnectState.ConnectionKicked)
+	# remove the disconnected player from the players
+	players.erase(player_id)
+	# update lobby
+	if state == GameState.Lobby:
+		current_scene.set_players(players)
 	print("net_player_disconnected: ", player_id)
 
 # get_next_player_index returns the next player index available.
 # @pure
 func get_next_player_index() -> int:
 	var index = 1 if current_listen_server else 0
-	for other_player_id in other_players:
-		var other_player_index = other_players[other_player_id].index
+	for other_player_id in players:
+		var other_player_index = players[other_player_id].index
 		if index == other_player_index:
 			index += 1
 	return index
