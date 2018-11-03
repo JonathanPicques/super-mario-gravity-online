@@ -302,10 +302,6 @@ func has_invert_direction(dir1: float, dir2: float) -> bool:
 	return dir1 != 0 and dir2 != 0 and sign(dir1) != sign(dir2)
 
 ###
-# PLAYER STATE MACHINE
-###
-
-###
 # Player movement grounded states
 ###
 

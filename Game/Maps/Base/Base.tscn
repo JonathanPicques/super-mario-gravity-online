@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/Players/Mario/Mario.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/Players/PlayerCamera2D.gd" type="Script" id=4]
+[ext_resource path="res://Game/Players/Luigi/Luigi.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Players/PlayerCamera2D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Items/Platforms/MovingPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Players/Mario/Mario.tscn" type="PackedScene" id=7]
 
 [node name="Base" type="Node2D"]
 
@@ -32,39 +33,12 @@ _sections_unfolded = [ "Collision" ]
 [node name="FlagStart" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 128 )
 
-[node name="Mario" parent="." instance=ExtResource( 3 )]
-editor/display_folded = true
-position = Vector2( 64, 128 )
-_sections_unfolded = [ "Collision", "collision", "motion" ]
+[node name="Luigi" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 128 )
 
-[node name="Camera2D" type="Camera2D" parent="Mario"]
-visible = false
-anchor_mode = 1
-rotating = false
+[node name="PlayerCamera2D" parent="Luigi" instance=ExtResource( 4 )]
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -1000
-limit_top = -1000
-limit_right = 1000
-limit_bottom = 1000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 10.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.5
-drag_margin_top = 0.5
-drag_margin_right = 0.5
-drag_margin_bottom = 0.5
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = true
-script = ExtResource( 4 )
-_sections_unfolded = [ "Drag Margin" ]
 tile_map = NodePath("../../Map")
-restrict_tile_map = true
 
 [node name="MovingPlatform" parent="." instance=ExtResource( 5 )]
 position = Vector2( 336, 144 )
@@ -97,4 +71,7 @@ _sections_unfolded = [ "Cell" ]
 
 [node name="FlagEnd" parent="." instance=ExtResource( 6 )]
 position = Vector2( 544, 144 )
+
+[node name="Mario" parent="." instance=ExtResource( 7 )]
+position = Vector2( 80, 128 )
 
