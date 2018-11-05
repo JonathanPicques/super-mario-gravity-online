@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Menus/LobbyMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Common/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Menus/Textures/WaitingRoom.png" type="Texture" id=3]
-[ext_resource path="res://Game/Menus/LobbyPlayerMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Menus/Common/Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Menus/LobbyPeerMenu.tscn" type="PackedScene" id=5]
 
 [node name="LobbyMenu" type="Control"]
 anchor_left = 0.0
@@ -39,39 +40,47 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 4
 
-[node name="LobbyPlayerMenu1" parent="." instance=ExtResource( 4 )]
+[node name="Cancel Button" parent="." instance=ExtResource( 4 )]
+margin_left = 464.0
+margin_top = 16.0
+margin_right = 496.0
+margin_bottom = 48.0
+text = "x"
+
+[node name="LobbyPeerMenu1" parent="." instance=ExtResource( 5 )]
 margin_left = 64.0
 margin_top = 64.0
 margin_right = 64.0
 margin_bottom = 64.0
 
-[node name="LobbyPlayerMenu2" parent="." instance=ExtResource( 4 )]
+[node name="LobbyPeerMenu2" parent="." instance=ExtResource( 5 )]
 margin_left = 208.0
 margin_top = 64.0
 margin_right = 208.0
 margin_bottom = 64.0
 
-[node name="LobbyPlayerMenu3" parent="." instance=ExtResource( 4 )]
+[node name="LobbyPeerMenu3" parent="." instance=ExtResource( 5 )]
 margin_left = 352.0
 margin_top = 64.0
 margin_right = 352.0
 margin_bottom = 64.0
 
-[node name="LobbyPlayerMenu4" parent="." instance=ExtResource( 4 )]
+[node name="LobbyPeerMenu4" parent="." instance=ExtResource( 5 )]
 margin_left = 64.0
 margin_top = 176.0
 margin_right = 64.0
 margin_bottom = 176.0
 
-[node name="LobbyPlayerMenu5" parent="." instance=ExtResource( 4 )]
+[node name="LobbyPeerMenu5" parent="." instance=ExtResource( 5 )]
 margin_left = 208.0
 margin_top = 176.0
 margin_right = 208.0
 margin_bottom = 176.0
 
-[node name="LobbyPlayerMenu6" parent="." instance=ExtResource( 4 )]
+[node name="LobbyPeerMenu6" parent="." instance=ExtResource( 5 )]
 margin_left = 352.0
 margin_top = 176.0
 margin_right = 352.0
 margin_bottom = 176.0
 
+[connection signal="pressed" from="Cancel Button" to="." method="on_cancel_button_pressed"]

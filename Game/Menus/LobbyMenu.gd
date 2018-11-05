@@ -1,23 +1,27 @@
 extends Control
 
-onready var LobbyPlayers = [
-	$LobbyPlayerMenu1,
-	$LobbyPlayerMenu2,
-	$LobbyPlayerMenu3,
-	$LobbyPlayerMenu4,
-	$LobbyPlayerMenu5,
-	$LobbyPlayerMenu6,
+# stop_game is emitted when cancel button is pressed.
+signal stop_game
+
+onready var LobbyPeers = [
+	$LobbyPeerMenu1,
+	$LobbyPeerMenu2,
+	$LobbyPeerMenu3,
+	$LobbyPeerMenu4,
+	$LobbyPeerMenu5,
+	$LobbyPeerMenu6,
 ]
 
-# set_players set the players in the lobby players boxes.
+# set_peers set the peers in the lobby peers boxes.
 # @impure
-func set_players(players: Dictionary):
-	for lobby_player in LobbyPlayers:
-		lobby_player.joined = false
-	for player_id in players:
-		var player = players[player_id]
-		var lobby_player = LobbyPlayers[player.index]
-		lobby_player.host = player.id == 1
-		lobby_player.joined = true
-		lobby_player.self_player = false
-		lobby_player.find_node("PlayerName").text = player.name
+func set_peers(peers: Dictionary):
+	for lobby_peer in LobbyPeers:
+		lobby_peer.set_peer(null)
+	for peer_id in peers:
+		var peer = peers[peer_id]
+		var lobby_peer = LobbyPeers[peer.index]
+		lobby_peer.set_peer(peer)
+
+# @driven(signal)
+func on_cancel_button_pressed():
+	emit_signal("stop_game")
