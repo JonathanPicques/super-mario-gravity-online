@@ -7,7 +7,7 @@ enum MovingPlatformDirection {
 
 export var speed = 1.0
 export var amplitude = 30.0
-export var direction = MovingPlatformDirection.Vertical
+export(MovingPlatformDirection) var direction = MovingPlatformDirection.Vertical
 
 onready var start_pos = position
 

@@ -1,6 +1,7 @@
 extends Control
 
 const Base = preload("res://Game/Maps/Base/Base.tscn")
+
 const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
 const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
@@ -27,7 +28,7 @@ var current_listen_server = false
 var peer = {id = 0, index = 0, name = "root", ready = false, player = 0}
 var peers = {}
 
-# _ready is called when the node is ready.
+# _ready is called when the game node is ready.
 # @driven(lifecycle)
 # @impure
 func _ready():
@@ -37,6 +38,7 @@ func _ready():
 	get_tree().connect("network_peer_connected", self, "on_network_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "on_network_peer_disconnected")
 	# go to home menu scene
+	set_state(GameState.Home)
 	goto_home_menu_scene()
 
 # set_state changes the game state.
@@ -61,19 +63,19 @@ func goto_home_menu_scene():
 	home_menu_scene.connect("join_game", self, "join_game")
 	set_scene(home_menu_scene)
 
-# goto_error_menu loads the error menu.
-# @impure
-func goto_connect_menu_scene():
-	var error_menu_scene = ConnectMenu.instance()
-	error_menu_scene.connect("stop_game", self, "stop_game")
-	set_scene(error_menu_scene)
-
 # goto_home_menu loads the lobby menu.
 # @impure
 func goto_lobby_menu_scene():
 	var lobby_menu_scene = LobbyMenu.instance()
 	lobby_menu_scene.connect("stop_game", self, "stop_game")
 	set_scene(lobby_menu_scene)
+
+# goto_error_menu loads the error menu.
+# @impure
+func goto_connect_menu_scene():
+	var error_menu_scene = ConnectMenu.instance()
+	error_menu_scene.connect("stop_game", self, "stop_game")
+	set_scene(error_menu_scene)
 
 # host_game hosts a game on the given port with the given number of max peers.
 # @impure
@@ -242,11 +244,6 @@ remote func net_peer_post_configured(peer_id: int, peer_player: int, peer_ready:
 	# update lobby with new skin
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
-	# check if all players are ready
-	if is_every_peer_ready():
-		print("all ready")
-	else:
-		print("not all ready")
 
 # net_other_peer_disconnected is called when the server tells us another peer has disconnected.
 # @driven(server_to_client)

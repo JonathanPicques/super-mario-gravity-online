@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/Players/Luigi/Luigi.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/Players/PlayerCamera2D.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/Items/Platforms/MovingPlatform.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Game/Players/Mario/Mario.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Items/Platforms/MovingPlatform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=4]
 
 [node name="Base" type="Node2D"]
 
@@ -33,21 +30,17 @@ _sections_unfolded = [ "Collision" ]
 [node name="FlagStart" parent="." instance=ExtResource( 2 )]
 position = Vector2( 32, 128 )
 
-[node name="Luigi" parent="." instance=ExtResource( 3 )]
-position = Vector2( 96, 128 )
-
-[node name="PlayerCamera2D" parent="Luigi" instance=ExtResource( 4 )]
-current = true
-tile_map = NodePath("../../Map")
-
-[node name="MovingPlatform" parent="." instance=ExtResource( 5 )]
+[node name="MovingPlatformVertical" parent="." instance=ExtResource( 3 )]
 position = Vector2( 336, 144 )
 motion/sync_to_physics = false
 
-[node name="MovingPlatform2" parent="." instance=ExtResource( 5 )]
+[node name="MovingPlatformHorizontal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 240, 128 )
 motion/sync_to_physics = false
 direction = 1
+
+[node name="FlagEnd" parent="." instance=ExtResource( 4 )]
+position = Vector2( 544, 144 )
 
 [node name="DecorMap" type="TileMap" parent="."]
 mode = 0
@@ -68,10 +61,4 @@ occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 458759, 1, 65541, 524318, 1, 131075, 524319, 1, 131076, 524320, 1, 65540, 524321, 1, 131076, 524322, 1, 65540, 524323, 1, 131076, 524324, 1, 131077, 917528, 1, 65541, 917529, 1, 131075, 917530, 1, 131076, 917531, 1, 131076, 917532, 1, 131076, 917533, 1, 131077, 1441790, 1, 65539, 1441791, 1, 4 )
 _sections_unfolded = [ "Cell" ]
-
-[node name="FlagEnd" parent="." instance=ExtResource( 6 )]
-position = Vector2( 544, 144 )
-
-[node name="Mario" parent="." instance=ExtResource( 7 )]
-position = Vector2( 80, 128 )
 
