@@ -1,10 +1,11 @@
 extends Control
 
 const Base = preload("res://Game/Maps/Base/Base.tscn")
-
 const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
 const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
+
+onready var Players = preload("res://Game/Players/Players.gd").new()
 
 enum GameState {
 	None,
@@ -21,11 +22,11 @@ var state = GameState.None
 
 var current_ip = ""
 var current_port = 0
-var current_scene: Node = null
+var current_scene: Node
 var current_max_peers = 0
 var current_listen_server = false
 
-var peer = {id = 0, index = 0, name = "root", ready = false, player = 0}
+var peer = {id = 0, index = 0, name = "", ready = false, player = 0}
 var peers = {}
 
 # _ready is called when the game node is ready.
@@ -105,7 +106,7 @@ func join_game(ip: String, port: int, peer_name: String = "client") -> bool:
 
 # stop_game stops hosting or playing as a client.
 # @impure
-func stop_game():
+func stop_game(return_home: bool = true):
 	var mp_peer = get_tree().get_network_peer()
 	if mp_peer != null:
 		# close connection
@@ -115,11 +116,13 @@ func stop_game():
 		# reset self peer values
 		peer.id = 0
 		peer.index = 0
+		peer.ready = false
 		# remove all other peers
 		peers.clear()
 	# return to home menu scene
-	set_state(GameState.Home)
-	goto_home_menu_scene()
+	if return_home:
+		set_state(GameState.Home)
+		goto_home_menu_scene()
 
 # setup_self is called when successfully hosted or joined.
 # @impure
@@ -134,6 +137,8 @@ func setup_self(mp_peer: NetworkedMultiplayerPeer, peer_name: String):
 # @driven(signal)
 # @impure
 func on_connection_failed():
+	# stop game
+	stop_game(false)
 	# connect error state
 	set_state(GameState.ConnectError)
 	# display connection failed error
@@ -150,6 +155,8 @@ func on_connected_to_server():
 # @driven(signal)
 # @impure
 func on_server_disconnected():
+	# stop game
+	stop_game(false)
 	# error state
 	set_state(GameState.ConnectError)
 	# load error menu scene
@@ -176,48 +183,50 @@ func on_network_peer_disconnected(peer_id: int):
 # net_peer_configure is called on the server when a new peer sends its config.
 # @driven(client_to_server)
 # @impure
-master func net_peer_configure(new_peer_config: Dictionary):
+master func net_peer_configure(new_peer):
 	# check if rpc sender id match peer config
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != new_peer_config.id:
+	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != new_peer.id:
 		print("net_peer_configure(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
 	# compute new peer name (avoid dups)
-	new_peer_config.name = get_peer_name(new_peer_config.name)
+	new_peer.name = get_peer_name(new_peer.name)
 	# compute new peer index
-	new_peer_config.index = get_next_peer_index()
+	new_peer.index = get_next_peer_index()
+	# force the peer not to be ready
+	new_peer.ready = false
 	# tell the peer he is configured
-	rpc_id(new_peer_config.id, "net_peer_configured", new_peer_config)
+	rpc_id(new_peer.id, "net_peer_configured", new_peer)
 	# if the server is playing, send its info too to the new peer
 	if current_listen_server:
-		rpc_id(new_peer_config.id, "net_peer_configured", peer)
+		rpc_id(new_peer.id, "net_peer_configured", peer)
 	# send new peer info to the other connected peers and the other way around
 	for other_peer_id in peers:
-		rpc_id(other_peer_id, "net_peer_configured", new_peer_config)
-		rpc_id(new_peer_config.id, "net_peer_configured", peers[other_peer_id])
+		rpc_id(other_peer_id, "net_peer_configured", new_peer)
+		rpc_id(new_peer.id, "net_peer_configured", peers[other_peer_id])
 	# add the new peer to the peers list
-	net_peer_configured(new_peer_config)
+	net_peer_configured(new_peer)
 
 # net_peer_configured is called when the server tells us the given peer is correctly configured.
 # @driven(server_to_client)
 # @impure
-remote func net_peer_configured(peer_config: Dictionary):
+remote func net_peer_configured(other_peer):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_peer_configured(): warning sender is not server")
-	if peer_config.id == peer.id:
+	if other_peer.id == peer.id:
 		# save our config
-		peer = peer_config
+		peer = other_peer
 		# go to lobby menu scene upon successful connection
 		set_state(GameState.Lobby)
 		goto_lobby_menu_scene()
 	# add the configured peer to the peers
-	peers[peer_config.id] = peer_config
+	peers[other_peer.id] = other_peer
 	# update lobby
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
-	print("net_peer_configured: ", peer_config)
+	print("net_peer_configured: ", other_peer)
 
-# net_peer_post_configure is called on the server when a new peer sends its player skin / ready state.
+# net_peer_post_configure is called on the server when a new peer sends its player / ready state.
 # @driven(client_to_server)
 # @impure
 master func net_peer_post_configure(peer_id: int, peer_player: int, peer_ready: bool):
@@ -226,12 +235,12 @@ master func net_peer_post_configure(peer_id: int, peer_player: int, peer_ready: 
 		print("net_peer_post_configure(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
-	# send other players that the player skin changed
+	# send other peers that the peer player / ready state changed
 	rpc("net_peer_post_configured", peer_id, peer_player, peer_ready)
-	# save the peer skin
+	# save the peer player / ready state
 	net_peer_post_configured(peer_id, peer_player, peer_ready)
 
-# net_peer_post_configured is called when the server tells us the given peer changed its player skin / ready state.
+# net_peer_post_configured is called when the server tells us the given peer changed its player / ready state.
 # @driven(server_to_client)
 # @impure
 remote func net_peer_post_configured(peer_id: int, peer_player: int, peer_ready: bool):
@@ -239,9 +248,9 @@ remote func net_peer_post_configured(peer_id: int, peer_player: int, peer_ready:
 		return print("net_peer_post_configured(): warning sender is not server")
 	# save the player ready state
 	peers[peer_id].ready = peer_ready
-	# save the player skin
+	# save the player
 	peers[peer_id].player = peer_player
-	# update lobby with new skin
+	# update lobby
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
 
@@ -259,6 +268,7 @@ remote func net_peer_disconnected(peer_id: int):
 		goto_connect_menu_scene()
 		# ... display kick message
 		current_scene.set_state(current_scene.ConnectState.ConnectionKicked)
+		return
 	# remove the disconnected peer from the peers
 	peers.erase(peer_id)
 	# update lobby
