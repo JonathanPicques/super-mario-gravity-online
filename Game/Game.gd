@@ -24,7 +24,7 @@ var current_scene: Node = null
 var current_max_peers = 0
 var current_listen_server = false
 
-var peer = {id = 0, index = 0, name = "root", skin = "mario"}
+var peer = {id = 0, index = 0, name = "root", ready = false, player = 0}
 var peers = {}
 
 # _ready is called when the node is ready.
@@ -176,13 +176,13 @@ func on_network_peer_disconnected(peer_id: int):
 # @impure
 master func net_peer_configure(new_peer_config: Dictionary):
 	# check if rpc sender id match peer config
-	if get_tree().get_rpc_sender_id() != new_peer_config.id:
+	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != new_peer_config.id:
 		print("net_peer_configure(): warning: peer id mismatch")
-		get_tree().get_network_mp_peer().disconnect_peer(get_tree().get_rpc_sender_id())
+		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
-	# comp_peerute new peer name (avoid dups)
+	# compute new peer name (avoid dups)
 	new_peer_config.name = get_peer_name(new_peer_config.name)
-	# comp_peerute new peer index
+	# compute new peer index
 	new_peer_config.index = get_next_peer_index()
 	# tell the peer he is configured
 	rpc_id(new_peer_config.id, "net_peer_configured", new_peer_config)
@@ -196,12 +196,12 @@ master func net_peer_configure(new_peer_config: Dictionary):
 	# add the new peer to the peers list
 	net_peer_configured(new_peer_config)
 
-# net_other_peer_configured is called when the server tells us the given peer is correctly configured.
+# net_peer_configured is called when the server tells us the given peer is correctly configured.
 # @driven(server_to_client)
 # @impure
 remote func net_peer_configured(peer_config: Dictionary):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("net_other_peer_configured(): warning sender is not server")
+		return print("net_peer_configured(): warning sender is not server")
 	if peer_config.id == peer.id:
 		# save our config
 		peer = peer_config
@@ -215,12 +215,45 @@ remote func net_peer_configured(peer_config: Dictionary):
 		current_scene.set_peers(peers)
 	print("net_peer_configured: ", peer_config)
 
+# net_peer_post_configure is called on the server when a new peer sends its player skin / ready state.
+# @driven(client_to_server)
+# @impure
+master func net_peer_post_configure(peer_id: int, peer_player: int, peer_ready: bool):
+	# check if rpc sender id match peer config
+	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != peer_id:
+		print("net_peer_post_configure(): warning: peer id mismatch")
+		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
+		return
+	# send other players that the player skin changed
+	rpc("net_peer_post_configured", peer_id, peer_player, peer_ready)
+	# save the peer skin
+	net_peer_post_configured(peer_id, peer_player, peer_ready)
+
+# net_peer_post_configured is called when the server tells us the given peer changed its player skin / ready state.
+# @driven(server_to_client)
+# @impure
+remote func net_peer_post_configured(peer_id: int, peer_player: int, peer_ready: bool):
+	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
+		return print("net_peer_post_configured(): warning sender is not server")
+	# save the player ready state
+	peers[peer_id].ready = peer_ready
+	# save the player skin
+	peers[peer_id].player = peer_player
+	# update lobby with new skin
+	if state == GameState.Lobby:
+		current_scene.set_peers(peers)
+	# check if all players are ready
+	if is_every_peer_ready():
+		print("all ready")
+	else:
+		print("not all ready")
+
 # net_other_peer_disconnected is called when the server tells us another peer has disconnected.
 # @driven(server_to_client)
 # @impure
 remote func net_peer_disconnected(peer_id: int):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("net_other_peer_disconnected(): warning sender is not server")
+		return print("net_peer_disconnected(): warning sender is not server")
 	# if our peer is disconnected, we got kicked
 	if peer.id == peer_id:
 		# connect error state
@@ -260,3 +293,13 @@ func get_next_peer_index() -> int:
 		if index == other_peer_index:
 			index += 1
 	return index
+
+# is_every_peer_ready returns true if every peer is ready.
+# @pure
+func is_every_peer_ready() -> bool:
+	if peers.size() <= 1:
+		return false
+	for peer_id in peers:
+		if not peers[peer_id].ready:
+			return false
+	return true
