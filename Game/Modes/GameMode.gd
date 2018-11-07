@@ -1,32 +1,32 @@
 extends Control
 
 # mode_ended is emitted when the game mode ends with a winner.
-# @param(int[player_count]) kills - indexed by player index
-# @param(int[player_count]) deaths - indexed by player index
-# @param(int[player_count]) scores - indexed by player index, higher score is the winner
+# @param(int[peer_count]) kills - indexed by peer index
+# @param(int[peer_count]) deaths - indexed by peer index
+# @param(int[peer_count]) scores - indexed by peer index, higher score is the winner
 signal mode_ended
 
 # create is called when instancing a game mode.
 # @impure
-master func create(new_map: String, new_options = {}):
+remote func create(map_path: String):
 	pass
 
-# start is called when all players are ready and the game is about to start.
+# start is called when all peers are ready and the game is about to start.
 # @impure
-master func start(player_count: int):
+remote func start():
 	pass
 
-# spawn_player is called when game needs to spawn a player (first time).
+# spawn_peer is called when game needs to spawn a peer (first time).
 # @impure
-master func spawn_player(index: int, player: Dictionary, player_scene: Node2D):
+remote func spawn_peer(peer: Dictionary):
 	pass
 
-# kill_player is called when game needs to kill a player.
+# kill_peer is called when game needs to kill a peer.
 # @impure
-master func kill_player(index: int, player: Dictionary, player_scene: Node2D):
+remote func kill_peer(peer: Dictionary):
 	pass
 
-# respawn_player is called when game needs to respawn a player (often after kill/fall/death).
+# respawn_peer is called when game needs to respawn a peer (often after kill/fall/death).
 # @impure
-master func respawn_player(index: int, player: Dictionary, player_scene: Node2D, last_safe_pos: Vector2):
+remote func respawn_peer(peer: Dictionary, last_safe_pos: Vector2):
 	pass

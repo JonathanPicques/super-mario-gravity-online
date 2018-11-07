@@ -26,7 +26,14 @@ var current_scene: Node
 var current_max_peers = 0
 var current_listen_server = false
 
-var peer = {id = 0, index = 0, name = "", ready = false, player = 0}
+var peer = {        # self peer
+	id = 0,         # peer network id
+	name = "",      # peer name
+	index = 0,      # peer index (order of connection)
+	ready = false,  # peer ready
+	ingame = false, # peer in game
+	player_id = 0   # peer player id (Mario = 0, Luigi = 1, ...)
+}
 var peers = {}
 
 # _ready is called when the game node is ready.
@@ -226,30 +233,30 @@ remote func net_peer_configured(other_peer):
 		current_scene.set_peers(peers)
 	print("net_peer_configured: ", other_peer)
 
-# net_peer_post_configure is called on the server when a new peer sends its player / ready state.
+# net_peer_post_configure is called on the server when a new peer sends its player_id / ready state.
 # @driven(client_to_server)
 # @impure
-master func net_peer_post_configure(peer_id: int, peer_player: int, peer_ready: bool):
+master func net_peer_post_configure(peer_id: int, peer_player_id: int, peer_ready: bool):
 	# check if rpc sender id match peer config
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != peer_id:
 		print("net_peer_post_configure(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
-	# send other peers that the peer player / ready state changed
-	rpc("net_peer_post_configured", peer_id, peer_player, peer_ready)
-	# save the peer player / ready state
-	net_peer_post_configured(peer_id, peer_player, peer_ready)
+	# send other peers that the peer player_id / ready state changed
+	rpc("net_peer_post_configured", peer_id, peer_player_id, peer_ready)
+	# save the peer player_id / ready state
+	net_peer_post_configured(peer_id, peer_player_id, peer_ready)
 
-# net_peer_post_configured is called when the server tells us the given peer changed its player / ready state.
+# net_peer_post_configured is called when the server tells us the given peer changed its player_id / ready state.
 # @driven(server_to_client)
 # @impure
-remote func net_peer_post_configured(peer_id: int, peer_player: int, peer_ready: bool):
+remote func net_peer_post_configured(peer_id: int, peer_player_id: int, peer_ready: bool):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_peer_post_configured(): warning sender is not server")
-	# save the player ready state
+	# save the player_id ready state
 	peers[peer_id].ready = peer_ready
-	# save the player
-	peers[peer_id].player = peer_player
+	# save the player_id
+	peers[peer_id].player_id = peer_player_id
 	# update lobby
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
