@@ -1,12 +1,11 @@
 extends KinematicBody2D
 
-onready var PlayerTimer = $"Timer"
-onready var PlayerSprite = $"Sprite"
-onready var PlayerEveryTimer = $"EveryTimer"
-onready var PlayerWallChecker = $"WallChecker"
-onready var PlayerCollisionBody = $"CollisionBody"
-onready var PlayerCollisionFloor = $"CollisionFloor"
-onready var PlayerAnimationPlayer = $"AnimationPlayer"
+onready var PlayerTimer: Timer = $"Timer"
+onready var PlayerSprite: Sprite = $"Sprite"
+onready var PlayerEveryTimer: Timer = $"EveryTimer"
+onready var PlayerWallChecker: RayCast2D = $"WallChecker"
+onready var PlayerCollisionBody: CollisionShape2D = $"CollisionBody"
+onready var PlayerAnimationPlayer: AnimationPlayer = $"AnimationPlayer"
 onready var PlayerSoundEffectPlayers = [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
 
 onready var BumpSFX: AudioStream

@@ -3,7 +3,7 @@ extends Control
 # stop_game is emitted when cancel button is pressed.
 signal stop_game
 
-onready var MessageLabel = $"Message Label"
+onready var MessageLabel: Label = $"Message Label"
 
 enum ConnectState {
 	Connecting,

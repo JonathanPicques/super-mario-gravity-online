@@ -10,8 +10,8 @@ signal host_game
 # @param(string) player_name
 signal join_game
 
-onready var PlayerNameLineEdit = $"Player Name Line Edit"
-onready var IPAddressConnectLineEdit = $"IP Address Line Edit"
+onready var PlayerNameLineEdit: LineEdit = $"Player Name Line Edit"
+onready var IPAddressConnectLineEdit: LineEdit = $"IP Address Line Edit"
 
 # _ready is called when the HomeMenu node is ready to load the saved player name.
 # driven(lifecycle)

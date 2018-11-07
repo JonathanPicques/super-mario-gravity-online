@@ -1,7 +1,7 @@
 extends Control
 
-const CharacterSelect = preload("res://Game/Menus/Textures/CharacterSelect.png")
-const CharacterSelectDisabled = preload("res://Game/Menus/Textures/CharacterSelectDisabled.png")
+const CharacterSelect: Texture = preload("res://Game/Menus/Textures/CharacterSelect.png")
+const CharacterSelectDisabled: Texture = preload("res://Game/Menus/Textures/CharacterSelectDisabled.png")
 
 onready var Game = get_tree().get_root().get_node("Game")
 
