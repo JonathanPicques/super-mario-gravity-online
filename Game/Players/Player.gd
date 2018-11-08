@@ -32,22 +32,6 @@ const FLOOR_SNAP_DISABLED = Vector2()
 const FLOOR_SNAP_DISABLE_TIME = 0.1
 const INPUT_DOUBLE_TAP_THRESHOLD = 0.25
 
-const JUMP_STRENGTH = -180
-const CEILING_KNOCKDOWN = 50
-const WALL_JUMP_STRENGTH = -120
-const WALL_JUMP_PUSH_STRENGTH = 80
-
-const WALK_MAX_SPEED = 120
-const WALK_ACCELERATION = 250
-const WALK_DECELERATION = 320
-
-const RUN_MAX_SPEED = 160
-const RUN_ACCELERATION = 290
-const RUN_DECELERATION = 340
-
-const GRAVITY_MAX_SPEED = 500
-const GRAVITY_ACCELERATION =  500
-
 var state = PlayerState.none
 
 var input_up = false
@@ -73,6 +57,22 @@ var disable_snap = 0.0
 
 var direction = 1
 var wallslide_cancelled = false # reset on stand or walljump
+
+var JUMP_STRENGTH = -180
+var CEILING_KNOCKDOWN = 50
+var WALL_JUMP_STRENGTH = -120
+var WALL_JUMP_PUSH_STRENGTH = 80
+
+var WALK_MAX_SPEED = 120
+var WALK_ACCELERATION = 250
+var WALK_DECELERATION = 320
+
+var RUN_MAX_SPEED = 160
+var RUN_ACCELERATION = 290
+var RUN_DECELERATION = 340
+
+var GRAVITY_MAX_SPEED = 500
+var GRAVITY_ACCELERATION =  500
 
 # _physics_process is called every process tick and updates player state.
 # @driven(lifecycle)

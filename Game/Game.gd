@@ -26,14 +26,15 @@ var current_scene: Node
 var current_max_peers = 0
 var current_listen_server = false
 
-var peer = {        # self peer
+# self peer
+var peer = {
 	id = 0,         # peer network id
 	name = "",      # peer name
 	index = 0,      # peer index (order of connection)
 	ready = false,  # peer ready
-	ingame = false, # peer in game
 	player_id = 0   # peer player id (Mario = 0, Luigi = 1, ...)
 }
+# other peers (self peer is included)
 var peers = {}
 
 # _ready is called when the game node is ready.
@@ -175,13 +176,13 @@ func on_server_disconnected():
 	# display connection lost error
 	current_scene.set_state(current_scene.ConnectState.ConnectionLost)
 
-# on_network_peer_connected is called when another peer is connected.
+# on_network_peer_connected is called when a peer is connected.
 # @driven(signal)
 # @impure
 func on_network_peer_connected(peer_id: int):
 	pass
 
-# on_network_peer_disconnected is called when another peer is disconnected.
+# on_network_peer_disconnected is called when a peer is disconnected.
 # @driven(signal)
 # @impure
 func on_network_peer_disconnected(peer_id: int):
@@ -190,6 +191,10 @@ func on_network_peer_disconnected(peer_id: int):
 		rpc("net_peer_disconnected", peer_id)
 		# removes the peer from the peers list
 		net_peer_disconnected(peer_id)
+		# remove the peer from the game mode if playing
+		if state == GameState.PlayGameMode:
+			current_scene.rpc("destroy_peer", peer_id)
+			current_scene.destroy_peer(peer_id)
 
 # net_peer_configure is called on the server when a new peer sends its config.
 # @driven(client_to_server)
@@ -237,7 +242,7 @@ remote func net_peer_configured(other_peer):
 		current_scene.set_peers(peers)
 	print("net_peer_configured: ", other_peer)
 
-# net_peer_post_configure is called on the server when a new peer sends its player_id / ready state.
+# net_peer_post_configure is called on the server when a new peer sends its player_id/ready state.
 # @driven(client_to_server)
 # @impure
 master func net_peer_post_configure(peer_id: int, peer_player_id: int, peer_ready: bool):
@@ -246,12 +251,22 @@ master func net_peer_post_configure(peer_id: int, peer_player_id: int, peer_read
 		print("net_peer_post_configure(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
-	# send other peers that the peer player_id / ready state changed
+	# send other peers that the peer player_id/ready state changed
 	rpc("net_peer_post_configured", peer_id, peer_player_id, peer_ready)
-	# save the peer player_id / ready state
+	# save the peer player_id/ready state
 	net_peer_post_configured(peer_id, peer_player_id, peer_ready)
+	# if all peers are ready, start the game mode
+	if state == GameState.Lobby and is_every_peer_ready():
+		# tell other peers to load the game mode
+		rpc("net_peer_start_game_mode", "res://Game/Modes/Race/RaceGameMode.tscn")
+		# load the game mode
+		net_peer_start_game_mode("res://Game/Modes/Race/RaceGameMode.tscn")
+		# tell other peers to start the game mode
+		current_scene.rpc("start", "res://Game/Maps/Base/Base.tscn", peers)
+		# start game mode
+		current_scene.start("res://Game/Maps/Base/Base.tscn", peers)
 
-# net_peer_post_configured is called when the server tells us the given peer changed its player_id / ready state.
+# net_peer_post_configured is called when the server tells us the given peer changed its player_id/ready state.
 # @driven(server_to_client)
 # @impure
 remote func net_peer_post_configured(peer_id: int, peer_player_id: int, peer_ready: bool):
@@ -265,7 +280,18 @@ remote func net_peer_post_configured(peer_id: int, peer_player_id: int, peer_rea
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
 
-# net_other_peer_disconnected is called when the server tells us another peer has disconnected.
+# net_peer_start_game_mode is called when the server tells us to start the given game mode.
+# @driven(server_to_client)
+# @impure
+remote func net_peer_start_game_mode(game_mode_path: String):
+	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
+		return print("net_peer_start_game_mode(): warning sender is not server")
+	set_state(GameState.LoadGameMode)
+	var game_mode_scene = load(game_mode_path).instance()
+	set_scene(game_mode_scene)
+	set_state(GameState.PlayGameMode)
+
+# net_peer_disconnected is called when the server tells us a peer has disconnected.
 # @driven(server_to_client)
 # @impure
 remote func net_peer_disconnected(peer_id: int):
@@ -273,6 +299,8 @@ remote func net_peer_disconnected(peer_id: int):
 		return print("net_peer_disconnected(): warning sender is not server")
 	# if our peer is disconnected, we got kicked
 	if peer.id == peer_id:
+		# stop game
+		stop_game(false)
 		# connect error state
 		set_state(GameState.ConnectError)
 		# go to connect menu scene and ...
@@ -315,7 +343,7 @@ func get_next_peer_index() -> int:
 # is_every_peer_ready returns true if every peer is ready.
 # @pure
 func is_every_peer_ready() -> bool:
-	if peers.size() <= 1:
+	if peers.size() <= 0: # TODO
 		return false
 	for peer_id in peers:
 		if not peers[peer_id].ready:
