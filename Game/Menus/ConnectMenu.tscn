@@ -13,7 +13,6 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 4 )
-_sections_unfolded = [ "Font", "Settings", "font_data" ]
 
 [node name="ErrorMenu" type="Control"]
 anchor_left = 0.0
@@ -32,7 +31,6 @@ __meta__ = {
 }
 
 [node name="Background" parent="." instance=ExtResource( 2 )]
-_sections_unfolded = [ "Material", "Visibility", "material" ]
 
 [node name="Cancel Button" parent="." instance=ExtResource( 3 )]
 margin_left = 384.0
@@ -61,7 +59,6 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts", "custom_fonts/font" ]
 __meta__ = {
 "_edit_lock_": true
 }

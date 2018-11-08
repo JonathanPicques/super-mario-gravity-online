@@ -11,10 +11,10 @@ enum GameState {
 	None,
 	Home,
 	Lobby,
-	LoadMap,
-	InGameMap,
 	Connecting,
 	ConnectError,
+	LoadGameMode,
+	PlayGameMode,
 	ResultScreen,
 }
 
@@ -87,29 +87,33 @@ func goto_connect_menu_scene():
 
 # host_game hosts a game on the given port with the given number of max peers.
 # @impure
-func host_game(port: int, max_peers: int, listen_server = true, peer_name: String = "server") -> bool:
+func host_game(port: int, max_peers: int, listen_server = true, peer_name: String = "server"):
 	var mp_peer = NetworkedMultiplayerENet.new()
+	current_port = port
+	current_max_peers = max_peers
+	current_listen_server = listen_server
 	if mp_peer.create_server(port, max_peers) == 0:
-		current_port = port
-		current_max_peers = max_peers
-		current_listen_server = listen_server
 		setup_self(mp_peer, peer_name)
 		net_peer_configured(peer)
-		return true
-	return false
+	else:
+		set_state(GameState.ConnectError)
+		goto_connect_menu_scene()
+		current_scene.set_state(current_scene.ConnectState.HostingFailed)
 
 # join_game joins a game on the given ip:port.
 # @impure
-func join_game(ip: String, port: int, peer_name: String = "client") -> bool:
+func join_game(ip: String, port: int, peer_name: String = "client"):
 	var mp_peer = NetworkedMultiplayerENet.new()
+	current_ip = ip
+	current_port = port
 	if mp_peer.create_client(ip, port) == 0:
-		current_ip = ip
-		current_port = port
 		set_state(GameState.Connecting)
 		setup_self(mp_peer, peer_name)
 		goto_connect_menu_scene()
-		return true
-	return false
+	else:
+		set_state(GameState.ConnectError)
+		goto_connect_menu_scene()
+		current_scene.set_state(current_scene.ConnectState.ConnectionFailed)
 
 # stop_game stops hosting or playing as a client.
 # @impure
