@@ -15,7 +15,7 @@
 [ext_resource path="res://Game/Players/Mario/Anims/walk.tres" type="Animation" id=13]
 [ext_resource path="res://Game/Players/Mario/Anims/wallslide.tres" type="Animation" id=14]
 
-[node name="Mario" index="0" instance=ExtResource( 1 )]
+[node name="Mario" instance=ExtResource( 1 )]
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( -10, -29 )

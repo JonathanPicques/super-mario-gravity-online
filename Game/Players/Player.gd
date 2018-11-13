@@ -7,6 +7,7 @@ onready var PlayerWallChecker: RayCast2D = $"WallChecker"
 onready var PlayerCollisionBody: CollisionShape2D = $"CollisionBody"
 onready var PlayerAnimationPlayer: AnimationPlayer = $"AnimationPlayer"
 onready var PlayerSoundEffectPlayers = [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
+onready var PlayerNetworkDeadReckoning: Tween = $"NetworkDeadReckoning"
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
@@ -28,6 +29,7 @@ enum PlayerState {
 
 const FLOOR = Vector2(0, -1)
 const FLOOR_SNAP = Vector2(0, 1)
+const NETWORK_TICK_RATE = 0.033
 const FLOOR_SNAP_DISABLED = Vector2()
 const FLOOR_SNAP_DISABLE_TIME = 0.1
 const INPUT_DOUBLE_TAP_THRESHOLD = 0.25
@@ -74,28 +76,53 @@ var RUN_DECELERATION = 340
 var GRAVITY_MAX_SPEED = 500
 var GRAVITY_ACCELERATION =  500
 
-# _physics_process is called every process tick and updates player state.
+slave var slave_position = Vector2()
+slave var slave_direction = 1
+slave var slave_animation = ""
+
+# _process is called every tick and send player state over network.
+# @driven(lifecycle)
+# @impure
+var tick_rate_delay = 0
+func _process(delta):
+	tick_rate_delay += delta
+	if is_network_master():
+		if tick_rate_delay >= NETWORK_TICK_RATE:
+			rset_unreliable("slave_position", position)
+			rset_unreliable("slave_direction", direction)
+			rset_unreliable("slave_animation", PlayerAnimationPlayer.current_animation)
+			tick_rate_delay -= NETWORK_TICK_RATE
+
+# _physics_process is called every physics tick and updates player state.
 # @driven(lifecycle)
 # @impure
 func _physics_process(delta: float):
-	process_input(delta)
-	process_velocity(delta)
-	match state:
-		PlayerState.stand: tick_stand(delta)
-		PlayerState.stand_turn: tick_stand_turn(delta)
-		PlayerState.run: tick_run(delta)
-		PlayerState.walk: tick_walk(delta)
-		PlayerState.crouch: tick_crouch(delta)
-		PlayerState.move_turn: tick_move_turn(delta)
-		PlayerState.push_wall: tick_push_wall(delta)
-		PlayerState.fall: tick_fall(delta)
-		PlayerState.fall_to_stand: tick_fall_to_stand(delta)
-		PlayerState.jump: tick_jump(delta)
-		PlayerState.wallslide: tick_wallslide(delta)
-		PlayerState.walljump: tick_walljump(delta)
-		PlayerState.ground_pound: tick_ground_pound(delta)
-		PlayerState.ground_pound_fall: tick_ground_pound_fall(delta)
-		PlayerState.ground_pound_fall_to_stand: tick_ground_pound_fall_to_stand(delta)
+	if is_network_master():
+		process_input(delta)
+		process_velocity(delta)
+		match state:
+			PlayerState.stand: tick_stand(delta)
+			PlayerState.stand_turn: tick_stand_turn(delta)
+			PlayerState.run: tick_run(delta)
+			PlayerState.walk: tick_walk(delta)
+			PlayerState.crouch: tick_crouch(delta)
+			PlayerState.move_turn: tick_move_turn(delta)
+			PlayerState.push_wall: tick_push_wall(delta)
+			PlayerState.fall: tick_fall(delta)
+			PlayerState.fall_to_stand: tick_fall_to_stand(delta)
+			PlayerState.jump: tick_jump(delta)
+			PlayerState.wallslide: tick_wallslide(delta)
+			PlayerState.walljump: tick_walljump(delta)
+			PlayerState.ground_pound: tick_ground_pound(delta)
+			PlayerState.ground_pound_fall: tick_ground_pound_fall(delta)
+			PlayerState.ground_pound_fall_to_stand: tick_ground_pound_fall_to_stand(delta)
+	else:
+		PlayerNetworkDeadReckoning.stop_all()
+		PlayerNetworkDeadReckoning.interpolate_property(self, "position", position, slave_position, delta, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		PlayerNetworkDeadReckoning.start()
+		set_direction(slave_direction)
+		if PlayerAnimationPlayer.has_animation(slave_animation) and PlayerAnimationPlayer.current_animation != slave_animation:
+			set_animation(slave_animation)
 
 # process_input updates player inputs.
 # @impure
