@@ -3,6 +3,18 @@ extends "res://Game/Modes/GameMode.gd"
 var flag_end: Node2D
 var flag_start: Node2D
 
+func _process(delta):
+	var nav_line = map_scene.find_node("NavigationPolygonInstanceLine2D")
+	for peer_id in Game.peers:
+		var player_scene = get_node(str(peer_id))
+		var navigation_path = map_scene.get_simple_path(player_scene.position, flag_end.position)
+		nav_line.points = navigation_path
+		var length = 0
+		for i in range(0, navigation_path.size()):
+			var next = i + 1
+			if next < navigation_path.size():
+				length += navigation_path[i].distance_to(navigation_path[next])
+
 # start is called when all peers are ready and the game is about to start.
 # @impure
 remote func start(map_path: String, peers: Dictionary):

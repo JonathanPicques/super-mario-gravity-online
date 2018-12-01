@@ -6,7 +6,7 @@
 [ext_resource path="res://Game/Items/Platforms/MovingPlatform.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=5]
 
-[sub_resource type="NavigationPolygon" id=1]
+[sub_resource type="NavigationPolygon" id=2]
 
 vertices = PoolVector2Array( 480, 144, 480, 240, 448, 192, 448, 112, 416, 192, 384, 240, 384, 224, -32, 32, 0, 32, 0, 80, -32, 352, 32, 80, 32, 32, 592, 32, 192, 128, 592, 144, 432, 112, 432, 96, 352, 224, 352, 240, 336, 240, 256, 208, 336, 272, 304, 272, 304, 256, 272, 256, 272, 240, 256, 240, 240, 208, 240, 192, 416, 96, 208, 192, 208, 160, 192, 160, 0, 128, 0, 352 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1, 5, 6 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 11, 12, 13, 14 ), PoolIntArray( 13, 15, 0, 3 ), PoolIntArray( 3, 16, 17, 13 ), PoolIntArray( 18, 19, 20, 21 ), PoolIntArray( 20, 22, 23, 24 ), PoolIntArray( 24, 25, 26, 20 ), PoolIntArray( 26, 27, 21 ), PoolIntArray( 21, 28, 29, 30 ), PoolIntArray( 29, 31, 32, 30 ), PoolIntArray( 32, 33, 14, 13, 30 ), PoolIntArray( 34, 35, 10 ), PoolIntArray( 34, 10, 9 ), PoolIntArray( 34, 9, 11, 14 ), PoolIntArray( 20, 26, 21 ), PoolIntArray( 30, 4, 6, 18, 21 ), PoolIntArray( 30, 13, 17 ) ]
@@ -69,7 +69,7 @@ format = 1
 tile_data = PoolIntArray( 458759, 1, 65541, 524318, 1, 131075, 524319, 1, 131076, 524320, 1, 65540, 524321, 1, 131076, 524322, 1, 65540, 524323, 1, 131076, 524324, 1, 131077, 917528, 1, 65541, 917529, 1, 131075, 917530, 1, 131076, 917531, 1, 131076, 917532, 1, 131076, 917533, 1, 131077, 1441790, 1, 65539, 1441791, 1, 4 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
-navpoly = SubResource( 1 )
+navpoly = SubResource( 2 )
 enabled = true
 
 [node name="NavigationPolygonInstanceLine2D" type="Line2D" parent="."]
