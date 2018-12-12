@@ -32,7 +32,9 @@ var peer = {
 	name = "",      # peer name
 	index = 0,      # peer index (order of connection)
 	ready = false,  # peer ready
-	player_id = 0   # peer player id (Mario = 0, Luigi = 1, ...)
+	player_id = 0,   # peer player id (Mario = 0, Luigi = 1, ...)
+	position_index = 0, # peer position (1st, 2nd, ...)
+	position_length = 0, # peer distance from flag
 }
 # other peers (self peer is included)
 var peers = {}
@@ -129,6 +131,8 @@ func stop_game(return_home: bool = true):
 		peer.id = 0
 		peer.index = 0
 		peer.ready = false
+		peer.position_index = 0
+		peer.position_length = 0
 		# remove all other peers
 		peers.clear()
 	# return to home menu scene

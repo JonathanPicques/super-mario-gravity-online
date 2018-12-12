@@ -1,17 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Game/Modes/Race/RaceGameMode.gd" type="Script" id=1]
+[ext_resource path="res://Game/Modes/Race/GameMode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Modes/Race/RaceGameMode.gd" type="Script" id=2]
 
-[node name="RaceGameMode" type="Control"]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-script = ExtResource( 1 )
+[node name="RaceGameMode" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 
