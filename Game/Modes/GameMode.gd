@@ -55,23 +55,32 @@ remote func update_peer_position(peer_id: int, position_index: int):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("update_peer_position(): warning sender is not server")
 	Game.peers[peer_id].position_index = position_index
-	print(peer_id, position_index)
 
 # refresh_peer_position is called for refreshing peer position (1st, 2nd, 3rd, ...)
 # @impure
 master func refresh_peer_position():
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("refresh_peer_position(): warning sender is not server")
+	var sorted_peers = []
 	for peer_id in Game.peers:
 		var player_scene = get_node(str(peer_id))
 		if player_scene != null:
 			var navigation_path = map_scene.get_simple_path(player_scene.position, map_end_position)
 			var navigation_size = navigation_path.size()
 			Game.peers[peer_id].position_length = 0
+			sorted_peers.push_back(Game.peers[peer_id])
 			for i in range(0, navigation_size):
 				var next = i + 1
 				if next < navigation_size:
 					Game.peers[peer_id].position_length += navigation_path[i].distance_to(navigation_path[next])
-			# TODO: sort players by navigation length to compute position instead of just sending position_length from end.
-			rpc("update_peer_position", peer_id, Game.peers[peer_id].position_length)
-			update_peer_position(peer_id, Game.peers[peer_id].position_length)
+	# sort peers by position_length
+	sorted_peers.sort_custom(self, "peer_position_sort")
+	# update peers position
+	for i in range(0, sorted_peers.size()):
+		rpc("update_peer_position", sorted_peers[i].id, i)
+		update_peer_position(sorted_peers[i].id, i)
+
+# peer_position_sort is called as a sort comparator for sorting peers by position.
+# @pure
+func peer_position_sort(peer_a: Dictionary, peer_b: Dictionary):
+	return peer_a.position_length < peer_b.position_length
