@@ -1,7 +1,18 @@
 extends "res://Game/Modes/GameMode.gd"
 
+onready var PositionLabel: Label = $PositionLabel
+
+# flag end node
 var flag_end: Node2D
+# flag start node
 var flag_start: Node2D
+
+# _process updates the self peer position in HUD.
+# @driven(lifecycle)
+# @impure
+func _process(delta):
+	if Game.peer.position_index != -1:
+		PositionLabel.text = str(Game.peer.position_index + 1)
 
 # start is called when all peers are ready and the game is about to start.
 # @impure
@@ -23,7 +34,7 @@ remote func spawn_peer(peer: Dictionary):
 	player_scene.position = flag_start.position
 	player_scene.set_name(str(peer.id))
 	player_scene.set_network_master(peer.id)
-	add_child(player_scene)
+	MapSlot.add_child(player_scene)
 
 # destroy_peer is called when game needs to destroy a disconnected peer.
 # @impure

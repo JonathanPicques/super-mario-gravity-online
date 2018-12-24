@@ -1,8 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Modes/Race/RaceGameMode.gd" type="Script" id=2]
+[ext_resource path="res://Game/Menus/Fonts/MediumFont.tres" type="DynamicFont" id=3]
 
 [node name="RaceGameMode" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="PositionLabel" type="Label" parent="." index="1"]
+margin_left = 448.0
+margin_top = 16.0
+margin_right = 496.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 3 )
+align = 2
 
