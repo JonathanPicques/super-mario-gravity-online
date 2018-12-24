@@ -9,6 +9,7 @@ remote func start(map_path: String, peers: Dictionary):
 	.start(map_path, peers)
 	flag_end = map_scene.find_node("FlagEnd")
 	flag_start = map_scene.find_node("FlagStart")
+	map_end_position = flag_end.position
 	if get_tree().is_network_server():
 		for other_peer_id in peers:
 			rpc("spawn_peer", peers[other_peer_id])
