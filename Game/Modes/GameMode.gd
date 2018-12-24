@@ -7,6 +7,7 @@ extends Control
 signal mode_ended
 
 onready var Game = get_node("/root/Game")
+onready var MapSlot: Node2D = $MapSlot
 onready var GameModePositionTimer: Timer = $PositionTimer
 
 # reference to the loaded map (loaded on start).
@@ -23,7 +24,7 @@ remote func start(map_path: String, peers: Dictionary):
 		# start timer for updating position on each timer tick.
 		GameModePositionTimer.start()
 	map_scene = load(map_path).instance()
-	add_child(map_scene)
+	MapSlot.add_child(map_scene)
 
 # spawn_peer is called when game needs to spawn a peer (first time).
 # @impure

@@ -5,6 +5,8 @@
 [node name="GameMode" type="Control"]
 script = ExtResource( 1 )
 
+[node name="MapSlot" type="Node2D" parent="."]
+
 [node name="PositionTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="PositionTimer" to="." method="refresh_peer_position"]
