@@ -1,12 +1,5 @@
 extends Control
 
-const Base = preload("res://Game/Maps/Base/Base.tscn")
-const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
-const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
-const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
-
-onready var Players = preload("res://Game/Players/Players.gd").new()
-
 enum GameState {
 	None,
 	Home,
@@ -18,8 +11,14 @@ enum GameState {
 	ResultScreen,
 }
 
-var state = GameState.None
+const Base = preload("res://Game/Maps/Base/Base.tscn")
+const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
+const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
+const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 
+onready var Players = preload("res://Game/Players/Players.gd").new()
+
+var state = GameState.None
 var current_ip = ""
 var current_port = 0
 var current_scene: Node
@@ -28,15 +27,17 @@ var current_listen_server = false
 
 # self peer
 var peer = {
-	id = 0,         # peer network id
-	name = "",      # peer name
-	index = 0,      # peer index (order of connection)
-	ready = false,  # peer ready
-	player_id = 0,   # peer player id (Mario = 0, Luigi = 1, ...)
-	position_index = 0, # peer position (1st, 2nd, ...)
+	id = 0,              # peer network id
+	name = "",           # peer name
+	index = 0,           # peer index (order of connection)
+	ready = false,       # peer ready
+	player_id = 0,       # peer player id (Mario = 0, Luigi = 1, ...)
+	position_index = 0,  # peer position (1st, 2nd, ...)
 	position_length = 0, # peer distance from flag
 }
-# other peers (self peer is included)
+# other peers dictionary (self peer is included)
+# @key {int} peer id
+# @value {Dictionary} peer info (@see self peer)
 var peers = {}
 
 # _ready is called when the game node is ready.

@@ -40,6 +40,6 @@ remote func spawn_peer(peer: Dictionary):
 # @impure
 remote func destroy_peer(peer_id: int):
 	.destroy_peer(peer_id)
-	var player_scene = get_node(str(peer_id))
+	var player_scene = MapSlot.get_node(str(peer_id))
 	remove_child(player_scene)
 	player_scene.queue_free()

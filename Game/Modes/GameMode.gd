@@ -64,7 +64,7 @@ master func refresh_peer_position():
 		return print("refresh_peer_position(): warning sender is not server")
 	var sorted_peers = []
 	for peer_id in Game.peers:
-		var player_scene = get_node(str(peer_id))
+		var player_scene = MapSlot.get_node(str(peer_id))
 		if player_scene != null:
 			var navigation_path = map_scene.get_simple_path(player_scene.position, map_end_position)
 			var navigation_size = navigation_path.size()
