@@ -30,7 +30,7 @@ remote func start(map_path: String, peers: Dictionary):
 # @impure
 remote func spawn_peer(peer: Dictionary):
 	.spawn_peer(peer)
-	var player_scene = load(Game.Players.get_player(peer.player_id).scene_path).instance()
+	var player_scene = load(Game.Players[peer.player_id].scene_path).instance()
 	player_scene.position = flag_start.position
 	player_scene.set_name(str(peer.id))
 	player_scene.set_network_master(peer.id)

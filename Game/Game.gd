@@ -16,8 +16,6 @@ const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
 const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 
-onready var Players = preload("res://Game/Players/Players.gd").new()
-
 var state = GameState.None
 var current_ip = ""
 var current_port = 0
@@ -39,6 +37,20 @@ var peer = {
 # @key {int} peer id
 # @value {Dictionary} peer info (@see self peer)
 var peers = {}
+
+# player skins available
+var Players = [
+	{
+		name = "Mario",
+		scene_path = "res://Game/Players/Mario/Mario.tscn",
+		preview_path = "res://Game/Players/Mario/Textures/Stand/stand_01.png",
+	},
+	{
+		name = "Luigi",
+		scene_path = "res://Game/Players/Luigi/Luigi.tscn",
+		preview_path = "res://Game/Players/Luigi/Textures/Stand/stand_01.png",
+	}
+]
 
 # _ready is called when the game node is ready.
 # @driven(lifecycle)

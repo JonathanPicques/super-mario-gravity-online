@@ -16,9 +16,9 @@ func _process(delta):
 	var peer_id = get_tree().get_network_unique_id()
 	if peer != null and peer.id == peer_id:
 		if Input.is_action_just_pressed("ui_left"):
-			Game.rpc("net_peer_post_configure", peer.id, Game.Players.get_next_player_index(peer.player_id), false)
+			Game.rpc("net_peer_post_configure", peer.id, (peer.player_id - 1) % Game.Players.size(), false)
 		elif Input.is_action_just_pressed("ui_right"):
-			Game.rpc("net_peer_post_configure", peer.id, Game.Players.get_next_player_index(peer.player_id), false)
+			Game.rpc("net_peer_post_configure", peer.id, (peer.player_id + 1) % Game.Players.size(), false)
 		elif Input.is_action_just_pressed("ui_accept"):
 			Game.rpc("net_peer_post_configure", peer.id, peer.player_id, not peer.ready)
 
@@ -35,5 +35,5 @@ func set_peer(new_peer):
 	$NextCharacterRight.visible = peer != null and peer.id == peer_id
 	if peer != null:
 		$PeerName.text = peer.name
-		$CharacterSprite.texture = load(Game.Players.get_player(peer.player_id).preview_path)
+		$CharacterSprite.texture = load(Game.Players[peer.player_id].preview_path)
 		$CharacterSprite.self_modulate = HalfOpaque if not peer.ready else FullOpaque
