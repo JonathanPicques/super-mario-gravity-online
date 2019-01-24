@@ -16,6 +16,8 @@ const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
 const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 
+const PlayerCamera = preload("res://Game/Players/Cam/PlayerCamera2D.tscn")
+
 var state = GameState.None
 var current_ip = ""
 var current_port = 0
@@ -51,6 +53,7 @@ var Players = [
 		preview_path = "res://Game/Players/Luigi/Textures/Stand/stand_01.png",
 	}
 ]
+
 
 # _ready is called when the game node is ready.
 # @driven(lifecycle)

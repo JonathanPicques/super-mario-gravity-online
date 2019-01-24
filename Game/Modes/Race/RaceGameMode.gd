@@ -1,6 +1,6 @@
 extends "res://Game/Modes/GameMode.gd"
 
-onready var PositionLabel: Label = $PositionLabel
+onready var PositionLabel: Label = $CanvasLayerUI/PositionLabel
 
 # flag end node
 var flag_end: Node2D
@@ -34,6 +34,10 @@ remote func spawn_peer(peer: Dictionary):
 	player_scene.position = flag_start.position
 	player_scene.set_name(str(peer.id))
 	player_scene.set_network_master(peer.id)
+	if Game.peer.id == peer.id:
+		var player_camera_scene = Game.PlayerCamera.instance()
+		player_camera_scene.tile_map = MapSlot.get_child(0).find_node("Map").get_path()
+		player_scene.add_child(player_camera_scene)
 	MapSlot.add_child(player_scene)
 
 # destroy_peer is called when game needs to destroy a disconnected peer.
