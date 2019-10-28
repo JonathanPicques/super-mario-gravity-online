@@ -17,13 +17,13 @@ func _process(delta):
 	if peer != null and peer.id == peer_id:
 		if Input.is_action_just_pressed("ui_left"):
 			# cycle player skins to the left.
-			Game.rpc("net_peer_post_configure", peer.id, (peer.player_id - 1) % Game.Players.size(), false)
+			Game.rpc("net_peer_lobby_update", peer.id, false, (peer.player_id - 1) % Game.Players.size())
 		elif Input.is_action_just_pressed("ui_right"):
 			# cycle player skins to the right.
-			Game.rpc("net_peer_post_configure", peer.id, (peer.player_id + 1) % Game.Players.size(), false)
+			Game.rpc("net_peer_lobby_update", peer.id, false, (peer.player_id + 1) % Game.Players.size())
 		elif Input.is_action_just_pressed("ui_accept"):
 			# toggle peer ready status.
-			Game.rpc("net_peer_post_configure", peer.id, peer.player_id, not peer.ready)
+			Game.rpc("net_peer_lobby_update", peer.id, not peer.ready, peer.player_id)
 
 # set_peer sets the lobby peer menu or empties it.
 # @impure

@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/CharacterSelectDisabled.png-e545734947a141ef179137c1a217bf9e.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

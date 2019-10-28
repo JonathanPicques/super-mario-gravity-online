@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/crouch_01.png-b561fe491c202ff851a2b02646ef0be8.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

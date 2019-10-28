@@ -22,9 +22,9 @@ remote func start(map_path: String, peers: Dictionary):
 	flag_start = map_scene.find_node("FlagStart")
 	map_end_position = flag_end.position
 	if get_tree().is_network_server():
-		for other_peer_id in peers:
-			rpc("spawn_peer", peers[other_peer_id])
-			spawn_peer(peers[other_peer_id])
+		for peer_id in peers:
+			rpc("spawn_peer", peers[peer_id])
+			spawn_peer(peers[peer_id])
 
 # spawn_peer is called when game needs to spawn a peer (first time).
 # @impure
@@ -39,6 +39,7 @@ remote func spawn_peer(peer: Dictionary):
 		player_camera_scene.tile_map = MapSlot.get_child(0).find_node("Map").get_path()
 		player_scene.add_child(player_camera_scene)
 	MapSlot.add_child(player_scene)
+	print("spawn peer: ", peer, flag_start.position)
 
 # destroy_peer is called when game needs to destroy a disconnected peer.
 # @impure

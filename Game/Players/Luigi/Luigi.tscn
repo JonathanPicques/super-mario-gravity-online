@@ -1,17 +1,19 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Players/Luigi/Luigi.gd" type="Script" id=2]
-[ext_resource path="res://Game/Players/Luigi/Textures/Stand/stand_01.png" type="Texture" id=3]
+[ext_resource path="res://Game/Players/Luigi/Textures/Run/run_06.png" type="Texture" id=3]
 [ext_resource path="res://Game/Players/Luigi/Anims/crouch.tres" type="Animation" id=4]
-[ext_resource path="res://Game/Players/Luigi/Anims/fall.tres" type="Animation" id=5]
-[ext_resource path="res://Game/Players/Luigi/Anims/jump.tres" type="Animation" id=6]
-[ext_resource path="res://Game/Players/Luigi/Anims/push.tres" type="Animation" id=7]
-[ext_resource path="res://Game/Players/Luigi/Anims/run.tres" type="Animation" id=8]
-[ext_resource path="res://Game/Players/Luigi/Anims/skid.tres" type="Animation" id=9]
-[ext_resource path="res://Game/Players/Luigi/Anims/stand.tres" type="Animation" id=10]
-[ext_resource path="res://Game/Players/Luigi/Anims/walk.tres" type="Animation" id=11]
-[ext_resource path="res://Game/Players/Luigi/Anims/wallslide.tres" type="Animation" id=12]
+[ext_resource path="res://Game/Players/Luigi/Anims/crouch_to_stand.tres" type="Animation" id=5]
+[ext_resource path="res://Game/Players/Luigi/Anims/fall.tres" type="Animation" id=6]
+[ext_resource path="res://Game/Players/Luigi/Anims/jump.tres" type="Animation" id=7]
+[ext_resource path="res://Game/Players/Luigi/Anims/push.tres" type="Animation" id=8]
+[ext_resource path="res://Game/Players/Luigi/Anims/run.tres" type="Animation" id=9]
+[ext_resource path="res://Game/Players/Luigi/Anims/skid.tres" type="Animation" id=10]
+[ext_resource path="res://Game/Players/Luigi/Anims/stand.tres" type="Animation" id=11]
+[ext_resource path="res://Game/Players/Luigi/Anims/stand_to_crouch.tres" type="Animation" id=12]
+[ext_resource path="res://Game/Players/Luigi/Anims/walk.tres" type="Animation" id=13]
+[ext_resource path="res://Game/Players/Luigi/Anims/wallslide.tres" type="Animation" id=14]
 
 [node name="Luigi" index="0" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
@@ -20,23 +22,27 @@ script = ExtResource( 2 )
 [node name="Sprite" parent="." index="1"]
 position = Vector2( -9, -33 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Offset", "Transform", "texture" ]
+offset = Vector2( -4, 1 )
 
 [node name="WallChecker" parent="." index="3"]
 position = Vector2( 0, -14 )
 
-[node name="CollisionBody" parent="." index="5"]
+[node name="SoundEffects" parent="." index="5"]
+editor/display_folded = true
+
+[node name="CollisionBody" parent="." index="6"]
 position = Vector2( 0, -14 )
 
-[node name="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" parent="." index="7"]
 autoplay = "stand"
 anims/crouch = ExtResource( 4 )
-anims/fall = ExtResource( 5 )
-anims/jump = ExtResource( 6 )
-anims/push = ExtResource( 7 )
-anims/run = ExtResource( 8 )
-anims/skid = ExtResource( 9 )
-anims/stand = ExtResource( 10 )
-anims/walk = ExtResource( 11 )
-anims/wallslide = ExtResource( 12 )
-
+anims/crouch_to_stand = ExtResource( 5 )
+anims/fall = ExtResource( 6 )
+anims/jump = ExtResource( 7 )
+anims/push = ExtResource( 8 )
+anims/run = ExtResource( 9 )
+anims/skid = ExtResource( 10 )
+anims/stand = ExtResource( 11 )
+anims/stand_to_crouch = ExtResource( 12 )
+anims/walk = ExtResource( 13 )
+anims/wallslide = ExtResource( 14 )

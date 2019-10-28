@@ -11,6 +11,12 @@ enum GameState {
 	ResultScreen,
 }
 
+enum PeerState {
+	None,
+	Configured,
+	PlayGameMode,
+}
+
 const Base = preload("res://Game/Maps/Base/Base.tscn")
 const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
@@ -19,29 +25,30 @@ const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 const PlayerCamera = preload("res://Game/Players/Cam/PlayerCamera2D.tscn")
 
 var state = GameState.None
-var current_ip = ""
-var current_port = 0
+var current_ip := ""
+var current_port := 0
 var current_scene: Node
-var current_max_peers = 0
-var current_listen_server = false
+var current_max_peers := 0
+var current_listen_server := false
 
 # self peer
-var peer = {
-	id = 0,              # peer network id
-	name = "",           # peer name
-	index = 0,           # peer index (order of connection)
-	ready = false,       # peer ready
-	player_id = 0,       # peer player id (Mario = 0, Luigi = 1, ...)
-	position_index = 0,  # peer position (1st, 2nd, ...)
-	position_length = 0, # peer distance from flag
+var peer := {
+	id = 0,                 # peer network id
+	name = "",              # peer name
+	index = 0,              # peer index (order of connection)
+	ready = false,          # peer ready
+	state = PeerState.None, # peer state
+	player_id = 0,          # peer player id (Mario = 0, Luigi = 1, ...)
+	position_index = 0,     # peer position (1st, 2nd, ...)
+	position_length = 0,    # peer distance from flag
 }
 # other peers dictionary (self peer is included)
 # @key {int} peer id
 # @value {Dictionary} peer info (@see self peer)
-var peers = {}
+var peers := {}
 
 # player skins available
-var Players = [
+var Players := [
 	{
 		name = "Mario",
 		scene_path = "res://Game/Players/Mario/Mario.tscn",
@@ -85,7 +92,7 @@ func set_scene(scene: Node):
 # goto_home_menu loads the home menu.
 # @impure
 func goto_home_menu_scene():
-	var home_menu_scene = HomeMenu.instance()
+	var home_menu_scene := HomeMenu.instance()
 	home_menu_scene.connect("host_game", self, "host_game")
 	home_menu_scene.connect("join_game", self, "join_game")
 	set_scene(home_menu_scene)
@@ -93,27 +100,27 @@ func goto_home_menu_scene():
 # goto_home_menu loads the lobby menu.
 # @impure
 func goto_lobby_menu_scene():
-	var lobby_menu_scene = LobbyMenu.instance()
+	var lobby_menu_scene := LobbyMenu.instance()
 	lobby_menu_scene.connect("stop_game", self, "stop_game")
 	set_scene(lobby_menu_scene)
 
 # goto_error_menu loads the error menu.
 # @impure
 func goto_connect_menu_scene():
-	var error_menu_scene = ConnectMenu.instance()
+	var error_menu_scene := ConnectMenu.instance()
 	error_menu_scene.connect("stop_game", self, "stop_game")
 	set_scene(error_menu_scene)
 
-# host_game hosts a game on the given port with the given number of max peers.
+# host_game hosts a game as a (listen?) server on the given port with the given number of max peers.
 # @impure
 func host_game(port: int, max_peers: int, listen_server = true, peer_name: String = "server"):
-	var mp_peer = NetworkedMultiplayerENet.new()
+	var mp_peer := NetworkedMultiplayerENet.new()
 	current_port = port
 	current_max_peers = max_peers
 	current_listen_server = listen_server
 	if mp_peer.create_server(port, max_peers) == 0:
 		setup_self(mp_peer, peer_name)
-		net_peer_configured(peer)
+		net_peer_configure(peer)
 	else:
 		set_state(GameState.ConnectError)
 		goto_connect_menu_scene()
@@ -122,7 +129,7 @@ func host_game(port: int, max_peers: int, listen_server = true, peer_name: Strin
 # join_game joins a game on the given ip:port.
 # @impure
 func join_game(ip: String, port: int, peer_name: String = "client"):
-	var mp_peer = NetworkedMultiplayerENet.new()
+	var mp_peer := NetworkedMultiplayerENet.new()
 	current_ip = ip
 	current_port = port
 	if mp_peer.create_client(ip, port) == 0:
@@ -137,7 +144,7 @@ func join_game(ip: String, port: int, peer_name: String = "client"):
 # stop_game stops hosting or playing as a client.
 # @impure
 func stop_game(return_home: bool = true):
-	var mp_peer = get_tree().get_network_peer()
+	var mp_peer := get_tree().get_network_peer()
 	if mp_peer != null:
 		# close connection
 		mp_peer.close_connection()
@@ -183,7 +190,7 @@ func on_connected_to_server():
 	# send our configuration to the server
 	rpc_id(1, "net_peer_configure", peer)
 
-# on_server_disconnected is called when the connection to the server is lost.
+# on_server_disconnected is called when we lose connection to the server.
 # @driven(signal)
 # @impure
 func on_server_disconnected():
@@ -231,50 +238,54 @@ master func net_peer_configure(new_peer):
 	new_peer.index = get_next_peer_index()
 	# force the peer not to be ready
 	new_peer.ready = false
-	# tell the peer he is configured
+	# force the peer to be configured
+	new_peer.state = PeerState.Configured
+	# tell the new peer he is configured
 	rpc_id(new_peer.id, "net_peer_configured", new_peer)
-	# if the server is playing, send its info too to the new peer
-	if current_listen_server:
-		rpc_id(new_peer.id, "net_peer_configured", peer)
 	# send new peer info to the other connected peers and the other way around
 	for other_peer_id in peers:
+		# ignore same peer
+		if other_peer_id == new_peer.id:
+			continue
 		rpc_id(other_peer_id, "net_peer_configured", new_peer)
 		rpc_id(new_peer.id, "net_peer_configured", peers[other_peer_id])
-	# add the new peer to the peers list
+	# add the new peer to the server peers list
 	net_peer_configured(new_peer)
 
-# net_peer_configured is called when the server tells us the given peer is correctly configured.
+# net_peer_configured is called when the server tells us the given new peer is correctly configured.
 # @driven(server_to_client)
 # @impure
-remote func net_peer_configured(other_peer):
+remote func net_peer_configured(new_peer):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
 		return print("net_peer_configured(): warning sender is not server")
-	if other_peer.id == peer.id:
-		# save our config
-		peer = other_peer
+	# add the configured peer to the peers
+	peers[new_peer.id] = new_peer
+	# save our config and go to lobby menu scene upon successful connection
+	if new_peer.id == peer.id:
+		peer = new_peer
 		# go to lobby menu scene upon successful connection
 		set_state(GameState.Lobby)
 		goto_lobby_menu_scene()
-	# add the configured peer to the peers
-	peers[other_peer.id] = other_peer
 	# update lobby
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
-	print("net_peer_configured: ", other_peer)
+	print("net_peer_configured: ", new_peer)
 
-# net_peer_post_configure is called on the server when a new peer sends its player_id/ready state.
+# net_peer_lobby_update is called on the server when a new peer sends its player_id/ready state.
 # @driven(client_to_server)
 # @impure
-master func net_peer_post_configure(peer_id: int, peer_player_id: int, peer_ready: bool):
+master func net_peer_lobby_update(peer_id: int, peer_ready: bool, peer_player_id: int):
 	# check if rpc sender id match peer config
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != peer_id:
-		print("net_peer_post_configure(): warning: peer id mismatch")
+		print("net_peer_lobby_update(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
+	peers[peer_id].ready = peer_ready
+	peers[peer_id].player_id = peer_player_id
 	# send other peers that the peer player_id/ready state changed
-	rpc("net_peer_post_configured", peer_id, peer_player_id, peer_ready)
+	rpc("net_peer_lobby_updated", peers[peer_id])
 	# save the peer player_id/ready state
-	net_peer_post_configured(peer_id, peer_player_id, peer_ready)
+	net_peer_lobby_updated(peers[peer_id])
 	# if all peers are ready, start the game mode
 	if state == GameState.Lobby and is_every_peer_ready():
 		# tell other peers to load the game mode
@@ -286,19 +297,20 @@ master func net_peer_post_configure(peer_id: int, peer_player_id: int, peer_read
 		# start game mode
 		current_scene.start("res://Game/Maps/Base/Base.tscn", peers)
 
-# net_peer_post_configured is called when the server tells us the given peer changed its player_id/ready state.
+# net_peer_lobby_updated is called when the server tells us the given peer changed its player_id/ready state.
 # @driven(server_to_client)
 # @impure
-remote func net_peer_post_configured(peer_id: int, peer_player_id: int, peer_ready: bool):
+remote func net_peer_lobby_updated(updated_peer):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("net_peer_post_configured(): warning sender is not server")
-	# save the player_id ready state
-	peers[peer_id].ready = peer_ready
-	# save the player_id
-	peers[peer_id].player_id = peer_player_id
+		return print("net_peer_lobby_updated(): warning sender is not server")
+	# save peer config
+	if peer.id == updated_peer.id:
+		peer = updated_peer
+	peers[updated_peer.id] = updated_peer
 	# update lobby
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
+	print("net_peer_lobby_updated: ", updated_peer)
 
 # net_peer_start_game_mode is called when the server tells us to start the given game mode.
 # @driven(server_to_client)
@@ -310,6 +322,7 @@ remote func net_peer_start_game_mode(game_mode_path: String):
 	var game_mode_scene = load(game_mode_path).instance()
 	set_scene(game_mode_scene)
 	set_state(GameState.PlayGameMode)
+	print("net_peer_start_game_mode: ", game_mode_path)
 
 # net_peer_disconnected is called when the server tells us a peer has disconnected.
 # @driven(server_to_client)
@@ -338,9 +351,9 @@ remote func net_peer_disconnected(peer_id: int):
 # get_peer_name returns the next peer name available.
 # @pure
 func get_peer_name(name: String) -> String:
-	var unique = 1
-	var restart = true
-	var unique_name = name
+	var unique := 1
+	var restart := true
+	var unique_name := name
 	while restart:
 		restart = false
 		for other_peer_id in peers:
@@ -353,7 +366,7 @@ func get_peer_name(name: String) -> String:
 # get_next_peer_index returns the next peer index available.
 # @pure
 func get_next_peer_index() -> int:
-	var index = 1 if current_listen_server else 0
+	var index := 0
 	for other_peer_id in peers:
 		var other_peer_index = peers[other_peer_id].index
 		if index == other_peer_index:

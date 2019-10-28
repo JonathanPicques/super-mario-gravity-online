@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/WaitingRoom.png-f3661d6a5703c30776fade32121d0a55.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

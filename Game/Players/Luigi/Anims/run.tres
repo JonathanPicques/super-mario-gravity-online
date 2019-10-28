@@ -9,11 +9,9 @@
 [ext_resource path="res://Game/Players/Luigi/Textures/Run/run_07.png" type="Texture" id=7]
 
 [resource]
-
 resource_name = "run"
 length = 0.7
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
@@ -38,4 +36,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( -1, 2 ), Vector2( -4, 1 ), Vector2( -1, 2 ), Vector2( 2, 2 ), Vector2( -3, 2 ), Vector2( -4, 1 ), Vector2( -3, 2 ) ]
 }
-
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "fx_step_01"
+}, {
+"args": [  ],
+"method": "fx_step_02"
+} ]
+}

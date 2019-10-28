@@ -7,7 +7,6 @@
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=5]
 
 [sub_resource type="NavigationPolygon" id=1]
-
 vertices = PoolVector2Array( 480, 144, 480, 240, 448, 192, 448, 112, 416, 192, 384, 240, 384, 224, -32, 32, 0, 32, 0, 80, -32, 352, 32, 80, 32, 32, 592, 32, 192, 128, 592, 144, 432, 112, 432, 96, 352, 224, 352, 240, 336, 240, 256, 208, 336, 272, 304, 272, 304, 256, 272, 256, 272, 240, 256, 240, 240, 208, 240, 192, 416, 96, 208, 192, 208, 160, 192, 160, 0, 128, 0, 352 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1, 5, 6 ), PoolIntArray( 7, 8, 9, 10 ), PoolIntArray( 11, 12, 13, 14 ), PoolIntArray( 13, 15, 0, 3 ), PoolIntArray( 3, 16, 17, 13 ), PoolIntArray( 18, 19, 20, 21 ), PoolIntArray( 20, 22, 23, 24 ), PoolIntArray( 24, 25, 26, 20 ), PoolIntArray( 26, 27, 21 ), PoolIntArray( 21, 28, 29, 30 ), PoolIntArray( 29, 31, 32, 30 ), PoolIntArray( 32, 33, 14, 13, 30 ), PoolIntArray( 34, 35, 10 ), PoolIntArray( 34, 10, 9 ), PoolIntArray( 34, 9, 11, 14 ), PoolIntArray( 20, 26, 21 ), PoolIntArray( 30, 4, 6, 18, 21 ), PoolIntArray( 30, 13, 17 ) ]
 outlines = [ PoolVector2Array( -32, 32, -32, 352, 0, 352, 0, 128, 192, 128, 192, 160, 208, 160, 208, 192, 240, 192, 240, 208, 256, 208, 256, 240, 272, 240, 272, 256, 304, 256, 304, 272, 336, 272, 336, 240, 352, 240, 352, 224, 384, 224, 384, 240, 480, 240, 480, 144, 592, 144, 592, 32, 32, 32, 32, 80, 0, 80, 0, 32 ), PoolVector2Array( 416, 96, 416, 192, 448, 192, 448, 112, 432, 112, 432, 96 ) ]
@@ -54,4 +53,3 @@ texture_mode = -2147483648
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
-
