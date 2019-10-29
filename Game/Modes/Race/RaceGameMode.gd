@@ -1,5 +1,6 @@
 extends "res://Game/Modes/GameMode.gd"
 
+onready var StageClearSFX: AudioStream = preload("res://Game/Modes/Race/Sounds/smb_stage_clear.ogg")
 onready var PositionLabel: Label = $CanvasLayerUI/PositionLabel
 
 # flag end node
@@ -25,6 +26,7 @@ remote func start(map_path: String, peers: Dictionary):
 		for peer_id in peers:
 			rpc("spawn_peer", peers[peer_id])
 			spawn_peer(peers[peer_id])
+		flag_end.connect_flag_overlap(self, "on_flag_end_overlap")
 
 # spawn_peer is called when game needs to spawn a peer (first time).
 # @impure
@@ -48,3 +50,14 @@ remote func destroy_peer(peer_id: int):
 	var player_scene = MapSlot.get_node(str(peer_id))
 	remove_child(player_scene)
 	player_scene.queue_free()
+
+# on_flag_end_overlap is called when a player reaches the goal flag.
+# @driven(signal)
+# @impure
+master func on_flag_end_overlap(body: PhysicsBody2D):
+	var winner_peer_id := int(body.name)
+	Game.play_sound_effect(StageClearSFX, -5)
+	print(Game.peers[winner_peer_id], " won")
+	for loser_peer_id in Game.peers:
+		if loser_peer_id !=  winner_peer_id:
+			kill_peer(loser_peer_id)

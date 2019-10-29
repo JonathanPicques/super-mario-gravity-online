@@ -89,6 +89,11 @@ func set_scene(scene: Node):
 	add_child(scene)
 	current_scene = scene
 
+func play_sound_effect(stream: AudioStream, volume_db = -20):
+	$SoundEffects/SFX1.stream = stream
+	$SoundEffects/SFX1.volume_db = volume_db
+	$SoundEffects/SFX1.play()
+
 # goto_home_menu loads the home menu.
 # @impure
 func goto_home_menu_scene():

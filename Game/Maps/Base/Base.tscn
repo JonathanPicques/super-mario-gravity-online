@@ -35,7 +35,7 @@ motion/sync_to_physics = false
 direction = 1
 
 [node name="FlagEnd" parent="." instance=ExtResource( 5 )]
-position = Vector2( 544, 144 )
+position = Vector2( 115, 124 )
 
 [node name="DecorMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )

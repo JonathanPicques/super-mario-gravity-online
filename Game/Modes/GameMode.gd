@@ -13,7 +13,7 @@ onready var GameModePositionTimer: Timer = $PositionTimer
 # reference to the loaded map (loaded on start).
 var map_scene: Node2D
 # position of the end in the map, for computing position (1st, 2nd, 3rd, ...)
-var map_end_position = Vector2()
+var map_end_position := Vector2()
 
 # start is called when all peers are ready and the game is about to start.
 # @impure
