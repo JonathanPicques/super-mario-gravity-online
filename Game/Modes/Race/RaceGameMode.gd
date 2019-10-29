@@ -60,4 +60,4 @@ master func on_flag_end_overlap(body: PhysicsBody2D):
 	print(Game.peers[winner_peer_id], " won")
 	for loser_peer_id in Game.peers:
 		if loser_peer_id !=  winner_peer_id:
-			kill_peer(loser_peer_id)
+			kill_peer(Game.peers[loser_peer_id])

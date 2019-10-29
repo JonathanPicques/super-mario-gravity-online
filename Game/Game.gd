@@ -69,8 +69,8 @@ var Players := [
 # @impure
 func _ready():
 	get_tree().connect("connection_failed", self, "on_connection_failed")
-	get_tree().connect("connected_to_server", self, "on_connected_to_server")
 	get_tree().connect("server_disconnected", self, "on_server_disconnected")
+	get_tree().connect("connected_to_server", self, "on_connected_to_server")
 	get_tree().connect("network_peer_connected", self, "on_network_peer_connected")
 	get_tree().connect("network_peer_disconnected", self, "on_network_peer_disconnected")
 	# go to home menu scene
@@ -132,7 +132,9 @@ func host_game(port: int, max_peers: int, listen_server = true, peer_name: Strin
 	current_max_peers = max_peers
 	current_listen_server = listen_server
 	if MultiplayerHelper.host("", port, max_peers):
-		setup_self(mp_peer, peer_name)
+		get_tree().set_network_peer(mp_peer)
+		peer.id = get_tree().get_network_unique_id()
+		peer.name = peer_name
 		net_peer_configure(peer)
 	else:
 		set_state(GameState.ConnectError)
@@ -146,8 +148,9 @@ func join_game(ip: String, port: int, peer_name: String = "client"):
 	current_ip = ip
 	current_port = port
 	if MultiplayerHelper.join(ip, port):
+		peer.name = peer_name
+		get_tree().set_network_peer(mp_peer)
 		set_state(GameState.Connecting)
-		setup_self(mp_peer, peer_name)
 		goto_connect_menu_scene()
 	else:
 		set_state(GameState.ConnectError)
@@ -176,32 +179,21 @@ func stop_game(return_home: bool = true):
 		set_state(GameState.Home)
 		goto_home_menu_scene()
 
-# setup_self is called when successfully hosted or joined.
-# @impure
-func setup_self(mp_peer: NetworkedMultiplayerPeer, peer_name: String):
-	# save multiplayer peer for later use
-	get_tree().set_network_peer(mp_peer)
-	# assign self peer id/name
-	peer.id = get_tree().get_network_unique_id()
-	peer.name = peer_name
-
-# on_connection_failed is called when joining (not hosting) failed.
+# on_connection_failed is called when joining the server failed.
 # @driven(signal)
 # @impure
 func on_connection_failed():
+	# on_connection_failed will sometime be called when the connection to the server is lost
+	if MultiplayerHelper.was_connected:
+		return on_server_disconnected()
 	# stop game
 	stop_game(false)
 	# connect error state
 	set_state(GameState.ConnectError)
+	# load error menu scene
+	goto_connect_menu_scene()
 	# display connection failed error
 	current_scene.set_state(current_scene.ConnectState.ConnectionFailed)
-
-# on_connected_to_server is called when joining (not hosting) successfully.
-# @driven(signal)
-# @impure
-func on_connected_to_server():
-	# send our configuration to the server
-	rpc_id(1, "net_peer_configure", peer)
 
 # on_server_disconnected is called when we lose connection to the server.
 # @driven(signal)
@@ -216,10 +208,22 @@ func on_server_disconnected():
 	# display connection lost error
 	current_scene.set_state(current_scene.ConnectState.ConnectionLost)
 
+# on_connected_to_server is called when joining (not hosting) successfully.
+# @driven(signal)
+# @impure
+func on_connected_to_server():
+	# setup our peer
+	peer.id = get_tree().get_network_unique_id()
+	# send our configuration to the server
+	rpc_id(1, "net_peer_configure", peer)
+	# tell the multiplayer helper that the connection was successful
+	MultiplayerHelper.was_connected = true
+
 # on_network_peer_connected is called when a peer is connected.
 # @driven(signal)
 # @impure
 func on_network_peer_connected(peer_id: int):
+	print("on_network_peer_connected", peer_id)
 	pass
 
 # on_network_peer_disconnected is called when a peer is disconnected.
@@ -245,6 +249,8 @@ master func net_peer_configure(new_peer):
 		print("net_peer_configure(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
+	# force peer id for clients
+	new_peer.id = get_tree().get_rpc_sender_id() if not get_tree().is_network_server() else new_peer.id
 	# compute new peer name (avoid dups)
 	new_peer.name = get_peer_name(new_peer.name)
 	# compute new peer index
@@ -293,6 +299,7 @@ master func net_peer_lobby_update(peer_id: int, peer_ready: bool, peer_player_id
 		print("net_peer_lobby_update(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
+	# update the peer
 	peers[peer_id].ready = peer_ready
 	peers[peer_id].player_id = peer_player_id
 	# send other peers that the peer player_id/ready state changed
