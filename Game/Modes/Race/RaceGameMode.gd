@@ -23,6 +23,9 @@ remote func start(map_path: String, peers: Dictionary):
 	flag_start = map_scene.find_node("FlagStart")
 	map_end_position = flag_end.position
 	if get_tree().is_network_server():
+		# TODO: add a countdown before starting the gamemode
+		yield(get_tree().create_timer(0.5), "timeout")
+		# TODO: wait for all peers to have loaded the gamemode
 		for peer_id in peers:
 			rpc("spawn_peer", peers[peer_id])
 			spawn_peer(peers[peer_id])

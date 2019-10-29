@@ -76,6 +76,11 @@ func _ready():
 	# go to home menu scene
 	set_state(GameState.Home)
 	goto_home_menu_scene()
+	# debug args to start server/client
+	var argument = OS.get_cmdline_args()[0] if len(OS.get_cmdline_args()) > 0 else ""
+	match argument:
+		"--server": host_game(45678, 4)
+		"--client": join_game("localhost", 45678)
 
 # _process is called each tick.
 # @driven(lifecycle)
@@ -223,7 +228,7 @@ func on_connected_to_server():
 # @driven(signal)
 # @impure
 func on_network_peer_connected(peer_id: int):
-	print("on_network_peer_connected", peer_id)
+	print("on_network_peer_connected: ", peer_id)
 	pass
 
 # on_network_peer_disconnected is called when a peer is disconnected.
@@ -240,7 +245,31 @@ func on_network_peer_disconnected(peer_id: int):
 			current_scene.rpc("destroy_peer", peer_id)
 			current_scene.destroy_peer(peer_id)
 
-# net_peer_configure is called on the server when a new peer sends its config.
+# net_peer_disconnected is called when the server tells us a peer has disconnected.
+# @driven(server_to_client)
+# @impure
+remote func net_peer_disconnected(peer_id: int):
+	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
+		return print("net_peer_disconnected(): warning sender is not server")
+	# if our peer is disconnected, we got kicked
+	if peer.id == peer_id:
+		# stop game
+		stop_game(false)
+		# connect error state
+		set_state(GameState.ConnectError)
+		# go to connect menu scene and ...
+		goto_connect_menu_scene()
+		# ... display kick message
+		current_scene.set_state(current_scene.ConnectState.ConnectionKicked)
+		return
+	# remove the disconnected peer from the peers
+	peers.erase(peer_id)
+	# update lobby
+	if state == GameState.Lobby:
+		current_scene.set_peers(peers)
+	print("net_peer_disconnected: ", peer_id)
+
+# net_peer_configure is called on the server when a new peer sends its config for the first time.
 # @driven(client_to_server)
 # @impure
 master func net_peer_configure(new_peer):
@@ -259,19 +288,17 @@ master func net_peer_configure(new_peer):
 	new_peer.ready = false
 	# force the peer to be configured
 	new_peer.state = PeerState.Configured
-	# tell the new peer he is configured
-	rpc_id(new_peer.id, "net_peer_configured", new_peer)
-	# send new peer info to the other connected peers and the other way around
-	for other_peer_id in peers:
-		# ignore same peer
-		if other_peer_id == new_peer.id:
-			continue
-		rpc_id(other_peer_id, "net_peer_configured", new_peer)
-		rpc_id(new_peer.id, "net_peer_configured", peers[other_peer_id])
 	# add the new peer to the server peers list
 	net_peer_configured(new_peer)
+	# tell the peers a new peer he is configured
+	rpc("net_peer_configured", new_peer)
+	# send other peer config to the new peer
+	for other_peer_id in peers:
+		if other_peer_id == new_peer.id:
+			continue
+		rpc_id(new_peer.id, "net_peer_configured", peers[other_peer_id])
 
-# net_peer_configured is called when the server tells us the given new peer is correctly configured.
+# net_peer_configured is called when the server tells us the given new peer is configured for the first time.
 # @driven(server_to_client)
 # @impure
 remote func net_peer_configured(new_peer):
@@ -279,7 +306,7 @@ remote func net_peer_configured(new_peer):
 		return print("net_peer_configured(): warning sender is not server")
 	# add the configured peer to the peers
 	peers[new_peer.id] = new_peer
-	# save our config and go to lobby menu scene upon successful connection
+	# if this is our config, save it and go to lobby menu scene
 	if new_peer.id == peer.id:
 		peer = new_peer
 		# go to lobby menu scene upon successful connection
@@ -302,20 +329,20 @@ master func net_peer_lobby_update(peer_id: int, peer_ready: bool, peer_player_id
 	# update the peer
 	peers[peer_id].ready = peer_ready
 	peers[peer_id].player_id = peer_player_id
-	# send other peers that the peer player_id/ready state changed
-	rpc("net_peer_lobby_updated", peers[peer_id])
 	# save the peer player_id/ready state
 	net_peer_lobby_updated(peers[peer_id])
+	# send peers that the peer player_id/ready state changed
+	rpc("net_peer_lobby_updated", peers[peer_id])
 	# if all peers are ready, start the game mode
 	if state == GameState.Lobby and is_every_peer_ready():
-		# tell other peers to load the game mode
-		rpc("net_peer_start_game_mode", "res://Game/Modes/Race/RaceGameMode.tscn")
 		# load the game mode
 		net_peer_start_game_mode("res://Game/Modes/Race/RaceGameMode.tscn")
-		# tell other peers to start the game mode
-		current_scene.rpc("start", "res://Game/Maps/Base/Base.tscn", peers)
+		# tell peers to load the game mode
+		rpc("net_peer_start_game_mode", "res://Game/Modes/Race/RaceGameMode.tscn")
 		# start game mode
 		current_scene.start("res://Game/Maps/Base/Base.tscn", peers)
+		# tell peers to start the game mode
+		current_scene.rpc("start", "res://Game/Maps/Base/Base.tscn", peers)
 
 # net_peer_lobby_updated is called when the server tells us the given peer changed its player_id/ready state.
 # @driven(server_to_client)
@@ -343,30 +370,6 @@ remote func net_peer_start_game_mode(game_mode_path: String):
 	set_scene(game_mode_scene)
 	set_state(GameState.PlayGameMode)
 	print("net_peer_start_game_mode: ", game_mode_path)
-
-# net_peer_disconnected is called when the server tells us a peer has disconnected.
-# @driven(server_to_client)
-# @impure
-remote func net_peer_disconnected(peer_id: int):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("net_peer_disconnected(): warning sender is not server")
-	# if our peer is disconnected, we got kicked
-	if peer.id == peer_id:
-		# stop game
-		stop_game(false)
-		# connect error state
-		set_state(GameState.ConnectError)
-		# go to connect menu scene and ...
-		goto_connect_menu_scene()
-		# ... display kick message
-		current_scene.set_state(current_scene.ConnectState.ConnectionKicked)
-		return
-	# remove the disconnected peer from the peers
-	peers.erase(peer_id)
-	# update lobby
-	if state == GameState.Lobby:
-		current_scene.set_peers(peers)
-	print("net_peer_disconnected: ", peer_id)
 
 # get_peer_name returns the next peer name available.
 # @pure
