@@ -24,6 +24,8 @@ const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 
 const PlayerCamera = preload("res://Game/Players/Cam/PlayerCamera2D.tscn")
 
+var MultiplayerHelper := preload("res://Game/MultiplayerHelper.gd").new()
+
 var state = GameState.None
 var current_ip := ""
 var current_port := 0
@@ -75,6 +77,12 @@ func _ready():
 	set_state(GameState.Home)
 	goto_home_menu_scene()
 
+# _process is called each tick.
+# @driven(lifecycle)
+# @impure
+func _process(delta: float):
+	MultiplayerHelper.poll()
+
 # set_state changes the game state.
 # @impure
 func set_state(new_state: int):
@@ -119,11 +127,11 @@ func goto_connect_menu_scene():
 # host_game hosts a game as a (listen?) server on the given port with the given number of max peers.
 # @impure
 func host_game(port: int, max_peers: int, listen_server = true, peer_name: String = "server"):
-	var mp_peer := NetworkedMultiplayerENet.new()
+	var mp_peer = MultiplayerHelper.create_server()
 	current_port = port
 	current_max_peers = max_peers
 	current_listen_server = listen_server
-	if mp_peer.create_server(port, max_peers) == 0:
+	if MultiplayerHelper.host("", port, max_peers):
 		setup_self(mp_peer, peer_name)
 		net_peer_configure(peer)
 	else:
@@ -134,10 +142,10 @@ func host_game(port: int, max_peers: int, listen_server = true, peer_name: Strin
 # join_game joins a game on the given ip:port.
 # @impure
 func join_game(ip: String, port: int, peer_name: String = "client"):
-	var mp_peer := NetworkedMultiplayerENet.new()
+	var mp_peer = MultiplayerHelper.create_client()
 	current_ip = ip
 	current_port = port
-	if mp_peer.create_client(ip, port) == 0:
+	if MultiplayerHelper.join(ip, port):
 		set_state(GameState.Connecting)
 		setup_self(mp_peer, peer_name)
 		goto_connect_menu_scene()
@@ -152,7 +160,7 @@ func stop_game(return_home: bool = true):
 	var mp_peer := get_tree().get_network_peer()
 	if mp_peer != null:
 		# close connection
-		mp_peer.close_connection()
+		MultiplayerHelper.close()
 		# reset network peer
 		get_tree().set_network_peer(null)
 		# reset self peer values
