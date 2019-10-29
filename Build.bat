@@ -1,3 +1,5 @@
+@echo off
+
 :: Kill process
 TASKKILL.exe /F /IM "Super Mario Gravity Online.exe"
 
@@ -7,5 +9,8 @@ MKDIR "Build"
 :: Remove binaries
 DEL /Q "Build\*"
 
-:: Export new Halo Deathmatch binary
+:: Export new Super Mario Gravity Online binary
 "%GODOT_EXECUTABLE%" --export-debug "Windows Desktop" "Build\Super Mario Gravity Online.exe"
+
+:: Run client/server
+Dedicated.bat
