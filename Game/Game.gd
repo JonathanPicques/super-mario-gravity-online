@@ -13,7 +13,7 @@ enum GameState {
 
 enum PeerState {
 	None,
-	Configured,
+	Registered,
 	PlayGameMode,
 }
 
@@ -140,7 +140,7 @@ func host_game(port: int, max_peers: int, listen_server = true, peer_name: Strin
 		get_tree().set_network_peer(mp_peer)
 		peer.id = get_tree().get_network_unique_id()
 		peer.name = peer_name
-		net_peer_configure(peer)
+		net_peer_register(peer)
 	else:
 		set_state(GameState.ConnectError)
 		goto_connect_menu_scene()
@@ -219,8 +219,8 @@ func on_server_disconnected():
 func on_connected_to_server():
 	# setup our peer
 	peer.id = get_tree().get_network_unique_id()
-	# send our configuration to the server
-	rpc_id(1, "net_peer_configure", peer)
+	# register to the server
+	rpc_id(1, "net_peer_register", peer)
 	# tell the multiplayer helper that the connection was successful
 	MultiplayerHelper.was_connected = true
 
@@ -269,13 +269,12 @@ remote func net_peer_disconnected(peer_id: int):
 		current_scene.set_peers(peers)
 	print("net_peer_disconnected: ", peer_id)
 
-# net_peer_configure is called on the server when a new peer sends its config for the first time.
+# net_peer_register is called on the server when a new peer registers for the first time.
 # @driven(client_to_server)
 # @impure
-master func net_peer_configure(new_peer):
-	# check if rpc sender id match peer config
+master func net_peer_register(new_peer):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != new_peer.id:
-		print("net_peer_configure(): warning: peer id mismatch")
+		print("net_peer_register(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
 		return
 	# force peer id for clients
@@ -286,25 +285,25 @@ master func net_peer_configure(new_peer):
 	new_peer.index = get_next_peer_index()
 	# force the peer not to be ready
 	new_peer.ready = false
-	# force the peer to be configured
-	new_peer.state = PeerState.Configured
+	# force the peer to be registered
+	new_peer.state = PeerState.Registered
 	# add the new peer to the server peers list
-	net_peer_configured(new_peer)
-	# tell the peers a new peer he is configured
-	rpc("net_peer_configured", new_peer)
+	net_peer_registered(new_peer)
+	# tell the peers a new peer is registered
+	rpc("net_peer_registered", new_peer)
 	# send other peer config to the new peer
 	for other_peer_id in peers:
 		if other_peer_id == new_peer.id:
 			continue
-		rpc_id(new_peer.id, "net_peer_configured", peers[other_peer_id])
+		rpc_id(new_peer.id, "net_peer_registered", peers[other_peer_id])
 
-# net_peer_configured is called when the server tells us the given new peer is configured for the first time.
+# net_peer_registered is called when the server tells us the given new peer is registered for the first time.
 # @driven(server_to_client)
 # @impure
-remote func net_peer_configured(new_peer):
+remote func net_peer_registered(new_peer):
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("net_peer_configured(): warning sender is not server")
-	# add the configured peer to the peers
+		return print("net_peer_registered(): warning sender is not server")
+	# add the registered peer to the peers
 	peers[new_peer.id] = new_peer
 	# if this is our config, save it and go to lobby menu scene
 	if new_peer.id == peer.id:
@@ -315,13 +314,12 @@ remote func net_peer_configured(new_peer):
 	# update lobby
 	if state == GameState.Lobby:
 		current_scene.set_peers(peers)
-	print("net_peer_configured: ", new_peer)
+	print("net_peer_registered: ", new_peer)
 
 # net_peer_lobby_update is called on the server when a new peer sends its player_id/ready state.
 # @driven(client_to_server)
 # @impure
 master func net_peer_lobby_update(peer_id: int, peer_ready: bool, peer_player_id: int):
-	# check if rpc sender id match peer config
 	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != peer_id:
 		print("net_peer_lobby_update(): warning: peer id mismatch")
 		get_tree().get_network_peer().disconnect_peer(get_tree().get_rpc_sender_id())
@@ -339,9 +337,9 @@ master func net_peer_lobby_update(peer_id: int, peer_ready: bool, peer_player_id
 		net_peer_start_game_mode("res://Game/Modes/Race/RaceGameMode.tscn")
 		# tell peers to load the game mode
 		rpc("net_peer_start_game_mode", "res://Game/Modes/Race/RaceGameMode.tscn")
-		# start game mode
+		# start game mode with the given map
 		current_scene.start("res://Game/Maps/Base/Base.tscn", peers)
-		# tell peers to start the game mode
+		# tell peers to start the game mode with the given map
 		current_scene.rpc("start", "res://Game/Maps/Base/Base.tscn", peers)
 
 # net_peer_lobby_updated is called when the server tells us the given peer changed its player_id/ready state.
