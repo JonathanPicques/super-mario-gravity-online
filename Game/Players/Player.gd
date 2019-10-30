@@ -26,10 +26,13 @@ enum PlayerState {
 
 const FLOOR := Vector2(0, -1) # floor direction.
 const FLOOR_SNAP := Vector2(0, 5) # floor snap for slopes.
-const NETWORK_TICK_RATE := 0.033 # network delay before sending.
 const FLOOR_SNAP_DISABLED := Vector2() # no floor snap for slopes.
 const FLOOR_SNAP_DISABLE_TIME := 0.1 # time during snapping is disabled.
 const FLOOR_FALL_JUMP_THRESHOLD := 0.1 # time allowed after leaving the floor to jump.
+
+const NET_VIEW_INPUT_INDEX := 0
+const NET_VIEW_POSITION_INDEX := 1
+const NET_VIEW_VELOCITY_INDEX := 2
 
 var state: int = PlayerState.none
 
@@ -56,10 +59,6 @@ var input_velocity := Vector2()
 var velocity_offset := Vector2()
 var wallslide_cancelled = false # reset on stand or walljump
 
-puppet var puppet_position = Vector2()
-puppet var puppet_direction = 1
-puppet var puppet_animation = ""
-
 var JUMP_STRENGTH := -170.0
 var CEILING_KNOCKDOWN := 50.0
 var WALL_JUMP_STRENGTH := -120.0
@@ -82,71 +81,99 @@ var GRAVITY_ACCELERATION := 500.0
 func _ready():
 	set_state(PlayerState.stand)
 	set_direction(direction)
-	print(get_network_master(), " spawned at ", position)
 
-# _process is called every tick and send player state over network.
+# _process is called every tick and updates network player state.
 # @driven(lifecycle)
 # @impure
-var tick_rate_delay := 0.0
-func _process(delta: float):
+var _net_view_index := 0
+func _process(delta):
 	if is_network_master():
-		tick_rate_delay += delta
-		if tick_rate_delay >= NETWORK_TICK_RATE:
-			rset_unreliable("puppet_position", position)
-			rset_unreliable("puppet_direction", direction)
-			rset_unreliable("puppet_animation", PlayerAnimationPlayer.current_animation)
-			tick_rate_delay -= NETWORK_TICK_RATE
+		var net_view := []
+		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_run) << 0x1 | int(input_down) << 0x2 | int(input_left) << 0x3 | int(input_jump) << 0x4 | int(input_right) << 0x5)
+		net_view.insert(NET_VIEW_POSITION_INDEX, position)
+		net_view.insert(NET_VIEW_VELOCITY_INDEX, velocity)
+		_net_view_index += 1
+		rpc_unreliable("_process_network", delta, net_view, _net_view_index)
 
 # _physics_process is called every physics tick and updates player state.
 # @driven(lifecycle)
 # @impure
 func _physics_process(delta: float):
-	if is_network_master():
-		process_input(delta)
-		process_velocity(delta)
-		match state:
-			PlayerState.stand: tick_stand(delta)
-			PlayerState.stand_turn: tick_stand_turn(delta)
-			PlayerState.stand_to_crouch: tick_stand_to_crouch(delta)
-			PlayerState.run: tick_run(delta)
-			PlayerState.walk: tick_walk(delta)
-			PlayerState.crouch: tick_crouch(delta)
-			PlayerState.crouch_to_stand: tick_crouch_to_stand(delta)
-			PlayerState.move_turn: tick_move_turn(delta)
-			PlayerState.push_wall: tick_push_wall(delta)
-			PlayerState.fall: tick_fall(delta)
-			PlayerState.fall_to_stand: tick_fall_to_stand(delta)
-			PlayerState.jump: tick_jump(delta)
-			PlayerState.wallslide: tick_wallslide(delta)
-			PlayerState.walljump: tick_walljump(delta)
-	else:
-		PlayerNetworkDeadReckoning.stop_all()
-		PlayerNetworkDeadReckoning.interpolate_property(self, "position", position, puppet_position, delta, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		PlayerNetworkDeadReckoning.start()
-		set_direction(puppet_direction)
-		if PlayerAnimationPlayer.has_animation(puppet_animation) and PlayerAnimationPlayer.current_animation != puppet_animation:
-			set_animation(puppet_animation)
+	process_input(delta)
+	process_velocity(delta)
+	match state:
+		PlayerState.stand: tick_stand(delta)
+		PlayerState.stand_turn: tick_stand_turn(delta)
+		PlayerState.stand_to_crouch: tick_stand_to_crouch(delta)
+		PlayerState.run: tick_run(delta)
+		PlayerState.walk: tick_walk(delta)
+		PlayerState.crouch: tick_crouch(delta)
+		PlayerState.crouch_to_stand: tick_crouch_to_stand(delta)
+		PlayerState.move_turn: tick_move_turn(delta)
+		PlayerState.push_wall: tick_push_wall(delta)
+		PlayerState.fall: tick_fall(delta)
+		PlayerState.fall_to_stand: tick_fall_to_stand(delta)
+		PlayerState.jump: tick_jump(delta)
+		PlayerState.wallslide: tick_wallslide(delta)
+		PlayerState.walljump: tick_walljump(delta)
 
-# process_input updates Player inputs.
+# _process_network updates player from the given network infos.
+# @driven(client_to_client)
 # @impure
-func process_input(__: float):
-	input_up = Input.is_action_pressed("player_0_up")
-	input_run = Input.is_action_pressed("player_0_run")
-	input_down = Input.is_action_pressed("player_0_down")
-	input_left = Input.is_action_pressed("player_0_left")
-	input_jump = Input.is_action_pressed("player_0_jump")
-	input_right = Input.is_action_pressed("player_0_right")
-	
-	input_up_once = Input.is_action_just_pressed("player_0_up")
-	input_run_once = Input.is_action_just_pressed("player_0_run")
-	input_down_once = Input.is_action_just_pressed("player_0_down")
-	input_left_once = Input.is_action_just_pressed("player_0_left")
-	input_jump_once = Input.is_action_just_pressed("player_0_jump")
-	input_right_once = Input.is_action_just_pressed("player_0_right")
-	
+var _last_net_view: Array
+var _last_net_view_index = 0
+remote func _process_network(delta: float, net_view: Array, net_view_index: int):
+	# drop if received out of order
+	if _last_net_view_index > net_view_index:
+		return
+	_last_net_view = net_view
+	_last_net_view_index = net_view_index
+	# compare position to adjust for network errors
+	var peer_position: Vector2 = net_view[NET_VIEW_POSITION_INDEX]
+	if abs(position.x - peer_position.x) > 10 or abs(position.y - peer_position.y) > 20:
+		PlayerNetworkDeadReckoning.stop_all()
+		PlayerNetworkDeadReckoning.interpolate_property(self, "position", position, peer_position, delta, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		PlayerNetworkDeadReckoning.start()
+
+# process_input updates player inputs from local inputs or network inputs.
+# @impure
+var _up = false; var _run = false; var _down = false
+var _left = false; var _jump = false; var _right = false
+func process_input(delta: float):
+	if is_network_master():
+		# get inputs from gamepad or keyboard
+		input_up = Input.is_action_pressed("player_0_up")
+		input_run = Input.is_action_pressed("player_0_run")
+		input_down = Input.is_action_pressed("player_0_down")
+		input_left = Input.is_action_pressed("player_0_left")
+		input_jump = Input.is_action_pressed("player_0_jump")
+		input_right = Input.is_action_pressed("player_0_right")
+	elif len(_last_net_view) > 0:
+		# get inputs from last net view
+		input_up = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 0))
+		input_run = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 1))
+		input_down = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 2))
+		input_left = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 3))
+		input_jump = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 4))
+		input_right = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 5))
+	# compute input just pressed
+	input_up_once = not _up and input_up
+	input_run_once = not _run and input_run
+	input_down_once = not _down and input_down
+	input_left_once = not _left and input_left
+	input_jump_once = not _jump and input_jump
+	input_right_once = not _right and input_right
+	# remember we pressed these inputs last frame
+	_up = input_up
+	_run = input_run
+	_down = input_down
+	_left = input_left
+	_jump = input_jump
+	_right = input_right
+	# compute input velocity
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
 
-# process_velocity updates position after applying velocity.
+# process_velocity updates player position after applying velocity.
 # @impure
 var _was_on_floor := false
 func process_velocity(delta: float):

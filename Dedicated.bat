@@ -2,7 +2,7 @@
 CD /d "Build"
 
 :: Ask how many client to start
-SET /P "CLIENT_COUNT=How many clients [2]?" || SET "CLIENT_COUNT=2"
+SET /P "CLIENT_COUNT=How many clients [default: 1]?" || SET "CLIENT_COUNT=1"
 
 :: Start server
 START "Build" "Super Mario Gravity Online.exe" --server
