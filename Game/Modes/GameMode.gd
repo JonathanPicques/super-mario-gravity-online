@@ -1,87 +1,62 @@
 extends Control
 
-# mode_ended is emitted when the game mode ends with a winner.
-# @param(int[peer_count]) kills - indexed by peer index
-# @param(int[peer_count]) deaths - indexed by peer index
-# @param(int[peer_count]) scores - indexed by peer index, higher score is the winner
-signal mode_ended
-
 onready var Game = get_node("/root/Game")
 onready var MapSlot: Node2D = $MapSlot
 onready var GameModePositionTimer: Timer = $PositionTimer
 
-# reference to the loaded map (loaded on start).
-var map_scene: Node2D
-# position of the end in the map, for computing position (1st, 2nd, 3rd, ...)
-var map_end_position := Vector2()
+var options: Dictionary
+var map_scene: Navigation2D
+var goal_position: Vector2
 
-# start is called when all peers are ready and the game is about to start.
-# @impure
-remote func start(map_path: String, peers: Dictionary):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("start(): warning sender is not server")
+func _ready():
+	# start timer for updating ranking on each timer tick.
 	if get_tree().is_network_server():
-		# start timer for updating position on each timer tick.
 		GameModePositionTimer.start()
-	map_scene = load(map_path).instance()
-	MapSlot.add_child(map_scene)
 
-# spawn_peer is called when game needs to spawn a peer (first time).
+# set_options is called when starting this game mode.
 # @impure
-remote func spawn_peer(peer: Dictionary):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("spawn_peer(): warning sender is not server")
+func set_options(options: Dictionary):
+	self.options = options
 
-# kill_peer is called when game needs to kill a peer.
+# net_compute_peer_ranking is called by the server for computing peers ranking (distance from the goal: 1st, 2nd, ...)
 # @impure
-remote func kill_peer(peer: Dictionary):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("kill_peer(): warning sender is not server")
-
-# respawn_peer is called when game needs to respawn a peer (often after kill/fall/death).
-# @impure
-remote func respawn_peer(peer: Dictionary, last_safe_pos: Vector2):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("respawn_peer(): warning sender is not server")
-
-# destroy_peer is called when game needs to destroy a disconnected peer.
-# @impure
-remote func destroy_peer(peer_id: int):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("destroy_peer(): warning sender is not server")
-
-# update_peer_position is called when game updates the given peer position from end.
-# @impure
-remote func update_peer_position(peer_id: int, position_index: int):
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("update_peer_position(): warning sender is not server")
-	Game.peers[peer_id].position_index = position_index
-
-# refresh_peer_position is called for refreshing peer position (1st, 2nd, 3rd, ...)
-# @impure
-master func refresh_peer_position():
-	if not get_tree().is_network_server() and get_tree().get_rpc_sender_id() != 1:
-		return print("refresh_peer_position(): warning sender is not server")
-	var sorted_peers = []
-	for peer_id in Game.peers:
-		var player_scene = MapSlot.get_node(str(peer_id))
+master func net_compute_peer_ranking():
+	var peers = Game.get_all_peers()
+	var sorted_peers := []
+	# compute distance from peer player scene to the goal
+	for peer_id in peers:
+		var player_scene := MapSlot.get_node(str(peer_id))
 		if player_scene != null:
-			var navigation_path = map_scene.get_simple_path(player_scene.position, map_end_position)
-			var navigation_size = navigation_path.size()
-			Game.peers[peer_id].position_length = 0
-			sorted_peers.push_back(Game.peers[peer_id])
+			var distance := 0
+			var navigation_path := map_scene.get_simple_path(player_scene.position, goal_position)
+			var navigation_size := navigation_path.size()
 			for i in range(0, navigation_size):
-				var next = i + 1
+				var next := i + 1
 				if next < navigation_size:
-					Game.peers[peer_id].position_length += navigation_path[i].distance_to(navigation_path[next])
-	# sort peers by position_length
+					distance += navigation_path[i].distance_to(navigation_path[next])
+			sorted_peers.push_back({id = peer_id, distance = distance})
+	# sort peers by distance from the goal
 	sorted_peers.sort_custom(self, "peer_position_sort")
-	# update peers position
-	for i in range(0, sorted_peers.size()):
-		rpc("update_peer_position", sorted_peers[i].id, i)
-		update_peer_position(sorted_peers[i].id, i)
+	# rpc call on_net_computed_peer_positions to update all peer positions
+	on_net_computed_peer_ranking(sorted_peers)
+	rpc("on_net_computed_peer_ranking", sorted_peers)
+
+# on_net_computed_peer_ranking is called by the server when peer ranking is updated (distance from the goal: 1st, 2nd, ...)
+# @impure
+remote func on_net_computed_peer_ranking(sorted_peers: Array):
+	# checksum
+	if not Game.is_rpc_sender_server():
+		return print("on_net_computed_peer_ranking(): warning sender is not server")
+	# save ranking
+	for i in range(0, len(sorted_peers)):
+		var peer: Dictionary = sorted_peers[i]
+		if peer.id == Game.self_peer.id:
+			Game.self_peer.player_ranking = i
+		else:
+			Game.other_peers[peer.id].player_ranking = i
+	print("on_net_computed_peer_ranking: sorted_peers(", sorted_peers, ")")
 
 # peer_position_sort is called as a sort comparator for sorting peers by position.
 # @pure
 func peer_position_sort(peer_a: Dictionary, peer_b: Dictionary):
-	return peer_a.position_length < peer_b.position_length
+	return peer_a.distance < peer_b.distance

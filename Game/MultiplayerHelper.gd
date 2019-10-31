@@ -17,12 +17,12 @@ func create_client() -> NetworkedMultiplayerPeer:
 	return instance
 
 # @impure
-func host(ip: String, port: int, max_peers = 4) -> bool:
+func host(addr: String, port: int) -> bool:
 	return instance.listen(port, [], true) == 0
 
 # @impure
-func join(ip: String, port: int) -> bool:
-	return instance.connect_to_url("ws://" + ip + ":" + String(port), [], true) == 0
+func join(addr: String, port: int) -> bool:
+	return instance.connect_to_url("ws://" + addr + ":" + String(port), [], true) == 0
 
 # @impure
 func poll():

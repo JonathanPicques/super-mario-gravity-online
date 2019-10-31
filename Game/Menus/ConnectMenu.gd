@@ -4,31 +4,19 @@ extends Control
 signal stop_game
 
 onready var Game = get_node("/root/Game")
+onready var error = Game.StopError.none
 onready var MessageLabel: Label = $"Message Label"
 
-enum ConnectState {
-	HostingFailed,
-
-	Connecting,
-	ConnectionLost,
-	ConnectionKicked,
-	ConnectionFailed,
-	ConnectionAborted,
-}
-
-var state = ConnectState.Connecting
-
-# set_state changes the error menu state.
+# set_error changes the connect menu error.
 # @impure
-func set_state(new_state: int):
-	state = new_state
-	match state:
-		ConnectState.HostingFailed: MessageLabel.text = "Hosting failed\n\nPort " + str(Game.current_port) + "\nalready in use"
-		ConnectState.Connecting: MessageLabel.text = "Connecting..."
-		ConnectState.ConnectionLost: MessageLabel.text = "Connection lost"
-		ConnectState.ConnectionKicked: MessageLabel.text = "Kicked!"
-		ConnectState.ConnectionFailed: MessageLabel.text = "Connection failed"
-		ConnectState.ConnectionAborted: MessageLabel.text = "Connection aborted"
+func set_error(new_error: int):
+	error = new_error
+	match error:
+		Game.StopError.none: MessageLabel.text = "Connecting..."
+		Game.StopError.hosting_failed: MessageLabel.text = "Hosting failed"
+		Game.StopError.joining_failed: MessageLabel.text = "Joining failed"
+		Game.StopError.connection_lost: MessageLabel.text = "Connection lost"
+		Game.StopError.connection_failed: MessageLabel.text = "Connection failed"
 
 # @driven(signal)
 func on_cancel_button_pressed():

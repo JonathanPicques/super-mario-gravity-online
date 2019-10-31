@@ -62,7 +62,6 @@ margin_top = 240.0
 margin_right = 368.0
 margin_bottom = 272.0
 text = "Connect"
-
 [connection signal="text_entered" from="Peer Name Line Edit" to="." method="on_peer_name_text_entered"]
 [connection signal="pressed" from="Host Button" to="." method="on_host_button_pressed"]
 [connection signal="pressed" from="Connect Button" to="." method="on_connect_button_pressed"]

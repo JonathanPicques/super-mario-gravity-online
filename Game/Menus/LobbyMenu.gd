@@ -1,5 +1,7 @@
 extends Control
 
+onready var Game = get_tree().get_root().get_node("Game")
+
 # stop_game is emitted when cancel button is pressed.
 signal stop_game
 
@@ -12,9 +14,18 @@ onready var LobbyPeers = [
 	$LobbyPeerMenu6,
 ]
 
-# set_peers set the peers in the lobby peers boxes.
+func _ready():
+	# connect peer signals to update lobby
+	Game.connect("peer_registered", self, "update_lobby", [])
+	Game.connect("peer_unregistered", self, "update_lobby", [])
+	Game.connect("peer_selected_player", self, "update_lobby", [])
+	# update lobby
+	update_lobby()
+
+# update_lobby set the peers in the lobby peer boxes.
 # @impure
-func set_peers(peers: Dictionary):
+func update_lobby(a = null, b = null, c = null):
+	var peers = Game.get_all_peers()
 	for lobby_peer in LobbyPeers:
 		lobby_peer.set_peer(null)
 	for peer_id in peers:

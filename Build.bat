@@ -10,7 +10,7 @@ MKDIR "Build"
 DEL /Q "Build\*"
 
 :: Export new Super Mario Gravity Online binary
-"%GODOT_EXECUTABLE%" --export-debug "Windows Desktop" "Build\Super Mario Gravity Online.exe"
+"%GODOT_EXECUTABLE%" --export "Windows Desktop" "Build\Super Mario Gravity Online.exe"
 
 :: Run client/server
 Dedicated.bat
