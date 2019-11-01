@@ -14,10 +14,10 @@ func _process(delta):
 	if peer != null and peer.id == Game.self_peer.id:
 		if Input.is_action_just_pressed("ui_left"):
 			# cycle player skins to the left.
-			Game.rpc("net_peer_select_player", (peer.player_id - 1) % Game.Players.size(), false)
+			Game.rpc("net_peer_select_player", abs((peer.player_id - 1) % Game.players.size()), false)
 		elif Input.is_action_just_pressed("ui_right"):
 			# cycle player skins to the right.
-			Game.rpc("net_peer_select_player", (peer.player_id + 1) % Game.Players.size(), false)
+			Game.rpc("net_peer_select_player", abs((peer.player_id + 1) % Game.players.size()), false)
 		elif Input.is_action_just_pressed("ui_accept"):
 			# toggle peer ready status.
 			Game.rpc("net_peer_select_player", peer.player_id, not peer.player_ready)
@@ -29,10 +29,10 @@ func set_peer(new_peer):
 	$PeerName.visible = peer != null
 	$HostCrown.visible = peer != null and peer.id == 1
 	$Background.texture = CharacterSelect if peer != null else CharacterSelectDisabled
-	$CharacterSprite.visible = peer != null
+	$CharacterSprite.visible = peer != null and peer.player_id != -1
 	$NextCharacterLeft.visible = peer != null and peer.id == Game.self_peer.id
 	$NextCharacterRight.visible = peer != null and peer.id == Game.self_peer.id
 	if peer != null:
 		$PeerName.text = peer.name
-		$CharacterSprite.texture = load(Game.Players[peer.player_id].preview_path)
+		$CharacterSprite.texture = load(Game.players[peer.player_id].preview_path)
 		$CharacterSprite.self_modulate = HalfOpaque if not peer.player_ready else FullOpaque

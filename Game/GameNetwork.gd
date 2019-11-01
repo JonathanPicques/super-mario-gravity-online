@@ -1,7 +1,7 @@
 extends Control
 onready var MultiplayerHelper := preload("res://Game/MultiplayerHelper.gd").new()
 
-enum PeerState { none, registered, in_game_mode }
+enum PeerState { none, registered }
 enum StopError { none, hosting_failed, joining_failed, connection_lost, connection_failed}
 
 var self_peer := {
@@ -17,14 +17,14 @@ var self_peer := {
 var other_peers := {}
 var is_listen_server := false
 
-signal peer_registered # (peer_id: int, peer_info: Dictionary)
-signal peer_unregistered # (peer_id: int)
-signal peer_selected_player # (peer_id: int, ready: bool, player_id: int)
+signal peer_register # (peer_id: int, peer_info: Dictionary)
+signal peer_unregister # (peer_id: int)
+signal peer_select_player # (peer_id: int, ready: bool, player_id: int)
+signal peer_load_game_mode # (peer_id: int, game_mode_scene: Scene)
+signal peer_start_game_mode # (peer_id: int)
 
-signal server_started_game_mode # (game_mode_scene: Scene)
-
-signal self_peer_hosted
-signal self_peer_stopped
+signal host # ()
+signal stop # ()
 
 # _ready is called when the game network node is ready.
 # @driven(lifecycle)
@@ -97,8 +97,8 @@ func net_host(addr: String, port: int, peer_name:= ""):
 			self_peer.id = 1
 			self_peer.name = peer_name
 			call_deferred("net_peer_register", self_peer)
-		# emit signal self_peer_hosted (to go to lobby scene)
-		emit_signal("self_peer_hosted")
+		# emit signal host (to go to lobby scene)
+		emit_signal("host")
 		# server started
 		print("server started")
 		return true
@@ -126,6 +126,7 @@ func net_join(addr: String, port: int, peer_name:= "client"):
 # @impure
 func net_stop(error:= StopError.none):
 	if get_tree().get_network_peer() != null:
+		print("server" if MultiplayerHelper.server else "client", " stopped")
 		# close connection
 		MultiplayerHelper.close()
 		# reset network peer
@@ -134,14 +135,14 @@ func net_stop(error:= StopError.none):
 	self_peer.id = -1
 	self_peer.name = ""
 	self_peer.index = -1
-	# emit signal self_peer_stopped (to return to the home menu or display error)
-	emit_signal("self_peer_stopped", error)
+	# emit signal stop (to return to the home menu or display error)
+	emit_signal("stop", error)
 
 ####################
 # Server functions #
 ####################
 
-# net_peer_register is called on the server when self or another peer sends its infos for the first time.
+# net_peer_register is called on the server when a peer wants to register.
 # @impure
 master func net_peer_register(peer_info: Dictionary):
 	# enforce peer infos
@@ -149,77 +150,75 @@ master func net_peer_register(peer_info: Dictionary):
 	peer_info.name = compute_unique_peer_name(peer_info.name)
 	peer_info.index = compute_next_peer_index()
 	peer_info.state = PeerState.registered
-	peer_info.player_index = -1
+	peer_info.player_id = 0
 	peer_info.player_ranking = -1
-	# call on_net_peer_registered on the server
-	on_net_peer_registered(peer_info.id, peer_info)
-	# rpc call on_net_peer_registered on all other peers
-	rpc("on_net_peer_registered", peer_info.id, peer_info)
-	# rpc_id call on_net_peer_registered to register the listen server peer to the new peer
+	# register the peer
+	on_net_peer_register(peer_info.id, peer_info)
+	# let every other peer know that a new peer registers
+	rpc("on_net_peer_register", peer_info.id, peer_info)
+	# let know to the registering peer that the listen server is a peer
 	if is_listen_server and peer_info.id != 1:
-		rpc_id(peer_info.id, "on_net_peer_registered", self_peer.id, self_peer)
-	# rpc_id call on_net_peer_registered to register every other registered peers to the new peer
+		rpc_id(peer_info.id, "on_net_peer_register", self_peer.id, self_peer)
+	# let know to the registering peer every other registered peer
 	for other_peer_id in other_peers:
 		if other_peer_id != peer_info.id:
-			rpc_id(peer_info.id, "on_net_peer_registered", other_peer_id, other_peers[other_peer_id])
+			rpc_id(peer_info.id, "on_net_peer_register", other_peer_id, other_peers[other_peer_id])
 
-# net_peer_unregister is called on the server when the given peer disconnected/unregistered
+# net_peer_unregister is called on the server when the given peer wants to unregister or is disconnected.
 # @impure
 master func net_peer_unregister(peer_id: int):
 	if other_peers.has(peer_id):
-		# call on_net_peer_unregistered
-		on_net_peer_unregistered(peer_id)
-		# rpc call on_net_peer_unregistered
-		rpc("on_net_peer_unregistered", peer_id)
+		var peer_info = other_peers[peer_id]
+		# unregister the peer
+		on_net_peer_unregister(peer_id, peer_info)
+		# let every other peer know that this peer unregisters
+		rpc("on_net_peer_unregister", peer_id, peer_info)
 
-# net_peer_select_player is called when self or another peer selected a new player_id or is ready to play.
+# net_peer_select_player is called on the server when a peer wants to select its player or is ready
 # @impure
 master func net_peer_select_player(player_id: int, player_ready: bool):
-	# call on_net_peer_selected_player
-	on_net_peer_selected_player(get_real_rpc_sender_id(), player_id, player_ready)
-	# rpc call on_net_peer_selected_player on all other peers
-	rpc("on_net_peer_selected_player", get_real_rpc_sender_id(), player_id, player_ready)
-
-# net_server_start_game_mode starts a game with the given game mode.
-# @impure
-master func net_server_start_game_mode(game_mode_path: String, game_mode_options: Dictionary):
-	# call on_net_server_started_game_mode
-	on_net_server_started_game_mode(game_mode_path, game_mode_options)
-	# rpc call on_net_server_started_game_mode on all other peers
-	rpc("on_net_server_started_game_mode", game_mode_path, game_mode_options)
+	# select or ready the peer player
+	on_net_peer_select_player(get_real_rpc_sender_id(), player_id, player_ready)
+	# let every other peer know that this peers selects its player or is ready
+	rpc("on_net_peer_select_player", get_real_rpc_sender_id(), player_id, player_ready)
 
 ################################################
 # Client / listen server as a client functions #
 ################################################
 
-# net_peer_register is called by the server when self or another peer sent its infos for the first time.
+# on_net_peer_register is called by the server when the given peer registers.
 # @impure
-remote func on_net_peer_registered(peer_id: int, peer_info: Dictionary):
+remote func on_net_peer_register(peer_id: int, peer_info: Dictionary):
 	# checksum
 	if not is_rpc_sender_server():
-		return print("on_net_peer_registered(): warning sender is not server")
+		return print("on_net_peer_register(): warning sender is not server")
 	# store peer_info
 	if peer_id == self_peer.id:
 		self_peer = peer_info
 	else:
 		other_peers[peer_id] = peer_info
 	# emit peer_registered signal (to update the lobby)
-	print("peer_registered: peer_id(", peer_id, ") peer_name(", peer_info.name, ") peer_index(", peer_info.index , ")")
-	emit_signal("peer_registered", peer_id, peer_info)
+	print("peer_register: peer_id(", peer_id, ") peer_name(", peer_info.name, ") peer_index(", peer_info.index , ")")
+	emit_signal("peer_register", peer_id, peer_info)
 
-remote func on_net_peer_unregistered(peer_id: int):
+# on_net_peer_unregister is called by the server when the given peer disconnects/unregisters.
+# @impure
+remote func on_net_peer_unregister(peer_id: int, peer_info: Dictionary):
+	# checksum
+	if not is_rpc_sender_server():
+		return print("on_net_peer_unregister(): warning sender is not server")
 	# remove the peer
 	other_peers.erase(peer_id)
 	# emit peer_unregistered signal (to update the lobby)
-	print("peer_unregistered: peer_id(", peer_id, ")")
-	emit_signal("peer_unregistered", peer_id)
+	print("peer_unregister: peer_id(", peer_id, ")")
+	emit_signal("peer_unregister", peer_id, peer_info)
 
-# on_net_peer_selected_player is called by the server when self or another peer selected a new player_id or is ready to play.
+# on_net_peer_select_player is called by the server when the given peer selects its player or is ready
 # @impure
-remote func on_net_peer_selected_player(peer_id: int, player_id: int, player_ready: bool):
+remote func on_net_peer_select_player(peer_id: int, player_id: int, player_ready: bool):
 	# checksum
 	if not is_rpc_sender_server():
-		return print("on_net_peer_selected_player(): warning sender is not server")
+		return print("on_net_peer_select_player(): warning sender is not server")
 	# store peer player infos
 	if peer_id == self_peer.id:
 		self_peer.player_id = player_id
@@ -227,22 +226,9 @@ remote func on_net_peer_selected_player(peer_id: int, player_id: int, player_rea
 	else:
 		other_peers[peer_id].player_id = player_id
 		other_peers[peer_id].player_ready = player_ready
-	# emit peer_selected_player signal (to update the lobby)
-	print("peer_selected_player: peer_id(", peer_id, ") player_id(", player_id, ") player_ready(", player_ready, ")")
-	emit_signal("peer_selected_player", peer_id, player_id, player_ready)
-
-# on_net_server_started_game_mode is called by the server when we should start a game the given game mode.
-# @impure
-remote func on_net_server_started_game_mode(game_mode_path: String, game_mode_options: Dictionary):
-	# checksum
-	if not is_rpc_sender_server():
-		return print("on_net_server_started_game_mode(): warning sender is not server")
-	# load the game mode
-	var game_mode_scene: Node = load(game_mode_path).instance()
-	game_mode_scene.set_options(game_mode_options)
-	# emit server_started_game_mode signal
-	print("server_started_game_mode: game_mode_path(", game_mode_path, ") game_mode_options(", game_mode_options, ")")
-	emit_signal("server_started_game_mode", game_mode_scene)
+	# emit peer_select_player signal (to update the lobby)
+	print("peer_select_player: peer_id(", peer_id, ") player_id(", player_id, ") player_ready(", player_ready, ")")
+	emit_signal("peer_select_player", peer_id, player_id, player_ready)
 
 ####################
 # Helper functions #
@@ -260,8 +246,6 @@ func get_all_peers() -> Dictionary:
 # @pure
 func is_every_peer_ready() -> bool:
 	var all_peers := get_all_peers()
-	if all_peers.size() <= 0: # TODO
-		return false
 	for peer_id in all_peers:
 		if not all_peers[peer_id].player_ready:
 			return false

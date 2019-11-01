@@ -3,7 +3,6 @@ extends KinematicBody2D
 onready var PlayerTimer: Timer = $"Timer"
 onready var PlayerSprite: Sprite = $"Sprite"
 onready var PlayerWallChecker: RayCast2D = $"WallChecker"
-onready var PlayerCollisionBody: CollisionShape2D = $"CollisionBody"
 onready var PlayerCeilingChecker: RayCast2D = $"CeilingChecker"
 onready var PlayerAnimationPlayer: AnimationPlayer = $"AnimationPlayer"
 onready var PlayerSoundEffectPlayers = [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
@@ -608,7 +607,7 @@ func tick_wallslide(delta: float):
 func pre_walljump():
 	set_animation("jump")
 	set_direction(-direction)
-	handle_walljump(JUMP_STRENGTH, sign(direction) * WALL_JUMP_PUSH_STRENGTH)
+	handle_walljump(WALL_JUMP_STRENGTH, sign(direction) * WALL_JUMP_PUSH_STRENGTH)
 	play_sound_effect(WalljumpSFX)
 	wallslide_cancelled = false
 

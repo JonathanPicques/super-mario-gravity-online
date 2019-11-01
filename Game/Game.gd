@@ -1,6 +1,6 @@
 extends "res://Game/GameNetwork.gd"
 
-enum GameState { none, home, lobby, connecting, connection_error, loading_game_mode, playing_game_mode }
+enum GameState { none, home, lobby, connecting, connection_error, loading_game_mode, done_loading_game_mode, playing_game_mode }
 
 const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
@@ -8,9 +8,8 @@ const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
 const PlayerCamera = preload("res://Game/Players/Cam/PlayerCamera2D.tscn")
 
 var state = GameState.none
-var current_scene = null
-
-var Players := [
+var scene = null
+var players := [
 	{
 		name = "Mario",
 		scene_path = "res://Game/Players/Mario/Mario.tscn",
@@ -28,27 +27,32 @@ var Players := [
 # @impure
 func _ready():
 	# connect signals
-	connect("self_peer_hosted", self, "on_self_peer_hosted")
-	connect("self_peer_stopped", self, "on_self_peer_stopped")
-	connect("peer_registered", self, "on_peer_registered")
-	connect("peer_unregistered", self, "on_peer_unregistered")
-	connect("peer_selected_player", self, "on_peer_selected_player")
-	connect("server_started_game_mode", self, "on_server_started_game_mode")
+	connect("host", self, "on_host")
+	connect("stop", self, "on_stop")
+	connect("peer_register", self, "on_peer_register")
+	connect("peer_unregister", self, "on_peer_unregister")
+	connect("peer_select_player", self, "on_peer_select_player")
 	# load home menu
+	set_state(GameState.home)
 	goto_home_menu_scene()
 
 ##########
 # Scenes #
 ##########
 
+# set_state sets the current state.
+# @impure
+func set_state(new_state: int):
+	state = new_state
+
 # set_scene sets the current scene and releases the previous one.
 # @impure
-func set_scene(scene: Node):
-	if current_scene != null:
-		remove_child(current_scene)
-		current_scene.queue_free()
-	add_child(scene)
-	current_scene = scene
+func set_scene(new_scene: Node):
+	if scene != null:
+		remove_child(scene)
+		scene.queue_free()
+	add_child(new_scene)
+	scene = new_scene
 
 # goto_home_menu loads and go to the home menu.
 # @impure
@@ -77,47 +81,51 @@ func goto_connect_menu_scene(error:= StopError.none):
 # Peer events #
 ###############
 
-# on_self_peer_hosted is called when we started a server successfully.
+# on_host is called when we started a server successfully.
 # @driven(signal)
 # @impure
-func on_self_peer_hosted():
+func on_host():
+	set_state(GameState.lobby)
 	goto_lobby_menu_scene()
 
-# on_self_peer_stopped is called when we stopped playing as a server or client.
+# on_stop is called when we stopped playing as a server or as a client or an error happened.
 # @driven(signal)
 # @impure
-func on_self_peer_stopped(error: int):
+func on_stop(error: int):
 	match error:
-		StopError.none: goto_home_menu_scene()
-		StopError.hosting_failed: goto_connect_menu_scene(StopError.hosting_failed)
-		StopError.joining_failed: goto_connect_menu_scene(StopError.joining_failed)
-		StopError.connection_lost: goto_connect_menu_scene(StopError.connection_lost)
-		StopError.connection_failed: goto_connect_menu_scene(StopError.connection_failed)
+		StopError.none:
+			set_state(GameState.home)
+			goto_home_menu_scene()
+		StopError.hosting_failed:
+			set_state(GameState.connection_error)
+			goto_connect_menu_scene(StopError.hosting_failed)
+		StopError.joining_failed:
+			set_state(GameState.connection_error)
+			goto_connect_menu_scene(StopError.joining_failed)
+		StopError.connection_lost:
+			set_state(GameState.connection_error)
+			goto_connect_menu_scene(StopError.connection_lost)
+		StopError.connection_failed:
+			set_state(GameState.connection_error)
+			goto_connect_menu_scene(StopError.connection_failed)
 
-# on_peer_registered is called when a peer is registered.
+# on_peer_register is called when a peer is registered.
 # @driven(signal)
 # @impure
-func on_peer_registered(peer_id: int, peer_info: Dictionary):
+func on_peer_register(peer_id: int, peer_info: Dictionary):
 	# if our peer is registered, go to lobby
 	if peer_id == self_peer.id:
+		set_state(GameState.lobby)
 		goto_lobby_menu_scene()
 
-# on_peer_unregistered is called when a peer is unregistered.
+# on_peer_unregister is called when a peer is unregistered.
 # @driven(signal)
 # @impure
-func on_peer_unregistered(peer_id: int):
+func on_peer_unregister(peer_id: int, peer_info: Dictionary):
 	pass
 
-# on_peer_selected_player is called when a peer selected a player.
+# on_peer_select_player is called when a peer selected a player.
 # @driven(signal)
 # @impure
-func on_peer_selected_player(peer_id: int, player_id: int, player_ready: bool):
-	# if we are the server and all peers are ready, start the game mode
-	if get_tree().is_network_server() and is_every_peer_ready():
-		net_server_start_game_mode("res://Game/Modes/Race/RaceGameMode.tscn", {map = "res://Game/Maps/Base/Base.tscn"})
-
-# on_server_started_game_mode is called when the server started a game mode.
-# @driven(signal)
-# @impure
-func on_server_started_game_mode(game_mode_scene: Node):
-	set_scene(game_mode_scene)
+func on_peer_select_player(peer_id: int, player_id: int, player_ready: bool):
+	pass

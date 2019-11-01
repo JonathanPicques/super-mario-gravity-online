@@ -16,9 +16,9 @@ onready var LobbyPeers = [
 
 func _ready():
 	# connect peer signals to update lobby
-	Game.connect("peer_registered", self, "update_lobby", [])
-	Game.connect("peer_unregistered", self, "update_lobby", [])
-	Game.connect("peer_selected_player", self, "update_lobby", [])
+	Game.connect("peer_register", self, "update_lobby", [])
+	Game.connect("peer_unregister", self, "update_lobby", [])
+	Game.connect("peer_select_player", self, "update_lobby", [])
 	# update lobby
 	update_lobby()
 
