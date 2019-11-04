@@ -560,7 +560,7 @@ func pre_jump():
 	set_animation("jump")
 	play_sound_effect(JumpSFX)
 	if input_velocity.x != 0:
-		set_direction(sign(input_velocity.x))
+		set_direction(int(sign(input_velocity.x)))
 
 func tick_jump(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)

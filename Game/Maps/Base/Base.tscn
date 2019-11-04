@@ -35,7 +35,7 @@ motion/sync_to_physics = false
 direction = 1
 
 [node name="FlagEnd" parent="." instance=ExtResource( 5 )]
-position = Vector2( 115, 124 )
+position = Vector2( 544, 144 )
 
 [node name="DecorMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
@@ -44,6 +44,7 @@ format = 1
 tile_data = PoolIntArray( 458759, 1, 65541, 524318, 1, 131075, 524319, 1, 131076, 524320, 1, 65540, 524321, 1, 131076, 524322, 1, 65540, 524323, 1, 131076, 524324, 1, 131077, 917528, 1, 65541, 917529, 1, 131075, 917530, 1, 131076, 917531, 1, 131076, 917532, 1, 131076, 917533, 1, 131077, 1441790, 1, 65539, 1441791, 1, 4 )
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+visible = false
 navpoly = SubResource( 1 )
 
 [node name="NavigationPolygonInstanceLine2D" type="Line2D" parent="."]

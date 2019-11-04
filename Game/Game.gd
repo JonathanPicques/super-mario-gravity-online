@@ -1,11 +1,11 @@
 extends "res://Game/GameNetwork.gd"
 
-enum GameState { none, home, lobby, connecting, connection_error, loading_game_mode, done_loading_game_mode, playing_game_mode }
+enum GameState { none, home, lobby, connecting, connection_error, game_mode }
 
 const HomeMenu = preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu = preload("res://Game/Menus/LobbyMenu.tscn")
 const ConnectMenu = preload("res://Game/Menus/ConnectMenu.tscn")
-const PlayerCamera = preload("res://Game/Players/Cam/PlayerCamera2D.tscn")
+const PlayerCamera = preload("res://Game/Players/PlayerCamera2D.tscn")
 
 var state = GameState.none
 var scene = null
@@ -29,9 +29,11 @@ func _ready():
 	# connect signals
 	connect("host", self, "on_host")
 	connect("stop", self, "on_stop")
-	connect("peer_register", self, "on_peer_register")
-	connect("peer_unregister", self, "on_peer_unregister")
-	connect("peer_select_player", self, "on_peer_select_player")
+	connect("registered", self, "on_registered")
+	connect("server_load_game_mode", self, "on_server_load_game_mode")
+	connect("server_start_game_mode", self, "on_server_start_game_mode")
+	connect("client_load_game_mode", self, "on_client_load_game_mode")
+	connect("client_start_game_mode", self, "on_client_start_game_mode")
 	# load home menu
 	set_state(GameState.home)
 	goto_home_menu_scene()
@@ -109,23 +111,49 @@ func on_stop(error: int):
 			set_state(GameState.connection_error)
 			goto_connect_menu_scene(StopError.connection_failed)
 
-# on_peer_register is called when a peer is registered.
+# on_registered is called when we registered to the server.
 # @driven(signal)
 # @impure
-func on_peer_register(peer_id: int, peer_info: Dictionary):
-	# if our peer is registered, go to lobby
-	if peer_id == self_peer.id:
-		set_state(GameState.lobby)
-		goto_lobby_menu_scene()
+func on_registered():
+	set_state(GameState.lobby)
+	goto_lobby_menu_scene()
 
-# on_peer_unregister is called when a peer is unregistered.
+# on_server_load_game_mode is called on the server to load a game mode.
 # @driven(signal)
 # @impure
-func on_peer_unregister(peer_id: int, peer_info: Dictionary):
-	pass
+func on_server_load_game_mode():
+	var game_mode_path := "res://Game/Modes/Race/RaceGameMode.tscn"
+	var game_mode_options := {map = "res://Game/Maps/Base/Base.tscn"}
+	# we get to load the game mode we want
+	var game_mode_scene = load(game_mode_path).instance()
+	game_mode_scene.options = game_mode_options
+	# set the scene
+	set_scene(game_mode_scene)
+	set_state(GameState.game_mode)
+	# tell the other peers to load the given game mode like us
+	net_load_game_mode(game_mode_path, game_mode_options)
 
-# on_peer_select_player is called when a peer selected a player.
+# client_load_game_mode is called by the server to tell us to load the given game mode.
 # @driven(signal)
 # @impure
-func on_peer_select_player(peer_id: int, player_id: int, player_ready: bool):
-	pass
+func on_client_load_game_mode(game_mode_path: String, game_mode_options: Dictionary):
+	# load the game mode 
+	var game_mode_scene = load(game_mode_path).instance()
+	game_mode_scene.options = game_mode_options
+	# load the game mode
+	set_scene(game_mode_scene)
+	set_state(GameState.game_mode)
+	# tell the server we loaded the game mode
+	rpc_id(1, "net_loaded_game_mode")
+
+# on_server_start_game_mode is called on the server to start the game mode.
+# @driven(signal)
+# @impure
+func on_server_start_game_mode():
+	scene.start()
+
+# on_server_start_game_mode is called on the client to start the game mode.
+# @driven(signal)
+# @impure
+func on_client_start_game_mode():
+	scene.start()

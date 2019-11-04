@@ -1,10 +1,8 @@
 extends Control
 
+signal stop_game # ()
+
 onready var Game = get_tree().get_root().get_node("Game")
-
-# stop_game is emitted when cancel button is pressed.
-signal stop_game
-
 onready var LobbyPeers = [
 	$LobbyPeerMenu1,
 	$LobbyPeerMenu2,
@@ -16,10 +14,11 @@ onready var LobbyPeers = [
 
 func _ready():
 	# connect peer signals to update lobby
-	Game.connect("peer_register", self, "update_lobby", [])
-	Game.connect("peer_unregister", self, "update_lobby", [])
-	Game.connect("peer_select_player", self, "update_lobby", [])
-	# update lobby
+	Game.connect("selected_player", self, "update_lobby", [])
+	Game.connect("peer_registered", self, "update_lobby", [])
+	Game.connect("peer_disconnected", self, "update_lobby", [])
+	Game.connect("peer_selected_player", self, "update_lobby", [])
+	# update lobby for the first time
 	update_lobby()
 
 # update_lobby set the peers in the lobby peer boxes.
