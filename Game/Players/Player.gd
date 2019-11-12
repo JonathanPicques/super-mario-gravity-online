@@ -23,6 +23,8 @@ enum PlayerState {
 	wallslide, walljump
 }
 
+export var local := false # debug local player
+
 const FLOOR := Vector2(0, -1) # floor direction.
 const FLOOR_SNAP := Vector2(0, 5) # floor snap for slopes.
 const FLOOR_SNAP_DISABLED := Vector2() # no floor snap for slopes.
@@ -32,8 +34,6 @@ const FLOOR_FALL_JUMP_THRESHOLD := 0.1 # time allowed after leaving the floor to
 const NET_VIEW_INPUT_INDEX := 0
 const NET_VIEW_POSITION_INDEX := 1
 const NET_VIEW_VELOCITY_INDEX := 2
-
-var state: int = PlayerState.none
 
 var input_up := false
 var input_run := false
@@ -49,6 +49,7 @@ var input_jump_once := false
 var input_right_once := false
 var input_throw_once := false
 
+var state: int = PlayerState.none
 var velocity := Vector2()
 var direction := 1
 var disable_snap := 0.0
@@ -58,18 +59,18 @@ var input_velocity := Vector2()
 var velocity_offset := Vector2()
 var wallslide_cancelled = false # reset on stand or walljump
 
-var JUMP_STRENGTH := -170.0
+var JUMP_STRENGTH := -190.0
 var CEILING_KNOCKDOWN := 50.0
-var WALL_JUMP_STRENGTH := -120.0
-var WALL_JUMP_PUSH_STRENGTH := 80.0
+var WALL_JUMP_STRENGTH := -140.0
+var WALL_JUMP_PUSH_STRENGTH := 105.0
 
-var WALK_MAX_SPEED := 75.0
-var WALK_ACCELERATION := 200.0
-var WALK_DECELERATION := 320.0
+var WALK_MAX_SPEED := 105.0
+var WALK_ACCELERATION := 300.0
+var WALK_DECELERATION := 350.0
 
-var RUN_MAX_SPEED := 110.0
-var RUN_ACCELERATION := 230.0
-var RUN_DECELERATION := 350.0
+var RUN_MAX_SPEED := 125.0
+var RUN_ACCELERATION := 350.0
+var RUN_DECELERATION := 370.0
 
 var GRAVITY_MAX_SPEED := 500.0
 var GRAVITY_ACCELERATION := 500.0
@@ -86,7 +87,7 @@ func _ready():
 # @impure
 var _net_view_index := 0
 func _process(delta):
-	if is_network_master():
+	if not local and is_network_master():
 		var net_view := []
 		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_run) << 0x1 | int(input_down) << 0x2 | int(input_left) << 0x3 | int(input_jump) << 0x4 | int(input_right) << 0x5)
 		net_view.insert(NET_VIEW_POSITION_INDEX, position)
@@ -139,7 +140,7 @@ remote func _process_network(delta: float, net_view: Array, net_view_index: int)
 var _up = false; var _run = false; var _down = false
 var _left = false; var _jump = false; var _right = false
 func process_input(delta: float):
-	if is_network_master():
+	if local or is_network_master():
 		# get inputs from gamepad or keyboard
 		input_up = Input.is_action_pressed("player_0_up")
 		input_run = Input.is_action_pressed("player_0_run")
@@ -284,13 +285,6 @@ func handle_jump(jump_strength: float):
 	velocity.y += jump_strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
-# handle_walljump walljumps.
-# @impure
-func handle_walljump(walljump_strength: float, walljump_push_strength: float):
-	velocity.y = walljump_strength
-	velocity.x = walljump_push_strength
-	disable_snap = FLOOR_SNAP_DISABLE_TIME
-
 # handle_gravity applies gravity to the velocity.
 # @impure
 func handle_gravity(delta: float, max_speed: float, acceleration: float):
@@ -298,6 +292,20 @@ func handle_gravity(delta: float, max_speed: float, acceleration: float):
 		velocity.y = min(velocity.y + delta * acceleration, max_speed)
 	elif velocity.x == 0 and input_velocity.x == 0:
 		velocity.y = 0
+
+# handle_walljump walljumps.
+# @impure
+func handle_walljump(walljump_strength: float, walljump_push_strength: float):
+	velocity.y = walljump_strength
+	velocity.x = walljump_push_strength
+	disable_snap = FLOOR_SNAP_DISABLE_TIME
+
+# handle_direction changes the direction depending on the input velocity.
+# @impure
+func handle_direction():
+	var input_direction := int(sign(input_velocity.x))
+	if input_direction != 0:
+		set_direction(input_direction)
 
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
 # @impure
@@ -517,6 +525,7 @@ func pre_fall():
 func tick_fall(delta: float):
 	falling_time += delta
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
+	handle_direction()
 	handle_airborne_move(delta, \
 		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
 		WALK_ACCELERATION if not input_run else RUN_ACCELERATION, \
@@ -564,6 +573,7 @@ func pre_jump():
 
 func tick_jump(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
+	handle_direction()
 	handle_airborne_move(delta, \
 		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
 		WALK_ACCELERATION if not input_run else RUN_ACCELERATION, \
