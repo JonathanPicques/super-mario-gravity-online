@@ -7,9 +7,7 @@ onready var LobbyPeers = [
 	$LobbyPeerMenu1,
 	$LobbyPeerMenu2,
 	$LobbyPeerMenu3,
-	$LobbyPeerMenu4,
-	$LobbyPeerMenu5,
-	$LobbyPeerMenu6,
+	$LobbyPeerMenu4
 ]
 
 func _ready():
@@ -20,6 +18,10 @@ func _ready():
 	Game.connect("peer_selected_player", self, "update_lobby", [])
 	# update lobby for the first time
 	update_lobby()
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		emit_signal("stop_game")
 
 # update_lobby set the peers in the lobby peer boxes.
 # @impure

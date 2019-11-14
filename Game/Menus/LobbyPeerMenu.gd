@@ -3,7 +3,7 @@ extends Control
 const FullOpaque = Color(1, 1, 1, 1)
 const HalfOpaque = Color(1, 1, 1, 0.5)
 const CharacterSelect: Texture = preload("res://Game/Menus/Textures/CharacterSelect.png")
-const CharacterSelectDisabled: Texture = preload("res://Game/Menus/Textures/CharacterSelectDisabled.png")
+const CharacterSelectDisabled: Texture = preload("res://Game/Menus/Textures/EmptyState.png")
 onready var Game = get_tree().get_root().get_node("Game")
 
 var peer = null
@@ -28,6 +28,7 @@ func set_peer(new_peer):
 	peer = new_peer
 	$PeerName.visible = peer != null
 	$HostCrown.visible = peer != null and peer.id == 1
+	$EmptyState.visible = peer == null
 	$Background.texture = CharacterSelect if peer != null else CharacterSelectDisabled
 	$CharacterSprite.visible = peer != null and peer.player_id != -1
 	$NextCharacterLeft.visible = peer != null and peer.id == Game.self_peer.id
