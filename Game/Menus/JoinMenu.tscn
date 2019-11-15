@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game/Menus/Fonts/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Game/Menus/Textures/JoystickButtonRight.png" type="Texture" id=3]
+[ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Game/Menus/Textures/JoystickButtonDown.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.780392, 0.92549, 0.933333, 1 )
@@ -10,14 +13,14 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 10
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 border_width_top = 3
 border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
@@ -61,7 +64,7 @@ margin_top = 74.0
 margin_right = 312.0
 margin_bottom = 97.0
 custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 align = 1
 placeholder_text = "IP Address"
@@ -70,7 +73,7 @@ placeholder_text = "IP Address"
 margin_top = 117.0
 margin_right = 312.0
 margin_bottom = 150.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "For now, the matchmaking system isn't implemented yet. Therefore, you need to manually specify an IP address."
 align = 1
@@ -84,4 +87,73 @@ anchor_bottom = 1.0
 margin_top = -30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 4 )
+
+[node name="RightHint" type="HBoxContainer" parent="Footer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -90.0
+margin_top = -22.0
+margin_right = -20.0
+margin_bottom = -6.0
+rect_pivot_offset = Vector2( 244.111, 111.445 )
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Footer/RightHint"]
+margin_right = 16.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Footer/RightHint"]
+margin_left = 16.0
+margin_right = 70.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "confirm"
+align = 1
+valign = 1
+
+[node name="RightHint2" type="HBoxContainer" parent="Footer"]
+editor/display_folded = true
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -22.0
+margin_right = -90.0
+margin_bottom = -6.0
+rect_pivot_offset = Vector2( 244.111, 111.445 )
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Footer/RightHint2"]
+margin_right = 16.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Footer/RightHint2"]
+margin_left = 16.0
+margin_right = 70.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "cancel"
+align = 1
+valign = 1

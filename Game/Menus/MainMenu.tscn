@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Black.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://Game/Menus/Colors/PrimaryColor.tres" type="StyleBox" id=4]
 [ext_resource path="res://Game/Menus/Colors/DisabledColor.tres" type="StyleBox" id=5]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Game/Menus/Textures/JoystickOppositeArrows.png" type="Texture" id=7]
+[ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Game/Menus/Textures/JoystickButtonRight.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 33
@@ -20,7 +23,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 6 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 border_width_top = 3
 border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
@@ -154,4 +157,69 @@ anchor_bottom = 1.0
 margin_top = -30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
+
+[node name="LeftHint" type="HBoxContainer" parent="Footer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = -22.0
+margin_right = 130.0
+margin_bottom = -6.0
+rect_pivot_offset = Vector2( 244.111, 111.445 )
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Footer/LeftHint"]
+margin_right = 25.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Footer/LeftHint"]
+margin_left = 25.0
+margin_right = 110.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "select menu"
+valign = 1
+
+[node name="RightHint" type="HBoxContainer" parent="Footer"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -90.0
+margin_top = -22.0
+margin_right = -20.0
+margin_bottom = -6.0
+rect_pivot_offset = Vector2( 244.111, 111.445 )
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="Footer/RightHint"]
+margin_right = 16.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Footer/RightHint"]
+margin_left = 16.0
+margin_right = 70.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "confirm"
+align = 1
+valign = 1

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/JoystickButton.png-a8d15f4fa16227590beb66c9580598ce.stex"
+path="res://.import/JoystickButtonDown.png-411de9ad2417aa21e3f85be2180b995f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/JoystickButton.png"
-dest_files=[ "res://.import/JoystickButton.png-a8d15f4fa16227590beb66c9580598ce.stex" ]
+source_file="res://Game/Menus/Textures/JoystickButtonDown.png"
+dest_files=[ "res://.import/JoystickButtonDown.png-411de9ad2417aa21e3f85be2180b995f.stex" ]
 
 [params]
 
