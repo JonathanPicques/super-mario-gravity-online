@@ -1,12 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game/Menus/LobbyMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Common/Background.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Menus/Textures/MainBackground.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Bold.ttf" type="DynamicFontData" id=4]
-[ext_resource path="res://Game/Menus/Common/Button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/Menus/Textures/CloseButton.png" type="Texture" id=6]
-[ext_resource path="res://Game/Menus/LobbyPeerMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Menus/LobbyPeerMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Theme" id=1]
 Button/colors/font_color = Color( 0, 0, 0, 1 )
@@ -450,35 +448,25 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="Cancel Button" parent="." instance=ExtResource( 5 )]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -50.0
-margin_right = 0.0
-margin_bottom = 50.0
-text = ""
-icon = ExtResource( 6 )
-flat = true
-
-[node name="LobbyPeerMenu1" parent="." instance=ExtResource( 7 )]
+[node name="LobbyPeerMenu1" parent="." instance=ExtResource( 5 )]
 margin_left = 40.0
 margin_top = 75.0
 margin_right = 140.0
 margin_bottom = 175.0
 
-[node name="LobbyPeerMenu2" parent="." instance=ExtResource( 7 )]
+[node name="LobbyPeerMenu2" parent="." instance=ExtResource( 5 )]
 margin_left = 150.0
 margin_top = 75.0
 margin_right = 250.0
 margin_bottom = 175.0
 
-[node name="LobbyPeerMenu3" parent="." instance=ExtResource( 7 )]
+[node name="LobbyPeerMenu3" parent="." instance=ExtResource( 5 )]
 margin_left = 260.0
 margin_top = 76.2069
 margin_right = 360.0
 margin_bottom = 176.207
 
-[node name="LobbyPeerMenu4" parent="." instance=ExtResource( 7 )]
+[node name="LobbyPeerMenu4" parent="." instance=ExtResource( 5 )]
 margin_left = 370.0
 margin_top = 75.0
 margin_right = 470.0
@@ -491,4 +479,3 @@ anchor_bottom = 1.0
 margin_top = -49.2919
 margin_bottom = 0.70813
 custom_styles/panel = SubResource( 3 )
-[connection signal="pressed" from="Cancel Button" to="." method="on_cancel_button_pressed"]

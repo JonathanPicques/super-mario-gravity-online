@@ -33,7 +33,3 @@ func update_lobby(a = null, b = null, c = null):
 		var peer = peers[peer_id]
 		var lobby_peer = LobbyPeers[peer.index]
 		lobby_peer.set_peer(peer)
-
-# @driven(signal)
-func on_cancel_button_pressed():
-	emit_signal("stop_game")

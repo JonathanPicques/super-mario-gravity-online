@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game/Menus/Fonts/Nunito-Black.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Game/Menus/Fonts/Nunito-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Game/Menus/Colors/PrimaryColor.tres" type="StyleBox" id=3]
+[ext_resource path="res://Game/Menus/Colors/DisabledColor.tres" type="StyleBox" id=4]
+[ext_resource path="res://Game/Menus/Fonts/Nunito-Bold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=3]
+size = 33
+outline_size = 3
+outline_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 22
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+border_width_top = 3
+border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 40.0
+margin_right = -30.0
+margin_bottom = -60.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 452.0
+margin_bottom = 188.0
+custom_constants/separation = 20
+
+[node name="Logo" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 240.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/Logo"]
+margin_top = 53.0
+margin_right = 240.0
+margin_bottom = 99.0
+custom_fonts/font = SubResource( 3 )
+text = "SUPER MARIO"
+align = 1
+
+[node name="Subtitle" type="Label" parent="MarginContainer/HBoxContainer/Logo"]
+margin_top = 103.0
+margin_right = 240.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+text = "GRAVITY ONLINE"
+align = 1
+
+[node name="Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 260.0
+margin_right = 452.0
+margin_bottom = 188.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
+custom_constants/separation = 10
+
+[node name="TryAgainButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+margin_right = 192.0
+margin_bottom = 39.0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
+text = "NEW GAME"
+
+[node name="TryAgainButton2" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+margin_top = 49.0
+margin_right = 192.0
+margin_bottom = 88.0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
+text = "JOIN GAME"
+
+[node name="TryAgainButton3" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+margin_top = 98.0
+margin_right = 192.0
+margin_bottom = 137.0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
+text = "CREATE MAP"
+
+[node name="TryAgainButton4" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+margin_top = 147.0
+margin_right = 192.0
+margin_bottom = 188.0
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
+custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
+text = "SETTINGS"
+
+[node name="Footer" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -30.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
