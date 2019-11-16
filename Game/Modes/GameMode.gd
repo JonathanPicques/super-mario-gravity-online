@@ -15,4 +15,5 @@ func start():
 
 # toggle on on/off color switch for the given color
 func item_color_switch_toggle(isOn: bool, color: int):
+	print("IN GAME MODE")
 	emit_signal("item_color_switch_toggle", isOn, color)
