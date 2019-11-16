@@ -18,11 +18,11 @@
 size = 12
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 10
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 border_width_top = 3
 border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
@@ -31,9 +31,19 @@ border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.87451, 0.976471, 0.984314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="RoomStatus" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 120.0
@@ -63,7 +73,6 @@ valign = 1
 uppercase = true
 
 [node name="RoomKey" type="HBoxContainer" parent="."]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -100.0
@@ -107,7 +116,6 @@ margin_right = 492.0
 margin_bottom = 258.0
 
 [node name="TitleMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 492.0
 margin_bottom = 54.0
 custom_constants/margin_right = 0
@@ -141,7 +149,6 @@ margin_bottom = 180.0
 custom_constants/separation = 20
 
 [node name="PlayerSlot1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
-editor/display_folded = true
 margin_right = 98.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
@@ -157,7 +164,6 @@ expand = true
 stretch_mode = 6
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot1/Box"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -182,20 +188,18 @@ stretch_mode = 6
 margin_top = 164.0
 margin_right = 98.0
 margin_bottom = 179.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "RootKernel (2)"
 align = 1
 
 [node name="PlayerSlot2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
-editor/display_folded = true
 margin_left = 118.0
 margin_right = 216.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
 
 [node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2"]
-editor/display_folded = true
 margin_right = 98.0
 margin_bottom = 132.0
 size_flags_horizontal = 7
@@ -206,7 +210,6 @@ expand = true
 stretch_mode = 6
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2/Box"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -231,20 +234,18 @@ stretch_mode = 6
 margin_top = 164.0
 margin_right = 98.0
 margin_bottom = 179.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "RootKernel (2)"
 align = 1
 
 [node name="PlayerSlot3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
-editor/display_folded = true
 margin_left = 236.0
 margin_right = 334.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
 
 [node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3"]
-editor/display_folded = true
 margin_right = 98.0
 margin_bottom = 132.0
 size_flags_horizontal = 7
@@ -255,7 +256,6 @@ expand = true
 stretch_mode = 6
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3/Box"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -280,20 +280,18 @@ stretch_mode = 6
 margin_top = 164.0
 margin_right = 98.0
 margin_bottom = 179.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "RootKernel (2)"
 align = 1
 
 [node name="PlayerSlot4" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
-editor/display_folded = true
 margin_left = 354.0
 margin_right = 452.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
 
 [node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4"]
-editor/display_folded = true
 margin_right = 98.0
 margin_bottom = 132.0
 size_flags_horizontal = 7
@@ -304,7 +302,6 @@ expand = true
 stretch_mode = 6
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4/Box"]
-editor/display_folded = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -329,7 +326,7 @@ stretch_mode = 6
 margin_top = 164.0
 margin_right = 98.0
 margin_bottom = 179.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 align = 1
 
@@ -340,10 +337,9 @@ anchor_bottom = 1.0
 margin_top = -30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="LeftHint" type="HBoxContainer" parent="Footer"]
-editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0

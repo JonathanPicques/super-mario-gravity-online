@@ -36,6 +36,14 @@ border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.87451, 0.976471, 0.984314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -81,7 +89,6 @@ margin_bottom = 180.0
 custom_constants/separation = 20
 
 [node name="LeaderBoard" type="Panel" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer"]
-editor/display_folded = true
 margin_right = 240.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
@@ -89,7 +96,6 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -98,19 +104,16 @@ margin_right = -10.0
 margin_bottom = -10.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer"]
-editor/display_folded = true
 margin_right = 220.0
 margin_bottom = 160.0
 
 [node name="PlayerRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_right = 220.0
 margin_bottom = 37.0
 size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer/PlayerRow"]
-editor/display_folded = true
 margin_right = 18.0
 margin_bottom = 37.0
 
@@ -140,7 +143,6 @@ custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "1:33.312"
 
 [node name="PlayerRow2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 41.0
 margin_right = 220.0
 margin_bottom = 78.0
@@ -148,7 +150,6 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer/PlayerRow2"]
-editor/display_folded = true
 margin_right = 18.0
 margin_bottom = 37.0
 
@@ -178,7 +179,6 @@ custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "1:33.312"
 
 [node name="PlayerRow3" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 82.0
 margin_right = 220.0
 margin_bottom = 119.0
@@ -186,7 +186,6 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer/PlayerRow3"]
-editor/display_folded = true
 margin_right = 18.0
 margin_bottom = 37.0
 
@@ -216,7 +215,6 @@ custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "1:33.312"
 
 [node name="PlayerRow4" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer"]
-editor/display_folded = true
 margin_top = 123.0
 margin_right = 220.0
 margin_bottom = 160.0
@@ -224,7 +222,6 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoard/MarginContainer/VBoxContainer/PlayerRow4"]
-editor/display_folded = true
 margin_right = 18.0
 margin_bottom = 37.0
 
@@ -254,7 +251,6 @@ custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "1:33.312"
 
 [node name="Buttons" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer"]
-editor/display_folded = true
 margin_left = 260.0
 margin_right = 452.0
 margin_bottom = 180.0
@@ -335,7 +331,6 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 5 )
 
 [node name="LeftHint" type="HBoxContainer" parent="Footer"]
-editor/display_folded = true
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -367,7 +362,6 @@ text = "select menu"
 valign = 1
 
 [node name="RightHint" type="HBoxContainer" parent="Footer"]
-editor/display_folded = true
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
