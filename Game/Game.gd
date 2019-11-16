@@ -3,9 +3,9 @@ extends Control
 onready var GameInput = $GameInput
 onready var GameMultiplayer = $GameMultiplayer
 
-const Map = preload("res://Game/Maps/Base/Base.tscn")
-const MainMenu = preload("res://Game/Menus/MainMenu.tscn")
-const CharactersMenu = preload("res://Game/Menus/CharactersMenu.tscn")
+const Map: = preload("res://Game/Maps/Base/Base.tscn")
+const MainMenu := preload("res://Game/Menus/MainMenu.tscn")
+const CharactersMenu := preload("res://Game/Menus/CharactersMenu.tscn")
 
 var scene = null
 var skins := [
@@ -27,9 +27,7 @@ var skins := [
 # @driven(lifecycle)
 # @impure
 func _ready():
-	set_scene(MainMenu.instance())
-	yield(get_tree().create_timer(0.5), "timeout")
-	set_scene(CharactersMenu.instance())
+	goto_main_menu_scene()
 
 ##########
 # Scenes #
@@ -43,3 +41,12 @@ func set_scene(new_scene: Node):
 		scene.queue_free()
 	add_child(new_scene)
 	scene = new_scene
+
+func goto_main_menu_scene():
+	var main_menu := MainMenu.instance()
+	main_menu.connect("new_game", self, "goto_characters_menu_scene")
+	set_scene(main_menu)
+
+func goto_characters_menu_scene():
+	var characters_menu := CharactersMenu.instance()
+	set_scene(characters_menu)

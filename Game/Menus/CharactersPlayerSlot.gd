@@ -2,11 +2,11 @@ extends VBoxContainer
 
 onready var Game = get_node("/root/Game")
 
-onready var SlotJoinTexture = preload("res://Game/Menus/Textures/SlotJoin.png")
-onready var SlotReadyTexture = preload("res://Game/Menus/Textures/SlotReady.png")
-onready var SlotSearchTexture = preload("res://Game/Menus/Textures/SlotSearch.png")
-onready var SlotSelectTexture = preload("res://Game/Menus/Textures/SlotSelect.png")
-onready var InputDeviceTextures = [
+const SlotJoinTexture := preload("res://Game/Menus/Textures/SlotJoin.png")
+const SlotReadyTexture := preload("res://Game/Menus/Textures/SlotReady.png")
+const SlotSearchTexture := preload("res://Game/Menus/Textures/SlotSearch.png")
+const SlotSelectTexture := preload("res://Game/Menus/Textures/SlotSelect.png")
+const InputDeviceTextures := [
 	preload("res://Game/Menus/Textures/Keyboard.png"),
 	preload("res://Game/Menus/Textures/Gamepad1.png"),
 	preload("res://Game/Menus/Textures/Gamepad2.png"),

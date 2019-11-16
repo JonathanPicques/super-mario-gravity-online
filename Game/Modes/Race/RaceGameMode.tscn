@@ -7,7 +7,7 @@
 [node name="RaceGameMode" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="CanvasLayerUI" type="CanvasLayer" parent="." index="2"]
+[node name="CanvasLayerUI" type="CanvasLayer" parent="." index="1"]
 
 [node name="PositionLabel" type="Label" parent="CanvasLayerUI" index="0"]
 margin_left = 448.0
@@ -16,4 +16,3 @@ margin_right = 496.0
 margin_bottom = 49.0
 custom_fonts/font = ExtResource( 3 )
 align = 2
-

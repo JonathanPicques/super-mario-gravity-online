@@ -2,9 +2,9 @@ extends Control
 
 onready var Game = get_node("/root/Game")
 
-onready var KeyIconTexture = preload("res://Game/Menus/Textures/KeyIcon.png")
-onready var LockIconTexture = preload("res://Game/Menus/Textures/LockIcon.png")
-onready var UnlockIconTexture = preload("res://Game/Menus/Textures/UnlockIcon.png")
+const KeyIconTexture := preload("res://Game/Menus/Textures/KeyIcon.png")
+const LockIconTexture := preload("res://Game/Menus/Textures/LockIcon.png")
+const UnlockIconTexture := preload("res://Game/Menus/Textures/UnlockIcon.png")
 
 enum RoomState { none, join, public, private, offline }
 

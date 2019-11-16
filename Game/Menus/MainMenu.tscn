@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Black.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Regular.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Game/Menus/Textures/JoystickOppositeArrows.png" type="Texture" id=7]
 [ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Game/Menus/Textures/JoystickButtonRight.png" type="Texture" id=9]
+[ext_resource path="res://Game/Menus/MainMenu.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 33
@@ -31,6 +32,10 @@ border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -94,7 +99,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.8
 custom_constants/separation = 10
 
-[node name="TryAgainButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="NewGameButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 margin_right = 192.0
 margin_bottom = 39.0
 size_flags_vertical = 3
@@ -109,7 +114,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "NEW GAME"
 
-[node name="TryAgainButton2" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="JoinGameButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 margin_top = 49.0
 margin_right = 192.0
 margin_bottom = 88.0
@@ -125,7 +130,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "JOIN GAME"
 
-[node name="TryAgainButton3" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="CreateMapButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 margin_top = 98.0
 margin_right = 192.0
 margin_bottom = 137.0
@@ -141,7 +146,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "CREATE MAP"
 
-[node name="TryAgainButton4" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 margin_top = 147.0
 margin_right = 192.0
 margin_bottom = 188.0
@@ -230,3 +235,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "confirm"
 align = 1
 valign = 1
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/NewGameButton" to="." method="on_new_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/JoinGameButton" to="." method="on_join_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/CreateMapButton" to="." method="on_create_map_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SettingsButton" to="." method="on_settings_button_pressed"]

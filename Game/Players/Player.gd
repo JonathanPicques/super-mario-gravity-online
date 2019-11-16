@@ -9,7 +9,7 @@ onready var PlayerSprite: Sprite = $"Sprite"
 onready var PlayerWallChecker: RayCast2D = $"WallChecker"
 onready var PlayerCeilingChecker: RayCast2D = $"CeilingChecker"
 onready var PlayerAnimationPlayer: AnimationPlayer = $"AnimationPlayer"
-onready var PlayerSoundEffectPlayers = [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
+onready var PlayerSoundEffectPlayers := [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
 onready var PlayerNetworkDeadReckoning: Tween = $"NetworkDeadReckoning"
 
 onready var BumpSFX: AudioStream
