@@ -1,8 +1,6 @@
 extends KinematicBody2D
 
 onready var Game = get_node("/root/Game")
-onready var GameInput = Game.GameInput
-onready var GameMultiplayer = Game.GameMultiplayer
 
 onready var PlayerTimer: Timer = $"Timer"
 onready var PlayerSprite: Sprite = $"Sprite"
@@ -87,7 +85,7 @@ var GRAVITY_ACCELERATION := 500.0
 func _ready():
 	set_state(PlayerState.stand)
 	set_direction(direction)
-	is_local_player = GameMultiplayer.is_local_player(player_id)
+	is_local_player = Game.GameMultiplayer.is_local_player(player_id)
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
@@ -149,13 +147,13 @@ var _run := false; var _use := false; var _jump := false
 func process_input(delta: float):
 	if is_local_player or is_network_master():
 		# get inputs from gamepad or keyboard
-		input_up = GameInput.is_player_action_pressed(player_id, "up")
-		input_left = GameInput.is_player_action_pressed(player_id, "left")
-		input_down = GameInput.is_player_action_pressed(player_id, "down")
-		input_right = GameInput.is_player_action_pressed(player_id, "right")
-		input_run = GameInput.is_player_action_pressed(player_id, "run")
-		input_use = GameInput.is_player_action_pressed(player_id, "use")
-		input_jump = GameInput.is_player_action_pressed(player_id, "jump")
+		input_up = Game.GameInput.is_player_action_pressed(player_id, "up")
+		input_left = Game.GameInput.is_player_action_pressed(player_id, "left")
+		input_down = Game.GameInput.is_player_action_pressed(player_id, "down")
+		input_right = Game.GameInput.is_player_action_pressed(player_id, "right")
+		input_run = Game.GameInput.is_player_action_pressed(player_id, "run")
+		input_use = Game.GameInput.is_player_action_pressed(player_id, "use")
+		input_jump = Game.GameInput.is_player_action_pressed(player_id, "jump")
 	elif len(_last_net_view) > 0:
 		# get inputs from last net view
 		input_up = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 0))

@@ -14,16 +14,20 @@ func _ready():
 # @override
 # @impure
 func start():
+	# setup split screen
+	setup_split_screen()
 	# cache start and end position
 	var flag_end: Vector2 = map_scene.find_node("FlagEnd").position
 	var flag_start: Vector2 = map_scene.find_node("FlagStart").position
 	# create all players
 	for player in Game.GameMultiplayer.players:
-		# create player scene
-		var player_scene: Node2D = load(Game.skins[player.skin_id].scene_path).instance()
-		player_scene.name = str(player.id)
-		player_scene.position = flag_start
-		player_scene.player_id = player.id
-		player_scene.set_network_master(player.peer_id)
+		# create player node
+		var player_node: Node2D = load(Game.skins[player.skin_id].node_path).instance()
+		player_node.name = str(player.id)
+		player_node.position = flag_start
+		player_node.player_id = player.id
+		player_node.set_network_master(player.peer_id)
 		# add the player to the map
-		MapSlot.add_child(player_scene)
+		MapSlot.add_child(player_node)
+		# add the player camera
+		add_player_screen_camera(player.id, player_node.get_path())
