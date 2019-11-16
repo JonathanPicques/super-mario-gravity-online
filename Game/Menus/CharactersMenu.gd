@@ -23,7 +23,10 @@ func _process(delta: float):
 		set_room_state(RoomState.public if room_state == RoomState.private else RoomState.private)
 	# start game if every player is ready
 	if Input.is_action_just_pressed("ui_accept") and Game.GameMultiplayer.is_every_player_ready():
-		Game.set_scene(Game.Map.instance())
+		var game_mode = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
+		game_mode.options = { map = "res://Game/Maps/Base/Base.tscn" }
+		Game.set_scene(game_mode)
+		game_mode.start()
 		return
 	# add a local player
 	for input_device_id in range(0, 5):

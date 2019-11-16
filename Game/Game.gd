@@ -4,6 +4,7 @@ onready var GameInput = $GameInput
 onready var GameMultiplayer = $GameMultiplayer
 
 const Map: = preload("res://Game/Maps/Base/Base.tscn")
+const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
 const MainMenu := preload("res://Game/Menus/MainMenu.tscn")
 const CharactersMenu := preload("res://Game/Menus/CharactersMenu.tscn")
 
@@ -45,7 +46,12 @@ func set_scene(new_scene: Node):
 func goto_main_menu_scene():
 	var main_menu := MainMenu.instance()
 	main_menu.connect("new_game", self, "goto_characters_menu_scene")
+	main_menu.connect("join_game", self, "goto_join_menu_scene")
 	set_scene(main_menu)
+
+func goto_join_menu_scene():
+	var join_menu := JoinMenu.instance()
+	set_scene(join_menu)
 
 func goto_characters_menu_scene():
 	var characters_menu := CharactersMenu.instance()

@@ -17,20 +17,13 @@ func start():
 	# cache start and end position
 	var flag_end: Vector2 = map_scene.find_node("FlagEnd").position
 	var flag_start: Vector2 = map_scene.find_node("FlagStart").position
-	# create all peers
-	var peers = Game.get_all_peers()
-	for peer_id in peers:
-		var peer: Dictionary = peers[peer_id]
+	# create all players
+	for player in Game.GameMultiplayer.players:
 		# create player scene
-		var player_scene: Node2D = load(Game.players[peer.player_id].scene_path).instance()
-		player_scene.name = str(peer.id)
+		var player_scene: Node2D = load(Game.skins[player.skin_id].scene_path).instance()
+		player_scene.name = str(player.id)
 		player_scene.position = flag_start
-		player_scene.set_network_master(peer.id)
-		# attach camera to our peer
-		if peer.id == Game.self_peer.id:
-			var player_camera_scene = Game.PlayerCamera.instance()
-			player_camera_scene.tile_map = map_scene.get_node("Map").get_path()
-			player_camera_scene.set_network_master(peer.id)
-			player_scene.add_child(player_camera_scene)
+		player_scene.player_id = player.id
+		player_scene.set_network_master(player.peer_id)
 		# add the player to the map
 		MapSlot.add_child(player_scene)
