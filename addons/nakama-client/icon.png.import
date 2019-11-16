@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Joystick2-1.png-057a9db094366c815b8674f7339bd42e.stex"
+path="res://.import/icon.png-36546c4e68d3f2427439d22f1a572734.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/Joystick2-1.png"
-dest_files=[ "res://.import/Joystick2-1.png-057a9db094366c815b8674f7339bd42e.stex" ]
+source_file="res://addons/nakama-client/icon.png"
+dest_files=[ "res://.import/icon.png-36546c4e68d3f2427439d22f1a572734.stex" ]
 
 [params]
 

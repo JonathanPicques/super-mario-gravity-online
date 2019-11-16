@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+onready var Game = get_node("/root/Game")
+onready var GameInput = Game.GameInput
+onready var GameMultiplayer = Game.GameMultiplayer
+
 onready var PlayerTimer: Timer = $"Timer"
 onready var PlayerSprite: Sprite = $"Sprite"
 onready var PlayerWallChecker: RayCast2D = $"WallChecker"
@@ -23,8 +27,6 @@ enum PlayerState {
 	wallslide, walljump
 }
 
-export var local := false # debug local player
-
 const FLOOR := Vector2(0, -1) # floor direction.
 const FLOOR_SNAP := Vector2(0, 5) # floor snap for slopes.
 const FLOOR_SNAP_DISABLED := Vector2() # no floor snap for slopes.
@@ -35,19 +37,23 @@ const NET_VIEW_INPUT_INDEX := 0
 const NET_VIEW_POSITION_INDEX := 1
 const NET_VIEW_VELOCITY_INDEX := 2
 
+export var player_id := 0 # player index in Game.
+export var is_local_player := true # is player handled locally.
+
 var input_up := false
-var input_run := false
 var input_down := false
 var input_left := false
-var input_jump := false
 var input_right := false
+var input_run := false
+var input_use := false
+var input_jump := false
 var input_up_once := false
-var input_run_once := false
 var input_down_once := false
 var input_left_once := false
-var input_jump_once := false
 var input_right_once := false
-var input_throw_once := false
+var input_run_once := false
+var input_use_once := false
+var input_jump_once := false
 
 var state: int = PlayerState.none
 var velocity := Vector2()
@@ -68,7 +74,7 @@ var WALK_MAX_SPEED := 105.0
 var WALK_ACCELERATION := 300.0
 var WALK_DECELERATION := 350.0
 
-var RUN_MAX_SPEED := 125.0
+var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 350.0
 var RUN_DECELERATION := 370.0
 
@@ -81,15 +87,16 @@ var GRAVITY_ACCELERATION := 500.0
 func _ready():
 	set_state(PlayerState.stand)
 	set_direction(direction)
+	is_local_player = GameMultiplayer.is_local_player(player_id)
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
 # @impure
 var _net_view_index := 0
 func _process(delta):
-	if not local and is_network_master():
+	if not is_local_player and is_network_master():
 		var net_view := []
-		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_run) << 0x1 | int(input_down) << 0x2 | int(input_left) << 0x3 | int(input_jump) << 0x4 | int(input_right) << 0x5)
+		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_down) << 0x1 | int(input_left) << 0x2 | int(input_right) << 0x3 | int(input_run) << 0x4 | int(input_use) << 0x5 | int(input_jump) << 0x6)
 		net_view.insert(NET_VIEW_POSITION_INDEX, position)
 		net_view.insert(NET_VIEW_VELOCITY_INDEX, velocity)
 		_net_view_index += 1
@@ -137,39 +144,43 @@ remote func _process_network(delta: float, net_view: Array, net_view_index: int)
 
 # process_input updates player inputs from local inputs or network inputs.
 # @impure
-var _up = false; var _run = false; var _down = false
-var _left = false; var _jump = false; var _right = false
+var _up := false; var _down := false; var _left := false; var _right := false
+var _run := false; var _use := false; var _jump := false
 func process_input(delta: float):
-	if local or is_network_master():
+	if is_local_player or is_network_master():
 		# get inputs from gamepad or keyboard
-		input_up = Input.is_action_pressed("player_0_up")
-		input_run = Input.is_action_pressed("player_0_run")
-		input_down = Input.is_action_pressed("player_0_down")
-		input_left = Input.is_action_pressed("player_0_left")
-		input_jump = Input.is_action_pressed("player_0_jump")
-		input_right = Input.is_action_pressed("player_0_right")
+		input_up = GameInput.is_player_action_pressed(player_id, "up")
+		input_left = GameInput.is_player_action_pressed(player_id, "left")
+		input_down = GameInput.is_player_action_pressed(player_id, "down")
+		input_right = GameInput.is_player_action_pressed(player_id, "right")
+		input_run = GameInput.is_player_action_pressed(player_id, "run")
+		input_use = GameInput.is_player_action_pressed(player_id, "use")
+		input_jump = GameInput.is_player_action_pressed(player_id, "jump")
 	elif len(_last_net_view) > 0:
 		# get inputs from last net view
 		input_up = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 0))
-		input_run = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 1))
-		input_down = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 2))
-		input_left = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 3))
-		input_jump = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 4))
-		input_right = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 5))
+		input_down = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 1))
+		input_left = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 2))
+		input_right = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 3))
+		input_run = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 4))
+		input_use = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 5))
+		input_jump = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 6))
 	# compute input just pressed
 	input_up_once = not _up and input_up
-	input_run_once = not _run and input_run
 	input_down_once = not _down and input_down
 	input_left_once = not _left and input_left
-	input_jump_once = not _jump and input_jump
 	input_right_once = not _right and input_right
+	input_run_once = not _run and input_run
+	input_use_once = not _use and input_use
+	input_jump_once = not _jump and input_jump
 	# remember we pressed these inputs last frame
 	_up = input_up
-	_run = input_run
 	_down = input_down
 	_left = input_left
-	_jump = input_jump
 	_right = input_right
+	_run = input_run
+	_use = input_use
+	_jump = input_jump
 	# compute input velocity
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
 
@@ -386,8 +397,6 @@ func tick_stand(delta: float):
 		return set_state(PlayerState.jump)
 	if input_down_once:
 		return set_state(PlayerState.stand_to_crouch)
-	if input_throw_once:
-		return set_state(PlayerState.hold_grenade)
 	if input_velocity.x != 0 and has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.walk)
 	elif input_velocity.x != 0 and not has_same_direction(direction, input_velocity.x):

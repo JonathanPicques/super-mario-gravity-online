@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Joystick1.png-5038c9fb3bde67a6ed93990641a7ac18.stex"
+path="res://.import/Gamepad4.png-81a48bb7e537ea0eee1c5cbe27c4cfa3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/Joystick1.png"
-dest_files=[ "res://.import/Joystick1.png-5038c9fb3bde67a6ed93990641a7ac18.stex" ]
+source_file="res://Game/Menus/Textures/Gamepad4.png"
+dest_files=[ "res://.import/Gamepad4.png-81a48bb7e537ea0eee1c5cbe27c4cfa3.stex" ]
 
 [params]
 

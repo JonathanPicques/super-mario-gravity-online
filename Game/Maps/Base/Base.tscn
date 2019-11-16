@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Maps/Base/Base.gd" type="Script" id=1]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Game/Maps/Textures/1.png" type="Texture" id=7]
 [ext_resource path="res://Game/Maps/Textures/2.png" type="Texture" id=8]
 [ext_resource path="res://Game/Maps/Textures/3.png" type="Texture" id=9]
+[ext_resource path="res://Game/Players/PlayerCamera2D.tscn" type="PackedScene" id=10]
 
 [sub_resource type="NavigationPolygon" id=1]
 vertices = PoolVector2Array( 480, 144, 480, 240, 448, 192, 448, 112, 416, 192, 384, 240, 384, 224, -32, 32, 0, 32, 0, 80, -32, 352, 32, 80, 32, 32, 592, 32, 192, 128, 592, 144, 432, 112, 432, 96, 352, 224, 352, 240, 336, 240, 256, 208, 336, 272, 304, 272, 304, 256, 272, 256, 272, 240, 256, 240, 240, 208, 240, 192, 416, 96, 208, 192, 208, 160, 192, 160, 0, 128, 0, 352 )
@@ -16,7 +17,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1, 5, 6 ), PoolIntA
 outlines = [ PoolVector2Array( -32, 32, -32, 352, 0, 352, 0, 128, 192, 128, 192, 160, 208, 160, 208, 192, 240, 192, 240, 208, 256, 208, 256, 240, 272, 240, 272, 256, 304, 256, 304, 272, 336, 272, 336, 240, 352, 240, 352, 224, 384, 224, 384, 240, 480, 240, 480, 144, 592, 144, 592, 32, 32, 32, 32, 80, 0, 80, 0, 32 ), PoolVector2Array( 416, 96, 416, 192, 448, 192, 448, 112, 432, 112, 432, 96 ) ]
 
 [node name="Base" type="Navigation2D"]
-editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="Map" type="TileMap" parent="."]
@@ -62,12 +62,13 @@ end_cap_mode = 2
 
 [node name="Mario" parent="." instance=ExtResource( 6 )]
 position = Vector2( 94, 96 )
-local = true
+
+[node name="PlayerCamera2D" parent="Mario" instance=ExtResource( 10 )]
+tile_map = NodePath("../../Map")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
-editor/display_folded = true
 motion_mirroring = Vector2( 700, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Sky"]

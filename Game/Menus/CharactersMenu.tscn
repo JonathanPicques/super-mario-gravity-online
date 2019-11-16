@@ -1,14 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/Menus/CharactersMenu.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/LockIcon.png" type="Texture" id=2]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Game/Menus/Textures/KeyIcon.png" type="Texture" id=4]
 [ext_resource path="res://Game/Menus/Fonts/TitleFont.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Game/Menus/Textures/SlotSelect.png" type="Texture" id=6]
-[ext_resource path="res://Game/Players/Mario/Textures/Stand/stand_01.png" type="Texture" id=7]
-[ext_resource path="res://Game/Menus/Textures/Keyboard.png" type="Texture" id=8]
-[ext_resource path="res://Game/Menus/Textures/SlotJoin.png" type="Texture" id=9]
+[ext_resource path="res://Game/Menus/CharactersPlayerSlot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Menus/Textures/JoystickOppositeArrows.png" type="Texture" id=10]
 [ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Game/Menus/Textures/JoystickButtonRight.png" type="Texture" id=12]
@@ -18,11 +15,7 @@
 size = 12
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
-size = 10
-font_data = ExtResource( 3 )
-
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 border_width_top = 3
 border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
@@ -49,6 +42,9 @@ margin_top = 10.0
 margin_right = 120.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 244.111, 111.445 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="RoomStatus"]
 margin_right = 24.0
@@ -148,187 +144,22 @@ margin_right = 472.0
 margin_bottom = 180.0
 custom_constants/separation = 20
 
-[node name="PlayerSlot1" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
-margin_right = 98.0
-margin_bottom = 180.0
-size_flags_horizontal = 3
+[node name="PlayerSlot1" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots" instance=ExtResource( 6 )]
 
-[node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot1"]
-margin_right = 98.0
-margin_bottom = 132.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-size_flags_stretch_ratio = 5.46
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 6
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot1/Box"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot1/Box/CenterContainer"]
-margin_left = 40.0
-margin_top = 51.0
-margin_right = 58.0
-margin_bottom = 80.0
-texture = ExtResource( 7 )
-
-[node name="Joystick" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot1"]
-margin_top = 136.0
-margin_right = 98.0
-margin_bottom = 160.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 6
-
-[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot1"]
-margin_top = 164.0
-margin_right = 98.0
-margin_bottom = 179.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
-text = "RootKernel (2)"
-align = 1
-
-[node name="PlayerSlot2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
+[node name="PlayerSlot2" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots" instance=ExtResource( 6 )]
 margin_left = 118.0
 margin_right = 216.0
-margin_bottom = 180.0
-size_flags_horizontal = 3
+player_id = 1
 
-[node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2"]
-margin_right = 98.0
-margin_bottom = 132.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-size_flags_stretch_ratio = 5.46
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 6
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2/Box"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2/Box/CenterContainer"]
-margin_left = 40.0
-margin_top = 51.0
-margin_right = 58.0
-margin_bottom = 80.0
-texture = ExtResource( 7 )
-
-[node name="Joystick" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2"]
-margin_top = 136.0
-margin_right = 98.0
-margin_bottom = 160.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 6
-
-[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot2"]
-margin_top = 164.0
-margin_right = 98.0
-margin_bottom = 179.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
-text = "RootKernel (2)"
-align = 1
-
-[node name="PlayerSlot3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
+[node name="PlayerSlot3" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots" instance=ExtResource( 6 )]
 margin_left = 236.0
 margin_right = 334.0
-margin_bottom = 180.0
-size_flags_horizontal = 3
+player_id = 2
 
-[node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3"]
-margin_right = 98.0
-margin_bottom = 132.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-size_flags_stretch_ratio = 5.46
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 6
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3/Box"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3/Box/CenterContainer"]
-margin_left = 40.0
-margin_top = 51.0
-margin_right = 58.0
-margin_bottom = 80.0
-texture = ExtResource( 7 )
-
-[node name="Joystick" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3"]
-margin_top = 136.0
-margin_right = 98.0
-margin_bottom = 160.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 6
-
-[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot3"]
-margin_top = 164.0
-margin_right = 98.0
-margin_bottom = 179.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
-text = "RootKernel (2)"
-align = 1
-
-[node name="PlayerSlot4" type="VBoxContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots"]
+[node name="PlayerSlot4" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots" instance=ExtResource( 6 )]
 margin_left = 354.0
 margin_right = 452.0
-margin_bottom = 180.0
-size_flags_horizontal = 3
-
-[node name="Box" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4"]
-margin_right = 98.0
-margin_bottom = 132.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-size_flags_stretch_ratio = 5.46
-texture = ExtResource( 9 )
-expand = true
-stretch_mode = 6
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4/Box"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4/Box/CenterContainer"]
-margin_left = 40.0
-margin_top = 51.0
-margin_right = 58.0
-margin_bottom = 80.0
-texture = ExtResource( 7 )
-
-[node name="Joystick" type="TextureRect" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4"]
-margin_top = 136.0
-margin_right = 98.0
-margin_bottom = 160.0
-size_flags_horizontal = 7
-size_flags_vertical = 7
-expand = true
-stretch_mode = 6
-
-[node name="PlayerName" type="Label" parent="MarginContainer/VBoxContainer/PlayersMargin/PlayersSlots/PlayerSlot4"]
-margin_top = 164.0
-margin_right = 98.0
-margin_bottom = 179.0
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
-align = 1
+player_id = 3
 
 [node name="Footer" type="Panel" parent="."]
 anchor_top = 1.0
@@ -337,7 +168,7 @@ anchor_bottom = 1.0
 margin_top = -30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 
 [node name="LeftHint" type="HBoxContainer" parent="Footer"]
 anchor_top = 1.0
