@@ -85,4 +85,4 @@ quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=1
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.87451, 0.976471, 0.984314, 1 )
+environment/default_clear_color=Color( 0, 0.470588, 0.74902, 1 )
