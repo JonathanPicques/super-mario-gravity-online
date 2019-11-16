@@ -9,7 +9,7 @@ enum BlockColor {
 	Yellow
 }
 
-var color: int = BlockColor.Blue
+export var color: int = BlockColor.Blue
 var is_on = false
 
 const OnTextures = [
@@ -25,6 +25,9 @@ const OffTextures = [
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchRedOff.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchYellowOff.png")
 ]
+
+func _ready():
+	$Sprite.texture = OnTextures[color] if is_on else OffTextures[color]
 
 func _on_Area2D_body_entered(body):
 	is_on = !is_on

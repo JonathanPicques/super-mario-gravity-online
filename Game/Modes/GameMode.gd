@@ -51,3 +51,4 @@ func add_player_screen_camera(player_id: int, player_node_path: NodePath):
 # @impure
 func item_color_switch_toggle(is_on: bool, color: int):
 	emit_signal("item_color_switch_toggle", is_on, color)
+

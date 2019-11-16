@@ -16,7 +16,20 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 2, 1, 5, 6 ), PoolIntA
 outlines = [ PoolVector2Array( -32, 32, -32, 352, 0, 352, 0, 128, 192, 128, 192, 160, 208, 160, 208, 192, 240, 192, 240, 208, 256, 208, 256, 240, 272, 240, 272, 256, 304, 256, 304, 272, 336, 272, 336, 240, 352, 240, 352, 224, 384, 224, 384, 240, 480, 240, 480, 144, 592, 144, 592, 32, 32, 32, 32, 80, 0, 80, 0, 32 ), PoolVector2Array( 416, 96, 416, 192, 448, 192, 448, 112, 432, 112, 432, 96 ) ]
 
 [node name="Base" type="Navigation2D"]
+position = Vector2( 0, 0.287827 )
 script = ExtResource( 1 )
+
+[node name="ColorBlock4" parent="." instance=ExtResource( 6 )]
+position = Vector2( 456.585, 178.068 )
+color = 1
+
+[node name="ColorBlock5" parent="." instance=ExtResource( 6 )]
+position = Vector2( 472.704, 178.068 )
+color = 1
+
+[node name="ColorSwitch2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 326.201, 263.839 )
+color = 1
 
 [node name="ColorSwitch" parent="." instance=ExtResource( 4 )]
 position = Vector2( 267.773, 120.503 )
@@ -83,7 +96,7 @@ texture = ExtResource( 9 )
 centered = false
 
 [node name="ColorBlock" parent="." instance=ExtResource( 6 )]
-position = Vector2( 375.419, 119.639 )
+position = Vector2( 375.419, 119.927 )
 
 [node name="ColorBlock2" parent="." instance=ExtResource( 6 )]
 position = Vector2( 374.843, 89.7054 )

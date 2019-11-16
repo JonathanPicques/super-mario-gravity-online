@@ -2,6 +2,15 @@ extends Node2D
 
 onready var Game = get_node("/root/Game")
 
+enum BlockColor {
+	Blue,
+	Green,
+	Red,
+	Yellow
+}
+
+export var color: int = BlockColor.Blue
+
 const OnTextures = [
 	preload("res://Game/Items/ColorSwitch/Textures/BlockBlueOn.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/BlockGreenOn.png"),
@@ -17,10 +26,11 @@ const OffTextures = [
 ]
 
 func _ready():
-	Game.GameMode.connect("item_color_switch_toggle", self, "on_toggle_color_block")
+	$Sprite.texture = OffTextures[color]
+	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
+	Game.GameMode.connect("item_color_switch_toggle", self, "on_toggle")
 
-func on_toggle_color_block(is_on: bool, color: int):
+func on_toggle(is_on: bool, switch_color: int):
 	$Sprite.texture = OnTextures[color] if is_on else OffTextures[color]
-	print("Disable collisions: ", !is_on)
 	$StaticBody2D/CollisionShape2D.set_deferred("disabled", !is_on)
 	
