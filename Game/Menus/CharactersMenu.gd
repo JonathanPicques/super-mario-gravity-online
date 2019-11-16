@@ -25,7 +25,7 @@ func _process(delta: float):
 	if Input.is_action_just_pressed("ui_accept") and Game.GameMultiplayer.is_every_player_ready():
 		var game_mode = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
 		game_mode.options = { map = "res://Game/Maps/Base/Base.tscn" }
-		Game.set_scene(game_mode)
+		Game.goto_game_mode_scene(game_mode)
 		game_mode.start()
 		return
 	# add a local player

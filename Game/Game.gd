@@ -1,5 +1,6 @@
 extends Control
 
+onready var GameMode = null
 onready var GameInput = $GameInput
 onready var GameMultiplayer = $GameMultiplayer
 
@@ -52,6 +53,10 @@ func goto_main_menu_scene():
 func goto_join_menu_scene():
 	var join_menu := JoinMenu.instance()
 	set_scene(join_menu)
+
+func goto_game_mode_scene(game_mode_scene: Node):
+	GameMode = game_mode_scene
+	set_scene(game_mode_scene)
 
 func goto_characters_menu_scene():
 	var characters_menu := CharactersMenu.instance()
