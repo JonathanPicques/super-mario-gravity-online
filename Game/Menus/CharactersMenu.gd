@@ -21,15 +21,31 @@ func _process(delta: float):
 	# toggle room status
 	if room_state != RoomState.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
 		set_room_state(RoomState.public if room_state == RoomState.private else RoomState.private)
+	# start game if every player is ready
+	if Input.is_action_just_pressed("ui_accept") and Game.GameMultiplayer.is_every_player_ready():
+		Game.set_scene(Game.Map.instance())
+		return
 	# add a local player
 	for input_device_id in range(0, 5):
 		if Game.GameInput.is_device_action_just_pressed(input_device_id, "accept") and not Game.GameInput.is_device_used_by_player(input_device_id):
-			print("ADD PLAYER with input ", input_device_id)
 			Game.GameMultiplayer.add_player("", true, input_device_id)
-	# remove a local player
+	# remove a player
 	for player in Game.GameMultiplayer.players:
-		if player.local and Game.GameInput.is_player_action_just_pressed(player.id, "cancel"):
-			Game.GameMultiplayer.remove_player(player.id)
+		if player.local:
+			if Game.GameInput.is_player_action_just_pressed(player.id, "cancel"):
+				Game.GameMultiplayer.remove_player(player.id)
+	# change skin or be ready
+	for player in Game.GameMultiplayer.players:
+		if player.local:
+			if Game.GameInput.is_player_action_just_pressed(player.id, "left"):
+				yield(get_tree(), "idle_frame")
+				Game.GameMultiplayer.player_set_skin(player.id, (player.skin_id - 1) % len(Game.skins))
+			if Game.GameInput.is_player_action_just_pressed(player.id, "right"):
+				yield(get_tree(), "idle_frame")
+				Game.GameMultiplayer.player_set_skin(player.id, (player.skin_id + 1) % len(Game.skins))
+			if Game.GameInput.is_player_action_just_pressed(player.id, "accept"):
+				yield(get_tree(), "idle_frame")
+				Game.GameMultiplayer.player_set_ready(player.id, not player.ready)
 
 func set_room_state(new_room_state: int):
 	room_state = new_room_state

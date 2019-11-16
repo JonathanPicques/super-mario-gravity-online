@@ -12,12 +12,14 @@ var skins := [
 	{
 		name = "Mario",
 		scene_path = "res://Game/Players/Mario/Mario.tscn",
-		preview_path = "res://Game/Players/Mario/Textures/Stand/stand_01.png",
+		preview_ready_path = "res://Game/Players/Mario/Textures/Jump/jump_01.png",
+		preview_select_path = "res://Game/Players/Mario/Textures/Stand/stand_01.png",
 	},
 	{
 		name = "Luigi",
 		scene_path = "res://Game/Players/Luigi/Luigi.tscn",
-		preview_path = "res://Game/Players/Luigi/Textures/Stand/stand_01.png",
+		preview_ready_path = "res://Game/Players/Luigi/Textures/Jump/jump_01.png",
+		preview_select_path = "res://Game/Players/Luigi/Textures/Stand/stand_01.png",
 	}
 ]
 

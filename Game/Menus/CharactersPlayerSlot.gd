@@ -47,7 +47,7 @@ func update_player(a = null, b = null, c = null):
 			false: set_state(State.select)
 		$PlayerName.text = player.name
 		$InputDevice.texture = InputDeviceTextures[player.input_device_id]
-		$SlotState/CenterContainer/SkinTextureRect.texture = load(Game.skins[player.skin_id].preview_path)
+		$SlotState/CenterContainer/SkinTextureRect.texture = load(Game.skins[player.skin_id].preview_select_path if not player.ready else Game.skins[player.skin_id].preview_ready_path)
 	else:
 		if state != State.join:
 			set_state(State.join)

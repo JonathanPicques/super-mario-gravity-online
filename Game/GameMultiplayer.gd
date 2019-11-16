@@ -46,6 +46,8 @@ func _process(delta: float) -> void:
 
 # @impure
 func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: int = -1):
+	# wait one frame to not invalidate player iterators
+	yield(get_tree(), "idle_frame")
 	# compute player id
 	var id = get_next_player_id()
 	# duplicate sample player info
@@ -64,7 +66,7 @@ func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: i
 # @impure
 func remove_player(player_id: int):
 	# wait one frame to not invalidate player iterators
-	yield(get_tree(),"idle_frame")
+	yield(get_tree(), "idle_frame")
 	# find if player exists
 	var player = get_player(player_id)
 	if player:
@@ -120,6 +122,8 @@ func get_next_player_id() -> int:
 # is_every_player_ready returns true if every player is ready.
 # @pure
 func is_every_player_ready() -> bool:
+	if players.empty():
+		return false
 	for player in players:
 		if not player.ready:
 			return false
