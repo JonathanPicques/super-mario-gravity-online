@@ -24,13 +24,20 @@ var sample_player = {
 	input_device_id = -1
 }
 
-# Nakama realtime matchmaking client
+var webrtc_multiplayer: WebRTCMultiplayer
+
+var nakama_players = {}
+var nakama_next_peer_id := 1
 var nakama_realtime_client = null
+var my_session_id = null
+var webrtc_peers = {}
+var match_data = {}
 
 # _ready connects to the nakama server and authenticates this devices.
 # @driven(lifecycle)
 # @impure
 func _ready():
+	create_webrtc_multiplayer()
 	nakama_create_realtime_client()
 
 # _process polls new events from nakama.
@@ -143,10 +150,24 @@ func start_matchmaker():
 		query = "*",
 		min_count = 2,
 		max_count = 4,
+		string_properties = {
+			players = JSON.print(players)
+		}
 	} })
 	if promise.error == OK:
 		promise.connect("completed", self, "on_nakama_realtime_client_matchmaker")
 	print("nakama_create_realtime_client: matchmaking")
+
+func create_webrtc_multiplayer():
+	webrtc_multiplayer = WebRTCMultiplayer.new()
+	webrtc_multiplayer.connect("peer_connected", self, "on_peer_connected")
+	webrtc_multiplayer.connect("peer_disconnected", self, "on_peer_disconnected")
+
+func on_peer_connected(peer_id: int):
+	print("YOUHOU")
+
+func on_peer_disconnected(peer_id: int):
+	pass
 
 ##############
 # Nakama API #
@@ -172,6 +193,8 @@ func nakama_create_realtime_client():
 		return
 	nakama_realtime_client.connect("error", self, "on_nakama_realtime_client_error")
 	nakama_realtime_client.connect("disconnected", self, "on_nakama_realtime_client_disconnected")
+	nakama_realtime_client.connect("match_data", self, "on_nakama_realtime_client_match_data")
+	nakama_realtime_client.connect("match_presence", self, "on_nakama_realtime_client_match_presence")
 	nakama_realtime_client.connect("matchmaker_matched", self, "on_nakama_realtime_client_matchmaker_matched")
 	# all is good
 	yield(nakama_realtime_client, "connected")
@@ -187,7 +210,103 @@ func on_nakama_realtime_client_disconnected(data: Dictionary):
 	emit_signal("matchmaking_offline")
 
 func on_nakama_realtime_client_matchmaker(data: Dictionary, request: Dictionary):
-	print(data, request)
+	pass
+
+func on_nakama_realtime_client_match_data(data: Dictionary):
+	print("on_nakama_realtime_client_match_data")
+	var json = JSON.parse(data['data'])
+	var content = json.result
+	match data['op_code']:
+		1:
+			if content['target'] == my_session_id:
+				var session_id = data['presence']['session_id']
+				var webrtc_peer = webrtc_peers[session_id]
+				match content['method']:
+					'set_remote_description':
+						webrtc_peer.set_remote_description(content['type'], content['sdp'])
+					'add_ice_candidate':
+						webrtc_peer.add_ice_candidate(content['media'], content['index'], content['name'])
+
+func on_nakama_realtime_client_match_presence(data: Dictionary):
+	print("on_nakama_realtime_client_match_presence")
+	pass # TODO: joining late
 
 func on_nakama_realtime_client_matchmaker_matched(data: Dictionary):
-	print("Matched ", data)
+	if data.has('users') && data.has('token') && data.has('self'):
+		# store our session_id
+		my_session_id = data['self']['presence']['session_id']
+		# store all matched sessions
+		for u in data['users']:
+			nakama_players[u['presence']['session_id']] = u['presence']
+		# generate peer ids
+		var session_ids = nakama_players.keys()
+		session_ids.sort()
+		for session_id in session_ids:
+			nakama_players[session_id]['peer_id'] = nakama_next_peer_id
+			nakama_next_peer_id += 1
+		# create webrtc
+		webrtc_multiplayer.initialize(nakama_players[my_session_id]['peer_id'], true)
+		get_tree().set_network_peer(webrtc_multiplayer)
+		# join game
+		nakama_realtime_client.send({ match_join = {token = data['token']}}).connect("completed", self, "on_nakama_realtime_client_match_join")
+
+func on_nakama_realtime_client_match_join(data: Dictionary, request: Dictionary):
+	print("on_nakama_realtime_client_match_join")
+	if data.has('match'):
+		match_data = data['match']
+		my_session_id = match_data['self']['session_id']
+		for u in match_data['presences']:
+			if u['session_id'] == my_session_id:
+				continue
+			webrtc_connect_peer(nakama_players[u['session_id']])
+
+func webrtc_connect_peer(nakama_player: Dictionary):
+	print("webrtc_connect_peer")
+	if webrtc_peers.has(nakama_player['session_id']):
+		print('duplicate')
+		return
+	
+	var webrtc_peer := WebRTCPeerConnection.new()
+	webrtc_peer.initialize({
+		"iceServers": [{ "urls": ["stun:stun.l.google.com:19302"] }]
+	})
+	webrtc_peer.connect("session_description_created", self, "_on_webrtc_peer_session_description_created", [nakama_player['session_id']])
+	webrtc_peer.connect("ice_candidate_created", self, "_on_webrtc_peer_ice_candidate_created", [nakama_player['session_id']])
+
+	webrtc_peers[nakama_player['session_id']] = webrtc_peer
+	webrtc_multiplayer.add_peer(webrtc_peer, nakama_player['peer_id'])
+
+func _on_webrtc_peer_session_description_created(type : String, sdp : String, session_id : String):
+	print("_on_webrtc_peer_session_description_created")
+	var webrtc_peer = webrtc_peers[session_id]
+	webrtc_peer.set_local_description(type, sdp)
+	
+	# Send this data to the peer so they can call call .set_remote_description().
+	nakama_realtime_client.send({
+		match_data_send = {
+			op_code = 1,
+			match_id = match_data['match_id'],
+			data = JSON.print({
+				method = "set_remote_description",
+				target = session_id,
+				type = type,
+				sdp = sdp,
+			}),
+		},
+	})
+
+func _on_webrtc_peer_ice_candidate_created(media : String, index : int, name : String, session_id : String):
+	print("_on_webrtc_peer_ice_candidate_created")
+	nakama_realtime_client.send({
+		match_data_send = {
+			op_code = 1,
+			match_id = match_data['match_id'],
+			data = JSON.print({
+				method = "add_ice_candidate",
+				target = session_id,
+				media = media,
+				index = index,
+				name = name,
+			}),
+		},
+	})
