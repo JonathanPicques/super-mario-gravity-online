@@ -9,6 +9,7 @@ const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
 const MainMenu := preload("res://Game/Menus/MainMenu.tscn")
 const CharactersMenu := preload("res://Game/Menus/CharactersMenu.tscn")
 const WaitingRoomMenu := preload("res://Game/Menus/WaitingRoomMenu.tscn")
+const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 
 var scene = null
 var skins := [
@@ -66,3 +67,7 @@ func goto_characters_menu_scene():
 func goto_waiting_room_menu_scene():
 	var waiting_room_node := WaitingRoomMenu.instance()
 	set_scene(waiting_room_node)
+
+func goto_end_game_room_menu_scene():
+	var end_game_room := EndGameMenu.instance()
+	set_scene(end_game_room)

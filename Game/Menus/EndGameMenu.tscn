@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/Menus/Fonts/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Game/Players/Mario/Textures/Stand/stand_01.png" type="Texture" id=2]
@@ -9,6 +9,27 @@
 [ext_resource path="res://Game/Menus/Textures/JoystickOppositeArrows.png" type="Texture" id=7]
 [ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Game/Menus/Textures/JoystickButtonRight.png" type="Texture" id=9]
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends Control
+
+onready var Game = get_node(\"/root/Game\")
+
+func _on_TryAgainButton_pressed():
+	print(\"TODO: reload game\")
+
+
+func _on_MapsButton_pressed():
+	print(\"TODO: choose map\")
+
+
+func _on_CharactersButton_pressed():
+	Game.goto_characters_menu_scene()
+
+
+func _on_HomeButton_pressed():
+	Game.goto_main_menu_scene()
+"
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.780392, 0.92549, 0.933333, 1 )
@@ -35,6 +56,10 @@ border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
 [node name="EndGameMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -273,7 +298,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "TRY AGAIN"
 
-[node name="TryAgainButton2" type="Button" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons"]
+[node name="MapsButton" type="Button" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons"]
 margin_top = 47.0
 margin_right = 192.0
 margin_bottom = 84.0
@@ -289,7 +314,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "SELECT MAP"
 
-[node name="TryAgainButton3" type="Button" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons"]
+[node name="CharactersButton" type="Button" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons"]
 margin_top = 94.0
 margin_right = 192.0
 margin_bottom = 131.0
@@ -305,7 +330,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "CHANGE CHARACTER"
 
-[node name="TryAgainButton4" type="Button" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons"]
+[node name="HomeButton" type="Button" parent="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons"]
 margin_top = 141.0
 margin_right = 192.0
 margin_bottom = 180.0
@@ -394,3 +419,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "confirm"
 align = 1
 valign = 1
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons/TryAgainButton" to="." method="_on_TryAgainButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons/MapsButton" to="." method="_on_MapsButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons/CharactersButton" to="." method="_on_CharactersButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons/HomeButton" to="." method="_on_HomeButton_pressed"]
