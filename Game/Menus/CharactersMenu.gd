@@ -6,28 +6,24 @@ const KeyIconTexture := preload("res://Game/Menus/Textures/KeyIcon.png")
 const LockIconTexture := preload("res://Game/Menus/Textures/LockIcon.png")
 const UnlockIconTexture := preload("res://Game/Menus/Textures/UnlockIcon.png")
 
-enum RoomState { none, join, public, private, offline }
+enum State { none, join, public, private, offline }
 
-var room_state = RoomState.none
+var state = State.none
 
 func _ready():
 	match Game.GameMultiplayer.is_matchmaking_available():
-		true: set_room_state(RoomState.public)
-		false: set_room_state(RoomState.offline)
+		true: set_state(State.public)
+		false: set_state(State.offline)
 	Game.GameMultiplayer.connect("matchmaking_online", self, "on_matchmaking_online")
 	Game.GameMultiplayer.connect("matchmaking_offline", self, "on_matchmaking_offline")
 
 func _process(delta: float):
 	# toggle room status
-	if room_state != RoomState.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
-		set_room_state(RoomState.public if room_state == RoomState.private else RoomState.private)
+	if state != State.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
+		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
 	if Input.is_action_just_pressed("ui_accept") and Game.GameMultiplayer.is_every_player_ready():
-		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
-		Game.goto_game_mode_scene(game_mode_node)
-		game_mode_node.start()
-		return
+		return start_game()
 	# add a local player
 	for input_device_id in range(0, 5):
 		if Game.GameInput.is_device_action_just_pressed(input_device_id, "accept") and not Game.GameInput.is_device_used_by_player(input_device_id):
@@ -50,28 +46,37 @@ func _process(delta: float):
 				yield(get_tree(), "idle_frame")
 				Game.GameMultiplayer.player_set_ready(player.id, not player.ready)
 
-func set_room_state(new_room_state: int):
-	room_state = new_room_state
-	match room_state:
-		RoomState.public:
+func set_state(new_state: int):
+	state = new_state
+	match state:
+		State.public:
 			$RoomKey/Label.text = ""
 			$RoomKey/TextureRect.texture = null
 			$RoomStatus/Label.text = "Public"
 			$RoomStatus/TextureRect.texture = UnlockIconTexture
-		RoomState.private:
+		State.private:
 			$RoomKey/Label.text = "join_code"
 			$RoomKey/TextureRect.texture = KeyIconTexture
 			$RoomStatus/Label.text = "Private"
 			$RoomStatus/TextureRect.texture = LockIconTexture
-		RoomState.offline:
+		State.offline:
 			$RoomKey/Label.text = ""
 			$RoomKey/TextureRect.texture = null
 			$RoomStatus/Label.text = "Offline"
 			$RoomStatus/TextureRect.texture = null
 
+func start_game():
+	if state == State.public:
+		Game.goto_waiting_room_menu_scene()
+	else:
+		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
+		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
+		Game.goto_game_mode_scene(game_mode_node)
+		game_mode_node.start()
+
 func on_matchmaking_online():
-	if room_state == RoomState.offline:
-		set_room_state(RoomState.private)
+	if state == State.offline:
+		set_state(State.private)
 
 func on_matchmaking_offline():
-	set_room_state(RoomState.offline)
+	set_state(State.offline)

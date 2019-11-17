@@ -135,6 +135,20 @@ func has_room_for_new_player():
 	return players.size() < MAX_PLAYERS
 
 ##############
+# Online API #
+##############
+
+func start_matchmaker():
+	var promise = nakama_realtime_client.send({ matchmaker_add = {
+		query = "*",
+		min_count = 2,
+		max_count = 4,
+	} })
+	if promise.error == OK:
+		promise.connect("completed", self, "on_nakama_realtime_client_matchmaker")
+	print("nakama_create_realtime_client: matchmaking")
+
+##############
 # Nakama API #
 ##############
 
@@ -158,6 +172,7 @@ func nakama_create_realtime_client():
 		return
 	nakama_realtime_client.connect("error", self, "on_nakama_realtime_client_error")
 	nakama_realtime_client.connect("disconnected", self, "on_nakama_realtime_client_disconnected")
+	nakama_realtime_client.connect("matchmaker_matched", self, "on_nakama_realtime_client_matchmaker_matched")
 	# all is good
 	yield(nakama_realtime_client, "connected")
 	print("nakama_create_realtime_client: create_realtime_client")
@@ -170,3 +185,9 @@ func on_nakama_realtime_client_disconnected(data: Dictionary):
 	print("on_nakama_realtime_client_disconnected: ", data)
 	nakama_realtime_client = null
 	emit_signal("matchmaking_offline")
+
+func on_nakama_realtime_client_matchmaker(data: Dictionary, request: Dictionary):
+	print(data, request)
+
+func on_nakama_realtime_client_matchmaker_matched(data: Dictionary):
+	print("Matched ", data)

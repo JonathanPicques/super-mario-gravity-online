@@ -2,9 +2,6 @@ extends Node
 
 onready var Game = get_node("/root/Game")
 
-func _ready():
-	print (Game)
-
 func is_player_action_pressed(player_id: int, action: String):
 	var player = Game.GameMultiplayer.get_player(player_id)
 	return is_device_action_pressed(player.input_device_id, action)

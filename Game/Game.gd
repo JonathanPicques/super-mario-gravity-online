@@ -8,6 +8,7 @@ const Map: = preload("res://Game/Maps/Base/Base.tscn")
 const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
 const MainMenu := preload("res://Game/Menus/MainMenu.tscn")
 const CharactersMenu := preload("res://Game/Menus/CharactersMenu.tscn")
+const WaitingRoomMenu := preload("res://Game/Menus/WaitingRoomMenu.tscn")
 
 var scene = null
 var skins := [
@@ -61,3 +62,7 @@ func goto_game_mode_scene(game_mode_node: Node):
 func goto_characters_menu_scene():
 	var characters_menu_node := CharactersMenu.instance()
 	set_scene(characters_menu_node)
+
+func goto_waiting_room_menu_scene():
+	var waiting_room_node := WaitingRoomMenu.instance()
+	set_scene(waiting_room_node)
