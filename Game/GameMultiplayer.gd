@@ -236,12 +236,13 @@ func on_nakama_realtime_client_match_data(data: Dictionary):
 				var session_id = data['presence']['session_id']
 				var webrtc_peer = webrtc_peers[session_id]
 				match content['method']:
-					'set_remote_description':
-						webrtc_peer.set_remote_description(content['type'], content['sdp'])
 					'add_ice_candidate':
 						webrtc_peer.add_ice_candidate(content['media'], content['index'], content['name'])
+					'set_remote_description':
+						webrtc_peer.set_remote_description(content['type'], content['sdp'])
 
 func on_nakama_realtime_client_match_presence(data: Dictionary):
+	print("on_nakama_realtime_client_match_presence: ", data)
 	if data.has('joins'):
 		for u in data['joins']:
 			if u['session_id'] == my_session_id:
@@ -292,39 +293,38 @@ func webrtc_connect_peer(nakama_player: Dictionary):
 	webrtc_peers[nakama_player['session_id']] = webrtc_peer
 	webrtc_multiplayer.add_peer(webrtc_peer, nakama_player['peer_id'])
 	
-	if my_session_id != nakama_player['session_id']:
+	if my_session_id.casecmp_to(nakama_player['session_id']) < 0:
 		var result = webrtc_peer.create_offer()
 		if result != OK:
-			print("webrtc_connect_peer: Unable to create WebRTC offer")
+			print("webrtc_connect_peer: unable to create webrtc offer")
 
-func _on_webrtc_peer_session_description_created(type : String, sdp : String, session_id : String):
+func _on_webrtc_peer_session_description_created(type: String, sdp: String, session_id: String):
 	var webrtc_peer = webrtc_peers[session_id]
 	webrtc_peer.set_local_description(type, sdp)
-	# Send this data to the peer so they can call call .set_remote_description().
 	nakama_realtime_client.send({
 		match_data_send = {
 			op_code = 1,
 			match_id = match_data['match_id'],
 			data = JSON.print({
-				method = "set_remote_description",
-				target = session_id,
-				type = type,
 				sdp = sdp,
+				type = type,
+				target = session_id,
+				method = "set_remote_description",
 			}),
 		},
 	})
 
-func _on_webrtc_peer_ice_candidate_created(media : String, index : int, name : String, session_id : String):
+func _on_webrtc_peer_ice_candidate_created(media: String, index: int, name: String, session_id: String):
 	nakama_realtime_client.send({
 		match_data_send = {
 			op_code = 1,
 			match_id = match_data['match_id'],
 			data = JSON.print({
-				method = "add_ice_candidate",
-				target = session_id,
-				media = media,
-				index = index,
 				name = name,
+				index = index,
+				media = media,
+				target = session_id,
+				method = "add_ice_candidate",
 			}),
 		},
 	})
