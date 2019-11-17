@@ -28,8 +28,16 @@ const OffTextures = [
 
 func _ready():
 	$Sprite.texture = OnTextures[color] if is_on else OffTextures[color]
+	Game.GameMode.connect("item_color_switch_trigger", self, "on_trigger")
 
 func _on_Area2D_body_entered(body):
-	is_on = !is_on
-	$Sprite.texture = OnTextures[color] if is_on else OffTextures[color]
-	Game.GameMode.item_color_switch_toggle(is_on, color)
+	if !is_on:
+		Game.GameMode.item_color_switch_trigger(color)
+
+func on_trigger(switch_color: int):
+	if switch_color == color:
+		is_on = true
+		$Sprite.texture = OnTextures[color]
+	else:
+		is_on = false
+		$Sprite.texture = OffTextures[color]

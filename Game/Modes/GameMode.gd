@@ -10,7 +10,7 @@ onready var Viewport4 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Vie
 
 const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
-signal item_color_switch_toggle
+signal item_color_switch_trigger # (color: int)
 
 # options available in _ready.
 export var options = {}
@@ -47,8 +47,9 @@ func add_player_screen_camera(player_id: int, player_node_path: NodePath):
 		2: Viewport3.add_child(player_camera_scene)
 		3: Viewport4.add_child(player_camera_scene)
 
-# toggle on on/off color switch for the given color.
+# trigger color switch for the given color.
 # @impure
-func item_color_switch_toggle(is_on: bool, color: int):
-	emit_signal("item_color_switch_toggle", is_on, color)
+func item_color_switch_trigger(color: int):
+	print("emit signal item_color_switch_trigger ", color)
+	emit_signal("item_color_switch_trigger", color)
 

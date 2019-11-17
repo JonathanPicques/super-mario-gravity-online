@@ -28,9 +28,12 @@ const OffTextures = [
 func _ready():
 	$Sprite.texture = OffTextures[color]
 	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
-	Game.GameMode.connect("item_color_switch_toggle", self, "on_toggle")
+	Game.GameMode.connect("item_color_switch_trigger", self, "on_trigger")
 
-func on_toggle(is_on: bool, switch_color: int):
-	$Sprite.texture = OnTextures[color] if is_on else OffTextures[color]
-	$StaticBody2D/CollisionShape2D.set_deferred("disabled", !is_on)
-	
+func on_trigger(switch_color: int):
+	if switch_color == color:
+		$Sprite.texture = OnTextures[color]
+		$StaticBody2D/CollisionShape2D.set_deferred("disabled", false)
+	else:
+		$Sprite.texture = OffTextures[color]
+		$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
