@@ -1,11 +1,21 @@
-extends Node
+extends Control
 
 onready var Game = get_node("/root/Game")
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons/TryAgainButton.grab_focus()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_TryAgainButton_pressed():
+	print("TODO: reload game")
+
+
+func _on_MapsButton_pressed():
+	print("TODO: choose map")
+
+
+func _on_CharactersButton_pressed():
+	Game.goto_characters_menu_scene()
+
+
+func _on_HomeButton_pressed():
+	Game.goto_main_menu_scene()
