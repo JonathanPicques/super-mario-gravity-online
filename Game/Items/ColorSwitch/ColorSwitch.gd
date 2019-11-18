@@ -3,26 +3,26 @@ extends Node2D
 onready var Game = get_node("/root/Game")
 
 enum BlockColor {
+	Red,
 	Blue,
 	Green,
-	Red,
 	Yellow
 }
 
-export var color: int = BlockColor.Blue
+export(BlockColor) var color: int = BlockColor.Blue
 var is_on = false
 
 const OnTextures = [
+	preload("res://Game/Items/ColorSwitch/Textures/SwitchRedOn.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchBlueOn.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchGreenOn.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/SwitchRedOn.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchYellowOn.png")
 ]
 
 const OffTextures = [
+	preload("res://Game/Items/ColorSwitch/Textures/SwitchRedOff.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchBlueOff.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchGreenOff.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/SwitchRedOff.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/SwitchYellowOff.png")
 ]
 
