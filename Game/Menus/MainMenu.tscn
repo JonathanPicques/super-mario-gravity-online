@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Black.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Game/Menus/Textures/Logo.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Colors/PrimaryColor.tres" type="StyleBox" id=4]
 [ext_resource path="res://Game/Menus/Colors/DisabledColor.tres" type="StyleBox" id=5]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Bold.ttf" type="DynamicFontData" id=6]
@@ -20,6 +19,10 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=2]
 size = 22
 font_data = ExtResource( 2 )
+
+[sub_resource type="StreamTexture" id=5]
+flags = 4
+load_path = "res://.import/Logo.png-a9d4a1fff68fd0cd369dabbf6b4fd3fb.stex"
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 6 )
@@ -87,7 +90,7 @@ margin_right = 240.0
 margin_bottom = 188.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource( 3 )
+texture = SubResource( 5 )
 expand = true
 stretch_mode = 6
 

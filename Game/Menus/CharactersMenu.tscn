@@ -76,6 +76,9 @@ margin_top = 10.0
 margin_right = -20.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 244.111, 111.445 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="RoomKey"]
 margin_right = 19.0

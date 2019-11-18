@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Modes/Race/RaceGameMode.gd" type="Script" id=2]
-[ext_resource path="res://Game/Menus/Fonts/MediumFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=3]
 
 [node name="RaceGameMode" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -15,4 +15,8 @@ margin_top = 16.0
 margin_right = 496.0
 margin_bottom = 49.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

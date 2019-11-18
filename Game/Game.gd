@@ -1,8 +1,8 @@
 extends Control
 
 onready var GameMode = null
-onready var GameInput = $GameInput
 onready var GameMultiplayer = $GameMultiplayer
+onready var GameInput = $GameInput
 
 const Map: = preload("res://Game/Maps/Base/Base.tscn")
 const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
@@ -26,6 +26,9 @@ var skins := [
 		preview_select_path = "res://Game/Players/Luigi/Textures/Stand/stand_01.png",
 	}
 ]
+
+func get_skin_from_id(skin_id: int, ready: bool = false):
+	return load(skins[skin_id].preview_select_path if not ready else skins[skin_id].preview_ready_path)
 
 # _ready is called when the game node is ready.
 # @driven(lifecycle)
