@@ -48,8 +48,6 @@ func set_scene(new_scene: Node):
 
 func goto_main_menu_scene():
 	var main_menu_node := MainMenu.instance()
-	main_menu_node.connect("new_game", self, "goto_characters_menu_scene")
-	main_menu_node.connect("join_game", self, "goto_join_menu_scene")
 	set_scene(main_menu_node)
 
 func goto_join_menu_scene():

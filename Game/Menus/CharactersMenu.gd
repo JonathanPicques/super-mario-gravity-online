@@ -18,6 +18,9 @@ func _ready():
 	Game.GameMultiplayer.connect("matchmaking_offline", self, "on_matchmaking_offline")
 
 func _process(delta: float):
+	# back to home if cancel when not ready
+	if Input.is_action_just_pressed("ui_cancel") and Game.GameMultiplayer.get_lead_player() == null:
+		Game.goto_main_menu_scene()
 	# toggle room status
 	if state != State.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
 		set_state(State.public if state == State.private else State.private)

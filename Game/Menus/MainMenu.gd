@@ -1,21 +1,19 @@
 extends Control
 
-signal settings
-signal new_game
-signal join_game
-signal create_map
+onready var Game = get_node("/root/Game")
 
 func _ready():
 	$MarginContainer/HBoxContainer/Buttons/NewGameButton.grab_focus()
 
-func on_settings_button_pressed():
-	emit_signal("settings")
+func _on_NewGameButton_pressed():
+	Game.goto_characters_menu_scene()
 
-func on_new_game_button_pressed():
-	emit_signal("new_game")
+func _on_JoinGameButton_pressed():
+	Game.goto_join_menu_scene()
 
-func on_join_game_button_pressed():
-	emit_signal("join_game")
+func _on_SettingsButton_pressed():
+	print("Open settings")
 
-func on_create_map_button_pressed():
-	emit_signal("create_map")
+
+func _on_ExitButton_pressed():
+	get_tree().quit()

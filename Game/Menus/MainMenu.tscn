@@ -130,7 +130,7 @@ custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
 text = "JOIN GAME"
 
-[node name="CreateMapButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 margin_top = 98.0
 margin_right = 192.0
 margin_bottom = 137.0
@@ -144,9 +144,9 @@ custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
-text = "CREATE MAP"
+text = "SETTINGS"
 
-[node name="SettingsButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
+[node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/Buttons"]
 margin_top = 147.0
 margin_right = 192.0
 margin_bottom = 188.0
@@ -160,7 +160,7 @@ custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_pressed = Color( 0.32549, 0.360784, 0.407843, 1 )
-text = "SETTINGS"
+text = "EXIT"
 
 [node name="Footer" type="Panel" parent="."]
 anchor_top = 1.0
@@ -235,7 +235,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "confirm"
 align = 1
 valign = 1
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/NewGameButton" to="." method="on_new_game_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/JoinGameButton" to="." method="on_join_game_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/CreateMapButton" to="." method="on_create_map_button_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SettingsButton" to="." method="on_settings_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/JoinGameButton" to="." method="_on_JoinGameButton_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Buttons/ExitButton" to="." method="_on_ExitButton_pressed"]
