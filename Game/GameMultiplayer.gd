@@ -25,15 +25,16 @@ var sample_player = {
 	input_device_id = -1
 }
 
+var my_peer_id = null
+var my_session_id = null
+var next_available_peer_id := 1
+
 var matchmaker = null
 var match_data = {}
 var match_peers = {}
 var webrtc_peers = {}
+var matchmaker_ticket = null
 var webrtc_multiplayer: WebRTCMultiplayer
-
-var my_peer_id = null
-var my_session_id = null
-var next_available_peer_id := 1
 
 # _ready connects to the matchmaking server and authenticates this device.
 # @driven(lifecycle)
@@ -170,23 +171,46 @@ func init_matchmaker():
 	matchmaker.connect("matchmaker_matched", self, "on_matchmaker_matched")
 	# all is good
 	yield(matchmaker, "connected")
-	print("init_matchmaker: create_realtime_client")
+	print("init_matchmaker: ok")
 	emit_signal("matchmaking_online")
 
 func start_matchmaking():
-	var promise = matchmaker.send({ matchmaker_add = {
-		query = "*",
-		min_count = 2,
-		max_count = 4,
-		string_properties = {
-			players = JSON.print(players)
-		}
-	} })
-	if promise.error == OK:
-		print("start_matchmaking: matchmaking...")
+	var player_count = players.size()
+	for i in range(MAX_PLAYERS, player_count - 1, -1):
+		print("start_matchmaking: query(", "+properties.player_count:>=%d" % i, ")")
+		var promise = matchmaker.send({ matchmaker_add = {
+			query = "+properties.player_count:>=%d" % i,
+			min_count = 2,
+			max_count = 4,
+			string_properties = {
+				players = JSON.print(players),
+			},
+			numeric_properties = {
+				player_count = player_count
+			}
+		} })
+		if promise.error == OK:
+			print("start_matchmaking: ok")
+		promise.connect("completed", self, "on_matchmaker_add")
+		yield(get_tree().create_timer(4), "timeout")
+		if matchmaker_ticket == null:
+			return
+		yield(finish_matchmaking(), "completed")
+
+func finish_matchmaking():
+	if matchmaker_ticket == null:
+		print("finish_matchmaking: warning no matchmaking in progress")
+		return
+	var promise = matchmaker.send({ matchmaker_remove = { ticket = matchmaker_ticket } })
+	promise.error == OK and yield(promise, "completed")
+	print("finish_matchmaking: ok")
 
 func is_matchmaking_available():
 	return matchmaker != null
+
+func on_matchmaker_add(data: Dictionary, request: Dictionary):
+	if data.has('matchmaker_ticket'):
+		matchmaker_ticket = data['matchmaker_ticket']['ticket']
 
 func on_matchmaker_matched(data: Dictionary):
 	if data.has('self') && data.has('token') && data.has('users'):
@@ -203,12 +227,15 @@ func on_matchmaker_matched(data: Dictionary):
 			match_peers[session_id]['peer_id'] = next_available_peer_id
 			if session_id == my_session_id:
 				my_peer_id = match_peers[session_id]['peer_id']
+			print("session_id(", session_id ,") is peer_id(", match_peers[session_id]['peer_id'], ")")
 			next_available_peer_id += 1
 		# create webrtc
 		webrtc_multiplayer.initialize(match_peers[my_session_id]['peer_id'])
 		get_tree().set_network_peer(webrtc_multiplayer)
 		# join game
 		matchmaker.send({ match_join = {token = data['token']}}).connect("completed", self, "on_matchmaker_match_join")
+		# remove matchmaking ticket
+		matchmaker_ticket = null
 
 func on_matchmaker_match_join(data: Dictionary, request: Dictionary):
 	if data.has('match'):
@@ -279,7 +306,8 @@ func webrtc_connect_peer(match_peer: Dictionary):
 			print("webrtc_connect_peer: unable to create webrtc offer")
 
 func on_webrtc_peer_connected(peer_id: int):
-	# run game
+	print(peer_id, " connected ", match_peers.size(), "/", 3)
+	# create player from peer
 	for session_id in match_peers:
 		var match_peer = match_peers[session_id]
 		if match_peer['peer_id'] == peer_id:
@@ -289,16 +317,18 @@ func on_webrtc_peer_connected(peer_id: int):
 				player_set_skin(player.id, match_peer_player.skin_id)
 				player_set_ready(player.id, match_peer_player.ready)
 				peer_player_id += 1
-	# patch local player
-	for player in players:
-		if player.local:
-			player.peer_id = my_peer_id
-			player.peer_player_id = player.id
-	# start game mode
-	var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-	game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
-	get_node("/root/Game").goto_game_mode_scene(game_mode_node)
-	game_mode_node.start()
+	# start game if there are enough players
+	if players.size() >= 1:
+		# patch local player
+		for player in players:
+			if player.local:
+				player.peer_id = my_peer_id
+				player.peer_player_id = player.id
+		# start game mode
+		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
+		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
+		get_node("/root/Game").goto_game_mode_scene(game_mode_node)
+		game_mode_node.start()
 
 func on_webrtc_peer_disconnected(peer_id: int):
 	print("TODO: remove_player")
