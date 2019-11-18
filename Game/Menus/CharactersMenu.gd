@@ -40,10 +40,10 @@ func _process(delta: float):
 	# change skin or be ready
 	for player in Game.GameMultiplayer.players:
 		if player.local:
-			if Game.GameInput.is_player_action_just_pressed(player.id, "left"):
+			if Game.GameInput.is_player_action_just_pressed(player.id, "left") and !player.ready:
 				yield(get_tree(), "idle_frame")
 				Game.GameMultiplayer.player_set_skin(player.id, (player.skin_id - 1) % len(Game.skins))
-			if Game.GameInput.is_player_action_just_pressed(player.id, "right"):
+			if Game.GameInput.is_player_action_just_pressed(player.id, "right") and !player.ready:
 				yield(get_tree(), "idle_frame")
 				Game.GameMultiplayer.player_set_skin(player.id, (player.skin_id + 1) % len(Game.skins))
 			if Game.GameInput.is_player_action_just_pressed(player.id, "accept"):
