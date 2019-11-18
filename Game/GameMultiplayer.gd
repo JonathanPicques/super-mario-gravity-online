@@ -21,6 +21,7 @@ var sample_player = {
 	ready = false,
 	skin_id = 0,
 	peer_id = -1,
+	peer_player_id = -1,
 	input_device_id = -1
 }
 
@@ -53,7 +54,7 @@ func _process(delta: float) -> void:
 ##############
 
 # @impure
-func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: int = -1):
+func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: int = -1, peer_player_id: int = -1) -> Dictionary:
 	# compute player id
 	var id = get_next_player_id()
 	# duplicate sample player info
@@ -63,11 +64,14 @@ func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: i
 	player.name = name
 	player.local = local
 	player.peer_id = peer_id
+	player.peer_player_id = peer_player_id
 	player.input_device_id = input_device_id
 	# add player
 	players.append(player)
 	# emit signal to update lobby
 	emit_signal("player_add", player)
+	# return new player
+	return player
 
 # @impure
 func remove_player(player_id: int):
@@ -185,12 +189,13 @@ func is_matchmaking_available():
 	return matchmaker != null
 
 func on_matchmaker_matched(data: Dictionary):
-	if data.has('users') && data.has('token') && data.has('self'):
+	if data.has('self') && data.has('token') && data.has('users'):
 		# store our session_id
 		my_session_id = data['self']['presence']['session_id']
 		# store all matched sessions
 		for match_peer in data['users']:
 			match_peers[match_peer['presence']['session_id']] = match_peer['presence']
+			match_peers[match_peer['presence']['session_id']]['players'] = JSON.parse(match_peer['string_properties']['players']).result
 		# generate peer ids
 		var session_ids = match_peers.keys()
 		session_ids.sort()
@@ -276,12 +281,19 @@ func webrtc_connect_peer(match_peer: Dictionary):
 func on_webrtc_peer_connected(peer_id: int):
 	# run game
 	for session_id in match_peers:
-		if match_peers[session_id]['peer_id'] == peer_id:
-			add_player("Network Peer", false, -1, peer_id)
+		var match_peer = match_peers[session_id]
+		if match_peer['peer_id'] == peer_id:
+			var peer_player_id := 0
+			for match_peer_player in match_peer['players']:
+				var player := add_player("Network Peer", false, -1, peer_id, peer_player_id)
+				player_set_skin(player.id, match_peer_player.skin_id)
+				player_set_ready(player.id, match_peer_player.ready)
+				peer_player_id += 1
 	# patch local player
 	for player in players:
 		if player.local:
 			player.peer_id = my_peer_id
+			player.peer_player_id = player.id
 	# start game mode
 	var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
 	game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
