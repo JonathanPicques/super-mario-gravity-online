@@ -79,10 +79,6 @@ color = 1
 [node name="ColorSwitch" parent="BlueColorBlocks" instance=ExtResource( 4 )]
 position = Vector2( 288, 112 )
 
-[node name="ColorSwitch2" parent="BlueColorBlocks" instance=ExtResource( 4 )]
-
-[node name="ColorSwitch3" parent="BlueColorBlocks" instance=ExtResource( 4 )]
-
 [node name="GreenColorBlocks" type="Node" parent="."]
 
 [node name="ColorBlock" parent="GreenColorBlocks" instance=ExtResource( 6 )]
@@ -100,8 +96,6 @@ color = 2
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Sky" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( -35, -84 )
-scale = Vector2( 1.5, 1.5 )
 motion_mirroring = Vector2( 700, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/Sky"]
@@ -113,8 +107,6 @@ __meta__ = {
 }
 
 [node name="Montains" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( -35, -84 )
-scale = Vector2( 1.5, 1.5 )
 motion_scale = Vector2( 0.3, 1 )
 motion_mirroring = Vector2( 500, 0 )
 
@@ -128,8 +120,6 @@ __meta__ = {
 }
 
 [node name="Montains2" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2( -35, -84 )
-scale = Vector2( 1.5, 1.5 )
 motion_scale = Vector2( 0.6, 1 )
 motion_mirroring = Vector2( 504, 0 )
 

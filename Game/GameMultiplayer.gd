@@ -110,6 +110,13 @@ func get_player(player_id: int):
 # @pure
 func get_lead_player():
 	return players[0] if players.size() > 0 else null
+	
+# get_closest_player returns the closest player in front of you
+func get_closest_player(player_id: int): # FIXME: shouldn't pass the ID 
+	for player in players:
+		if player.id != player_id:
+			return player
+	return null
 
 # is_local_player returns true if the given player_id is locally handled.
 # @pure

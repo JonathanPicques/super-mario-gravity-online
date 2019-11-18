@@ -22,7 +22,7 @@ enum PlayerState {
 	stand, stand_turn, stand_to_crouch,
 	run, walk, crouch, crouch_to_stand, move_turn, push_wall,
 	fall, fall_to_stand, jump,
-	wallslide, walljump
+	wallslide, walljump, use_object
 }
 
 const FLOOR := Vector2(0, -1) # floor direction.
@@ -121,6 +121,7 @@ func _physics_process(delta: float):
 		PlayerState.jump: tick_jump(delta)
 		PlayerState.wallslide: tick_wallslide(delta)
 		PlayerState.walljump: tick_walljump(delta)
+		PlayerState.use_object: tick_use_object(delta)
 
 # _process_network updates player from the given network infos.
 # @driven(client_to_client)
@@ -225,6 +226,7 @@ func set_state(new_state: int):
 		PlayerState.jump: pre_jump()
 		PlayerState.wallslide: pre_wallslide()
 		PlayerState.walljump: pre_walljump()
+		PlayerState.use_object: pre_use_object()
 
 # set_direction changes the Player direction and flips the sprite accordingly.
 # @impure
@@ -389,6 +391,8 @@ func pre_stand():
 func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, WALK_MAX_SPEED)
+	if input_use:
+		return set_state(PlayerState.use_object)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	if input_jump_once and not is_on_ceiling_passive():
@@ -644,6 +648,27 @@ func tick_walljump(delta: float):
 		return set_state(PlayerState.fall)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
+
+###
+# Player objects
+###
+
+onready var object_scenes = [ # TODO: ponderate random
+	preload("res://Game/Objects/Missile.tscn")
+]
+
+func pre_use_object():
+	var object = object_scenes[randi()%object_scenes.size()].instance()
+	var size = $CollisionBody.get_shape().get_extents()
+	object.position = (Vector2(global_position.x, global_position.y - size[1]))
+	object.player = self
+	get_parent().add_child(object)
+
+func tick_use_object(delta: float):
+	if not is_on_floor():
+		return set_state(PlayerState.fall)
+	else:
+		return set_state(PlayerState.stand)
 
 ###
 # Animation driven
