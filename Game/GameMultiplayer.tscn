@@ -8,9 +8,9 @@ script = ExtResource( 1 )
 
 [node name="NakamaRestClient" type="Node" parent="."]
 script = ExtResource( 2 )
-host = "176.185.132.83"
-port = 7350
+host = "nakama.rootkernel.net"
+port = 443
 server_key = "defaultkey"
-use_ssl = false
+use_ssl = true
 ssl_validate = false
 debugging = false
