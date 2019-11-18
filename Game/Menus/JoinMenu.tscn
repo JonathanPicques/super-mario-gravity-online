@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Menus/Fonts/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Game/Menus/Fonts/Nunito-Regular.ttf" type="DynamicFontData" id=2]
@@ -6,19 +6,11 @@
 [ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Game/Menus/Textures/JoystickButtonDown.png" type="Texture" id=5]
 [ext_resource path="res://Game/Menus/JoinMenu.gd" type="Script" id=6]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.780392, 0.92549, 0.933333, 1 )
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource path="res://Game/Menus/Textures/JoinDescription.png" type="Texture" id=7]
+[ext_resource path="res://Game/Menus/Styles/NormalInputStyle.tres" type="StyleBox" id=8]
+[ext_resource path="res://Game/Menus/Styles/FocusInputStyle.tres" type="StyleBox" id=9]
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 10
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -48,6 +40,9 @@ anchor_bottom = 1.0
 margin_left = 100.0
 margin_right = -100.0
 margin_bottom = -30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 312.0
@@ -72,26 +67,36 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="LineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+[node name="RoomCodeInput" type="LineEdit" parent="MarginContainer/VBoxContainer"]
 margin_top = 74.0
 margin_right = 312.0
 margin_bottom = 97.0
-custom_styles/normal = SubResource( 1 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 8 )
 custom_fonts/font = SubResource( 2 )
+custom_colors/cursor_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 align = 1
-placeholder_text = "IP Address"
+placeholder_text = "Room code"
 
-[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 117.0
 margin_right = 312.0
-margin_bottom = 150.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
-text = "For now, the matchmaking system isn't implemented yet. Therefore, you need to manually specify an IP address."
-align = 1
-autowrap = true
-max_lines_visible = 2
+margin_bottom = 258.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/MarginContainer"]
+margin_left = 20.0
+margin_right = 292.0
+margin_bottom = 141.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
 
 [node name="Footer" type="Panel" parent="."]
 anchor_top = 1.0
