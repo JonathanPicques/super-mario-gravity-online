@@ -152,6 +152,19 @@ func is_every_player_ready() -> bool:
 func has_room_for_new_player():
 	return players.size() < MAX_PLAYERS
 
+###################
+# Player node API #
+###################
+
+# @pure
+func get_player_node(player_id: int) -> Node:
+	return get_node("/root/Game").scene.MapSlot.get_node(get_player_node_name(player_id))
+
+# @pure
+func get_player_node_name(player_id: int) -> String:
+	var player = players[player_id]
+	return str(player.peer_id) + "_" + str(player.peer_player_id)
+
 ###############
 # Matchmaking #
 ###############

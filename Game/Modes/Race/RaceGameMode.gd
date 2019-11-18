@@ -23,11 +23,10 @@ func start():
 	for player in Game.GameMultiplayer.players:
 		# create player node
 		var player_node: Node2D = load(Game.skins[player.skin_id].node_path).instance()
-		player_node.name = str(player.peer_id) + "_" + str(player.peer_player_id)
+		player_node.name = Game.GameMultiplayer.get_player_node_name(player.id)
 		player_node.position = flag_start
 		player_node.player_id = player.id
 		player_node.set_network_master(player.peer_id)
-		print("peer id is ", player.peer_id)
 		# add the player to the map
 		MapSlot.add_child(player_node)
 		# add the player camera
