@@ -8,7 +8,7 @@ func _ready():
 	Game.GameMultiplayer.connect("matchmaking_online", self, "on_matchmaking_online")
 	Game.GameMultiplayer.connect("matchmaking_offline", self, "on_matchmaking_offline")
 	# start matchmaking
-	Game.GameMultiplayer.start_matchmaker()
+	Game.GameMultiplayer.start_matchmaking()
 
 func on_matchmaking_online():
 	pass
