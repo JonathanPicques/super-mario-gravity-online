@@ -23,7 +23,8 @@ func start():
 # setup the split screen depending on the number of players.
 # @impure
 func setup_split_screen():
-	match Game.GameMultiplayer.players.size():
+	var player_count = Game.GameMultiplayer.get_local_player_count() # Game.GameMultiplayer.players.size()
+	match player_count:
 		1: 
 			$SplitScreenContainer/RowContainer2.visible = false
 			$SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer2.visible = false
