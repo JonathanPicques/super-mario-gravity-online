@@ -27,6 +27,8 @@ func start():
 		player_node.position = flag_start
 		player_node.player_id = player.id
 		player_node.set_network_master(player.peer_id)
+		# debug: sort players by peer_id
+		player_node.position.x += player.peer_id * 16
 		# add the player to the map
 		MapSlot.add_child(player_node)
 		# add the player camera

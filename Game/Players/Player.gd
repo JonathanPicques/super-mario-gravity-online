@@ -667,8 +667,7 @@ func pre_use_object():
 func tick_use_object(delta: float):
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	else:
-		return set_state(PlayerState.stand)
+	return set_state(PlayerState.stand)
 
 ###
 # Animation driven

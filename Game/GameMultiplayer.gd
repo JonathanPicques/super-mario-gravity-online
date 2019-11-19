@@ -8,7 +8,7 @@ signal player_set_ready
 signal matchmaking_online
 signal matchmaking_offline
 
-const MAX_PLAYERS = 4
+const MAX_PLAYERS := 4
 
 # players
 var players = []
@@ -22,7 +22,7 @@ var sample_player = {
 	skin_id = 0,
 	peer_id = -1,
 	peer_player_id = -1,
-	input_device_id = -1
+	input_device_id = -1,
 }
 
 var my_peer_id = null
@@ -30,10 +30,13 @@ var my_session_id = null
 var next_available_peer_id := 1
 
 var matchmaker = null
+var matchmaker_ticket = null
+
 var match_data = {}
 var match_peers = {}
+
 var webrtc_peers = {}
-var matchmaker_ticket = null
+var webrtc_peers_ok = {}
 var webrtc_multiplayer: WebRTCMultiplayer
 
 # _ready connects to the matchmaking server and authenticates this device.
@@ -49,6 +52,9 @@ func _ready():
 func _process(delta: float) -> void:
 	if matchmaker:
 		matchmaker.poll()
+	if Input.is_action_just_pressed("ui_cancel"):
+		print("disconnect")
+		webrtc_multiplayer.remove_peer(2)
 
 ##############
 # Player API #
@@ -86,7 +92,7 @@ func remove_player(player_id: int):
 		# emit signal to update lobby
 		emit_signal("player_remove", player)
 	else:
-		print("warning: remove_player player not found")
+		print("remove_player: warning player not found")
 
 # @impure
 func player_set_skin(player_id: int, skin_id: int):
@@ -275,6 +281,10 @@ func on_matchmaker_match_data(data: Dictionary):
 				var session_id = data['presence']['session_id']
 				var webrtc_peer = webrtc_peers[session_id]
 				match content['method']:
+					'reconnect':
+						# a peer lost his connection to us, try to reconnect with him
+						webrtc_multiplayer.remove_peer(match_peers[session_id]['peer_id'])
+						webrtc_reconnect_peer(match_peers[session_id])
 					'add_ice_candidate':
 						webrtc_peer.add_ice_candidate(content['media'], content['index'], content['name'])
 					'set_remote_description':
@@ -309,36 +319,54 @@ func init_webrtc_multiplayer():
 func webrtc_connect_peer(match_peer: Dictionary):
 	if webrtc_peers.has(match_peer['session_id']):
 		return
-	
+	# create webrtc peer
 	var webrtc_peer := WebRTCPeerConnection.new()
 	webrtc_peer.initialize({
 		"iceServers": [{ "urls": ["stun:stun.l.google.com:19302"] }]
 	})
 	webrtc_peer.connect("ice_candidate_created", self, "on_webrtc_peer_ice_candidate_created", [match_peer['session_id']])
 	webrtc_peer.connect("session_description_created", self, "on_webrtc_peer_session_description_created", [match_peer['session_id']])
-
+	# link matchmaking peer and webrtc peer
 	webrtc_peers[match_peer['session_id']] = webrtc_peer
 	webrtc_multiplayer.add_peer(webrtc_peer, match_peer['peer_id'])
-	
+	# create offer on one side
 	if my_session_id.casecmp_to(match_peer['session_id']) < 0:
 		var result = webrtc_peer.create_offer()
 		if result != OK:
 			print("webrtc_connect_peer: unable to create webrtc offer")
 
+func webrtc_reconnect_peer(match_peer: Dictionary):
+	var webrtc_peer = webrtc_peers[match_peer['session_id']]
+	# destroy the peer...
+	webrtc_peer.close()
+	webrtc_peers.erase(match_peer['session_id'])
+	webrtc_peers_ok.erase(match_peer['session_id'])
+	# ... and try to (re)connect the peer
+	webrtc_connect_peer(match_peer)
+
+func webrtc_disconnect_peer(match_peer: Dictionary):
+	var webrtc_peer = webrtc_peers[match_peer['session_id']]
+	# destroy the peer...
+	webrtc_peer.close()
+	webrtc_peers.erase(match_peer['session_id'])
+	webrtc_peers_ok.erase(match_peer['session_id'])
+
 func on_webrtc_peer_connected(peer_id: int):
-	print(peer_id, " connected ", match_peers.size(), "/", 3)
-	# create player from peer
-	for session_id in match_peers:
-		var match_peer = match_peers[session_id]
-		if match_peer['peer_id'] == peer_id:
-			var peer_player_id := 0
-			for match_peer_player in match_peer['players']:
-				var player := add_player("Network Peer", false, -1, peer_id, peer_player_id)
-				player_set_skin(player.id, match_peer_player.skin_id)
-				player_set_ready(player.id, match_peer_player.ready)
-				peer_player_id += 1
-	# start game if there are enough players
-	if players.size() >= 1:
+	print("on_webrtc_peer_connected: ", peer_id)
+	# start game if all webrtc peers are ok
+	if webrtc_peers_ok.size() == players.size() - 1:
+		# create player from webrtc peers
+		for session_id in match_peers:
+			var match_peer = match_peers[session_id]
+			if match_peer['peer_id'] == peer_id:
+				webrtc_peers_ok[session_id] = true
+				var peer_player_id := 0
+				for match_peer_player in match_peer['players']:
+					# create a player for each local player in this peer.
+					var player := add_player("Network Peer", false, -1, peer_id, peer_player_id)
+					player_set_skin(player.id, match_peer_player.skin_id)
+					player_set_ready(player.id, match_peer_player.ready)
+					peer_player_id += 1
 		# patch local player
 		for player in players:
 			if player.local:
@@ -351,7 +379,24 @@ func on_webrtc_peer_connected(peer_id: int):
 		game_mode_node.start()
 
 func on_webrtc_peer_disconnected(peer_id: int):
-	print("TODO: remove_player")
+	print("on_webrtc_peer_disconnected: ", peer_id)
+	# we lost the webrtc connection to this peer...
+	for session_id in match_peers:
+		if match_peers[session_id]['peer_id'] == peer_id:
+			# ... offer the peer to reconnect via the matchmaking channel ...
+			if my_session_id.casecmp_to(session_id) < 0:
+				matchmaker.send({
+					match_data_send = {
+						op_code = 1,
+						match_id = match_data['match_id'],
+						data = JSON.print({
+							method = "reconnect",
+							target = session_id,
+						}),
+					},
+				})
+				# ... and try to reconnect the peer on our end, he will do the same when receiving our offer
+				webrtc_reconnect_peer(match_peers[session_id])
 
 func on_webrtc_peer_ice_candidate_created(media: String, index: int, name: String, session_id: String):
 	matchmaker.send({
