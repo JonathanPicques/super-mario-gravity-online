@@ -31,7 +31,7 @@ func _process(delta: float):
 	for input_device_id in range(0, 5):
 		if Game.GameInput.is_device_action_just_pressed(input_device_id, "accept") and not Game.GameInput.is_device_used_by_player(input_device_id):
 			yield(get_tree(), "idle_frame")
-			Game.GameMultiplayer.add_player("", true, input_device_id)
+			Game.GameMultiplayer.add_player("Local player", true, input_device_id, Game.GameMultiplayer.my_peer_id, Game.GameMultiplayer.get_next_peer_player_id(Game.GameMultiplayer.my_peer_id))
 	# remove a player
 	for player in Game.GameMultiplayer.players:
 		if player.local:

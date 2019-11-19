@@ -53,4 +53,3 @@ func add_player_screen_camera(player_id: int, player_node_path: NodePath):
 func item_color_switch_trigger(color: int):
 	print("emit signal item_color_switch_trigger ", color)
 	emit_signal("item_color_switch_trigger", color)
-

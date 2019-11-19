@@ -23,9 +23,12 @@ var sample_player := {
 	peer_id = -1,
 	peer_player_id = -1,
 	input_device_id = -1,
+	# race game mode
+	rank = 0,
+	rank_distance = 0,
 }
 
-var my_peer_id = null
+var my_peer_id := -1
 var my_session_id = null
 var next_available_peer_id := 1
 
@@ -150,16 +153,33 @@ func get_local_player_count() -> int:
 # get_next_player_id returns the next player id available.
 # @pure
 func get_next_player_id() -> int:
-	var id := 0
 	var restart := true
+	var player_id := 0
 	while restart:
 		restart = false
 		for player in players:
-			var player_id = player.id
-			if id == player_id:
-				id += 1
+			if player_id == player.id:
+				player_id += 1
 				restart = true
-	return id
+	return player_id
+
+# get_next_peer_player_id returns the next peer player id available.
+# @pure
+func get_next_peer_player_id(peer_id: int) -> int:
+	var restart := true
+	var peer_player_id := 0
+	while restart:
+		restart = false
+		for player in players:
+			if peer_id == player.peer_id and peer_player_id == player.peer_player_id:
+				peer_player_id += 1
+				restart = true
+	return peer_player_id
+
+# has_server_authority returns true if we have the authority (local player only or network server).
+# @pure
+func has_server_authority() -> bool:
+	return get_local_player_count() == players.size() or get_tree().is_network_server()
 
 # is_every_player_ready returns true if every player is ready.
 # @pure
