@@ -15,7 +15,7 @@
 [ext_resource path="res://Game/Players/Luigi/Anims/walk.tres" type="Animation" id=13]
 [ext_resource path="res://Game/Players/Luigi/Anims/wallslide.tres" type="Animation" id=14]
 
-[node name="Luigi" index="0" instance=ExtResource( 1 )]
+[node name="Luigi" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
 script = ExtResource( 2 )
 
@@ -26,9 +26,6 @@ offset = Vector2( -4, 1 )
 
 [node name="WallChecker" parent="." index="3"]
 position = Vector2( 0, -14 )
-
-[node name="SoundEffects" parent="." index="5"]
-editor/display_folded = true
 
 [node name="CollisionBody" parent="." index="6"]
 position = Vector2( 0, -14 )

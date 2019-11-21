@@ -4,13 +4,13 @@
 [ext_resource path="res://Game/Objects/Missile.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 25, 7 )
+extents = Vector2( 12, 4 )
 
 [node name="Missile" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 centered = false
 
@@ -19,7 +19,7 @@ collision_layer = 32
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 25, 7 )
+position = Vector2( 13, 4 )
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]

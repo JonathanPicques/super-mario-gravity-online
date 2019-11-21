@@ -661,7 +661,7 @@ func pre_use_object():
 	var object = object_scenes[randi()%object_scenes.size()].instance()
 	var size = $CollisionBody.get_shape().get_extents()
 	object.position = (Vector2(global_position.x, global_position.y - size[1]))
-	object.player = self
+	object.player_node = self
 	get_parent().add_child(object)
 
 func tick_use_object(delta: float):
