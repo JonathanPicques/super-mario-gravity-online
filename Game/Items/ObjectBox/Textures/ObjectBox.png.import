@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ItemBox.png-8fe0323392689c16287702bc17820cfe.stex"
+path="res://.import/ObjectBox.png-2d138f349f8eac55f1a5cd4a18b940a4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/ItemBox/Textures/ItemBox.png"
-dest_files=[ "res://.import/ItemBox.png-8fe0323392689c16287702bc17820cfe.stex" ]
+source_file="res://Game/Items/ObjectBox/Textures/ObjectBox.png"
+dest_files=[ "res://.import/ObjectBox.png-2d138f349f8eac55f1a5cd4a18b940a4.stex" ]
 
 [params]
 

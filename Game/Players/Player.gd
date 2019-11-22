@@ -657,17 +657,26 @@ onready var object_scenes = [ # TODO: ponderate random
 	preload("res://Game/Objects/Missile.tscn")
 ]
 
+var current_object = null
+
 func pre_use_object():
-	var object = object_scenes[randi()%object_scenes.size()].instance()
+	if current_object == null:
+		return
+	print("use_object()")
 	var size = $CollisionBody.get_shape().get_extents()
-	object.position = (Vector2(global_position.x, global_position.y - size[1]))
-	object.player_node = self
-	get_parent().add_child(object)
+	current_object.position = (Vector2(global_position.x, global_position.y - size[1]))
+	current_object.player_node = self
+	get_parent().add_child(current_object)
+	current_object = null
 
 func tick_use_object(delta: float):
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	return set_state(PlayerState.stand)
+
+func get_object():
+	print("get_object()")
+	current_object = object_scenes[randi()%object_scenes.size()].instance()
 
 ###
 # Animation driven

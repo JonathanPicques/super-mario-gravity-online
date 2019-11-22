@@ -34,7 +34,7 @@ func seek_target():
 func _on_Area2D_body_entered(body):
 	if player_node != body: # don't check collision on current player
 		# FIXME: kill the player if there is one (how to check??)
-		print("KILL PLAYER!")
+		print("Missile collides with ", body.name)
 		queue_free()
 
 func _on_Timer_timeout():

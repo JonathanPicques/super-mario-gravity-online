@@ -10,4 +10,7 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 host = "nakama.rootkernel.net"
 port = 443
+server_key = "defaultkey"
 use_ssl = true
+ssl_validate = false
+debugging = false
