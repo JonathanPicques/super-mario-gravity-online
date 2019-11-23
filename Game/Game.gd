@@ -1,8 +1,11 @@
 extends Control
 class_name GameNode
 
+# warning-ignore:unused_class_variable
 onready var GameMode = null
+# warning-ignore:unused_class_variable
 onready var GameInput = $GameInput
+# warning-ignore:unused_class_variable
 onready var GameMultiplayer = $GameMultiplayer
 
 const Map: = preload("res://Game/Maps/Base/Base.tscn")

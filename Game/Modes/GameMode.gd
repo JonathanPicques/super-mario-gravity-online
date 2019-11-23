@@ -14,6 +14,7 @@ const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 signal item_color_switch_trigger(color)
 
 # options available in _ready.
+# warning-ignore:unused_class_variable
 export var options = {}
 
 # start is called when the game mode starts.

@@ -37,6 +37,9 @@ position = Vector2( 64, 128 )
 [node name="FlagEnd" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1392, 0 )
 
+[node name="FlagEnd2" parent="." instance=ExtResource( 5 )]
+position = Vector2( -16, 352 )
+
 [node name="DecorMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )

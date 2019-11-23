@@ -26,7 +26,7 @@ var sample_player := {
 	input_device_id = -1,
 	# race game mode
 	rank = 0,
-	rank_distance = 0,
+	rank_distance = 0.0,
 }
 
 var my_peer_id := -1
@@ -227,16 +227,18 @@ func init_matchmaker():
 	var unique_id := String(OS.get_unix_time())
 	# authenticate this device to the matchmaking server
 	var promise = $NakamaRestClient.authenticate_device(unique_id, true)
-	promise.error == OK and yield(promise, "completed")
+	if promise.error == OK:
+		yield(promise, "completed")
 	print("init_matchmaker: authenticate_device")
 	# ensures the authentication was successfull and get our device account
 	promise = $NakamaRestClient.get_account()
-	promise.error == OK and yield(promise, "completed")
+	if promise.error == OK:
+		yield(promise, "completed")
 	print("init_matchmaker: get_account")
 	# create the realtime matchmaking client
 	matchmaker = $NakamaRestClient.create_realtime_client()
 	if not matchmaker:
-		print ("init_matchmaker: ko")
+		print("init_matchmaker: ko")
 		return
 	matchmaker.connect("error", self, "on_matchmaker_error")
 	matchmaker.connect("disconnected", self, "on_matchmaker_disconnected")
@@ -288,7 +290,8 @@ func finish_matchmaking():
 		print("finish_matchmaking: warning no matchmaking in progress")
 		return
 	var promise = matchmaker.send({ matchmaker_remove = { ticket = matchmaker_ticket } })
-	promise.error == OK and yield(promise, "completed")
+	if promise.error == OK:
+		yield(promise, "completed")
 	print("finish_matchmaking: ok")
 
 # @impure

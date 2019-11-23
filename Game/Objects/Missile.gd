@@ -1,9 +1,7 @@
 extends Node2D
 
-onready var Game = get_node("/root/Game")
-
-var SPEED := 350
-var STEER_FORCE := 20.0
+const SPEED := 350
+const STEER_FORCE := 20.0
 
 var target = null
 var velocity := Vector2.ZERO
@@ -36,7 +34,7 @@ func _on_Area2D_body_entered(body):
 	if player_node != body: # don't check collision on current player
 		# FIXME: kill the player if there is one (how to check??)
 		if body.is_in_group("PlayerNode"):
-			print("Missile collided width player ", body.player_id)
+			print("Missile collided width player ", body.player.id)
 		else:
 			print("Missile collided with ", body.name)
 		queue_free()

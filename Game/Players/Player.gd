@@ -84,6 +84,7 @@ var GRAVITY_ACCELERATION := 500.0
 # @impure
 func _ready():
 	set_state(PlayerState.stand)
+	set_process(!!get_tree().network_peer)
 	set_direction(direction)
 
 # _process is called every tick and updates network player state.
@@ -91,7 +92,7 @@ func _ready():
 # @impure
 var _net_view_index := 0
 func _process(delta):
-	if player.local and is_network_master():
+	if player.local or is_network_master():
 		var net_view := []
 		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_down) << 0x1 | int(input_left) << 0x2 | int(input_right) << 0x3 | int(input_run) << 0x4 | int(input_use) << 0x5 | int(input_jump) << 0x6)
 		net_view.insert(NET_VIEW_POSITION_INDEX, position)

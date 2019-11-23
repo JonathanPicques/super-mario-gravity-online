@@ -47,7 +47,7 @@ func compute_player_ranking(goal_position: Vector2):
 	for player in Game.GameMultiplayer.players:
 		var player_node = Game.GameMultiplayer.get_player_node(player.id)
 		if player_node != null:
-			var distance := 0
+			var distance := 0.0
 			var navigation_path := map_scene.get_simple_path(player_node.position, goal_position)
 			var navigation_size := navigation_path.size()
 			for i in range(0, navigation_size):
