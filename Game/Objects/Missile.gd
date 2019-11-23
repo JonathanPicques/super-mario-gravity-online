@@ -35,7 +35,7 @@ func seek_target():
 func _on_Area2D_body_entered(body):
 	if player_node != body: # don't check collision on current player
 		# FIXME: kill the player if there is one (how to check??)
-		if body.is_in_group('PlayerNode'):
+		if body.is_in_group("PlayerNode"):
 			print("Missile collided width player ", body.player_id)
 		else:
 			print("Missile collided with ", body.name)
