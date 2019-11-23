@@ -24,8 +24,8 @@ func start():
 		# create player node
 		var player_node: Node2D = load(Game.skins[player.skin_id].node_path).instance()
 		player_node.name = Game.GameMultiplayer.get_player_node_name(player.id)
+		player_node.player = player
 		player_node.position = flag_start_pos
-		player_node.player_id = player.id
 		player_node.set_network_master(player.peer_id)
 		# debug: offset players by peer_id and peer_player_id
 		player_node.position.x += player.peer_id * 32 + player.peer_player_id * 8

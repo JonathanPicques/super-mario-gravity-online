@@ -11,7 +11,7 @@ onready var Viewport4 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Vie
 
 const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
-signal item_color_switch_trigger # (color: int)
+signal item_color_switch_trigger(color)
 
 # options available in _ready.
 export var options = {}

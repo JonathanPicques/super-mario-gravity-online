@@ -37,7 +37,6 @@ const NET_VIEW_POSITION_INDEX := 1
 const NET_VIEW_VELOCITY_INDEX := 2
 
 var player = null # player reference.
-export var player_id := 0 # player index in Game.
 
 var input_up := false
 var input_down := false
@@ -84,7 +83,6 @@ var GRAVITY_ACCELERATION := 500.0
 # @driven(lifecycle)
 # @impure
 func _ready():
-	player = Game.GameMultiplayer.get_player(player_id)
 	set_state(PlayerState.stand)
 	set_direction(direction)
 
@@ -93,7 +91,7 @@ func _ready():
 # @impure
 var _net_view_index := 0
 func _process(delta):
-	if not player.local and is_network_master():
+	if player.local and is_network_master():
 		var net_view := []
 		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_down) << 0x1 | int(input_left) << 0x2 | int(input_right) << 0x3 | int(input_run) << 0x4 | int(input_use) << 0x5 | int(input_jump) << 0x6)
 		net_view.insert(NET_VIEW_POSITION_INDEX, position)
@@ -149,13 +147,13 @@ var _run := false; var _use := false; var _jump := false
 func process_input(delta: float):
 	if player.local or is_network_master():
 		# get inputs from gamepad or keyboard
-		input_up = Game.GameInput.is_player_action_pressed(player_id, "up")
-		input_left = Game.GameInput.is_player_action_pressed(player_id, "left")
-		input_down = Game.GameInput.is_player_action_pressed(player_id, "down")
-		input_right = Game.GameInput.is_player_action_pressed(player_id, "right")
-		input_run = Game.GameInput.is_player_action_pressed(player_id, "run")
-		input_use = Game.GameInput.is_player_action_pressed(player_id, "use")
-		input_jump = Game.GameInput.is_player_action_pressed(player_id, "jump")
+		input_up = Game.GameInput.is_player_action_pressed(player.id, "up")
+		input_left = Game.GameInput.is_player_action_pressed(player.id, "left")
+		input_down = Game.GameInput.is_player_action_pressed(player.id, "down")
+		input_right = Game.GameInput.is_player_action_pressed(player.id, "right")
+		input_run = Game.GameInput.is_player_action_pressed(player.id, "run")
+		input_use = Game.GameInput.is_player_action_pressed(player.id, "use")
+		input_jump = Game.GameInput.is_player_action_pressed(player.id, "jump")
 	elif len(_last_net_view) > 0:
 		# get inputs from last net view
 		input_up = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 0))
@@ -392,14 +390,14 @@ func pre_stand():
 func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, WALK_MAX_SPEED)
-	if input_use:
-		return set_state(PlayerState.use_object)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	if input_jump_once and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_down_once:
 		return set_state(PlayerState.stand_to_crouch)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
 	if input_velocity.x != 0 and has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.walk)
 	elif input_velocity.x != 0 and not has_same_direction(direction, input_velocity.x):
@@ -654,15 +652,17 @@ func tick_walljump(delta: float):
 # Player objects
 ###
 
-onready var object_scenes = [ # TODO: ponderate random
+onready var ObjectScenes = [ # TODO: ponderate random
 	preload("res://Game/Objects/Missile.tscn")
 ]
 
 var current_object = null
 
+func get_object():
+	print("get_object()")
+	current_object = ObjectScenes[randi() % ObjectScenes.size()].instance()
+
 func pre_use_object():
-	if current_object == null:
-		return
 	print("use_object()")
 	var size = $CollisionBody.get_shape().get_extents()
 	current_object.position = (Vector2(global_position.x, global_position.y - size[1]))
@@ -674,10 +674,6 @@ func tick_use_object(delta: float):
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	return set_state(PlayerState.stand)
-
-func get_object():
-	print("get_object()")
-	current_object = object_scenes[randi()%object_scenes.size()].instance()
 
 ###
 # Animation driven
