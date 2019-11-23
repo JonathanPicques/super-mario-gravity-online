@@ -49,6 +49,27 @@ func add_player_screen_camera(player_id: int, player_node_path: NodePath):
 		2: Viewport3.add_child(player_camera_scene)
 		3: Viewport4.add_child(player_camera_scene)
 
+# add a camera compatible with split screen for the given player.
+# @impure
+func remove_player_screen_camera(player_id: int):
+	match player_id:
+		0:
+			var camera_node = Viewport1.get_node("PlayerCamera2D")
+			if camera_node:
+				camera_node.queue_free()
+		1:
+			var camera_node = Viewport2.get_node("PlayerCamera2D")
+			if camera_node:
+				camera_node.queue_free()
+		2:
+			var camera_node = Viewport3.get_node("PlayerCamera2D")
+			if camera_node:
+				camera_node.queue_free()
+		3:
+			var camera_node = Viewport4.get_node("PlayerCamera2D")
+			if camera_node:
+				camera_node.queue_free()
+
 # trigger color switch for the given color.
 # @impure
 func item_color_switch_trigger(color: int):

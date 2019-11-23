@@ -41,7 +41,7 @@ func _ready():
 # set_scene sets the current scene and frees the previous one.
 # @impure
 func set_scene (new_scene: Node):
-	if scene != null:
+	if scene:
 		remove_child(scene)
 		scene.queue_free()
 	add_child(new_scene)

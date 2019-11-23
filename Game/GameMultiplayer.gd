@@ -1,13 +1,13 @@
 extends Node
 class_name GameMultiplayerNode
 
-signal player_add
-signal player_remove
-signal player_set_skin
-signal player_set_ready
+signal player_add(player)
+signal player_remove(player)
+signal player_set_skin(player, skin_id)
+signal player_set_ready(player, ready)
 
-signal matchmaking_online
-signal matchmaking_offline
+signal matchmaking_online()
+signal matchmaking_offline()
 
 const MAX_PLAYERS := 4
 
@@ -56,9 +56,6 @@ func _ready():
 func _process(delta: float) -> void:
 	if matchmaker:
 		matchmaker.poll()
-	if Input.is_action_just_pressed("ui_cancel"):
-		print("disconnect")
-		webrtc_multiplayer.remove_peer(2)
 
 # _notification is called to check if the application is quitting to dispose of network resources.
 # @driven(lifecycle)
@@ -87,34 +84,32 @@ func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: i
 	player.input_device_id = input_device_id
 	# add player
 	players.append(player)
-	# emit signal to update lobby
+	# emit signal to update lobby/game mode
 	emit_signal("player_add", player)
 	# return new player
 	return player
 
 # @impure
-func remove_player(player_id: int) -> void:
-	# wait one frame to not invalidate player iterators
-	yield(get_tree(), "idle_frame")
-	# find if player exists
+func remove_player(player_id: int) -> Dictionary:
 	var player = get_player(player_id)
-	if player:
-		# actually remove the player
-		players.erase(player)
-		# emit signal to update lobby
-		emit_signal("player_remove", player)
-	else:
-		print("remove_player: warning player not found")
+	# emit signal to update lobby/game mode
+	emit_signal("player_remove", player)
+	# actually remove the player
+	players.erase(player)
+	# return the removed player
+	return player
 
 # @impure
 func player_set_skin(player_id: int, skin_id: int) -> void:
-	get_player(player_id).skin_id = skin_id
-	emit_signal("player_set_skin", player_id, skin_id)
+	var player = get_player(player_id)
+	player.skin_id = skin_id
+	emit_signal("player_set_skin", player, skin_id)
 
 # @impure
 func player_set_ready(player_id: int, ready: bool) -> void:
-	get_player(player_id).ready = ready
-	emit_signal("player_set_ready", player_id, ready)
+	var player = get_player(player_id)
+	player.ready = ready
+	emit_signal("player_set_ready", player, ready)
 
 # get_player return the player by the given id.
 # @pure
@@ -123,6 +118,15 @@ func get_player(player_id: int):
 		if player.id == player_id:
 			return player
 	return null
+
+# get_players return the list of players optionally inverted.
+# @pure
+func get_players(invert := false):
+	if not invert:
+		return players
+	var inverted_players := players.duplicate()
+	inverted_players.invert()
+	return inverted_players
 
 # get_lead_player returns the local lead player or null.
 # @pure
@@ -273,14 +277,14 @@ func start_matchmaking():
 			# wait a bit before restarting matchmaking
 			yield(get_tree().create_timer(4), "timeout")
 			# if the matchmaker ticket is consumed, we successfully found a match
-			if matchmaker_ticket == null:
+			if not matchmaker_ticket:
 				return
 			# otherwise restart matchmaking with lower expectations
 			yield(finish_matchmaking(), "completed")
 
 # @impure
 func finish_matchmaking():
-	if matchmaker_ticket == null:
+	if not matchmaker_ticket:
 		print("finish_matchmaking: warning no matchmaking in progress")
 		return
 	var promise = matchmaker.send({ matchmaker_remove = { ticket = matchmaker_ticket } })
@@ -356,7 +360,11 @@ func on_matchmaker_match_presence(data: Dictionary):
 	if data.has("leaves"):
 		for leave_match_peer in data["leaves"]:
 			if leave_match_peer["session_id"] != my_session_id:
-				webrtc_disconnect_peer(match_peers[leave_match_peer["session_id"]])
+				var match_peer = match_peers[leave_match_peer["session_id"]]
+				webrtc_disconnect_peer(match_peer)
+				for player in get_players(true):
+					if player.peer_id == match_peer["peer_id"]:
+						remove_player(player.id)
 
 # @impure
 func on_matchmaker_error(error: Dictionary):

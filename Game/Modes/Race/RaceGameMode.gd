@@ -33,6 +33,8 @@ func start():
 		MapSlot.add_child(player_node)
 		# add the player camera
 		add_player_screen_camera(player.id, player_node.get_path())
+	# connect multiplayer signals
+	Game.GameMultiplayer.connect("player_remove", self, "on_player_remove")
 	# compute player ranking locally
 	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking", [flag_end_pos])
 	$RankUpdateTimer.start()
@@ -61,8 +63,19 @@ func compute_player_ranking(goal_position: Vector2):
 		player.rank = i
 		player.rank_distance = sorted_players[i].distance
 		# print("player %d is #%d with a distance from flag of %d" % [player.id, (player.rank + 1), player.rank_distance])
+		pass
 
 # peer_position_sort is called as a sort comparator for sorting players by position.
 # @pure
 func player_sort_by_distance(player_a: Dictionary, player_b: Dictionary):
 	return player_a.distance < player_b.distance 
+
+# on_player_remove is called when a player is removed (usually disconnected from network.)
+# driven(signal)
+# @impure
+func on_player_remove(player: Dictionary):
+	# remove player nodes and cameras associated to the removed player
+	var player_node = Game.GameMultiplayer.get_player_node(player.id)
+	if player_node:
+		player_node.queue_free()
+		remove_player_screen_camera(player.id)

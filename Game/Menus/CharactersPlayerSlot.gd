@@ -19,14 +19,17 @@ enum State { none, join, ready, search, select }
 export var state = State.none
 export var player_id := 0
 
+# @impure
+# @driven(lifecycle)
 func _ready():
 	set_state(State.join)
-	update_player()
-	Game.GameMultiplayer.connect("player_add", self, "update_player")
-	Game.GameMultiplayer.connect("player_remove", self, "update_player")
-	Game.GameMultiplayer.connect("player_set_skin", self, "update_player")
-	Game.GameMultiplayer.connect("player_set_ready", self, "update_player")
+	on_update_player()
+	Game.GameMultiplayer.connect("player_add", self, "on_update_player")
+	Game.GameMultiplayer.connect("player_remove", self, "on_update_player")
+	Game.GameMultiplayer.connect("player_set_skin", self, "on_update_player")
+	Game.GameMultiplayer.connect("player_set_ready", self, "on_update_player")
 
+# @impure
 func set_state(new_state: int):
 	state = new_state
 	match state:
@@ -39,9 +42,15 @@ func set_state(new_state: int):
 		State.select:
 			$SlotState.texture = SlotSelectTexture
 
-func update_player(a = null, b = null, c = null):
+# on_update_player is called to update the character slot on player add/remove/skin change/ready change.
+# @driven(signal)
+# @impure
+func on_update_player(a = null, b = null, c = null):
+	# wait one frame to ensure player is null if it was removed this frame
+	yield(get_tree(), "idle_frame")
 	var player = Game.GameMultiplayer.get_player(player_id)
 	if player != null:
+		# player added or changed skin/ready
 		match player.ready:
 			true: set_state(State.ready)
 			false: set_state(State.select)
@@ -49,6 +58,7 @@ func update_player(a = null, b = null, c = null):
 		$InputDevice.texture = InputDeviceTextures[player.input_device_id]
 		$SlotState/CenterContainer/SkinTextureRect.texture = Game.get_skin_from_id(player.skin_id, player.ready)
 	else:
+		# player removed
 		if state != State.join:
 			set_state(State.join)
 		$PlayerName.text = ""

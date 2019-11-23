@@ -269,7 +269,7 @@ func is_colliding_with_group(group: String) -> bool:
 # @impure
 func play_sound_effect(stream: AudioStream):
 	var sound_effect_player = get_sound_effect_player()
-	if sound_effect_player != null:
+	if sound_effect_player:
 		sound_effect_player.stream = stream
 		sound_effect_player.play()
 
