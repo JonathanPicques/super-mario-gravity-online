@@ -1,4 +1,5 @@
 extends Node
+class_name GameInputNode
 
 onready var Game = get_node("/root/Game")
 

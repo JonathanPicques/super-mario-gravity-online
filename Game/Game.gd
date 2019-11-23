@@ -1,8 +1,9 @@
 extends Control
+class_name GameNode
 
 onready var GameMode = null
-onready var GameMultiplayer = $GameMultiplayer
 onready var GameInput = $GameInput
+onready var GameMultiplayer = $GameMultiplayer
 
 const Map: = preload("res://Game/Maps/Base/Base.tscn")
 const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
@@ -27,9 +28,6 @@ var skins := [
 	}
 ]
 
-func get_skin_from_id(skin_id: int, ready: bool = false):
-	return load(skins[skin_id].preview_select_path if not ready else skins[skin_id].preview_ready_path)
-
 # _ready is called when the game node is ready.
 # @driven(lifecycle)
 # @impure
@@ -49,26 +47,40 @@ func set_scene (new_scene: Node):
 	add_child(new_scene)
 	scene = new_scene
 
+# @impure
 func goto_main_menu_scene():
 	var main_menu_node := MainMenu.instance()
 	set_scene(main_menu_node)
 
+# @impure
 func goto_join_menu_scene():
 	var join_menu_node := JoinMenu.instance()
 	set_scene(join_menu_node)
 
+# @impure
 func goto_game_mode_scene(game_mode_node: Node):
 	GameMode = game_mode_node
 	set_scene(game_mode_node)
 
+# @impure
 func goto_characters_menu_scene():
 	var characters_menu_node := CharactersMenu.instance()
 	set_scene(characters_menu_node)
 
+# @impure
 func goto_waiting_room_menu_scene():
 	var waiting_room_node := WaitingRoomMenu.instance()
 	set_scene(waiting_room_node)
 
+# @impure
 func goto_end_game_room_menu_scene():
 	var end_game_room := EndGameMenu.instance()
 	set_scene(end_game_room)
+
+#########
+# Skins #
+#########
+
+# @pure
+func get_skin_from_id(skin_id: int, ready: bool = false):
+	return load(skins[skin_id].preview_select_path if not ready else skins[skin_id].preview_ready_path)

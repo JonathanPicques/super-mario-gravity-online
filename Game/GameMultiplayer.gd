@@ -1,4 +1,5 @@
 extends Node
+class_name GameMultiplayerNode
 
 signal player_add
 signal player_remove

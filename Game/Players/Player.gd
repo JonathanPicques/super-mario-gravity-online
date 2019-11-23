@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name PlayerNode
 
 onready var Game = get_node("/root/Game")
 
@@ -35,8 +36,8 @@ const NET_VIEW_INPUT_INDEX := 0
 const NET_VIEW_POSITION_INDEX := 1
 const NET_VIEW_VELOCITY_INDEX := 2
 
+var player = null # player reference.
 export var player_id := 0 # player index in Game.
-export var is_local_only := true
 
 var input_up := false
 var input_down := false
@@ -83,16 +84,16 @@ var GRAVITY_ACCELERATION := 500.0
 # @driven(lifecycle)
 # @impure
 func _ready():
+	player = Game.GameMultiplayer.get_player(player_id)
 	set_state(PlayerState.stand)
 	set_direction(direction)
-	is_local_only = Game.GameMultiplayer.get_player(player_id).peer_id == -1
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
 # @impure
 var _net_view_index := 0
 func _process(delta):
-	if not is_local_only and is_network_master():
+	if not player.local and is_network_master():
 		var net_view := []
 		net_view.insert(NET_VIEW_INPUT_INDEX, int(input_up) << 0 | int(input_down) << 0x1 | int(input_left) << 0x2 | int(input_right) << 0x3 | int(input_run) << 0x4 | int(input_use) << 0x5 | int(input_jump) << 0x6)
 		net_view.insert(NET_VIEW_POSITION_INDEX, position)
@@ -146,7 +147,7 @@ remote func _process_network(delta: float, net_view: Array, net_view_index: int)
 var _up := false; var _down := false; var _left := false; var _right := false
 var _run := false; var _use := false; var _jump := false
 func process_input(delta: float):
-	if is_local_only or is_network_master():
+	if player.local or is_network_master():
 		# get inputs from gamepad or keyboard
 		input_up = Game.GameInput.is_player_action_pressed(player_id, "up")
 		input_left = Game.GameInput.is_player_action_pressed(player_id, "left")

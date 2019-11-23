@@ -1,4 +1,5 @@
 extends Control
+class_name GameModeNode
 
 onready var Game = get_node("/root/Game")
 onready var MapSlot: Node2D = $SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer1/Viewport1/MapSlot
