@@ -11,11 +11,11 @@ enum State { none, join, public, private, offline }
 var state = State.none
 
 func _ready():
-	match Game.GameMultiplayer.is_matchmaking_available():
+	match Game.GameMultiplayer.is_online():
 		true: set_state(State.public)
 		false: set_state(State.offline)
-	Game.GameMultiplayer.connect("matchmaking_online", self, "on_matchmaking_online")
-	Game.GameMultiplayer.connect("matchmaking_offline", self, "on_matchmaking_offline")
+	Game.GameMultiplayer.connect("online", self, "on_online")
+	Game.GameMultiplayer.connect("offline", self, "on_offline")
 
 func _process(delta: float):
 	# back to home if cancel when not ready
@@ -78,9 +78,9 @@ func start_game():
 		Game.goto_game_mode_scene(game_mode_node)
 		game_mode_node.start()
 
-func on_matchmaking_online():
+func on_online():
 	if state == State.offline:
 		set_state(State.private)
 
-func on_matchmaking_offline():
+func on_offline():
 	set_state(State.offline)

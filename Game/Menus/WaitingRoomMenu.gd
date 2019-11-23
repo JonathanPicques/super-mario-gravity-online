@@ -3,15 +3,15 @@ extends Control
 onready var Game = get_node("/root/Game")
 
 func _ready():
-	match Game.GameMultiplayer.is_matchmaking_available():
+	match Game.GameMultiplayer.is_online():
 		_: pass
-	Game.GameMultiplayer.connect("matchmaking_online", self, "on_matchmaking_online")
-	Game.GameMultiplayer.connect("matchmaking_offline", self, "on_matchmaking_offline")
+	Game.GameMultiplayer.connect("online", self, "on_online")
+	Game.GameMultiplayer.connect("offline", self, "on_offline")
 	# start matchmaking
-	Game.GameMultiplayer.start_matchmaking()
+	Game.GameMultiplayer.matchmaking_start()
 
-func on_matchmaking_online():
+func on_online():
 	pass
 
-func on_matchmaking_offline():
+func on_offline():
 	pass
