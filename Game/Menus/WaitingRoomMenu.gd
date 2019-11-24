@@ -2,16 +2,19 @@ extends Control
 
 onready var Game = get_node("/root/Game")
 
+# @impure
 func _ready():
-	match Game.GameMultiplayer.is_online():
-		_: pass
-	Game.GameMultiplayer.connect("online", self, "on_online")
-	Game.GameMultiplayer.connect("offline", self, "on_offline")
-	# start matchmaking
+	if not Game.GameMultiplayer.is_online():
+		cancel_waiting()
+	Game.GameMultiplayer.connect("offline", self, "cancel_waiting")
 	Game.GameMultiplayer.start_matchmaking()
 
-func on_online():
-	pass
+# @impure
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		cancel_waiting()
 
-func on_offline():
-	pass
+# @impure
+func cancel_waiting():
+	Game.GameMultiplayer.finish_playing()
+	Game.goto_characters_menu_scene()

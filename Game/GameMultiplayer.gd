@@ -62,7 +62,7 @@ func _process(delta: float) -> void:
 # @impure
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
-		pass
+		finish_playing()
 
 ############
 # Play API #
@@ -290,7 +290,7 @@ func start_matchmaking():
 		# if there is no match found after a while, retry with lower expectations
 		if player_preferred_count > 1:
 			# wait a bit before restarting matchmaking
-			yield(get_tree().create_timer(4), "timeout")
+			yield(get_tree().create_timer(1), "timeout")
 			# if the matchmaker ticket is consumed, we successfully found a match
 			if not matchmaker_ticket:
 				return
@@ -304,6 +304,7 @@ func finish_matchmaking():
 		return
 	var promise = nakama_client.send({ matchmaker_remove = { ticket = matchmaker_ticket } })
 	if promise.error == OK:
+		matchmaker_ticket = null
 		yield(promise, "completed")
 	print("finish_matchmaking: ok")
 
