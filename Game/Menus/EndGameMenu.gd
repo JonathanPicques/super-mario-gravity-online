@@ -27,7 +27,9 @@ func _on_MapsButton_pressed():
 	print("TODO: choose map")
 
 func _on_CharactersButton_pressed():
+	Game.GameMultiplayer.finish_playing()
 	Game.goto_characters_menu_scene()
 
 func _on_HomeButton_pressed():
+	Game.GameMultiplayer.finish_playing()
 	Game.goto_main_menu_scene()

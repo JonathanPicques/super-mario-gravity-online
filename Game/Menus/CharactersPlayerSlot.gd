@@ -24,8 +24,8 @@ export var player_id := 0
 func _ready():
 	set_state(State.join)
 	on_update_player()
-	Game.GameMultiplayer.connect("player_add", self, "on_update_player")
-	Game.GameMultiplayer.connect("player_remove", self, "on_update_player")
+	Game.GameMultiplayer.connect("player_added", self, "on_update_player")
+	Game.GameMultiplayer.connect("player_removed", self, "on_update_player")
 	Game.GameMultiplayer.connect("player_set_skin", self, "on_update_player")
 	Game.GameMultiplayer.connect("player_set_ready", self, "on_update_player")
 

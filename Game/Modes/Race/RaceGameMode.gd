@@ -34,7 +34,7 @@ func start():
 		# add the player camera
 		add_player_screen_camera(player.id, player_node.get_path())
 	# connect multiplayer signals
-	Game.GameMultiplayer.connect("player_remove", self, "on_player_remove")
+	Game.GameMultiplayer.connect("player_removed", self, "on_player_removed")
 	# compute player ranking locally
 	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking", [flag_end_pos])
 	$RankUpdateTimer.start()
@@ -70,10 +70,10 @@ func compute_player_ranking(goal_position: Vector2):
 func player_sort_by_distance(player_a: Dictionary, player_b: Dictionary):
 	return player_a.distance < player_b.distance 
 
-# on_player_remove is called when a player is removed (usually disconnected from network.)
+# on_player_removed is called when a player is removed (usually disconnected from network.)
 # driven(signal)
 # @impure
-func on_player_remove(player: Dictionary):
+func on_player_removed(player: Dictionary):
 	# remove player nodes and cameras associated to the removed player
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
 	if player_node:
