@@ -1,16 +1,9 @@
 extends Node2D
 
-const SPEED := 100
+const SPEED := 250
+export var use_target := false
 
 onready var Game = get_node("/root/Game")
-
-enum Type {
-	basic,
-	auto,
-	ghost
-}
-
-export(Type) var type: int = Type.basic
 
 var target = null
 var velocity := Vector2.ZERO
@@ -21,7 +14,7 @@ var acceleration := Vector2.ZERO
 func _ready():
 	direction = player_node.direction
 	$Sprite.scale.x = abs($Sprite.scale.x) * sign(direction)
-	if type != Type.basic:
+	if use_target:
 		var closest = Game.GameMultiplayer.get_closest_player(player_node.player.id)
 		if closest:
 			target = Game.GameMultiplayer.get_player_node(closest.id)

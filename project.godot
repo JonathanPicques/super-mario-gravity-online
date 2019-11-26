@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "GameMultiplayerNode",
 "language": "GDScript",
 "path": "res://Game/GameMultiplayer.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "PlayerNode",
+"language": "GDScript",
+"path": "res://Game/Players/Player.gd"
 } ]
 _global_script_class_icons={
-"GameMultiplayerNode": ""
+"GameMultiplayerNode": "",
+"PlayerNode": ""
 }
 
 [application]

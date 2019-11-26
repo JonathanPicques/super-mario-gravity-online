@@ -46,6 +46,8 @@ __meta__ = {
 
 [node name="Viewport1" type="Viewport" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1"]
 size = Vector2( 254, 142 )
+handle_input_locally = false
+render_target_update_mode = 3
 
 [node name="MapSlot" type="Node2D" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1"]
 

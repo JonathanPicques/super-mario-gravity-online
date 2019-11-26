@@ -654,7 +654,9 @@ func tick_walljump(delta: float):
 ###
 
 onready var ObjectScenes = [ # TODO: ponderate random
-	preload("res://Game/Objects/Missile.tscn")
+	preload("res://Game/Objects/MissileGhost.tscn"),
+	preload("res://Game/Objects/MissileAuto.tscn"),
+	preload("res://Game/Objects/MissileBasic.tscn")
 ]
 
 var current_object = null
