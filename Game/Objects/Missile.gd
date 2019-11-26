@@ -1,7 +1,8 @@
 extends Node2D
 
-const SPEED := 5
-const STEER_FORCE := 20
+const SPEED := 100
+
+onready var Game = get_node("/root/Game")
 
 var target = null
 var velocity := Vector2.ZERO
@@ -12,11 +13,14 @@ var acceleration := Vector2.ZERO
 func _ready():
 	direction = player_node.direction
 	$Sprite.scale.x = abs($Sprite.scale.x) * sign(direction)
-	target = get_node("/root/Game/RaceGameMode/SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer1/Viewport1/MapSlot/Base/Target")
+	var closest = Game.GameMultiplayer.get_closest_player(player_node.player.id)
+	if closest:
+		target = Game.GameMultiplayer.get_player_node(closest.id)
+	print("Target = ", target)
 
 func _physics_process(delta: float):
-	if target:
-		var v = (target.position - position).normalized() * SPEED
+	if is_instance_valid(target):
+		var v = (target.position - position).normalized() * SPEED * delta
 		rotation = v.angle()
 		position += v
 	else:

@@ -157,9 +157,13 @@ func get_lead_player():
 	
 # @pure
 func get_closest_player(player_id: int): # FIXME: shouldn't pass the ID 
-	for player in players:
-		if player.id != player_id:
-			return player
+	var ranked_players := get_players(SortPlayerMethods.ranked)
+	var index := 0
+	print("ranked_players: ", ranked_players)
+	for player in ranked_players:
+		if player.id == player_id and index - 1 >= 0:
+			return ranked_players[index - 1]
+		index += 1
 	return null
 
 # @pure
