@@ -21,9 +21,10 @@ var acceleration := Vector2.ZERO
 func _ready():
 	direction = player_node.direction
 	$Sprite.scale.x = abs($Sprite.scale.x) * sign(direction)
-	var closest = Game.GameMultiplayer.get_closest_player(player_node.player.id)
-	if closest:
-		target = Game.GameMultiplayer.get_player_node(closest.id)
+	if type != Type.basic:
+		var closest = Game.GameMultiplayer.get_closest_player(player_node.player.id)
+		if closest:
+			target = Game.GameMultiplayer.get_player_node(closest.id)
 
 func _physics_process(delta: float):
 	if is_instance_valid(target):
