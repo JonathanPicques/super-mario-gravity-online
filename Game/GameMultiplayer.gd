@@ -12,6 +12,8 @@ signal offline()
 const MAX_PLAYERS := 4
 const OP_CODE_WEBRTC := 1
 
+enum SortPlayerMethods { normal, inverted, ranked, ranked_inverted }
+
 # players
 var players := []
 
@@ -80,7 +82,7 @@ func finish_playing():
 		finish_matchmaking()
 	if webrtc_multiplayer:
 		finish_webrtc()
-	for player in get_players(true):
+	for player in get_players(SortPlayerMethods.inverted):
 		if not player.local:
 			remove_player(player.id)
 		else:
@@ -131,12 +133,23 @@ func get_player(player_id: int):
 	return null
 
 # @pure
-func get_players(invert := false):
-	if not invert:
-		return players
-	var inverted_players := players.duplicate()
-	inverted_players.invert()
-	return inverted_players
+func get_players(sort_method := SortPlayerMethods.normal) -> Array:
+	match sort_method:
+		SortPlayerMethods.ranked:
+			var ranked_players := players.duplicate()
+			ranked_players.sort_custom(self, "player_sort_by_rank")
+			return ranked_players
+		SortPlayerMethods.inverted:
+			var inverted_players := players.duplicate()
+			inverted_players.invert()
+			return inverted_players
+		SortPlayerMethods.ranked_inverted:
+			var ranked_players := players.duplicate()
+			ranked_players.sort_custom(self, "player_sort_by_rank")
+			ranked_players.invert()
+			return ranked_players
+		_:
+			return players.duplicate()
 
 # @pure
 func get_lead_player():
@@ -201,6 +214,10 @@ func is_every_player_ready() -> bool:
 # @pure
 func has_room_for_new_player() -> bool:
 	return players.size() < MAX_PLAYERS
+
+# @pure
+func player_sort_by_rank(player_a: Dictionary, player_b: Dictionary):
+	return player_a.rank < player_b.rank 
 
 ###################
 # Player node API #
@@ -383,7 +400,7 @@ func on_match_presence(data: Dictionary):
 			if leave_match_peer["session_id"] != my_session_id:
 				var match_peer = match_peers[leave_match_peer["session_id"]]
 				disconnect_webrtc_peer(match_peer)
-				for player in get_players(true):
+				for player in get_players(SortPlayerMethods.inverted):
 					if player.peer_id == match_peer["peer_id"]:
 						remove_player(player.id)
 

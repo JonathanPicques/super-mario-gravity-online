@@ -1,0 +1,11 @@
+{
+  "name": "super-mario-gravity-online",
+  "routes": [
+    {
+      "src": "/.*",
+      "headers": {
+        "cache-control": "no-store"
+      }
+    }
+  ]
+}

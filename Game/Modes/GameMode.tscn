@@ -47,7 +47,12 @@ __meta__ = {
 [node name="Viewport1" type="Viewport" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1"]
 size = Vector2( 254, 142 )
 handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 0
+render_direct_to_screen = true
 render_target_update_mode = 3
+audio_listener_enable_2d = true
 
 [node name="MapSlot" type="Node2D" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1"]
 
@@ -73,7 +78,12 @@ __meta__ = {
 [node name="Viewport2" type="Viewport" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control2/ViewportContainer2"]
 size = Vector2( 254, 142 )
 handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 0
+render_direct_to_screen = true
 render_target_update_mode = 3
+audio_listener_enable_2d = true
 
 [node name="RowContainer2" type="HBoxContainer" parent="SplitScreenContainer"]
 margin_top = 146.0
@@ -106,7 +116,12 @@ __meta__ = {
 [node name="Viewport3" type="Viewport" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3"]
 size = Vector2( 254, 142 )
 handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 0
+render_direct_to_screen = true
 render_target_update_mode = 3
+audio_listener_enable_2d = true
 
 [node name="Control4" type="Control" parent="SplitScreenContainer/RowContainer2/ColumnContainer2"]
 margin_left = 258.0
@@ -128,4 +143,9 @@ __meta__ = {
 [node name="Viewport4" type="Viewport" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4"]
 size = Vector2( 254, 142 )
 handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 0
+render_direct_to_screen = true
 render_target_update_mode = 3
+audio_listener_enable_2d = true
