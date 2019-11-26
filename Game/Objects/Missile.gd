@@ -4,6 +4,14 @@ const SPEED := 100
 
 onready var Game = get_node("/root/Game")
 
+enum Type {
+	basic,
+	auto,
+	ghost
+}
+
+export(Type) var type: int = Type.basic
+
 var target = null
 var velocity := Vector2.ZERO
 var direction := 1
