@@ -2,12 +2,12 @@ extends Control
 class_name GameModeNode
 
 onready var Game = get_node("/root/Game")
-onready var MapSlot: Node2D = $SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer1/Viewport1/MapSlot
+onready var MapSlot: Node2D = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1/MapSlot
 
-onready var Viewport1 = $SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer1/Viewport1
-onready var Viewport2 = $SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer2/Viewport2
-onready var Viewport3 = $SplitScreenContainer/RowContainer2/ColumnContainer2/ViewportContainer3/Viewport3
-onready var Viewport4 = $SplitScreenContainer/RowContainer2/ColumnContainer2/ViewportContainer4/Viewport4
+onready var Viewport1 = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1
+onready var Viewport2 = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control2/ViewportContainer2/Viewport2
+onready var Viewport3 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3/Viewport3
+onready var Viewport4 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4/Viewport4
 
 const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
@@ -29,11 +29,11 @@ func setup_split_screen():
 	match player_count:
 		1: 
 			$SplitScreenContainer/RowContainer2.visible = false
-			$SplitScreenContainer/RowContainer1/ColumnContainer1/ViewportContainer2.visible = false
+			$SplitScreenContainer/RowContainer1/ColumnContainer1/Control2.visible = false
 		2: 
 			$SplitScreenContainer/RowContainer2.visible = false
 		3: 
-			$SplitScreenContainer/RowContainer2/ColumnContainer2/ViewportContainer4.visible = false
+			$SplitScreenContainer/RowContainer2/ColumnContainer2/Control4.visible = false
 	Viewport2.world_2d = Viewport1.world_2d
 	Viewport3.world_2d = Viewport1.world_2d
 	Viewport4.world_2d = Viewport1.world_2d

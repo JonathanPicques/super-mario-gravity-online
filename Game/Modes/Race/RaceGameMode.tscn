@@ -1,19 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Modes/Race/RaceGameMode.gd" type="Script" id=2]
 [ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Game/Modes/Race/RaceGameModeUI.tscn" type="PackedScene" id=4]
 
 [node name="RaceGameMode" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+
+[node name="RaceGameModeUI" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1" index="1" instance=ExtResource( 4 )]
+
+[node name="RaceGameModeUI" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control2" index="1" instance=ExtResource( 4 )]
+player_id = 1
+
+[node name="RaceGameModeUI" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control3" index="1" instance=ExtResource( 4 )]
+player_id = 2
+
+[node name="RaceGameModeUI" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control4" index="1" instance=ExtResource( 4 )]
+player_id = 3
 
 [node name="CanvasLayerUI" type="CanvasLayer" parent="." index="1"]
 
 [node name="PositionLabel" type="Label" parent="CanvasLayerUI" index="0"]
 margin_left = 448.0
-margin_top = 16.0
+margin_top = 16.6302
 margin_right = 496.0
-margin_bottom = 49.0
+margin_bottom = 49.6302
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 2
