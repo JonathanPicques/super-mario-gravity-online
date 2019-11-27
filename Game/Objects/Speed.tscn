@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Objects/Textures/Speed.png" type="Texture" id=1]
+[ext_resource path="res://Game/Objects/Speed.gd" type="Script" id=2]
+
+[node name="Speed" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )

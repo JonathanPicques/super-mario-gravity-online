@@ -3,13 +3,12 @@ extends Node2D
 const SPEED := 250
 export var use_target := false
 
+var player_node = null
+
 onready var Game = get_node("/root/Game")
 
-var target = null
-var velocity := Vector2.ZERO
+var target_node = null
 var direction := 1
-var player_node = null
-var acceleration := Vector2.ZERO
 
 func _ready():
 	direction = player_node.direction
@@ -17,11 +16,11 @@ func _ready():
 	if use_target:
 		var closest = Game.GameMultiplayer.get_closest_player(player_node.player.id)
 		if closest:
-			target = Game.GameMultiplayer.get_player_node(closest.id)
+			target_node = Game.GameMultiplayer.get_player_node(closest.id)
 
 func _physics_process(delta: float):
-	if is_instance_valid(target):
-		var v = (target.position - position).normalized() * SPEED * delta
+	if is_instance_valid(target_node):
+		var v = (target_node.position - position).normalized() * SPEED * delta
 		rotation = v.angle()
 		position += v
 	else:

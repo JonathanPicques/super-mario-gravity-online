@@ -3,13 +3,14 @@ class_name PlayerNode
 
 onready var Game = get_node("/root/Game")
 
-onready var PlayerTimer: Timer = $"Timer"
-onready var PlayerSprite: Sprite = $"Sprite"
-onready var PlayerWallChecker: RayCast2D = $"WallChecker"
-onready var PlayerCeilingChecker: RayCast2D = $"CeilingChecker"
-onready var PlayerAnimationPlayer: AnimationPlayer = $"AnimationPlayer"
-onready var PlayerSoundEffectPlayers := [$"SoundEffects/SFX1", $"SoundEffects/SFX2", $"SoundEffects/SFX3", $"SoundEffects/SFX4"]
-onready var PlayerNetworkDeadReckoning: Tween = $"NetworkDeadReckoning"
+onready var PlayerTimer: Timer = $Timer
+onready var PlayerSprite: Sprite = $Sprite
+onready var PlayerWallChecker: RayCast2D = $WallChecker
+onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
+onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
+onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
+onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
+onready var ObjectTimer: Timer = $ObjectTimer
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
@@ -62,7 +63,12 @@ var velocity_prev := Vector2()
 var input_velocity := Vector2()
 var velocity_offset := Vector2()
 var wallslide_cancelled = false # reset on stand or walljump
+var speed_multiplier = 1.0
+var is_invincible = false
 
+var OBJECT_TIME_SPEED = 4.0
+var OBJECT_TIME_INVINCIBILITY = 4.0
+var SPEED_MULTIPLIER = 1.5
 var JUMP_STRENGTH := -190.0
 var CEILING_KNOCKDOWN := 50.0
 var WALL_JUMP_STRENGTH := -140.0
@@ -105,6 +111,7 @@ func _process(delta):
 # @impure
 func _physics_process(delta: float):
 	process_input(delta)
+	process_object(delta)
 	process_velocity(delta)
 	match state:
 		PlayerState.stand: tick_stand(delta)
@@ -182,6 +189,15 @@ func process_input(delta: float):
 	_jump = input_jump
 	# compute input velocity
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
+
+# Reset all stats affected by objects when timer finishes
+# @impure
+func process_object(delta: float):
+	if ObjectTimer.is_stopped():
+		speed_multiplier = 1.0
+		if active_object:
+			active_object.queue_free()
+			active_object = null
 
 # process_velocity updates player position after applying velocity.
 # @impure
@@ -322,7 +338,7 @@ func handle_direction():
 # @impure
 func handle_floor_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if has_same_direction(direction, input_velocity.x):
-		velocity.x = get_acceleration(delta, velocity.x, max_speed, acceleration)
+		velocity.x = get_acceleration(delta, velocity.x, max_speed, acceleration) * speed_multiplier
 	else:
 		velocity.x = get_deceleration(delta, velocity.x, deceleration)
 
@@ -330,7 +346,7 @@ func handle_floor_move(delta: float, max_speed: float, acceleration: float, dece
 # @impure
 func handle_airborne_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if input_velocity.x != 0:
-		velocity.x = clamp(velocity.x + delta * sign(input_velocity.x) * acceleration, -max_speed, max_speed)
+		velocity.x = clamp(velocity.x + delta * sign(input_velocity.x) * acceleration, -max_speed, max_speed) * speed_multiplier
 	else:
 		handle_deceleration_move(delta, deceleration)
 
@@ -435,6 +451,8 @@ func tick_run(delta: float):
 		return set_state(PlayerState.fall)
 	if is_on_wall():
 		return set_state(PlayerState.push_wall)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
 	if input_down:
 		return set_state(PlayerState.stand_to_crouch)
 	if input_jump_once and not is_on_ceiling_passive():
@@ -456,6 +474,8 @@ func tick_walk(delta: float):
 		return set_state(PlayerState.fall)
 	if is_on_wall():
 		return set_state(PlayerState.push_wall)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
 	if input_down:
 		return set_state(PlayerState.stand_to_crouch)
 	if input_jump_once and not is_on_ceiling_passive():
@@ -551,6 +571,8 @@ func tick_fall(delta: float):
 		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x))
 	):
 		return set_state(PlayerState.wallslide)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
 	if input_jump_once and not is_on_ceiling_passive() and falling_time < FLOOR_FALL_JUMP_THRESHOLD:
 		velocity.y = 0
 		falling_time = 0.0
@@ -598,6 +620,8 @@ func tick_jump(delta: float):
 			play_sound_effect(BumpSFX)
 			pass
 		return set_state(PlayerState.fall)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
 
@@ -656,17 +680,20 @@ func tick_walljump(delta: float):
 onready var ObjectScenes = [ # TODO: ponderate random
 	preload("res://Game/Objects/MissileGhost.tscn"),
 	preload("res://Game/Objects/MissileAuto.tscn"),
-	preload("res://Game/Objects/MissileBasic.tscn")
+	preload("res://Game/Objects/MissileBasic.tscn"),
+	preload("res://Game/Objects/Invincibility.tscn"),
+	preload("res://Game/Objects/Speed.tscn")
 ]
 
 var current_object = null
+var active_object = null
 
 func get_object():
-	print("get_object()")
 	current_object = ObjectScenes[randi() % ObjectScenes.size()].instance()
 
 func pre_use_object():
-	print("use_object()")
+	if active_object:
+		return
 	var size = $CollisionBody.get_shape().get_extents()
 	current_object.position = (Vector2(global_position.x, global_position.y - size[1]))
 	current_object.player_node = self
@@ -677,6 +704,19 @@ func tick_use_object(delta: float):
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	return set_state(PlayerState.stand)
+
+func apply_object_speed(object):
+	active_object = object
+	speed_multiplier = SPEED_MULTIPLIER
+	ObjectTimer.wait_time = OBJECT_TIME_SPEED
+	ObjectTimer.start()
+
+func apply_object_invincibility(object):
+	active_object = object
+	speed_multiplier = SPEED_MULTIPLIER
+	is_invincible = true
+	ObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
+	ObjectTimer.start()
 
 ###
 # Animation driven

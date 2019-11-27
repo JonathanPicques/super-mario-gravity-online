@@ -10,9 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "GameInputNode",
+"language": "GDScript",
+"path": "res://Game/GameInput.gd"
+}, {
+"base": "Control",
+"class": "GameModeNode",
+"language": "GDScript",
+"path": "res://Game/Modes/GameMode.gd"
+}, {
+"base": "Node",
 "class": "GameMultiplayerNode",
 "language": "GDScript",
 "path": "res://Game/GameMultiplayer.gd"
+}, {
+"base": "Control",
+"class": "GameNode",
+"language": "GDScript",
+"path": "res://Game/Game.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerNode",
@@ -20,7 +35,10 @@ _global_script_classes=[ {
 "path": "res://Game/Players/Player.gd"
 } ]
 _global_script_class_icons={
+"GameInputNode": "",
+"GameModeNode": "",
 "GameMultiplayerNode": "",
+"GameNode": "",
 "PlayerNode": ""
 }
 
@@ -43,7 +61,7 @@ window/size/width=512
 window/size/height=288
 window/size/test_width=1024
 window/size/test_height=576
-window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -297,6 +315,10 @@ device_4_cancel={
 2d_physics/layer_4="OneWayPlatform"
 2d_physics/layer_5="ObjectCollision"
 2d_physics/layer_6="Missile"
+
+[physics]
+
+common/physics_fps=144
 
 [rendering]
 
