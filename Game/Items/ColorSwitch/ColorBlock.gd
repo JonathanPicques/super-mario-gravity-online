@@ -11,29 +11,23 @@ enum BlockColor {
 
 export(BlockColor) var color: int = BlockColor.Blue
 
-const OnTextures = [
-	preload("res://Game/Items/ColorSwitch/Textures/BlockRedOn.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/BlockBlueOn.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/BlockGreenOn.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/BlockYellowOn.png")
-]
-
-const OffTextures = [
-	preload("res://Game/Items/ColorSwitch/Textures/BlockRedOff.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/BlockBlueOff.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/BlockGreenOff.png"),
-	preload("res://Game/Items/ColorSwitch/Textures/BlockYellowOff.png")
+const ColorTextures = [
+	preload("res://Game/Items/ColorSwitch/Textures/BlockRed.png"),
+	preload("res://Game/Items/ColorSwitch/Textures/BlockBlue.png"),
+	preload("res://Game/Items/ColorSwitch/Textures/BlockGreen.png"),
+	preload("res://Game/Items/ColorSwitch/Textures/BlockYellow.png")
 ]
 
 func _ready():
-	$Sprite.texture = OffTextures[color]
+	$Sprite.texture = ColorTextures[color]
+	$Sprite.modulate.a = 0.4
 	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 	Game.GameMode.connect("item_color_switch_trigger", self, "on_trigger")
 
 func on_trigger(switch_color: int):
 	if switch_color == color:
-		$Sprite.texture = OnTextures[color]
+		$Sprite.modulate.a = 1
 		$StaticBody2D/CollisionShape2D.set_deferred("disabled", false)
 	else:
-		$Sprite.texture = OffTextures[color]
+		$Sprite.modulate.a = 0.4
 		$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
