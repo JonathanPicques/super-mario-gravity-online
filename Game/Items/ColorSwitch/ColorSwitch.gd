@@ -30,9 +30,10 @@ func _ready():
 	$Sprite.texture = OnTextures[color] if is_on else OffTextures[color]
 	Game.GameMode.connect("item_color_switch_trigger", self, "on_trigger")
 
-func _on_Area2D_body_entered(body):
-	if !is_on:
-		Game.GameMode.item_color_switch_trigger(color)
+func _on_Area2D_body_entered(player_node):
+	if player_node.state == player_node.PlayerState.wallslide or player_node.state == player_node.PlayerState.fall:
+		if !is_on:
+			Game.GameMode.item_color_switch_trigger(color)
 
 func on_trigger(switch_color: int):
 	if switch_color == color:

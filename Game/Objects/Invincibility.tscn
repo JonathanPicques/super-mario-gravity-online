@@ -8,3 +8,5 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 0, 0, 16, 16 )
