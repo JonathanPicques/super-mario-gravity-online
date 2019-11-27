@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/Maps/Base/Base.gd" type="Script" id=1]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://Game/Maps/Textures/Gray.png" type="Texture" id=3]
 [ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Game/Items/ObjectBox/ObjectBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=11]
 
 [node name="Base" type="Navigation2D"]
@@ -58,3 +59,9 @@ position = Vector2( 512, 0 )
 
 [node name="Spike5" parent="." instance=ExtResource( 4 )]
 position = Vector2( 496, 0 )
+
+[node name="ObjectBox" parent="." instance=ExtResource( 6 )]
+position = Vector2( 167, 128 )
+
+[node name="ObjectBox2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 167, 93 )
