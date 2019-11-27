@@ -46,22 +46,25 @@ __meta__ = {
 }
 
 [node name="Spike" parent="." instance=ExtResource( 4 )]
-position = Vector2( 432, 0 )
+position = Vector2( 432, 16 )
 
 [node name="Spike2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 448, 0 )
+position = Vector2( 448, 16 )
 
 [node name="Spike3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 528, -16 )
+position = Vector2( 528, 0 )
 
 [node name="Spike4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 512, 0 )
+position = Vector2( 512, 16 )
 
 [node name="Spike5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 496, 0 )
+position = Vector2( 496, 16 )
+
+[node name="Spike6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 160, 176 )
 
 [node name="ObjectBox" parent="." instance=ExtResource( 6 )]
-position = Vector2( 167, 128 )
+position = Vector2( 192, 128 )
 
 [node name="ObjectBox2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 167, 93 )
+position = Vector2( 192, 96 )
