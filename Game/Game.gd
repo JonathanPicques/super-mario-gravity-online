@@ -19,7 +19,7 @@ var scene = null
 var skins := [
 	{
 		name = "Mario",
-		node_path = "res://Game/Players/Mario/Mario.tscn",
+		node_path = "res://Game/Players/Frog/Frog.tscn",
 		preview_ready_path = "res://Game/Players/Mario/Textures/Jump/jump_01.png",
 		preview_select_path = "res://Game/Players/Mario/Textures/Stand/stand_01.png",
 	},

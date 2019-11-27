@@ -9,8 +9,8 @@ onready var PlayerWallChecker: RayCast2D = $WallChecker
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
-onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
 onready var ObjectTimer: Timer = $ObjectTimer
+onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
@@ -20,11 +20,9 @@ onready var Step_01_SFX: AudioStream
 onready var Step_02_SFX: AudioStream
 
 enum PlayerState {
-	none,
-	stand, stand_turn, stand_to_crouch,
-	run, walk, crouch, crouch_to_stand, move_turn, push_wall,
-	fall, fall_to_stand, jump,
-	wallslide, walljump, use_object
+	none, stand, run, move_turn, push_wall,
+	fall, jump, wallslide, walljump,
+	use_object
 }
 
 const FLOOR := Vector2(0, -1) # floor direction.
@@ -59,31 +57,28 @@ var velocity := Vector2()
 var direction := 1
 var disable_snap := 0.0
 var falling_time := 0.0
+var is_invincible := false
 var velocity_prev := Vector2()
 var input_velocity := Vector2()
 var velocity_offset := Vector2()
-var wallslide_cancelled = false # reset on stand or walljump
-var speed_multiplier = 1.0
-var is_invincible = false
+var speed_multiplier := 1.0
+var wallslide_cancelled := false # reset on stand or walljump
 
-var OBJECT_TIME_SPEED = 4.0
-var OBJECT_TIME_INVINCIBILITY = 4.0
-var SPEED_MULTIPLIER = 1.5
-var JUMP_STRENGTH := -190.0
-var CEILING_KNOCKDOWN := 50.0
-var WALL_JUMP_STRENGTH := -140.0
-var WALL_JUMP_PUSH_STRENGTH := 105.0
-
-var WALK_MAX_SPEED := 105.0
-var WALK_ACCELERATION := 300.0
-var WALK_DECELERATION := 350.0
+var SPEED_MULTIPLIER := 1.5
+var OBJECT_TIME_SPEED := 4.0
+var OBJECT_TIME_INVINCIBILITY := 4.0
 
 var RUN_MAX_SPEED := 145.0
-var RUN_ACCELERATION := 350.0
-var RUN_DECELERATION := 370.0
+var RUN_ACCELERATION := 550.0
+var RUN_DECELERATION := 570.0
 
-var GRAVITY_MAX_SPEED := 500.0
-var GRAVITY_ACCELERATION := 500.0
+var JUMP_STRENGTH := -350.0
+var CEILING_KNOCKDOWN := 50.0
+var WALL_JUMP_STRENGTH := -350.0
+var WALL_JUMP_PUSH_STRENGTH := 85.0
+
+var GRAVITY_MAX_SPEED := 1200.0
+var GRAVITY_ACCELERATION := 1300.0
 
 # _ready is called when the Player node is ready.
 # @driven(lifecycle)
@@ -115,16 +110,10 @@ func _physics_process(delta: float):
 	process_velocity(delta)
 	match state:
 		PlayerState.stand: tick_stand(delta)
-		PlayerState.stand_turn: tick_stand_turn(delta)
-		PlayerState.stand_to_crouch: tick_stand_to_crouch(delta)
 		PlayerState.run: tick_run(delta)
-		PlayerState.walk: tick_walk(delta)
-		PlayerState.crouch: tick_crouch(delta)
-		PlayerState.crouch_to_stand: tick_crouch_to_stand(delta)
 		PlayerState.move_turn: tick_move_turn(delta)
 		PlayerState.push_wall: tick_push_wall(delta)
 		PlayerState.fall: tick_fall(delta)
-		PlayerState.fall_to_stand: tick_fall_to_stand(delta)
 		PlayerState.jump: tick_jump(delta)
 		PlayerState.wallslide: tick_wallslide(delta)
 		PlayerState.walljump: tick_walljump(delta)
@@ -229,16 +218,10 @@ func set_state(new_state: int):
 	state = new_state
 	match state:
 		PlayerState.stand: pre_stand()
-		PlayerState.stand_turn: pre_stand_turn()
-		PlayerState.stand_to_crouch: pre_stand_to_crouch()
 		PlayerState.run: pre_run()
-		PlayerState.walk: pre_walk()
-		PlayerState.crouch: pre_crouch()
-		PlayerState.crouch_to_stand: pre_crouch_to_stand()
 		PlayerState.move_turn: pre_move_turn()
 		PlayerState.push_wall: pre_push_wall()
 		PlayerState.fall: pre_fall()
-		PlayerState.fall_to_stand: pre_fall_to_stand()
 		PlayerState.jump: pre_jump()
 		PlayerState.wallslide: pre_wallslide()
 		PlayerState.walljump: pre_walljump()
@@ -249,7 +232,6 @@ func set_state(new_state: int):
 func set_direction(new_direction: int):
 	direction = new_direction
 	PlayerSprite.scale.x = abs(PlayerSprite.scale.x) * sign(direction)
-	PlayerSprite.position.x = 9 if direction < 0 else -9
 	PlayerWallChecker.cast_to.x = abs(PlayerWallChecker.cast_to.x) * sign(direction)
 
 # set_animation changes the Player animation.
@@ -406,43 +388,20 @@ func pre_stand():
 
 func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, WALK_MAX_SPEED)
+	handle_deceleration_move(delta, RUN_MAX_SPEED)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	if input_jump_once and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
-	if input_down_once:
-		return set_state(PlayerState.stand_to_crouch)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
 	if input_velocity.x != 0 and has_same_direction(direction, input_velocity.x):
-		return set_state(PlayerState.walk)
+		return set_state(PlayerState.run)
 	elif input_velocity.x != 0 and not has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.move_turn)
 
-func pre_stand_turn():
-	set_direction(-direction)
-
-func tick_stand_turn(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_floor_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	return set_state(PlayerState.stand)
-
-func pre_stand_to_crouch():
-	set_animation("stand_to_crouch")
-
-func tick_stand_to_crouch(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, WALK_DECELERATION * 2.0)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	if is_animation_finished():
-		return set_state(PlayerState.crouch)
-
 func pre_run():
-	set_animation("run", 0.0 if PlayerAnimationPlayer.current_animation != "walk" else PlayerAnimationPlayer.current_animation_position * 0.8)
+	set_animation("run")
 
 func tick_run(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
@@ -453,98 +412,30 @@ func tick_run(delta: float):
 		return set_state(PlayerState.push_wall)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
-	if input_down:
-		return set_state(PlayerState.stand_to_crouch)
 	if input_jump_once and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
-	if not input_run:
-		return set_state(PlayerState.walk)
 	if input_velocity.x != 0 and has_invert_direction(direction, input_velocity.x):
 		return set_state(PlayerState.move_turn)
 	if input_velocity.x == 0 and velocity.x == 0:
-		return set_state(PlayerState.stand)
-
-func pre_walk():
-	set_animation("walk", 0.0 if PlayerAnimationPlayer.current_animation != "run" else PlayerAnimationPlayer.current_animation_position * 1.2)
-
-func tick_walk(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_floor_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	if is_on_wall():
-		return set_state(PlayerState.push_wall)
-	if input_use and current_object:
-		return set_state(PlayerState.use_object)
-	if input_down:
-		return set_state(PlayerState.stand_to_crouch)
-	if input_jump_once and not is_on_ceiling_passive():
-		return set_state(PlayerState.jump)
-	if input_run:
-		return set_state(PlayerState.run)
-	if input_velocity.x != 0 and has_invert_direction(direction, input_velocity.x):
-		return set_state(PlayerState.move_turn)
-	if input_velocity.x == 0 and velocity.x == 0:
-		return set_state(PlayerState.stand)
-
-func pre_crouch():
-	start_timer(0.05)
-	set_animation("crouch")
-	play_sound_effect(CrouchSFX)
-
-func tick_crouch(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, WALK_DECELERATION * 2.0)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	if is_timer_finished() and not input_down:
-		return set_state(PlayerState.crouch_to_stand)
-
-func pre_crouch_to_stand():
-	set_animation("crouch_to_stand")
-
-func tick_crouch_to_stand(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, WALK_DECELERATION * 2.0)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	if is_animation_finished():
 		return set_state(PlayerState.stand)
 
 func pre_move_turn():
-	set_animation("skid")
+	pass
 
 func tick_move_turn(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_floor_move(delta, \
-		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
-		WALK_ACCELERATION if not input_run else RUN_ACCELERATION, \
-		(WALK_DECELERATION if not input_run else RUN_DECELERATION) * 2.0 \
-	)
+	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, (RUN_DECELERATION) * 2.0)
 	if not is_on_floor():
 		set_direction(-direction)
 		return set_state(PlayerState.fall)
 	if has_same_direction(direction, input_velocity.x):
-		return set_state(PlayerState.walk)
+		return set_state(PlayerState.run)
 	if input_jump_once and not is_on_ceiling_passive():
 		set_direction(-direction)
 		return set_state(PlayerState.jump)
 	if velocity.x == 0:
 		set_direction(-direction)
-		return set_state(PlayerState.walk)
-
-func pre_push_wall():
-	set_animation("push")
-
-func tick_push_wall(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_floor_move(delta, WALK_MAX_SPEED, WALK_ACCELERATION, WALK_DECELERATION)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	if not is_on_wall_passive() or not has_same_direction(direction, input_velocity.x):
-		return set_state(PlayerState.stand)
-	if input_jump_once and not is_on_ceiling_passive():
-		return set_state(PlayerState.jump)
+		return set_state(PlayerState.run)
 
 ###
 # Player movement airborne states.
@@ -557,14 +448,10 @@ func tick_fall(delta: float):
 	falling_time += delta
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_direction()
-	handle_airborne_move(delta, \
-		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
-		WALK_ACCELERATION if not input_run else RUN_ACCELERATION, \
-		WALK_DECELERATION if not input_run else RUN_DECELERATION \
-	)
+	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if is_on_floor():
 		falling_time = 0.0
-		return set_state(PlayerState.fall_to_stand)
+		return set_state(PlayerState.stand)
 	if is_on_wall_passive() and not input_down and (\
 		(not wallslide_cancelled and is_timer_finished()) or \
 		(not wallslide_cancelled and has_same_direction(direction, input_velocity.x)) or \
@@ -573,29 +460,6 @@ func tick_fall(delta: float):
 		return set_state(PlayerState.wallslide)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
-	if input_jump_once and not is_on_ceiling_passive() and falling_time < FLOOR_FALL_JUMP_THRESHOLD:
-		velocity.y = 0
-		falling_time = 0.0
-		return set_state(PlayerState.jump)
-
-func pre_fall_to_stand():
-	start_timer(0.10)
-	set_animation("fall_to_stand")
-
-func tick_fall_to_stand(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, WALK_DECELERATION if not input_run else RUN_DECELERATION)
-	if not is_on_floor():
-		return set_state(PlayerState.fall)
-	if input_jump_once and not is_on_ceiling_passive():
-		return set_state(PlayerState.jump)
-	if input_down:
-		return set_state(PlayerState.stand_to_crouch)
-	if is_timer_finished():
-		if has_invert_direction(direction, velocity.x):
-			set_direction(-direction)
-		if not input_down:
-			return set_state(PlayerState.stand if velocity.x == 0 else PlayerState.walk)
 
 func pre_jump():
 	handle_jump(JUMP_STRENGTH)
@@ -605,13 +469,9 @@ func pre_jump():
 		set_direction(int(sign(input_velocity.x)))
 
 func tick_jump(delta: float):
-	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
+	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_direction()
-	handle_airborne_move(delta, \
-		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
-		WALK_ACCELERATION if not input_run else RUN_ACCELERATION, \
-		WALK_DECELERATION if not input_run else RUN_DECELERATION \
-	)
+	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if is_on_floor():
 		return set_state(PlayerState.stand)
 	if is_on_ceiling():
@@ -629,6 +489,19 @@ func tick_jump(delta: float):
 # Player movement wall states
 ###
 
+func pre_push_wall():
+	set_animation("stand")
+
+func tick_push_wall(delta: float):
+	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
+	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
+	if not is_on_floor():
+		return set_state(PlayerState.fall)
+	if not is_on_wall_passive() or not has_same_direction(direction, input_velocity.x):
+		return set_state(PlayerState.stand)
+	if input_jump_once and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
+
 func pre_wallslide():
 	velocity.x = 0
 	velocity.y = velocity.y * 0.1
@@ -637,7 +510,7 @@ func pre_wallslide():
 func tick_wallslide(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED * 0.5, GRAVITY_ACCELERATION * 0.25)
 	if is_on_floor():
-		return set_state(PlayerState.fall_to_stand)
+		return set_state(PlayerState.stand)
 	if not is_on_wall_passive():
 		return set_state(PlayerState.fall)
 	if input_down_once:
@@ -658,11 +531,7 @@ func pre_walljump():
 
 func tick_walljump(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION if not input_jump else GRAVITY_ACCELERATION * 0.75)
-	handle_airborne_move(delta,
-		WALK_MAX_SPEED if not input_run else RUN_MAX_SPEED, \
-		WALK_ACCELERATION if not input_run else RUN_ACCELERATION, \
-		(WALK_DECELERATION if not input_run else RUN_DECELERATION) * 0.25 \
-	)
+	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION * 0.25)
 	if is_on_floor():
 		return set_state(PlayerState.stand)
 	if is_on_ceiling():
@@ -727,21 +596,3 @@ func fx_step_01():
 
 func fx_step_02():
 	play_sound_effect(Step_02_SFX)
-
-###
-# Debug
-###
-
-func print_state():
-	match state:
-		PlayerState.stand: print("stand")
-		PlayerState.stand_turn: print("stand_turn")
-		PlayerState.run: print("run")
-		PlayerState.walk: print("walk")
-		PlayerState.crouch: print("crouch")
-		PlayerState.move_turn: print("move_turn")
-		PlayerState.push_wall: print("push_wall")
-		PlayerState.fall: print("fall")
-		PlayerState.fall_to_stand: print("fall_to_stand")
-		PlayerState.jump: print("jump")
-		_: print("state not mapped", state)

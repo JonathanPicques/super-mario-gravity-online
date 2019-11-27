@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Game/Players/Mario/Textures/Crouch/crouch_01.png" type="Texture" id=2]
+[ext_resource path="res://Game/Players/Mario/Textures/Stand/stand_01.png" type="Texture" id=2]
 [ext_resource path="res://Game/Players/Mario/Anims/crouch.tres" type="Animation" id=3]
 [ext_resource path="res://Game/Players/Mario/Anims/crouch_to_stand.tres" type="Animation" id=4]
 [ext_resource path="res://Game/Players/Mario/Anims/fall.tres" type="Animation" id=5]
@@ -23,7 +23,7 @@
 [node name="Sprite" parent="." index="1"]
 position = Vector2( -10, -29 )
 texture = ExtResource( 2 )
-offset = Vector2( -3, 2 )
+offset = Vector2( 1, 0 )
 
 [node name="WallChecker" parent="." index="3"]
 position = Vector2( 0, -13 )
