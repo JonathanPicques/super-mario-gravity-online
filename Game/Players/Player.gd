@@ -5,12 +5,13 @@ onready var Game = get_node("/root/Game")
 
 onready var PlayerTimer: Timer = $Timer
 onready var PlayerSprite: Sprite = $Sprite
+onready var PlayerObjectTimer: Timer = $ObjectTimer
 onready var PlayerWallChecker: RayCast2D = $WallChecker
+onready var PlayerCollisionBody: CollisionShape2D = $CollisionBody
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
-onready var ObjectTimer: Timer = $ObjectTimer
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
@@ -21,7 +22,8 @@ onready var Step_02_SFX: AudioStream
 enum PlayerState {
 	none, stand, run, move_turn, push_wall,
 	fall, jump, wallslide, walljump,
-	use_object
+	use_object,
+	death
 }
 
 const FLOOR := Vector2(0, -1) # floor direction.
@@ -62,6 +64,7 @@ var velocity_prev := Vector2()
 var input_velocity := Vector2()
 var velocity_offset := Vector2()
 var speed_multiplier := 1.0
+var last_safe_position := Vector2()
 var wallslide_cancelled := false # reset on stand or walljump
 
 var SPEED_MULTIPLIER := 1.5
@@ -120,6 +123,7 @@ func _physics_process(delta: float):
 		PlayerState.wallslide: tick_wallslide(delta)
 		PlayerState.walljump: tick_walljump(delta)
 		PlayerState.use_object: tick_use_object(delta)
+		PlayerState.death: tick_death(delta)
 
 # _process_network updates player from the given network infos.
 # @driven(client_to_client)
@@ -184,7 +188,7 @@ func process_input(delta: float):
 # Reset all stats affected by objects when timer finishes
 # @impure
 func process_object(delta: float):
-	if ObjectTimer.is_stopped():
+	if PlayerObjectTimer.is_stopped():
 		speed_multiplier = 1.0
 		if active_object:
 			active_object.queue_free()
@@ -228,6 +232,7 @@ func set_state(new_state: int):
 		PlayerState.wallslide: pre_wallslide()
 		PlayerState.walljump: pre_walljump()
 		PlayerState.use_object: pre_use_object()
+		PlayerState.death: pre_death()
 
 # set_direction changes the Player direction and flips the sprite accordingly.
 # @impure
@@ -318,6 +323,11 @@ func handle_direction():
 	if input_direction != 0:
 		set_direction(input_direction)
 
+# handle_last_safe_position saves the last safe position.
+# @impure
+func handle_last_safe_position():
+	last_safe_position = position
+
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
 # @impure
 func handle_floor_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
@@ -392,6 +402,7 @@ func pre_stand():
 func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, RUN_DECELERATION)
+	handle_last_safe_position()
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
@@ -572,15 +583,15 @@ func get_object():
 func apply_object_speed(object):
 	active_object = object
 	speed_multiplier = SPEED_MULTIPLIER
-	ObjectTimer.wait_time = OBJECT_TIME_SPEED
-	ObjectTimer.start()
+	PlayerObjectTimer.wait_time = OBJECT_TIME_SPEED
+	PlayerObjectTimer.start()
 
 func apply_object_invincibility(object):
 	is_invincible = true
 	active_object = object
 	speed_multiplier = SPEED_MULTIPLIER
-	ObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
-	ObjectTimer.start()
+	PlayerObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
+	PlayerObjectTimer.start()
 
 func pre_use_object():
 	if active_object:
@@ -595,6 +606,29 @@ func tick_use_object(delta: float):
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	return set_state(PlayerState.stand)
+
+###
+# Player stun/death
+###
+
+func apply_death(from_pos: Vector2):
+	return set_state(PlayerState.death)
+
+func pre_death():
+	velocity = Vector2(-120, -320)
+	start_timer(2.0)
+	set_animation("death")
+	PlayerCollisionBody.set_deferred("disabled", true)
+
+func tick_death(delta: float):
+	rotation -= 2.0 * delta
+	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
+	if is_timer_finished():
+		rotation = 0.0
+		position = last_safe_position
+		velocity = Vector2()
+		PlayerCollisionBody.set_deferred("disabled", false)
+		return set_state(PlayerState.fall)
 
 ###
 # Animation driven

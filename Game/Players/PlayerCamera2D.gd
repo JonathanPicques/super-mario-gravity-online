@@ -34,4 +34,5 @@ func _ready():
 # @driven(lifecycle)
 # @impure
 func _process(delta):
-	position = player_node.position
+	if player_node.state != player_node.PlayerState.death:
+		position = player_node.position

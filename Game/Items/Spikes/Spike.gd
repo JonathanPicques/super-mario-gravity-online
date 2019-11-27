@@ -1,4 +1,5 @@
 extends Node2D
 
 func _on_Area2D_body_entered(body):
-	print("Handle player death")
+	if body.is_in_group("PlayerNode"):
+		body.apply_death(Vector2())
