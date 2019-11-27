@@ -28,7 +28,7 @@ func start():
 		player_node.position = flag_start_pos
 		player_node.set_network_master(player.peer_id)
 		# debug: offset players by peer_id and peer_player_id
-		player_node.position.x += player.peer_id * 32 + player.peer_player_id * 8
+		player_node.position.x += max(player.peer_id, 0) * 32 + player.peer_player_id * 8 + 32
 		# add the player to the map
 		MapSlot.add_child(player_node)
 		# add the player camera
