@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/Maps/Base/Base.gd" type="Script" id=1]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://Game/Items/ColorSwitch/ColorBlock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorSwitch.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=11]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 16, -32, -16, -32, -16, -176, 528, -176, 192, -80, 672, -176, 672, -112, 528, -112, 528, -96, 304, -96, 304, -80, 336, -48, 336, -64, 560, -64, 576, -16, 528, 0, 496, 0, 560, -80, 624, -80, 624, -16, 576, 0, 528, 16, 496, 16, 464, 0, 464, 16, 432, 16, 432, 0, 368, 0, 368, 176, 256, 176, 192, -48, 256, 208, 480, 208, 480, 224, 432, 288, 384, 304, 336, 304, 288, 288, 496, 224, 496, 288, 432, 304, 384, 320, 336, 320, 288, 304, 208, 288, 208, 176, 144, 176, 144, 160, 16, 160 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 3, 5, 6, 7 ), PoolIntArray( 7, 8, 9 ), PoolIntArray( 9, 10, 4 ), PoolIntArray( 11, 12, 13, 14, 15, 16 ), PoolIntArray( 13, 17, 18, 19, 14 ), PoolIntArray( 14, 20, 15 ), PoolIntArray( 15, 21, 22, 16 ), PoolIntArray( 11, 16, 23 ), PoolIntArray( 23, 24, 25, 26 ), PoolIntArray( 11, 23, 26 ), PoolIntArray( 11, 26, 27 ), PoolIntArray( 11, 27, 28, 29, 30 ), PoolIntArray( 31, 32, 33, 34, 35, 36, 37 ), PoolIntArray( 33, 38, 39, 34 ), PoolIntArray( 34, 40, 35 ), PoolIntArray( 35, 41, 42, 36 ), PoolIntArray( 36, 43, 37 ), PoolIntArray( 31, 37, 44, 45 ), PoolIntArray( 29, 31, 45, 30 ), PoolIntArray( 45, 46, 47, 30 ), PoolIntArray( 30, 47, 48, 0, 4 ), PoolIntArray( 3, 7, 9 ), PoolIntArray( 4, 3, 9 ) ]
+outlines = [ PoolVector2Array( 16, 160, 144, 160, 144, 176, 208, 176, 208, 288, 288, 288, 288, 304, 336, 304, 336, 320, 384, 320, 384, 304, 432, 304, 432, 288, 496, 288, 496, 224, 480, 224, 480, 208, 256, 208, 256, 176, 368, 176, 368, 0, 432, 0, 432, 16, 464, 16, 464, 0, 496, 0, 496, 16, 528, 16, 528, 0, 576, 0, 576, -16, 624, -16, 624, -80, 560, -80, 560, -64, 336, -64, 336, -48, 192, -48, 192, -80, 304, -80, 304, -96, 528, -96, 528, -112, 672, -112, 672, -176, 528, -176, -16, -176, -16, -32, 16, -32 ) ]
 
 [node name="Base" type="Navigation2D"]
 script = ExtResource( 1 )
@@ -46,6 +51,9 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+navpoly = SubResource( 1 )
 
 [node name="Items" type="Node" parent="."]
 
