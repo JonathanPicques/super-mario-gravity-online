@@ -47,7 +47,10 @@ __meta__ = {
 [node name="Viewport1" type="Viewport" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1"]
 size = Vector2( 254, 142 )
 handle_input_locally = false
+hdr = false
+usage = 1
 render_target_update_mode = 3
+audio_listener_enable_2d = true
 
 [node name="MapSlot" type="Node2D" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1"]
 
@@ -75,7 +78,7 @@ size = Vector2( 254, 142 )
 handle_input_locally = false
 hdr = false
 disable_3d = true
-usage = 0
+usage = 1
 render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
@@ -113,7 +116,7 @@ size = Vector2( 254, 142 )
 handle_input_locally = false
 hdr = false
 disable_3d = true
-usage = 0
+usage = 1
 render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
@@ -140,7 +143,7 @@ size = Vector2( 254, 142 )
 handle_input_locally = false
 hdr = false
 disable_3d = true
-usage = 0
+usage = 1
 render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true

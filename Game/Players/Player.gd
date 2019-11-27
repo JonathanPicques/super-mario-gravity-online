@@ -9,8 +9,8 @@ onready var PlayerWallChecker: RayCast2D = $WallChecker
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
-onready var ObjectTimer: Timer = $ObjectTimer
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
+onready var ObjectTimer: Timer = $ObjectTimer
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
@@ -57,6 +57,7 @@ var velocity := Vector2()
 var direction := 1
 var disable_snap := 0.0
 var falling_time := 0.0
+var current_jump := 0  # reset on stand or wallslide
 var is_invincible := false
 var velocity_prev := Vector2()
 var input_velocity := Vector2()
@@ -69,13 +70,15 @@ var OBJECT_TIME_SPEED := 4.0
 var OBJECT_TIME_INVINCIBILITY := 4.0
 
 var RUN_MAX_SPEED := 145.0
-var RUN_ACCELERATION := 550.0
-var RUN_DECELERATION := 570.0
+var RUN_ACCELERATION := 630.0
+var RUN_DECELERATION := 690.0
 
+var MAX_JUMPS := 2
 var JUMP_STRENGTH := -350.0
 var CEILING_KNOCKDOWN := 50.0
-var WALL_JUMP_STRENGTH := -350.0
-var WALL_JUMP_PUSH_STRENGTH := 85.0
+var WALL_JUMP_STRENGTH := -330.0
+var WALL_JUMP_RESTORE_JUMP := 1
+var WALL_JUMP_PUSH_STRENGTH := 55.0
 
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
@@ -291,7 +294,7 @@ func get_sound_effect_player() -> AudioStreamPlayer2D:
 # handle_jump applies jump_strength to jump and disable floor snapping for a little while.
 # @impure
 func handle_jump(jump_strength: float):
-	velocity.y += jump_strength
+	velocity.y = jump_strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
 # handle_gravity applies gravity to the velocity.
@@ -384,14 +387,15 @@ func has_invert_direction(dir1: float, dir2: float) -> bool:
 
 func pre_stand():
 	set_animation("stand")
+	current_jump = 0
 	wallslide_cancelled = false
 
 func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
-	handle_deceleration_move(delta, RUN_MAX_SPEED)
+	handle_deceleration_move(delta, RUN_DECELERATION)
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	if input_jump_once and not is_on_ceiling_passive():
+	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
@@ -412,7 +416,7 @@ func tick_run(delta: float):
 		return set_state(PlayerState.push_wall)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
-	if input_jump_once and not is_on_ceiling_passive():
+	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_velocity.x != 0 and has_invert_direction(direction, input_velocity.x):
 		return set_state(PlayerState.move_turn)
@@ -458,12 +462,16 @@ func tick_fall(delta: float):
 		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x))
 	):
 		return set_state(PlayerState.wallslide)
+	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
 
 func pre_jump():
+	current_jump += 1
+	start_timer(0.14)
 	handle_jump(JUMP_STRENGTH)
-	set_animation("jump")
+	set_animation("jump" if current_jump == 1 else "double_jump")
 	play_sound_effect(JumpSFX)
 	if input_velocity.x != 0:
 		set_direction(int(sign(input_velocity.x)))
@@ -478,10 +486,11 @@ func tick_jump(delta: float):
 		velocity.y = CEILING_KNOCKDOWN
 		if not is_colliding_with_group("no_ceiling_sound"):
 			play_sound_effect(BumpSFX)
-			pass
 		return set_state(PlayerState.fall)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
+	if is_timer_finished() and input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
 
@@ -505,6 +514,7 @@ func tick_push_wall(delta: float):
 func pre_wallslide():
 	velocity.x = 0
 	velocity.y = velocity.y * 0.1
+	current_jump = WALL_JUMP_RESTORE_JUMP
 	set_animation("wallslide")
 
 func tick_wallslide(delta: float):
@@ -546,19 +556,32 @@ func tick_walljump(delta: float):
 # Player objects
 ###
 
-onready var ObjectScenes = [ # TODO: ponderate random
-	preload("res://Game/Objects/MissileGhost.tscn"),
-	preload("res://Game/Objects/MissileAuto.tscn"),
+onready var ObjectScenes := [ # TODO: ponderate random
+	preload("res://Game/Objects/Speed.tscn"),
 	preload("res://Game/Objects/MissileBasic.tscn"),
+	preload("res://Game/Objects/MissileAuto.tscn"),
+	preload("res://Game/Objects/MissileGhost.tscn"),
 	preload("res://Game/Objects/Invincibility.tscn"),
-	preload("res://Game/Objects/Speed.tscn")
 ]
 
-var current_object = null
 var active_object = null
+var current_object = null
 
 func get_object():
 	current_object = ObjectScenes[randi() % ObjectScenes.size()].instance()
+
+func apply_object_speed(object):
+	active_object = object
+	speed_multiplier = SPEED_MULTIPLIER
+	ObjectTimer.wait_time = OBJECT_TIME_SPEED
+	ObjectTimer.start()
+
+func apply_object_invincibility(object):
+	is_invincible = true
+	active_object = object
+	speed_multiplier = SPEED_MULTIPLIER
+	ObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
+	ObjectTimer.start()
 
 func pre_use_object():
 	if active_object:
@@ -573,19 +596,6 @@ func tick_use_object(delta: float):
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
 	return set_state(PlayerState.stand)
-
-func apply_object_speed(object):
-	active_object = object
-	speed_multiplier = SPEED_MULTIPLIER
-	ObjectTimer.wait_time = OBJECT_TIME_SPEED
-	ObjectTimer.start()
-
-func apply_object_invincibility(object):
-	active_object = object
-	speed_multiplier = SPEED_MULTIPLIER
-	is_invincible = true
-	ObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
-	ObjectTimer.start()
 
 ###
 # Animation driven
