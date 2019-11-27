@@ -30,7 +30,6 @@ const FLOOR := Vector2(0, -1) # floor direction.
 const FLOOR_SNAP := Vector2(0, 5) # floor snap for slopes.
 const FLOOR_SNAP_DISABLED := Vector2() # no floor snap for slopes.
 const FLOOR_SNAP_DISABLE_TIME := 0.1 # time during snapping is disabled.
-const FLOOR_FALL_JUMP_THRESHOLD := 0.1 # time allowed after leaving the floor to jump.
 
 const NET_VIEW_INPUT_INDEX := 0
 const NET_VIEW_POSITION_INDEX := 1
@@ -53,20 +52,6 @@ var input_run_once := false
 var input_use_once := false
 var input_jump_once := false
 
-var state: int = PlayerState.none
-var velocity := Vector2()
-var direction := 1
-var disable_snap := 0.0
-var falling_time := 0.0
-var current_jump := 0  # reset on stand or wallslide
-var is_invincible := false
-var velocity_prev := Vector2()
-var input_velocity := Vector2()
-var velocity_offset := Vector2()
-var speed_multiplier := 1.0
-var last_safe_position := Vector2()
-var wallslide_cancelled := false # reset on stand or walljump
-
 var SPEED_MULTIPLIER := 1.5
 var OBJECT_TIME_SPEED := 4.0
 var OBJECT_TIME_INVINCIBILITY := 4.0
@@ -78,12 +63,27 @@ var RUN_DECELERATION := 690.0
 var MAX_JUMPS := 2
 var JUMP_STRENGTH := -350.0
 var CEILING_KNOCKDOWN := 50.0
+var FALL_RESTORE_JUMP := 1
 var WALL_JUMP_STRENGTH := -330.0
 var WALL_JUMP_RESTORE_JUMP := 1
 var WALL_JUMP_PUSH_STRENGTH := 55.0
 
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
+
+var state: int = PlayerState.none
+var velocity := Vector2()
+var direction := 1
+var disable_snap := 0.0
+var falling_time := 0.0
+var is_invincible := false
+var velocity_prev := Vector2()
+var input_velocity := Vector2()
+var velocity_offset := Vector2()
+var jumps_remaining := MAX_JUMPS  # reset on stand or wallslide
+var speed_multiplier := 1.0
+var last_safe_position := Vector2()
+var wallslide_cancelled := false # reset on stand or walljump
 
 # _ready is called when the Player node is ready.
 # @driven(lifecycle)
@@ -396,7 +396,7 @@ func has_invert_direction(dir1: float, dir2: float) -> bool:
 
 func pre_stand():
 	set_animation("stand")
-	current_jump = 0
+	jumps_remaining = MAX_JUMPS
 	wallslide_cancelled = false
 
 func tick_stand(delta: float):
@@ -405,11 +405,11 @@ func tick_stand(delta: float):
 	handle_last_safe_position()
 	if not is_on_floor():
 		return set_state(PlayerState.fall)
-	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
+	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
-	if input_velocity.x != 0 and has_same_direction(direction, input_velocity.x):
+	if input_velocity.x != 0 and has_same_direction(direction, input_velocity.x) and not is_on_wall_passive():
 		return set_state(PlayerState.run)
 	elif input_velocity.x != 0 and not has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.move_turn)
@@ -426,7 +426,7 @@ func tick_run(delta: float):
 		return set_state(PlayerState.push_wall)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
-	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
+	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_velocity.x != 0 and has_invert_direction(direction, input_velocity.x):
 		return set_state(PlayerState.move_turn)
@@ -457,6 +457,8 @@ func tick_move_turn(delta: float):
 
 func pre_fall():
 	set_animation("fall")
+	if jumps_remaining == MAX_JUMPS:
+		jumps_remaining -= 1
 
 func tick_fall(delta: float):
 	falling_time += delta
@@ -469,19 +471,19 @@ func tick_fall(delta: float):
 	if is_on_wall_passive() and not input_down and (\
 		(not wallslide_cancelled and is_timer_finished()) or \
 		(not wallslide_cancelled and has_same_direction(direction, input_velocity.x)) or \
-		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x))
+		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x)) \
 	):
 		return set_state(PlayerState.wallslide)
-	if input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
+	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
 
 func pre_jump():
-	current_jump += 1
+	jumps_remaining -= 1
 	start_timer(0.14)
 	handle_jump(JUMP_STRENGTH)
-	set_animation("jump" if current_jump == 1 else "double_jump")
+	set_animation("jump" if jumps_remaining == 1 else "double_jump")
 	play_sound_effect(JumpSFX)
 	if input_velocity.x != 0:
 		set_direction(int(sign(input_velocity.x)))
@@ -499,7 +501,7 @@ func tick_jump(delta: float):
 		return set_state(PlayerState.fall)
 	if input_use and current_object:
 		return set_state(PlayerState.use_object)
-	if is_timer_finished() and input_jump_once and current_jump < MAX_JUMPS and not is_on_ceiling_passive():
+	if is_timer_finished() and input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
@@ -524,7 +526,7 @@ func tick_push_wall(delta: float):
 func pre_wallslide():
 	velocity.x = 0
 	velocity.y = velocity.y * 0.1
-	current_jump = WALL_JUMP_RESTORE_JUMP
+	jumps_remaining = MAX_JUMPS - 1
 	set_animation("wallslide")
 
 func tick_wallslide(delta: float):
@@ -596,7 +598,7 @@ func apply_object_invincibility(object):
 func pre_use_object():
 	if active_object:
 		return
-	var size = $CollisionBody.get_shape().get_extents()
+	var size = PlayerCollisionBody.get_shape().get_extents()
 	current_object.position = (Vector2(global_position.x, global_position.y - size[1]))
 	current_object.player_node = self
 	get_parent().add_child(current_object)
