@@ -14,7 +14,6 @@ onready var ObjectTimer: Timer = $ObjectTimer
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
-onready var CrouchSFX: AudioStream
 onready var WalljumpSFX: AudioStream
 onready var Step_01_SFX: AudioStream
 onready var Step_02_SFX: AudioStream

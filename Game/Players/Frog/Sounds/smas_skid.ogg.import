@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/smas_skid.ogg-c5e5092ee19d460081eda6af37bbce78.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Frog/Sounds/smas_skid.ogg"
+dest_files=[ "res://.import/smas_skid.ogg-c5e5092ee19d460081eda6af37bbce78.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

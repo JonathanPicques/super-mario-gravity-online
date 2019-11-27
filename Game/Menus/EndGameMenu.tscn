@@ -16,10 +16,10 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 border_width_top = 3
 border_color = Color( 0.262745, 0.286275, 0.313726, 1 )
@@ -119,7 +119,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 6 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
@@ -135,7 +135,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 6 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
@@ -151,7 +151,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 6 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
@@ -167,7 +167,7 @@ custom_styles/hover = ExtResource( 5 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/normal = ExtResource( 6 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_disabled = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color = Color( 0.32549, 0.360784, 0.407843, 1 )
 custom_colors/font_color_hover = Color( 0.32549, 0.360784, 0.407843, 1 )
@@ -181,7 +181,7 @@ anchor_bottom = 1.0
 margin_top = -30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="LeftHint" type="HBoxContainer" parent="Footer"]
 anchor_top = 1.0

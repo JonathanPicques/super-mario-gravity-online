@@ -10,9 +10,9 @@
 [ext_resource path="res://Game/Players/Frog/Textures/DoubleJump.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 10 )
+extents = Vector2( 7, 10 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "double_jump"
 length = 0.36
 loop = true
@@ -54,7 +54,7 @@ tracks/2/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "fall"
 length = 0.08
 loop = true
@@ -138,8 +138,7 @@ tracks/2/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "run"
+[sub_resource type="Animation" id=5]
 length = 0.96
 loop = true
 step = 0.08
@@ -180,8 +179,7 @@ tracks/2/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "stand"
+[sub_resource type="Animation" id=6]
 length = 0.56
 loop = true
 step = 0.08
@@ -222,8 +220,7 @@ tracks/2/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "wallslide"
+[sub_resource type="Animation" id=7]
 length = 0.3
 loop = true
 step = 0.06
@@ -269,9 +266,9 @@ script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( -2, -16 )
-texture = ExtResource( 8 )
+texture = ExtResource( 1 )
 centered = true
-hframes = 6
+hframes = 11
 
 [node name="WallChecker" parent="." index="4"]
 position = Vector2( -2, -10 )
@@ -290,9 +287,9 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" parent="." index="8"]
 autoplay = "stand"
 playback_speed = 1.3
-anims/double_jump = SubResource( 7 )
-anims/fall = SubResource( 5 )
+anims/double_jump = SubResource( 2 )
+anims/fall = SubResource( 3 )
 anims/jump = SubResource( 4 )
-anims/run = SubResource( 3 )
-anims/stand = SubResource( 2 )
-anims/wallslide = SubResource( 6 )
+anims/run = SubResource( 5 )
+anims/stand = SubResource( 6 )
+anims/wallslide = SubResource( 7 )

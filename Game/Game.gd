@@ -18,17 +18,11 @@ const WaitingRoomMenu := preload("res://Game/Menus/WaitingRoomMenu.tscn")
 var scene = null
 var skins := [
 	{
-		name = "Mario",
+		name = "Frog",
 		node_path = "res://Game/Players/Frog/Frog.tscn",
-		preview_ready_path = "res://Game/Players/Mario/Textures/Jump/jump_01.png",
-		preview_select_path = "res://Game/Players/Mario/Textures/Stand/stand_01.png",
+		preview_ready_path = "res://Game/Players/Frog/Textures/Fall.png",
+		preview_select_path = "res://Game/Players/Frog/Textures/Jump.png",
 	},
-	{
-		name = "Luigi",
-		node_path = "res://Game/Players/Luigi/Luigi.tscn",
-		preview_ready_path = "res://Game/Players/Luigi/Textures/Jump/jump_01.png",
-		preview_select_path = "res://Game/Players/Luigi/Textures/Stand/stand_01.png",
-	}
 ]
 
 # _ready is called when the game node is ready.

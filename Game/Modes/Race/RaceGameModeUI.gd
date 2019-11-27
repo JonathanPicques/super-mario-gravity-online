@@ -15,7 +15,6 @@ func _process(delta: float):
 		$Ranking.text = String(player.rank + 1) + "st"
 		player_node = Game.GameMultiplayer.get_player_node(player.id) # TODO: find a better way to assign only once
 		if player_node.current_object:
-			var current = player_node.current_object
 			$ObjectBox/MarginContainer/ObjectSkin.texture = player_node.current_object.get_node("Sprite").texture
 		else:
 			$ObjectBox/MarginContainer/ObjectSkin.texture = null

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/smas_kick.ogg-8d5d9639021df381df0e4321bb503ad4.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Frog/Sounds/smas_kick.ogg"
+dest_files=[ "res://.import/smas_kick.ogg-8d5d9639021df381df0e4321bb503ad4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

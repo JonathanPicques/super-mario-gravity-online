@@ -14,6 +14,5 @@ func _on_JoinGameButton_pressed():
 func _on_SettingsButton_pressed():
 	print("Open settings")
 
-
 func _on_ExitButton_pressed():
 	get_tree().quit()
