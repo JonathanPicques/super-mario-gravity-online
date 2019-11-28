@@ -580,7 +580,9 @@ var active_object = null
 var current_object = null
 
 func get_object():
-	current_object = ObjectScenes[randi() % ObjectScenes.size()].instance()
+	var index = randi() % ObjectScenes.size()
+	print("Get random object: ", index)
+	current_object = ObjectScenes[index].instance()
 
 func apply_object_speed(object):
 	active_object = object
