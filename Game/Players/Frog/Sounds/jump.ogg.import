@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/jump.ogg-d83f4caa5ee056a3cbb9b184b99d90ea.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Frog/Sounds/jump.ogg"
+dest_files=[ "res://.import/jump.ogg-d83f4caa5ee056a3cbb9b184b99d90ea.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

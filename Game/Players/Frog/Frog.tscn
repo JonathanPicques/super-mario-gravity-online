@@ -217,6 +217,23 @@ tracks/2/keys = {
 "update": 1,
 "values": [ 12 ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.32, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "fx_step_01"
+}, {
+"args": [  ],
+"method": "fx_step_02"
+} ]
+}
 
 [sub_resource type="Animation" id=7]
 length = 0.56
@@ -305,9 +322,10 @@ script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( -2, -16 )
-texture = ExtResource( 9 )
+texture = ExtResource( 4 )
 centered = true
-hframes = 7
+hframes = 12
+frame = 10
 
 [node name="WallChecker" parent="." index="4"]
 position = Vector2( -2, -10 )

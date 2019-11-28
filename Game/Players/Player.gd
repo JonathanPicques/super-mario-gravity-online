@@ -15,6 +15,7 @@ onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
+onready var DeathSFX: AudioStream
 onready var WalljumpSFX: AudioStream
 onready var Step_01_SFX: AudioStream
 onready var Step_02_SFX: AudioStream
@@ -622,6 +623,7 @@ func pre_death():
 	velocity = Vector2(-120, -320)
 	start_timer(2.0)
 	set_animation("death")
+	play_sound_effect(DeathSFX)
 	PlayerCollisionBody.set_deferred("disabled", true)
 
 func tick_death(delta: float):
