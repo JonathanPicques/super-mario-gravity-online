@@ -71,15 +71,12 @@ position = Vector2( 256, 272 )
 
 [node name="ColorBlock4" parent="Items/ColorSwitch2" instance=ExtResource( 7 )]
 position = Vector2( 160, -32 )
-color = 1
 
 [node name="ColorBlock5" parent="Items/ColorSwitch2" instance=ExtResource( 7 )]
 position = Vector2( 176, -32 )
-color = 1
 
 [node name="ColorBlock6" parent="Items/ColorSwitch2" instance=ExtResource( 7 )]
 position = Vector2( 192, -32 )
-color = 1
 
 [node name="Spike" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 432, 16 )
