@@ -1,0 +1,23 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item; 
+
+uniform vec4 color1 : hint_color;
+uniform vec4 color2 : hint_color;
+uniform vec4 color3 : hint_color;
+uniform vec4 color4 : hint_color;
+
+const vec3 red = vec3(1, 0, 0);
+const vec3 green = vec3(0, 1, 0);
+const vec3 blue = vec3(0, 0, 1);
+const vec3 cyan = vec3(0, 1, 1);
+
+void fragment() {
+	
+	COLOR = texture(TEXTURE, UV);
+	COLOR = mix(COLOR, color1, float(COLOR.rgb == red));
+	COLOR = mix(COLOR, color2, float(COLOR.rgb == blue));
+	COLOR = mix(COLOR, color3, float(COLOR.rgb == green));
+	COLOR = mix(COLOR, color4, float(COLOR.rgb == cyan));
+}"
