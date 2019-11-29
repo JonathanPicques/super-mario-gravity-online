@@ -240,7 +240,6 @@ func set_state(new_state: int):
 func set_direction(new_direction: int):
 	direction = new_direction
 	PlayerSprite.scale.x = abs(PlayerSprite.scale.x) * sign(direction)
-	PlayerWallChecker.cast_to.x = abs(PlayerWallChecker.cast_to.x) * sign(direction)
 
 # set_animation changes the Player animation.
 # @impure
@@ -368,7 +367,7 @@ func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 # is_on_wall_passive returns true if there is a wall on the side.
 # @pure
 func is_on_wall_passive() -> bool:
-	return PlayerWallChecker.is_colliding()
+	return test_move(transform, Vector2(direction, 0))
 
 # is_on_ceiling_passive returns true if there is a ceiling upward.
 # @pure
@@ -616,18 +615,23 @@ func tick_use_object(delta: float):
 # Player stun/death
 ###
 
-func apply_death(from_pos: Vector2):
+var _death_dir := 1.0
+var _death_origin := Vector2()
+func apply_death(death_origin: Vector2):
+	_death_dir = 1.0 if _death_origin.x > position.x else -1.0
+	_death_origin = death_origin
 	return set_state(PlayerState.death)
 
 func pre_death():
-	velocity = Vector2(-120, -320)
+	print(_death_dir)
+	velocity = Vector2(_death_dir * -120.0, -320.0)
 	start_timer(2.0)
 	set_animation("death")
 	play_sound_effect(DeathSFX)
 	PlayerCollisionBody.set_deferred("disabled", true)
 
 func tick_death(delta: float):
-	rotation -= 2.0 * delta
+	rotation -= 2.0 * _death_dir * delta
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	if is_timer_finished():
 		rotation = 0.0

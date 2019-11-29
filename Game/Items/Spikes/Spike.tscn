@@ -19,4 +19,7 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 7.5, -3 )
 shape = SubResource( 1 )
+
+[node name="DamageOrigin" type="Node2D" parent="."]
+position = Vector2( 7.5, -3 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
