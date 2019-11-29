@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Maps/EndGame/EndGame.gd" type="Script" id=2]
-[ext_resource path="res://Game/Maps/Textures/Yellow.png" type="Texture" id=3]
+[ext_resource path="res://Game/Maps/Textures/Background.png" type="Texture" id=3]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Menus/Textures/Princess.png" type="Texture" id=7]

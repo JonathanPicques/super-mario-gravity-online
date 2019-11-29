@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/Maps/Home/Home.gd" type="Script" id=1]
-[ext_resource path="res://Game/Maps/Textures/Blue.png" type="Texture" id=2]
+[ext_resource path="res://Game/Maps/Textures/Background.png" type="Texture" id=2]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=6]

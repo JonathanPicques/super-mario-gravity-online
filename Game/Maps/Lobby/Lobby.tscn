@@ -2,16 +2,16 @@
 
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Maps/Lobby/Lobby.gd" type="Script" id=2]
-[ext_resource path="res://Game/Maps/Textures/Blue.png" type="Texture" id=3]
+[ext_resource path="res://Game/Maps/Textures/Background.png" type="Texture" id=3]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://Game/Items/SolidBlock/HSolidBlock.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=6]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 14
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 19
 font_data = ExtResource( 6 )
 
@@ -67,7 +67,7 @@ margin_left = 336.0
 margin_top = 16.0
 margin_right = 448.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "code: x0wf3he367"
 align = 2
@@ -82,7 +82,7 @@ margin_left = 64.0
 margin_top = 16.0
 margin_right = 144.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "private room"
 __meta__ = {
@@ -96,7 +96,7 @@ margin_left = 80.0
 margin_top = 80.0
 margin_right = 432.0
 margin_bottom = 105.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "Starts when everyone is ready!"
 align = 1
@@ -111,7 +111,7 @@ margin_left = 64.0
 margin_top = 240.0
 margin_right = 232.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "(ESC) back to home"
 __meta__ = {
@@ -125,7 +125,7 @@ margin_left = 288.0
 margin_top = 256.0
 margin_right = 448.0
 margin_bottom = 272.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "(C) change skin"
 align = 2
@@ -140,7 +140,7 @@ margin_left = 64.0
 margin_top = 256.0
 margin_right = 232.0
 margin_bottom = 272.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "(ENTER) join/ready"
 __meta__ = {
@@ -154,7 +154,7 @@ margin_left = 256.0
 margin_top = 240.0
 margin_right = 448.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = " (X) private/public"
 align = 2

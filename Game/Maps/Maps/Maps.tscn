@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Game/Maps/Base/Base.gd" type="Script" id=2]
-[ext_resource path="res://Game/Maps/Textures/Blue.png" type="Texture" id=3]
+[ext_resource path="res://Game/Maps/Textures/Background.png" type="Texture" id=3]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=4]
 
 [sub_resource type="DynamicFont" id=1]
