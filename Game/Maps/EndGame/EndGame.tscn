@@ -128,6 +128,7 @@ position = Vector2( 384, 64 )
 texture = ExtResource( 7 )
 
 [node name="Popup" type="ColorRect" parent="."]
+visible = false
 margin_right = 512.0
 margin_bottom = 288.0
 color = Color( 0, 0, 0, 0.498039 )
