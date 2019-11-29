@@ -135,22 +135,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DecorMap" type="TileMap" parent="."]
-visible = false
+[node name="Node2D" type="Node2D" parent="Popup"]
 position = Vector2( 64, 0 )
+
+[node name="DecorMap" type="TileMap" parent="Popup/Node2D"]
+visible = false
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 393217, 4, 0, 393218, 4, 1, 393219, 4, 1, 393220, 4, 2, 393223, 4, 0, 393224, 4, 1, 393225, 4, 1, 393226, 4, 2, 393229, 4, 0, 393230, 4, 1, 393231, 4, 1, 393232, 4, 2, 393235, 4, 0, 393236, 4, 1, 393237, 4, 1, 393238, 4, 2, 458753, 4, 65536, 458754, 4, 65537, 458755, 4, 65537, 458756, 4, 65538, 458759, 4, 65536, 458760, 4, 65537, 458761, 4, 65537, 458762, 4, 65538, 458765, 4, 65536, 458766, 4, 65537, 458767, 4, 65537, 458768, 4, 65538, 458771, 4, 65536, 458772, 4, 65537, 458773, 4, 65537, 458774, 4, 65538, 524289, 4, 65536, 524290, 4, 65537, 524291, 4, 65537, 524292, 4, 65538, 524295, 4, 65536, 524296, 4, 65537, 524297, 4, 65537, 524298, 4, 65538, 524301, 4, 65536, 524302, 4, 65537, 524303, 4, 65537, 524304, 4, 65538, 524307, 4, 65536, 524308, 4, 65537, 524309, 4, 65537, 524310, 4, 65538, 589825, 4, 65536, 589826, 4, 65537, 589827, 4, 65537, 589828, 4, 65538, 589831, 4, 65536, 589832, 4, 65537, 589833, 4, 65537, 589834, 4, 65538, 589837, 4, 65536, 589838, 4, 65537, 589839, 4, 65537, 589840, 4, 65538, 589843, 4, 65536, 589844, 4, 65537, 589845, 4, 65537, 589846, 4, 65538, 655361, 4, 131072, 655362, 4, 131073, 655363, 4, 131073, 655364, 4, 131074, 655367, 4, 131072, 655368, 4, 131073, 655369, 4, 131073, 655370, 4, 131074, 655373, 4, 131072, 655374, 4, 131073, 655375, 4, 131073, 655376, 4, 131074, 655379, 4, 131072, 655380, 4, 131073, 655381, 4, 131073, 655382, 4, 131074 )
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 64, 0 )
-
-[node name="Button" type="Sprite" parent="Node2D"]
+[node name="Button" type="Sprite" parent="Popup/Node2D"]
 position = Vector2( 192, 64 )
 texture = ExtResource( 9 )
 
-[node name="Label" type="Label" parent="Node2D/Button"]
+[node name="Label" type="Label" parent="Popup/Node2D/Button"]
 margin_left = -80.0
 margin_top = -16.0
 margin_right = 80.0
@@ -164,11 +163,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DisableButton" type="Sprite" parent="Node2D"]
+[node name="DisableButton" type="Sprite" parent="Popup/Node2D"]
 position = Vector2( 192, 112 )
 texture = ExtResource( 6 )
 
-[node name="Label2" type="Label" parent="Node2D/DisableButton"]
+[node name="Label2" type="Label" parent="Popup/Node2D/DisableButton"]
 margin_left = -80.0
 margin_top = -16.0
 margin_right = 80.0
@@ -182,11 +181,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DisableButton2" type="Sprite" parent="Node2D"]
+[node name="DisableButton2" type="Sprite" parent="Popup/Node2D"]
 position = Vector2( 192, 208 )
 texture = ExtResource( 6 )
 
-[node name="Label3" type="Label" parent="Node2D/DisableButton2"]
+[node name="Label3" type="Label" parent="Popup/Node2D/DisableButton2"]
 margin_left = -80.0
 margin_top = -16.0
 margin_right = 80.0
@@ -200,11 +199,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DisableButton3" type="Sprite" parent="Node2D"]
+[node name="DisableButton3" type="Sprite" parent="Popup/Node2D"]
 position = Vector2( 192, 160 )
 texture = ExtResource( 6 )
 
-[node name="Label4" type="Label" parent="Node2D/DisableButton3"]
+[node name="Label4" type="Label" parent="Popup/Node2D/DisableButton3"]
 margin_left = -80.0
 margin_top = -16.0
 margin_right = 80.0

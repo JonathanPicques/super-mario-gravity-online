@@ -139,3 +139,19 @@ position = Vector2( 336, 304 )
 
 [node name="BigSolidBlock" parent="Decors" instance=ExtResource( 10 )]
 position = Vector2( 640, -16 )
+
+[node name="ColorSwitch" parent="." instance=ExtResource( 8 )]
+position = Vector2( 464, 272 )
+color = 3
+
+[node name="ColorSwitch2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 400, 288 )
+color = 2
+
+[node name="ColorBlock" parent="ColorSwitch2" instance=ExtResource( 7 )]
+position = Vector2( -112, -80 )
+color = 3
+
+[node name="ColorBlock2" parent="ColorSwitch2" instance=ExtResource( 7 )]
+position = Vector2( -96, -80 )
+color = 2
