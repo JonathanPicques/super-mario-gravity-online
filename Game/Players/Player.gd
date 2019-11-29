@@ -333,17 +333,17 @@ func handle_last_safe_position():
 # @impure
 func handle_floor_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if has_same_direction(direction, input_velocity.x):
-		velocity.x = get_acceleration(delta, velocity.x, max_speed, acceleration) * speed_multiplier
+		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier)
 	else:
-		velocity.x = get_deceleration(delta, velocity.x, deceleration)
+		velocity.x = get_deceleration(delta, velocity.x, deceleration * speed_multiplier)
 
 # handle_airborne_move applies acceleration or deceleration depending on the input_velocity while airborne.
 # @impure
 func handle_airborne_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if input_velocity.x != 0:
-		velocity.x = clamp(velocity.x + delta * sign(input_velocity.x) * acceleration, -max_speed, max_speed) * speed_multiplier
+		velocity.x = clamp(velocity.x + delta * sign(input_velocity.x) * acceleration * speed_multiplier, -max_speed * speed_multiplier, max_speed * speed_multiplier)
 	else:
-		handle_deceleration_move(delta, deceleration)
+		handle_deceleration_move(delta, deceleration * speed_multiplier)
 
 # handle_deceleration_move applies deceleration.
 # @impure
