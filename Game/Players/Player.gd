@@ -6,7 +6,6 @@ onready var Game = get_node("/root/Game")
 onready var PlayerTimer: Timer = $Timer
 onready var PlayerSprite: Sprite = $Sprite
 onready var PlayerObjectTimer: Timer = $ObjectTimer
-onready var PlayerWallChecker: RayCast2D = $WallChecker
 onready var PlayerCollisionBody: CollisionShape2D = $CollisionBody
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
@@ -63,6 +62,7 @@ var RUN_DECELERATION := 690.0
 
 var MAX_JUMPS := 2
 var JUMP_STRENGTH := -350.0
+var FALL_JUMP_GRACE := 0.08
 var CEILING_KNOCKDOWN := 50.0
 var FALL_RESTORE_JUMP := 1
 var WALL_JUMP_STRENGTH := -330.0
@@ -81,6 +81,7 @@ var is_invincible := false
 var velocity_prev := Vector2()
 var input_velocity := Vector2()
 var velocity_offset := Vector2()
+var fall_jump_grace := 0.0
 var jumps_remaining := MAX_JUMPS  # reset on stand or wallslide
 var speed_multiplier := 1.0
 var last_safe_position := Vector2()
@@ -404,6 +405,7 @@ func tick_stand(delta: float):
 	handle_deceleration_move(delta, RUN_DECELERATION)
 	handle_last_safe_position()
 	if not is_on_floor():
+		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
 	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
@@ -421,6 +423,7 @@ func tick_run(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if not is_on_floor():
+		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
 	if is_on_wall():
 		return set_state(PlayerState.push_wall)
@@ -457,11 +460,10 @@ func tick_move_turn(delta: float):
 
 func pre_fall():
 	set_animation("fall")
-	if jumps_remaining == MAX_JUMPS:
-		jumps_remaining -= 1
 
 func tick_fall(delta: float):
 	falling_time += delta
+	fall_jump_grace -= delta
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_direction()
 	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
@@ -474,6 +476,8 @@ func tick_fall(delta: float):
 		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x)) \
 	):
 		return set_state(PlayerState.wallslide)
+	if fall_jump_grace <= 0 and jumps_remaining == MAX_JUMPS:
+		jumps_remaining -= 1
 	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_use and current_object:
@@ -626,7 +630,6 @@ func apply_death(death_origin: Vector2):
 	return set_state(PlayerState.death)
 
 func pre_death():
-	print(_death_dir)
 	velocity = Vector2(_death_dir * -120.0, -320.0)
 	start_timer(2.0)
 	set_animation("death")
