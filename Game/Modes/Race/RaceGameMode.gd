@@ -20,18 +20,11 @@ func start():
 	var flag_end_pos: Vector2 = map_scene.find_node("FlagEnd").position
 	var flag_start_pos: Vector2 = map_scene.find_node("FlagStart").position
 	# create all players
+	Game.GameMultiplayer.spawn_player_nodes(MapSlot)
 	for player in Game.GameMultiplayer.players:
-		# create player node
-		var player_node: Node2D = load(Game.skins[player.skin_id].node_path).instance()
-		player_node.name = Game.GameMultiplayer.get_player_node_name(player.id)
-		player_node.player = player
+		var player_node: Node2D = Game.GameMultiplayer.get_player_node(player.id)
 		player_node.position = flag_start_pos
-		player_node.set_network_master(player.peer_id)
-		# debug: offset players by peer_id and peer_player_id
 		player_node.position.x += max(player.peer_id, 0) * 32 + player.peer_player_id * 8 + 32
-		# add the player to the map
-		MapSlot.add_child(player_node)
-		# add the player camera
 		add_player_screen_camera(player.id, player_node.get_path())
 	# connect multiplayer signals
 	Game.GameMultiplayer.connect("player_removed", self, "on_player_removed")

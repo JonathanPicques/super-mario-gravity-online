@@ -236,6 +236,15 @@ func get_player_node_name(player_id: int) -> String:
 	var player = players[player_id]
 	return str(player.peer_id) + "_" + str(player.peer_player_id)
 
+# @impure
+func spawn_player_nodes(parent_node: Node):
+	for player in players:
+		var player_node: Node2D = load(get_node("/root/Game").skins[player.skin_id].node_path).instance()
+		player_node.name = get_player_node_name(player.id)
+		player_node.player = player
+		player_node.set_network_master(player.peer_id)
+		parent_node.add_child(player_node)
+
 ##########
 # Nakama #
 ##########

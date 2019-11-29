@@ -11,7 +11,7 @@ onready var GameMultiplayer = $GameMultiplayer
 const Map: = preload("res://Game/Maps/Base/Base.tscn")
 const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
 const MainMenu := preload("res://Game/Menus/MainMenu.tscn")
-const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
+const EndGameMenu := preload("res://Game/Maps/EndGame/EndGame.tscn")
 const CharactersMenu := preload("res://Game/Menus/CharactersMenu.tscn")
 const WaitingRoomMenu := preload("res://Game/Menus/WaitingRoomMenu.tscn")
 
