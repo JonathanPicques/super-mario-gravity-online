@@ -6,7 +6,7 @@ func _ready():
 	$MarginContainer/HBoxContainer/Buttons/NewGameButton.grab_focus()
 
 func _on_NewGameButton_pressed():
-	Game.goto_characters_menu_scene()
+	Game.goto_lobby_scene()
 
 func _on_JoinGameButton_pressed():
 	Game.goto_join_menu_scene()

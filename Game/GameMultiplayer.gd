@@ -1,6 +1,8 @@
 extends Node
 class_name GameMultiplayerNode
 
+onready var PlayerNode := preload("res://Game/Players/Frog/Frog.tscn")
+
 signal player_added(player)
 signal player_removed(player)
 signal player_set_skin(player, skin_id)
@@ -237,13 +239,18 @@ func get_player_node_name(player_id: int) -> String:
 	return str(player.peer_id) + "_" + str(player.peer_player_id)
 
 # @impure
+func spawn_player_node(player: Dictionary, parent_node: Node):
+	var player_node := PlayerNode.instance()
+	player_node.name = get_player_node_name(player.id)
+	player_node.player = player
+	player_node.set_network_master(player.peer_id)
+	parent_node.add_child(player_node)
+	return player_node
+
+# @impure
 func spawn_player_nodes(parent_node: Node):
 	for player in players:
-		var player_node: Node2D = load(get_node("/root/Game").skins[player.skin_id].node_path).instance()
-		player_node.name = get_player_node_name(player.id)
-		player_node.player = player
-		player_node.set_network_master(player.peer_id)
-		parent_node.add_child(player_node)
+		spawn_player_node(player, parent_node)
 
 ##########
 # Nakama #

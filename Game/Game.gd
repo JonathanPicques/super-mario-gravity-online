@@ -12,18 +12,10 @@ const Map: = preload("res://Game/Maps/Base/Base.tscn")
 const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
 const MainMenu := preload("res://Game/Menus/MainMenu.tscn")
 const EndGameMenu := preload("res://Game/Maps/EndGame/EndGame.tscn")
-const CharactersMenu := preload("res://Game/Menus/CharactersMenu.tscn")
+const LobbyMenu := preload("res://Game/Maps/Lobby/Lobby.tscn")
 const WaitingRoomMenu := preload("res://Game/Menus/WaitingRoomMenu.tscn")
 
 var scene = null
-var skins := [
-	{
-		name = "Frog",
-		node_path = "res://Game/Players/Frog/Frog.tscn",
-		preview_ready_path = "res://Game/Players/Frog/Textures/Fall.png",
-		preview_select_path = "res://Game/Players/Frog/Textures/Jump.png",
-	},
-]
 
 # _ready is called when the game node is ready.
 # @driven(lifecycle)
@@ -60,8 +52,8 @@ func goto_game_mode_scene(game_mode_node: Node):
 	set_scene(game_mode_node)
 
 # @impure
-func goto_characters_menu_scene():
-	var characters_menu_node := CharactersMenu.instance()
+func goto_lobby_scene():
+	var characters_menu_node := LobbyMenu.instance()
 	set_scene(characters_menu_node)
 
 # @impure
@@ -73,11 +65,3 @@ func goto_waiting_room_menu_scene():
 func goto_end_game_room_menu_scene():
 	var end_game_room := EndGameMenu.instance()
 	set_scene(end_game_room)
-
-#########
-# Skins #
-#########
-
-# @pure
-func get_skin_from_id(skin_id: int, ready: bool = false):
-	return load(skins[skin_id].preview_select_path if not ready else skins[skin_id].preview_ready_path)
