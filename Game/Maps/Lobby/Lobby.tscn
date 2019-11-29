@@ -161,3 +161,15 @@ align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Player1Position" type="Node2D" parent="."]
+position = Vector2( 144, 144 )
+
+[node name="Player2Position" type="Node2D" parent="."]
+position = Vector2( 208, 176 )
+
+[node name="Player3Position" type="Node2D" parent="."]
+position = Vector2( 288, 128 )
+
+[node name="Player4Position" type="Node2D" parent="."]
+position = Vector2( 352, 160 )
