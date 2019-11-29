@@ -8,6 +8,6 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
-		Game.goto_main_menu_scene()
+		Game.goto_home_menu_scene()
 	if Input.is_action_just_pressed("ui_accept"):
 		print("Send code ", RoomInput.text)

@@ -28,8 +28,8 @@ func _on_MapsButton_pressed():
 
 func _on_CharactersButton_pressed():
 	Game.GameMultiplayer.finish_playing()
-	Game.goto_lobby_scene()
+	Game.goto_lobby_menu_scene()
 
 func _on_HomeButton_pressed():
 	Game.GameMultiplayer.finish_playing()
-	Game.goto_main_menu_scene()
+	Game.goto_home_menu_scene()

@@ -20,7 +20,7 @@ func _ready():
 func _process(delta: float):
 	# back to home if cancel when not ready
 	if Input.is_action_just_pressed("ui_cancel") and not Game.GameMultiplayer.get_lead_player():
-		Game.goto_main_menu_scene()
+		Game.goto_home_menu_scene()
 	# toggle room status
 	if state != State.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
 		set_state(State.public if state == State.private else State.private)

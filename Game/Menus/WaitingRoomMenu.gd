@@ -17,4 +17,4 @@ func _process(delta):
 # @impure
 func cancel_waiting():
 	Game.GameMultiplayer.finish_playing()
-	Game.goto_lobby_scene()
+	Game.goto_lobby_menu_scene()
