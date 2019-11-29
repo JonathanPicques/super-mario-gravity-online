@@ -545,6 +545,7 @@ func tick_wallslide(delta: float):
 		return set_state(PlayerState.fall)
 
 func pre_walljump():
+	start_timer(0.14)
 	set_animation("jump")
 	set_direction(-direction)
 	handle_walljump(WALL_JUMP_STRENGTH, sign(direction) * WALL_JUMP_PUSH_STRENGTH)
@@ -561,6 +562,8 @@ func tick_walljump(delta: float):
 		if not is_colliding_with_group("no_ceiling_sound"):
 			play_sound_effect(BumpSFX)
 		return set_state(PlayerState.fall)
+	if is_timer_finished() and input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
 
