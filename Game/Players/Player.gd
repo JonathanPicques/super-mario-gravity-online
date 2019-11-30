@@ -585,9 +585,9 @@ func tick_walljump(delta: float):
 
 onready var ObjectScenes := [ # TODO: ponderate random
 	preload("res://Game/Objects/Speed.tscn"),
-	preload("res://Game/Objects/MissileBasic.tscn"),
-	preload("res://Game/Objects/MissileAuto.tscn"),
-	preload("res://Game/Objects/MissileGhost.tscn"),
+	preload("res://Game/Objects/FireballDumb.tscn"),
+	preload("res://Game/Objects/FireballAuto.tscn"),
+	preload("res://Game/Objects/FireballGhost.tscn"),
 	preload("res://Game/Objects/Invincibility.tscn"),
 ]
 
@@ -595,8 +595,8 @@ var active_object = null
 var current_object = null
 
 func get_object():
+	randomize()
 	var index = randi() % ObjectScenes.size()
-	print("Get random object: ", index)
 	current_object = ObjectScenes[index].instance()
 
 func apply_object_speed(object):
@@ -619,8 +619,7 @@ func reset_object_invincibility(object):
 func pre_use_object():
 	if active_object:
 		return
-	var size = PlayerCollisionBody.get_shape().get_extents()
-	current_object.position = (Vector2(global_position.x, global_position.y - size[1]))
+	current_object.position = $FirebaseSpawn.global_position
 	current_object.player_node = self
 	get_parent().add_child(current_object)
 	current_object = null

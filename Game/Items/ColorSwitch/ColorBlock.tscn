@@ -10,6 +10,10 @@ shader_param/color1 = Color( 0.117647, 0.486275, 0.705882, 1 )
 shader_param/color2 = Color( 0.282353, 0.729412, 0.890196, 1 )
 shader_param/color3 = Color( 0.423529, 0.854902, 0.945098, 1 )
 shader_param/color4 = Color( 0.678431, 0.968627, 0.980392, 1 )
+shader_param/skin_color1 = null
+shader_param/skin_color2 = null
+shader_param/skin_color3 = null
+shader_param/skin_color4 = null
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )

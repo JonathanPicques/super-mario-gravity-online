@@ -1,7 +1,17 @@
 extends Node2D
 
 const SPEED := 250
+
+enum BlockColor {
+	Blue,
+	Red,
+	Pink,
+	Orange
+}
+
+
 export var use_target := false
+export(BlockColor) var color: int = BlockColor.Blue
 
 var player_node = null
 

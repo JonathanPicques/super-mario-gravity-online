@@ -60,3 +60,6 @@ playback/repeat = true
 [node name="Dialog" type="Sprite" parent="."]
 position = Vector2( 0, -40 )
 texture = ExtResource( 2 )
+
+[node name="FirebaseSpawn" type="Node2D" parent="."]
+position = Vector2( 16, -16 )
