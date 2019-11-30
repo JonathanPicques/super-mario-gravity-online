@@ -1,14 +1,21 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Game/Players/Frog/Textures/Idle.png" type="Texture" id=1]
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Players/Frog/Frog.gd" type="Script" id=3]
 [ext_resource path="res://Game/Players/Frog/Textures/Run.png" type="Texture" id=4]
-[ext_resource path="res://Game/Players/Frog/Textures/Jump.png" type="Texture" id=5]
-[ext_resource path="res://Game/Players/Frog/Textures/Fall.png" type="Texture" id=6]
+[ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=5]
+[ext_resource path="res://Game/Players/Frog/Textures/Jump.png" type="Texture" id=6]
 [ext_resource path="res://Game/Players/Frog/Textures/Walljump.png" type="Texture" id=7]
 [ext_resource path="res://Game/Players/Frog/Textures/DoubleJump.png" type="Texture" id=8]
 [ext_resource path="res://Game/Players/Frog/Textures/Hit.png" type="Texture" id=9]
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 5 )
+shader_param/color1 = null
+shader_param/color2 = null
+shader_param/color3 = null
+shader_param/color4 = null
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 10 )
@@ -162,7 +169,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 5 ) ]
+"values": [ ExtResource( 6 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -321,6 +328,7 @@ tracks/2/keys = {
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
+material = SubResource( 9 )
 position = Vector2( -2, -16 )
 texture = ExtResource( 4 )
 centered = true

@@ -50,7 +50,7 @@ margin_right = 304.0
 margin_bottom = 109.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
-text = "Prince of Frogs"
+text = "Pick up the Pricess"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -62,7 +62,7 @@ margin_right = 195.0
 margin_bottom = 126.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.12549, 0.541176, 0.701961, 1 )
-text = "Press (ENTER) to join"
+text = "Press (ENTER) to join and start the game"
 __meta__ = {
 "_edit_use_anchors_": false
 }

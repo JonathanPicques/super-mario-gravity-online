@@ -21,4 +21,5 @@ func _process(delta: float):
 func on_player_added(player: Dictionary):
 	var player_node = Game.GameMultiplayer.spawn_player_node(player, MapSlot)
 	# TODO: spawn GFX
+	Game.GameConst.replace_skin(player_node.PlayerSprite, 0)
 	player_node.position = $FlagStart.position

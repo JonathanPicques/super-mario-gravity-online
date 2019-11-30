@@ -97,13 +97,7 @@ func on_player_removed(player: Dictionary):
 
 func on_player_set_skin(player: Dictionary, skin_id: int):
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
-	var a = player_node.PlayerSprite.self_modulate.a
-	match skin_id:
-		0: player_node.PlayerSprite.self_modulate = Color.white
-		1: player_node.PlayerSprite.self_modulate = Color.red
-		2: player_node.PlayerSprite.self_modulate = Color.blue
-		3: player_node.PlayerSprite.self_modulate = Color.purple
-	player_node.PlayerSprite.self_modulate.a = a
+	Game.GameConst.replace_skin(player_node.PlayerSprite, skin_id)
 
 func on_player_set_ready(player: Dictionary, ready: bool):
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
