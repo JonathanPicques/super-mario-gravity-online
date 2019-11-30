@@ -1,35 +1,24 @@
-extends Control
+extends Navigation2D
 
 onready var Game = get_node("/root/Game")
-onready var EndGameRow = preload("res://Game/Menus/EndGameRow.tscn")
+onready var MapSlot = $"."
 
-onready var Title = $MarginContainer/VBoxContainer/TitleMargin/Title
-onready var Leaderboard = $MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/LeaderBoardPanel/MarginContainer/Leaderboard
-onready var TryAgainButton = $MarginContainer/VBoxContainer/ContentMargin/HBoxContainer/Buttons/TryAgainButton
-
+# @impure
 func _ready():
-	TryAgainButton.grab_focus()
-	# TODO: sort player by A*
-	var position := 0
-	var players = Game.GameMultiplayer.players
-	var player_name = players[0].name if players[0].name else "Unnamed"
-	Title.text = player_name + " WINS!"
-	for player in Game.GameMultiplayer.players:
-		var player_row = EndGameRow.instance()
-		position += 1
-		player_row.set_player_data(player.name, player.skin_id, position)
-		Leaderboard.add_child(player_row)
+	# spawn player
+	Game.GameMultiplayer.spawn_player_nodes(MapSlot)
+	var players = Game.GameMultiplayer.get_players(Game.GameMultiplayer.SortPlayerMethods.ranked)
+	# map is not ready yet
+	yield(get_tree(), "idle_frame")
+	# put first player on top
+	var first_player_node = Game.GameMultiplayer.get_player_node(players[0].id)
+	first_player_node.position = $FlagStart.position
+	# put other players on the bottom
+	for player_id in range(1, players.size()):
+		var player_node = Game.GameMultiplayer.get_player_node(players[player_id].id)
+		player_node.position = get_node("Player%dPosition" % (player_id + 1)).position
 
-func _on_TryAgainButton_pressed():
-	print("TODO: reload game")
-
-func _on_MapsButton_pressed():
-	print("TODO: choose map")
-
-func _on_CharactersButton_pressed():
-	Game.GameMultiplayer.finish_playing()
-	Game.goto_lobby_menu_scene()
-
-func _on_HomeButton_pressed():
-	Game.GameMultiplayer.finish_playing()
-	Game.goto_home_menu_scene()
+func _process(delta: float):
+	if Game.GameInput.is_player_action_just_pressed(0, "cancel"):
+		Game.GameMultiplayer.finish_playing()
+		Game.goto_lobby_menu_scene()

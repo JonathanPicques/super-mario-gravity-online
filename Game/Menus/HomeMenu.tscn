@@ -1,13 +1,73 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=1]
+[ext_resource path="res://Game/Maps/Textures/Sky.png" type="Texture" id=1]
+[ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
+[ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=6]
 
-[node name="HomeMenu" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 5 )
+
+[node name="Base" type="Navigation2D"]
+script = ExtResource( 2 )
+
+[node name="Map" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+collision_use_kinematic = true
+collision_layer = 2
+format = 1
+tile_data = PoolIntArray( 131098, 5, 0, 131099, 5, 2, 131101, 5, 0, 131102, 5, 2, 196634, 5, 65536, 196635, 5, 65539, 196636, 5, 1, 196637, 5, 65540, 196638, 5, 65539, 196639, 5, 2, 262170, 5, 65536, 262171, 5, 65537, 262172, 5, 65537, 262173, 5, 65537, 262174, 5, 65537, 262175, 5, 65538, 327706, 5, 65536, 327707, 5, 65537, 327708, 5, 65537, 327709, 5, 65537, 327710, 5, 65537, 327711, 5, 65538, 393242, 5, 131072, 393243, 5, 4, 393244, 5, 65537, 393245, 5, 65537, 393246, 5, 65537, 393247, 5, 65538, 458779, 5, 131072, 458780, 5, 4, 458781, 5, 65537, 458782, 5, 65537, 458783, 5, 65538, 524316, 5, 65536, 524317, 5, 65537, 524318, 5, 65537, 524319, 5, 65538, 589852, 5, 65536, 589853, 5, 65537, 589854, 5, 65537, 589855, 5, 65538, 655388, 5, 65536, 655389, 5, 65537, 655390, 5, 65537, 655391, 5, 65538, 720924, 5, 65536, 720925, 5, 65537, 720926, 5, 65537, 720927, 5, 65538, 786460, 5, 65536, 786461, 5, 65537, 786462, 5, 65537, 786463, 5, 65538, 851996, 5, 65536, 851997, 5, 65537, 851998, 5, 65537, 851999, 5, 65538, 917532, 5, 131072, 917533, 5, 131073, 917534, 5, 131073, 917535, 5, 131074, 983040, 2, 0, 983041, 2, 1, 983042, 2, 1, 983043, 2, 1, 983044, 2, 1, 983045, 2, 1, 983046, 2, 1, 983047, 2, 1, 983048, 2, 1, 983049, 2, 1, 983050, 2, 1, 983051, 2, 1, 983052, 2, 1, 983053, 2, 1, 983054, 2, 1, 983055, 2, 1, 983056, 2, 1, 983057, 2, 1, 983058, 2, 1, 983059, 2, 1, 983060, 2, 1, 983061, 2, 1, 983062, 2, 1, 983063, 2, 1, 983064, 2, 1, 983065, 2, 1, 983066, 2, 1, 983067, 2, 1, 983068, 2, 1, 983069, 2, 1, 983070, 2, 1, 983071, 2, 2, 1048576, 2, 65536, 1048577, 2, 65537, 1048578, 2, 65537, 1048579, 2, 65537, 1048580, 2, 65537, 1048581, 2, 65537, 1048582, 2, 65537, 1048583, 2, 65537, 1048584, 2, 65537, 1048585, 2, 65537, 1048586, 2, 65537, 1048587, 2, 65537, 1048588, 2, 65537, 1048589, 2, 65537, 1048590, 2, 65537, 1048591, 2, 65537, 1048592, 2, 65537, 1048593, 2, 65537, 1048594, 2, 65537, 1048595, 2, 65537, 1048596, 2, 65537, 1048597, 2, 65537, 1048598, 2, 65537, 1048599, 2, 65537, 1048600, 2, 65537, 1048601, 2, 65537, 1048602, 2, 65537, 1048603, 2, 65537, 1048604, 2, 65537, 1048605, 2, 65537, 1048606, 2, 65537, 1048607, 2, 65538, 1114112, 2, 131072, 1114113, 2, 131073, 1114114, 2, 131073, 1114115, 2, 131073, 1114116, 2, 131073, 1114117, 2, 131073, 1114118, 2, 131073, 1114119, 2, 131073, 1114120, 2, 131073, 1114121, 2, 131073, 1114122, 2, 131073, 1114123, 2, 131073, 1114124, 2, 131073, 1114125, 2, 131073, 1114126, 2, 131073, 1114127, 2, 131073, 1114128, 2, 131073, 1114129, 2, 131073, 1114130, 2, 131073, 1114131, 2, 131073, 1114132, 2, 131073, 1114133, 2, 131073, 1114134, 2, 131073, 1114135, 2, 131073, 1114136, 2, 131073, 1114137, 2, 131073, 1114138, 2, 131073, 1114139, 2, 131073, 1114140, 2, 131073, 1114141, 2, 131073, 1114142, 2, 131073, 1114143, 2, 131074 )
+
+[node name="DecorMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="FlagStart" parent="." instance=ExtResource( 4 )]
+position = Vector2( 32, 240 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 512, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 288 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 48.0
+margin_top = 80.0
+margin_right = 304.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
+text = "Prince of Frogs"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapSlot" type="Node2D" parent="."]
+[node name="Label2" type="Label" parent="."]
+margin_left = 48.0
+margin_top = 112.0
+margin_right = 195.0
+margin_bottom = 126.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.12549, 0.541176, 0.701961, 1 )
+text = "Press (ENTER) to join"
+__meta__ = {
+"_edit_use_anchors_": false
+}

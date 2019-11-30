@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Modes/Race/RaceGameMode.gd" type="Script" id=2]
-[ext_resource path="res://Game/Menus/Fonts/FooterFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Game/Modes/Race/RaceGameModeUI.tscn" type="PackedScene" id=4]
 
-[node name="RaceGameMode" instance=ExtResource( 1 )]
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="RaceGameMode" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="RaceGameModeUI" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1" index="1" instance=ExtResource( 4 )]
@@ -26,7 +29,7 @@ margin_left = 448.0
 margin_top = 16.6302
 margin_right = 496.0
 margin_bottom = 49.6302
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 2
 __meta__ = {

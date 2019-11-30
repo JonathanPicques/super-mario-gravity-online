@@ -11,11 +11,10 @@ onready var GameMultiplayer = $GameMultiplayer
 onready var GameConst = $GameConst
 
 const Map: = preload("res://Game/Maps/Base/Base.tscn")
-const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
-const HomeMenu := preload("res://Game/Maps/Home/Home.tscn")
-const LobbyMenu := preload("res://Game/Maps/Lobby/Lobby.tscn")
-const EndGameMenu := preload("res://Game/Maps/EndGame/EndGame.tscn")
-const WaitingRoomMenu := preload("res://Game/Menus/WaitingRoomMenu.tscn")
+const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
+const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
+const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
+const WaitingMenu := preload("res://Game/Menus/WaitingMenu.tscn")
 
 var scene = null
 
@@ -40,13 +39,8 @@ func set_scene(new_scene: Node):
 
 # @impure
 func goto_home_menu_scene():
-	var home_menu_node := HomeMenu.instance()
-	set_scene(home_menu_node)
-
-# @impure
-func goto_join_menu_scene():
-	var join_menu_node := JoinMenu.instance()
-	set_scene(join_menu_node)
+	var node := HomeMenu.instance()
+	set_scene(node)
 
 # @impure
 func goto_game_mode_scene(game_mode_node: Node):
@@ -55,15 +49,15 @@ func goto_game_mode_scene(game_mode_node: Node):
 
 # @impure
 func goto_lobby_menu_scene():
-	var characters_menu_node := LobbyMenu.instance()
-	set_scene(characters_menu_node)
+	var node := LobbyMenu.instance()
+	set_scene(node)
 
 # @impure
-func goto_waiting_room_menu_scene():
-	var waiting_room_node := WaitingRoomMenu.instance()
-	set_scene(waiting_room_node)
+func goto_waiting_menu_scene():
+	var node := WaitingMenu.instance()
+	set_scene(node)
 
 # @impure
 func goto_end_game_room_menu_scene():
-	var end_game_room := EndGameMenu.instance()
-	set_scene(end_game_room)
+	var node := EndGameMenu.instance()
+	set_scene(node)

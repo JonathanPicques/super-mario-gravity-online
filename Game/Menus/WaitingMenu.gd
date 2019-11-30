@@ -1,4 +1,4 @@
-extends Control
+extends Navigation2D
 
 onready var Game = get_node("/root/Game")
 
