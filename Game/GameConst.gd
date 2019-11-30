@@ -15,10 +15,10 @@ var Palettes = {
 		Color("#adf7fa")
 	],
 	SkinColor.Red: [
-		Color("#cd2c46"),
-		Color("#adf7fa"),
-		Color("#f18c73"),
-		Color("#fbbba4")
+		Color("#9c1b4d"),
+		Color("#cc3048"),
+		Color("#e44a4a"),
+		Color("#ea6262")
 	],
 	SkinColor.Pink: [
 		Color("#b45ac3"),

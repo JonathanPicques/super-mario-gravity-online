@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
+[ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 14 )
@@ -55,3 +56,7 @@ shape = SubResource( 1 )
 [node name="NetworkDeadReckoning" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
+
+[node name="Dialog" type="Sprite" parent="."]
+position = Vector2( 0, -40 )
+texture = ExtResource( 2 )

@@ -87,7 +87,7 @@ func on_player_added(player: Dictionary):
 	var player_node = Game.GameMultiplayer.spawn_player_node(player, MapSlot)
 	# TODO: spawn GFX
 	player_node.position = get_node("Player%dPosition" % (player.id + 1)).position
-	player_node.PlayerSprite.self_modulate.a = 0.5
+	player_node.set_dialog(0)
 
 func on_player_removed(player: Dictionary):
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
@@ -101,4 +101,4 @@ func on_player_set_skin(player: Dictionary, skin_id: int):
 
 func on_player_set_ready(player: Dictionary, ready: bool):
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
-	player_node.PlayerSprite.self_modulate.a = 1.0 if ready else 0.5
+	player_node.set_dialog(0 if !ready else 1)

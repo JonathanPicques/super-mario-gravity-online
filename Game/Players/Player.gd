@@ -26,6 +26,11 @@ enum PlayerState {
 	death
 }
 
+enum DialogType {
+	none,
+	ready
+}
+
 const FLOOR := Vector2(0, -1) # floor direction.
 const FLOOR_SNAP := Vector2(0, 5) # floor snap for slopes.
 const FLOOR_SNAP_DISABLED := Vector2() # no floor snap for slopes.
@@ -92,6 +97,7 @@ func _ready():
 	set_state(PlayerState.stand)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
+	set_dialog(DialogType.none)
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
@@ -643,6 +649,15 @@ func tick_death(delta: float):
 		velocity = Vector2()
 		PlayerCollisionBody.set_deferred("disabled", false)
 		return set_state(PlayerState.fall)
+
+###
+# Dialogs
+###
+
+func set_dialog(dialog: int):
+	match dialog:
+		DialogType.none: $Dialog.visible = false
+		DialogType.ready: $Dialog.visible = true
 
 ###
 # Animation driven
