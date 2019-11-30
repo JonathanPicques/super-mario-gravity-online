@@ -13,7 +13,7 @@ func _ready():
 
 func _process(delta: float):
 	if player:
-		$Ranking.text = String(player.rank + 1) + "st"
+		$Ranking.text = "#" + String(player.rank + 1)
 		player_node = Game.GameMultiplayer.get_player_node(player.id) # TODO: find a better way to assign only once
 		if player_node.current_object:
 			var object_sprite = player_node.current_object.get_node("Sprite")

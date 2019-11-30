@@ -5,7 +5,7 @@
 [ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 23
+size = 30
 outline_size = 1
 font_data = ExtResource( 2 )
 
@@ -36,7 +36,7 @@ margin_bottom = 48.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 custom_constants/shadow_offset_y = 2
-text = "1st"
+text = "#1"
 align = 1
 valign = 1
 __meta__ = {
@@ -44,9 +44,9 @@ __meta__ = {
 }
 
 [node name="ObjectBox" type="Control" parent="."]
-margin_left = 56.0
+margin_left = 48.0
 margin_top = 16.0
-margin_right = 88.0
+margin_right = 80.0
 margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
