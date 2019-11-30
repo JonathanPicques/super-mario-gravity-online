@@ -97,8 +97,8 @@ func on_player_removed(player: Dictionary):
 
 func on_player_set_skin(player: Dictionary, skin_id: int):
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
-	Game.GameConst.replace_skin(player_node.PlayerSprite, skin_id)
+	Game.GameConst.replace_skin(player_node.PlayerSprite, skin_id) # todo move in player?
 
 func on_player_set_ready(player: Dictionary, ready: bool):
 	var player_node = Game.GameMultiplayer.get_player_node(player.id)
-	player_node.set_dialog(0 if !ready else 1)
+	player_node.set_dialog(player_node.DialogType.ready if ready else player_node.DialogType.none)

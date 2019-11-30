@@ -27,8 +27,7 @@ enum PlayerState {
 }
 
 enum DialogType {
-	none,
-	ready
+	none, ready
 }
 
 const FLOOR := Vector2(0, -1) # floor direction.
@@ -79,7 +78,6 @@ var state: int = PlayerState.none
 var velocity := Vector2()
 var direction := 1
 var disable_snap := 0.0
-var falling_time := 0.0
 var is_invincible := false
 var velocity_prev := Vector2()
 var input_velocity := Vector2()
@@ -95,9 +93,9 @@ var wallslide_cancelled := false # reset on stand or walljump
 # @impure
 func _ready():
 	set_state(PlayerState.stand)
+	set_dialog(DialogType.none)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
-	set_dialog(DialogType.none)
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
@@ -448,6 +446,7 @@ func tick_move_turn(delta: float):
 	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, (RUN_DECELERATION) * 2.0)
 	if not is_on_floor():
 		set_direction(-direction)
+		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
 	if has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.run)
@@ -466,25 +465,27 @@ func pre_fall():
 	set_animation("fall")
 
 func tick_fall(delta: float):
-	falling_time += delta
-	fall_jump_grace -= delta
+	fall_jump_grace = max(fall_jump_grace - delta, 0.0)
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_direction()
 	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if is_on_floor():
-		falling_time = 0.0
+		fall_jump_grace = 0.0
 		return set_state(PlayerState.stand)
 	if is_on_wall_passive() and not input_down and (\
 		(not wallslide_cancelled and is_timer_finished()) or \
 		(not wallslide_cancelled and has_same_direction(direction, input_velocity.x)) or \
 		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x)) \
 	):
+		fall_jump_grace = 0.0
 		return set_state(PlayerState.wallslide)
-	if fall_jump_grace <= 0 and jumps_remaining == MAX_JUMPS:
+	if fall_jump_grace == 0 and jumps_remaining == MAX_JUMPS:
 		jumps_remaining -= 1
 	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
+		fall_jump_grace = 0.0
 		return set_state(PlayerState.jump)
 	if input_use and current_object:
+		fall_jump_grace = 0.0
 		return set_state(PlayerState.use_object)
 
 func pre_jump():
