@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/Modes/Race/RaceGameModeUI.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=3]
 [ext_resource path="res://Game/Menus/Textures/MiniMap.png" type="Texture" id=4]
+[ext_resource path="res://Game/Menus/Textures/MiniFrog.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -71,7 +72,7 @@ size_flags_vertical = 3
 expand = true
 stretch_mode = 6
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="MiniMap" type="TextureRect" parent="."]
 margin_left = 96.0
 margin_right = 416.0
 margin_bottom = 40.0
@@ -79,3 +80,7 @@ texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MiniFrog" type="Sprite" parent="MiniMap"]
+position = Vector2( 48, 20 )
+texture = ExtResource( 5 )
