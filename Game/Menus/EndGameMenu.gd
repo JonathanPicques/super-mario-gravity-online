@@ -20,9 +20,12 @@ func _ready():
 
 func _process(delta: float):
 	if Game.GameInput.is_player_action_just_pressed(0, "cancel"):
-		$Popup.visible = !$Popup.visible
-		$Popup/RetryButton.grab_focus()
+		open_popup()
 
+
+func open_popup():
+	$Popup.visible = !$Popup.visible
+	$Popup/RetryButton.grab_focus()
 
 func _on_RetryButton_pressed():
 	print("TODO: retry game")
