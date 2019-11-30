@@ -7,6 +7,8 @@ onready var GameMode = null
 onready var GameInput = $GameInput
 # warning-ignore:unused_class_variable
 onready var GameMultiplayer = $GameMultiplayer
+# warning-ignore:unused_class_variable
+onready var GameConst = $GameConst
 
 const Map: = preload("res://Game/Maps/Base/Base.tscn")
 const JoinMenu := preload("res://Game/Menus/JoinMenu.tscn")
