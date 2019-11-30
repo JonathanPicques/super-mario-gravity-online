@@ -8,16 +8,42 @@ uniform vec4 color2 : hint_color;
 uniform vec4 color3 : hint_color;
 uniform vec4 color4 : hint_color;
 
+uniform vec4 skin_color1 : hint_color;
+uniform vec4 skin_color2 : hint_color;
+uniform vec4 skin_color3 : hint_color;
+uniform vec4 skin_color4 : hint_color;
+
+
 const vec3 red = vec3(1, 0, 0);
 const vec3 green = vec3(0, 1, 0);
 const vec3 blue = vec3(0, 0, 1);
 const vec3 cyan = vec3(0, 1, 1);
 
+const vec3 base_skin_color1 = vec3(0.02745098039, 0.37647058823, 0.16078431372);
+const vec3 base_skin_color2 = vec3(0.15686274509, 0.52549019607, 0.05882352941);
+const vec3 base_skin_color3 = vec3(0.44705882352, 0.63137254902, 0.11372549019);
+const vec3 base_skin_color4 = vec3(0.6431372549, 0.8, 0.25882352941);
+
+const float TOLERANCE = 0.02; 
+
+bool almost_equal(vec3 a, vec3 b, float tolerance) {
+	vec3 result = abs(a - b);
+	return result.x < TOLERANCE && result.y < TOLERANCE && result.z < TOLERANCE;
+}
+
 void fragment() {
 	
 	COLOR = texture(TEXTURE, UV);
+
+	// accent color
 	COLOR.rgb = mix(COLOR.rgb, color1.rgb, float(COLOR.rgb == red));
 	COLOR.rgb = mix(COLOR.rgb, color2.rgb, float(COLOR.rgb == blue));
 	COLOR.rgb = mix(COLOR.rgb, color3.rgb, float(COLOR.rgb == green));
 	COLOR.rgb = mix(COLOR.rgb, color4.rgb, float(COLOR.rgb == cyan));
+	
+	// skin color
+	COLOR.rgb = mix(COLOR.rgb, skin_color1.rgb, float(almost_equal(COLOR.rgb, base_skin_color1, TOLERANCE)));
+	COLOR.rgb = mix(COLOR.rgb, skin_color2.rgb, float(almost_equal(COLOR.rgb, base_skin_color2, TOLERANCE)));
+	COLOR.rgb = mix(COLOR.rgb, skin_color3.rgb, float(almost_equal(COLOR.rgb, base_skin_color3, TOLERANCE)));
+	COLOR.rgb = mix(COLOR.rgb, skin_color4.rgb, float(almost_equal(COLOR.rgb, base_skin_color4, TOLERANCE)));
 }"

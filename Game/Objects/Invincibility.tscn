@@ -1,12 +1,15 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Game/Objects/Textures/Invincibility.png" type="Texture" id=1]
 [ext_resource path="res://Game/Objects/Invincibility.gd" type="Script" id=2]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Invincibility.png-ffbca8bd444c2408beee0ec91fba9eae.stex"
 
 [node name="Invincibility" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+visible = false
+texture = SubResource( 1 )
 centered = false
 region_rect = Rect2( 0, 0, 16, 16 )

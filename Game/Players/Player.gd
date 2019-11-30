@@ -56,9 +56,10 @@ var input_run_once := false
 var input_use_once := false
 var input_jump_once := false
 
-var SPEED_MULTIPLIER := 1.5
-var OBJECT_TIME_SPEED := 4.0
-var OBJECT_TIME_INVINCIBILITY := 4.0
+var SPEED_MULTIPLIER := 2
+var INVINCIBILITY_SPEED_MULTIPLIER := 1.5
+var OBJECT_TIME_SPEED := 6.0
+var OBJECT_TIME_INVINCIBILITY := 6.0
 
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
@@ -195,6 +196,8 @@ func process_object(delta: float):
 	if PlayerObjectTimer.is_stopped():
 		speed_multiplier = 1.0
 		if active_object:
+			if active_object.has_method("reset_player"):
+				active_object.reset_player()
 			active_object.queue_free()
 			active_object = null
 
@@ -605,9 +608,13 @@ func apply_object_speed(object):
 func apply_object_invincibility(object):
 	is_invincible = true
 	active_object = object
-	speed_multiplier = SPEED_MULTIPLIER
+	speed_multiplier = INVINCIBILITY_SPEED_MULTIPLIER
+	Game.GameConst.replace_skin(PlayerSprite, 0, true) # TODO Access skin id
 	PlayerObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
 	PlayerObjectTimer.start()
+
+func reset_object_invincibility(object):
+	Game.GameConst.replace_skin(PlayerSprite, 0, false) # TODO Access skin id
 
 func pre_use_object():
 	if active_object:
@@ -630,6 +637,8 @@ func tick_use_object(delta: float):
 var _death_dir := 1.0
 var _death_origin := Vector2()
 func apply_death(death_origin: Vector2):
+	if is_invincible:
+		return
 	_death_dir = 1.0 if _death_origin.x > position.x else -1.0
 	_death_origin = death_origin
 	return set_state(PlayerState.death)
