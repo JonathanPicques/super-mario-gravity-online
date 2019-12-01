@@ -5,28 +5,28 @@ onready var Game = get_node("/root/Game")
 const maps := [
 	{
 		"title": "Debug",
-		"scene": "res://Game/Maps/Base/Base.tscn",
+		"scene": "res://Game/Maps/Base.tscn",
 		"score": 0,
 		"author": "anonymous",
 		"difficulty": "easy"
 	},
 	{
 		"title": "Spike Corridor",
-		"scene": "res://Game/Maps/SpikesCorridor/SpikesCorridor.tscn",
+		"scene": "res://Game/Maps/SpikesCorridor.tscn",
 		"score": 8,
 		"author": "jeremtab",
 		"difficulty": "easy"
 	},
 	{
 		"title": "Crazy tower",
-		"scene": "res://Game/Maps/Base/Base.tscn",
+		"scene": "res://Game/Maps/Base.tscn",
 		"score": 7,
 		"author": "jeremtab",
 		"difficulty": "medium"
 	},
 	{
 		"title": "Rainbow room",
-		"scene": "res://Game/Maps/Base/Base.tscn",
+		"scene": "res://Game/Maps//Base.tscn",
 		"score": 6,
 		"author": "jeremtab",
 		"difficulty": "medium"
@@ -42,14 +42,12 @@ func start_game(scene_path):
 	Game.goto_game_mode_scene(game_mode_node)
 	game_mode_node.start()
 
-
 func set_map_infos(index):
 	$MapInfos.text = "Difficulty: %s\nAuthor: %s\nScore: %d/10" % [
 		maps[index]["difficulty"],
 		maps[index]["author"],
 		maps[index]["score"]
 	]
-
 
 func _on_MapButton1_pressed(): start_game(maps[0]["scene"])
 func _on_MapButton1_focus_entered(): set_map_infos(0)
