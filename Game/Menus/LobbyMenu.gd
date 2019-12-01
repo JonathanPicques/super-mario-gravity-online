@@ -71,10 +71,11 @@ func start_game():
 	if state == State.public:
 		Game.goto_waiting_menu_scene()
 	else:
-		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
-		Game.goto_game_mode_scene(game_mode_node)
-		game_mode_node.start()
+		Game.goto_maps_menu_scene()
+#		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
+#		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
+#		Game.goto_game_mode_scene(game_mode_node)
+#		game_mode_node.start()
 
 func on_online():
 	if state == State.offline:

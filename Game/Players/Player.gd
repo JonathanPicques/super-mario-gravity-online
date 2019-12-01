@@ -614,6 +614,7 @@ func apply_object_invincibility(object):
 	PlayerObjectTimer.start()
 
 func reset_object_invincibility(object):
+	is_invincible = false
 	Game.GameConst.replace_skin(PlayerSprite, 0, false) # TODO Access skin id
 
 func pre_use_object():
