@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Hangin-Ten_Looping.ogg-affdfc101ed037c49e2c44c693b75a1b.oggstr"
+
+[deps]
+
+source_file="res://Game/Maps/Musics/Hangin-Ten_Looping.ogg"
+dest_files=[ "res://.import/Hangin-Ten_Looping.ogg-affdfc101ed037c49e2c44c693b75a1b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -10,12 +10,12 @@ onready var GameMultiplayer = $GameMultiplayer
 # warning-ignore:unused_class_variable
 onready var GameConst = $GameConst
 
-const Map: = preload("res://Game/Maps/Base/Base.tscn")
+const Map := preload("res://Game/Maps/Base.tscn")
+const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 const WaitingMenu := preload("res://Game/Menus/WaitingMenu.tscn")
-const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
 
 var scene = null
 

@@ -32,7 +32,7 @@ tile_data = PoolIntArray( 65532, 4, 0, 65533, 4, 1, 65534, 4, 1, 65535, 4, 1, 0,
 motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 512, 512 )
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
+[node name="Parallax" type="Sprite" parent="ParallaxBackground/Background"]
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
