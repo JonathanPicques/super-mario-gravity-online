@@ -1,8 +1,6 @@
-extends Sprite
+extends Node2D
 
-func _ready():
-	print("Princess ready")
+onready var Game = get_node("/root/Game")
 
-func _on_Area2D_area_entered(area):
-	print("Enter area")
+func _on_Area2D_body_entered(body):
 	get_parent().open_popup()
