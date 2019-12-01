@@ -23,6 +23,7 @@ var scene = null
 # @driven(lifecycle)
 # @impure
 func _ready():
+	VisualServer.set_default_clear_color(Color("#211F30"))
 	goto_home_menu_scene()
 
 ##########
