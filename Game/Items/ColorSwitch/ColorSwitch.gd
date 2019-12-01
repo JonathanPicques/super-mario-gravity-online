@@ -17,8 +17,10 @@ const OffTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOff
 
 func _ready():
 	$Sprite.texture = OnTexture if is_on else OffTexture
-	print("Create Switch with color ")
-	Game.GameConst.replace_skin($Sprite, color)
+	randomize()
+	var rand_color := randi() % 4
+	print("Create Switch with color ", rand_color)
+	Game.GameConst.replace_skin($Sprite, rand_color)
 	Game.GameMode.connect("item_color_switch_trigger", self, "on_trigger")
 
 func _on_Area2D_body_entered(player_node):
