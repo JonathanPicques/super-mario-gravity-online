@@ -4,11 +4,11 @@ class_name GameNode
 # warning-ignore:unused_class_variable
 onready var GameMode = null
 # warning-ignore:unused_class_variable
+onready var GameConst = $GameConst
+# warning-ignore:unused_class_variable
 onready var GameInput = $GameInput
 # warning-ignore:unused_class_variable
 onready var GameMultiplayer = $GameMultiplayer
-# warning-ignore:unused_class_variable
-onready var GameConst = $GameConst
 
 const Map := preload("res://Game/Maps/Base.tscn")
 const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
