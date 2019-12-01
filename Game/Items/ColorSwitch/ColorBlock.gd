@@ -2,24 +2,16 @@ extends Node2D
 
 onready var Game = get_node("/root/Game")
 
-enum BlockColor {
-	Blue,
-	Red,
-	Pink,
-	Orange
-}
-
-export(BlockColor) var color: int = BlockColor.Blue
+export(GameConst.SkinColor) var color: int = GameConst.SkinColor.red
 
 const OnTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOn.png")
 const OffTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOff.png")
 
-
 func _ready():
-	$Sprite.texture = OffTexture
-	Game.GameConst.replace_skin($Sprite, color)
-	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 	Game.GameMode.connect("item_color_switch_trigger", self, "on_trigger")
+	Game.GameConst.replace_skin($Sprite, color)
+	$Sprite.texture = OffTexture
+	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 
 func on_trigger(switch_color: int):
 	if switch_color == color:

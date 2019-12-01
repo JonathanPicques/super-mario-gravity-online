@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game/Modes/Race/RaceGameModeUI.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=3]
+[ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=3]
 [ext_resource path="res://Game/Menus/Textures/MiniMap.png" type="Texture" id=4]
 [ext_resource path="res://Game/Menus/Textures/MiniFrog.png" type="Texture" id=5]
 
@@ -10,17 +10,6 @@
 size = 30
 outline_size = 1
 font_data = ExtResource( 2 )
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
-shader_param/color1 = null
-shader_param/color2 = null
-shader_param/color3 = null
-shader_param/color4 = null
-shader_param/skin_color1 = null
-shader_param/skin_color2 = null
-shader_param/skin_color3 = null
-shader_param/skin_color4 = null
 
 [node name="RaceGameModeUI" type="Control"]
 anchor_right = 1.0
@@ -64,7 +53,7 @@ __meta__ = {
 }
 
 [node name="ObjectSkin" type="TextureRect" parent="ObjectBox/MarginContainer"]
-material = SubResource( 2 )
+material = ExtResource( 3 )
 margin_right = 32.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
@@ -82,5 +71,6 @@ __meta__ = {
 }
 
 [node name="MiniFrog" type="Sprite" parent="MiniMap"]
+material = ExtResource( 3 )
 position = Vector2( 48, 20 )
 texture = ExtResource( 5 )

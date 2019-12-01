@@ -97,6 +97,7 @@ func _ready():
 	set_dialog(DialogType.none)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
+	Game.GameConst.replace_skin(PlayerSprite, player.skin_id, false)
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
@@ -609,13 +610,13 @@ func apply_object_invincibility(object):
 	is_invincible = true
 	active_object = object
 	speed_multiplier = INVINCIBILITY_SPEED_MULTIPLIER
-	Game.GameConst.replace_skin(PlayerSprite, 0, true) # TODO Access skin id
+	Game.GameConst.replace_skin(PlayerSprite, player.skin_id, true)
 	PlayerObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
 	PlayerObjectTimer.start()
 
 func reset_object_invincibility(object):
 	is_invincible = false
-	Game.GameConst.replace_skin(PlayerSprite, 0, false) # TODO Access skin id
+	Game.GameConst.replace_skin(PlayerSprite, player.skin_id, false)
 
 func pre_use_object():
 	if active_object:

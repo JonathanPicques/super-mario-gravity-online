@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "GameConst",
+"language": "GDScript",
+"path": "res://Game/GameConst.gd"
+}, {
+"base": "Node",
 "class": "GameInputNode",
 "language": "GDScript",
 "path": "res://Game/GameInput.gd"
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://Game/Players/Player.gd"
 } ]
 _global_script_class_icons={
+"GameConst": "",
 "GameInputNode": "",
 "GameModeNode": "",
 "GameMultiplayerNode": "",

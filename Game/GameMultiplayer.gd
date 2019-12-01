@@ -487,27 +487,26 @@ func disconnect_webrtc_peer(match_peer: Dictionary):
 # @impure
 func on_webrtc_peer_connected(peer_id: int):
 	print("on_webrtc_peer_connected: ", peer_id)
-	if true: # webrtc_peers_ok.size() == players.size() - 1:
-		for session_id in match_peers:
-			var match_peer = match_peers[session_id]
-			if match_peer["peer_id"] == peer_id:
-				webrtc_peers_ok[session_id] = true
-				var peer_player_id := 0
-				for match_peer_player in match_peer["players"]:
-					var player := add_player("Network Peer", false, -1, peer_id, peer_player_id)
-					player_set_skin(player.id, match_peer_player.skin_id)
-					player_set_ready(player.id, match_peer_player.ready)
-					peer_player_id += 1
-		for player in players:
-			if player.local:
-				player.peer_id = my_peer_id
-				player.peer_player_id = player.id
-		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
-		get_node("/root/Game").goto_game_mode_scene(game_mode_node)
-		game_mode_node.start()
-		for player in players:
-			print("player %d joined (local: %s) (local_id: %s)" % [player.id, player.local, player.peer_player_id])
+	for session_id in match_peers:
+		var match_peer = match_peers[session_id]
+		if match_peer["peer_id"] == peer_id:
+			webrtc_peers_ok[session_id] = true
+			var peer_player_id := 0
+			for match_peer_player in match_peer["players"]:
+				var player := add_player("Network Peer", false, -1, peer_id, peer_player_id)
+				player_set_skin(player.id, match_peer_player.skin_id)
+				player_set_ready(player.id, match_peer_player.ready)
+				peer_player_id += 1
+	for player in players:
+		if player.local:
+			player.peer_id = my_peer_id
+			player.peer_player_id = player.id
+	var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
+	game_mode_node.options = { map = "res://Game/Maps/SpikesCorridor.tscn" }
+	get_node("/root/Game").goto_game_mode_scene(game_mode_node)
+	game_mode_node.start()
+	for player in players:
+		print("player %d joined (local: %s) (local_id: %s)" % [player.id, player.local, player.peer_player_id])
 
 # @impure
 func on_webrtc_peer_disconnected(peer_id: int):
