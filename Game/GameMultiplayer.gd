@@ -235,7 +235,7 @@ func get_player_node(player_id: int) -> Node:
 
 # @pure
 func get_player_node_name(player_id: int) -> String:
-	var player = players[player_id]
+	var player = get_player(player_id)
 	return str(player.peer_id) + "_" + str(player.peer_player_id)
 
 # @impure
