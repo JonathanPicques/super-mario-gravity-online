@@ -23,8 +23,8 @@ const maps := [
 		"difficulty": "medium"
 	},
 	{
-		"title": "Rainbow room",
-		"scene": "res://Game/Maps//Base.tscn",
+		"title": "Rainbow garden",
+		"scene": "res://Game/Maps/RainbowGarden.tscn",
 		"score": 6,
 		"author": "jeremtab",
 		"difficulty": "medium"
