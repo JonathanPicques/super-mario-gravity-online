@@ -36,9 +36,9 @@ func goto_home_menu_scene():
 	set_scene(HomeMenu.instance())
 
 # @impure
-func goto_game_mode_scene(game_mode_node: Node):
-	self.game_mode_node = game_mode_node
-	set_scene(game_mode_node)
+func goto_game_mode_scene(_game_mode_node: Node):
+	game_mode_node = _game_mode_node
+	set_scene(_game_mode_node)
 
 # @impure
 func goto_lobby_menu_scene():

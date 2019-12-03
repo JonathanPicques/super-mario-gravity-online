@@ -10,7 +10,7 @@ func _on_Area2D_body_entered(body):
 		effect_node.position = $EffectPosition.global_position
 		get_parent().add_child(effect_node)
 		visible = false
-		$Timer.start()
+		RespawnTimer.start()
 
 func _on_Timer_timeout():
 	visible = true
