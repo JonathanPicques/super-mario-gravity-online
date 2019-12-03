@@ -1,5 +1,5 @@
 extends Node
-class_name GameConst
+class_name GameConstNode
 
 enum SkinColor {
 	red,

@@ -1,4 +1,5 @@
 extends "res://Game/Modes/GameMode.gd"
+class_name RaceGameModeNode
 
 # map scene
 var map_scene: Navigation2D
@@ -20,14 +21,14 @@ func start():
 	var flag_end_pos: Vector2 = map_scene.find_node("FlagEnd").position
 	var flag_start_pos: Vector2 = map_scene.find_node("FlagStart").position
 	# create all players
-	Game.GameMultiplayer.spawn_player_nodes(MapSlot)
-	for player in Game.GameMultiplayer.players:
-		var player_node: Node2D = Game.GameMultiplayer.get_player_node(player.id)
+	GameMultiplayer.spawn_player_nodes(MapSlot)
+	for player in GameMultiplayer.get_players():
+		var player_node: Node2D = GameMultiplayer.get_player_node(player.id)
 		player_node.position = flag_start_pos
 		player_node.position.x += max(player.peer_id, 0) * 32 + player.peer_player_id * 8 + 32
 		add_player_screen_camera(player.id, player_node.get_path())
 	# connect multiplayer signals
-	Game.GameMultiplayer.connect("player_removed", self, "on_player_removed")
+	GameMultiplayer.connect("player_removed", self, "on_player_removed")
 	# compute player ranking locally
 	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking", [flag_end_pos])
 	$RankUpdateTimer.start()
@@ -37,8 +38,8 @@ func start():
 func compute_player_ranking(goal_position: Vector2):
 	var sorted_players := []
 	# compute distance from player node to the goal
-	for player in Game.GameMultiplayer.players:
-		var player_node = Game.GameMultiplayer.get_player_node(player.id)
+	for player in GameMultiplayer.get_players():
+		var player_node := GameMultiplayer.get_player_node(player.id)
 		if player_node != null:
 			var distance := 0.0
 			var navigation_path := map_scene.get_simple_path(player_node.position, goal_position)
@@ -52,7 +53,7 @@ func compute_player_ranking(goal_position: Vector2):
 	sorted_players.sort_custom(self, "player_sort_by_distance")
 	# assign player ranking
 	for i in range(0, sorted_players.size()):
-		var player = Game.GameMultiplayer.get_player(sorted_players[i].id)
+		var player = GameMultiplayer.get_player(sorted_players[i].id)
 		player.rank = i
 		player.rank_distance = sorted_players[i].distance
 		# print("player %d is #%d with a distance from flag of %d" % [player.id, (player.rank + 1), player.rank_distance])
@@ -68,7 +69,7 @@ func player_sort_by_distance(player_a: Dictionary, player_b: Dictionary):
 # @impure
 func on_player_removed(player: Dictionary):
 	# remove player nodes and cameras associated to the removed player
-	var player_node = Game.GameMultiplayer.get_player_node(player.id)
+	var player_node := GameMultiplayer.get_player_node(player.id)
 	if player_node:
 		player_node.queue_free()
 		remove_player_screen_camera(player.id)

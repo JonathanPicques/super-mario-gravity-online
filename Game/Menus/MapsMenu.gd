@@ -1,7 +1,5 @@
 extends Navigation2D
 
-onready var Game = get_node("/root/Game")
-
 const maps := [
 	{
 		"title": "Debug",

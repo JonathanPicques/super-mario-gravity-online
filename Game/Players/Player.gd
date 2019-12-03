@@ -1,8 +1,6 @@
 extends KinematicBody2D
 class_name PlayerNode
 
-onready var Game = get_node("/root/Game")
-
 onready var PlayerTimer: Timer = $Timer
 onready var PlayerSprite: Sprite = $Sprite
 onready var PlayerObjectTimer: Timer = $ObjectTimer
@@ -97,7 +95,7 @@ func _ready():
 	set_dialog(DialogType.none)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
-	Game.GameConst.replace_skin(PlayerSprite, player.skin_id, false)
+	GameConst.replace_skin(PlayerSprite, player.skin_id, false)
 
 # _process is called every tick and updates network player state.
 # @driven(lifecycle)
@@ -156,13 +154,13 @@ var _run := false; var _use := false; var _jump := false
 func process_input(delta: float):
 	if player.local or is_network_master():
 		# get inputs from gamepad or keyboard
-		input_up = Game.GameInput.is_player_action_pressed(player.id, "up")
-		input_left = Game.GameInput.is_player_action_pressed(player.id, "left")
-		input_down = Game.GameInput.is_player_action_pressed(player.id, "down")
-		input_right = Game.GameInput.is_player_action_pressed(player.id, "right")
-		input_run = Game.GameInput.is_player_action_pressed(player.id, "run")
-		input_use = Game.GameInput.is_player_action_pressed(player.id, "use")
-		input_jump = Game.GameInput.is_player_action_pressed(player.id, "jump")
+		input_up = GameInput.is_player_action_pressed(player.id, "up")
+		input_left = GameInput.is_player_action_pressed(player.id, "left")
+		input_down = GameInput.is_player_action_pressed(player.id, "down")
+		input_right = GameInput.is_player_action_pressed(player.id, "right")
+		input_run = GameInput.is_player_action_pressed(player.id, "run")
+		input_use = GameInput.is_player_action_pressed(player.id, "use")
+		input_jump = GameInput.is_player_action_pressed(player.id, "jump")
 	elif len(_last_net_view) > 0:
 		# get inputs from last net view
 		input_up = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 0))
@@ -610,13 +608,13 @@ func apply_object_invincibility(object):
 	is_invincible = true
 	active_object = object
 	speed_multiplier = INVINCIBILITY_SPEED_MULTIPLIER
-	Game.GameConst.replace_skin(PlayerSprite, player.skin_id, true)
+	GameConst.replace_skin(PlayerSprite, player.skin_id, true)
 	PlayerObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
 	PlayerObjectTimer.start()
 
 func reset_object_invincibility(object):
 	is_invincible = false
-	Game.GameConst.replace_skin(PlayerSprite, player.skin_id, false)
+	GameConst.replace_skin(PlayerSprite, player.skin_id, false)
 
 func pre_use_object():
 	if active_object:

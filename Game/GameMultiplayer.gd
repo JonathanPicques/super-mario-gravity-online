@@ -1,7 +1,7 @@
 extends Node
 class_name GameMultiplayerNode
 
-onready var PlayerNode := preload("res://Game/Players/Frog/Frog.tscn")
+onready var PlayerNodeScene := preload("res://Game/Players/Frog/Frog.tscn")
 
 signal player_added(player)
 signal player_removed(player)
@@ -146,10 +146,10 @@ func get_players(sort_method := SortPlayerMethods.normal) -> Array:
 			inverted_players.invert()
 			return inverted_players
 		SortPlayerMethods.ranked_inverted:
-			var ranked_players := players.duplicate()
-			ranked_players.sort_custom(self, "player_sort_by_rank")
-			ranked_players.invert()
-			return ranked_players
+			var ranked_inverted_players := players.duplicate()
+			ranked_inverted_players.sort_custom(self, "player_sort_by_rank")
+			ranked_inverted_players.invert()
+			return ranked_inverted_players
 		_:
 			return players.duplicate()
 
@@ -159,8 +159,8 @@ func get_lead_player():
 	
 # @pure
 func get_closest_player(player_id: int): # FIXME: shouldn't pass the ID 
-	var ranked_players := get_players(SortPlayerMethods.ranked)
 	var index := 0
+	var ranked_players := get_players(SortPlayerMethods.ranked)
 	print("ranked_players: ", ranked_players)
 	for player in ranked_players:
 		if player.id == player_id and index - 1 >= 0:
@@ -222,7 +222,7 @@ func has_room_for_new_player() -> bool:
 	return players.size() < MAX_PLAYERS
 
 # @pure
-func player_sort_by_rank(player_a: Dictionary, player_b: Dictionary):
+func player_sort_by_rank(player_a: Dictionary, player_b: Dictionary) -> int:
 	return player_a.rank < player_b.rank 
 
 ###################
@@ -231,7 +231,7 @@ func player_sort_by_rank(player_a: Dictionary, player_b: Dictionary):
 
 # @pure
 func get_player_node(player_id: int) -> Node:
-	return get_node("/root/Game").scene.MapSlot.get_node(get_player_node_name(player_id))
+	return Game.scene.MapSlot.get_node(get_player_node_name(player_id))
 
 # @pure
 func get_player_node_name(player_id: int) -> String:
@@ -239,8 +239,8 @@ func get_player_node_name(player_id: int) -> String:
 	return str(player.peer_id) + "_" + str(player.peer_player_id)
 
 # @impure
-func spawn_player_node(player: Dictionary, parent_node: Node):
-	var player_node := PlayerNode.instance()
+func spawn_player_node(player: Dictionary, parent_node: Node) -> Node:
+	var player_node := PlayerNodeScene.instance()
 	player_node.name = get_player_node_name(player.id)
 	player_node.player = player
 	player_node.set_network_master(player.peer_id)

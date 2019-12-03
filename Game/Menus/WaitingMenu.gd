@@ -1,13 +1,11 @@
 extends Navigation2D
 
-onready var Game = get_node("/root/Game")
-
 # @impure
 func _ready():
-	if not Game.GameMultiplayer.is_online():
+	if not GameMultiplayer.is_online():
 		cancel_waiting()
-	Game.GameMultiplayer.connect("offline", self, "cancel_waiting")
-	Game.GameMultiplayer.start_matchmaking()
+	GameMultiplayer.connect("offline", self, "cancel_waiting")
+	GameMultiplayer.start_matchmaking()
 
 # @impure
 func _process(delta):
@@ -16,5 +14,5 @@ func _process(delta):
 
 # @impure
 func cancel_waiting():
-	Game.GameMultiplayer.finish_playing()
+	GameMultiplayer.finish_playing()
 	Game.goto_lobby_menu_scene()

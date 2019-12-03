@@ -13,20 +13,17 @@ enum BlockColor {
 export var use_target := false
 export(BlockColor) var color: int = BlockColor.Blue
 
-var player_node = null
-
-onready var Game = get_node("/root/Game")
-
-var target_node = null
 var direction := 1
+var player_node = null
+var target_node = null
 
 func _ready():
 	direction = player_node.direction
 	$Sprite.scale.x = abs($Sprite.scale.x) * sign(direction)
 	if use_target:
-		var closest = Game.GameMultiplayer.get_closest_player(player_node.player.id)
+		var closest = GameMultiplayer.get_closest_player(player_node.player.id)
 		if closest:
-			target_node = Game.GameMultiplayer.get_player_node(closest.id)
+			target_node = GameMultiplayer.get_player_node(closest.id)
 
 func _physics_process(delta: float):
 	if is_instance_valid(target_node):

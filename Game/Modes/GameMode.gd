@@ -1,7 +1,6 @@
 extends Control
 class_name GameModeNode
 
-onready var Game = get_node("/root/Game")
 onready var MapSlot: Node2D = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1/MapSlot
 
 onready var Viewport1 = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1
@@ -9,7 +8,7 @@ onready var Viewport2 = $SplitScreenContainer/RowContainer1/ColumnContainer1/Con
 onready var Viewport3 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3/Viewport3
 onready var Viewport4 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4/Viewport4
 
-const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
+var PlayerCamera := load("res://Game/Players/PlayerCamera2D.tscn")
 
 signal item_color_switch_trigger(color)
 
@@ -25,7 +24,7 @@ func start():
 # setup the split screen depending on the number of players.
 # @impure
 func setup_split_screen():
-	var player_count = Game.GameMultiplayer.get_local_player_count() # Game.GameMultiplayer.players.size()
+	var player_count := GameMultiplayer.get_local_player_count()
 	match player_count:
 		1: 
 			$SplitScreenContainer/RowContainer2.visible = false

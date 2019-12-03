@@ -10,7 +10,7 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
-"class": "GameConst",
+"class": "GameConstNode",
 "language": "GDScript",
 "path": "res://Game/GameConst.gd"
 }, {
@@ -38,21 +38,34 @@ _global_script_classes=[ {
 "class": "PlayerNode",
 "language": "GDScript",
 "path": "res://Game/Players/Player.gd"
+}, {
+"base": "Control",
+"class": "RaceGameModeNode",
+"language": "GDScript",
+"path": "res://Game/Modes/Race/RaceGameMode.gd"
 } ]
 _global_script_class_icons={
-"GameConst": "",
+"GameConstNode": "",
 "GameInputNode": "",
 "GameModeNode": "",
 "GameMultiplayerNode": "",
 "GameNode": "",
-"PlayerNode": ""
+"PlayerNode": "",
+"RaceGameModeNode": ""
 }
 
 [application]
 
 config/name="God Save The Frog"
-run/main_scene="res://Game/Game.tscn"
+run/main_scene="res://Game/Menus/HomeMenu.tscn"
 config/icon="res://Settings/Icon.png"
+
+[autoload]
+
+GameMultiplayer="*res://Game/GameMultiplayer.tscn"
+GameConst="*res://Game/GameConst.tscn"
+GameInput="*res://Game/GameInput.tscn"
+Game="*res://Game/Game.tscn"
 
 [debug]
 
