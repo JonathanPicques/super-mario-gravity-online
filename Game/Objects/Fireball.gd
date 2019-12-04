@@ -29,9 +29,8 @@ func _physics_process(delta: float):
 
 func _on_Area2D_body_entered(body):
 	if player_node != body: # don't check collision on current player
-		# FIXME: kill the player if there is one (how to check??)
 		if body.is_in_group("PlayerNode"):
-			print("Missile collided width player ", body.player.id)
+			body.apply_death(position)
 		else:
 			print("Missile collided with ", body.name)
 		queue_free()
