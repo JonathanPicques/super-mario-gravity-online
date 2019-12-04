@@ -34,6 +34,12 @@ const maps := [
 func _ready():
 	$MapButton1.grab_focus()
 
+# @impure
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		GameMultiplayer.finish_playing()
+		Game.goto_lobby_menu_scene()
+
 func start_game(scene_path):
 	var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
 	game_mode_node.options = { map = scene_path }
