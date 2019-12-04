@@ -1,6 +1,8 @@
 extends KinematicBody2D
 class_name PlayerNode
 
+const GroundDustFX := preload("res://Game/Effects/Particles/GroundDust.tscn")
+
 onready var PlayerTimer: Timer = $Timer
 onready var PlayerSprite: Sprite = $Sprite
 onready var PlayerObjectTimer: Timer = $ObjectTimer
@@ -472,6 +474,7 @@ func tick_fall(delta: float):
 	handle_direction()
 	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if is_on_floor():
+		fx_hit_ground()
 		fall_jump_grace = 0.0
 		return set_state(PlayerState.stand)
 	if is_on_wall_passive() and not input_down and (\
@@ -543,6 +546,7 @@ func pre_wallslide():
 func tick_wallslide(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED * 0.5, GRAVITY_ACCELERATION * 0.25)
 	if is_on_floor():
+		fx_hit_ground()
 		return set_state(PlayerState.stand)
 	if not is_on_wall_passive():
 		return set_state(PlayerState.fall)
@@ -669,11 +673,25 @@ func set_dialog(dialog: int):
 		DialogType.ready: $Dialog.visible = true
 
 ###
-# Animation driven
+# FX / Animation driven
 ###
 
 func fx_step_01():
 	play_sound_effect(Step_01_SFX)
+	fx_spawn_dust_particles(Vector2(position.x + 5 * direction, position.y))
 
 func fx_step_02():
 	play_sound_effect(Step_02_SFX)
+	fx_spawn_dust_particles(Vector2(position.x - 5 * direction, position.y))
+
+func fx_hit_ground():
+	Engine.time_scale = 0.1
+	play_sound_effect(Step_01_SFX)
+	fx_spawn_dust_particles(Vector2(position.x - 5, position.y))
+	fx_spawn_dust_particles(Vector2(position.x + 5, position.y))
+
+func fx_spawn_dust_particles(position: Vector2):
+	var ground_dust_node := GroundDustFX.instance()
+	ground_dust_node.position = position
+	ground_dust_node.get_node("Particles2D").call_deferred("restart")
+	Game.scene.MapSlot.add_child(ground_dust_node)

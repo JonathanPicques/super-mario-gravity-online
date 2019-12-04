@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
+[ext_resource path="res://Game/Effects/Particles/GroundDust.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7, 14 )
@@ -10,6 +11,7 @@ extents = Vector2( 7, 14 )
 "PlayerNode",
 ]]
 position = Vector2( 2, 0 )
+z_index = -1
 collision_mask = 62
 script = ExtResource( 1 )
 
@@ -20,18 +22,16 @@ one_shot = true
 [node name="Sprite" type="Sprite" parent="."]
 centered = false
 
+[node name="Dialog" type="Sprite" parent="."]
+position = Vector2( 0, -40 )
+texture = ExtResource( 2 )
+
 [node name="EveryTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
 
 [node name="ObjectTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="CeilingChecker" type="RayCast2D" parent="."]
-position = Vector2( 0, -30 )
-enabled = true
-cast_to = Vector2( 0, -2 )
-collision_mask = 2
 
 [node name="SoundEffects" type="Node" parent="."]
 
@@ -51,15 +51,20 @@ bus = "SFX"
 position = Vector2( 0, -16 )
 shape = SubResource( 1 )
 
+[node name="CeilingChecker" type="RayCast2D" parent="."]
+position = Vector2( 0, -30 )
+enabled = true
+cast_to = Vector2( 0, -2 )
+collision_mask = 2
+
+[node name="FirebaseSpawn" type="Node2D" parent="."]
+position = Vector2( 16, -16 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="NetworkDeadReckoning" type="Tween" parent="."]
 repeat = true
 playback/repeat = true
 
-[node name="Dialog" type="Sprite" parent="."]
-position = Vector2( 0, -40 )
-texture = ExtResource( 2 )
-
-[node name="FirebaseSpawn" type="Node2D" parent="."]
-position = Vector2( 16, -16 )
+[node name="GroundDust" parent="." instance=ExtResource( 3 )]
+position = Vector2( -2, 0 )

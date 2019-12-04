@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Game/Effects/Textures/Dust.png" type="Texture" id=1]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.8, 0.9, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.784314, 0.784314, 0.784314, 1, 0.745098, 0.745098, 0.745098, 0.745098, 0.705882, 0.705882, 0.705882, 0.392157 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, -3.82387, 0, 0, Vector2( 0.610118, 0 ), -0.419696, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 90.0
+gravity = Vector3( 0, 60, 0 )
+initial_velocity = 20.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="GroundDust" type="Node2D"]
+z_index = -1
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 3
+one_shot = true
+explosiveness = 0.96
+process_material = SubResource( 5 )
+texture = ExtResource( 1 )
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
