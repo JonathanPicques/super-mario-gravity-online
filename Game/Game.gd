@@ -6,7 +6,6 @@ const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
-const WaitingMenu := preload("res://Game/Menus/WaitingMenu.tscn")
 
 var map_node: MapNode
 var scene_node: Node2D
@@ -48,12 +47,6 @@ func goto_lobby_menu_scene():
 	var lobby_node := LobbyMenu.instance()
 	map_node = lobby_node
 	set_scene(lobby_node)
-
-# @impure
-func goto_waiting_menu_scene():
-	var waiting_menu_node := WaitingMenu.instance()
-	map_node = waiting_menu_node
-	set_scene(waiting_menu_node)
 
 # @impure
 func goto_maps_menu_scene():

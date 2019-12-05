@@ -45,7 +45,7 @@ func _process(delta: float):
 		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
 	if lead_player and GameInput.is_player_action_just_pressed(lead_player.id, "accept") and GameMultiplayer.is_every_player_ready():
-		return start_game()
+		return Game.goto_maps_menu_scene()
 	# add a local player
 	for input_device_id in range(0, 5):
 		if GameInput.is_device_action_just_pressed(input_device_id, "accept") and not GameInput.is_device_used_by_player(input_device_id):
@@ -79,6 +79,7 @@ func set_state(new_state: int):
 			$WaitingPrivateLabel.visible = false
 			$WaitingOfflineLabel.visible = false
 			$WaitingPublicLabel.visible = true
+			start_waiting()
 		State.private:
 			$CodeLabel.text = "join_code"
 			$StatusLabel.text = "Private"
@@ -89,6 +90,7 @@ func set_state(new_state: int):
 			$WaitingPrivateLabel.visible = true
 			$WaitingOfflineLabel.visible = false
 			$WaitingPublicLabel.visible = false
+			cancel_waiting()
 		State.offline:
 			$CodeLabel.text = ""
 			$StatusLabel.text = "Offline"
@@ -99,16 +101,16 @@ func set_state(new_state: int):
 			$WaitingPrivateLabel.visible = false
 			$WaitingOfflineLabel.visible = true
 			$WaitingPublicLabel.visible = false
+			cancel_waiting()
 
-func start_game():
-	if state == State.public:
-		Game.goto_waiting_menu_scene()
-	else:
-		Game.goto_maps_menu_scene()
-#		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-#		game_mode_node.options = { map = "res://Game/Maps/Map.tscn" }
-#		Game.goto_game_mode_scene(game_mode_node)
-#		game_mode_node.start()
+func start_waiting():
+	if not GameMultiplayer.is_online():
+		cancel_waiting()
+	GameMultiplayer.start_matchmaking()
+
+# @impure
+func cancel_waiting():
+	GameMultiplayer.finish_playing()
 
 func on_online():
 	if state == State.offline:
