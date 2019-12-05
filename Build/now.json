@@ -1,0 +1,11 @@
+{
+    "name": "frog",
+    "routes": [
+      {
+        "src": ".*",
+        "headers": {
+          "cache-control": "no-store"
+        }
+      }
+    ]
+  }
