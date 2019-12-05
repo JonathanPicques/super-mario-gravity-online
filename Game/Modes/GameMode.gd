@@ -42,7 +42,7 @@ func setup_split_screen():
 func add_player_screen_camera(player_id: int, player_node_path: NodePath):
 	var player_camera_scene = PlayerCamera.instance()
 	player_camera_scene.player_node_path = player_node_path
-	player_camera_scene.tile_map_node_path = MapSlot.get_node("Map").Tilemap.get_path()
+	player_camera_scene.tile_map_node_path = MapSlot.get_node("Map").Map.get_path()
 	match player_id:
 		0: Viewport1.add_child(player_camera_scene)
 		1: Viewport2.add_child(player_camera_scene)

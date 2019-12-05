@@ -27,7 +27,6 @@ scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )
 
 [node name="GroundDust" type="Node2D"]
-z_index = -1
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

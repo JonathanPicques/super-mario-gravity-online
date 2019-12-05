@@ -1,4 +1,4 @@
-extends Navigation2D
+extends "res://Game/Maps/Map.gd"
 
 onready var MapSlot = $"."
 
@@ -72,7 +72,7 @@ func start_game():
 	else:
 		Game.goto_maps_menu_scene()
 #		var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-#		game_mode_node.options = { map = "res://Game/Maps/Base/Base.tscn" }
+#		game_mode_node.options = { map = "res://Game/Maps/Map.tscn" }
 #		Game.goto_game_mode_scene(game_mode_node)
 #		game_mode_node.start()
 

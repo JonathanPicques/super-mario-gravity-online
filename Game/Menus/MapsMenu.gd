@@ -3,7 +3,7 @@ extends Navigation2D
 const maps := [
 	{
 		"title": "Debug",
-		"scene": "res://Game/Maps/Base.tscn",
+		"scene": "res://Game/Maps/Map.tscn",
 		"score": 0,
 		"author": "anonymous",
 		"difficulty": "easy"
@@ -17,7 +17,7 @@ const maps := [
 	},
 	{
 		"title": "Crazy tower",
-		"scene": "res://Game/Maps/Base.tscn",
+		"scene": "res://Game/Maps/Map.tscn",
 		"score": 7,
 		"author": "jeremtab",
 		"difficulty": "medium"

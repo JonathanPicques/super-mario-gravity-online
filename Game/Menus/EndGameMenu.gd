@@ -1,4 +1,4 @@
-extends Navigation2D
+extends "res://Game/Maps/Map.gd"
 
 onready var MapSlot = $"."
 

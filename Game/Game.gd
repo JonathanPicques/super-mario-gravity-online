@@ -1,7 +1,7 @@
 extends Control
 class_name GameNode
 
-const Map := preload("res://Game/Maps/Base.tscn")
+const Map := preload("res://Game/Maps/Map.tscn")
 const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")

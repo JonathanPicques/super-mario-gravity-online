@@ -18,8 +18,8 @@ func start():
 	# setup split screen
 	setup_split_screen()
 	# cache start and end position
-	var flag_end_pos: Vector2 = map_scene.find_node("FlagEnd").position
-	var flag_start_pos: Vector2 = map_scene.find_node("FlagStart").position
+	var flag_end_pos: Vector2 = map_scene.FlagEnd.position
+	var flag_start_pos: Vector2 = map_scene.FlagStart.position
 	# create all players
 	GameMultiplayer.spawn_player_nodes(MapSlot)
 	for player in GameMultiplayer.get_players():
