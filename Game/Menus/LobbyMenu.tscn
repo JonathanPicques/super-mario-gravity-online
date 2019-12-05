@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/Textures/KeyAlt1.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Game/Menus/Textures/Lock.png" type="Texture" id=15]
 [ext_resource path="res://Game/Menus/Textures/Key.png" type="Texture" id=16]
 [ext_resource path="res://Game/Menus/Textures/Unlock.png" type="Texture" id=17]
+[ext_resource path="res://Game/Menus/Textures/Offline.png" type="Texture" id=18]
 
 [sub_resource type="DynamicFont" id=2]
 size = 19
@@ -215,6 +216,7 @@ position = Vector2( 336, 264 )
 texture = ExtResource( 9 )
 
 [node name="Lock" type="Sprite" parent="." index="32"]
+visible = false
 position = Vector2( 77.6812, 24.9518 )
 texture = ExtResource( 15 )
 
@@ -226,3 +228,7 @@ texture = ExtResource( 17 )
 [node name="Key" type="Sprite" parent="." index="34"]
 position = Vector2( 369, 25 )
 texture = ExtResource( 16 )
+
+[node name="Offline" type="Sprite" parent="." index="35"]
+position = Vector2( 78, 26 )
+texture = ExtResource( 18 )
