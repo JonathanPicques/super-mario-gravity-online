@@ -72,12 +72,21 @@ func set_state(new_state: int):
 		State.public:
 			$CodeLabel.text = ""
 			$StatusLabel.text = "Public"
+			$Lock.visible = false
+			$Key.visible = false
+			$Unlock.visible = true
 		State.private:
 			$CodeLabel.text = "join_code"
 			$StatusLabel.text = "Private"
+			$Lock.visible = true
+			$Key.visible = true
+			$Unlock.visible = false
 		State.offline:
 			$CodeLabel.text = ""
 			$StatusLabel.text = "Offline"
+			$Lock.visible = false
+			$Key.visible = false
+			$Unlock.visible = false
 
 func start_game():
 	if state == State.public:
