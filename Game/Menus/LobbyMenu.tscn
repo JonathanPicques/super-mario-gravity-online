@@ -28,7 +28,6 @@ size = 14
 font_data = ExtResource( 4 )
 
 [node name="Map" index="0" instance=ExtResource( 1 )]
-position = Vector2( 1, 0 )
 script = ExtResource( 6 )
 
 [node name="WaitingLabel" type="Label" parent="." index="0"]
