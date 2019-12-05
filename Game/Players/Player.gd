@@ -1,6 +1,7 @@
 extends KinematicBody2D
 class_name PlayerNode
 
+const SpriteTrail := preload("res://Game/Effects/Sprites/SpriteTrail.tscn")
 const GroundDustFX := preload("res://Game/Effects/Particles/GroundDust.tscn")
 
 onready var PlayerTimer: Timer = $Timer
@@ -118,6 +119,7 @@ func _process(delta):
 func _physics_process(delta: float):
 	process_input(delta)
 	process_object(delta)
+	process_effects(delta)
 	process_velocity(delta)
 	match state:
 		PlayerState.stand: tick_stand(delta)
@@ -191,7 +193,7 @@ func process_input(delta: float):
 	# compute input velocity
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
 
-# Reset all stats affected by objects when timer finishes
+# process_object resets all stats affected by objects when timer finishes
 # @impure
 func process_object(delta: float):
 	if PlayerObjectTimer.is_stopped():
@@ -201,6 +203,18 @@ func process_object(delta: float):
 				active_object.reset_player()
 			active_object.queue_free()
 			active_object = null
+
+# process_effects plays all sprite effects applied to the player.
+# @impure
+var _trail := 0.0
+func process_effects(delta: float):
+	if active_object and active_object is ObjectSpeedNode or active_object is ObjectInvincibilityNode:
+		_trail += delta
+		if _trail > 0.05:
+			var trail_node := SpriteTrail.instance()
+			trail_node.trail_sprite(PlayerSprite)
+			Game.map_node.PlayerSlot.add_child_below_node(self, trail_node)
+			_trail -= 0.05
 
 # process_velocity updates player position after applying velocity.
 # @impure

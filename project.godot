@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Maps/Map.gd"
 }, {
+"base": "Node2D",
+"class": "ObjectInvincibilityNode",
+"language": "GDScript",
+"path": "res://Game/Objects/Invincibility.gd"
+}, {
+"base": "Node2D",
+"class": "ObjectSpeedNode",
+"language": "GDScript",
+"path": "res://Game/Objects/Speed.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "PlayerNode",
 "language": "GDScript",
@@ -56,6 +66,8 @@ _global_script_class_icons={
 "GameMultiplayerNode": "",
 "GameNode": "",
 "MapNode": "",
+"ObjectInvincibilityNode": "",
+"ObjectSpeedNode": "",
 "PlayerNode": "",
 "RaceGameModeNode": ""
 }

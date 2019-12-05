@@ -3,7 +3,7 @@ extends Navigation2D
 const maps := [
 	{
 		"title": "Debug",
-		"scene": "res://Game/Maps/Map.tscn",
+		"scene": "res://Game/Maps/Debug.tscn",
 		"score": 0,
 		"author": "anonymous",
 		"difficulty": "easy"

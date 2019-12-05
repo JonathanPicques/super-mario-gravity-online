@@ -508,7 +508,7 @@ func on_webrtc_peer_connected(peer_id: int):
 			player.peer_player_id = player.id
 	var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
 	game_mode_node.options = { map = "res://Game/Maps/SpikesCorridor.tscn" }
-	get_node("/root/Game").goto_game_mode_scene(game_mode_node)
+	Game.goto_game_mode_scene(game_mode_node)
 	game_mode_node.start()
 	for player in players:
 		print("player %d joined (local: %s) (local_id: %s)" % [player.id, player.local, player.peer_player_id])

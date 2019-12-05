@@ -17,6 +17,7 @@ var game_mode_node: GameModeNode
 # @impure
 func _ready():
 	scene_node = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
+	map_node = scene_node
 	VisualServer.set_default_clear_color(Color("#211F30"))
 
 ##########

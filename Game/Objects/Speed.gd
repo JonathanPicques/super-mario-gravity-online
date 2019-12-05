@@ -1,4 +1,5 @@
 extends Node2D
+class_name ObjectSpeedNode
 
 var player_node = null
 
