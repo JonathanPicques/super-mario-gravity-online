@@ -38,9 +38,9 @@ func goto_home_menu_scene():
 
 # @impure
 func goto_game_mode_scene(_game_mode_node: GameModeNode):
+	game_mode_node = _game_mode_node
 	set_scene(_game_mode_node)
 	map_node = _game_mode_node.map_node
-	game_mode_node = _game_mode_node
 
 # @impure
 func goto_lobby_menu_scene():

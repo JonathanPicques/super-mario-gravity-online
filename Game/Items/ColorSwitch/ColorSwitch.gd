@@ -1,6 +1,6 @@
 extends Node2D
 
-export(GameConstNode.SkinColor) var color: int = GameConst.SkinColor.red
+export(GameConstNode.SkinColor) var color: int = GameConstNode.SkinColor.red
 var is_on = false
 
 const OnTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOn.png")
@@ -9,8 +9,8 @@ const OffTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOff
 # @impure
 func _ready():
 	$Sprite.texture = OnTexture if is_on else OffTexture
-	GameConst.replace_skin($Sprite, color)
 	Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
+	GameConst.replace_skin($Sprite, color)
 
 # @impure
 func _on_Area2D_body_entered(player_node):
