@@ -78,9 +78,9 @@ func start_playing():
 
 # @impure
 func finish_playing():
-	if match_data.has("match_id"):
+	if nakama_client and match_data.has("match_id"):
 		finish_match()
-	if matchmaker_ticket:
+	if nakama_client and matchmaker_ticket:
 		finish_matchmaking()
 	if webrtc_multiplayer:
 		finish_webrtc()
@@ -230,13 +230,18 @@ func player_sort_by_rank(player_a: Dictionary, player_b: Dictionary) -> int:
 ###################
 
 # @pure
-func get_player_node(player_id: int) -> Node:
+func get_player_node(player_id: int):
+	var player_node_name = get_player_node_name(player_id)
+	if not player_node_name:
+		return null
 	return Game.scene.MapSlot.get_node(get_player_node_name(player_id))
 
 # @pure
-func get_player_node_name(player_id: int) -> String:
+func get_player_node_name(player_id: int):
 	var player = get_player(player_id)
-	return str(player.peer_id) + "_" + str(player.peer_player_id)
+	if not player:
+		return null
+	return "player_%d_%d" % [player.peer_id, player.peer_player_id]
 
 # @impure
 func spawn_player_node(player: Dictionary, parent_node: Node) -> Node:

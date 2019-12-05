@@ -10,12 +10,14 @@ func _ready():
 	# map is not ready yet
 	yield(get_tree(), "idle_frame")
 	# put first player on top
-	var first_player_node := GameMultiplayer.get_player_node(players[0].id)
-	first_player_node.position = $FlagStart.position
+	var first_player_node = GameMultiplayer.get_player_node(players[0].id)
+	if first_player_node:
+		first_player_node.position = $FlagStart.position
 	# put other players on the bottom
 	for player_id in range(1, players.size()):
-		var player_node := GameMultiplayer.get_player_node(players[player_id].id)
-		player_node.position = get_node("Player%dPosition" % (player_id + 1)).position
+		var player_node = GameMultiplayer.get_player_node(players[player_id].id)
+		if player_node:
+			player_node.position = get_node("Player%dPosition" % (player_id + 1)).position
 
 func _process(delta: float):
 	if GameInput.is_player_action_just_pressed(0, "cancel"):

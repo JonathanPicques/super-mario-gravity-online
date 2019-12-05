@@ -39,8 +39,8 @@ func compute_player_ranking(goal_position: Vector2):
 	var sorted_players := []
 	# compute distance from player node to the goal
 	for player in GameMultiplayer.get_players():
-		var player_node := GameMultiplayer.get_player_node(player.id)
-		if player_node != null:
+		var player_node = GameMultiplayer.get_player_node(player.id)
+		if player_node:
 			var distance := 0.0
 			var navigation_path := map_scene.get_simple_path(player_node.position, goal_position)
 			var navigation_size := navigation_path.size()
@@ -69,7 +69,7 @@ func player_sort_by_distance(player_a: Dictionary, player_b: Dictionary):
 # @impure
 func on_player_removed(player: Dictionary):
 	# remove player nodes and cameras associated to the removed player
-	var player_node := GameMultiplayer.get_player_node(player.id)
+	var player_node = GameMultiplayer.get_player_node(player.id)
 	if player_node:
 		player_node.queue_free()
 		remove_player_screen_camera(player.id)

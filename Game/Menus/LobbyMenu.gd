@@ -90,15 +90,17 @@ func on_player_added(player: Dictionary):
 	player_node.set_dialog(0)
 
 func on_player_removed(player: Dictionary):
-	var player_node := GameMultiplayer.get_player_node(player.id)
+	var player_node = GameMultiplayer.get_player_node(player.id)
 	if player_node:
 		# TODO: spawn GFX
 		player_node.queue_free()
 
 func on_player_set_skin(player: Dictionary, skin_id: int):
-	var player_node := GameMultiplayer.get_player_node(player.id)
-	GameConst.replace_skin(player_node.PlayerSprite, skin_id) # todo move in player?
+	var player_node = GameMultiplayer.get_player_node(player.id)
+	if player_node:
+		GameConst.replace_skin(player_node.PlayerSprite, skin_id) # todo move in player?
 
 func on_player_set_ready(player: Dictionary, ready: bool):
-	var player_node := GameMultiplayer.get_player_node(player.id)
-	player_node.set_dialog(player_node.DialogType.ready if ready else player_node.DialogType.none)
+	var player_node = GameMultiplayer.get_player_node(player.id)
+	if player_node:
+		player_node.set_dialog(player_node.DialogType.ready if ready else player_node.DialogType.none)
