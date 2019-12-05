@@ -1,7 +1,5 @@
 extends "res://Game/Maps/Map.gd"
 
-onready var MapSlot = $"."
-
 func _ready():
 	GameMultiplayer.connect("player_added", self, "on_player_added")
 
@@ -18,7 +16,7 @@ func _process(delta: float):
 				GameMultiplayer.add_player("Local player", true, input_device_id, GameMultiplayer.my_peer_id, GameMultiplayer.get_next_peer_player_id(GameMultiplayer.my_peer_id))
 
 func on_player_added(player: Dictionary):
-	var player_node := GameMultiplayer.spawn_player_node(player, MapSlot)
+	var player_node := GameMultiplayer.spawn_player_node(player, PlayerSlot)
 	# TODO: spawn GFX
 	GameConst.replace_skin(player_node.PlayerSprite, 0)
 	player_node.set_dialog(0)

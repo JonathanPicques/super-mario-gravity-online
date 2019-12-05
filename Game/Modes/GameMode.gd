@@ -1,20 +1,22 @@
 extends Control
 class_name GameModeNode
 
-onready var MapSlot: Node2D = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1/MapSlot
+const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
-onready var Viewport1 = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1
-onready var Viewport2 = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control2/ViewportContainer2/Viewport2
-onready var Viewport3 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3/Viewport3
-onready var Viewport4 = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4/Viewport4
-
-var PlayerCamera := load("res://Game/Players/PlayerCamera2D.tscn")
+onready var MapSlot: MapNode = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1/MapSlot
+onready var Viewport1: Viewport = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1
+onready var Viewport2: Viewport = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control2/ViewportContainer2/Viewport2
+onready var Viewport3: Viewport = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3/Viewport3
+onready var Viewport4: Viewport = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4/Viewport4
 
 signal item_color_switch_trigger(color)
 
 # options available in _ready.
 # warning-ignore:unused_class_variable
 export var options = {}
+
+# map node
+var map_node: MapNode
 
 # start is called when the game mode starts.
 # @abstract

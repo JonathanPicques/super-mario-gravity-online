@@ -34,6 +34,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Game.gd"
 }, {
+"base": "Navigation2D",
+"class": "MapNode",
+"language": "GDScript",
+"path": "res://Game/Maps/Map.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "PlayerNode",
 "language": "GDScript",
@@ -50,6 +55,7 @@ _global_script_class_icons={
 "GameModeNode": "",
 "GameMultiplayerNode": "",
 "GameNode": "",
+"MapNode": "",
 "PlayerNode": "",
 "RaceGameModeNode": ""
 }

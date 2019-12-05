@@ -1,15 +1,12 @@
 extends "res://Game/Modes/GameMode.gd"
 class_name RaceGameModeNode
 
-# map scene
-var map_scene: Navigation2D
-
 # _ready is called when this node is ready
 # @driven(lifecycle)
 # @impure
 func _ready():
-	map_scene = load(options.map).instance()
-	MapSlot.add_child(map_scene)
+	map_node = load(options.map).instance()
+	MapSlot.add_child(map_node)
 
 # start is called when the game mode starts.
 # @override
@@ -18,10 +15,11 @@ func start():
 	# setup split screen
 	setup_split_screen()
 	# cache start and end position
-	var flag_end_pos: Vector2 = map_scene.FlagEnd.position
-	var flag_start_pos: Vector2 = map_scene.FlagStart.position
+	var flag_end_pos: Vector2 = map_node.FlagEnd.position
+	var flag_start_pos: Vector2 = map_node.FlagStart.position
 	# create all players
-	GameMultiplayer.spawn_player_nodes(MapSlot)
+	GameMultiplayer.spawn_player_nodes(map_node.PlayerSlot)
+	# position players close to the flag
 	for player in GameMultiplayer.get_players():
 		var player_node: Node2D = GameMultiplayer.get_player_node(player.id)
 		player_node.position = flag_start_pos
@@ -42,7 +40,7 @@ func compute_player_ranking(goal_position: Vector2):
 		var player_node = GameMultiplayer.get_player_node(player.id)
 		if player_node:
 			var distance := 0.0
-			var navigation_path := map_scene.get_simple_path(player_node.position, goal_position)
+			var navigation_path := map_node.get_simple_path(player_node.position, goal_position)
 			var navigation_size := navigation_path.size()
 			for i in range(0, navigation_size):
 				var next := i + 1

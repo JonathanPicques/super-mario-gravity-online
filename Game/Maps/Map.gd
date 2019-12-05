@@ -1,8 +1,11 @@
 extends Navigation2D
+class_name MapNode
 
 onready var Map: TileMap = $Map
 onready var FlagEnd: Node2D = $FlagEnd
 onready var FlagStart: Node2D = $FlagStart
+onready var PlayerSlot: Node2D = $PlayerSlot
+onready var ParticleSlot: Node2D = $ParticleSlot
 
 # _ready fills the empty map cells with navigable tiles.
 # @impure

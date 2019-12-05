@@ -234,7 +234,7 @@ func get_player_node(player_id: int):
 	var player_node_name = get_player_node_name(player_id)
 	if not player_node_name:
 		return null
-	return Game.scene.MapSlot.get_node(get_player_node_name(player_id))
+	return Game.map_node.PlayerSlot.get_node(get_player_node_name(player_id))
 
 # @pure
 func get_player_node_name(player_id: int):

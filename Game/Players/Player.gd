@@ -698,4 +698,4 @@ func fx_spawn_dust_particles(position: Vector2):
 	var ground_dust_node := GroundDustFX.instance()
 	ground_dust_node.position = position
 	ground_dust_node.get_node("Particles2D").call_deferred("restart")
-	Game.scene.MapSlot.add_child(ground_dust_node)
+	Game.map_node.ParticleSlot.add_child(ground_dust_node)

@@ -1,7 +1,5 @@
 extends "res://Game/Maps/Map.gd"
 
-onready var MapSlot = $"."
-
 enum State { none, join, public, private, offline }
 
 var state = State.none
@@ -84,7 +82,7 @@ func on_offline():
 	set_state(State.offline)
 
 func on_player_added(player: Dictionary):
-	var player_node := GameMultiplayer.spawn_player_node(player, MapSlot)
+	var player_node := GameMultiplayer.spawn_player_node(player, PlayerSlot)
 	# TODO: spawn GFX
 	player_node.position = get_node("Player%dPosition" % (player.id + 1)).position
 	player_node.set_dialog(0)

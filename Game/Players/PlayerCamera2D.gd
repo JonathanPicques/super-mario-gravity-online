@@ -17,8 +17,8 @@ func _ready():
 		tile_map_node_rect = tile_map_node.get_used_rect()
 		limit_top = int(tile_map_node_rect.position.y * tile_map_node.cell_size.y)
 		limit_left = int(tile_map_node_rect.position.x * tile_map_node.cell_size.x)
-		limit_right = int((1 + tile_map_node_rect.end.x) * tile_map_node.cell_size.x)
-		limit_bottom = int((1 + tile_map_node_rect.end.y) * tile_map_node.cell_size.y)
+		limit_right = int(tile_map_node_rect.end.x * tile_map_node.cell_size.x)
+		limit_bottom = int(tile_map_node_rect.end.y * tile_map_node.cell_size.y)
 
 # _process is called on every tick to center the camera on the player.
 # @driven(lifecycle)

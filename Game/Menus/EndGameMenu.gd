@@ -1,11 +1,9 @@
 extends "res://Game/Maps/Map.gd"
 
-onready var MapSlot = $"."
-
 # @impure
 func _ready():
 	# spawn player
-	GameMultiplayer.spawn_player_nodes(MapSlot)
+	GameMultiplayer.spawn_player_nodes(PlayerSlot)
 	var players := GameMultiplayer.get_players(GameMultiplayer.SortPlayerMethods.ranked)
 	# map is not ready yet
 	yield(get_tree(), "idle_frame")
