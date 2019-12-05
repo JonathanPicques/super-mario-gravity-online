@@ -347,7 +347,8 @@ func handle_direction():
 # handle_last_safe_position saves the last safe position.
 # @impure
 func handle_last_safe_position():
-	last_safe_position = position
+	if !is_invincible:
+		last_safe_position = position
 
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
 # @impure
