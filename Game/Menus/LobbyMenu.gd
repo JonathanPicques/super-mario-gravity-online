@@ -5,14 +5,29 @@ enum State { none, join, public, private, offline }
 var state = State.none
 
 func _ready():
+	# Set key icons
+	$KeyCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$KeyConfirm.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$KeyAlt1.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$KeyAlt2.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$KeyCtrlCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$KeyCtrlConfirm.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$KeyCtrlAlt1.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$KeyCtrlAlt2.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	
+	# Re-add players in already added
 	for player in GameMultiplayer.get_players():
 		on_player_added(player)
 		yield(get_tree(), "idle_frame")
 		on_player_set_skin(player, player.skin_id)
 		on_player_set_ready(player, player.ready)
+	
+	# Set initial status
 	match GameMultiplayer.is_online():
 		true: set_state(State.public)
 		false: set_state(State.offline)
+		
+	# Listeners
 	GameMultiplayer.connect("online", self, "on_online")
 	GameMultiplayer.connect("offline", self, "on_offline")
 	GameMultiplayer.connect("player_added", self, "on_player_added")

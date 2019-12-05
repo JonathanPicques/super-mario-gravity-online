@@ -32,6 +32,8 @@ const maps := [
 ]
 
 func _ready():
+	$KeyCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$KeyCtrlCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
 	$MapButton1.grab_focus()
 
 # @impure
