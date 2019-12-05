@@ -541,6 +541,7 @@ func pre_wallslide():
 	velocity.x = 0
 	velocity.y = velocity.y * 0.1
 	jumps_remaining = MAX_JUMPS - 1
+	fx_hit_wall()
 	set_animation("wallslide")
 
 func tick_wallslide(delta: float):
@@ -684,8 +685,11 @@ func fx_step_02():
 	play_sound_effect(Step_02_SFX)
 	fx_spawn_dust_particles(Vector2(position.x - 5 * direction, position.y))
 
+func fx_hit_wall():
+	play_sound_effect(Step_02_SFX)
+	fx_spawn_dust_particles(Vector2(position.x + 7 * direction, position.y - 12))
+
 func fx_hit_ground():
-	Engine.time_scale = 0.1
 	play_sound_effect(Step_01_SFX)
 	fx_spawn_dust_particles(Vector2(position.x - 5, position.y))
 	fx_spawn_dust_particles(Vector2(position.x + 5, position.y))
