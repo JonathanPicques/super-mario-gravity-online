@@ -1,15 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game/Modes/Race/RaceGameModeUI.gd" type="Script" id=1]
-[ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Game/Menus/Fonts/HUDFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=3]
 [ext_resource path="res://Game/Menus/Textures/MiniMap.png" type="Texture" id=4]
 [ext_resource path="res://Game/Menus/Textures/MiniFrog.png" type="Texture" id=5]
+[ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Game/Modes/Race/TimerLabel.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 30
+size = 20
 outline_size = 1
-font_data = ExtResource( 2 )
+font_data = ExtResource( 6 )
 
 [node name="RaceGameModeUI" type="Control"]
 anchor_right = 1.0
@@ -23,7 +25,7 @@ __meta__ = {
 margin_left = 16.0
 margin_right = 56.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 custom_constants/shadow_offset_y = 2
 text = "#1"
@@ -74,3 +76,23 @@ __meta__ = {
 material = ExtResource( 3 )
 position = Vector2( 48, 20 )
 texture = ExtResource( 5 )
+
+[node name="TimerLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -40.0
+margin_right = 88.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
+text = "00:00:00"
+valign = 1
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MSTimer" type="Timer" parent="TimerLabel"]
+wait_time = 0.1
+autostart = true
+[connection signal="timeout" from="TimerLabel/MSTimer" to="TimerLabel" method="_on_MSTimer_timeout"]
