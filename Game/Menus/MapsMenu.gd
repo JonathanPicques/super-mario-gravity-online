@@ -55,30 +55,53 @@ func set_map_infos(index):
 		maps[index]["score"]
 	]
 
-# @signal
-# @impure
-func _on_MapButton1_pressed(): start_game(maps[0]["map_scene_path"])
-# @signal
-# @impure
-func _on_MapButton1_focus_entered(): set_map_infos(0)
+# block_input is used to avoid calling start_game multiple times.
+var block_input := false
 
 # @signal
 # @impure
-func _on_MapButton2_pressed(): start_game(maps[1]["map_scene_path"])
-# @signal
-# @impure
-func _on_MapButton2_focus_entered(): set_map_infos(1)
+func _on_MapButton1_pressed(): 
+	if not block_input:
+		block_input = true
+		start_game(maps[0]["map_scene_path"])
 
 # @signal
 # @impure
-func _on_MapButton3_pressed(): start_game(maps[2]["map_scene_path"])
-# @signal
-# @impure
-func _on_MapButton3_focus_entered(): set_map_infos(2)
+func _on_MapButton1_focus_entered():
+	set_map_infos(0)
 
 # @signal
 # @impure
-func _on_MapButton4_pressed(): start_game(maps[3]["map_scene_path"])
+func _on_MapButton2_pressed():
+	if not block_input:
+		block_input = true
+		start_game(maps[1]["map_scene_path"])
+
 # @signal
 # @impure
-func _on_MapButton4_focus_entered(): set_map_infos(3)
+func _on_MapButton2_focus_entered():
+	set_map_infos(1)
+
+# @signal
+# @impure
+func _on_MapButton3_pressed():
+	if not block_input:
+		block_input = true
+		start_game(maps[2]["map_scene_path"])
+
+# @signal
+# @impure
+func _on_MapButton3_focus_entered():
+	set_map_infos(2)
+
+# @signal
+# @impure
+func _on_MapButton4_pressed():
+	if not block_input:
+		block_input = true
+		start_game(maps[3]["map_scene_path"])
+
+# @signal
+# @impure
+func _on_MapButton4_focus_entered():
+	set_map_infos(3)

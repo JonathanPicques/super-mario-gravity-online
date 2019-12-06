@@ -9,6 +9,7 @@ func _process(delta: float):
 	var lead_player = GameMultiplayer.get_lead_player()
 	# goto lobby
 	if lead_player and GameInput.is_player_action_just_pressed(lead_player.id, "accept"):
+		set_process(false) # disable process to avoid calling goto_lobby_menu_scene multiple times.
 		return Game.goto_lobby_menu_scene()
 	# add a local player
 	if not lead_player:

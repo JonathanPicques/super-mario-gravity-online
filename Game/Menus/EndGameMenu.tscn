@@ -11,7 +11,6 @@
 [ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Game/Maps/Textures/BackgroundCastle.png" type="Texture" id=12]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 24
 font_data = ExtResource( 8 )

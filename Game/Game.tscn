@@ -14,3 +14,16 @@ __meta__ = {
 
 [node name="SFX1" type="AudioStreamPlayer2D" parent="SoundEffects"]
 bus = "SFX"
+
+[node name="TransitionCanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Tween" type="Tween" parent="TransitionCanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="TransitionCanvasLayer"]
+modulate = Color( 0, 0, 0, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

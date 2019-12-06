@@ -41,12 +41,14 @@ func _process(delta: float):
 	var lead_player = GameMultiplayer.get_lead_player()
 	# back to home if cancel when not ready
 	if Input.is_action_just_pressed("ui_cancel") and not GameMultiplayer.get_lead_player():
+		set_process(false) # disable process to avoid calling goto_home_menu_scene multiple times.
 		Game.goto_home_menu_scene()
 	# toggle room status
 	if state != State.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
 		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
 	if lead_player and GameInput.is_player_action_just_pressed(lead_player.id, "accept") and GameMultiplayer.is_every_player_ready():
+		set_process(false) # disable process to avoid calling goto_maps_menu_scene multiple times.
 		return Game.goto_maps_menu_scene()
 	# add a local player
 	for input_device_id in range(0, 5):

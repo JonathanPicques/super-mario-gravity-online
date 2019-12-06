@@ -7,6 +7,9 @@ const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 
+onready var GameTween: Tween = $TransitionCanvasLayer/Tween
+onready var GameColorRect: ColorRect = $TransitionCanvasLayer/ColorRect
+
 var map_node: MapNode
 var scene_node: Node2D
 var game_mode_node: GameModeNode
@@ -34,31 +37,61 @@ func set_scene(_scene_node: Node):
 # @impure
 func goto_home_menu_scene():
 	var home_menu_node := HomeMenu.instance()
-	map_node = home_menu_node
+	yield(screen_transition_start(), "completed")
 	set_scene(home_menu_node)
+	map_node = home_menu_node
+	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
 	game_mode_node = load(game_mode_scene_path).instance()
 	game_mode_node.options = options
+	yield(screen_transition_start(), "completed")
 	set_scene(game_mode_node)
 	map_node = game_mode_node.map_node
 	game_mode_node.start()
+	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_lobby_menu_scene():
 	var lobby_node := LobbyMenu.instance()
-	map_node = lobby_node
+	yield(screen_transition_start(), "completed")
 	set_scene(lobby_node)
+	map_node = lobby_node
+	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_maps_menu_scene():
 	var maps_menu_node := MapsMenu.instance()
-	map_node = maps_menu_node
+	yield(screen_transition_start(), "completed")
 	set_scene(maps_menu_node)
+	map_node = maps_menu_node
+	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_end_game_room_menu_scene():
 	var end_game_menu_node := EndGameMenu.instance()
-	map_node = end_game_menu_node
+	yield(screen_transition_start(), "completed")
 	set_scene(end_game_menu_node)
+	map_node = end_game_menu_node
+	yield(screen_transition_finish(), "completed")
+
+##
+# Transition
+##
+
+# @async
+# @impure
+func screen_transition_start():
+	GameTween.remove_all()
+	GameTween.interpolate_property(GameColorRect, "modulate", null, Color(0, 0, 0, 1), 0.4, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	GameTween.start()
+	yield(GameTween, "tween_all_completed")
+
+# @async
+# @impure
+func screen_transition_finish():
+	GameTween.remove_all()
+	GameTween.interpolate_property(GameColorRect, "modulate", null, Color(0, 0, 0, 0), 0.4, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	GameTween.start()
+	yield(GameTween, "tween_all_completed")

@@ -27,6 +27,9 @@ func open_popup():
 	$Popup.visible = !$Popup.visible
 	$Popup/RetryButton.grab_focus()
 
+# block_input is used to avoid calling finish_playing multiple times.
+var block_input := false
+
 # @impure
 # @signal
 func _on_RetryButton_pressed():
@@ -35,8 +38,10 @@ func _on_RetryButton_pressed():
 # @impure
 # @signal
 func _on_LobbyButton_pressed():
-	GameMultiplayer.finish_playing()
-	Game.goto_lobby_menu_scene()
+	if not block_input:
+		block_input = true
+		GameMultiplayer.finish_playing()
+		Game.goto_lobby_menu_scene()
 
 # @impure
 # @signal
@@ -46,5 +51,7 @@ func _on_MapsButton_pressed():
 # @impure
 # @signal
 func _on_HomeButton_pressed():
-	GameMultiplayer.finish_playing()
-	Game.goto_home_menu_scene()
+	if not block_input:
+		block_input = true
+		GameMultiplayer.finish_playing()
+		Game.goto_home_menu_scene()

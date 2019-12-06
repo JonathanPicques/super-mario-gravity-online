@@ -21,5 +21,5 @@ func _process(delta: float):
 			ObjectSkin.texture = object_sprite.texture
 			if player_node.current_object.get("color") != null:
 				GameConst.replace_skin(ObjectSkin, player_node.current_object.color)
-		else:
-			ObjectSkin.texture = null
+	else:
+		ObjectSkin.texture = null
