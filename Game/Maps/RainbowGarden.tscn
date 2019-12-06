@@ -5,7 +5,8 @@
 [ext_resource path="res://Game/Items/ColorSwitch/ColorBlock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorSwitch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Items/ObjectBox/ObjectBox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/Maps/Textures/Sky.png" type="Texture" id=6]
+[ext_resource path="res://Game/Maps/Textures/BackgroundGarden.png" type="Texture" id=6]
+
 
 [node name="Map" instance=ExtResource( 1 )]
 

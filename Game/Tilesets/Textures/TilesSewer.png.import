@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grass.png-deb8f91fc1b17ce59c551e4d471fbb64.stex"
+path="res://.import/TilesSewer.png-4f23bd032a911813b725d2eef1c645a9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Tilesets/Textures/Grass.png"
-dest_files=[ "res://.import/Grass.png-deb8f91fc1b17ce59c551e4d471fbb64.stex" ]
+source_file="res://Game/Tilesets/Textures/TilesSewer.png"
+dest_files=[ "res://.import/TilesSewer.png-4f23bd032a911813b725d2eef1c645a9.stex" ]
 
 [params]
 

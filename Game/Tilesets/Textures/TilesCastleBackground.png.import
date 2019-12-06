@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Frame.png-b8474142e8fd4da8f9fa49887a29a4fb.stex"
+path="res://.import/TilesCastleBackground.png-78fffb8229e2b9250367a948fcc745db.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Tilesets/Textures/Frame.png"
-dest_files=[ "res://.import/Frame.png-b8474142e8fd4da8f9fa49887a29a4fb.stex" ]
+source_file="res://Game/Tilesets/Textures/TilesCastleBackground.png"
+dest_files=[ "res://.import/TilesCastleBackground.png-78fffb8229e2b9250367a948fcc745db.stex" ]
 
 [params]
 

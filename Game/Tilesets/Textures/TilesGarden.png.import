@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WallBackground.png-4095357c083a2007a7ccc53604609e39.stex"
+path="res://.import/TilesGarden.png-bd43455d522909649232aafb1ed052b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Tilesets/Textures/WallBackground.png"
-dest_files=[ "res://.import/WallBackground.png-4095357c083a2007a7ccc53604609e39.stex" ]
+source_file="res://Game/Tilesets/Textures/TilesGarden.png"
+dest_files=[ "res://.import/TilesGarden.png-bd43455d522909649232aafb1ed052b4.stex" ]
 
 [params]
 

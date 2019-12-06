@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Background.png-09e9366ccae504cb9831517dc217a6d2.stex"
+path="res://.import/TilesFrame.png-9cfeab50767324bc8bbafa4a1d1ab64f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Maps/Textures/Background.png"
-dest_files=[ "res://.import/Background.png-09e9366ccae504cb9831517dc217a6d2.stex" ]
+source_file="res://Game/Tilesets/Textures/TilesFrame.png"
+dest_files=[ "res://.import/TilesFrame.png-9cfeab50767324bc8bbafa4a1d1ab64f.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=1
+flags/repeat=0
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

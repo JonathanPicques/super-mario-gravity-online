@@ -7,8 +7,9 @@
 [ext_resource path="res://Game/Items/ObjectBox/ObjectBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SolidBlock/VSolidBlock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Maps/Musics/Hangin-Ten_Looping.ogg" type="AudioStream" id=9]
-[ext_resource path="res://Game/Maps/Textures/Background.png" type="Texture" id=11]
+[ext_resource path="res://Game/Maps/Textures/BackgroundCastle.png" type="Texture" id=11]
 [ext_resource path="res://Game/Items/SolidBlock/SolidBlock.tscn" type="PackedScene" id=13]
+
 
 [node name="Map" instance=ExtResource( 1 )]
 

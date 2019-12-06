@@ -6,7 +6,7 @@
 [ext_resource path="res://Game/Menus/Textures/KeyCtrlConfirm.png" type="Texture" id=4]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Game/Maps/Textures/Sky.png" type="Texture" id=7]
+[ext_resource path="res://Game/Maps/Textures/BackgroundGarden.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30

@@ -7,7 +7,7 @@
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Game/Menus/LobbyMenu.gd" type="Script" id=6]
 [ext_resource path="res://Game/Menus/Textures/KeyCancel.png" type="Texture" id=7]
-[ext_resource path="res://Game/Maps/Textures/Background.png" type="Texture" id=8]
+[ext_resource path="res://Game/Maps/Textures/BackgroundCastle.png" type="Texture" id=8]
 [ext_resource path="res://Game/Menus/Textures/KeyAlt2.png" type="Texture" id=9]
 [ext_resource path="res://Game/Menus/Textures/KeyConfirm.png" type="Texture" id=10]
 [ext_resource path="res://Game/Menus/Textures/KeyCtrlConfirm.png" type="Texture" id=11]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Game/Menus/Textures/Key.png" type="Texture" id=16]
 [ext_resource path="res://Game/Menus/Textures/Unlock.png" type="Texture" id=17]
 [ext_resource path="res://Game/Menus/Textures/Offline.png" type="Texture" id=18]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
