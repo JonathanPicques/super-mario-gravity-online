@@ -49,20 +49,17 @@ var webrtc_peers_ok := {}
 var webrtc_multiplayer: WebRTCMultiplayer
 
 # _ready connects to the matchmaking server.
-# @driven(lifecycle)
 # @impure
 func _ready():
 	init_nakama()
 
 # _process polls new events from matchmaking.
-# @driven(lifecycle)
 # @impure
 func _process(delta: float) -> void:
 	if nakama_client:
 		nakama_client.poll()
 
 # _notification is called to check if the application is quitting to dispose of network resources.
-# @driven(lifecycle)
 # @impure
 func _notification(event):
 	if event == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
@@ -506,12 +503,9 @@ func on_webrtc_peer_connected(peer_id: int):
 		if player.local:
 			player.peer_id = my_peer_id
 			player.peer_player_id = player.id
-	var game_mode_node = load("res://Game/Modes/Race/RaceGameMode.tscn").instance()
-	game_mode_node.options = { map = "res://Game/Maps/SpikesCorridor.tscn" }
-	Game.goto_game_mode_scene(game_mode_node)
-	game_mode_node.start()
-	for player in players:
-		print("player %d joined (local: %s) (local_id: %s)" % [player.id, player.local, player.peer_player_id])
+		for player in players:
+			print("player %d joined (local: %s) (local_id: %s)" % [player.id, player.local, player.peer_player_id])
+	return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map = "res://Game/Maps/SpikesCorridor.tscn" })
 
 # @impure
 func on_webrtc_peer_disconnected(peer_id: int):

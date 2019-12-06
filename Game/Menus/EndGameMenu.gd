@@ -17,24 +17,34 @@ func _ready():
 		if player_node:
 			player_node.position = get_node("Player%dPosition" % (player_id + 1)).position
 
+# @impure
 func _process(delta: float):
 	if GameInput.is_player_action_just_pressed(0, "cancel"):
 		open_popup()
 
+# @impure
 func open_popup():
 	$Popup.visible = !$Popup.visible
 	$Popup/RetryButton.grab_focus()
 
+# @impure
+# @signal
 func _on_RetryButton_pressed():
 	print("TODO: retry game")
 
+# @impure
+# @signal
 func _on_LobbyButton_pressed():
 	GameMultiplayer.finish_playing()
 	Game.goto_lobby_menu_scene()
 
+# @impure
+# @signal
 func _on_MapsButton_pressed():
 	print("TODO: back to maps")
 
+# @impure
+# @signal
 func _on_HomeButton_pressed():
 	GameMultiplayer.finish_playing()
 	Game.goto_home_menu_scene()

@@ -1,7 +1,5 @@
 extends "res://Game/Players/Player.gd"
 
-# _ready is called when the player node is ready.
-# @driven(lifecycle)
 # @impure
 func _ready():
 	BumpSFX = preload("res://Game/Players/Frog/Sounds/bump.ogg")

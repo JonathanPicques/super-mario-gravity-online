@@ -90,8 +90,6 @@ var speed_multiplier := 1.0
 var last_safe_position := Vector2()
 var wallslide_cancelled := false # reset on stand or walljump
 
-# _ready is called when the Player node is ready.
-# @driven(lifecycle)
 # @impure
 func _ready():
 	set_state(PlayerState.stand)
@@ -100,8 +98,6 @@ func _ready():
 	set_direction(direction)
 	GameConst.replace_skin(PlayerSprite, player.skin_id, false)
 
-# _process is called every tick and updates network player state.
-# @driven(lifecycle)
 # @impure
 var _net_view_index := 0
 func _process(delta):
@@ -114,7 +110,6 @@ func _process(delta):
 		rpc_unreliable("_process_network", delta, net_view, _net_view_index)
 
 # _physics_process is called every physics tick and updates player state.
-# @driven(lifecycle)
 # @impure
 func _physics_process(delta: float):
 	process_input(delta)
@@ -134,7 +129,6 @@ func _physics_process(delta: float):
 		PlayerState.death: tick_death(delta)
 
 # _process_network updates player from the given network infos.
-# @driven(client_to_client)
 # @impure
 var _last_net_view: Array
 var _last_net_view_index = 0

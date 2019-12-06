@@ -8,7 +8,6 @@ var tile_map_node: TileMap
 var tile_map_node_rect: Rect2
 
 # _ready is called to restrict the camera bounds to the tilemap bounds.
-# @driven(lifecycle)
 # @impure
 func _ready():
 	player_node = get_node(player_node_path)
@@ -21,7 +20,6 @@ func _ready():
 		limit_bottom = int(tile_map_node_rect.end.y * tile_map_node.cell_size.y)
 
 # _process is called on every tick to center the camera on the player.
-# @driven(lifecycle)
 # @impure
 func _process(delta):
 	if player_node.state != player_node.PlayerState.death:

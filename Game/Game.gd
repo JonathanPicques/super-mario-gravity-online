@@ -12,7 +12,6 @@ var scene_node: Node2D
 var game_mode_node: GameModeNode
 
 # _ready is called when the game node is ready.
-# @driven(lifecycle)
 # @impure
 func _ready():
 	scene_node = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
@@ -34,13 +33,17 @@ func set_scene(_scene_node: Node):
 
 # @impure
 func goto_home_menu_scene():
-	set_scene(HomeMenu.instance())
+	var home_menu_node := HomeMenu.instance()
+	map_node = home_menu_node
+	set_scene(home_menu_node)
 
 # @impure
-func goto_game_mode_scene(_game_mode_node: GameModeNode):
-	game_mode_node = _game_mode_node
-	set_scene(_game_mode_node)
-	map_node = _game_mode_node.map_node
+func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
+	game_mode_node = load(game_mode_scene_path).instance()
+	game_mode_node.options = options
+	set_scene(game_mode_node)
+	map_node = game_mode_node.map_node
+	game_mode_node.start()
 
 # @impure
 func goto_lobby_menu_scene():

@@ -4,16 +4,17 @@ enum State { none, join, public, private, offline }
 
 var state = State.none
 
+# @impure
 func _ready():
 	# Set key icons
-	$KeyCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
-	$KeyConfirm.visible = GameMultiplayer.get_lead_player().input_device_id == 0
 	$KeyAlt1.visible = GameMultiplayer.get_lead_player().input_device_id == 0
 	$KeyAlt2.visible = GameMultiplayer.get_lead_player().input_device_id == 0
-	$KeyCtrlCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 1
-	$KeyCtrlConfirm.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$KeyCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$KeyConfirm.visible = GameMultiplayer.get_lead_player().input_device_id == 0
 	$KeyCtrlAlt1.visible = GameMultiplayer.get_lead_player().input_device_id == 1
 	$KeyCtrlAlt2.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$KeyCtrlCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$KeyCtrlConfirm.visible = GameMultiplayer.get_lead_player().input_device_id == 1
 	
 	# Re-add players in already added
 	for player in GameMultiplayer.get_players():
@@ -35,6 +36,7 @@ func _ready():
 	GameMultiplayer.connect("player_set_skin", self, "on_player_set_skin")
 	GameMultiplayer.connect("player_set_ready", self, "on_player_set_ready")
 
+# @impure
 func _process(delta: float):
 	var lead_player = GameMultiplayer.get_lead_player()
 	# back to home if cancel when not ready
@@ -66,76 +68,96 @@ func _process(delta: float):
 				yield(get_tree(), "idle_frame")
 				GameMultiplayer.player_set_ready(player.id, not player.ready)
 
+# @impure
 func set_state(new_state: int):
 	state = new_state
 	match state:
 		State.public:
-			$CodeLabel.text = ""
-			$StatusLabel.text = "Public"
-			$Lock.visible = false
 			$Key.visible = false
+			$Lock.visible = false
 			$Unlock.visible = true
 			$Offline.visible = false
+			$CodeLabel.text = ""
+			$StatusLabel.text = "Public"
+			$WaitingPublicLabel.visible = true
 			$WaitingPrivateLabel.visible = false
 			$WaitingOfflineLabel.visible = false
-			$WaitingPublicLabel.visible = true
 			start_waiting()
 		State.private:
-			$CodeLabel.text = "join_code"
-			$StatusLabel.text = "Private"
-			$Lock.visible = true
 			$Key.visible = true
+			$Lock.visible = true
 			$Unlock.visible = false
 			$Offline.visible = false
+			$CodeLabel.text = "join_code"
+			$StatusLabel.text = "Private"
+			$WaitingPublicLabel.visible = false
 			$WaitingPrivateLabel.visible = true
 			$WaitingOfflineLabel.visible = false
-			$WaitingPublicLabel.visible = false
 			cancel_waiting()
 		State.offline:
-			$CodeLabel.text = ""
-			$StatusLabel.text = "Offline"
-			$Lock.visible = false
 			$Key.visible = false
+			$Lock.visible = false
 			$Unlock.visible = false
 			$Offline.visible = true
+			$CodeLabel.text = ""
+			$StatusLabel.text = "Offline"
+			$WaitingPublicLabel.visible = false
 			$WaitingPrivateLabel.visible = false
 			$WaitingOfflineLabel.visible = true
-			$WaitingPublicLabel.visible = false
 			cancel_waiting()
 
+# start_waiting is called to start matchmaking.
+# @impure
 func start_waiting():
-	if not GameMultiplayer.is_online():
-		cancel_waiting()
 	GameMultiplayer.start_matchmaking()
 
+# cancel_waiting is called to stop matchmaking.
 # @impure
 func cancel_waiting():
 	GameMultiplayer.finish_playing()
 
+# on_online is called when the connection to the matchmaking is recovered.
+# @signal
+# @impure
 func on_online():
 	if state == State.offline:
 		set_state(State.private)
 
+# on_offline is called when the connection to the matchmaking is lost.
+# @signal
+# @impure
 func on_offline():
 	set_state(State.offline)
 
+# on_player_added is called when a player joins by pressing accept.
+# @signal
+# @impure
 func on_player_added(player: Dictionary):
-	var player_node := GameMultiplayer.spawn_player_node(player, PlayerSlot)
 	# TODO: spawn GFX
+	var player_node := GameMultiplayer.spawn_player_node(player, PlayerSlot)
 	player_node.position = get_node("Player%dPosition" % (player.id + 1)).position
 	player_node.set_dialog(0)
 
+# on_player_added is called when a player leaves be pressing cancel.
+# @signal
+# @impure
 func on_player_removed(player: Dictionary):
 	var player_node = GameMultiplayer.get_player_node(player.id)
 	if player_node:
-		# TODO: spawn GFX
+		# TODO: remove GFX
 		player_node.queue_free()
 
+# on_player_set_skin is called when a player changes its skin.
+# @signal
+# @impure
 func on_player_set_skin(player: Dictionary, skin_id: int):
 	var player_node = GameMultiplayer.get_player_node(player.id)
 	if player_node:
-		GameConst.replace_skin(player_node.PlayerSprite, skin_id) # todo move in player?
+		GameConst.replace_skin(player_node.PlayerSprite, skin_id)
 
+# on_player_set_skin is called when a player changes its ready state.
+# @signal
+# @impure
 func on_player_set_ready(player: Dictionary, ready: bool):
 	var player_node = GameMultiplayer.get_player_node(player.id)
 	if player_node:

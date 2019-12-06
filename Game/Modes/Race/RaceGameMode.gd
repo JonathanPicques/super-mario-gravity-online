@@ -2,7 +2,6 @@ extends "res://Game/Modes/GameMode.gd"
 class_name RaceGameModeNode
 
 # _ready is called when this node is ready
-# @driven(lifecycle)
 # @impure
 func _ready():
 	map_node = load(options.map).instance()
