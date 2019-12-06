@@ -4,6 +4,9 @@ var ms = 0
 var s = 0
 var m = 0
 
+func _ready():
+	print("TODO: add timer into the game multiplayer and sync it")
+
 func _process(delta):
 	if ms > 9:
 		s += 1

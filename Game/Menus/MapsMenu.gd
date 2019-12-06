@@ -17,7 +17,7 @@ const maps := [
 	},
 	{
 		"title": "Crazy tower",
-		"scene": "res://Game/Maps/Map.tscn",
+		"scene": "res://Game/Maps/CrazyTower.tscn",
 		"score": 7,
 		"author": "jeremtab",
 		"difficulty": "medium"
