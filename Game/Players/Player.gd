@@ -58,9 +58,9 @@ var input_use_once := false
 var input_jump_once := false
 
 var SPEED_MULTIPLIER := 2
-var INVINCIBILITY_SPEED_MULTIPLIER := 1.5
 var OBJECT_TIME_SPEED := 6.0
 var OBJECT_TIME_INVINCIBILITY := 6.0
+var INVINCIBILITY_SPEED_MULTIPLIER := 1.5
 
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
@@ -72,6 +72,7 @@ var FALL_JUMP_GRACE := 0.08
 var CEILING_KNOCKDOWN := 50.0
 var WALL_JUMP_STRENGTH := -330.0
 var WALL_JUMP_PUSH_STRENGTH := 55.0
+var WALL_SLIDE_STICK_WALL_JUMP := 0.18
 
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
@@ -546,9 +547,11 @@ func tick_push_wall(delta: float):
 	if input_jump_once and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 
+var _stick_wall := 0.0
 func pre_wallslide():
 	velocity.x = 0
 	velocity.y = velocity.y * 0.1
+	_stick_wall = 0
 	jumps_remaining = MAX_JUMPS - 1
 	fx_hit_wall()
 	set_animation("wallslide")
@@ -566,8 +569,10 @@ func tick_wallslide(delta: float):
 	if input_jump_once:
 		return set_state(PlayerState.walljump)
 	if has_invert_direction(input_velocity.x, direction):
-		set_direction(direction * -1)
-		return set_state(PlayerState.fall)
+		_stick_wall += delta
+		if _stick_wall > WALL_SLIDE_STICK_WALL_JUMP:
+			set_direction(direction * -1)
+			return set_state(PlayerState.fall)
 
 func pre_walljump():
 	start_timer(0.14)
