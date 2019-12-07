@@ -75,5 +75,4 @@ func remove_player_screen_camera(player_id: int):
 # trigger color switch for the given color.
 # @impure
 func item_color_switch_trigger(color: int):
-	print("emit signal item_color_switch_trigger ", color)
 	emit_signal("item_color_switch_trigger", color)

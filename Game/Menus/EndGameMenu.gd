@@ -2,11 +2,10 @@ extends "res://Game/Maps/Map.gd"
 
 # @impure
 func _ready():
+	yield(get_tree(), "idle_frame")
 	# spawn player
 	GameMultiplayer.spawn_player_nodes(PlayerSlot)
 	var players := GameMultiplayer.get_players(GameMultiplayer.SortPlayerMethods.ranked)
-	# map is not ready yet
-	yield(get_tree(), "idle_frame")
 	# put first player on top
 	var first_player_node = GameMultiplayer.get_player_node(players[0].id)
 	if first_player_node:

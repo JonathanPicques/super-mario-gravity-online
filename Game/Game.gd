@@ -31,15 +31,18 @@ func set_scene(_scene_node: Node):
 	if scene_node:
 		get_tree().get_root().remove_child(scene_node)
 		scene_node.queue_free()
+	if _scene_node is MapNode:
+		map_node = _scene_node
+	scene_node = _scene_node
 	get_tree().get_root().add_child(_scene_node)
 	scene_node = _scene_node
+	if _scene_node is GameModeNode:
+		map_node = _scene_node.map_node
 
 # @impure
 func goto_home_menu_scene():
-	var home_menu_node := HomeMenu.instance()
 	yield(screen_transition_start(), "completed")
-	set_scene(home_menu_node)
-	map_node = home_menu_node
+	set_scene(HomeMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
 # @impure
@@ -48,32 +51,25 @@ func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
 	game_mode_node.options = options
 	yield(screen_transition_start(), "completed")
 	set_scene(game_mode_node)
-	map_node = game_mode_node.map_node
 	game_mode_node.start()
 	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_lobby_menu_scene():
-	var lobby_node := LobbyMenu.instance()
 	yield(screen_transition_start(), "completed")
-	set_scene(lobby_node)
-	map_node = lobby_node
+	set_scene(LobbyMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_maps_menu_scene():
-	var maps_menu_node := MapsMenu.instance()
 	yield(screen_transition_start(), "completed")
-	set_scene(maps_menu_node)
-	map_node = maps_menu_node
+	set_scene(MapsMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
 # @impure
 func goto_end_game_room_menu_scene():
-	var end_game_menu_node := EndGameMenu.instance()
 	yield(screen_transition_start(), "completed")
-	set_scene(end_game_menu_node)
-	map_node = end_game_menu_node
+	set_scene(EndGameMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
 ##

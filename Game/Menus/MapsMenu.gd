@@ -33,9 +33,9 @@ const maps := [
 
 # @impure
 func _ready():
-	$KeyCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
-	$MapButton1.grab_focus()
-	$KeyCtrlCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
+	$GUI/MapButton1.grab_focus()
+	$Icons/KeyGamepadCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 1
+	$Icons/KeyKeyboardCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0
 
 # @impure
 func _process(delta):
@@ -49,7 +49,7 @@ func start_game(map_scene_path: String):
 
 # @impure
 func set_map_infos(index):
-	$MapInfos.text = "Difficulty: %s\nAuthor: %s\nScore: %d/10" % [
+	$GUI/MapInfos.text = "Difficulty: %s\nAuthor: %s\nScore: %d/10" % [
 		maps[index]["difficulty"],
 		maps[index]["author"],
 		maps[index]["score"]

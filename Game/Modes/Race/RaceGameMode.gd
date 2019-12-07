@@ -62,8 +62,8 @@ func player_sort_by_distance(player_a: Dictionary, player_b: Dictionary):
 	return player_a.distance < player_b.distance 
 
 # on_player_removed is called when a player is removed (usually disconnected from network.)
-# driven(signal)
 # @impure
+# @signal
 func on_player_removed(player: Dictionary):
 	# remove player nodes and cameras associated to the removed player
 	var player_node = GameMultiplayer.get_player_node(player.id)

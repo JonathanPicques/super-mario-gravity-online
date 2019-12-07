@@ -10,7 +10,6 @@
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Game/Menus/Textures/KeyCtrlCancel.png" type="Texture" id=9]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 14
 font_data = ExtResource( 8 )
@@ -27,50 +26,19 @@ position = Vector2( 0, -32 )
 [node name="FlagStart" parent="." index="4"]
 position = Vector2( 0, -80 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="8"]
-
-[node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
-motion_scale = Vector2( 0.5, 1 )
-motion_mirroring = Vector2( 512, 512 )
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background" index="0"]
-texture = ExtResource( 3 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 512, 512 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="KeyCtrlCancel" type="Sprite" parent="." index="9"]
-position = Vector2( 59.6196, 263.885 )
-texture = ExtResource( 9 )
-
-[node name="KeyCancel" type="Sprite" parent="." index="10"]
-visible = false
-position = Vector2( 60, 264 )
-texture = ExtResource( 4 )
-
-[node name="HelpLabel4" type="Label" parent="." index="11"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 74.0
-margin_top = 256.0
-margin_right = 216.0
-margin_bottom = 272.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "back to lobby"
+[node name="GUI" type="Control" parent="." index="8"]
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapInfos" type="Label" parent="." index="12"]
+[node name="MapInfos" type="Label" parent="GUI" index="0"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 240.0
+margin_left = 220.0
 margin_top = 192.0
-margin_right = 448.0
+margin_right = 428.0
 margin_bottom = 243.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -82,7 +50,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapButton1" type="TextureButton" parent="." index="13"]
+[node name="MapButton1" type="TextureButton" parent="GUI" index="1"]
 margin_left = 48.0
 margin_top = 48.0
 margin_right = 208.0
@@ -96,7 +64,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MapButton1" index="0"]
+[node name="Label" type="Label" parent="GUI/MapButton1" index="0"]
 margin_right = 160.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
@@ -109,7 +77,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapButton2" type="TextureButton" parent="." index="14"]
+[node name="MapButton2" type="TextureButton" parent="GUI" index="2"]
 margin_left = 48.0
 margin_top = 96.0
 margin_right = 208.0
@@ -124,7 +92,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MapButton2" index="0"]
+[node name="Label" type="Label" parent="GUI/MapButton2" index="0"]
 margin_right = 160.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
@@ -137,7 +105,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapButton3" type="TextureButton" parent="." index="15"]
+[node name="MapButton3" type="TextureButton" parent="GUI" index="3"]
 margin_left = 48.0
 margin_top = 144.0
 margin_right = 208.0
@@ -152,7 +120,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MapButton3" index="0"]
+[node name="Label" type="Label" parent="GUI/MapButton3" index="0"]
 margin_right = 160.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
@@ -165,7 +133,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapButton4" type="TextureButton" parent="." index="16"]
+[node name="MapButton4" type="TextureButton" parent="GUI" index="4"]
 margin_left = 48.0
 margin_top = 192.0
 margin_right = 208.0
@@ -179,7 +147,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="MapButton4" index="0"]
+[node name="Label" type="Label" parent="GUI/MapButton4" index="0"]
 margin_right = 160.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
@@ -191,11 +159,51 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="focus_entered" from="MapButton1" to="." method="_on_MapButton1_focus_entered"]
-[connection signal="pressed" from="MapButton1" to="." method="_on_MapButton1_pressed"]
-[connection signal="focus_entered" from="MapButton2" to="." method="_on_MapButton2_focus_entered"]
-[connection signal="pressed" from="MapButton2" to="." method="_on_MapButton2_pressed"]
-[connection signal="focus_entered" from="MapButton3" to="." method="_on_MapButton3_focus_entered"]
-[connection signal="pressed" from="MapButton3" to="." method="_on_MapButton3_pressed"]
-[connection signal="focus_entered" from="MapButton4" to="." method="_on_MapButton4_focus_entered"]
-[connection signal="pressed" from="MapButton4" to="." method="_on_MapButton4_pressed"]
+
+[node name="BackToLobbyLabel" type="Label" parent="GUI" index="5"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 54.0
+margin_top = 256.0
+margin_right = 196.0
+margin_bottom = 272.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "back to lobby"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icons" type="Node2D" parent="." index="9"]
+
+[node name="KeyGamepadCancel" type="Sprite" parent="Icons" index="0"]
+position = Vector2( 59.6196, 263.885 )
+texture = ExtResource( 9 )
+
+[node name="KeyKeyboardCancel" type="Sprite" parent="Icons" index="1"]
+visible = false
+position = Vector2( 60, 264 )
+texture = ExtResource( 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="10"]
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 512, 512 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background" index="0"]
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 512 )
+__meta__ = {
+"_edit_lock_": true
+}
+[connection signal="focus_entered" from="GUI/MapButton1" to="." method="_on_MapButton1_focus_entered"]
+[connection signal="pressed" from="GUI/MapButton1" to="." method="_on_MapButton1_pressed"]
+[connection signal="focus_entered" from="GUI/MapButton2" to="." method="_on_MapButton2_focus_entered"]
+[connection signal="pressed" from="GUI/MapButton2" to="." method="_on_MapButton2_pressed"]
+[connection signal="focus_entered" from="GUI/MapButton3" to="." method="_on_MapButton3_focus_entered"]
+[connection signal="pressed" from="GUI/MapButton3" to="." method="_on_MapButton3_pressed"]
+[connection signal="focus_entered" from="GUI/MapButton4" to="." method="_on_MapButton4_focus_entered"]
+[connection signal="pressed" from="GUI/MapButton4" to="." method="_on_MapButton4_pressed"]

@@ -241,8 +241,8 @@ func get_player_node_name(player_id: int):
 	return "player_%d_%d" % [player.peer_id, player.peer_player_id]
 
 # @impure
-func spawn_player_node(player: Dictionary, parent_node: Node) -> Node:
-	var player_node := PlayerNodeScene.instance()
+func spawn_player_node(player: Dictionary, parent_node: Node) -> PlayerNode:
+	var player_node: PlayerNode = PlayerNodeScene.instance()
 	player_node.name = get_player_node_name(player.id)
 	player_node.player = player
 	player_node.set_network_master(player.peer_id)
