@@ -45,7 +45,7 @@ func _process(delta):
 
 # @impure
 func start_game(map_scene_path: String):
-	return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map = map_scene_path })
+	Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map = map_scene_path })
 
 # @impure
 func set_map_infos(index):

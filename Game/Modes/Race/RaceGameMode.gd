@@ -22,7 +22,7 @@ func start():
 	for player in GameMultiplayer.get_players():
 		var player_node: Node2D = GameMultiplayer.get_player_node(player.id)
 		player_node.position = flag_start_pos
-		player_node.position.x += max(player.peer_id - 1, 0) * 16 + player.peer_player_id * 4
+		player_node.position.x += max(player.peer_id - 1, 0) * 16 + player.local_id * 4
 		add_player_screen_camera(player.id, player_node.get_path())
 	# connect multiplayer signals
 	GameMultiplayer.connect("player_removed", self, "on_player_removed")

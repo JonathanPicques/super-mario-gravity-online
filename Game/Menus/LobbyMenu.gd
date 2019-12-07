@@ -31,7 +31,7 @@ func _process(delta: float):
 	# back to home if cancel when not ready
 	if Input.is_action_just_pressed("ui_cancel") and not GameMultiplayer.get_lead_player():
 		set_process(false) # disable process to avoid calling goto_home_menu_scene multiple times.
-		Game.goto_home_menu_scene()
+		return Game.goto_home_menu_scene()
 	# toggle room status
 	if state != State.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
 		set_state(State.public if state == State.private else State.private)
@@ -43,7 +43,7 @@ func _process(delta: float):
 	for input_device_id in range(0, 5):
 		if GameInput.is_device_action_just_pressed(input_device_id, "accept") and not GameInput.is_device_used_by_player(input_device_id):
 			yield(get_tree(), "idle_frame")
-			GameMultiplayer.add_player("Local player", true, input_device_id, GameMultiplayer.my_peer_id, GameMultiplayer.get_next_peer_player_id(GameMultiplayer.my_peer_id))
+			GameMultiplayer.add_player("Local player", true, input_device_id, GameMultiplayer.my_peer_id, GameMultiplayer.get_next_player_local_id(GameMultiplayer.my_peer_id))
 	# remove a player
 	for player in GameMultiplayer.get_players():
 		if player.local:

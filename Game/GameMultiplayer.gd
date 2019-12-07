@@ -7,6 +7,7 @@ signal player_added(player)
 signal player_removed(player)
 signal player_set_skin(player, skin_id)
 signal player_set_ready(player, ready)
+signal player_set_peer_id(player, peer_id, local_id)
 
 signal online()
 signal offline()
@@ -27,7 +28,7 @@ var sample_player := {
 	ready = false,
 	skin_id = 0,
 	peer_id = -1,
-	peer_player_id = -1,
+	local_id = -1,
 	input_device_id = -1,
 	# race game mode
 	rank = 0,
@@ -92,14 +93,14 @@ func finish_playing():
 ##############
 
 # @impure
-func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: int = -1, peer_player_id: int = -1) -> Dictionary:
+func add_player(name: String, local: bool, input_device_id: int = -1, peer_id: int = -1, local_id: int = -1) -> Dictionary:
 	var id = get_next_player_id()
 	var player = sample_player.duplicate(true)
 	player.id = id
 	player.name = name
 	player.local = local
 	player.peer_id = peer_id
-	player.peer_player_id = peer_player_id
+	player.local_id = local_id
 	player.input_device_id = input_device_id
 	players.append(player)
 	emit_signal("player_added", player)
@@ -123,6 +124,13 @@ func player_set_ready(player_id: int, ready: bool) -> void:
 	var player = get_player(player_id)
 	player.ready = ready
 	emit_signal("player_set_ready", player, ready)
+
+# @impure
+func player_set_peer_id(player_id: int, peer_id: int, local_id: int):
+	var player = get_player(player_id)
+	player.peer_id = peer_id
+	player.local_id = local_id
+	emit_signal("player_set_peer_id", player, peer_id, local_id)
 
 # @pure
 func get_player(player_id: int):
@@ -190,16 +198,16 @@ func get_next_player_id() -> int:
 	return player_id
 
 # @pure
-func get_next_peer_player_id(peer_id: int) -> int:
+func get_next_player_local_id(peer_id: int) -> int:
 	var restart := true
-	var peer_player_id := 0
+	var local_id := 0
 	while restart:
 		restart = false
 		for player in players:
-			if peer_id == player.peer_id and peer_player_id == player.peer_player_id:
-				peer_player_id += 1
+			if peer_id == player.peer_id and local_id == player.local_id:
+				local_id += 1
 				restart = true
-	return peer_player_id
+	return local_id
 
 # @pure
 func has_server_authority() -> bool:
@@ -238,7 +246,7 @@ func get_player_node_name(player_id: int):
 	var player = get_player(player_id)
 	if not player:
 		return null
-	return "player_%d_%d" % [player.peer_id, player.peer_player_id]
+	return "player_%d_%d" % [player.peer_id, player.local_id] # peer_id and local_id are the same on all peers
 
 # @impure
 func spawn_player_node(player: Dictionary, parent_node: Node) -> PlayerNode:
@@ -493,19 +501,19 @@ func on_webrtc_peer_connected(peer_id: int):
 		var match_peer = match_peers[session_id]
 		if match_peer["peer_id"] == peer_id:
 			webrtc_peers_ok[session_id] = true
-			var peer_player_id := 0
+			var peer_local_id := 0
 			for match_peer_player in match_peer["players"]:
-				var player := add_player("Network Peer", false, -1, peer_id, peer_player_id)
+				var player := add_player("Network Peer", false, -1, peer_id, peer_local_id)
 				player_set_skin(player.id, match_peer_player.skin_id)
 				player_set_ready(player.id, match_peer_player.ready)
-				peer_player_id += 1
+				peer_local_id += 1
 	for player in players:
 		if player.local:
-			player.peer_id = my_peer_id
-			player.peer_player_id = player.id
-		for player in players:
-			print("player %d joined (local: %s) (local_id: %s)" % [player.id, player.local, player.peer_player_id])
-	return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map = "res://Game/Maps/SpikesCorridor.tscn" })
+			player_set_peer_id(player.id, my_peer_id, player.local_id)
+	for player in players:
+		print("player %d joined (local: %s) (peer_id: %s) (local_id: %s)" % [player.id, player.local, player.peer_id, player.local_id])
+	yield(get_tree().create_timer(3.0), "timeout")
+	return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map = "res://Game/Maps/Debug.tscn" })
 
 # @impure
 func on_webrtc_peer_disconnected(peer_id: int):
