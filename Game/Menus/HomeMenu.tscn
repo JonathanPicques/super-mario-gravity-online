@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden.png" type="Texture" id=7]
 [ext_resource path="res://Game/Utilities/AutoCreatePlayers.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/Items/Conveyor/Conveyor.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -16,7 +17,10 @@ font_data = ExtResource( 6 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 5 )
 
-[node name="Map" instance=ExtResource( 1 )]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 40, 4 )
+
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="TitleLabel" type="Label" parent="." index="0"]
@@ -59,6 +63,31 @@ position = Vector2( 0, -64 )
 
 [node name="FlagStart" parent="." index="6"]
 position = Vector2( 48, 240 )
+
+[node name="Conveyor" parent="ObjectSlot" index="0" instance=ExtResource( 9 )]
+position = Vector2( 208, 195 )
+
+[node name="OneWayPlatform" type="StaticBody2D" parent="ObjectSlot" index="1"]
+position = Vector2( 0, 3 )
+
+[node name="ColorRect" type="ColorRect" parent="ObjectSlot/OneWayPlatform" index="0"]
+margin_left = 128.0
+margin_top = 192.0
+margin_right = 208.0
+margin_bottom = 200.0
+color = Color( 0, 0, 1, 0.392157 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectSlot/OneWayPlatform" index="1"]
+position = Vector2( 168, 196 )
+shape = SubResource( 3 )
+one_way_collision = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AutoCreatePlayers" parent="." index="10" instance=ExtResource( 8 )]
 
