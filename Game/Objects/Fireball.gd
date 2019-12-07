@@ -13,7 +13,7 @@ func _ready():
 	direction = player_node.direction
 	GameConst.replace_skin($Sprite, color)
 	GameConst.replace_skin($AnimatedSprite, color)
-	$Sprite.scale.x = abs($Sprite.scale.x) * sign(direction)
+	$AnimatedSprite.scale.x = abs($AnimatedSprite.scale.x) * sign(direction)
 	if use_target:
 		var closest = GameMultiplayer.get_closest_player(player_node.player.id)
 		if closest:

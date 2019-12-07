@@ -633,7 +633,7 @@ func reset_object_invincibility(object):
 func pre_use_object():
 	if active_object:
 		return
-	current_object.position = $FirebaseSpawn.global_position
+	current_object.global_position = $Sprite/FirebaseSpawn.global_position
 	current_object.player_node = self
 	get_parent().add_child(current_object)
 	current_object = null
