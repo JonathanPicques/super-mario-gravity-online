@@ -20,10 +20,544 @@ layer = 2
 
 [node name="Tween" type="Tween" parent="TransitionCanvasLayer"]
 
-[node name="ColorRect" type="ColorRect" parent="TransitionCanvasLayer"]
-modulate = Color( 0, 0, 0, 0 )
+[node name="ColorRect1" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -448.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_right = -384.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect3" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_right = -320.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect4" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_right = -256.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect5" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_right = -192.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect6" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 320.0
+margin_right = -128.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect7" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_right = -64.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect8" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_bottom = -224.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect16" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 64.0
+margin_right = -448.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect15" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = -384.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect14" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 64.0
+margin_right = -320.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect13" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_top = 64.0
+margin_right = -256.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect12" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = 64.0
+margin_right = -192.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect11" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 320.0
+margin_top = 64.0
+margin_right = -128.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect10" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_top = 64.0
+margin_right = -64.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect9" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = 64.0
+margin_bottom = -160.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect24" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 128.0
+margin_right = -448.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect23" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 128.0
+margin_right = -384.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect22" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 128.0
+margin_right = -320.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect21" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_top = 128.0
+margin_right = -256.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect20" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = 128.0
+margin_right = -192.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect19" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 320.0
+margin_top = 128.0
+margin_right = -128.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect18" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_top = 128.0
+margin_right = -64.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect17" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = 128.0
+margin_bottom = -96.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect32" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 192.0
+margin_right = -448.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect31" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 192.0
+margin_right = -384.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect30" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 192.0
+margin_right = -320.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect29" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_top = 192.0
+margin_right = -256.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect28" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = 192.0
+margin_right = -192.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect27" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 320.0
+margin_top = 192.0
+margin_right = -128.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect26" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_top = 192.0
+margin_right = -64.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect25" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = 192.0
+margin_bottom = -32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect40" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 256.0
+margin_right = -448.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect39" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = 256.0
+margin_right = -384.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect38" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 256.0
+margin_right = -320.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect37" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+margin_top = 256.0
+margin_right = -256.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect36" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 256.0
+margin_top = 256.0
+margin_right = -192.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect35" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 320.0
+margin_top = 256.0
+margin_right = -128.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect34" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 384.0
+margin_top = 256.0
+margin_right = -64.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect33" type="ColorRect" parent="TransitionCanvasLayer"]
+self_modulate = Color( 0.129412, 0.121569, 0.188235, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = 256.0
+margin_bottom = 32.0
+rect_scale = Vector2( 0, 0 )
+rect_pivot_offset = Vector2( 32, 32 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
