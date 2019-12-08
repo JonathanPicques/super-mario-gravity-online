@@ -84,7 +84,7 @@ func screen_transition_start():
 	GameTween.remove_all()
 	var delay = 0.0
 	for rect in TransitionColorRects:
-		GameTween.interpolate_property(rect, "rect_scale", null, Vector2.ONE, 0.4, Tween.TRANS_CUBIC, Tween.EASE_IN, delay)
+		GameTween.interpolate_property(rect, "rect_scale", null, Vector2.ONE, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, delay)
 		delay += 0.01
 
 	GameTween.start()
@@ -96,7 +96,7 @@ func screen_transition_finish():
 	GameTween.remove_all()
 	var delay = 0.0
 	for rect in TransitionColorRects:
-		GameTween.interpolate_property(rect, "rect_scale", null, Vector2.ZERO, 0.4, Tween.TRANS_CUBIC, Tween.EASE_OUT, delay)
+		GameTween.interpolate_property(rect, "rect_scale", null, Vector2.ZERO, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, delay)
 		delay += 0.01
 	GameTween.start()
 	yield(GameTween, "tween_all_completed")

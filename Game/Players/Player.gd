@@ -22,7 +22,7 @@ onready var Step_02_SFX: AudioStream
 
 enum PlayerState {
 	none, stand, run, move_turn, push_wall,
-	fall, jump, wallslide, walljump,
+	fall, jump, expulse, wallslide, walljump,
 	use_object,
 	death
 }
@@ -74,6 +74,8 @@ var WALL_JUMP_STRENGTH := -330.0
 var WALL_JUMP_PUSH_STRENGTH := 55.0
 var WALL_SLIDE_STICK_WALL_JUMP := 0.18
 
+var EXPLUSE_STRENGH := -600.0
+
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
 
@@ -124,6 +126,7 @@ func _physics_process(delta: float):
 		PlayerState.push_wall: tick_push_wall(delta)
 		PlayerState.fall: tick_fall(delta)
 		PlayerState.jump: tick_jump(delta)
+		PlayerState.expulse: tick_expulse(delta)
 		PlayerState.wallslide: tick_wallslide(delta)
 		PlayerState.walljump: tick_walljump(delta)
 		PlayerState.use_object: tick_use_object(delta)
@@ -246,6 +249,7 @@ func set_state(new_state: int):
 		PlayerState.push_wall: pre_push_wall()
 		PlayerState.fall: pre_fall()
 		PlayerState.jump: pre_jump()
+		PlayerState.expulse: pre_expulse()
 		PlayerState.wallslide: pre_wallslide()
 		PlayerState.walljump: pre_walljump()
 		PlayerState.use_object: pre_use_object()
@@ -311,10 +315,14 @@ func get_sound_effect_player() -> AudioStreamPlayer2D:
 			return sound_effect_player
 	return null
 
-# handle_jump applies jump_strength to jump and disable floor snapping for a little while.
+# handle_jump applies strength to jump and disable floor snapping for a little while.
 # @impure
-func handle_jump(jump_strength: float):
-	velocity.y = jump_strength
+func handle_jump(strength: float):
+	velocity.y = strength
+	disable_snap = FLOOR_SNAP_DISABLE_TIME
+
+func handle_expulse(strength: float, direction: Vector2 = Vector2.UP):
+	velocity.y = strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
 # handle_gravity applies gravity to the velocity.
@@ -513,6 +521,32 @@ func pre_jump():
 		set_direction(int(sign(input_velocity.x)))
 
 func tick_jump(delta: float):
+	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
+	handle_direction()
+	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
+	if is_on_floor():
+		return set_state(PlayerState.stand)
+	if is_on_ceiling():
+		velocity.y = CEILING_KNOCKDOWN
+		if not is_colliding_with_group("no_ceiling_sound"):
+			play_sound_effect(BumpSFX)
+		return set_state(PlayerState.fall)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
+	if is_timer_finished() and input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
+	if velocity.y > 0:
+		return set_state(PlayerState.fall)
+
+func pre_expulse():
+	jumps_remaining = MAX_JUMPS - 1 # Only allow double jump for trampoline
+	start_timer(0.14)
+	handle_expulse(EXPLUSE_STRENGH)
+	set_animation("jump")
+	play_sound_effect(JumpSFX)
+	# TODO: set direction according to expulse_direction
+
+func tick_expulse(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_direction()
 	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
