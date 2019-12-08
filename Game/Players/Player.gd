@@ -74,7 +74,7 @@ var WALL_JUMP_STRENGTH := -330.0
 var WALL_JUMP_PUSH_STRENGTH := 55.0
 var WALL_SLIDE_STICK_WALL_JUMP := 0.18
 
-var EXPLUSE_STRENGH := -600.0
+var EXPLUSE_STRENGH := 600.0
 
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
@@ -88,7 +88,8 @@ var velocity_prev := Vector2()
 var input_velocity := Vector2()
 var velocity_offset := Vector2()
 var fall_jump_grace := 0.0
-var jumps_remaining := MAX_JUMPS  # reset on stand or wallslide
+var jumps_remaining := MAX_JUMPS  # reset on stand or wallslide or expulse
+var expulse_direction = Vector2.ZERO
 var speed_multiplier := 1.0
 var last_safe_position := Vector2()
 var wallslide_cancelled := false # reset on stand or walljump
@@ -321,8 +322,8 @@ func handle_jump(strength: float):
 	velocity.y = strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
-func handle_expulse(strength: float, direction: Vector2 = Vector2.UP):
-	velocity.y = strength
+func handle_expulse(strength: float):
+	velocity = expulse_direction * strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
 # handle_gravity applies gravity to the velocity.
