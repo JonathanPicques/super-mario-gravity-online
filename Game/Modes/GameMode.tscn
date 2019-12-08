@@ -10,31 +10,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SplitScreenContainer" type="VBoxContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RowContainer1" type="HBoxContainer" parent="SplitScreenContainer"]
-margin_right = 512.0
-margin_bottom = 142.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ColumnContainer1" type="VBoxContainer" parent="SplitScreenContainer/RowContainer1"]
-margin_right = 512.0
-margin_bottom = 142.0
-size_flags_horizontal = 3
-
-[node name="Control1" type="Control" parent="SplitScreenContainer/RowContainer1/ColumnContainer1"]
+[node name="Control1" type="Control" parent="GridContainer"]
 margin_right = 512.0
 margin_bottom = 69.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ViewportContainer1" type="ViewportContainer" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1"]
+[node name="ViewportContainer1" type="ViewportContainer" parent="GridContainer/Control1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -44,7 +33,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport1" type="Viewport" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1"]
+[node name="Viewport1" type="Viewport" parent="GridContainer/Control1/ViewportContainer1"]
 size = Vector2( 512, 69 )
 handle_input_locally = false
 hdr = false
@@ -52,16 +41,16 @@ usage = 1
 render_target_update_mode = 3
 audio_listener_enable_2d = true
 
-[node name="MapSlot" type="Node2D" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1"]
+[node name="MapSlot" type="Node2D" parent="GridContainer/Control1/ViewportContainer1/Viewport1"]
 
-[node name="Control2" type="Control" parent="SplitScreenContainer/RowContainer1/ColumnContainer1"]
+[node name="Control2" type="Control" parent="GridContainer"]
 margin_top = 73.0
 margin_right = 512.0
 margin_bottom = 142.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ViewportContainer2" type="ViewportContainer" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control2"]
+[node name="ViewportContainer2" type="ViewportContainer" parent="GridContainer/Control2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.857361
@@ -73,7 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport2" type="Viewport" parent="SplitScreenContainer/RowContainer1/ColumnContainer1/Control2/ViewportContainer2"]
+[node name="Viewport2" type="Viewport" parent="GridContainer/Control2/ViewportContainer2"]
 size = Vector2( 512, 69 )
 handle_input_locally = false
 hdr = false
@@ -83,25 +72,41 @@ render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
 
-[node name="RowContainer2" type="HBoxContainer" parent="SplitScreenContainer"]
+[node name="Control3" type="Control" parent="GridContainer"]
 margin_top = 146.0
+margin_right = 512.0
+margin_bottom = 215.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportContainer3" type="ViewportContainer" parent="GridContainer/Control3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport3" type="Viewport" parent="GridContainer/Control3/ViewportContainer3"]
+size = Vector2( 512, 69 )
+handle_input_locally = false
+hdr = false
+disable_3d = true
+usage = 1
+render_direct_to_screen = true
+render_target_update_mode = 3
+audio_listener_enable_2d = true
+
+[node name="Control4" type="Control" parent="GridContainer"]
+margin_top = 219.0
 margin_right = 512.0
 margin_bottom = 288.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ColumnContainer2" type="VBoxContainer" parent="SplitScreenContainer/RowContainer2"]
-margin_right = 512.0
-margin_bottom = 142.0
-size_flags_horizontal = 3
-
-[node name="Control3" type="Control" parent="SplitScreenContainer/RowContainer2/ColumnContainer2"]
-margin_right = 512.0
-margin_bottom = 69.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ViewportContainer3" type="ViewportContainer" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control3"]
+[node name="ViewportContainer4" type="ViewportContainer" parent="GridContainer/Control4"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -111,7 +116,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Viewport3" type="Viewport" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3"]
+[node name="Viewport4" type="Viewport" parent="GridContainer/Control4/ViewportContainer4"]
 size = Vector2( 512, 69 )
 handle_input_locally = false
 hdr = false
@@ -120,30 +125,4 @@ usage = 1
 render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
-
-[node name="Control4" type="Control" parent="SplitScreenContainer/RowContainer2/ColumnContainer2"]
-margin_top = 73.0
-margin_right = 512.0
-margin_bottom = 142.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ViewportContainer4" type="ViewportContainer" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control4"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Viewport4" type="Viewport" parent="SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4"]
-size = Vector2( 512, 69 )
-handle_input_locally = false
-hdr = false
-disable_3d = true
-usage = 1
-render_direct_to_screen = true
-render_target_update_mode = 3
-audio_listener_enable_2d = true
+[connection signal="tree_exiting" from="." to="." method="_on_GameMode_tree_exiting"]

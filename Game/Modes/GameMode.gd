@@ -3,11 +3,11 @@ class_name GameModeNode
 
 const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
-onready var MapSlot: MapNode = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1/MapSlot
-onready var Viewport1: Viewport = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control1/ViewportContainer1/Viewport1
-onready var Viewport2: Viewport = $SplitScreenContainer/RowContainer1/ColumnContainer1/Control2/ViewportContainer2/Viewport2
-onready var Viewport3: Viewport = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control3/ViewportContainer3/Viewport3
-onready var Viewport4: Viewport = $SplitScreenContainer/RowContainer2/ColumnContainer2/Control4/ViewportContainer4/Viewport4
+onready var MapSlot: MapNode = $GridContainer/Control1/ViewportContainer1/Viewport1/MapSlot
+onready var Viewport1: Viewport = $GridContainer/Control1/ViewportContainer1/Viewport1
+onready var Viewport2: Viewport = $GridContainer/Control2/ViewportContainer2/Viewport2
+onready var Viewport3: Viewport = $GridContainer/Control3/ViewportContainer3/Viewport3
+onready var Viewport4: Viewport = $GridContainer/Control4/ViewportContainer4/Viewport4
 
 signal item_color_switch_trigger(color)
 
@@ -27,14 +27,24 @@ func start():
 # @impure
 func setup_split_screen():
 	var player_count := GameMultiplayer.get_local_player_count()
+	
+	# dezoom if there is more than 1 screen
+	if player_count > 1:
+		var pixel_ratio := 2
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+	
 	match player_count:
 		1: 
-			$SplitScreenContainer/RowContainer2.visible = false
-			$SplitScreenContainer/RowContainer1/ColumnContainer1/Control2.visible = false
+			$GridContainer/Control2.visible = false
+			$GridContainer/Control3.visible = false
+			$GridContainer/Control4.visible = false
 		2: 
-			$SplitScreenContainer/RowContainer2.visible = false
+			$GridContainer/Control3.visible = false
+			$GridContainer/Control4.visible = false
+			$GridContainer.margin_left = 256
+			$GridContainer.margin_right = -256
 		3: 
-			$SplitScreenContainer/RowContainer2/ColumnContainer2/Control4.visible = false
+			$GridContainer/Control4.visible = false
 	Viewport2.world_2d = Viewport1.world_2d
 	Viewport3.world_2d = Viewport1.world_2d
 	Viewport4.world_2d = Viewport1.world_2d
@@ -83,3 +93,10 @@ func remove_player_screen_camera(player_id: int):
 # @impure
 func item_color_switch_trigger(color: int):
 	emit_signal("item_color_switch_trigger", color)
+
+
+func _on_GameMode_tree_exiting():
+	# reset zoom
+	var pixel_ratio := 1
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+
