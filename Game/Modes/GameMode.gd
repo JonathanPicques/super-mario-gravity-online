@@ -39,6 +39,13 @@ func setup_split_screen():
 	Viewport3.world_2d = Viewport1.world_2d
 	Viewport4.world_2d = Viewport1.world_2d
 
+func get_player_screen_camera(player_id):
+	match player_id:
+		0: return Viewport1.get_node("PlayerCamera2D")
+		1: return Viewport2.get_node("PlayerCamera2D")
+		2: return Viewport3.get_node("PlayerCamera2D")
+		3: return Viewport4.get_node("PlayerCamera2D")
+
 # add a camera compatible with split screen for the given player.
 # @impure
 func add_player_screen_camera(player_id: int, player_node_path: NodePath):

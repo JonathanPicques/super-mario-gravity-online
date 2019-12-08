@@ -657,6 +657,8 @@ var _death_origin := Vector2()
 func apply_death(death_origin: Vector2):
 	if is_invincible:
 		return
+	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
+	camera.get_node("ScreenShake").start_shake()
 	_death_dir = 1.0 if _death_origin.x > position.x else -1.0
 	_death_origin = death_origin
 	return set_state(PlayerState.death)
