@@ -7,9 +7,9 @@ onready var TweenNode = $ShakeTween
 onready var FrequencyNode = $Frenquency
 onready var DurationNode = $Duration
 
-func start_shake(duration = 0.2, frequency = 15, amplitude = 15):
+func start_shake(duration = 0.1, frequency = 15.0, amplitude = 15.0):
 	DurationNode.wait_time = duration
-	FrequencyNode.wait_time = 1 / frequency
+	FrequencyNode.wait_time = 1.0 / frequency
 	current_amplitude = amplitude
 	DurationNode.start()
 	FrequencyNode.start()
@@ -37,6 +37,7 @@ func reset():
 		Tween.EASE_OUT
 	)
 	TweenNode.start()
+	FrequencyNode.stop()
 
 func _on_Frenquency_timeout():
 	new_shake()

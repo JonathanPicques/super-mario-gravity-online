@@ -83,7 +83,6 @@ func screen_transition_start():
 	GameTween.remove_all()
 	var delay = 0.0
 	for node in transition_nodes:
-		print("Start transition ", node)
 		GameTween.interpolate_property(node, "rect_scale", Vector2.ZERO, Vector2.ONE, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, delay)
 		delay += 0.02
 	GameTween.start()
@@ -95,7 +94,6 @@ func screen_transition_finish():
 	GameTween.remove_all()
 	var delay = 0.0
 	for node in transition_nodes:
-		print("Finish transition ", node)
 		GameTween.interpolate_property(node, "rect_scale", Vector2.ONE, Vector2.ZERO, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, delay)
 		delay += 0.02
 	GameTween.start()
