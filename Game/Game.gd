@@ -8,20 +8,19 @@ const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
-onready var TransitionColorRects = []
 
 var map_node: MapNode
 var scene_node: Node2D
 var game_mode_node: GameModeNode
+onready var transition_nodes = []
 
 # _ready is called when the game node is ready.
 # @impure
 func _ready():
 	scene_node = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
 	map_node = scene_node
-	VisualServer.set_default_clear_color(Color("#211F30"))
-	for i in range(1, 39):
-		TransitionColorRects.append(get_node("TransitionCanvasLayer/ColorRect%d" % i))
+	for i in range(1, 22):
+		transition_nodes.append(get_node("TransitionCanvasLayer/TextureRect%d" % i))
 
 ##########
 # Scenes #
@@ -83,10 +82,10 @@ func goto_end_game_room_menu_scene():
 func screen_transition_start():
 	GameTween.remove_all()
 	var delay = 0.0
-	for rect in TransitionColorRects:
-		GameTween.interpolate_property(rect, "rect_scale", null, Vector2.ONE, 0.5, Tween.TRANS_CUBIC, Tween.EASE_IN, delay)
-		delay += 0.01
-
+	for node in transition_nodes:
+		print("Start transition ", node)
+		GameTween.interpolate_property(node, "rect_scale", Vector2.ZERO, Vector2.ONE, 0.4, Tween.TRANS_CUBIC, Tween.EASE_OUT, delay)
+		delay += 0.02
 	GameTween.start()
 	yield(GameTween, "tween_all_completed")
 
@@ -95,8 +94,9 @@ func screen_transition_start():
 func screen_transition_finish():
 	GameTween.remove_all()
 	var delay = 0.0
-	for rect in TransitionColorRects:
-		GameTween.interpolate_property(rect, "rect_scale", null, Vector2.ZERO, 0.5, Tween.TRANS_CUBIC, Tween.EASE_OUT, delay)
-		delay += 0.01
+	for node in transition_nodes:
+		print("Finish transition ", node)
+		GameTween.interpolate_property(node, "rect_scale", Vector2.ONE, Vector2.ZERO, 0.4, Tween.TRANS_CUBIC, Tween.EASE_IN, delay)
+		delay += 0.02
 	GameTween.start()
 	yield(GameTween, "tween_all_completed")
