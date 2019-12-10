@@ -69,12 +69,11 @@ var RUN_DECELERATION := 690.0
 var MAX_JUMPS := 2
 var JUMP_STRENGTH := -350.0
 var FALL_JUMP_GRACE := 0.08
+var EXPULSE_STRENGTH := 580.0
 var CEILING_KNOCKDOWN := 50.0
 var WALL_JUMP_STRENGTH := -330.0
 var WALL_JUMP_PUSH_STRENGTH := 55.0
 var WALL_SLIDE_STICK_WALL_JUMP := 0.18
-
-var EXPLUSE_STRENGH := 600.0
 
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
@@ -207,7 +206,8 @@ func process_object(delta: float):
 # @impure
 var _trail := 0.0
 func process_effects(delta: float):
-	if active_object and active_object is ObjectSpeedNode or active_object is ObjectInvincibilityNode:
+	if active_object and active_object is ObjectSpeedNode or active_object is ObjectInvincibilityNode or \
+		(state == PlayerState.expulse and (abs(velocity.x) > RUN_MAX_SPEED or velocity.y < 0)):
 		_trail += delta
 		if _trail > 0.05:
 			var trail_node := SpriteTrail.instance()
@@ -268,6 +268,11 @@ func set_animation(new_animation: String, animation_position = 0.0):
 	PlayerAnimationPlayer.play(new_animation)
 	PlayerAnimationPlayer.seek(animation_position)
 
+# is_animation_playing returns true if the given animation is playing.
+# @impure
+func is_animation_playing(animation: String) -> bool:
+	return PlayerAnimationPlayer.current_animation == animation
+
 # is_animation_finished returns true if the animation is finished (and not looping).
 # @pure
 func is_animation_finished() -> bool:
@@ -322,6 +327,8 @@ func handle_jump(strength: float):
 	velocity.y = strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
 
+# handle_expulse applies expulse_direction to send the player flying.
+# @impure
 func handle_expulse(strength: float):
 	velocity = expulse_direction * strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
@@ -330,7 +337,7 @@ func handle_expulse(strength: float):
 # @impure
 func handle_gravity(delta: float, max_speed: float, acceleration: float):
 	if not is_on_floor():
-		velocity.y = min(velocity.y + delta * acceleration, max_speed)
+		velocity.y = move_toward(velocity.y, max_speed, delta * acceleration)
 	elif velocity.x == 0 and input_velocity.x == 0:
 		velocity.y = 0
 
@@ -360,13 +367,13 @@ func handle_floor_move(delta: float, max_speed: float, acceleration: float, dece
 	if has_same_direction(direction, input_velocity.x):
 		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier)
 	else:
-		velocity.x = get_deceleration(delta, velocity.x, deceleration * speed_multiplier)
+		handle_deceleration_move(delta, deceleration * speed_multiplier)
 
 # handle_airborne_move applies acceleration or deceleration depending on the input_velocity while airborne.
 # @impure
 func handle_airborne_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if input_velocity.x != 0:
-		velocity.x = clamp(velocity.x + delta * sign(input_velocity.x) * acceleration * speed_multiplier, -max_speed * speed_multiplier, max_speed * speed_multiplier)
+		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier)
 	else:
 		handle_deceleration_move(delta, deceleration * speed_multiplier)
 
@@ -378,12 +385,12 @@ func handle_deceleration_move(delta: float, deceleration: float):
 # get_acceleration returns the next value after acceleration is applied.
 # @pure
 func get_acceleration(delta: float, value: float, max_speed: float, acceleration: float, override_direction = direction) -> float:
-	return min(abs(value) + delta * acceleration, max_speed) * sign(override_direction)
+	return move_toward(value, override_direction * max_speed, acceleration * delta)
 
 # get_deceleration returns the next value after deceleration is applied.
 # @pure
 func get_deceleration(delta: float, value: float, deceleration: float) -> float:
-	return max(abs(value) - delta * deceleration, 0) * sign(value)
+	return move_toward(value, 0.0, deceleration * delta)
 
 # is_nearly returns true if the first given value nearly equals the second given value.
 # @pure
@@ -532,38 +539,35 @@ func tick_jump(delta: float):
 		if not is_colliding_with_group("no_ceiling_sound"):
 			play_sound_effect(BumpSFX)
 		return set_state(PlayerState.fall)
-	if input_use and current_object:
-		return set_state(PlayerState.use_object)
-	if is_timer_finished() and input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
-		return set_state(PlayerState.jump)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
+	if input_use and current_object:
+		return set_state(PlayerState.use_object)
+	if input_jump_once and jumps_remaining > 0 and is_timer_finished() and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
 
 func pre_expulse():
-	jumps_remaining = MAX_JUMPS - 1 # Only allow double jump for trampoline
 	start_timer(0.14)
-	handle_expulse(EXPLUSE_STRENGH)
 	set_animation("jump")
+	handle_expulse(EXPULSE_STRENGTH)
 	play_sound_effect(JumpSFX)
-	# TODO: set direction according to expulse_direction
+	if sign(int(expulse_direction.x)) != 0:
+		set_direction(sign(int(expulse_direction.x)))
+	if expulse_direction.y < 0:
+		jumps_remaining = MAX_JUMPS - 1
 
 func tick_expulse(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_direction()
 	handle_airborne_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
 	if is_on_floor():
-		return set_state(PlayerState.stand)
-	if is_on_ceiling():
-		velocity.y = CEILING_KNOCKDOWN
-		if not is_colliding_with_group("no_ceiling_sound"):
-			play_sound_effect(BumpSFX)
-		return set_state(PlayerState.fall)
-	if input_use and current_object:
-		return set_state(PlayerState.use_object)
-	if is_timer_finished() and input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
+		jumps_remaining = MAX_JUMPS
+		if velocity.x == 0:
+			return set_state(PlayerState.stand)
+		if not is_animation_playing("run"):
+			set_animation("run")
+	if input_jump_once and jumps_remaining > 0 and is_timer_finished() and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
-	if velocity.y > 0:
-		return set_state(PlayerState.fall)
 
 ###
 # Player movement wall states
@@ -627,10 +631,10 @@ func tick_walljump(delta: float):
 		if not is_colliding_with_group("no_ceiling_sound"):
 			play_sound_effect(BumpSFX)
 		return set_state(PlayerState.fall)
-	if is_timer_finished() and input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
-		return set_state(PlayerState.jump)
 	if velocity.y > 0:
 		return set_state(PlayerState.fall)
+	if input_jump_once and jumps_remaining > 0 and is_timer_finished() and not is_on_ceiling_passive():
+		return set_state(PlayerState.jump)
 
 ###
 # Player objects
