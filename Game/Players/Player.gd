@@ -343,6 +343,11 @@ func get_sound_effect_player() -> AudioStreamPlayer2D:
 			return sound_effect_player
 	return null
 
+# screen_shake applies screen shake effect
+func screen_shake():
+	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
+	camera.get_node("ScreenShake").start_shake()
+
 # handle_jump applies strength to jump and disable floor snapping for a little while.
 # @impure
 func handle_jump(strength: float):
@@ -354,6 +359,7 @@ func handle_jump(strength: float):
 func handle_expulse(strength: float):
 	velocity = expulse_direction * strength
 	disable_snap = FLOOR_SNAP_DISABLE_TIME
+	screen_shake()
 
 # handle_gravity applies gravity to the velocity.
 # @impure
@@ -719,8 +725,7 @@ var _death_origin := Vector2()
 func apply_death(death_origin: Vector2):
 	if is_invincible:
 		return
-	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
-	camera.get_node("ScreenShake").start_shake()
+	screen_shake()
 	_death_dir = 1.0 if _death_origin.x > position.x else -1.0
 	_death_origin = death_origin
 	return set_state(PlayerState.death)
@@ -745,9 +750,11 @@ func tick_death(delta: float):
 ###
 # Player interactions with door
 ###
+var _initial_door_position = null
 func set_door(door_node, exit_node):
 	current_door = door_node
 	current_exit = exit_node
+	_initial_door_position = global_position.x
 
 func pre_exit():
 	set_direction(1 if global_position.x < current_door.target.global_position.x else -1)
@@ -756,10 +763,10 @@ func pre_exit():
 
 func tick_exit(delta: float):
 	if direction == 1 and global_position.x < current_door.target.global_position.x:
-		global_position.x += delta * DOOR_RUN_SPEED
+		global_position.x = move_toward(global_position.x, current_door.target.global_position.x, delta * DOOR_RUN_SPEED)
 		return
 	elif direction == -1 and global_position.x > current_door.target.global_position.x:
-		global_position.x -= delta * DOOR_RUN_SPEED
+		global_position.x = move_toward(global_position.x, current_door.target.global_position.x, delta * DOOR_RUN_SPEED)
 		return
 	global_position.x = current_door.target.global_position.x
 	return set_state(PlayerState.exit_fade)
