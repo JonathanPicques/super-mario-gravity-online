@@ -98,7 +98,7 @@ margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "Spikes Corridor"
+text = "Rainbow garden"
 align = 1
 valign = 1
 __meta__ = {
@@ -121,12 +121,13 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="GUI/MapButton3" index="0"]
-margin_right = 160.0
+margin_left = -0.292038
+margin_right = 159.708
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "Crazy Tower"
+text = "Crazy tower"
 align = 1
 valign = 1
 __meta__ = {
@@ -153,7 +154,7 @@ margin_bottom = 32.0
 rect_pivot_offset = Vector2( 64, 16 )
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "Rainbow Garden"
+text = "Spike corridor"
 align = 1
 valign = 1
 __meta__ = {

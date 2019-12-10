@@ -9,11 +9,11 @@ const maps := [
 		"map_scene_path": "res://Game/Maps/Debug.tscn",
 	},
 	{
-		"title": "Spike Corridor",
-		"score": 8,
+		"title": "Rainbow garden",
+		"score": 6,
 		"author": "jeremtab",
-		"difficulty": "easy",
-		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
+		"difficulty": "medium",
+		"map_scene_path": "res://Game/Maps/RainbowGarden.tscn",
 	},
 	{
 		"title": "Crazy tower",
@@ -23,11 +23,11 @@ const maps := [
 		"map_scene_path": "res://Game/Maps/CrazyTower.tscn",
 	},
 	{
-		"title": "Rainbow garden",
-		"score": 6,
+		"title": "Spike Corridor",
+		"score": 8,
 		"author": "jeremtab",
-		"difficulty": "medium",
-		"map_scene_path": "res://Game/Maps/RainbowGarden.tscn",
+		"difficulty": "hard",
+		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
 	}
 ]
 
