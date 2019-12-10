@@ -80,7 +80,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="God Save The Frog"
+config/name="Once Upon A Frog"
 run/main_scene="res://Game/Menus/HomeMenu.tscn"
 config/icon="res://Settings/Icon.png"
 

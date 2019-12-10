@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Awkward-Princesss-Day-Out.ogg-2af1088c76297ddf43ae8968ca3913a2.oggstr"
+
+[deps]
+
+source_file="res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg"
+dest_files=[ "res://.import/Awkward-Princesss-Day-Out.ogg-2af1088c76297ddf43ae8968ca3913a2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

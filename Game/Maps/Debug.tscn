@@ -8,7 +8,7 @@
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Items/SolidBlock/SolidBlock.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Game/Maps/Musics/Hangin-Ten_Looping.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Game/Maps/Musics/The-Village.ogg" type="AudioStream" id=9]
 [ext_resource path="res://Game/Items/OneWay/OneWay.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=11]
 
@@ -120,7 +120,12 @@ door_to_node_path = NodePath("../DoorBottom")
 position = Vector2( 48, 160 )
 door_to_node_path = NodePath("../DoorUp")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="8"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 9 )
+volume_db = -10.0
+autoplay = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="9"]
 
 [node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.5, 1 )
@@ -134,8 +139,3 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="9"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-autoplay = true

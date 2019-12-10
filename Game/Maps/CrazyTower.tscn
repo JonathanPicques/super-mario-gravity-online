@@ -5,7 +5,7 @@
 [ext_resource path="res://Game/Items/ColorSwitch/ColorBlock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Maps/Textures/BackgroundSewer.png" type="Texture" id=5]
-[ext_resource path="res://Game/Maps/Musics/Hangin-Ten_Looping.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Game/Maps/Musics/The-Village.ogg" type="AudioStream" id=6]
 
 [node name="Map" instance=ExtResource( 1 )]
 
@@ -108,7 +108,12 @@ position = Vector2( 0, -128 )
 [node name="ColorBlock4" parent="ObjectSlot" index="29" instance=ExtResource( 3 )]
 position = Vector2( -16, -128 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="8"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+autoplay = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="9"]
 
 [node name="Background" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.5, 1 )
@@ -122,8 +127,3 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." index="9"]
-stream = ExtResource( 9 )
-volume_db = -10.0
-autoplay = true
