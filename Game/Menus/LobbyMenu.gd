@@ -37,7 +37,10 @@ func _process(delta: float):
 		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
 	if lead_player and GameInput.is_player_action_just_pressed(lead_player.id, "accept") and GameMultiplayer.is_every_player_ready():
-		set_process(false) # disable process to avoid calling goto_maps_menu_scene multiple times.
+		# disable process to avoid calling goto_maps_menu_scene multiple times.
+		set_process(false)
+		# stop matchmaking
+		GameMultiplayer.finish_matchmaking()
 		return Game.goto_maps_menu_scene()
 	# add a local player
 	for input_device_id in range(0, 5):

@@ -374,7 +374,7 @@ func handle_floor_move(delta: float, max_speed: float, acceleration: float, dece
 # @impure
 func handle_airborne_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
 	if input_velocity.x != 0:
-		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier)
+		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier, input_velocity.x)
 	else:
 		handle_deceleration_move(delta, deceleration * speed_multiplier)
 
@@ -386,7 +386,7 @@ func handle_deceleration_move(delta: float, deceleration: float):
 # get_acceleration returns the next value after acceleration is applied.
 # @pure
 func get_acceleration(delta: float, value: float, max_speed: float, acceleration: float, override_direction = direction) -> float:
-	return move_toward(value, override_direction * max_speed, acceleration * delta)
+	return move_toward(value, max_speed * sign(override_direction), acceleration * delta)
 
 # get_deceleration returns the next value after deceleration is applied.
 # @pure
@@ -567,6 +567,12 @@ func tick_expulse(delta: float):
 			return set_state(PlayerState.stand)
 		if not is_animation_playing("run"):
 			set_animation("run")
+	if velocity.y > 0 and is_on_wall_passive() and not input_down and (\
+		(not wallslide_cancelled and is_timer_finished()) or \
+		(not wallslide_cancelled and has_same_direction(direction, input_velocity.x)) or \
+		(wallslide_cancelled and is_timer_finished() and has_same_direction(direction, input_velocity.x)) \
+	):
+		return set_state(PlayerState.wallslide)
 	if input_jump_once and jumps_remaining > 0 and is_timer_finished() and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 
