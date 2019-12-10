@@ -24,7 +24,7 @@ enum PlayerState {
 	none, stand, run, move_turn, push_wall,
 	fall, jump, expulse, wallslide, walljump,
 	use_object,
-	death
+	death, exit, exit_fade
 }
 
 enum DialogType {
@@ -79,6 +79,10 @@ var WALL_SLIDE_STICK_WALL_JUMP := 0.18
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
 
+const DOOR_RUN_SPEED = 20.0
+const DOOR_PLAYER_FADE_DURATION = 0.5
+const DOOR_SCREEN_FADE_DURATION = 0.5
+
 var state: int = PlayerState.none
 var velocity := Vector2()
 var direction := 1
@@ -93,6 +97,19 @@ var expulse_direction = Vector2.ZERO
 var speed_multiplier := 1.0
 var last_safe_position := Vector2()
 var wallslide_cancelled := false # reset on stand or walljump
+var current_exit = null
+var current_door = null
+
+onready var object_scenes := [ # TODO: ponderate random
+	preload("res://Game/Objects/Speed.tscn"),
+	preload("res://Game/Objects/FireballDumb.tscn"),
+	preload("res://Game/Objects/FireballAuto.tscn"),
+	preload("res://Game/Objects/FireballGhost.tscn"),
+	preload("res://Game/Objects/Invincibility.tscn"),
+]
+
+var active_object = null
+var current_object = null
 
 # @impure
 func _ready():
@@ -132,6 +149,8 @@ func _physics_process(delta: float):
 		PlayerState.walljump: tick_walljump(delta)
 		PlayerState.use_object: tick_use_object(delta)
 		PlayerState.death: tick_death(delta)
+		PlayerState.exit: tick_exit(delta)
+		PlayerState.exit_fade: tick_exit_fade(delta)
 
 # _process_network updates player from the given network infos.
 # @impure
@@ -256,6 +275,8 @@ func set_state(new_state: int):
 		PlayerState.walljump: pre_walljump()
 		PlayerState.use_object: pre_use_object()
 		PlayerState.death: pre_death()
+		PlayerState.exit: pre_exit()
+		PlayerState.exit_fade: pre_exit_fade()
 
 # set_direction changes the Player direction and flips the sprite accordingly.
 # @impure
@@ -440,6 +461,8 @@ func tick_stand(delta: float):
 	if not is_on_floor():
 		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
+	if input_jump_once and current_exit != null: # if on door, take exit instead of jumping
+		return set_state(PlayerState.exit)
 	if input_jump_once and jumps_remaining > 0 and not is_on_ceiling_passive():
 		return set_state(PlayerState.jump)
 	if input_use and current_object:
@@ -458,6 +481,8 @@ func tick_run(delta: float):
 	if not is_on_floor():
 		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
+	if input_jump_once and current_exit != null: # if on door, take exit instead of jumping
+		return set_state(PlayerState.exit)
 	if is_on_wall():
 		return set_state(PlayerState.push_wall)
 	if input_use and current_object:
@@ -479,6 +504,8 @@ func tick_move_turn(delta: float):
 		set_direction(-direction)
 		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
+	if input_jump_once and current_exit != null: # if on door, take exit instead of jumping
+		return set_state(PlayerState.exit)
 	if has_same_direction(direction, input_velocity.x):
 		return set_state(PlayerState.run)
 	if input_jump_once and not is_on_ceiling_passive():
@@ -647,21 +674,10 @@ func tick_walljump(delta: float):
 # Player objects
 ###
 
-onready var ObjectScenes := [ # TODO: ponderate random
-	preload("res://Game/Objects/Speed.tscn"),
-	preload("res://Game/Objects/FireballDumb.tscn"),
-	preload("res://Game/Objects/FireballAuto.tscn"),
-	preload("res://Game/Objects/FireballGhost.tscn"),
-	preload("res://Game/Objects/Invincibility.tscn"),
-]
-
-var active_object = null
-var current_object = null
-
 func get_object():
 	randomize()
-	var index = randi() % ObjectScenes.size()
-	current_object = ObjectScenes[index].instance()
+	var index = randi() % object_scenes.size()
+	current_object = object_scenes[index].instance()
 
 func apply_object_speed(object):
 	active_object = object
@@ -725,6 +741,39 @@ func tick_death(delta: float):
 		velocity = Vector2()
 		PlayerCollisionBody.set_deferred("disabled", false)
 		return set_state(PlayerState.fall)
+
+###
+# Player interactions with door
+###
+func set_door(door_node, exit_node):
+	current_door = door_node
+	current_exit = exit_node
+
+func pre_exit():
+	set_direction(1 if global_position.x < current_door.target.global_position.x else -1)
+	set_animation("run")
+
+func tick_exit(delta: float):
+	if direction == 1 and global_position.x < current_door.target.global_position.x:
+		global_position.x += delta * DOOR_RUN_SPEED
+		return
+	elif direction == -1 and global_position.x > current_door.target.global_position.x:
+		global_position.x -= delta * DOOR_RUN_SPEED
+		return
+	return set_state(PlayerState.exit_fade)
+
+func pre_exit_fade():
+	start_timer(DOOR_PLAYER_FADE_DURATION)
+
+func tick_exit_fade(delta):
+	# TODO: fade
+	PlayerSprite.modulate.a = PlayerTimer.time_left / PlayerTimer.wait_time
+	if is_timer_finished():
+		global_position = current_exit.target.global_position
+		set_door(null, null)
+		PlayerSprite.modulate.a = 1.0
+		return set_state(PlayerState.stand)
+
 
 ###
 # Dialogs
