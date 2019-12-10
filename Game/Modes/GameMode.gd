@@ -30,8 +30,7 @@ func setup_split_screen():
 	
 	# dezoom if there is more than 1 screen
 	if player_count > 1:
-		var pixel_ratio := 2
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+		set_pixel_ratio(2)
 	
 	match player_count:
 		1: 
@@ -89,6 +88,10 @@ func remove_player_screen_camera(player_id: int):
 			if camera_node:
 				camera_node.queue_free()
 
+func set_pixel_ratio(pixel_ratio):
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+	
+
 # trigger color switch for the given color.
 # @impure
 func item_color_switch_trigger(color: int):
@@ -96,7 +99,4 @@ func item_color_switch_trigger(color: int):
 
 
 func _on_GameMode_tree_exiting():
-	# reset zoom
-	var pixel_ratio := 1
-	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
-
+	set_pixel_ratio(1)
