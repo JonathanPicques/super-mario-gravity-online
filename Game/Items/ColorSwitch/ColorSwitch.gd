@@ -13,8 +13,8 @@ func _ready():
 	GameConst.replace_skin($Sprite, color)
 
 # @impure
-func _on_Area2D_body_entered(player_node):
-	if player_node.state == player_node.PlayerState.wallslide or player_node.state == player_node.PlayerState.fall:
+func _on_Area2D_body_entered(player_node: PlayerNode):
+	if player_node.velocity.y > PlayerNode.FALLING_VELOCITY_THRESHOLD:
 		if !is_on:
 		 Game.game_mode_node.item_color_switch_trigger(color)
 

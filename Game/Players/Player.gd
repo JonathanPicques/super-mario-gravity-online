@@ -35,6 +35,7 @@ const FLOOR := Vector2(0, -1) # floor direction.
 const FLOOR_SNAP := Vector2(0, 5) # floor snap for slopes.
 const FLOOR_SNAP_DISABLED := Vector2() # no floor snap for slopes.
 const FLOOR_SNAP_DISABLE_TIME := 0.1 # time during snapping is disabled.
+const FALLING_VELOCITY_THRESHOLD := 5.0 # velocity were we consider the player is falling
 
 const NET_VIEW_INPUT_INDEX := 0
 const NET_VIEW_POSITION_INDEX := 1
