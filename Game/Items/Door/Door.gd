@@ -15,4 +15,5 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Area2D_body_exited(body):
-	body.set_door(null, null)
+	if body.state != body.PlayerState.exit and body.state != body.PlayerState.exit_fade:
+		body.set_door(null, null)

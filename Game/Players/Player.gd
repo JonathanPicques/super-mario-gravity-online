@@ -79,7 +79,7 @@ var WALL_SLIDE_STICK_WALL_JUMP := 0.18
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
 
-const DOOR_RUN_SPEED = 20.0
+const DOOR_RUN_SPEED = 40.0
 const DOOR_PLAYER_FADE_DURATION = 0.5
 const DOOR_SCREEN_FADE_DURATION = 0.5
 
@@ -752,6 +752,7 @@ func set_door(door_node, exit_node):
 func pre_exit():
 	set_direction(1 if global_position.x < current_door.target.global_position.x else -1)
 	set_animation("run")
+	input_velocity.x = 0
 
 func tick_exit(delta: float):
 	if direction == 1 and global_position.x < current_door.target.global_position.x:
@@ -760,10 +761,12 @@ func tick_exit(delta: float):
 	elif direction == -1 and global_position.x > current_door.target.global_position.x:
 		global_position.x -= delta * DOOR_RUN_SPEED
 		return
+	global_position.x = current_door.target.global_position.x
 	return set_state(PlayerState.exit_fade)
 
 func pre_exit_fade():
 	start_timer(DOOR_PLAYER_FADE_DURATION)
+	set_animation("stand")
 
 func tick_exit_fade(delta):
 	# TODO: fade
