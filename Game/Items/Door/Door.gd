@@ -1,19 +1,13 @@
 extends Node2D
+class_name DoorNode
 
-export var exit_node_path: NodePath
+onready var Target = $Target
 
-onready var target = $Target
-var exit_node = null
+export var door_to_node_path: NodePath
 
+var door_to_node = null
+
+# @impure
 func _ready():
-	if exit_node_path:
-		exit_node = get_node(exit_node_path)
-
-func _on_Area2D_body_entered(body):
-	if exit_node:
-		body.set_door(self, exit_node)
-
-
-func _on_Area2D_body_exited(body):
-	if body.state != body.PlayerState.exit and body.state != body.PlayerState.exit_fade:
-		body.set_door(null, null)
+	if door_to_node_path:
+		door_to_node = get_node(door_to_node_path)

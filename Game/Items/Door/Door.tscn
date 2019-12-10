@@ -6,23 +6,31 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 22 )
 
-[node name="Door" type="Node2D"]
+[node name="Door" type="Node2D" groups=[
+"Door",
+]]
 z_index = -1
 z_as_relative = false
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="." groups=[
+"Door",
+]]
+position = Vector2( -16, -48 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="Area2D" type="Area2D" parent="Sprite"]
+[node name="Area2D" type="Area2D" parent="Sprite" groups=[
+"Door",
+]]
 collision_layer = 64
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D" groups=[
+"Door",
+]]
 position = Vector2( 16, 26 )
 shape = SubResource( 1 )
 
-[node name="Target" type="Node2D" parent="."]
-position = Vector2( 16, 48 )
-[connection signal="body_entered" from="Sprite/Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Sprite/Area2D" to="." method="_on_Area2D_body_exited"]
+[node name="Target" type="Node2D" parent="." groups=[
+"Door",
+]]

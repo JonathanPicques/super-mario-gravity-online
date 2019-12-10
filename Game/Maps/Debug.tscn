@@ -65,13 +65,60 @@ position = Vector2( 304, 96 )
 [node name="ObjectBox4" parent="ObjectSlot" index="11" instance=ExtResource( 4 )]
 position = Vector2( 336, 96 )
 
-[node name="Door" parent="ObjectSlot" index="12" instance=ExtResource( 11 )]
-position = Vector2( -336, -112 )
-exit_node_path = NodePath("../Door2")
+[node name="Trampoline" parent="ObjectSlot" index="12" instance=ExtResource( 6 )]
+position = Vector2( 384, 144 )
+rotation = -3.14159
 
-[node name="Door2" parent="ObjectSlot" index="13" instance=ExtResource( 11 )]
-position = Vector2( 48, 112 )
-exit_node_path = NodePath("../Door")
+[node name="Trampoline2" parent="ObjectSlot" index="13" instance=ExtResource( 6 )]
+position = Vector2( -160, 160 )
+rotation = -0.785397
+
+[node name="Trampoline8" parent="ObjectSlot" index="14" instance=ExtResource( 6 )]
+position = Vector2( -160, 160 )
+rotation = -0.785397
+
+[node name="Trampoline4" parent="ObjectSlot" index="15" instance=ExtResource( 6 )]
+position = Vector2( 256, 160 )
+rotation = -1.57079
+
+[node name="Trampoline6" parent="ObjectSlot" index="16" instance=ExtResource( 6 )]
+position = Vector2( 256, 32 )
+rotation = -0.785397
+
+[node name="Trampoline7" parent="ObjectSlot" index="17" instance=ExtResource( 6 )]
+position = Vector2( 480, -48 )
+rotation = -3.14159
+
+[node name="Trampoline5" parent="ObjectSlot" index="18" instance=ExtResource( 6 )]
+position = Vector2( -48, 64 )
+rotation = -3.14159
+
+[node name="Trampoline3" parent="ObjectSlot" index="19" instance=ExtResource( 6 )]
+position = Vector2( -16, 80 )
+
+[node name="SolidBlock" parent="ObjectSlot" index="20" instance=ExtResource( 8 )]
+position = Vector2( 368, 0 )
+
+[node name="SolidBlock2" parent="ObjectSlot" index="21" instance=ExtResource( 8 )]
+position = Vector2( 80, -16 )
+
+[node name="SpikeBall" parent="ObjectSlot" index="22" instance=ExtResource( 7 )]
+position = Vector2( 368, 0 )
+
+[node name="SpikeBall2" parent="ObjectSlot" index="23" instance=ExtResource( 7 )]
+position = Vector2( 80, -16 )
+length = 4
+
+[node name="Oneway" parent="ObjectSlot" index="24" instance=ExtResource( 10 )]
+position = Vector2( 272, 0 )
+
+[node name="DoorUp" parent="ObjectSlot" index="25" instance=ExtResource( 11 )]
+position = Vector2( -320, -64 )
+door_to_node_path = NodePath("../DoorBottom")
+
+[node name="DoorBottom" parent="ObjectSlot" index="26" instance=ExtResource( 11 )]
+position = Vector2( 48, 160 )
+door_to_node_path = NodePath("../DoorUp")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="8"]
 
@@ -92,50 +139,3 @@ __meta__ = {
 stream = ExtResource( 9 )
 volume_db = -10.0
 autoplay = true
-
-[node name="Trampoline" parent="." index="10" instance=ExtResource( 6 )]
-position = Vector2( 384, 144 )
-rotation = -3.14159
-
-[node name="Trampoline2" parent="." index="11" instance=ExtResource( 6 )]
-position = Vector2( -160, 160 )
-rotation = -0.785397
-
-[node name="Trampoline8" parent="." index="12" instance=ExtResource( 6 )]
-position = Vector2( -160, 160 )
-rotation = -0.785397
-
-[node name="Trampoline4" parent="." index="13" instance=ExtResource( 6 )]
-position = Vector2( 256, 160 )
-rotation = -1.57079
-
-[node name="Trampoline6" parent="." index="14" instance=ExtResource( 6 )]
-position = Vector2( 256, 32 )
-rotation = -0.785397
-
-[node name="Trampoline7" parent="." index="15" instance=ExtResource( 6 )]
-position = Vector2( 480, -48 )
-rotation = -3.14159
-
-[node name="Trampoline5" parent="." index="16" instance=ExtResource( 6 )]
-position = Vector2( -48, 64 )
-rotation = -3.14159
-
-[node name="Trampoline3" parent="." index="17" instance=ExtResource( 6 )]
-position = Vector2( -16, 80 )
-
-[node name="SolidBlock" parent="." index="18" instance=ExtResource( 8 )]
-position = Vector2( 368, 0 )
-
-[node name="SolidBlock2" parent="." index="19" instance=ExtResource( 8 )]
-position = Vector2( 80, -16 )
-
-[node name="SpikeBall" parent="." index="20" instance=ExtResource( 7 )]
-position = Vector2( 368, 0 )
-
-[node name="SpikeBall2" parent="." index="21" instance=ExtResource( 7 )]
-position = Vector2( 80, -16 )
-length = 4
-
-[node name="Oneway" parent="." index="22" instance=ExtResource( 10 )]
-position = Vector2( 272, 0 )
