@@ -13,11 +13,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SoundEffects" type="Node" parent="."]
-
-[node name="SFX1" type="AudioStreamPlayer2D" parent="SoundEffects"]
-bus = "SFX"
-
 [node name="TransitionCanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
 

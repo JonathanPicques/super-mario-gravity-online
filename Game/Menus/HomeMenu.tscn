@@ -28,16 +28,14 @@ position = Vector2( 0, -40 )
 [node name="FlagStart" parent="." index="4"]
 position = Vector2( 48, 240 )
 
-[node name="AutoCreatePlayers" parent="." index="8" instance=ExtResource( 8 )]
-
-[node name="Gui" type="Control" parent="." index="9"]
+[node name="GUI" type="Control" parent="." index="8"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="Gui" index="0"]
+[node name="TitleLabel" type="Label" parent="GUI" index="0"]
 margin_top = 64.0
 margin_right = 512.0
 margin_bottom = 93.0
@@ -49,7 +47,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SubtitleLabel" type="Label" parent="Gui" index="1"]
+[node name="SubtitleLabel" type="Label" parent="GUI" index="1"]
 margin_top = 104.0
 margin_right = 544.0
 margin_bottom = 121.0
@@ -61,13 +59,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeyCTRL" type="Sprite" parent="Gui/SubtitleLabel" index="0"]
+[node name="KeyCTRL" type="Sprite" parent="GUI/SubtitleLabel" index="0"]
 position = Vector2( 216, 8 )
 texture = ExtResource( 4 )
 
-[node name="KeyENTER" type="Sprite" parent="Gui/SubtitleLabel" index="1"]
+[node name="KeyENTER" type="Sprite" parent="GUI/SubtitleLabel" index="1"]
 position = Vector2( 184, 8 )
 texture = ExtResource( 3 )
+
+[node name="AutoCreatePlayers" parent="." index="9" instance=ExtResource( 8 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." index="10"]
 

@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://Game/Items/Door/Door.gd"
 }, {
 "base": "Node",
+"class": "GameAudioNode",
+"language": "GDScript",
+"path": "res://Game/GameAudio.gd"
+}, {
+"base": "Node",
 "class": "GameConstNode",
 "language": "GDScript",
 "path": "res://Game/GameConst.gd"
@@ -66,6 +71,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "DoorNode": "",
+"GameAudioNode": "",
 "GameConstNode": "",
 "GameInputNode": "",
 "GameModeNode": "",
@@ -87,8 +93,9 @@ config/icon="res://Settings/Icon.png"
 [autoload]
 
 GameMultiplayer="*res://Game/GameMultiplayer.tscn"
-GameConst="*res://Game/GameConst.tscn"
 GameInput="*res://Game/GameInput.tscn"
+GameConst="*res://Game/GameConst.tscn"
+GameAudio="*res://Game/GameAudio.tscn"
 Game="*res://Game/Game.tscn"
 
 [debug]

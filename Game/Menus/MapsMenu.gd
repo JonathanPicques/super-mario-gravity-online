@@ -33,6 +33,9 @@ const maps := [
 
 # @impure
 func _ready():
+	# music
+	GameAudio.play_music("res://Game/Menus/Musics/RPG-Battle-Climax-2.ogg")
+	# GUI
 	$GUI/MapButton1.grab_focus()
 	$Icons/KeyGamepadCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 1
 	$Icons/KeyKeyboardCancel.visible = GameMultiplayer.get_lead_player().input_device_id == 0

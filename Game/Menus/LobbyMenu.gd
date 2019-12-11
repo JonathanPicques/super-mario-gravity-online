@@ -6,6 +6,8 @@ var state = State.none
 
 # @impure
 func _ready():
+	# music
+	GameAudio.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# Set icons
 	var lead_player = GameMultiplayer.get_lead_player()
 	if lead_player:

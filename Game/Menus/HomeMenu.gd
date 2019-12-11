@@ -1,6 +1,10 @@
 extends "res://Game/Maps/Map.gd"
 
 # @impure
+func _ready():
+	GameAudio.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
+
+# @impure
 func _process(delta: float):
 	var lead_player = GameMultiplayer.get_lead_player()
 	# goto lobby

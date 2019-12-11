@@ -3,6 +3,8 @@ extends "res://Game/Maps/Map.gd"
 # @impure
 func _ready():
 	yield(get_tree(), "idle_frame")
+	# music
+	GameAudio.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
 	# spawn player
 	GameMultiplayer.spawn_player_nodes(PlayerSlot)
 	var players := GameMultiplayer.get_players(GameMultiplayer.SortPlayerMethods.ranked)
@@ -23,8 +25,8 @@ func _process(delta: float):
 
 # @impure
 func open_popup():
-	$Popup.visible = !$Popup.visible
-	$Popup/RetryButton.grab_focus()
+	$GUI/Popup.visible = !$GUI/Popup.visible
+	$GUI/Popup/RetryButton.grab_focus()
 
 # block_input is used to avoid calling finish_playing multiple times.
 var block_input := false

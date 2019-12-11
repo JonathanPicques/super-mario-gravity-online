@@ -31,7 +31,7 @@ func _process(delta: float):
 		ObjectSkin.texture = null
 
 # @impure
-func on_minimaptimer_timeout():
+func on_minimap_timer_timeout():
 	if player and player_node and player.rank_distance > 0 and Game.game_mode_node.flag_distance > 0:
 		var left := MiniMapLeft.global_position.x
 		var right := MiniMapRight.global_position.x

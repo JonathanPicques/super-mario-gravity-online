@@ -107,5 +107,5 @@ __meta__ = {
 [node name="MSTimer" type="Timer" parent="TimerLabel"]
 wait_time = 0.1
 autostart = true
-[connection signal="timeout" from="MiniMap/MiniMapTimer" to="." method="on_minimaptimer_timeout"]
+[connection signal="timeout" from="MiniMap/MiniMapTimer" to="." method="on_minimap_timer_timeout"]
 [connection signal="timeout" from="TimerLabel/MSTimer" to="TimerLabel" method="_on_MSTimer_timeout"]
