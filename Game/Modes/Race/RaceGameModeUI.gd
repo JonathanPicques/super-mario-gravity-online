@@ -1,6 +1,12 @@
 extends Control
 
-onready var ObjectSkin = $ObjectBox/MarginContainer/ObjectSkin
+onready var MiniMap: TextureRect = $MiniMap
+onready var MiniFrog: Sprite = $MiniMap/MiniFrog
+onready var MiniTween: Tween = $MiniMap/MiniTween
+onready var MiniMapLeft: Node2D = $MiniMap/MiniMapLeft
+onready var MiniMapRight: Node2D = $MiniMap/MiniMapRight
+onready var MiniMapTimer: Timer = $MiniMap/MiniMapTimer
+onready var ObjectSkin: TextureRect = $ObjectBox/MarginContainer/ObjectSkin
 
 export var player_id := 0
 
@@ -23,3 +29,13 @@ func _process(delta: float):
 				GameConst.replace_skin(ObjectSkin, player_node.current_object.color)
 	else:
 		ObjectSkin.texture = null
+
+# @impure
+func on_minimaptimer_timeout():
+	if player and player_node and player.rank_distance > 0 and Game.game_mode_node.flag_distance > 0:
+		var left := MiniMapLeft.global_position.x
+		var right := MiniMapRight.global_position.x
+		var distance: float = clamp(lerp(right, left, player.rank_distance / Game.game_mode_node.flag_distance), left, right)
+		MiniTween.remove_all()
+		MiniTween.interpolate_property(MiniFrog, "global_position:x", null, distance, MiniMapTimer.wait_time, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		MiniTween.start()

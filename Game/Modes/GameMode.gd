@@ -23,15 +23,18 @@ var map_node: MapNode
 func start():
 	pass
 
+# @impure
+func set_pixel_ratio(pixel_ratio: float):
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+
 # setup the split screen depending on the number of players.
 # @impure
 func setup_split_screen():
 	var player_count := GameMultiplayer.get_local_player_count()
-	
 	# dezoom if there is more than 1 screen
 	if player_count > 1:
-		set_pixel_ratio(2)
-	
+		set_pixel_ratio(2.0)
+	# adjust split screen layout
 	match player_count:
 		1: 
 			$GridContainer/Control2.visible = false
@@ -42,12 +45,14 @@ func setup_split_screen():
 			$GridContainer/Control4.visible = false
 			$GridContainer.margin_left = 256
 			$GridContainer.margin_right = -256
+			Viewport2.world_2d = Viewport1.world_2d
 		3: 
 			$GridContainer/Control4.visible = false
-	Viewport2.world_2d = Viewport1.world_2d
-	Viewport3.world_2d = Viewport1.world_2d
-	Viewport4.world_2d = Viewport1.world_2d
+			Viewport3.world_2d = Viewport1.world_2d
+		4:
+			Viewport4.world_2d = Viewport1.world_2d
 
+# @pure
 func get_player_screen_camera(player_id):
 	match player_id:
 		0: return Viewport1.get_node("PlayerCamera2D")
@@ -88,15 +93,11 @@ func remove_player_screen_camera(player_id: int):
 			if camera_node:
 				camera_node.queue_free()
 
-func set_pixel_ratio(pixel_ratio):
-	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
-	
-
 # trigger color switch for the given color.
 # @impure
 func item_color_switch_trigger(color: int):
 	emit_signal("item_color_switch_trigger", color)
 
-
+# @impure
 func _on_GameMode_tree_exiting():
-	set_pixel_ratio(1)
+	set_pixel_ratio(1.0)

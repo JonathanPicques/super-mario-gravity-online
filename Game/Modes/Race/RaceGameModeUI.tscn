@@ -77,6 +77,18 @@ material = ExtResource( 3 )
 position = Vector2( 48, 20 )
 texture = ExtResource( 5 )
 
+[node name="MiniTween" type="Tween" parent="MiniMap"]
+
+[node name="MiniMapLeft" type="Node2D" parent="MiniMap"]
+position = Vector2( 30, 21 )
+
+[node name="MiniMapRight" type="Node2D" parent="MiniMap"]
+position = Vector2( 290, 21 )
+
+[node name="MiniMapTimer" type="Timer" parent="MiniMap"]
+wait_time = 0.5
+autostart = true
+
 [node name="TimerLabel" type="Label" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -95,4 +107,5 @@ __meta__ = {
 [node name="MSTimer" type="Timer" parent="TimerLabel"]
 wait_time = 0.1
 autostart = true
+[connection signal="timeout" from="MiniMap/MiniMapTimer" to="." method="on_minimaptimer_timeout"]
 [connection signal="timeout" from="TimerLabel/MSTimer" to="TimerLabel" method="_on_MSTimer_timeout"]

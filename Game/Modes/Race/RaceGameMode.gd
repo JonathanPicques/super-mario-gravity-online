@@ -1,11 +1,19 @@
 extends "res://Game/Modes/GameMode.gd"
 class_name RaceGameModeNode
 
+var flag_end_pos := Vector2()
+var flag_distance := 0
+var flag_start_pos := Vector2()
+
 # _ready is called when this node is ready
 # @impure
 func _ready():
 	map_node = load(options.map).instance()
 	MapSlot.add_child(map_node)
+	flag_end_pos = map_node.FlagEnd.position
+	flag_distance = 0.0
+	flag_start_pos = map_node.FlagStart.position
+	call_deferred("compute_flag_distance")
 
 # start is called when the game mode starts.
 # @override
@@ -13,9 +21,6 @@ func _ready():
 func start():
 	# setup split screen
 	setup_split_screen()
-	# cache start and end position
-	var flag_end_pos: Vector2 = map_node.FlagEnd.position
-	var flag_start_pos: Vector2 = map_node.FlagStart.position
 	# create all players
 	GameMultiplayer.spawn_player_nodes(map_node.PlayerSlot)
 	# position players close to the flag
@@ -27,19 +32,29 @@ func start():
 	# connect multiplayer signals
 	GameMultiplayer.connect("player_removed", self, "on_player_removed")
 	# compute player ranking locally
-	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking", [flag_end_pos])
+	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking")
 	$RankUpdateTimer.start()
+
+# compute_flag_distance computes the distance between the start and end flag.
+# @impure
+func compute_flag_distance():
+	var navigation_path := map_node.get_simple_path(Vector2(flag_start_pos.x, flag_start_pos.y - 10), Vector2(flag_end_pos.x, flag_end_pos.y - 10))
+	var navigation_size := navigation_path.size()
+	for i in range(0, navigation_size):
+			var next := i + 1
+			if next < navigation_size:
+				flag_distance += navigation_path[i].distance_to(navigation_path[next])
 
 # compute_player_ranking computes the distance from the goal and assign the players ranks.
 # @impure
-func compute_player_ranking(goal_position: Vector2):
+func compute_player_ranking():
 	var sorted_players := []
 	# compute distance from player node to the goal
 	for player in GameMultiplayer.get_players():
 		var player_node = GameMultiplayer.get_player_node(player.id)
 		if player_node:
 			var distance := 0.0
-			var navigation_path := map_node.get_simple_path(player_node.position, goal_position)
+			var navigation_path := map_node.get_simple_path(player_node.position, flag_end_pos)
 			var navigation_size := navigation_path.size()
 			for i in range(0, navigation_size):
 				var next := i + 1
