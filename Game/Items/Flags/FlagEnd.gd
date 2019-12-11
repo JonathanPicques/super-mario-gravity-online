@@ -1,4 +1,8 @@
 extends Node2D
 
+var used := false
+
 func _on_Area2D_body_entered(body):
-	Game.call_deferred("goto_end_game_room_menu_scene")
+	if not used:
+		used = true
+		Game.call_deferred("goto_end_game_room_menu_scene")
