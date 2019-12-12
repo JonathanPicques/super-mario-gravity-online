@@ -8,11 +8,11 @@ const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
+onready var transition_nodes = []
 
 var map_node: MapNode
 var scene_node: Node2D
 var game_mode_node: GameModeNode
-onready var transition_nodes = []
 
 # _ready is called when the game node is ready.
 # @impure
@@ -81,7 +81,7 @@ func goto_end_game_room_menu_scene():
 # @impure
 func screen_transition_start():
 	GameTween.remove_all()
-	var delay = 0.0
+	var delay := 0.0
 	for node in transition_nodes:
 		GameTween.interpolate_property(node, "rect_scale", Vector2.ZERO, Vector2.ONE, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, delay)
 		delay += 0.02
@@ -92,7 +92,7 @@ func screen_transition_start():
 # @impure
 func screen_transition_finish():
 	GameTween.remove_all()
-	var delay = 0.0
+	var delay := 0.0
 	for node in transition_nodes:
 		GameTween.interpolate_property(node, "rect_scale", Vector2.ONE, Vector2.ZERO, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, delay)
 		delay += 0.02

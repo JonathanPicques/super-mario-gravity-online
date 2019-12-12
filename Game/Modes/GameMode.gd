@@ -40,16 +40,23 @@ func setup_split_screen():
 			$GridContainer/Control2.visible = false
 			$GridContainer/Control3.visible = false
 			$GridContainer/Control4.visible = false
+			$GridContainer/Control1.rect_size = Vector2(512, 288)
+			$GridContainer/Control1.rect_min_size = Vector2(512, 288)
 		2: 
-			$GridContainer/Control3.visible = false
-			$GridContainer/Control4.visible = false
 			$GridContainer.margin_left = 256
 			$GridContainer.margin_right = -256
+			$GridContainer/Control3.visible = false
+			$GridContainer/Control4.visible = false
 			Viewport2.world_2d = Viewport1.world_2d
 		3: 
+			$GridContainer.columns = 2
 			$GridContainer/Control4.visible = false
+			Viewport2.world_2d = Viewport1.world_2d
 			Viewport3.world_2d = Viewport1.world_2d
 		4:
+			$GridContainer.columns = 2
+			Viewport2.world_2d = Viewport1.world_2d
+			Viewport3.world_2d = Viewport1.world_2d
 			Viewport4.world_2d = Viewport1.world_2d
 
 # @pure
