@@ -3,8 +3,8 @@ extends Node2D
 const Chain := preload("res://Game/Items/SpikeBall/Chain.tscn")
 
 export var length := 8
-export var min_speed = 1.5
-export var max_speed = 3.5
+export var min_speed = 1
+export var max_speed = 3
 export var clockwise := true
 
 onready var ball_node := $Offset/Ball
