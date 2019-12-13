@@ -104,11 +104,11 @@ var current_door_to: DoorNode
 var current_door_from: DoorNode
 
 onready var object_scenes := [ # TODO: ponderate random
-	preload("res://Game/Objects/Speed.tscn"),
-	preload("res://Game/Objects/FireballDumb.tscn"),
-	preload("res://Game/Objects/FireballAuto.tscn"),
-	preload("res://Game/Objects/FireballGhost.tscn"),
-	preload("res://Game/Objects/Invincibility.tscn"),
+	preload("res://Game/Powers/Speed.tscn"),
+	preload("res://Game/Powers/FireballDumb.tscn"),
+	preload("res://Game/Powers/FireballAuto.tscn"),
+	preload("res://Game/Powers/FireballGhost.tscn"),
+	preload("res://Game/Powers/Invincibility.tscn"),
 ]
 
 var active_object = null

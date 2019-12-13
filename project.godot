@@ -9,79 +9,85 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "AudioManagerNode",
+"language": "GDScript",
+"path": "res://Game/Managers/AudioManager.gd"
+}, {
 "base": "Node2D",
 "class": "DoorNode",
 "language": "GDScript",
 "path": "res://Game/Items/Door/Door.gd"
-}, {
-"base": "Node",
-"class": "GameAudioNode",
-"language": "GDScript",
-"path": "res://Game/GameAudio.gd"
-}, {
-"base": "Node",
-"class": "GameConstNode",
-"language": "GDScript",
-"path": "res://Game/GameConst.gd"
-}, {
-"base": "Node",
-"class": "GameInputNode",
-"language": "GDScript",
-"path": "res://Game/GameInput.gd"
 }, {
 "base": "Control",
 "class": "GameModeNode",
 "language": "GDScript",
 "path": "res://Game/Modes/GameMode.gd"
 }, {
-"base": "Node",
-"class": "GameMultiplayerNode",
-"language": "GDScript",
-"path": "res://Game/GameMultiplayer.gd"
-}, {
 "base": "Control",
 "class": "GameNode",
 "language": "GDScript",
 "path": "res://Game/Game.gd"
+}, {
+"base": "Node",
+"class": "InputManagerNode",
+"language": "GDScript",
+"path": "res://Game/Managers/InputManager.gd"
 }, {
 "base": "Navigation2D",
 "class": "MapNode",
 "language": "GDScript",
 "path": "res://Game/Maps/Map.gd"
 }, {
+"base": "Node",
+"class": "MultiplayerManagerNode",
+"language": "GDScript",
+"path": "res://Game/Managers/MultiplayerManager.gd"
+}, {
 "base": "Node2D",
 "class": "ObjectInvincibilityNode",
 "language": "GDScript",
-"path": "res://Game/Objects/Invincibility.gd"
+"path": "res://Game/Powers/Invincibility.gd"
 }, {
 "base": "Node2D",
 "class": "ObjectSpeedNode",
 "language": "GDScript",
-"path": "res://Game/Objects/Speed.gd"
+"path": "res://Game/Powers/Speed.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerNode",
 "language": "GDScript",
 "path": "res://Game/Players/Player.gd"
 }, {
+"base": "Node",
+"class": "PowersManagerNode",
+"language": "GDScript",
+"path": "res://Game/Managers/PowersManager.gd"
+}, {
 "base": "Control",
 "class": "RaceGameModeNode",
 "language": "GDScript",
 "path": "res://Game/Modes/Race/RaceGameMode.gd"
+}, {
+"base": "Node",
+"class": "SkinManagerNode",
+"language": "GDScript",
+"path": "res://Game/Managers/SkinManager.gd"
 } ]
 _global_script_class_icons={
+"AudioManagerNode": "",
 "DoorNode": "",
-"GameAudioNode": "",
-"GameConstNode": "",
-"GameInputNode": "",
 "GameModeNode": "",
-"GameMultiplayerNode": "",
 "GameNode": "",
+"InputManagerNode": "",
 "MapNode": "",
+"MultiplayerManagerNode": "",
 "ObjectInvincibilityNode": "",
 "ObjectSpeedNode": "",
 "PlayerNode": "",
-"RaceGameModeNode": ""
+"PowersManagerNode": "",
+"RaceGameModeNode": "",
+"SkinManagerNode": ""
 }
 
 [application]
@@ -92,10 +98,11 @@ config/icon="res://Settings/Icon.png"
 
 [autoload]
 
-GameMultiplayer="*res://Game/GameMultiplayer.tscn"
-GameInput="*res://Game/GameInput.tscn"
-GameConst="*res://Game/GameConst.tscn"
-GameAudio="*res://Game/GameAudio.tscn"
+GameMultiplayer="*res://Game/Managers/MultiplayerManager.tscn"
+GameInput="*res://Game/Managers/InputManager.tscn"
+GameConst="*res://Game/Managers/SkinManager.tscn"
+GameAudio="*res://Game/Managers/AudioManager.tscn"
+GamePowers="*res://Game/Managers/PowersManager.tscn"
 Game="*res://Game/Game.tscn"
 
 [debug]

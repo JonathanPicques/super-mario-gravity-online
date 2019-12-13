@@ -5,12 +5,14 @@
 [ext_resource path="res://Game/Items/SolidBlock/HSolidBlock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Game/Items/ObjectBox/ObjectBox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Items/PowerBox/PowerBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SolidBlock/VSolidBlock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Maps/SpikesCorridor.gd" type="Script" id=9]
 [ext_resource path="res://Game/Maps/Textures/BackgroundCastle.png" type="Texture" id=11]
 [ext_resource path="res://Game/Items/SolidBlock/SolidBlock.tscn" type="PackedScene" id=13]
+
+
 
 [node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 9 )

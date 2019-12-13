@@ -16,6 +16,7 @@ var player_node
 # @impure
 func _ready():
 	player = GameMultiplayer.get_player(player_id)
+	print("TEST = ", GamePowers.test)
 
 # @impure
 func _process(delta: float):

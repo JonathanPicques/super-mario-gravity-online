@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=4]
+
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Fireball.png-d64a736f5898fa5e1fb92832cf60e37f.stex"
+
+[node name="FireballGhost" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+material = ExtResource( 4 )
+texture = SubResource( 1 )
+centered = false

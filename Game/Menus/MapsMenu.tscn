@@ -46,7 +46,6 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Difficulty: easy
 Author: @jeremtab
 Note: 8.4/10"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

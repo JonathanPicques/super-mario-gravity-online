@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Managers/AudioManager.gd" type="Script" id=1]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource( 1 )
+
+[node name="CrossFadeTween" type="Tween" parent="."]
+
+[node name="MusicStreamPlayer1" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+
+[node name="MusicStreamPlayer2" type="AudioStreamPlayer" parent="."]
+bus = "Music"
