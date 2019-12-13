@@ -21,11 +21,11 @@ func _ready():
 # @impure
 func _process(delta: float):
 	if GameInput.is_player_action_just_pressed(0, "cancel"):
-		open_popup()
+		toggle_popup(!$GUI/Popup.visible)
 
 # @impure
-func open_popup():
-	$GUI/Popup.visible = !$GUI/Popup.visible
+func toggle_popup(is_open):
+	$GUI/Popup.visible = is_open
 	$GUI/Popup/ReplayButton.grab_focus()
 
 # block_input is used to avoid calling finish_playing multiple times.

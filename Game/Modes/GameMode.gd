@@ -108,3 +108,27 @@ func item_color_switch_trigger(color: int):
 # @impure
 func _on_GameMode_tree_exiting():
 	set_pixel_ratio(1.0)
+
+##
+# Popup
+##
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		toggle_popup(!$Popup.visible)
+
+func toggle_popup(is_open):
+	$Popup/ContinueButton.grab_focus()
+	$Popup.visible = is_open
+
+# block_input is used to avoid calling finish_playing multiple times.
+var block_input := false
+	
+func _on_ContinueButton_pressed():
+	$Popup.visible = false
+
+func _on_HomeButton_pressed():
+	if not block_input:
+		block_input = true
+		GameMultiplayer.finish_playing()
+		Game.goto_home_menu_scene()

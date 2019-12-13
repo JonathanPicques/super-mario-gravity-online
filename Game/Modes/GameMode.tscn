@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.gd" type="Script" id=1]
+[ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Game/Menus/Textures/ButtonFocused.png" type="Texture" id=3]
+[ext_resource path="res://Game/Menus/Textures/Button.png" type="Texture" id=4]
 
 [node name="GameMode" type="Control"]
 anchor_right = 1.0
@@ -125,4 +128,69 @@ usage = 1
 render_direct_to_screen = true
 render_target_update_mode = 3
 audio_listener_enable_2d = true
+
+[node name="Popup" type="ColorRect" parent="."]
+visible = false
+margin_right = 512.0
+margin_bottom = 288.0
+color = Color( 0, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="TextureButton" parent="Popup"]
+margin_left = 176.0
+margin_top = 96.0
+margin_right = 336.0
+margin_bottom = 128.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+texture_focused = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popup/ContinueButton"]
+anchor_top = -0.015625
+anchor_bottom = -0.015625
+margin_right = 157.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
+text = "Continue"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HomeButton" type="TextureButton" parent="Popup"]
+margin_left = 176.0
+margin_top = 144.0
+margin_right = 336.0
+margin_bottom = 176.0
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 3 )
+texture_focused = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popup/HomeButton"]
+anchor_top = -0.015625
+anchor_bottom = -0.015625
+margin_right = 157.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
+text = "Back to home"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="tree_exiting" from="." to="." method="_on_GameMode_tree_exiting"]
+[connection signal="pressed" from="Popup/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Popup/HomeButton" to="." method="_on_HomeButton_pressed"]
