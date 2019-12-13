@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Game/Modes/Race/RaceGameModeUI.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Fonts/HUDFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=3]
 [ext_resource path="res://Game/Menus/Textures/MiniMap.png" type="Texture" id=4]
-[ext_resource path="res://Game/Menus/Textures/MiniFrog.png" type="Texture" id=5]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Game/Modes/Race/TimerLabel.gd" type="Script" id=7]
 
@@ -71,11 +70,6 @@ texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="MiniFrog" type="Sprite" parent="MiniMap"]
-material = ExtResource( 3 )
-position = Vector2( 48, 20 )
-texture = ExtResource( 5 )
 
 [node name="MiniTween" type="Tween" parent="MiniMap"]
 

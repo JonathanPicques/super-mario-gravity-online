@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Game/Menus/Textures/MiniFrog.png" type="Texture" id=2]
+
+[node name="MiniFrog" type="Sprite"]
+material = ExtResource( 1 )
+position = Vector2( 48, 20 )
+texture = ExtResource( 2 )
