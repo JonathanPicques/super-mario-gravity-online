@@ -9,7 +9,7 @@ func _ready():
 	$Sprite.texture = OffTexture
 	if Game.game_mode_node:
 		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
-	GameConst.replace_skin($Sprite, color)
+	SkinManager.replace_skin($Sprite, color)
 	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 
 func on_trigger(switch_color: int):

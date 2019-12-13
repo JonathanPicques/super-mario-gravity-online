@@ -11,7 +11,7 @@ func _ready():
 	$Sprite.texture = OnTexture if is_on else OffTexture
 	if Game.game_mode_node:
 		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
-	GameConst.replace_skin($Sprite, color)
+	SkinManager.replace_skin($Sprite, color)
 
 # @impure
 func _on_Area2D_body_entered(player_node: PlayerNode):

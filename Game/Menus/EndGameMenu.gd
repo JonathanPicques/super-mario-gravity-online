@@ -4,23 +4,23 @@ extends "res://Game/Maps/Map.gd"
 func _ready():
 	yield(get_tree(), "idle_frame")
 	# music
-	GameAudio.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
+	AudioManager.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
 	# spawn player
-	GameMultiplayer.spawn_player_nodes(PlayerSlot)
-	var players := GameMultiplayer.get_players(GameMultiplayer.SortPlayerMethods.ranked)
+	MultiplayerManager.spawn_player_nodes(PlayerSlot)
+	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)
 	# put first player on top
-	var first_player_node = GameMultiplayer.get_player_node(players[0].id)
+	var first_player_node = MultiplayerManager.get_player_node(players[0].id)
 	if first_player_node:
 		first_player_node.position = $FlagStart.position
 	# put other players on the bottom
 	for player_id in range(1, players.size()):
-		var player_node = GameMultiplayer.get_player_node(players[player_id].id)
+		var player_node = MultiplayerManager.get_player_node(players[player_id].id)
 		if player_node:
 			player_node.position = get_node("Player%dPosition" % (player_id + 1)).position
 
 # @impure
 func _process(delta: float):
-	if GameInput.is_player_action_just_pressed(0, "cancel"):
+	if InputManager.is_player_action_just_pressed(0, "cancel"):
 		toggle_popup(!$GUI/Popup.visible)
 
 # @impure
@@ -34,12 +34,12 @@ var block_input := false
 func _on_ReplayButton_pressed():
 	if not block_input:
 		block_input = true
-		GameMultiplayer.finish_playing()
+		MultiplayerManager.finish_playing()
 		Game.goto_lobby_menu_scene()
 
 
 func _on_HomeButton_pressed():
 	if not block_input:
 		block_input = true
-		GameMultiplayer.finish_playing()
+		MultiplayerManager.finish_playing()
 		Game.goto_home_menu_scene()

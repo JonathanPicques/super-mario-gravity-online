@@ -15,26 +15,26 @@ export var ui_player_id := 0
 
 # @impure
 func _ready():
-	ui_player = GameMultiplayer.get_player(ui_player_id)
+	ui_player = MultiplayerManager.get_player(ui_player_id)
 	# Spawn minifrogs
-	for player in GameMultiplayer.get_players():
+	for player in MultiplayerManager.get_players():
 		on_player_added(player)
 		on_player_set_skin(player, player.skin_id)
 	# Connect listeners
-	GameMultiplayer.connect("player_added", self, "on_player_added")
-	GameMultiplayer.connect("player_removed", self, "on_player_removed")
-	GameMultiplayer.connect("player_set_skin", self, "on_player_set_skin")
+	MultiplayerManager.connect("player_added", self, "on_player_added")
+	MultiplayerManager.connect("player_removed", self, "on_player_removed")
+	MultiplayerManager.connect("player_set_skin", self, "on_player_set_skin")
 
 # @impure
 func _process(delta: float):
 	if ui_player:
 		$Ranking.text = "#%d" % (ui_player.rank + 1)
-		ui_player_node = GameMultiplayer.get_player_node(ui_player.id) # TODO: find a better way to assign only once
+		ui_player_node = MultiplayerManager.get_player_node(ui_player.id) # TODO: find a better way to assign only once
 		if ui_player_node and ui_player_node.current_object:
 			var object_sprite = ui_player_node.current_object.get_node("Sprite")
 			ObjectSkin.texture = object_sprite.texture
 			if ui_player_node.current_object.get("color") != null:
-				GameConst.replace_skin(ObjectSkin, ui_player_node.current_object.color)
+				SkinManager.replace_skin(ObjectSkin, ui_player_node.current_object.color)
 	else:
 		ObjectSkin.texture = null
 
@@ -43,9 +43,9 @@ func _process(delta: float):
 func on_minimap_timer_timeout():
 	if Game.game_mode_node.flag_distance == 0:
 		return
-	for player in GameMultiplayer.get_players():
+	for player in MultiplayerManager.get_players():
 		if player.rank_distance > 0:
-			var mini_frog_node: Sprite = MiniMap.get_node(GameMultiplayer.get_player_node_name(player.id))
+			var mini_frog_node: Sprite = MiniMap.get_node(MultiplayerManager.get_player_node_name(player.id))
 			if mini_frog_node:
 				var left := MiniMapLeft.global_position.x
 				var right := MiniMapRight.global_position.x
@@ -58,7 +58,7 @@ func on_minimap_timer_timeout():
 # @impure
 func on_player_added(player: Dictionary):
 	var mini_frog_node := Minifrog.instance()
-	mini_frog_node.name = GameMultiplayer.get_player_node_name(player.id)
+	mini_frog_node.name = MultiplayerManager.get_player_node_name(player.id)
 	mini_frog_node.position = MiniMapLeft.position
 	MiniMap.add_child(mini_frog_node)
 
@@ -66,7 +66,7 @@ func on_player_added(player: Dictionary):
 # @signal
 # @impure
 func on_player_removed(player: Dictionary):
-	var mini_frog_node: Sprite = MiniMap.get_node(GameMultiplayer.get_player_node_name(player.id))
+	var mini_frog_node: Sprite = MiniMap.get_node(MultiplayerManager.get_player_node_name(player.id))
 	if mini_frog_node:
 		MiniMap.remove_child(mini_frog_node)
 		mini_frog_node.queue_free()
@@ -75,6 +75,6 @@ func on_player_removed(player: Dictionary):
 # @signal
 # @impure
 func on_player_set_skin(player: Dictionary, skin_id: int):
-	var mini_frog_node: Sprite = MiniMap.get_node(GameMultiplayer.get_player_node_name(player.id))
+	var mini_frog_node: Sprite = MiniMap.get_node(MultiplayerManager.get_player_node_name(player.id))
 	if mini_frog_node:
-		GameConst.replace_skin(mini_frog_node, skin_id)
+		SkinManager.replace_skin(mini_frog_node, skin_id)

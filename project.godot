@@ -98,11 +98,11 @@ config/icon="res://Settings/Icon.png"
 
 [autoload]
 
-GameMultiplayer="*res://Game/Managers/MultiplayerManager.tscn"
-GameInput="*res://Game/Managers/InputManager.tscn"
-GameConst="*res://Game/Managers/SkinManager.tscn"
-GameAudio="*res://Game/Managers/AudioManager.tscn"
-GamePowers="*res://Game/Managers/PowersManager.tscn"
+MultiplayerManager="*res://Game/Managers/MultiplayerManager.tscn"
+InputManager="*res://Game/Managers/InputManager.tscn"
+SkinManager="*res://Game/Managers/SkinManager.tscn"
+AudioManager="*res://Game/Managers/AudioManager.tscn"
+PowersManager="*res://Game/Managers/PowersManager.tscn"
 Game="*res://Game/Game.tscn"
 
 [debug]

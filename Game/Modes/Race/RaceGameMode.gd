@@ -22,15 +22,15 @@ func start():
 	# setup split screen
 	setup_split_screen()
 	# create all players
-	GameMultiplayer.spawn_player_nodes(map_node.PlayerSlot)
+	MultiplayerManager.spawn_player_nodes(map_node.PlayerSlot)
 	# position players close to the flag
-	for player in GameMultiplayer.get_players():
-		var player_node: Node2D = GameMultiplayer.get_player_node(player.id)
+	for player in MultiplayerManager.get_players():
+		var player_node: Node2D = MultiplayerManager.get_player_node(player.id)
 		player_node.position = flag_start_pos
 		player_node.position.x += max(player.peer_id - 1, 0) * 16 + player.local_id * 4
 		add_player_screen_camera(player.id, player_node.get_path())
 	# connect multiplayer signals
-	GameMultiplayer.connect("player_removed", self, "on_player_removed")
+	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	# compute player ranking locally
 	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking")
 	$RankUpdateTimer.start()
@@ -50,8 +50,8 @@ func compute_flag_distance():
 func compute_player_ranking():
 	var sorted_players := []
 	# compute distance from player node to the goal
-	for player in GameMultiplayer.get_players():
-		var player_node = GameMultiplayer.get_player_node(player.id)
+	for player in MultiplayerManager.get_players():
+		var player_node = MultiplayerManager.get_player_node(player.id)
 		if player_node:
 			var distance := 0.0
 			var navigation_path := map_node.get_simple_path(player_node.position, flag_end_pos)
@@ -65,7 +65,7 @@ func compute_player_ranking():
 	sorted_players.sort_custom(self, "player_sort_by_distance")
 	# assign player ranking
 	for i in range(0, sorted_players.size()):
-		var player = GameMultiplayer.get_player(sorted_players[i].id)
+		var player = MultiplayerManager.get_player(sorted_players[i].id)
 		player.rank = i
 		player.rank_distance = sorted_players[i].distance
 		# print("player %d is #%d with a distance from flag of %d" % [player.id, (player.rank + 1), player.rank_distance])
@@ -81,7 +81,7 @@ func player_sort_by_distance(player_a: Dictionary, player_b: Dictionary):
 # @signal
 func on_player_removed(player: Dictionary):
 	# remove player nodes and cameras associated to the removed player
-	var player_node = GameMultiplayer.get_player_node(player.id)
+	var player_node = MultiplayerManager.get_player_node(player.id)
 	if player_node:
 		player_node.queue_free()
 		remove_player_screen_camera(player.id)

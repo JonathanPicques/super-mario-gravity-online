@@ -30,7 +30,7 @@ func set_pixel_ratio(pixel_ratio: float):
 # setup the split screen depending on the number of players.
 # @impure
 func setup_split_screen():
-	var player_count := GameMultiplayer.get_local_player_count()
+	var player_count := MultiplayerManager.get_local_player_count()
 	# dezoom if there is more than 1 screen
 	if player_count > 1:
 		set_pixel_ratio(2.0)
@@ -130,5 +130,5 @@ func _on_ContinueButton_pressed():
 func _on_HomeButton_pressed():
 	if not block_input:
 		block_input = true
-		GameMultiplayer.finish_playing()
+		MultiplayerManager.finish_playing()
 		Game.goto_home_menu_scene()

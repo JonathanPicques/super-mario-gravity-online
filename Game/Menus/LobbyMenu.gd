@@ -7,9 +7,9 @@ var state = State.none
 # @impure
 func _ready():
 	# music
-	GameAudio.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
+	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# Set icons
-	var lead_player = GameMultiplayer.get_lead_player()
+	var lead_player = MultiplayerManager.get_lead_player()
 	if lead_player:
 		$Icons/KeyGamepadAlt1.visible = lead_player.input_device_id == 1
 		$Icons/KeyGamepadAlt2.visible = lead_player.input_device_id == 1
@@ -20,49 +20,49 @@ func _ready():
 		$Icons/KeyKeyboardCancel.visible = lead_player.input_device_id == 0
 		$Icons/KeyKeyboardConfirm.visible = lead_player.input_device_id == 0
 	# Set initial status
-	match GameMultiplayer.is_online():
+	match MultiplayerManager.is_online():
 		true: set_state(State.public)
 		false: set_state(State.offline)
 	# Connect matchmaking listeners
-	GameMultiplayer.connect("online", self, "on_online")
-	GameMultiplayer.connect("offline", self, "on_offline")
+	MultiplayerManager.connect("online", self, "on_online")
+	MultiplayerManager.connect("offline", self, "on_offline")
 
 # @impure
 func _process(delta: float):
-	var lead_player = GameMultiplayer.get_lead_player()
+	var lead_player = MultiplayerManager.get_lead_player()
 	# back to home if cancel when not ready
-	if Input.is_action_just_pressed("ui_cancel") and not GameMultiplayer.get_lead_player():
+	if Input.is_action_just_pressed("ui_cancel") and not MultiplayerManager.get_lead_player():
 		set_process(false) # disable process to avoid calling goto_home_menu_scene multiple times.
 		return Game.goto_home_menu_scene()
 	# toggle room status
 	if state != State.offline and Input.is_action_just_pressed("ui_toggle_room_status"):
 		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
-	if lead_player and GameInput.is_player_action_just_pressed(lead_player.id, "accept") and GameMultiplayer.is_every_player_ready():
+	if lead_player and InputManager.is_player_action_just_pressed(lead_player.id, "accept") and MultiplayerManager.is_every_player_ready():
 		# disable process to avoid calling goto_maps_menu_scene multiple times.
 		set_process(false)
 		# stop matchmaking
-		GameMultiplayer.finish_matchmaking()
+		MultiplayerManager.finish_matchmaking()
 		return Game.goto_maps_menu_scene()
 	# add a local player
 	for input_device_id in range(0, 5):
-		if GameInput.is_device_action_just_pressed(input_device_id, "accept") and not GameInput.is_device_used_by_player(input_device_id):
+		if InputManager.is_device_action_just_pressed(input_device_id, "accept") and not InputManager.is_device_used_by_player(input_device_id):
 			yield(get_tree(), "idle_frame")
-			GameMultiplayer.add_player("Local player", true, input_device_id, GameMultiplayer.my_peer_id, GameMultiplayer.get_next_player_local_id(GameMultiplayer.my_peer_id))
+			MultiplayerManager.add_player("Local player", true, input_device_id, MultiplayerManager.my_peer_id, MultiplayerManager.get_next_player_local_id(MultiplayerManager.my_peer_id))
 	# remove a player
-	for player in GameMultiplayer.get_players():
+	for player in MultiplayerManager.get_players():
 		if player.local:
-			if GameInput.is_player_action_just_pressed(player.id, "cancel"):
-				GameMultiplayer.remove_player(player.id)
+			if InputManager.is_player_action_just_pressed(player.id, "cancel"):
+				MultiplayerManager.remove_player(player.id)
 	# change skin or be ready
-	for player in GameMultiplayer.get_players():
+	for player in MultiplayerManager.get_players():
 		if player.local:
-			if GameInput.is_player_action_just_pressed(player.id, "use") and !player.ready:
+			if InputManager.is_player_action_just_pressed(player.id, "use") and !player.ready:
 				yield(get_tree(), "idle_frame")
-				GameMultiplayer.player_set_skin(player.id, (player.skin_id + 1) % 4)
-			if GameInput.is_player_action_just_pressed(player.id, "accept"):
+				MultiplayerManager.player_set_skin(player.id, (player.skin_id + 1) % 4)
+			if InputManager.is_player_action_just_pressed(player.id, "accept"):
 				yield(get_tree(), "idle_frame")
-				GameMultiplayer.player_set_ready(player.id, not player.ready)
+				MultiplayerManager.player_set_ready(player.id, not player.ready)
 
 # @impure
 func set_state(new_state: int):
@@ -105,12 +105,12 @@ func set_state(new_state: int):
 # start_waiting is called to start matchmaking.
 # @impure
 func start_waiting():
-	GameMultiplayer.start_matchmaking()
+	MultiplayerManager.start_matchmaking()
 
 # cancel_waiting is called to stop matchmaking.
 # @impure
 func cancel_waiting():
-	GameMultiplayer.finish_playing()
+	MultiplayerManager.finish_playing()
 
 # on_online is called when the connection to the matchmaking is recovered.
 # @signal

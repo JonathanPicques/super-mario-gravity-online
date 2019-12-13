@@ -1,4 +1,20 @@
 extends Node
 class_name PowersManagerNode
 
-var test = "Coucou"
+onready var Powers := [
+	{
+		"scene": preload("res://Game/Powers/Invincibility.tscn"),
+	},
+	{
+		"scene": preload("res://Game/Powers/Speed.tscn"),
+	},
+	{
+		"scene": preload("res://Game/Powers/FireballGhost.tscn"),
+	},
+	{
+		"scene": preload("res://Game/Powers/FireballAuto.tscn"),
+	},
+	{
+		"scene": preload("res://Game/Powers/FireballDumb.tscn"),
+	},
+]

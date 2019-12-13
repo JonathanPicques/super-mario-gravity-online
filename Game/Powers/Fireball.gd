@@ -11,13 +11,13 @@ var target_node = null
 
 func _ready():
 	direction = player_node.direction
-	GameConst.replace_skin($Sprite, color)
-	GameConst.replace_skin($AnimatedSprite, color)
+	SkinManager.replace_skin($Sprite, color)
+	SkinManager.replace_skin($AnimatedSprite, color)
 	$AnimatedSprite.scale.x = abs($AnimatedSprite.scale.x) * sign(direction)
 	if use_target:
-		var closest = GameMultiplayer.get_closest_player(player_node.player.id)
+		var closest = MultiplayerManager.get_closest_player(player_node.player.id)
 		if closest:
-			target_node = GameMultiplayer.get_player_node(closest.id)
+			target_node = MultiplayerManager.get_player_node(closest.id)
 
 func _physics_process(delta: float):
 	if is_instance_valid(target_node):
