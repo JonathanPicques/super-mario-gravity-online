@@ -1,11 +1,13 @@
 [gd_scene load_steps=2 format=2]
 
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/Invincibility.png-ffbca8bd444c2408beee0ec91fba9eae.stex"
+[ext_resource path="res://Game/Powers/Textures/InvincibilityHUD.png" type="Texture" id=1]
 
 [node name="Invincibility" type="Node2D"]
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 1 )
-centered = false
-region_rect = Rect2( 0, 0, 16, 16 )
+[node name="Sprite" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

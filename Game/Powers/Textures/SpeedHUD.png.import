@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Speed.png-ab035bb256e1fdcdc41de713b5be9c0f.stex"
+path="res://.import/SpeedHUD.png-2cbcab2f5b3736a12ef570e2c6bf48b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Powers/Textures/Speed.png"
-dest_files=[ "res://.import/Speed.png-ab035bb256e1fdcdc41de713b5be9c0f.stex" ]
+source_file="res://Game/Powers/Textures/SpeedHUD.png"
+dest_files=[ "res://.import/SpeedHUD.png-2cbcab2f5b3736a12ef570e2c6bf48b2.stex" ]
 
 [params]
 

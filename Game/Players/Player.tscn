@@ -21,7 +21,7 @@ one_shot = true
 [node name="Sprite" type="Sprite" parent="."]
 centered = false
 
-[node name="FirebaseSpawn" type="Node2D" parent="Sprite"]
+[node name="PowerSpawn" type="Node2D" parent="Sprite"]
 position = Vector2( 16, -2 )
 
 [node name="Dialog" type="Sprite" parent="."]

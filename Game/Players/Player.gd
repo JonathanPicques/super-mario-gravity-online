@@ -105,6 +105,7 @@ var current_door_from: DoorNode
 
 var active_object = null
 var current_object = null
+var current_object_index = null
 
 # @impure
 func _ready():
@@ -720,8 +721,8 @@ func tick_enter_door_fade(delta):
 
 func get_object():
 	randomize()
-	var index = randi() % PowersManager.Powers.size()
-	current_object = PowersManager.Powers[index]["scene"].instance()
+	current_object_index = randi() % PowersManager.Powers.size()
+	current_object = PowersManager.Powers[current_object_index]["scene"].instance()
 
 func apply_object_speed(object):
 	active_object = object
@@ -744,10 +745,12 @@ func reset_object_invincibility(object):
 func pre_use_object():
 	if active_object:
 		return
-	current_object.global_position = $Sprite/FirebaseSpawn.global_position
+	current_object.global_position = $Sprite/PowerSpawn.global_position
 	current_object.player_node = self
 	get_parent().add_child(current_object)
 	current_object = null
+	current_object_index = null
+	print("USE OBJECT !!!")
 
 func tick_use_object(delta: float):
 	if not is_on_floor():

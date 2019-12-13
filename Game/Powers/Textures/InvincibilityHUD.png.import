@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Invincibility.png-0993a8862018141e33f44390913e88c2.stex"
+path="res://.import/InvincibilityHUD.png-b3c0e039c3a9d207f563618921eb2416.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Powers/Textures/Invincibility.png"
-dest_files=[ "res://.import/Invincibility.png-0993a8862018141e33f44390913e88c2.stex" ]
+source_file="res://Game/Powers/Textures/InvincibilityHUD.png"
+dest_files=[ "res://.import/InvincibilityHUD.png-b3c0e039c3a9d207f563618921eb2416.stex" ]
 
 [params]
 
