@@ -7,7 +7,8 @@ const OffTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOff.
 
 func _ready():
 	$Sprite.texture = OffTexture
-	Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
+	if Game.game_mode_node:
+		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
 	GameConst.replace_skin($Sprite, color)
 	$StaticBody2D/CollisionShape2D.set_deferred("disabled", true)
 

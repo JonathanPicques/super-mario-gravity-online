@@ -4,16 +4,18 @@ const maps := [
 	{
 		"title": "Debug",
 		"score": 0,
-		"author": "anonymous",
+		"author": "rootkernel",
 		"difficulty": "easy",
 		"map_scene_path": "res://Game/Maps/Debug.tscn",
+		"preview": "res://Game/Maps/Textures/DebugPreview.png",
 	},
 	{
 		"title": "Rainbow garden",
 		"score": 6,
 		"author": "jeremtab",
-		"difficulty": "medium",
+		"difficulty": "easy",
 		"map_scene_path": "res://Game/Maps/RainbowGarden.tscn",
+		"preview": "res://Game/Maps/Textures/RainbowGardenPreview.png",
 	},
 	{
 		"title": "Crazy tower",
@@ -21,6 +23,7 @@ const maps := [
 		"author": "jeremtab",
 		"difficulty": "medium",
 		"map_scene_path": "res://Game/Maps/CrazyTower.tscn",
+		"preview": "res://Game/Maps/Textures/CrazyTowerPreview.png",
 	},
 	{
 		"title": "Spike Corridor",
@@ -28,6 +31,7 @@ const maps := [
 		"author": "jeremtab",
 		"difficulty": "hard",
 		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
+		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
 	}
 ]
 
@@ -52,11 +56,12 @@ func start_game(map_scene_path: String):
 
 # @impure
 func set_map_infos(index):
-	$GUI/MapInfos.text = "Difficulty: %s\nAuthor: %s\nScore: %d/10" % [
+	$GUI/MapInfos.text = "Difficulty: %s\nAuthor: %s\nRaiting: %d/10" % [
 		maps[index]["difficulty"],
 		maps[index]["author"],
 		maps[index]["score"]
 	]
+	$GUI/TextureRect.texture = load(maps[index]["preview"])
 
 # block_input is used to avoid calling start_game multiple times.
 var block_input := false
