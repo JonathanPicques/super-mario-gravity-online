@@ -26,31 +26,18 @@ func _process(delta: float):
 # @impure
 func open_popup():
 	$GUI/Popup.visible = !$GUI/Popup.visible
-	$GUI/Popup/RetryButton.grab_focus()
+	$GUI/Popup/ReplayButton.grab_focus()
 
 # block_input is used to avoid calling finish_playing multiple times.
 var block_input := false
 
-# @impure
-# @signal
-func _on_RetryButton_pressed():
-	print("TODO: retry game")
-
-# @impure
-# @signal
-func _on_LobbyButton_pressed():
+func _on_ReplayButton_pressed():
 	if not block_input:
 		block_input = true
 		GameMultiplayer.finish_playing()
 		Game.goto_lobby_menu_scene()
 
-# @impure
-# @signal
-func _on_MapsButton_pressed():
-	print("TODO: back to maps")
 
-# @impure
-# @signal
 func _on_HomeButton_pressed():
 	if not block_input:
 		block_input = true

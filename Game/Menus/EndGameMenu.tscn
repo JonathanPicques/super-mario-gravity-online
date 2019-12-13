@@ -11,7 +11,7 @@
 [ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Game/Maps/Textures/BackgroundCastle.png" type="Texture" id=12]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 13
 font_data = ExtResource( 4 )
 
@@ -46,7 +46,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#2"
 align = 1
@@ -66,7 +66,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#3"
 align = 1
@@ -86,7 +86,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#4"
 align = 1
@@ -125,34 +125,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RetryButton" type="TextureButton" parent="GUI/Popup" index="0"]
-margin_left = 176.0
-margin_top = 48.0
-margin_right = 336.0
-margin_bottom = 80.0
-texture_normal = ExtResource( 10 )
-texture_pressed = ExtResource( 9 )
-texture_hover = ExtResource( 9 )
-texture_focused = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GUI/Popup/RetryButton" index="0"]
-anchor_top = -0.015625
-anchor_bottom = -0.015625
-margin_right = 157.0
-margin_bottom = 32.0
-custom_fonts/font = ExtResource( 11 )
-custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
-text = "Try Again"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LobbyButton" type="TextureButton" parent="GUI/Popup" index="1"]
+[node name="ReplayButton" type="TextureButton" parent="GUI/Popup" index="0"]
 margin_left = 176.0
 margin_top = 96.0
 margin_right = 336.0
@@ -165,52 +138,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GUI/Popup/LobbyButton" index="0"]
+[node name="Label" type="Label" parent="GUI/Popup/ReplayButton" index="0"]
 anchor_top = -0.015625
 anchor_bottom = -0.015625
 margin_right = 157.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 11 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
-text = "Back to Lobby"
+text = "Play Again"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapsButton" type="TextureButton" parent="GUI/Popup" index="2"]
+[node name="HomeButton" type="TextureButton" parent="GUI/Popup" index="1"]
 margin_left = 176.0
 margin_top = 144.0
 margin_right = 336.0
 margin_bottom = 176.0
-texture_normal = ExtResource( 10 )
-texture_pressed = ExtResource( 9 )
-texture_hover = ExtResource( 9 )
-texture_focused = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GUI/Popup/MapsButton" index="0"]
-anchor_top = -0.015625
-anchor_bottom = -0.015625
-margin_right = 157.0
-margin_bottom = 32.0
-custom_fonts/font = ExtResource( 11 )
-custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
-text = "Change map"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HomeButton" type="TextureButton" parent="GUI/Popup" index="3"]
-margin_left = 176.0
-margin_top = 192.0
-margin_right = 336.0
-margin_bottom = 224.0
 texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 9 )
 texture_hover = ExtResource( 9 )
@@ -256,7 +202,5 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
-[connection signal="pressed" from="GUI/Popup/RetryButton" to="." method="_on_RetryButton_pressed"]
-[connection signal="pressed" from="GUI/Popup/LobbyButton" to="." method="_on_LobbyButton_pressed"]
-[connection signal="pressed" from="GUI/Popup/MapsButton" to="." method="_on_MapsButton_pressed"]
+[connection signal="pressed" from="GUI/Popup/ReplayButton" to="." method="_on_ReplayButton_pressed"]
 [connection signal="pressed" from="GUI/Popup/HomeButton" to="." method="_on_HomeButton_pressed"]
