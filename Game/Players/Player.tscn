@@ -44,16 +44,16 @@ one_shot = true
 
 [node name="SoundEffects" type="Node" parent="."]
 
-[node name="SFX1" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="SFX1" type="AudioStreamPlayer" parent="SoundEffects"]
 bus = "SFX"
 
-[node name="SFX2" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="SFX2" type="AudioStreamPlayer" parent="SoundEffects"]
 bus = "SFX"
 
-[node name="SFX3" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="SFX3" type="AudioStreamPlayer" parent="SoundEffects"]
 bus = "SFX"
 
-[node name="SFX4" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="SFX4" type="AudioStreamPlayer" parent="SoundEffects"]
 bus = "SFX"
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
