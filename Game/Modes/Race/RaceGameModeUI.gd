@@ -9,6 +9,18 @@ onready var MiniMapRight: Node2D = $MiniMap/MiniMapRight
 onready var MiniMapTimer: Timer = $MiniMap/MiniMapTimer
 
 onready var PowerContainer = $PowerHUD/PowerContainer
+onready var PowerStack = [
+	PowersManager.Powers[0]["hud"].instance(),
+	PowersManager.Powers[1]["hud"].instance(),
+	PowersManager.Powers[2]["hud"].instance(),
+	PowersManager.Powers[3]["hud"].instance(),
+	PowersManager.Powers[4]["hud"].instance(),
+	PowersManager.Powers[0]["hud"].instance(),
+	PowersManager.Powers[1]["hud"].instance(),
+	PowersManager.Powers[2]["hud"].instance(),
+	PowersManager.Powers[3]["hud"].instance(),
+	PowersManager.Powers[4]["hud"].instance(),
+]
 
 var ui_player # player for whom this UI belongs
 var ui_player_node
@@ -31,16 +43,16 @@ func _process(delta: float):
 	if ui_player:
 		$Ranking.text = "#%d" % (ui_player.rank + 1)
 		ui_player_node = MultiplayerManager.get_player_node(ui_player.id) # TODO: find a better way to assign only once
-		if ui_player_node and ui_player_node.current_object_index != null:
-			print("ADD")
-			var texture_rect = PowersManager.Powers[ui_player_node.current_object_index]["hud"].instance()
-			if PowerContainer.get_child_count() == 0:
-				PowerContainer.add_child(texture_rect)
-#			if ui_player_node.current_object.get("color") != null:
-#				SkinManager.replace_skin(ObjectSkin, ui_player_node.current_object.color)
-		else:
-			if PowerContainer.get_child_count() == 1:
-				PowerContainer.remove_child(PowerContainer.get_child(0))
+		display_power_hud()
+
+func display_power_hud():
+	if ui_player_node and ui_player_node.current_object_index != null:
+		var texture_rect = PowersManager.Powers[ui_player_node.current_object_index]["hud"].instance()
+		if PowerContainer.get_child_count() == 0:
+			PowerContainer.add_child(texture_rect)
+	else:
+		if PowerContainer.get_child_count() == 1:
+			PowerContainer.remove_child(PowerContainer.get_child(0))
 
 # @impure
 # @signal
