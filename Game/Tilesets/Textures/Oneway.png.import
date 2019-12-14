@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Oneway.png-42ecc379150443f3d3ecaace30ffc501.stex"
+path="res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/OneWay/Textures/Oneway.png"
-dest_files=[ "res://.import/Oneway.png-42ecc379150443f3d3ecaace30ffc501.stex" ]
+source_file="res://Game/Tilesets/Textures/Oneway.png"
+dest_files=[ "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex" ]
 
 [params]
 
