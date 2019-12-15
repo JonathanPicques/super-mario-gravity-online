@@ -6,6 +6,7 @@ const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
+const SettingsMenu := preload("res://Game/Menus/SettingsMenu.tscn")
 
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
 onready var transition_nodes = []
@@ -71,6 +72,12 @@ func goto_maps_menu_scene():
 func goto_end_game_room_menu_scene():
 	yield(screen_transition_start(), "completed")
 	set_scene(EndGameMenu.instance())
+	yield(screen_transition_finish(), "completed")
+
+# @impure
+func goto_settings_menu_scene():
+	yield(screen_transition_start(), "completed")
+	set_scene(SettingsMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
 ##

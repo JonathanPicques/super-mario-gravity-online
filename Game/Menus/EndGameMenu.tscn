@@ -202,5 +202,3 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
-[connection signal="pressed" from="GUI/Popup/ReplayButton" to="." method="_on_ReplayButton_pressed"]
-[connection signal="pressed" from="GUI/Popup/HomeButton" to="." method="_on_HomeButton_pressed"]

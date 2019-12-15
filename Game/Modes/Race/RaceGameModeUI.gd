@@ -9,18 +9,6 @@ onready var MiniMapRight: Node2D = $MiniMap/MiniMapRight
 onready var MiniMapTimer: Timer = $MiniMap/MiniMapTimer
 
 onready var PowerContainer = $PowerHUD/PowerContainer
-onready var PowerStack = [
-	PowersManager.Powers[0]["hud"].instance(),
-	PowersManager.Powers[1]["hud"].instance(),
-	PowersManager.Powers[2]["hud"].instance(),
-	PowersManager.Powers[3]["hud"].instance(),
-	PowersManager.Powers[4]["hud"].instance(),
-	PowersManager.Powers[0]["hud"].instance(),
-	PowersManager.Powers[1]["hud"].instance(),
-	PowersManager.Powers[2]["hud"].instance(),
-	PowersManager.Powers[3]["hud"].instance(),
-	PowersManager.Powers[4]["hud"].instance(),
-]
 
 var ui_player # player for whom this UI belongs
 var ui_player_node
@@ -37,6 +25,8 @@ func _ready():
 	MultiplayerManager.connect("player_added", self, "on_player_added")
 	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	MultiplayerManager.connect("player_set_skin", self, "on_player_set_skin")
+	
+	$MiniMap.visible = SettingsManager.values["minimap"]
 
 # @impure
 func _process(delta: float):

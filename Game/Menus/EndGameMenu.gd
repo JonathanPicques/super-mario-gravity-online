@@ -4,7 +4,8 @@ extends "res://Game/Maps/Map.gd"
 func _ready():
 	yield(get_tree(), "idle_frame")
 	# music
-	AudioManager.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
+	if SettingsManager.values["music"] == true:
+		AudioManager.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
 	# spawn player
 	MultiplayerManager.spawn_player_nodes(PlayerSlot)
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)

@@ -7,7 +7,8 @@ var state = State.none
 # @impure
 func _ready():
 	# music
-	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
+	if SettingsManager.values["music"] == true:
+		AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# Set icons
 	var lead_player = MultiplayerManager.get_lead_player()
 	if lead_player:

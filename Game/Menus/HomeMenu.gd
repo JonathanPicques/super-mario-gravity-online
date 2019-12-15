@@ -2,7 +2,8 @@ extends "res://Game/Maps/Map.gd"
 
 # @impure
 func _ready():
-	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
+	if SettingsManager.values["music"] == true:
+		AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 
 # @impure
 func _process(delta: float):
@@ -11,6 +12,8 @@ func _process(delta: float):
 	if lead_player and InputManager.is_player_action_just_pressed(lead_player.id, "accept"):
 		set_process(false) # disable process to avoid calling goto_lobby_menu_scene multiple times.
 		return Game.goto_lobby_menu_scene()
+	if Input.is_action_just_pressed("ui_toggle_room_status"):
+		Game.goto_settings_menu_scene()
 	# add a local player
 	if not lead_player:
 		for input_device_id in range(0, 5):

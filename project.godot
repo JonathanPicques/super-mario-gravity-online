@@ -103,6 +103,7 @@ InputManager="*res://Game/Managers/InputManager.tscn"
 SkinManager="*res://Game/Managers/SkinManager.tscn"
 AudioManager="*res://Game/Managers/AudioManager.tscn"
 PowersManager="*res://Game/Managers/PowersManager.tscn"
+SettingsManager="*res://Game/Managers/SettingsManager.tscn"
 Game="*res://Game/Game.tscn"
 
 [debug]
