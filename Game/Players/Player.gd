@@ -130,6 +130,7 @@ func _process(delta):
 # @impure
 func _physics_process(delta: float):
 	process_input(delta)
+	process_death(delta)
 	process_object(delta)
 	process_effects(delta)
 	process_velocity(delta)
@@ -206,6 +207,13 @@ func process_input(delta: float):
 	_jump = input_jump
 	# compute input velocity
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
+
+# process_death checks if the player should die.
+# @impure
+func process_death(delta: float):
+	if state != PlayerState.death:
+		if position.y > Game.map_node.killY:
+			return set_state(PlayerState.death)
 
 # process_object resets all stats affected by objects when timer finishes
 # @impure
@@ -773,7 +781,7 @@ func apply_death(death_origin: Vector2):
 
 func pre_death():
 	velocity = Vector2(_death_dir * -120.0, -320.0)
-	start_timer(2.0)
+	start_timer(1.0)
 	set_animation("death")
 	play_sound_effect(DeathSFX)
 	PlayerCollisionBody.set_deferred("disabled", true)

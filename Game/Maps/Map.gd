@@ -7,10 +7,15 @@ onready var FlagStart: Node2D = $FlagStart
 onready var PlayerSlot: Node2D = $PlayerSlot
 onready var ParticleSlot: Node2D = $ParticleSlot
 
+var killY := 3000.0
+
 # _ready fills the empty map cells with navigable tiles.
 # @impure
 func _ready():
 	var rect := Map.get_used_rect()
+	# compute map kill-Y
+	killY = rect.position.y * Map.cell_size.y + rect.size.y * Map.cell_size.y + 64.0
+	# fill tilemap with navigable cells.
 	for x in range (0, rect.size.x):
 		for y in range (0, rect.size.y):
 			var pos := Vector2(x + rect.position.x, y + rect.position.y)
