@@ -490,6 +490,7 @@ func tick_stand(delta: float):
 
 func pre_run():
 	set_animation("run")
+	jumps_remaining = MAX_JUMPS
 
 func tick_run(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
@@ -511,7 +512,7 @@ func tick_run(delta: float):
 		return set_state(PlayerState.stand)
 
 func pre_move_turn():
-	pass
+	jumps_remaining = MAX_JUMPS
 
 func tick_move_turn(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
