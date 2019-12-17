@@ -1,33 +1,29 @@
 extends Node
 
-const SAVE_PATH = "res://settings.cfg"
+const SAVE_PATH := "user://settings.cfg"
 
-var values = {
+var values := {
 	"music": true,
 	"sounds": true,
 	"minimap": true
 }
+var config_file := ConfigFile.new()
 
-var config_file = ConfigFile.new()
-
+# @impure
 func _ready():
 	load_settings()
 
+# @impure
 func load_settings():
-	var error = config_file.load(SAVE_PATH)
+	var error := config_file.load(SAVE_PATH)
 	if error != OK:
 		print("Failed to load settings file. Code %s" % error)
-		return []
-	print("Loading settings...")
+		return
 	for key in values.keys():
 		values[key] = config_file.get_value("config", key)
-		print(key, " = ", values[key])
-	print("... Done!")
 
+# @impure
 func save_settings():
-	print("Saving settings...")
 	for key in values.keys():
 		config_file.set_value("config", key, values[key])
-		print(key, " = ", values[key])
 	config_file.save(SAVE_PATH)
-	print("... Done!")
