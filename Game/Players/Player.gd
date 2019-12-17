@@ -26,7 +26,7 @@ enum PlayerState {
 	fall, jump, expulse, wallslide, walljump,
 	enter_door, enter_door_fade
 	use_object,
-	death,
+	death, respawn,
 }
 
 enum DialogType {
@@ -109,7 +109,7 @@ var current_object_index = null
 
 # @impure
 func _ready():
-	set_state(PlayerState.stand)
+	set_state(PlayerState.respawn)
 	set_dialog(DialogType.none)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
@@ -148,6 +148,7 @@ func _physics_process(delta: float):
 		PlayerState.enter_door_fade: tick_enter_door_fade(delta)
 		PlayerState.use_object: tick_use_object(delta)
 		PlayerState.death: tick_death(delta)
+		PlayerState.respawn: tick_respawn(delta)
 
 # _process_network updates player from the given network infos.
 # @impure
@@ -281,6 +282,7 @@ func set_state(new_state: int):
 		PlayerState.enter_door_fade: pre_enter_door_fade()
 		PlayerState.use_object: pre_use_object()
 		PlayerState.death: pre_death()
+		PlayerState.respawn: pre_respawn()
 
 # set_direction changes the Player direction and flips the sprite accordingly.
 # @impure
@@ -767,7 +769,7 @@ func tick_use_object(delta: float):
 	return set_state(PlayerState.stand)
 
 ###
-# Player stun/death
+# Player death/respawn
 ###
 
 var _death_dir := 1.0
@@ -794,8 +796,15 @@ func tick_death(delta: float):
 		rotation = 0.0
 		position = last_safe_position
 		velocity = Vector2()
+		return set_state(PlayerState.respawn)
+
+func pre_respawn():
+	set_animation("respawn")
+
+func tick_respawn(delta: float):
+	if is_animation_finished():
 		PlayerCollisionBody.set_deferred("disabled", false)
-		return set_state(PlayerState.fall)
+		return set_state(PlayerState.stand)
 
 ###
 # Dialogs
