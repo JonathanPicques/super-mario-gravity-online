@@ -19,7 +19,7 @@ font_data = ExtResource( 4 )
 size = 24
 font_data = ExtResource( 8 )
 
-[node name="Map" instance=ExtResource( 1 )]
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
 [node name="Map" parent="." index="1"]
@@ -202,3 +202,5 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
+[connection signal="pressed" from="GUI/Popup/ReplayButton" to="." method="_on_ReplayButton_pressed"]
+[connection signal="pressed" from="GUI/Popup/HomeButton" to="." method="_on_HomeButton_pressed"]
