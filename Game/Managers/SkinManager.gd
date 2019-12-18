@@ -17,28 +17,28 @@ const Steel = [
 
 const Palettes = {
 	SkinColor.red: [
-		Color("#9c1b4d"),
-		Color("#cc3048"),
-		Color("#e44a4a"),
-		Color("#ea6262")
+		Color("#963162"),
+		Color("#e84393"),
+		Color("#fd79a8"),
+		Color("#fda9c7")
 	],
 	SkinColor.blue: [
-		Color("#1e8db4"),
-		Color("#48bae3"),
-		Color("#6cdaf1"),
-		Color("#adf7fa")
+		Color("#493f9d"),
+		Color("#6c5ce7"),
+		Color("#a29bfe"),
+		Color("#c0bcf6")
 	],
 	SkinColor.pink: [
-		Color("#b45ac3"),
-		Color("#d57be5"),
-		Color("#ec94e2"),
-		Color("#ffcbf9")
+		Color("#0b807d"),
+		Color("#00cec9"),
+		Color("#81ecec"),
+		Color("#b7f4f4")
 	],
 	SkinColor.orange: [
-		Color("#d3612b"),
-		Color("#e78e3f"),
-		Color("#e79955"),
-		Color("#f2bd7f")
+		Color("#10568d"),
+		Color("#0984e3"),
+		Color("#74b9ff"),
+		Color("#b0d5fb")
 	]
 }
 
