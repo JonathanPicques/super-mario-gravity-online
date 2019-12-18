@@ -4,9 +4,7 @@
 [ext_resource path="res://Game/Powers/Fireball.gd" type="Script" id=2]
 [ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=3]
 
-
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/Fireball.png-d64a736f5898fa5e1fb92832cf60e37f.stex"
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7, 5 )
@@ -54,7 +52,6 @@ autostart = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 3 )
 frames = SubResource( 6 )
-frame = 2
 speed_scale = 2.0
 playing = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
