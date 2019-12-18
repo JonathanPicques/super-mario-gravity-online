@@ -206,7 +206,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "respawn"
-length = 0.42
+length = 0.4
 step = 0.06
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -243,6 +243,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 7 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.36 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0392157 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -391,9 +403,10 @@ script = ExtResource( 3 )
 [node name="Sprite" parent="." index="1"]
 material = SubResource( 12 )
 position = Vector2( -2, -16 )
-texture = ExtResource( 1 )
+texture = ExtResource( 10 )
 centered = true
-hframes = 11
+hframes = 7
+frame = 6
 
 [node name="CollisionBody" parent="." index="7"]
 position = Vector2( -2, -10 )
