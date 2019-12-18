@@ -3,7 +3,7 @@ extends Node2D
 const SPEED := 250
 
 export var use_target := false
-export(SkinManagerNode.SkinColor) var color: int = SkinManagerNode.SkinColor.red
+export(SkinManagerNode.SkinColor) var color: int = SkinManagerNode.SkinColor.pink
 
 var direction := 1
 var player_node = null

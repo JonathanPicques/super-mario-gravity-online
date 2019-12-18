@@ -1,6 +1,6 @@
 extends Node2D
 
-export(SkinManagerNode.SkinColor) var color: int = SkinManagerNode.SkinColor.red
+export(SkinManagerNode.SkinColor) var color: int = SkinManagerNode.SkinColor.aqua
 
 const OnTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOn.png")
 const OffTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOff.png")

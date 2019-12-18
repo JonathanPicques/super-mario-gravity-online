@@ -2,10 +2,12 @@ extends Node
 class_name SkinManagerNode
 
 enum SkinColor {
-	red,
+	aqua,
 	blue,
 	pink,
-	orange
+	orange,
+	yellow,
+	purple,
 }
 
 const Steel = [
@@ -16,29 +18,41 @@ const Steel = [
 ]
 
 const Palettes = {
-	SkinColor.red: [
+	SkinColor.aqua: [
+		Color("#0b807d"),
+		Color("#00cec9"),
+		Color("#81ecec"),
+		Color("#b7f4f4")
+	],
+	SkinColor.pink: [
 		Color("#963162"),
 		Color("#e84393"),
 		Color("#fd79a8"),
 		Color("#fda9c7")
 	],
 	SkinColor.blue: [
+		Color("#10568d"),
+		Color("#0984e3"),
+		Color("#74b9ff"),
+		Color("#b0d5fb")
+	],
+	SkinColor.orange: [
+		Color("#a54a34"),
+		Color("#e17055"),
+		Color("#fab1a0"),
+		Color("#ffd0c5")
+	],
+	SkinColor.purple: [
 		Color("#493f9d"),
 		Color("#6c5ce7"),
 		Color("#a29bfe"),
 		Color("#c0bcf6")
 	],
-	SkinColor.pink: [
-		Color("#0b807d"),
-		Color("#00cec9"),
-		Color("#81ecec"),
-		Color("#b7f4f4")
-	],
-	SkinColor.orange: [
-		Color("#10568d"),
-		Color("#0984e3"),
-		Color("#74b9ff"),
-		Color("#b0d5fb")
+	SkinColor.yellow: [
+		Color("#d99515"),
+		Color("#fdcb6e"),
+		Color("#ffe181"),
+		Color("#f9edc6")
 	]
 }
 
@@ -50,7 +64,7 @@ const FrogSkins = [
 ]
 
 onready var SkinMaterials = {
-	SkinColor.red: preload("res://Game/Effects/Materials/SkinMaterial.tres"),
+	SkinColor.aqua: preload("res://Game/Effects/Materials/SkinMaterial.tres"),
 	SkinColor.blue: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
 	SkinColor.pink: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
 	SkinColor.orange: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate()
@@ -58,7 +72,7 @@ onready var SkinMaterials = {
 
 # @impure
 func _ready():
-	replace_skin_material(SkinMaterials[SkinColor.red], SkinColor.red)
+	replace_skin_material(SkinMaterials[SkinColor.aqua], SkinColor.aqua)
 	replace_skin_material(SkinMaterials[SkinColor.blue], SkinColor.blue)
 	replace_skin_material(SkinMaterials[SkinColor.pink], SkinColor.pink)
 	replace_skin_material(SkinMaterials[SkinColor.orange], SkinColor.orange)
