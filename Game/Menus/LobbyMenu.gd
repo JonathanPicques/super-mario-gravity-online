@@ -60,7 +60,7 @@ func _process(delta: float):
 		if player.local:
 			if InputManager.is_player_action_just_pressed(player.id, "use") and !player.ready:
 				yield(get_tree(), "idle_frame")
-				MultiplayerManager.player_set_skin(player.id, (player.skin_id + 1) % 4)
+				MultiplayerManager.player_set_skin(player.id, (player.skin_id + 1) % 6)
 			if InputManager.is_player_action_just_pressed(player.id, "accept"):
 				yield(get_tree(), "idle_frame")
 				MultiplayerManager.player_set_ready(player.id, not player.ready)

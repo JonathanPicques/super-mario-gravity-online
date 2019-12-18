@@ -67,7 +67,9 @@ onready var SkinMaterials = {
 	SkinColor.aqua: preload("res://Game/Effects/Materials/SkinMaterial.tres"),
 	SkinColor.blue: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
 	SkinColor.pink: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
-	SkinColor.orange: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate()
+	SkinColor.orange: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
+	SkinColor.yellow: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
+	SkinColor.purple: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate()
 }
 
 # @impure
@@ -76,6 +78,8 @@ func _ready():
 	replace_skin_material(SkinMaterials[SkinColor.blue], SkinColor.blue)
 	replace_skin_material(SkinMaterials[SkinColor.pink], SkinColor.pink)
 	replace_skin_material(SkinMaterials[SkinColor.orange], SkinColor.orange)
+	replace_skin_material(SkinMaterials[SkinColor.yellow], SkinColor.yellow)
+	replace_skin_material(SkinMaterials[SkinColor.purple], SkinColor.purple)
 
 # @impure
 func replace_skin(spriteOrTexture, skin_color: int, is_steel := false):
