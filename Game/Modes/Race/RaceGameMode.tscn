@@ -14,13 +14,13 @@ script = ExtResource( 2 )
 [node name="RaceGameModeUI" parent="GridContainer/Control1" index="1" instance=ExtResource( 4 )]
 
 [node name="RaceGameModeUI" parent="GridContainer/Control2" index="1" instance=ExtResource( 4 )]
-player_id = 1
+ui_player_id = 1
 
 [node name="RaceGameModeUI" parent="GridContainer/Control3" index="1" instance=ExtResource( 4 )]
-player_id = 2
+ui_player_id = 2
 
 [node name="RaceGameModeUI" parent="GridContainer/Control4" index="1" instance=ExtResource( 4 )]
-player_id = 3
+ui_player_id = 3
 
 [node name="CanvasLayerUI" type="CanvasLayer" parent="." index="1"]
 
