@@ -10,6 +10,8 @@ onready var PlayerArea2D: Area2D = $Area2D
 onready var PlayerObjectTimer: Timer = $ObjectTimer
 onready var PlayerCollisionBody: CollisionShape2D = $CollisionBody
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
+onready var PlayerLeftFootChecker: RayCast2D = $LeftFootChecker
+onready var PlayerRightFootChecker: RayCast2D = $RightFootChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
@@ -392,7 +394,11 @@ func handle_direction():
 # handle_last_safe_position saves the last safe position.
 # @impure
 func handle_last_safe_position():
-	if !is_invincible:
+	# TODO: check both feet
+	for collider in PlayerArea2D.get_overlapping_areas():
+		if collider.collision_mask & 7: # TODO: add Death in constant
+			return
+	if PlayerLeftFootChecker.is_colliding() and PlayerRightFootChecker.is_colliding():
 		last_safe_position = position
 
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
@@ -434,8 +440,10 @@ func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 # is_on_door returns true if there is a door behind.
 # @impure
 func is_on_door() -> bool:
-	# TODO: will break if PlayerArea2D mask is changed.
-	return PlayerArea2D.get_overlapping_areas().size() > 0
+	for collider in PlayerArea2D.get_overlapping_areas():
+		if collider.is_in_group("Door"):
+			return true
+	return false
 
 # is_on_wall_passive returns true if there is a wall on the side.
 # @pure
@@ -497,6 +505,7 @@ func pre_run():
 func tick_run(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
+	handle_last_safe_position()	
 	if not is_on_floor():
 		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)

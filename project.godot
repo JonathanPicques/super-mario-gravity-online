@@ -370,10 +370,7 @@ device_4_cancel={
 2d_physics/layer_5="ObjectCollision"
 2d_physics/layer_6="Missile"
 2d_physics/layer_7="Door"
-
-[physics]
-
-common/physics_fps=144
+2d_physics/layer_8="Death"
 
 [rendering]
 

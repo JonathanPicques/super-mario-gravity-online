@@ -30,7 +30,7 @@ texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0, -16 )
-collision_mask = 64
+collision_mask = 192
 
 [node name="CollisionBody" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
@@ -65,6 +65,18 @@ position = Vector2( 0, -30 )
 enabled = true
 cast_to = Vector2( 0, -2 )
 collision_mask = 2
+
+[node name="LeftFootChecker" type="RayCast2D" parent="."]
+position = Vector2( -7, -2 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 14
+
+[node name="RightFootChecker" type="RayCast2D" parent="."]
+position = Vector2( 7, -2 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 14
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
