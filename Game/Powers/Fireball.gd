@@ -15,9 +15,11 @@ func _ready():
 	SkinManager.replace_skin($AnimatedSprite, color)
 	$AnimatedSprite.scale.x = abs($AnimatedSprite.scale.x) * sign(direction)
 	if use_target:
+		print("Use target !")
 		var closest = MultiplayerManager.get_closest_player(player_node.player.id)
 		if closest:
 			target_node = MultiplayerManager.get_player_node(closest.id)
+			print("Use firebase with target ", target_node.name)
 
 func _physics_process(delta: float):
 	if is_instance_valid(target_node):
