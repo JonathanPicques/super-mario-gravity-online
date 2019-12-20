@@ -94,13 +94,13 @@ func set_state(new_state: int):
 		State.offline:
 			$GUI/CodeLabel.text = ""
 			$GUI/StatusLabel.text = "Offline"
+			$GUI/WaitingPublicLabel.visible = false
+			$GUI/WaitingPrivateLabel.visible = false
+			$GUI/WaitingOfflineLabel.visible = true
 			$Icons/Key.visible = false
 			$Icons/Lock.visible = false
 			$Icons/Unlock.visible = false
 			$Icons/Offline.visible = true
-			$Icons/WaitingPublicLabel.visible = false
-			$Icons/WaitingPrivateLabel.visible = false
-			$Icons/WaitingOfflineLabel.visible = true
 			cancel_waiting()
 
 # start_waiting is called to start matchmaking.
