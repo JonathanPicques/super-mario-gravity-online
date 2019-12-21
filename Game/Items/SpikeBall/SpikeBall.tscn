@@ -16,6 +16,7 @@ position = Vector2( 0, 32 )
 texture = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="Offset/Ball"]
+collision_layer = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/Ball/Area2D"]
 shape = SubResource( 1 )
