@@ -2,8 +2,7 @@ extends "res://Game/Maps/Map.gd"
 
 # @impure
 func _ready():
-	if SettingsManager.values["music"] == true:
-		AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
+	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 
 # @impure
 func _process(delta: float):

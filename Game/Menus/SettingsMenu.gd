@@ -2,7 +2,7 @@ extends Navigation2D
 
 var current_row = 0
 
-const keys = ["music", "sounds", "minimap"]
+const keys = ["music", "sfx", "minimap"]
 
 onready var labels = [
 	$GUI/Row1Label,
@@ -17,11 +17,10 @@ onready var toggles = [
 ]
 
 func _ready():
-	if SettingsManager.values["music"] == true:
-		AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
+	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	refresh_labels_color()
 	for i in range(0, toggles.size()):
-		toggles[i].text = "On" if SettingsManager.values[keys[i]] else "Off"
+		toggles[i].text = str(SettingsManager.values[keys[i]])
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -45,9 +44,13 @@ func refresh_labels_color():
 
 # @impure
 func toggle_label():
-	var value = toggles[current_row].text == "On"
-	toggles[current_row].text = "Off" if value else "On"
-	SettingsManager.values[keys[current_row]] = !value
+	var value = int(toggles[current_row].text)
+	var new_value = value + 1 if value < 5 else 0
+	toggles[current_row].text = str(new_value)
+	SettingsManager.values[keys[current_row]] = new_value
+	if keys[current_row] == "sfx":
+		pass
+	SettingsManager.apply_settings()
 
 
 func _on_Map_tree_exited():

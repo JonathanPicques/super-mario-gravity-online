@@ -54,7 +54,7 @@ margin_bottom = 128.0
 rect_pivot_offset = Vector2( 16, 16 )
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "On"
+text = "0"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,7 +68,7 @@ margin_bottom = 160.0
 rect_pivot_offset = Vector2( 16, 16 )
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "Sounds"
+text = "Sound FX"
 align = 2
 valign = 1
 __meta__ = {
@@ -83,7 +83,7 @@ margin_bottom = 160.0
 rect_pivot_offset = Vector2( 16, 16 )
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "On"
+text = "0"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

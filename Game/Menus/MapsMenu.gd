@@ -38,8 +38,7 @@ const maps := [
 # @impure
 func _ready():
 	# music
-	if SettingsManager.values["music"] == true:
-		AudioManager.play_music("res://Game/Menus/Musics/RPG-Battle-Climax-2.ogg")
+	AudioManager.play_music("res://Game/Menus/Musics/RPG-Battle-Climax-2.ogg")
 	# GUI
 	$GUI/MapButton1.grab_focus()
 	$Icons/KeyGamepadCancel.visible = MultiplayerManager.get_lead_player().input_device_id == 1
