@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
 [ext_resource path="res://Game/Effects/Particles/GroundDust.tscn" type="PackedScene" id=3]
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9, 10 )
+
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7, 14 )
+extents = Vector2( 7, 10 )
 
 [node name="Player" type="KinematicBody2D" groups=[
 "PlayerNode",
@@ -19,6 +22,7 @@ process_mode = 0
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2, -16 )
 centered = false
 
 [node name="PowerSpawn" type="Node2D" parent="Sprite"]
@@ -29,11 +33,11 @@ position = Vector2( 0, -40 )
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 0, -16 )
 collision_mask = 192
 
 [node name="CollisionBody" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+position = Vector2( -2, -10 )
+shape = SubResource( 2 )
 
 [node name="EveryTimer" type="Timer" parent="."]
 process_mode = 0
@@ -57,11 +61,11 @@ bus = "SFX"
 bus = "SFX"
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -16 )
+position = Vector2( -2, -10 )
 shape = SubResource( 1 )
 
 [node name="CeilingChecker" type="RayCast2D" parent="."]
-position = Vector2( 0, -30 )
+position = Vector2( -2, -20 )
 enabled = true
 cast_to = Vector2( 0, -2 )
 collision_mask = 2
@@ -73,7 +77,7 @@ cast_to = Vector2( 0, 5 )
 collision_mask = 14
 
 [node name="RightFootChecker" type="RayCast2D" parent="."]
-position = Vector2( 7, -2 )
+position = Vector2( 3, -2 )
 enabled = true
 cast_to = Vector2( 0, 5 )
 collision_mask = 14

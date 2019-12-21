@@ -395,6 +395,9 @@ func handle_direction():
 # @impure
 func handle_last_safe_position():
 	if PlayerLeftFootChecker.is_colliding() and PlayerRightFootChecker.is_colliding():
+		for area in PlayerArea2D.get_overlapping_areas():
+			if Game.has_collision_layer_bit(area.collision_layer, Game.COLLISION_LAYER_DEATH):
+				return
 		last_safe_position = position
 
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
