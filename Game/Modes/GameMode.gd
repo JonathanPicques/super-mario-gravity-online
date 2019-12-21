@@ -26,6 +26,8 @@ func start():
 # @impure
 func set_pixel_ratio(pixel_ratio: float):
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+	Game.GameTransitionCanvasLayer.scale = Vector2(pixel_ratio, pixel_ratio)
+	$Popup.rect_scale = Vector2(pixel_ratio, pixel_ratio)
 
 # setup the split screen depending on the number of players.
 # @impure

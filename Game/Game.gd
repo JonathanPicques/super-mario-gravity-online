@@ -9,11 +9,12 @@ const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 const SettingsMenu := preload("res://Game/Menus/SettingsMenu.tscn")
 
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
-onready var transition_nodes = []
+onready var GameTransitionCanvasLayer: CanvasLayer = $TransitionCanvasLayer
 
 var map_node: MapNode
 var scene_node: Node2D
 var game_mode_node: GameModeNode
+var transition_nodes := []
 
 # _ready is called when the game node is ready.
 # @impure
