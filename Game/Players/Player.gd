@@ -394,10 +394,6 @@ func handle_direction():
 # handle_last_safe_position saves the last safe position.
 # @impure
 func handle_last_safe_position():
-	# TODO: check both feet
-	for collider in PlayerArea2D.get_overlapping_areas():
-		if collider.collision_mask & 7: # TODO: add Death in constant
-			return
 	if PlayerLeftFootChecker.is_colliding() and PlayerRightFootChecker.is_colliding():
 		last_safe_position = position
 
@@ -441,7 +437,7 @@ func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 # @impure
 func is_on_door() -> bool:
 	for collider in PlayerArea2D.get_overlapping_areas():
-		if collider.is_in_group("Door"):
+		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_DOOR):
 			return true
 	return false
 
@@ -704,7 +700,7 @@ func tick_walljump(delta: float):
 
 func pre_enter_door():
 	for collider in PlayerArea2D.get_overlapping_areas():
-		if collider.is_in_group("Door"):
+		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_DOOR):
 			current_door_from = collider.get_parent().get_parent()
 			current_door_to = current_door_from.door_to_node
 			if current_door_to and current_door_from:
