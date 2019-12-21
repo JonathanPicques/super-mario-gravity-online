@@ -6,6 +6,7 @@ onready var FlagEnd: Node2D = $FlagEnd
 onready var FlagStart: Node2D = $FlagStart
 onready var PlayerSlot: Node2D = $PlayerSlot
 onready var ParticleSlot: Node2D = $ParticleSlot
+onready var ParallaxSlot: Node2D = $ParallaxSlot
 
 var killY := 3000.0
 

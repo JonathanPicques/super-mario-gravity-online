@@ -34,30 +34,45 @@ func setup_split_screen():
 	# dezoom if there is more than 1 screen
 	if player_count > 1:
 		set_pixel_ratio(2.0)
+	# clone parallax for each screen
+	var parallax_node = Game.map_node.ParallaxSlot
+	Game.map_node.remove_child(parallax_node)
 	# adjust split screen layout
 	match player_count:
-		1: 
+		1:
+			Viewport1.add_child(parallax_node.duplicate())
 			$GridContainer/Control2.visible = false
 			$GridContainer/Control3.visible = false
 			$GridContainer/Control4.visible = false
 			$GridContainer/Control1.rect_size = Vector2(512, 288)
 			$GridContainer/Control1.rect_min_size = Vector2(512, 288)
 		2: 
+			Viewport1.add_child(parallax_node.duplicate())
+			Viewport2.add_child(parallax_node.duplicate())
 			$GridContainer.margin_left = 256
 			$GridContainer.margin_right = -256
 			$GridContainer/Control3.visible = false
 			$GridContainer/Control4.visible = false
 			Viewport2.world_2d = Viewport1.world_2d
 		3: 
+			Viewport1.add_child(parallax_node.duplicate())
+			Viewport2.add_child(parallax_node.duplicate())
+			Viewport3.add_child(parallax_node.duplicate())
 			$GridContainer.columns = 2
 			$GridContainer/Control4.visible = false
 			Viewport2.world_2d = Viewport1.world_2d
 			Viewport3.world_2d = Viewport1.world_2d
 		4:
+			Viewport1.add_child(parallax_node.duplicate())
+			Viewport2.add_child(parallax_node.duplicate())
+			Viewport3.add_child(parallax_node.duplicate())
+			Viewport4.add_child(parallax_node.duplicate())
 			$GridContainer.columns = 2
 			Viewport2.world_2d = Viewport1.world_2d
 			Viewport3.world_2d = Viewport1.world_2d
 			Viewport4.world_2d = Viewport1.world_2d
+	# clear map parallax
+	parallax_node.queue_free()
 
 # @pure
 func get_player_screen_camera(player_id):

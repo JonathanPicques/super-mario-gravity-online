@@ -38,7 +38,6 @@ func _on_ReplayButton_pressed():
 		MultiplayerManager.finish_playing()
 		Game.goto_lobby_menu_scene()
 
-
 func _on_HomeButton_pressed():
 	if not block_input:
 		block_input = true
