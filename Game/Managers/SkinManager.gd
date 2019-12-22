@@ -19,40 +19,40 @@ const Steel = [
 
 const Palettes = {
 	SkinColor.aqua: [
-		Color("#0b807d"),
-		Color("#00cec9"),
-		Color("#81ecec"),
-		Color("#b7f4f4")
+		Color("#2987ba"),
+		Color("#6cd9f1"),
+		Color("#94f1f6"),
+		Color("#c2f9f9")
 	],
 	SkinColor.pink: [
-		Color("#963162"),
-		Color("#e84393"),
-		Color("#fd79a8"),
-		Color("#fda9c7")
+		Color("#db4d9f"),
+		Color("#f9a3c5"),
+		Color("#ffbcd3"),
+		Color("#ffd4d4")
 	],
 	SkinColor.blue: [
-		Color("#10568d"),
-		Color("#0984e3"),
-		Color("#74b9ff"),
-		Color("#b0d5fb")
+		Color("#3556d4"),
+		Color("#8281f0"),
+		Color("#97b2f4"),
+		Color("#bfd9f6")
 	],
 	SkinColor.orange: [
-		Color("#a54a34"),
-		Color("#e17055"),
-		Color("#fab1a0"),
-		Color("#ffd0c5")
+		Color("#db5d25"),
+		Color("#e68d41"),
+		Color("#f0b565"),
+		Color("#f6d89f")
 	],
-	SkinColor.purple: [
-		Color("#493f9d"),
-		Color("#6c5ce7"),
-		Color("#a29bfe"),
-		Color("#c0bcf6")
+	SkinColor.purple: [ # white
+		Color("#8caacc"),
+		Color("#b4cae3"),
+		Color("#d2e0f0"),
+		Color("#ffffff")
 	],
-	SkinColor.yellow: [
-		Color("#d99515"),
-		Color("#fdcb6e"),
-		Color("#ffe181"),
-		Color("#f9edc6")
+	SkinColor.yellow: [ # black
+		Color("#1a232d"),
+		Color("#303943"),
+		Color("#5f6a76"),
+		Color("#828890")
 	]
 }
 

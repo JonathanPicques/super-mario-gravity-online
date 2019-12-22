@@ -403,7 +403,7 @@ texture = ExtResource( 1 )
 centered = true
 hframes = 11
 
-[node name="AnimationPlayer" parent="." index="11"]
+[node name="AnimationPlayer" parent="." index="12"]
 autoplay = "stand"
 playback_speed = 1.3
 anims/death = SubResource( 2 )
