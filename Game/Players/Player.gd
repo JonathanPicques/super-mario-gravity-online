@@ -112,7 +112,7 @@ var current_object_index = null
 # @impure
 func _ready():
 	set_state(PlayerState.respawn)
-	set_dialog(DialogType.none)
+	set_dialog(DialogType.none, false)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
@@ -815,13 +815,14 @@ func tick_respawn(delta: float):
 		return set_state(PlayerState.stand)
 
 ###
-# Dialogs
+# Dialogs / Crown
 ###
 
-func set_dialog(dialog: int):
+func set_dialog(dialog: int, has_crown: bool):
 	match dialog:
 		DialogType.none: $Dialog.visible = false
 		DialogType.ready: $Dialog.visible = true
+	$Crown.visible = has_crown
 
 ###
 # FX / Animation driven

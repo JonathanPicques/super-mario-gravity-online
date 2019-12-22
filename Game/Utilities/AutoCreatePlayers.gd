@@ -46,8 +46,9 @@ func on_player_set_skin(player: Dictionary, skin_id: int):
 # @impure
 func on_player_set_ready(player: Dictionary, ready: bool):
 	var player_node = MultiplayerManager.get_player_node(player.id)
+	var is_lead = MultiplayerManager.get_lead_player().id == player.id
 	if player_node:
-		player_node.set_dialog(player_node.DialogType.ready if ready else player_node.DialogType.none)
+		player_node.set_dialog(player_node.DialogType.ready if ready else player_node.DialogType.none, is_lead and ready)
 
 # on_player_set_peer_id is called when a players sets its peer and local id.
 # @signal

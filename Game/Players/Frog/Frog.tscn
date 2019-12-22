@@ -22,7 +22,7 @@ shader_param/skin_color1 = Color( 0.156863, 0.52549, 0.0588235, 1 )
 shader_param/skin_color2 = Color( 0.447059, 0.631373, 0.113725, 1 )
 shader_param/skin_color3 = Color( 0.643137, 0.8, 0.258824, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 0.42
 step = 0.06
 tracks/0/type = "value"
@@ -62,7 +62,7 @@ tracks/2/keys = {
 "values": [ 7 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.36
 loop = true
 step = 0.06
@@ -103,7 +103,7 @@ tracks/2/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 0.56
 step = 0.08
 tracks/0/type = "value"
@@ -117,6 +117,47 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.08
+loop = true
+step = 0.08
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -161,47 +202,6 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-length = 0.08
-loop = true
-step = 0.08
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 6 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 1 ]
-}
-
-[sub_resource type="Animation" id=8]
 resource_name = "respawn"
 length = 0.4
 step = 0.06
@@ -254,7 +254,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0.0392157 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 0.96
 loop = true
 step = 0.08
@@ -312,7 +312,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 0.56
 loop = true
 step = 0.08
@@ -353,7 +353,7 @@ tracks/2/keys = {
 "values": [ 11 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 0.3
 loop = true
 step = 0.06
@@ -394,7 +394,7 @@ tracks/2/keys = {
 "values": [ 5 ]
 }
 
-[node name="Frog" index="0" instance=ExtResource( 2 )]
+[node name="Frog" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
@@ -403,18 +403,15 @@ texture = ExtResource( 1 )
 centered = true
 hframes = 11
 
-[node name="RightFootChecker" parent="." index="10"]
-position = Vector2( 3, -2 )
-
 [node name="AnimationPlayer" parent="." index="11"]
 autoplay = "stand"
 playback_speed = 1.3
-anims/death = SubResource( 3 )
-anims/double_jump = SubResource( 4 )
-anims/enter_door = SubResource( 5 )
-anims/fall = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/respawn = SubResource( 8 )
-anims/run = SubResource( 9 )
-anims/stand = SubResource( 10 )
-anims/wallslide = SubResource( 11 )
+anims/death = SubResource( 2 )
+anims/double_jump = SubResource( 3 )
+anims/enter_door = SubResource( 4 )
+anims/fall = SubResource( 5 )
+anims/jump = SubResource( 6 )
+anims/respawn = SubResource( 7 )
+anims/run = SubResource( 8 )
+anims/stand = SubResource( 9 )
+anims/wallslide = SubResource( 10 )
