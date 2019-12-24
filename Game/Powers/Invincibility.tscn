@@ -3,7 +3,6 @@
 [ext_resource path="res://Game/Powers/Invincibility.gd" type="Script" id=1]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/Invincibility.png-ffbca8bd444c2408beee0ec91fba9eae.stex"
 
 [node name="Invincibility" type="Node2D"]
 script = ExtResource( 1 )

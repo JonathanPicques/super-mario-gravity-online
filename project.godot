@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://Game/Powers/Invincibility.gd"
 }, {
 "base": "Node2D",
+"class": "ObjectPrinceNode",
+"language": "GDScript",
+"path": "res://Game/Powers/Prince.gd"
+}, {
+"base": "Node2D",
 "class": "ObjectSpeedNode",
 "language": "GDScript",
 "path": "res://Game/Powers/Speed.gd"
@@ -83,6 +88,7 @@ _global_script_class_icons={
 "MapNode": "",
 "MultiplayerManagerNode": "",
 "ObjectInvincibilityNode": "",
+"ObjectPrinceNode": "",
 "ObjectSpeedNode": "",
 "PlayerNode": "",
 "PowersManagerNode": "",

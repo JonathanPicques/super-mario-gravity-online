@@ -3,6 +3,10 @@ class_name PowersManagerNode
 
 onready var Powers := [
 	{
+		"scene": preload("res://Game/Powers/Prince.tscn"),
+		"hud": preload("res://Game/Powers/PrinceHUD.tscn"),
+	},
+	{
 		"scene": preload("res://Game/Powers/Invincibility.tscn"),
 		"hud": preload("res://Game/Powers/InvincibilityHUD.tscn"),
 	},

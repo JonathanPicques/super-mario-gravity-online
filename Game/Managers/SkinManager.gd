@@ -17,6 +17,20 @@ const Steel = [
 	Color("#b0bcc4"),
 ]
 
+const PrinceSkin = [
+	Color("#e88f6f"),
+	Color("#eab386"),
+	Color("#fbdfb1"),
+	Color("#fff4e3")
+]
+
+const FrogSkins = [
+	Color("#076029"),
+	Color("#28860F"),
+	Color("#72A11D"),
+	Color("#A4CC42"),
+]
+
 const Palettes = {
 	SkinColor.aqua: [
 		Color("#2987ba"),
@@ -56,13 +70,6 @@ const Palettes = {
 	]
 }
 
-const FrogSkins = [
-	Color("#076029"),
-	Color("#28860F"),
-	Color("#72A11D"),
-	Color("#A4CC42"),
-]
-
 onready var SkinMaterials = {
 	SkinColor.aqua: preload("res://Game/Effects/Materials/SkinMaterial.tres"),
 	SkinColor.blue: preload("res://Game/Effects/Materials/SkinMaterial.tres").duplicate(),
@@ -82,21 +89,27 @@ func _ready():
 	replace_skin_material(SkinMaterials[SkinColor.purple], SkinColor.purple)
 
 # @impure
-func replace_skin(spriteOrTexture, skin_color: int, is_steel := false):
-	if is_steel:
+func replace_skin(spriteOrTexture, skin_color: int, is_steel := false, is_prince := false):
+	if is_steel or is_prince:
 		spriteOrTexture.material = SkinMaterials[skin_color].duplicate()
-		replace_skin_material(spriteOrTexture.material, skin_color, is_steel)
+		replace_skin_material(spriteOrTexture.material, skin_color, is_steel, is_prince)
 	else:
 		spriteOrTexture.material = SkinMaterials[skin_color]
 
 # @impure
-func replace_skin_material(sprite_material: Material, skin_color: int, is_steel := false):
+func replace_skin_material(sprite_material: Material, skin_color: int, is_steel := false, is_prince := false):
 	sprite_material.set_shader_param("color0", Palettes[skin_color][0])
 	sprite_material.set_shader_param("color1", Palettes[skin_color][1])
 	sprite_material.set_shader_param("color2", Palettes[skin_color][2])
 	sprite_material.set_shader_param("color3", Palettes[skin_color][3])
 	
-	sprite_material.set_shader_param("skin_color0", Steel[0] if is_steel else FrogSkins[0])
-	sprite_material.set_shader_param("skin_color1", Steel[1] if is_steel else FrogSkins[1])
-	sprite_material.set_shader_param("skin_color2", Steel[2] if is_steel else FrogSkins[2])
-	sprite_material.set_shader_param("skin_color3", Steel[3] if is_steel else FrogSkins[3])
+	if is_prince:
+		sprite_material.set_shader_param("skin_color0", PrinceSkin[0])
+		sprite_material.set_shader_param("skin_color1", PrinceSkin[1])
+		sprite_material.set_shader_param("skin_color2", PrinceSkin[2])
+		sprite_material.set_shader_param("skin_color3", PrinceSkin[3])
+	else:
+		sprite_material.set_shader_param("skin_color0", Steel[0] if is_steel else FrogSkins[0])
+		sprite_material.set_shader_param("skin_color1", Steel[1] if is_steel else FrogSkins[1])
+		sprite_material.set_shader_param("skin_color2", Steel[2] if is_steel else FrogSkins[2])
+		sprite_material.set_shader_param("skin_color3", Steel[3] if is_steel else FrogSkins[3])

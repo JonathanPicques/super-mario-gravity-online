@@ -43,7 +43,7 @@ animations = [ {
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "shine"
-frame = 5
+frame = 6
 playing = true
 centered = false
 

@@ -63,9 +63,12 @@ var input_use_once := false
 var input_jump_once := false
 
 var SPEED_MULTIPLIER := 2
+var INVINCIBILITY_SPEED_MULTIPLIER := 1.0
+var PRINCE_SPEED_MULTIPLIER := 1.5
+
 var OBJECT_TIME_SPEED := 6.0
 var OBJECT_TIME_INVINCIBILITY := 6.0
-var INVINCIBILITY_SPEED_MULTIPLIER := 1.5
+var OBJECT_TIME_PRINCE = 8.0
 
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
@@ -86,6 +89,8 @@ var GRAVITY_ACCELERATION := 1300.0
 const DOOR_RUN_SPEED = 40.0
 const DOOR_PLAYER_FADE_DURATION = 0.5
 const DOOR_SCREEN_FADE_DURATION = 0.5
+
+const TRAIL_OBJECT_TYPES = [ObjectSpeedNode, ObjectPrinceNode]
 
 var state: int = PlayerState.none
 var velocity := Vector2()
@@ -232,9 +237,16 @@ func process_object(delta: float):
 # process_effects plays all sprite effects applied to the player.
 # @impure
 var _trail := 0.0
+
+func has_trail(active_object):
+	for obj_type in TRAIL_OBJECT_TYPES:
+		if active_object is obj_type:
+			return true
+	return false
+
 func process_effects(delta: float):
-	if active_object and active_object is ObjectSpeedNode or active_object is ObjectInvincibilityNode or \
-		(state == PlayerState.expulse and (abs(velocity.x) > RUN_MAX_SPEED or velocity.y < 0)):
+	var is_explused = state == PlayerState.expulse and (abs(velocity.x) > RUN_MAX_SPEED or velocity.y < 0)
+	if active_object and has_trail(active_object) or is_explused:
 		_trail += delta
 		if _trail > 0.05:
 			var trail_node := SpriteTrail.instance()
@@ -761,6 +773,18 @@ func reset_object_invincibility(object):
 	is_invincible = false
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
 
+func apply_object_prince(object):
+	is_invincible = true
+	active_object = object
+	speed_multiplier = PRINCE_SPEED_MULTIPLIER
+	SkinManager.replace_skin(PlayerSprite, player.skin_id, false, true)
+	PlayerObjectTimer.wait_time = OBJECT_TIME_PRINCE
+	PlayerObjectTimer.start()
+
+func reset_object_prince(object):
+	is_invincible = false
+	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
+
 func pre_use_object():
 	if active_object:
 		return
@@ -769,7 +793,6 @@ func pre_use_object():
 	get_parent().add_child(current_object)
 	current_object = null
 	current_object_index = null
-	print("USE OBJECT !!!")
 
 func tick_use_object(delta: float):
 	if not is_on_floor():
