@@ -1,7 +1,15 @@
 extends Node
 class_name MultiplayerManagerNode
 
-onready var PlayerNodeScene := preload("res://Game/Players/Prince/Prince.tscn")
+enum PlayerClass {
+	Frog,
+	Prince
+}
+
+onready var PlayerClasses = {
+	PlayerClass.Frog: preload("res://Game/Players/Frog/Frog.tscn"),
+	PlayerClass.Prince: preload("res://Game/Players/Prince/Prince.tscn")
+}
 
 signal player_added(player)
 signal player_removed(player)
@@ -249,8 +257,8 @@ func get_player_node_name(player_id: int):
 	return "player_%d_%d" % [player.peer_id, player.local_id] # peer_id and local_id are the same on all peers
 
 # @impure
-func spawn_player_node(player: Dictionary, parent_node: Node) -> PlayerNode:
-	var player_node: PlayerNode = PlayerNodeScene.instance()
+func spawn_player_node(player: Dictionary, parent_node: Node, player_class: int = 0) -> PlayerNode:
+	var player_node: PlayerNode = PlayerClasses[player_class].instance()
 	player_node.name = get_player_node_name(player.id)
 	player_node.player = player
 	player_node.set_network_master(player.peer_id)

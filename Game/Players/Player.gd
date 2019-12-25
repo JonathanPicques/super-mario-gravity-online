@@ -774,6 +774,12 @@ func reset_object_invincibility(object):
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
 
 func apply_object_prince(object):
+	var new_player_node = MultiplayerManager.spawn_player_node(player, get_parent(), MultiplayerManager.PlayerClass.Prince)
+	new_player_node.position = position
+	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
+	camera.player_node = new_player_node
+	queue_free()
+	return
 	is_invincible = true
 	active_object = object
 	speed_multiplier = PRINCE_SPEED_MULTIPLIER
