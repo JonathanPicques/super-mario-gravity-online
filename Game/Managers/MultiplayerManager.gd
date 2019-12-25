@@ -1,7 +1,7 @@
 extends Node
 class_name MultiplayerManagerNode
 
-onready var PlayerNodeScene := preload("res://Game/Players/Frog/Frog.tscn")
+onready var PlayerNodeScene := preload("res://Game/Players/Prince/Prince.tscn")
 
 signal player_added(player)
 signal player_removed(player)
