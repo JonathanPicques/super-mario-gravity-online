@@ -37,11 +37,13 @@ func set_scene(_scene_node: Node):
 		scene_node.queue_free()
 	if _scene_node is MapNode:
 		map_node = _scene_node
+		game_mode_node = null
 	scene_node = _scene_node
 	get_tree().get_root().add_child(_scene_node)
 	scene_node = _scene_node
 	if _scene_node is GameModeNode:
 		map_node = _scene_node.map_node
+		game_mode_node = _scene_node
 
 # @impure
 func goto_home_menu_scene():

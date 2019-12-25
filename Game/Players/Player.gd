@@ -139,12 +139,12 @@ func _process(delta):
 # _physics_process is called every physics tick and updates player state.
 # @impure
 func _physics_process(delta: float):
-	process_lifetime(delta)
 	process_input(delta)
 	process_death(delta)
 	process_object(delta)
 	process_effects(delta)
 	process_velocity(delta)
+	process_lifetime(delta)
 	match state:
 		PlayerState.stand: tick_stand(delta)
 		PlayerState.run: tick_run(delta)
@@ -160,11 +160,6 @@ func _physics_process(delta: float):
 		PlayerState.use_object: tick_use_object(delta)
 		PlayerState.death: tick_death(delta)
 		PlayerState.respawn: tick_respawn(delta)
-
-func process_lifetime(delta: float):
-	if has_lifetime and PlayerLifetimeTimer.is_stopped():
-		change_class(MultiplayerManager.PlayerClass.Frog)
-
 
 # _process_network updates player from the given network infos.
 # @impure
@@ -246,16 +241,17 @@ func process_object(delta: float):
 			active_object.queue_free()
 			active_object = null
 
-# process_effects plays all sprite effects applied to the player.
-# @impure
-var _trail := 0.0
-
+# check_trail return true if the active object should yield a trail behind the player.
+# @pure
 func check_trail(active_object):
 	for obj_type in TRAIL_OBJECT_TYPES:
 		if active_object is obj_type:
 			return true
 	return false
 
+# process_effects plays all sprite effects applied to the player.
+# @impure
+var _trail := 0.0
 func process_effects(delta: float):
 	var is_explused = state == PlayerState.expulse and (abs(velocity.x) > RUN_MAX_SPEED or velocity.y < 0)
 	if active_object and check_trail(active_object) or is_explused or has_trail:
@@ -290,15 +286,11 @@ func process_velocity(delta: float):
 		0.0 if is_nearly(offset.y, 0) else velocity.y
 	)
 
-# change_class changes the current class (animations, properties...) of the player
+# process_lifetime checks if a player transformation is over.
 # @impure
-func change_class(player_class: int):
-	var new_player_node = MultiplayerManager.spawn_player_node(player, get_parent(), player_class)
-	new_player_node.position = position
-	if !Game.is_over:
-		var camera = Game.game_mode_node.get_player_screen_camera(player.id)
-		camera.player_node = new_player_node
-	queue_free()
+func process_lifetime(delta: float):
+	if has_lifetime and PlayerLifetimeTimer.is_stopped():
+		set_class(MultiplayerManager.PlayerClass.Frog)
 
 # set_state changes the current Player state to the new given state.
 # @impure
@@ -319,6 +311,20 @@ func set_state(new_state: int):
 		PlayerState.use_object: pre_use_object()
 		PlayerState.death: pre_death()
 		PlayerState.respawn: pre_respawn()
+
+# set_class changes the current class (animations, properties...) of the player
+# @impure
+func set_class(player_class: int):
+	var player_node = MultiplayerManager.create_player_node(player, player_class)
+	var player_camera = Game.game_mode_node.get_player_screen_camera(player.id) if Game.game_mode_node else null
+	player_node.position = position
+	player_node.velocity = Vector2()
+	get_parent().call_deferred("remove_child", self)
+	get_parent().call_deferred("add_child", player_node)
+	player_node.call_deferred("set_direction", direction)
+	if player_camera:
+		player_camera.set_deferred("player_node", player_node)
+	call_deferred("queue_free")
 
 # set_direction changes the Player direction and flips the sprite accordingly.
 # @impure
@@ -784,6 +790,13 @@ func apply_object_speed(object):
 	PlayerObjectTimer.wait_time = OBJECT_TIME_SPEED
 	PlayerObjectTimer.start()
 
+func apply_object_prince(object):
+	set_class(MultiplayerManager.PlayerClass.Prince)
+
+func reset_object_prince(object):
+	is_invincible = false
+	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
+
 func apply_object_invincibility(object):
 	is_invincible = true
 	active_object = object
@@ -793,13 +806,6 @@ func apply_object_invincibility(object):
 	PlayerObjectTimer.start()
 
 func reset_object_invincibility(object):
-	is_invincible = false
-	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
-
-func apply_object_prince(object):
-	change_class(MultiplayerManager.PlayerClass.Prince)
-
-func reset_object_prince(object):
 	is_invincible = false
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
 
@@ -864,7 +870,6 @@ func set_dialog(dialog: int, has_crown: bool):
 		DialogType.none: $Dialog.visible = false
 		DialogType.ready: $Dialog.visible = true
 	$Crown.visible = has_crown
-
 
 ###
 # FX / Animation driven
