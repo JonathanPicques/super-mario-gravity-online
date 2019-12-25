@@ -229,11 +229,8 @@ func process_death(delta: float):
 
 # process_object resets all stats affected by objects when timer finishes
 # @impure
-var is_transformed = false
 func process_object(delta: float):
-	if PlayerObjectTimer.is_stopped() and is_transformed:
-		is_transformed = false
-		print("RESET SPEED")
+	if PlayerObjectTimer.is_stopped():
 		speed_multiplier = 1.0
 		if active_object:
 			if active_object.has_method("reset_player"):
@@ -325,6 +322,7 @@ func set_class(player_class: int):
 	if player_camera:
 		player_camera.set_deferred("player_node", player_node)
 	call_deferred("queue_free")
+	return player_node
 
 # set_direction changes the Player direction and flips the sprite accordingly.
 # @impure
@@ -785,7 +783,6 @@ func get_object():
 
 func apply_object_speed(object):
 	active_object = object
-	is_transformed = true
 	speed_multiplier = SPEED_MULTIPLIER
 	PlayerObjectTimer.wait_time = OBJECT_TIME_SPEED
 	PlayerObjectTimer.start()
