@@ -3,7 +3,6 @@
 [ext_resource path="res://Game/Managers/MultiplayerManager.gd" type="Script" id=1]
 [ext_resource path="res://addons/nakama-client/NakamaRestClient.gd" type="Script" id=2]
 
-
 [node name="GameMultiplayer" type="Node"]
 script = ExtResource( 1 )
 

@@ -52,6 +52,9 @@ one_shot = true
 [node name="ObjectTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="LifetimeTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="SFX1" type="AudioStreamPlayer" parent="SoundEffects"]

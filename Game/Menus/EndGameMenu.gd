@@ -2,6 +2,7 @@ extends "res://Game/Maps/Map.gd"
 
 # @impure
 func _ready():
+	Game.is_over = true
 	yield(get_tree(), "idle_frame")
 	# music
 	AudioManager.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
@@ -9,6 +10,7 @@ func _ready():
 	MultiplayerManager.spawn_player_nodes(PlayerSlot)
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)
 	# put first player on top
+	print("IN END GAME ", players[0].id)
 	var first_player_node = MultiplayerManager.get_player_node(players[0].id)
 	if first_player_node:
 		first_player_node.position = $FlagStart.position

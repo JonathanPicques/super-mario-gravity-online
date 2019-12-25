@@ -11,6 +11,7 @@ const SettingsMenu := preload("res://Game/Menus/SettingsMenu.tscn")
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
 onready var GameTransitionCanvasLayer: CanvasLayer = $TransitionCanvasLayer
 
+var is_over = false
 var map_node: MapNode
 var scene_node: Node2D
 var game_mode_node: GameModeNode
@@ -50,6 +51,7 @@ func goto_home_menu_scene():
 
 # @impure
 func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
+	Game.is_over = false
 	game_mode_node = load(game_mode_scene_path).instance()
 	game_mode_node.options = options
 	yield(screen_transition_start(), "completed")
