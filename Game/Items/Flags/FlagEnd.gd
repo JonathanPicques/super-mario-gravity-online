@@ -2,7 +2,8 @@ extends Node2D
 
 var used := false
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(player_node: PlayerNode):
 	if not used:
 		used = true
-		Game.call_deferred("goto_end_game_room_menu_scene")
+		if Game.game_mode_node is RaceGameModeNode:
+			Game.game_mode_node.call_deferred("end_race", player_node.player.id)

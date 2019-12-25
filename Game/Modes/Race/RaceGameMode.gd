@@ -32,8 +32,18 @@ func start():
 	# connect multiplayer signals
 	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	# compute player ranking locally
-	$RankUpdateTimer.connect("timeout", self, "compute_player_ranking")
+	$RankUpdateTimer.connect("timeout", self, "compute_players_ranking")
 	$RankUpdateTimer.start()
+
+# end_race is called when a player reaches the end flag and wins the game.
+# @impure
+func end_race(winner_player_id: int):
+	# stop computing player ranks
+	$RankUpdateTimer.stop()
+	# compute player ranks immediately.
+	compute_players_ranking()
+	# goto end game scene.
+	Game.goto_end_game_menu_scene()
 
 # compute_flag_distance computes the distance between the start and end flag.
 # @impure
@@ -45,9 +55,9 @@ func compute_flag_distance():
 			if next < navigation_size:
 				flag_distance += navigation_path[i].distance_to(navigation_path[next])
 
-# compute_player_ranking computes the distance from the goal and assign the players ranks.
+# compute_players_ranking computes the distance from each player to the goal and assignes their ranks.
 # @impure
-func compute_player_ranking():
+func compute_players_ranking():
 	var sorted_players := []
 	# compute distance from player node to the goal
 	for player in MultiplayerManager.get_players():

@@ -74,7 +74,7 @@ func goto_maps_menu_scene():
 	yield(screen_transition_finish(), "completed")
 
 # @impure
-func goto_end_game_room_menu_scene():
+func goto_end_game_menu_scene():
 	yield(screen_transition_start(), "completed")
 	set_scene(EndGameMenu.instance())
 	yield(screen_transition_finish(), "completed")
