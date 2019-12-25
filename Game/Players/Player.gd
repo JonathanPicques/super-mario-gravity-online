@@ -238,7 +238,7 @@ func process_object(delta: float):
 			active_object.queue_free()
 			active_object = null
 
-# check_trail return true if the active object should yield a trail behind the player.
+# check_trail returns true if the active object should yield a trail behind the player.
 # @pure
 func check_trail(active_object):
 	for obj_type in TRAIL_OBJECT_TYPES:
@@ -434,7 +434,7 @@ func handle_direction():
 func handle_last_safe_position():
 	if PlayerLeftFootChecker.is_colliding() and PlayerRightFootChecker.is_colliding():
 		for area in PlayerArea2D.get_overlapping_areas():
-			if Game.has_collision_layer_bit(area.collision_layer, Game.COLLISION_LAYER_DEATH):
+			if Game.has_collision_layer_bit(area.collision_layer, Game.COLLISION_LAYER_DAMAGE):
 				return
 		last_safe_position = position
 

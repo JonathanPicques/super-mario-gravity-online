@@ -10,8 +10,8 @@ func _ready():
 	Step_02_SFX = preload("res://Game/Players/Prince/Sounds/step_02.ogg")
 	
 	has_trail = true
-	speed_multiplier = 2
-	is_invincible = true
 	has_lifetime = true
-	PlayerLifetimeTimer.wait_time = 8
+	is_invincible = true
+	speed_multiplier = 2.0
+	PlayerLifetimeTimer.wait_time = 8.0
 	PlayerLifetimeTimer.start()

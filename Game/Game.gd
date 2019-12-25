@@ -115,11 +115,12 @@ func screen_transition_finish():
 # Collision layers
 ##
 
-const COLLISION_LAYER_PLAYER := 1 << 0
-const COLLISION_LAYER_DOOR := 1 << 6
-const COLLISION_LAYER_DEATH := 1 << 7
+const COLLISION_LAYER_SOLID := 1 << 0
+const COLLISION_LAYER_PLAYER := 1 << 1
+const COLLISION_LAYER_DOOR := 1 << 3
+const COLLISION_LAYER_DAMAGE := 1 << 6
 
 # has_collision_layer_bit returns true if collision_layer has the given collision_layer_bit.
 # @pure
 func has_collision_layer_bit(collision_layer: int, collision_layer_bit: int) -> bool:
-	return collision_layer & collision_layer_bit == collision_layer
+	return (collision_layer_bit & collision_layer) == collision_layer_bit

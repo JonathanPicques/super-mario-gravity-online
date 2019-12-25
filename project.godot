@@ -369,14 +369,13 @@ device_4_cancel={
 
 [layer_names]
 
-2d_physics/layer_1="Player"
-2d_physics/layer_2="Collision"
-2d_physics/layer_3="MovingPlatform"
-2d_physics/layer_4="OneWayPlatform"
-2d_physics/layer_5="ObjectCollision"
-2d_physics/layer_6="Missile"
-2d_physics/layer_7="Door"
-2d_physics/layer_8="Death"
+2d_physics/layer_1="Solid"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemy"
+2d_physics/layer_4="Door"
+2d_physics/layer_5="Power"
+2d_physics/layer_6="Object"
+2d_physics/layer_7="Damage"
 
 [rendering]
 
