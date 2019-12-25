@@ -257,11 +257,16 @@ func get_player_node_name(player_id: int):
 	return "player_%d_%d" % [player.peer_id, player.local_id] # peer_id and local_id are the same on all peers
 
 # @impure
-func spawn_player_node(player: Dictionary, parent_node: Node, player_class: int = 0) -> PlayerNode:
+func create_player_node(player: Dictionary, player_class: int = PlayerClasses.FROG) -> PlayerNode:
 	var player_node: PlayerNode = PlayerClasses[player_class].instance()
 	player_node.name = get_player_node_name(player.id)
 	player_node.player = player
 	player_node.set_network_master(player.peer_id)
+	return player_node
+
+# @impure
+func spawn_player_node(player: Dictionary, parent_node: Node, player_class: int = 0) -> PlayerNode:
+	var player_node := create_player_node(player, player_class)
 	parent_node.add_child(player_node)
 	return player_node
 
