@@ -18,10 +18,10 @@ const Steel = [
 ]
 
 const PrinceSkin = [
-	Color("#e88f6f"),
-	Color("#eab386"),
-	Color("#fbdfb1"),
-	Color("#fff4e3")
+	Color("#365729"),
+	Color("#5a9244"),
+	Color("#5db53b"),
+	Color("#7dcd33")
 ]
 
 const FrogSkins = [
@@ -32,41 +32,41 @@ const FrogSkins = [
 ]
 
 const Palettes = {
-	SkinColor.aqua: [
-		Color("#2987ba"),
-		Color("#6cd9f1"),
-		Color("#94f1f6"),
-		Color("#c2f9f9")
-	],
-	SkinColor.pink: [
-		Color("#db4d9f"),
-		Color("#f9a3c5"),
-		Color("#ffbcd3"),
-		Color("#ffd4d4")
+	SkinColor.aqua: [ # Red
+		Color("#4c1010"),
+		Color("#861010"),
+		Color("#a51515"),
+		Color("#e72f2f")
 	],
 	SkinColor.blue: [
-		Color("#3556d4"),
-		Color("#8281f0"),
-		Color("#97b2f4"),
-		Color("#bfd9f6")
+		Color("#352369"),
+		Color("#483db3"),
+		Color("#7c8ade"),
+		Color("#60b5f0")
 	],
-	SkinColor.orange: [
-		Color("#db5d25"),
-		Color("#e68d41"),
-		Color("#f0b565"),
-		Color("#f6d89f")
+	SkinColor.pink: [
+		Color("#4a324a"),
+		Color("#874d89"),
+		Color("#c278bf"),
+		Color("#f084ae")
+	],
+	SkinColor.orange: [ # Cyan
+		Color("#226a5d"),
+		Color("#62e4c6"),
+		Color("#91e2f3"),
+		Color("#9afaf6")
 	],
 	SkinColor.purple: [ # white
-		Color("#8caacc"),
-		Color("#b4cae3"),
-		Color("#d2e0f0"),
-		Color("#ffffff")
+		Color("#695d51"),
+		Color("#daceb0"),
+		Color("#fde8d3"),
+		Color("#fff8f1")
 	],
 	SkinColor.yellow: [ # black
-		Color("#1a232d"),
-		Color("#303943"),
-		Color("#5f6a76"),
-		Color("#828890")
+		Color("#181e19"),
+		Color("#27392b"),
+		Color("#355140"),
+		Color("#366649")
 	]
 }
 
