@@ -64,8 +64,6 @@ var input_use_once := false
 var input_jump_once := false
 
 var SPEED_MULTIPLIER := 2
-var INVINCIBILITY_SPEED_MULTIPLIER := 1.0
-var PRINCE_SPEED_MULTIPLIER := 1.5
 
 var OBJECT_TIME_SPEED := 6.0
 var OBJECT_TIME_INVINCIBILITY := 6.0
@@ -116,6 +114,7 @@ var current_door_from: DoorNode
 var active_object = null
 var current_object = null
 var current_object_index = null
+var object_needs_reset = false
 
 # @impure
 func _ready():
@@ -230,8 +229,9 @@ func process_death(delta: float):
 # process_object resets all stats affected by objects when timer finishes
 # @impure
 func process_object(delta: float):
-	if PlayerObjectTimer.is_stopped():
+	if PlayerObjectTimer.is_stopped() and object_needs_reset:
 		speed_multiplier = 1.0
+		object_needs_reset = false
 		if active_object:
 			if active_object.has_method("reset_player"):
 				active_object.reset_player()
@@ -783,6 +783,7 @@ func get_object():
 
 func apply_object_speed(object):
 	active_object = object
+	object_needs_reset = true
 	speed_multiplier = SPEED_MULTIPLIER
 	PlayerObjectTimer.wait_time = OBJECT_TIME_SPEED
 	PlayerObjectTimer.start()
@@ -791,13 +792,15 @@ func apply_object_prince(object):
 	set_class(MultiplayerManager.PlayerClass.Prince)
 
 func reset_object_prince(object):
+	print("RESET PRINCE")
+	object_needs_reset = true
 	is_invincible = false
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
 
 func apply_object_invincibility(object):
 	is_invincible = true
 	active_object = object
-	speed_multiplier = INVINCIBILITY_SPEED_MULTIPLIER
+	object_needs_reset = true
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, true)
 	PlayerObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
 	PlayerObjectTimer.start()

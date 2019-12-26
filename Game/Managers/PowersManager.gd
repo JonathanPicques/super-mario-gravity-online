@@ -6,8 +6,10 @@ onready var Powers := [
 		"scene": preload("res://Game/Powers/Prince.tscn"),
 		"hud": preload("res://Game/Powers/PrinceHUD.tscn"),
 	},
-]
-onready var a = [
+	{
+		"scene": preload("res://Game/Powers/Invincibility.tscn"),
+		"hud": preload("res://Game/Powers/InvincibilityHUD.tscn"),
+	},
 	{
 		"scene": preload("res://Game/Powers/Invincibility.tscn"),
 		"hud": preload("res://Game/Powers/InvincibilityHUD.tscn"),
