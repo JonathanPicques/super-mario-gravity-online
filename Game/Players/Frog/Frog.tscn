@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Game/Players/Frog/Textures/Run.png" type="Texture" id=1]
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Game/Players/Frog/Textures/Run2.png" type="Texture" id=6]
 [ext_resource path="res://Game/Players/Frog/Textures/Swim.png" type="Texture" id=7]
 [ext_resource path="res://Game/Players/Frog/Textures/Fall.png" type="Texture" id=8]
+[ext_resource path="res://Game/Players/Frog/Textures/EnterDoor.png" type="Texture" id=9]
 [ext_resource path="res://Game/Players/Frog/Textures/Appearing.png" type="Texture" id=10]
 [ext_resource path="res://Game/Players/Frog/Textures/Idle.png" type="Texture" id=11]
 [ext_resource path="res://Game/Players/Frog/Textures/DoubleJump.png" type="Texture" id=13]
@@ -108,8 +109,45 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-length = 0.56
-step = 0.08
+resource_name = "enter_door"
+length = 0.72
+step = 0.04
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.12, 0.16, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.12 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 18, 18 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.101, 0.12 ),
+"transitions": PoolRealArray( 1, 1, 80684.2 ),
+"update": 1,
+"values": [ SubResource( 2 ), SubResource( 2 ), ExtResource( 9 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.32
@@ -472,16 +510,15 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[node name="Frog" instance=ExtResource( 2 )]
+[node name="Frog" index="0" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]
 self_modulate = Color( 1, 1, 1, 0.0392157 )
 material = SubResource( 1 )
-texture = ExtResource( 7 )
+texture = SubResource( 2 )
 centered = true
-hframes = 21
-frame = 9
+hframes = 17
 
 [node name="AnimationPlayer" parent="." index="13"]
 autoplay = "stand"
