@@ -68,6 +68,7 @@ var SPEED_MULTIPLIER := 2
 var OBJECT_TIME_SPEED := 6.0
 var OBJECT_TIME_INVINCIBILITY := 6.0
 var OBJECT_TIME_PRINCE = 8.0
+var OBJECT_TIME_DISTORT := 6.0
 
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
@@ -808,6 +809,16 @@ func apply_object_invincibility(object):
 func reset_object_invincibility(object):
 	is_invincible = false
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
+
+func apply_object_wave_distort(object):
+	object_needs_reset = true
+	active_object = object
+	Game.game_mode_node.apply_split_screen_effect(player.id, true)
+	PlayerObjectTimer.wait_time = OBJECT_TIME_INVINCIBILITY
+	PlayerObjectTimer.start()
+
+func reset_object_wave_distort(object):
+	Game.game_mode_node.apply_split_screen_effect(player.id, false)
 
 func pre_use_object():
 	if active_object:

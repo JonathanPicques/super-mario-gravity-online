@@ -30,4 +30,8 @@ onready var Powers := [
 		"scene": preload("res://Game/Powers/FireballDumb.tscn"),
 		"hud": preload("res://Game/Powers/FireballDumbHUD.tscn"),
 	},
+	{
+		"scene": preload("res://Game/Powers/WaveDistort.tscn"),
+		"hud": preload("res://Game/Powers/WaveDistortHUD.tscn"),
+	},
 ]

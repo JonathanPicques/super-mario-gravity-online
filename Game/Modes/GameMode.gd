@@ -29,7 +29,7 @@ func set_pixel_ratio(pixel_ratio: float):
 	Game.GameTransitionCanvasLayer.scale = Vector2(pixel_ratio, pixel_ratio)
 	$Popup.rect_scale = Vector2(pixel_ratio, pixel_ratio)
 
-# setup the split screen depending on the number of players.
+# setup_split_screen splits the screen between local players.
 # @impure
 func setup_split_screen():
 	var player_count := MultiplayerManager.get_local_player_count()
@@ -76,8 +76,18 @@ func setup_split_screen():
 	# clear map parallax
 	parallax_node.queue_free()
 
+# apply_split_screen_effect toggles the wave distort effect for the given player.
+# @impure
+func apply_split_screen_effect(player_id: int, wave: bool):
+	match player_id:
+		0: Viewport1.get_parent().material.set_shader_param("enabled", 1 if wave else 0)
+		1: Viewport2.get_parent().material.set_shader_param("enabled", 1 if wave else 0)
+		2: Viewport3.get_parent().material.set_shader_param("enabled", 1 if wave else 0)
+		3: Viewport4.get_parent().material.set_shader_param("enabled", 1 if wave else 0)
+
+# get_player_screen_camera returns 
 # @pure
-func get_player_screen_camera(player_id):
+func get_player_screen_camera(player_id: int):
 	match player_id:
 		0: return Viewport1.get_node("PlayerCamera2D")
 		1: return Viewport2.get_node("PlayerCamera2D")
