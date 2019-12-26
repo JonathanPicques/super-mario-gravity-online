@@ -1,12 +1,13 @@
 extends Node
 
 const SAVE_PATH := "user://settings.cfg"
-const RESET_CONFIG_FILE_TO_DEFAULT = true
+const RESET_CONFIG_FILE_TO_DEFAULT = false
 
 var values := {
 	"music": 0,
 	"sfx": 0,
-	"minimap": true
+	"minimap": true,
+	"show_tuto": true
 }
 var config_file := ConfigFile.new()
 

@@ -4,8 +4,17 @@ const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
 var player_camera_scene = null
 
+const SKIP_START_POSITION := Vector2(832, 64)
+
 # @impure
 func _ready():
+	print("SHOW TUTO ?", SettingsManager.values["show_tuto"])
+	if !SettingsManager.values["show_tuto"]:
+		$FlagStart.position = SKIP_START_POSITION
+	else:
+		SettingsManager.values["show_tuto"] = false # TODO: check if launch at least one game
+		SettingsManager.save_settings()
+		print("Save settings")
 	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 
 # @impure
