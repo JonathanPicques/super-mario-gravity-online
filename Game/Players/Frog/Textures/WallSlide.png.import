@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Walljump.png-ab16ae528a8077064370534efe5715c6.stex"
+path="res://.import/WallSlide.png-f000703781a36ca9832b011a5205c62e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Players/Frog/Textures/Walljump.png"
-dest_files=[ "res://.import/Walljump.png-ab16ae528a8077064370534efe5715c6.stex" ]
+source_file="res://Game/Players/Frog/Textures/WallSlide.png"
+dest_files=[ "res://.import/WallSlide.png-f000703781a36ca9832b011a5205c62e.stex" ]
 
 [params]
 

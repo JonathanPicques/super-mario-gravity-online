@@ -439,6 +439,14 @@ func handle_last_safe_position():
 				return
 		last_safe_position = position
 
+var is_sticky = false
+func handle_sticky_floor():
+	is_sticky = false
+	if PlayerLeftFootChecker.is_colliding() and PlayerRightFootChecker.is_colliding():
+		for area in PlayerArea2D.get_overlapping_areas():
+			if Game.has_collision_layer_bit(area.collision_layer, Game.COLLISION_LAYER_STICKY):
+				is_sticky = true
+
 # handle_floor_move applies acceleration or deceleration depending on the input_velocity on the floor.
 # @impure
 func handle_floor_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
@@ -522,6 +530,7 @@ func tick_stand(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_deceleration_move(delta, RUN_DECELERATION)
 	handle_last_safe_position()
+	handle_sticky_floor()
 	if not is_on_floor():
 		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
@@ -537,13 +546,14 @@ func tick_stand(delta: float):
 		return set_state(PlayerState.move_turn)
 
 func pre_run():
-	set_animation("run")
+	set_animation("run2")
 	jumps_remaining = MAX_JUMPS
 
 func tick_run(delta: float):
 	handle_gravity(delta, GRAVITY_MAX_SPEED, GRAVITY_ACCELERATION)
 	handle_floor_move(delta, RUN_MAX_SPEED, RUN_ACCELERATION, RUN_DECELERATION)
-	handle_last_safe_position()	
+	handle_last_safe_position()
+	handle_sticky_floor()
 	if not is_on_floor():
 		fall_jump_grace = FALL_JUMP_GRACE
 		return set_state(PlayerState.fall)
@@ -791,12 +801,6 @@ func apply_object_speed(object):
 
 func apply_object_prince(object):
 	set_class(MultiplayerManager.PlayerClass.Prince)
-
-func reset_object_prince(object):
-	print("RESET PRINCE")
-	object_needs_reset = true
-	is_invincible = false
-	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
 
 func apply_object_invincibility(object):
 	is_invincible = true
