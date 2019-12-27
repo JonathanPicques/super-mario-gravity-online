@@ -68,3 +68,31 @@ region_rect = Rect2( 0, 0, 512, 512 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Background2" type="ParallaxLayer" parent="ParallaxSlot/ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 512, 512 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 512 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Background3" type="ParallaxLayer" parent="ParallaxSlot/ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 512, 512 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3"]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 512 )
+__meta__ = {
+"_edit_lock_": true
+}
