@@ -11,10 +11,13 @@
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Items/SolidBlock/SolidBlock.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Items/SolidBlock/BigSolidBlock.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Game/Maps/Textures/BackgroundGarden3.png" type="Texture" id=12]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden1.png" type="Texture" id=13]
 
-[node name="Map" index="0" instance=ExtResource( 1 )]
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/BackgroundGarden3.png-3106e693710b819f6add1a95c7ac6595.stex"
+
+[node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 6 )
 
 [node name="Map" parent="." index="2"]
@@ -208,7 +211,7 @@ position = Vector2( 2720, -80 )
 rotation = 3.14159
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
-texture = ExtResource( 12 )
+texture = SubResource( 7 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 visible = true
