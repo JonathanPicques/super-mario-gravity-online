@@ -2,11 +2,16 @@
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/SettingsMenu.gd" type="Script" id=2]
-[ext_resource path="res://Game/Menus/Textures/KeyCancel.png" type="Texture" id=4]
-[ext_resource path="res://Game/Menus/Textures/KeyCtrlConfirm.png" type="Texture" id=5]
+[ext_resource path="res://Game/Menus/Textures/KeyKeyboardCancel.png" type="Texture" id=4]
+[ext_resource path="res://Game/Menus/Textures/KeyGamepadConfirm.png" type="Texture" id=5]
 [ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=8]
-[ext_resource path="res://Game/Menus/Textures/KeyCtrlCancel.png" type="Texture" id=9]
+[ext_resource path="res://Game/Menus/Textures/KeyGamepadCancel.png" type="Texture" id=9]
+
+
+
+
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 14

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/KeyAlt2.png-3942f5a4979ae47a12228294b279fb80.stex"
+path="res://.import/KeyGamepadCancel.png-1b72cc5dee74fce5ca834dd7d5ac380f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/KeyAlt2.png"
-dest_files=[ "res://.import/KeyAlt2.png-3942f5a4979ae47a12228294b279fb80.stex" ]
+source_file="res://Game/Menus/Textures/KeyGamepadCancel.png"
+dest_files=[ "res://.import/KeyGamepadCancel.png-1b72cc5dee74fce5ca834dd7d5ac380f.stex" ]
 
 [params]
 

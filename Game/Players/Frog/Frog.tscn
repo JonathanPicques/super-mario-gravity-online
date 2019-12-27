@@ -510,7 +510,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[node name="Frog" index="0" instance=ExtResource( 2 )]
+[node name="Frog" instance=ExtResource( 2 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="1"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/KeyCtrlAlt1.png-b1d4c5524a8bb34b43e0bf4d2fb681cf.stex"
+path="res://.import/KeyKeyboardCancel.png-b6fb5a6f7551cbc0b6cdd74eec2a7dc8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/KeyCtrlAlt1.png"
-dest_files=[ "res://.import/KeyCtrlAlt1.png-b1d4c5524a8bb34b43e0bf4d2fb681cf.stex" ]
+source_file="res://Game/Menus/Textures/KeyKeyboardCancel.png"
+dest_files=[ "res://.import/KeyKeyboardCancel.png-b6fb5a6f7551cbc0b6cdd74eec2a7dc8.stex" ]
 
 [params]
 

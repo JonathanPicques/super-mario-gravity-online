@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/KeyCtrlConfirm.png-59a864f0b327c92ec10fd21aa26c747b.stex"
+path="res://.import/KeyKeyboardAlt2.png-cbae0d66cf42d6a0644bd53cc93bca68.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/KeyCtrlConfirm.png"
-dest_files=[ "res://.import/KeyCtrlConfirm.png-59a864f0b327c92ec10fd21aa26c747b.stex" ]
+source_file="res://Game/Menus/Textures/KeyKeyboardAlt2.png"
+dest_files=[ "res://.import/KeyKeyboardAlt2.png-cbae0d66cf42d6a0644bd53cc93bca68.stex" ]
 
 [params]
 

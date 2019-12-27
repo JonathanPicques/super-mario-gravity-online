@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/KeyCtrlAlt2.png-7f3963e9f9a98017d60a422cf22d5244.stex"
+path="res://.import/WaveDistortHUD.png-21e64bc4f40a96fc0727a0a048d52f77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/KeyCtrlAlt2.png"
-dest_files=[ "res://.import/KeyCtrlAlt2.png-7f3963e9f9a98017d60a422cf22d5244.stex" ]
+source_file="res://Game/Powers/Textures/WaveDistortHUD.png"
+dest_files=[ "res://.import/WaveDistortHUD.png-21e64bc4f40a96fc0727a0a048d52f77.stex" ]
 
 [params]
 
