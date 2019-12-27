@@ -6,6 +6,13 @@ var player_camera_scene = null
 
 const SKIP_START_POSITION := Vector2(96, 240)
 
+onready var KeyKeyboardJump = $GUI/JumpHintLabel/KeyKeyboardJump
+onready var KeyGamepadJump = $GUI/JumpHintLabel/KeyGamepadJump
+onready var KeyKeyboardOpenDoor = $GUI/OpenDoorLabel/KeyKeyboardOpenDoor
+onready var KeyGamepadOpenDoor = $GUI/OpenDoorLabel/KeyGamepadOpenDoor
+onready var KeyKeyboardUseObject = $GUI/ObjectHintLabel/KeyKeyboardUseObject
+onready var KeyGamepadUseObject = $GUI/ObjectHintLabel/KeyGamepadUseObject
+
 # @impure
 func _ready():
 	if !SettingsManager.values["show_tuto"]:
@@ -36,7 +43,16 @@ func _process(delta: float):
 	# add camera to player
 	if !player_camera_scene and lead_player:
 		$GUI/TitleLabel.visible = false
-		$GUI/SubtitleLabel.visible = false 
+		$GUI/SubtitleLabel.visible = false
+		$GUI/OpenDoorLabel.visible = true
+		
+		KeyKeyboardJump.visible = lead_player.input_device_id == 0
+		KeyGamepadJump.visible = lead_player.input_device_id == 1
+		KeyKeyboardOpenDoor.visible = lead_player.input_device_id == 0
+		KeyGamepadOpenDoor.visible = lead_player.input_device_id == 1
+		KeyKeyboardUseObject.visible = lead_player.input_device_id == 0
+		KeyGamepadUseObject.visible = lead_player.input_device_id == 1
+		
 		var player_node = MultiplayerManager.get_player_node(lead_player.id)
 		if player_node:
 			player_camera_scene = PlayerCamera.instance()
