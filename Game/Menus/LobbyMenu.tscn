@@ -43,19 +43,7 @@ position = Vector2( 0, -32 )
 [node name="FlagStart" parent="." index="4"]
 position = Vector2( 0, -96 )
 
-[node name="HSolidBlock" parent="ObjectSlot" index="0" instance=ExtResource( 3 )]
-position = Vector2( 128, 144 )
-
-[node name="HSolidBlock2" parent="ObjectSlot" index="1" instance=ExtResource( 3 )]
-position = Vector2( 192, 176 )
-
-[node name="HSolidBlock3" parent="ObjectSlot" index="2" instance=ExtResource( 3 )]
-position = Vector2( 272, 128 )
-
-[node name="HSolidBlock4" parent="ObjectSlot" index="3" instance=ExtResource( 3 )]
-position = Vector2( 336, 160 )
-
-[node name="GUI" type="Control" parent="." index="8"]
+[node name="GUI" type="Control" parent="." index="6"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -209,6 +197,18 @@ text = "private/public"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HSolidBlock" parent="ObjectSlot" index="0" instance=ExtResource( 3 )]
+position = Vector2( 128, 144 )
+
+[node name="HSolidBlock2" parent="ObjectSlot" index="1" instance=ExtResource( 3 )]
+position = Vector2( 192, 176 )
+
+[node name="HSolidBlock3" parent="ObjectSlot" index="2" instance=ExtResource( 3 )]
+position = Vector2( 272, 128 )
+
+[node name="HSolidBlock4" parent="ObjectSlot" index="3" instance=ExtResource( 3 )]
+position = Vector2( 336, 160 )
 
 [node name="Icons" type="Node2D" parent="." index="9"]
 

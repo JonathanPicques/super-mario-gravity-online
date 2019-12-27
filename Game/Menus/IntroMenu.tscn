@@ -57,7 +57,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
 
-[node name="Map" index="0" instance=ExtResource( 7 )]
+[node name="Map" instance=ExtResource( 7 )]
 script = ExtResource( 10 )
 
 [node name="DecorBack" parent="." index="0"]
@@ -75,19 +75,7 @@ position = Vector2( -720, 240 )
 [node name="Door" parent="DoorSlot" index="0" instance=ExtResource( 3 )]
 position = Vector2( 256, 240 )
 
-[node name="PowerBox" parent="ObjectSlot" index="0" instance=ExtResource( 5 )]
-position = Vector2( -128, 32 )
-
-[node name="PowerBox2" parent="ObjectSlot" index="1" instance=ExtResource( 5 )]
-position = Vector2( -96, 32 )
-
-[node name="PowerBox3" parent="ObjectSlot" index="2" instance=ExtResource( 5 )]
-position = Vector2( -128, 0 )
-
-[node name="PowerBox4" parent="ObjectSlot" index="3" instance=ExtResource( 5 )]
-position = Vector2( -96, 0 )
-
-[node name="GUI" type="Control" parent="." index="8"]
+[node name="GUI" type="Control" parent="." index="6"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -259,6 +247,18 @@ visible = false
 position = Vector2( 7, 1 )
 texture = ExtResource( 4 )
 centered = false
+
+[node name="PowerBox" parent="ObjectSlot" index="0" instance=ExtResource( 5 )]
+position = Vector2( -128, 32 )
+
+[node name="PowerBox2" parent="ObjectSlot" index="1" instance=ExtResource( 5 )]
+position = Vector2( -96, 32 )
+
+[node name="PowerBox3" parent="ObjectSlot" index="2" instance=ExtResource( 5 )]
+position = Vector2( -128, 0 )
+
+[node name="PowerBox4" parent="ObjectSlot" index="3" instance=ExtResource( 5 )]
+position = Vector2( -96, 0 )
 
 [node name="AutoCreatePlayers" parent="." index="9" instance=ExtResource( 11 )]
 
