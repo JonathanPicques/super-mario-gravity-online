@@ -3,7 +3,7 @@ class_name GameNode
 
 const Map := preload("res://Game/Maps/Map.tscn")
 const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
-const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
+const HomeMenu := preload("res://Game/Menus/IntroMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 const SettingsMenu := preload("res://Game/Menus/SettingsMenu.tscn")

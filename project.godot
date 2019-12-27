@@ -105,7 +105,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Once Upon A Frog"
-run/main_scene="res://Game/Menus/HomeMenu.tscn"
+run/main_scene="res://Game/Menus/IntroMenu.tscn"
 config/icon="res://Settings/Icon.png"
 
 [autoload]

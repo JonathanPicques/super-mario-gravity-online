@@ -1,7 +1,6 @@
 [gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadConfirm.png" type="Texture" id=5]
@@ -15,6 +14,71 @@
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadUp.png" type="Texture" id=14]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=15]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden1.png" type="Texture" id=16]
+
+[sub_resource type="GDScript" id=9]
+script/source = "extends \"res://Game/Maps/Map.gd\"
+
+const PlayerCamera := preload(\"res://Game/Players/PlayerCamera2D.tscn\")
+
+var player_camera_scene = null
+
+const SKIP_START_POSITION := Vector2(96, 240)
+
+onready var KeyKeyboardJump = $GUI/JumpHintLabel/KeyKeyboardJump
+onready var KeyGamepadJump = $GUI/JumpHintLabel/KeyGamepadJump
+onready var KeyKeyboardOpenDoor = $GUI/OpenDoorLabel/KeyKeyboardOpenDoor
+onready var KeyGamepadOpenDoor = $GUI/OpenDoorLabel/KeyGamepadOpenDoor
+onready var KeyKeyboardUseObject = $GUI/ObjectHintLabel/KeyKeyboardUseObject
+onready var KeyGamepadUseObject = $GUI/ObjectHintLabel/KeyGamepadUseObject
+
+# @impure
+func _ready():
+	if !SettingsManager.values[\"show_tuto\"]:
+		$FlagStart.position = SKIP_START_POSITION
+	else:
+		SettingsManager.values[\"show_tuto\"] = false # TODO: check if launch at least one game
+		SettingsManager.save_settings()
+	AudioManager.play_music(\"res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg\")
+
+# @impure
+func _process(delta: float):
+	var lead_player = MultiplayerManager.get_lead_player()
+	# goto lobby
+	if lead_player and InputManager.is_player_action_just_pressed(lead_player.id, \"accept\"):
+		set_process(false) # disable process to avoid calling goto_lobby_menu_scene multiple times.
+		return Game.goto_lobby_menu_scene()
+	if Input.is_action_just_pressed(\"ui_toggle_room_status\"):
+		Game.goto_settings_menu_scene()
+	# add a local player
+	if not lead_player:
+		for input_device_id in range(0, 5):
+			if InputManager.is_device_action_just_pressed(input_device_id, \"accept\") and not InputManager.is_device_used_by_player(input_device_id):
+				yield(get_tree(), \"idle_frame\")
+				MultiplayerManager.add_player(\"Local player\", true, input_device_id, MultiplayerManager.my_peer_id, MultiplayerManager.get_next_player_local_id(MultiplayerManager.my_peer_id))
+				$GUI/TitleLabel.visible = false
+				$GUI/SubtitleLabel.visible = false 
+
+	# add camera to player
+	if !player_camera_scene and lead_player:
+		$GUI/TitleLabel.visible = false
+		$GUI/SubtitleLabel.visible = false
+		$GUI/OpenDoorLabel.visible = true
+		
+		KeyKeyboardJump.visible = lead_player.input_device_id == 0
+		KeyGamepadJump.visible = lead_player.input_device_id == 1
+		KeyKeyboardOpenDoor.visible = lead_player.input_device_id == 0
+		KeyGamepadOpenDoor.visible = lead_player.input_device_id == 1
+		KeyKeyboardUseObject.visible = lead_player.input_device_id == 0
+		KeyGamepadUseObject.visible = lead_player.input_device_id == 1
+		
+		var player_node = MultiplayerManager.get_player_node(lead_player.id)
+		if player_node:
+			player_camera_scene = PlayerCamera.instance()
+			player_camera_scene.player_node_path = player_node.get_path()
+			player_camera_scene.tile_map_node_path = $Map.get_path()
+			add_child(player_camera_scene)
+	
+"
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -58,7 +122,7 @@ tracks/0/keys = {
 }
 
 [node name="Map" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+script = SubResource( 9 )
 
 [node name="DecorBack" parent="." index="0"]
 tile_data = PoolIntArray( 393225, 11, 3, 393227, 11, 3, 393229, 11, 3, 393234, 11, 3, 393236, 11, 3, 393238, 11, 3, 458761, 11, 65542, 458762, 11, 1, 458763, 11, 196613, 458764, 11, 1, 458765, 11, 65543, 458770, 11, 65542, 458771, 11, 1, 458772, 11, 196613, 458773, 11, 1, 458774, 11, 65543, 524297, 11, 131072, 524298, 11, 5, 524299, 11, 65537, 524300, 11, 4, 524301, 11, 131074, 524306, 11, 131072, 524307, 11, 5, 524308, 11, 65537, 524309, 11, 4, 524310, 11, 131074, 589834, 11, 65536, 589835, 11, 65537, 589836, 11, 65538, 589839, 11, 0, 589840, 11, 2, 589843, 11, 65536, 589844, 11, 65537, 589845, 11, 65538, 655370, 11, 65536, 655371, 11, 65537, 655372, 11, 65538, 655374, 11, 0, 655375, 11, 65541, 655376, 11, 65540, 655377, 11, 2, 655379, 11, 65536, 655380, 11, 65537, 655381, 11, 65538, 720906, 11, 65536, 720907, 11, 65537, 720908, 11, 65540, 720909, 11, 1, 720910, 11, 65541, 720911, 11, 65537, 720912, 11, 65537, 720913, 11, 65540, 720914, 11, 1, 720915, 11, 65541, 720916, 11, 65537, 720917, 11, 65538, 786442, 11, 65536, 786443, 11, 65537, 786444, 11, 65537, 786445, 11, 65537, 786446, 11, 65537, 786447, 11, 65537, 786448, 11, 65537, 786449, 11, 65537, 786450, 11, 65537, 786451, 11, 65537, 786452, 11, 65537, 786453, 11, 65538, 851978, 11, 65536, 851979, 11, 65537, 851980, 11, 65537, 851981, 11, 65537, 851982, 11, 65537, 851983, 11, 65537, 851984, 11, 65537, 851985, 11, 65537, 851986, 11, 65537, 851987, 11, 65537, 851988, 11, 65537, 851989, 11, 65538, 917514, 11, 131072, 917515, 11, 131073, 917516, 11, 131073, 917517, 11, 131073, 917518, 11, 131073, 917519, 11, 131073, 917520, 11, 131073, 917521, 11, 131073, 917522, 11, 131073, 917523, 11, 131073, 917524, 11, 131073, 917525, 11, 131074, 983046, 13, 196608, 983047, 13, 196610, 1114120, 13, 196611 )
