@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
@@ -38,6 +38,24 @@ load_path = "res://.import/KeyAlt2.png-3942f5a4979ae47a12228294b279fb80.stex"
 [sub_resource type="StreamTexture" id=7]
 flags = 4
 load_path = "res://.import/BackgroundGarden3.png-3106e693710b819f6add1a95c7ac6595.stex"
+
+[sub_resource type="Animation" id=8]
+resource_name = "move_clouds"
+length = 30.0
+loop = true
+step = 30.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:motion_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 30 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
+}
 
 [node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -246,6 +264,10 @@ centered = false
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
+autoplay = "move_clouds"
+anims/move_clouds = SubResource( 8 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 visible = true
