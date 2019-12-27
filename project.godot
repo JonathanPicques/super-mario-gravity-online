@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Items/Door/Door.gd"
 }, {
+"base": "Object",
+"class": "FiniteStateMachine",
+"language": "GDScript",
+"path": "res://Game/Utilities/Scripts/FiniteStateMachine.gd"
+}, {
+"base": "Node",
+"class": "FiniteStateMachineStateNode",
+"language": "GDScript",
+"path": "res://Game/Utilities/Scripts/FiniteStateMachineState.gd"
+}, {
 "base": "Control",
 "class": "GameModeNode",
 "language": "GDScript",
@@ -87,6 +97,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AudioManagerNode": "",
 "DoorNode": "",
+"FiniteStateMachine": "",
+"FiniteStateMachineStateNode": "",
 "GameModeNode": "",
 "GameNode": "",
 "InputManagerNode": "",
@@ -105,7 +117,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Once Upon A Frog"
-run/main_scene="res://Game/Menus/IntroMenu.tscn"
+run/main_scene="res://Game/Menus/HomeMenu.tscn"
 config/icon="res://Settings/Icon.png"
 
 [autoload]

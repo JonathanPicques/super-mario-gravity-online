@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/step_01.ogg-30fb5a9dffe86c9f88baca625f7c0ae8.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Classes/Frog/Sounds/step_01.ogg"
+dest_files=[ "res://.import/step_01.ogg-30fb5a9dffe86c9f88baca625f7c0ae8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

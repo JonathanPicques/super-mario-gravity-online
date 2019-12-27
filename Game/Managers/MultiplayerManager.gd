@@ -7,8 +7,8 @@ enum PlayerClass {
 }
 
 onready var PlayerClasses = {
-	PlayerClass.Frog: preload("res://Game/Players/Frog/Frog.tscn"),
-	PlayerClass.Prince: preload("res://Game/Players/Prince/Prince.tscn")
+	PlayerClass.Frog: preload("res://Game/Players/Classes/Frog/Frog.tscn"),
+	PlayerClass.Prince: preload("res://Game/Players/Classes/Prince/Prince.tscn")
 }
 
 signal player_added(player)

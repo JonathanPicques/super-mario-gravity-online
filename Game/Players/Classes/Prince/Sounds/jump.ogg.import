@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/jump.ogg-0147ab7e814f1f8623789c7a45310e91.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Classes/Prince/Sounds/jump.ogg"
+dest_files=[ "res://.import/jump.ogg-0147ab7e814f1f8623789c7a45310e91.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

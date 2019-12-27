@@ -1,9 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
 [ext_resource path="res://Game/Effects/Particles/GroundDust.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/Players/Frog/Textures/Crown.png" type="Texture" id=4]
+[ext_resource path="res://Game/Players/Classes/Frog/Textures/Crown.png" type="Texture" id=4]
+[ext_resource path="res://Game/Players/States/stand.gd" type="Script" id=5]
+[ext_resource path="res://Game/Players/States/run.gd" type="Script" id=6]
+[ext_resource path="res://Game/Players/States/enter_door.gd" type="Script" id=7]
+[ext_resource path="res://Game/Players/States/walljump.gd" type="Script" id=8]
+[ext_resource path="res://Game/Players/States/expulse.gd" type="Script" id=9]
+[ext_resource path="res://Game/Players/States/push_wall.gd" type="Script" id=10]
+[ext_resource path="res://Game/Players/States/fall.gd" type="Script" id=11]
+[ext_resource path="res://Game/Players/States/move_turn.gd" type="Script" id=12]
+[ext_resource path="res://Game/Players/States/jump.gd" type="Script" id=13]
+[ext_resource path="res://Game/Players/States/wallslide.gd" type="Script" id=14]
+[ext_resource path="res://Game/Players/States/enter_door_fade.gd" type="Script" id=15]
+[ext_resource path="res://Game/Players/States/respawn.gd" type="Script" id=16]
+[ext_resource path="res://Game/Players/States/use_power.gd" type="Script" id=17]
+[ext_resource path="res://Game/Players/States/death.gd" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 10 )
@@ -100,3 +114,47 @@ playback/repeat = true
 
 [node name="GroundDust" parent="." instance=ExtResource( 3 )]
 position = Vector2( -2, 0 )
+
+[node name="StateMachine" type="Node2D" parent="."]
+
+[node name="stand" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="run" type="Node" parent="StateMachine"]
+script = ExtResource( 6 )
+
+[node name="move_turn" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+
+[node name="push_wall" type="Node" parent="StateMachine"]
+script = ExtResource( 10 )
+
+[node name="fall" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
+[node name="jump" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+
+[node name="expulse" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+
+[node name="wallslide" type="Node" parent="StateMachine"]
+script = ExtResource( 14 )
+
+[node name="walljump" type="Node" parent="StateMachine"]
+script = ExtResource( 8 )
+
+[node name="enter_door" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="enter_door_fade" type="Node" parent="StateMachine"]
+script = ExtResource( 15 )
+
+[node name="use_power" type="Node" parent="StateMachine"]
+script = ExtResource( 17 )
+
+[node name="death" type="Node" parent="StateMachine"]
+script = ExtResource( 18 )
+
+[node name="respawn" type="Node" parent="StateMachine"]
+script = ExtResource( 16 )

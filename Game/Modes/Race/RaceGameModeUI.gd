@@ -25,7 +25,7 @@ func _ready():
 	MultiplayerManager.connect("player_added", self, "on_player_added")
 	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	MultiplayerManager.connect("player_set_skin", self, "on_player_set_skin")
-	
+	# Show/hide minimap
 	$MiniMap.visible = SettingsManager.values["minimap"]
 
 # @impure
@@ -36,13 +36,14 @@ func _process(delta: float):
 		display_power_hud()
 
 func display_power_hud():
-	if ui_player_node and ui_player_node.current_object_index != null:
-		var texture_rect = PowersManager.Powers[ui_player_node.current_object_index]["hud"].instance()
-		if PowerContainer.get_child_count() == 0:
-			PowerContainer.add_child(texture_rect)
-	else:
-		if PowerContainer.get_child_count() == 1:
-			PowerContainer.remove_child(PowerContainer.get_child(0))
+	# if ui_player_node and ui_player_node.current_object_index != null:
+		# var texture_rect = PowersManager.Powers[ui_player_node.current_object_index]["hud"].instance()
+		# if PowerContainer.get_child_count() == 0:
+			# PowerContainer.add_child(texture_rect)
+	# else:
+		# if PowerContainer.get_child_count() == 1:
+			# PowerContainer.remove_child(PowerContainer.get_child(0))
+	pass
 
 # @impure
 # @signal

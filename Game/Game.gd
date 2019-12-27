@@ -11,7 +11,7 @@ const SettingsMenu := preload("res://Game/Menus/SettingsMenu.tscn")
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
 onready var GameTransitionCanvasLayer: CanvasLayer = $TransitionCanvasLayer
 
-var is_over = false
+var is_over := false
 var map_node: MapNode
 var scene_node: Node2D
 var game_mode_node: GameModeNode

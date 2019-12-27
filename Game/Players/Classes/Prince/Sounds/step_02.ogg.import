@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/step_02.ogg-bd14f962c65c20866014b03b7a9f09b4.oggstr"
+
+[deps]
+
+source_file="res://Game/Players/Classes/Prince/Sounds/step_02.ogg"
+dest_files=[ "res://.import/step_02.ogg-bd14f962c65c20866014b03b7a9f09b4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

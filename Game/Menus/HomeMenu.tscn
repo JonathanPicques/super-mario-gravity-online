@@ -15,7 +15,7 @@
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=15]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden1.png" type="Texture" id=16]
 
-[sub_resource type="GDScript" id=9]
+[sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Game/Maps/Map.gd\"
 
 const PlayerCamera := preload(\"res://Game/Players/PlayerCamera2D.tscn\")
@@ -80,31 +80,30 @@ func _process(delta: float):
 	
 "
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 30
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 4 )
-
-[sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/KeyConfirm.png-9b269870890eac6c202782262cc5c861.stex"
 
 [sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/KeyConfirm.png-9b269870890eac6c202782262cc5c861.stex"
+
+[sub_resource type="StreamTexture" id=5]
 load_path = "res://.import/KeyAlt1.png-44576e90e1bf327a6196642e5cba10c2.stex"
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 4 )
 
-[sub_resource type="StreamTexture" id=6]
+[sub_resource type="StreamTexture" id=7]
 load_path = "res://.import/KeyAlt2.png-3942f5a4979ae47a12228294b279fb80.stex"
 
-[sub_resource type="StreamTexture" id=7]
+[sub_resource type="StreamTexture" id=8]
 flags = 4
 load_path = "res://.import/BackgroundGarden3.png-3106e693710b819f6add1a95c7ac6595.stex"
 
-[sub_resource type="Animation" id=8]
-resource_name = "move_clouds"
+[sub_resource type="Animation" id=9]
 length = 30.0
 loop = true
 step = 30.0
@@ -121,8 +120,8 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
 
-[node name="Map" instance=ExtResource( 1 )]
-script = SubResource( 9 )
+[node name="Map" index="0" instance=ExtResource( 1 )]
+script = SubResource( 1 )
 
 [node name="DecorBack" parent="." index="0"]
 tile_data = PoolIntArray( 393225, 11, 3, 393227, 11, 3, 393229, 11, 3, 393234, 11, 3, 393236, 11, 3, 393238, 11, 3, 458761, 11, 65542, 458762, 11, 1, 458763, 11, 196613, 458764, 11, 1, 458765, 11, 65543, 458770, 11, 65542, 458771, 11, 1, 458772, 11, 196613, 458773, 11, 1, 458774, 11, 65543, 524297, 11, 131072, 524298, 11, 5, 524299, 11, 65537, 524300, 11, 4, 524301, 11, 131074, 524306, 11, 131072, 524307, 11, 5, 524308, 11, 65537, 524309, 11, 4, 524310, 11, 131074, 589834, 11, 65536, 589835, 11, 65537, 589836, 11, 65538, 589839, 11, 0, 589840, 11, 2, 589843, 11, 65536, 589844, 11, 65537, 589845, 11, 65538, 655370, 11, 65536, 655371, 11, 65537, 655372, 11, 65538, 655374, 11, 0, 655375, 11, 65541, 655376, 11, 65540, 655377, 11, 2, 655379, 11, 65536, 655380, 11, 65537, 655381, 11, 65538, 720906, 11, 65536, 720907, 11, 65537, 720908, 11, 65540, 720909, 11, 1, 720910, 11, 65541, 720911, 11, 65537, 720912, 11, 65537, 720913, 11, 65540, 720914, 11, 1, 720915, 11, 65541, 720916, 11, 65537, 720917, 11, 65538, 786442, 11, 65536, 786443, 11, 65537, 786444, 11, 65537, 786445, 11, 65537, 786446, 11, 65537, 786447, 11, 65537, 786448, 11, 65537, 786449, 11, 65537, 786450, 11, 65537, 786451, 11, 65537, 786452, 11, 65537, 786453, 11, 65538, 851978, 11, 65536, 851979, 11, 65537, 851980, 11, 65537, 851981, 11, 65537, 851982, 11, 65537, 851983, 11, 65537, 851984, 11, 65537, 851985, 11, 65537, 851986, 11, 65537, 851987, 11, 65537, 851988, 11, 65537, 851989, 11, 65538, 917514, 11, 131072, 917515, 11, 131073, 917516, 11, 131073, 917517, 11, 131073, 917518, 11, 131073, 917519, 11, 131073, 917520, 11, 131073, 917521, 11, 131073, 917522, 11, 131073, 917523, 11, 131073, 917524, 11, 131073, 917525, 11, 131074, 983046, 13, 196608, 983047, 13, 196610, 1114120, 13, 196611 )
@@ -165,7 +164,7 @@ margin_left = 128.0
 margin_top = 31.6559
 margin_right = 384.0
 margin_bottom = 60.6559
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.113725, 0.109804, 0.121569, 1 )
 text = "Once upon a frog"
 align = 1
@@ -178,7 +177,7 @@ margin_left = 160.0
 margin_top = 64.0
 margin_right = 352.0
 margin_bottom = 81.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "Press     /    to join "
 align = 1
@@ -192,14 +191,14 @@ texture = ExtResource( 5 )
 
 [node name="KeyENTER" type="Sprite" parent="GUI/SubtitleLabel" index="1"]
 position = Vector2( 73, 8 )
-texture = SubResource( 3 )
+texture = SubResource( 4 )
 
 [node name="JumpHintLabel" type="Label" parent="GUI" index="2"]
 margin_left = -576.0
 margin_top = 192.0
 margin_right = -448.0
 margin_bottom = 209.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "Press    to jump"
 align = 1
@@ -221,7 +220,7 @@ margin_left = -384.0
 margin_top = 192.0
 margin_right = -240.0
 margin_bottom = 229.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "Also, you can
 Double Jump"
@@ -235,7 +234,7 @@ margin_left = -1104.0
 margin_top = 736.0
 margin_right = -960.0
 margin_bottom = 773.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "Secret spot ;)"
 align = 1
@@ -248,7 +247,7 @@ margin_left = -288.0
 margin_top = 128.0
 margin_right = -176.0
 margin_bottom = 149.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "And Wall Jump !"
 align = 1
@@ -261,7 +260,7 @@ margin_left = -192.0
 margin_top = -32.0
 margin_right = -10.0
 margin_bottom = -15.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "Press    to use an object!"
 align = 1
@@ -271,7 +270,7 @@ __meta__ = {
 
 [node name="KeyKeyboardUseObject" type="Sprite" parent="GUI/ObjectHintLabel" index="0"]
 position = Vector2( 50, 9 )
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 
 [node name="KeyGamepadUseObject" type="Sprite" parent="GUI/ObjectHintLabel" index="1"]
 visible = false
@@ -283,7 +282,7 @@ margin_left = 32.0
 margin_top = 256.0
 margin_right = 96.0
 margin_bottom = 273.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "settings"
 __meta__ = {
@@ -292,7 +291,7 @@ __meta__ = {
 
 [node name="KeyKeyboardSettings" type="Sprite" parent="GUI/SettingsLabel" index="0"]
 position = Vector2( -13, 9 )
-texture = SubResource( 6 )
+texture = SubResource( 7 )
 
 [node name="KeyGamepadSettings" type="Sprite" parent="GUI/SettingsLabel" index="1"]
 visible = false
@@ -306,7 +305,7 @@ margin_left = 192.0
 margin_top = 256.0
 margin_right = 293.0
 margin_bottom = 273.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
 text = "    open the door"
 __meta__ = {
@@ -327,11 +326,11 @@ centered = false
 [node name="AutoCreatePlayers" parent="." index="9" instance=ExtResource( 7 )]
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
-texture = SubResource( 7 )
+texture = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
 autoplay = "move_clouds"
-anims/move_clouds = SubResource( 8 )
+anims/move_clouds = SubResource( 9 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 visible = true
