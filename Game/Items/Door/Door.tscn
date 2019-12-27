@@ -1,49 +1,23 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Game/Items/Door/Textures/Door.png" type="Texture" id=1]
 [ext_resource path="res://Game/Items/Door/Door.gd" type="Script" id=2]
 
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/DoorOpen.png-c0804f1ee1ecfb43930d244e21beceb6.stex"
+
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 32, 64 )
+atlas = SubResource( 4 )
+region = Rect2( 0, 0, 32, 48 )
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 1 )
-region = Rect2( 96, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 128, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 160, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 192, 0, 32, 64 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 224, 0, 32, 64 )
-
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"frames": [ SubResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 16, 22 )
 
 [node name="Door" type="Node2D" groups=[
@@ -55,12 +29,10 @@ script = ExtResource( 2 )
 "Door",
 ]]
 position = Vector2( -16, -48 )
-frames = SubResource( 9 )
-frame = 1
+frames = SubResource( 2 )
 speed_scale = 4.0
 playing = true
 centered = false
-offset = Vector2( 0, -16 )
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite" groups=[
 "Door",
@@ -72,7 +44,7 @@ collision_mask = 0
 "Door",
 ]]
 position = Vector2( 16, 26 )
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 
 [node name="Target" type="Node2D" parent="." groups=[
 "Door",
