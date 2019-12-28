@@ -108,6 +108,7 @@ var current_power_index: int
 
 # @impure
 func _ready():
+	set_dialog(DialogType.none, false)
 	set_process(!!get_tree().network_peer)
 	set_direction(direction)
 	SkinManager.replace_skin(PlayerSprite, player.skin_id, false)
@@ -316,6 +317,8 @@ func handle_expulse(strength: float):
 func handle_gravity(delta: float, max_speed: float, acceleration: float):
 	if not is_on_floor():
 		velocity.y = move_toward(velocity.y, max_speed, delta * acceleration)
+	elif velocity.x == 0 and input_velocity.x == 0:
+		velocity.y = 0
 
 # handle_walljump walljumps.
 # @impure
@@ -414,6 +417,8 @@ func has_invert_direction(dir1: float, dir2: float) -> bool:
 # Events
 ###
 
+# apply_death is called externally when the player should meet a fatal fate.
+# @impure
 var _death_dir := 1.0
 var _death_origin := Vector2()
 func apply_death(death_origin: Vector2):
@@ -423,6 +428,8 @@ func apply_death(death_origin: Vector2):
 	_death_origin = death_origin
 	fsm.set_state_node(fsm.states.death)
 
+# apply_expulse sends the player flying in the given direction.
+# @impure
 func apply_expulse(expulse_dir: Vector2):
 	expulse_direction = expulse_dir
 	fsm.set_state_node(fsm.states.expulse)

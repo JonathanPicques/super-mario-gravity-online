@@ -5,7 +5,7 @@ func start_state():
 	context.start_timer(0.14)
 	context.set_animation("jump")
 	context.handle_expulse(context.EXPULSE_STRENGTH)
-	# play_sound_effect(JumpSFX)
+	context.play_sound_effect(context.JumpSFX)
 	if context.expulse_direction.y < 0:
 		context.jumps_remaining = context.MAX_JUMPS - 1
 	if int(sign(context.expulse_direction.x)) != 0:

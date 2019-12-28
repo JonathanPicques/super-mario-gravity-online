@@ -22,5 +22,5 @@ func _ready():
 # _process is called on every tick to center the camera on the player.
 # @impure
 func _process(delta):
-#	if player_node.state != player_node.PlayerState.death:
-	position = player_node.position
+	if player_node.fsm.current_state_node != player_node.fsm.states.death:
+		position = player_node.position

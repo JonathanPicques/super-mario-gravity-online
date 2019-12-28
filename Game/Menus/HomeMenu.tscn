@@ -24,16 +24,13 @@ font_data = ExtResource( 3 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="StreamTexture" id=3]
-load_path = "res://.import/KeyConfirm.png-9b269870890eac6c202782262cc5c861.stex"
 
 [sub_resource type="StreamTexture" id=4]
-load_path = "res://.import/KeyAlt1.png-44576e90e1bf327a6196642e5cba10c2.stex"
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 4 )
 
 [sub_resource type="StreamTexture" id=6]
-load_path = "res://.import/KeyAlt2.png-3942f5a4979ae47a12228294b279fb80.stex"
 
 [sub_resource type="StreamTexture" id=7]
 flags = 4
@@ -57,7 +54,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
 
-[node name="Map" instance=ExtResource( 1 )]
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="DecorBack" parent="." index="0"]

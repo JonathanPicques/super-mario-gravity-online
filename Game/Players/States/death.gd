@@ -7,7 +7,7 @@ func start_state():
 	context.velocity = Vector2(_death_dir * -120.0, -320.0)
 	context.start_timer(1.0)
 	context.set_animation("death")
-	# play_sound_effect(DeathSFX)
+	context.play_sound_effect(context.DeathSFX)
 	context.PlayerCollisionBody.set_deferred("disabled", true)
 
 func process_state(delta: float):

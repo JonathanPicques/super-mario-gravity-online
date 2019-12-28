@@ -13,7 +13,7 @@ func _init(_context: Node, _parent_state_node: Node, _initial_state_node: Node):
 		state_node.fsm = self
 		state_node.context = _context
 		states[state_node.name] = state_node
-	next_state_node = _initial_state_node
+	set_state_node(_initial_state_node)
 
 func set_state_node(state_node: Node):
 	if current_state_node:
@@ -24,9 +24,6 @@ func set_state_node(state_node: Node):
 		set_state_node(change_state_node)
 
 func process_state_machine(delta: float):
-	if next_state_node and next_state_node != current_state_node:
-		print("%s => %s" % [current_state_node.name if current_state_node else "none", next_state_node.name])
-		set_state_node(next_state_node)
-		next_state_node = current_state_node.process_state(delta)
-	else:
-		next_state_node = current_state_node.process_state(delta)
+	var change_state_node = current_state_node.process_state(delta)
+	if change_state_node:
+		set_state_node(change_state_node)
