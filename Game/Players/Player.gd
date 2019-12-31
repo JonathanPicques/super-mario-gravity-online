@@ -61,13 +61,6 @@ var input_run_once := false
 var input_use_once := false
 var input_jump_once := false
 
-var SPEED_MULTIPLIER := 2
-
-var OBJECT_TIME_SPEED := 6.0
-var OBJECT_TIME_INVINCIBILITY := 6.0
-var OBJECT_TIME_PRINCE = 8.0
-var OBJECT_TIME_DISTORT := 6.0
-
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
 var RUN_DECELERATION := 690.0

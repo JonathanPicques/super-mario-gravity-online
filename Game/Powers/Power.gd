@@ -20,6 +20,6 @@ func finish_power():
 
 # @impure
 func set_hud_progress(progress: float):
-	var texture_rect: Control = power_hud_node.get_node("PowerProgressTextureRect")
+	var texture_rect: Control = power_hud_node.get_node("ProgressColorRect")
 	if texture_rect:
 		texture_rect.rect_scale.x = progress

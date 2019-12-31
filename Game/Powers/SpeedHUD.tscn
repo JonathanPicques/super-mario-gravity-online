@@ -4,6 +4,14 @@
 
 [node name="Speed" type="Node2D"]
 
+[node name="ProgressColorRect" type="ColorRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+color = Color( 0.219608, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Sprite" type="TextureRect" parent="."]
 texture = ExtResource( 1 )
 __meta__ = {

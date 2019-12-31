@@ -65,11 +65,6 @@ _global_script_classes=[ {
 "path": "res://Game/Powers/Prince.gd"
 }, {
 "base": "Node2D",
-"class": "ObjectSpeedNode",
-"language": "GDScript",
-"path": "res://Game/Powers/Speed.gd"
-}, {
-"base": "Node2D",
 "class": "ObjectWaveDistortNode",
 "language": "GDScript",
 "path": "res://Game/Powers/WaveDistort.gd"
@@ -98,6 +93,11 @@ _global_script_classes=[ {
 "class": "SkinManagerNode",
 "language": "GDScript",
 "path": "res://Game/Managers/SkinManager.gd"
+}, {
+"base": "PowerNode",
+"class": "SpeedPowerNode",
+"language": "GDScript",
+"path": "res://Game/Powers/Speed.gd"
 } ]
 _global_script_class_icons={
 "AudioManagerNode": "",
@@ -111,13 +111,13 @@ _global_script_class_icons={
 "MapNode": "",
 "MultiplayerManagerNode": "",
 "ObjectPrinceNode": "",
-"ObjectSpeedNode": "",
 "ObjectWaveDistortNode": "",
 "PlayerNode": "",
 "PowerNode": "",
 "PowersManagerNode": "",
 "RaceGameModeNode": "",
-"SkinManagerNode": ""
+"SkinManagerNode": "",
+"SpeedPowerNode": ""
 }
 
 [application]
