@@ -208,16 +208,12 @@ func process_death(delta: float):
 func process_powers(delta: float):
 	if power_node and power_node.on:
 		if power_node.process_power(delta):
+			emit_signal("finish_power", power_node.power_id)
 			power_node.finish_power()
 			power_node.on = false
-			#
-			emit_signal("finish_power", power_node.power_id)
-			#
 			get_parent().remove_child(power_node)
-			#
 			power_node.queue_free()
 			power_hud_node.queue_free()
-			#
 			power_node = null
 			power_hud_node = null
 

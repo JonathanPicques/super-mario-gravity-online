@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Game/Players/Classes/Frog/Frog.gd" type="Script" id=1]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Idle.png" type="Texture" id=2]
@@ -7,9 +7,9 @@
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Appearing.png" type="Texture" id=5]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Jump.png" type="Texture" id=6]
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Game/Players/Classes/Frog/Textures/Run2.png" type="Texture" id=8]
+[ext_resource path="res://Game/Players/Classes/Frog/Textures/Run.png" type="Texture" id=8]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Fall.png" type="Texture" id=9]
-[ext_resource path="res://Game/Players/Classes/Frog/Textures/Run.png" type="Texture" id=10]
+[ext_resource path="res://Game/Players/Classes/Frog/Textures/EnterDoor.png" type="Texture" id=10]
 [ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=11]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/WallSlide.png" type="Texture" id=12]
 
@@ -108,9 +108,47 @@ tracks/2/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=5]
-length = 0.56
-step = 0.08
+[sub_resource type="Animation" id=13]
+resource_name = "enter_door"
+length = 0.68
+loop = true
+step = 0.04
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.52, 0.56, 0.6, 0.64 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 18 ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.32
@@ -247,65 +285,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 0.48
-loop = true
-step = 0.04
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.88 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 11 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 0.0412346 ),
-"update": 1,
-"values": [ ExtResource( 10 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 12 ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.32, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "fx_step_01"
-}, {
-"args": [  ],
-"method": "fx_step_02"
-} ]
-}
-
-[sub_resource type="Animation" id=10]
-resource_name = "run2"
+resource_name = "run"
 length = 0.48
 loop = true
 step = 0.04
@@ -346,7 +326,7 @@ tracks/2/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 0.8
 loop = true
 step = 0.04
@@ -387,7 +367,7 @@ tracks/2/keys = {
 "values": [ 20 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "swim"
 length = 0.84
 loop = true
@@ -429,7 +409,7 @@ tracks/2/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 length = 0.16
 loop = true
 step = 0.04
@@ -470,26 +450,26 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[node name="Frog" instance=ExtResource( 7 )]
+[node name="Frog" index="0" instance=ExtResource( 7 )]
 script = ExtResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 material = SubResource( 1 )
-texture = ExtResource( 12 )
+texture = ExtResource( 10 )
 centered = true
-hframes = 4
+hframes = 18
+frame = 16
 
 [node name="AnimationPlayer" parent="." index="13"]
 autoplay = "stand"
 playback_speed = 1.3
 anims/death = SubResource( 3 )
 anims/double_jump = SubResource( 4 )
-anims/enter_door = SubResource( 5 )
+anims/enter_door = SubResource( 13 )
 anims/fall = SubResource( 6 )
 anims/jump = SubResource( 7 )
 anims/respawn = SubResource( 8 )
 anims/run = SubResource( 9 )
-anims/run2 = SubResource( 10 )
-anims/stand = SubResource( 11 )
-anims/swim = SubResource( 12 )
-anims/wallslide = SubResource( 14 )
+anims/stand = SubResource( 10 )
+anims/swim = SubResource( 11 )
+anims/wallslide = SubResource( 12 )

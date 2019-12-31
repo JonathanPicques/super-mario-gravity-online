@@ -2,7 +2,7 @@ extends FiniteStateMachineStateNode
 
 func start_state():
 	context.start_timer(context.DOOR_PLAYER_FADE_DURATION)
-	context.set_animation("stand")
+	context.set_animation("enter_door")
 
 func process_state(delta: float):
 	context.PlayerSprite.modulate.a = context.PlayerTimer.time_left / context.PlayerTimer.wait_time

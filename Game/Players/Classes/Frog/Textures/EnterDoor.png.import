@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Run2.png-f6805cf913e8067a04fc8e49643c8bda.stex"
+path="res://.import/EnterDoor.png-ff1636e349faa9b4f1888f0472c8afb0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Players/Classes/Frog/Textures/Run2.png"
-dest_files=[ "res://.import/Run2.png-f6805cf913e8067a04fc8e49643c8bda.stex" ]
+source_file="res://Game/Players/Classes/Frog/Textures/EnterDoor.png"
+dest_files=[ "res://.import/EnterDoor.png-ff1636e349faa9b4f1888f0472c8afb0.stex" ]
 
 [params]
 

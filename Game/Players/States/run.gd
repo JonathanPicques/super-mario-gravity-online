@@ -1,7 +1,7 @@
 extends FiniteStateMachineStateNode
 
 func start_state():
-	context.set_animation("run2")
+	context.set_animation("run")
 	context.jumps_remaining = context.MAX_JUMPS
 
 func process_state(delta: float):
