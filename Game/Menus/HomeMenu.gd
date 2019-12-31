@@ -2,16 +2,16 @@ extends "res://Game/Maps/Map.gd"
 
 const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
-var player_camera_scene = null
+var player_camera_node = null
 
 const SKIP_START_POSITION := Vector2(96, 240)
 
-onready var KeyKeyboardJump = $GUI/JumpHintLabel/KeyKeyboardJump
-onready var KeyGamepadJump = $GUI/JumpHintLabel/KeyGamepadJump
-onready var KeyKeyboardOpenDoor = $GUI/OpenDoorLabel/KeyKeyboardOpenDoor
-onready var KeyGamepadOpenDoor = $GUI/OpenDoorLabel/KeyGamepadOpenDoor
-onready var KeyKeyboardUseObject = $GUI/ObjectHintLabel/KeyKeyboardUseObject
-onready var KeyGamepadUseObject = $GUI/ObjectHintLabel/KeyGamepadUseObject
+onready var KeyGamepadJump := $GUI/JumpHintLabel/KeyGamepadJump
+onready var KeyKeyboardJump := $GUI/JumpHintLabel/KeyKeyboardJump
+onready var KeyGamepadOpenDoor := $GUI/OpenDoorLabel/KeyGamepadOpenDoor
+onready var KeyKeyboardOpenDoor := $GUI/OpenDoorLabel/KeyKeyboardOpenDoor
+onready var KeyGamepadUseObject := $GUI/ObjectHintLabel/KeyGamepadUseObject
+onready var KeyKeyboardUseObject := $GUI/ObjectHintLabel/KeyKeyboardUseObject
 
 # @impure
 func _ready():
@@ -41,7 +41,7 @@ func _process(delta: float):
 				$GUI/SubtitleLabel.visible = false 
 
 	# add camera to player
-	if !player_camera_scene and lead_player:
+	if !player_camera_node and lead_player:
 		$GUI/TitleLabel.visible = false
 		$GUI/SubtitleLabel.visible = false
 		$GUI/OpenDoorLabel.visible = true
@@ -55,8 +55,8 @@ func _process(delta: float):
 		
 		var player_node = MultiplayerManager.get_player_node(lead_player.id)
 		if player_node:
-			player_camera_scene = PlayerCamera.instance()
-			player_camera_scene.player_node_path = player_node.get_path()
-			player_camera_scene.tile_map_node_path = $Map.get_path()
-			add_child(player_camera_scene)
+			player_camera_node = PlayerCamera.instance()
+			player_camera_node.player_node_path = player_node.get_path()
+			player_camera_node.tile_map_node_path = $Map.get_path()
+			add_child(player_camera_node)
 	

@@ -1,10 +1,25 @@
-extends Node2D
-class_name ObjectInvincibilityNode
+extends PowerNode
+class_name InvincibilityPowerNodeNode
 
-var player_node = null
+onready var InvincibilityTimer: Timer = $Timer
 
-func _ready():
-	player_node.apply_object_invincibility(self)
+# @impure
+# @override
+func start_power():
+	player_node.has_trail += 1
+	player_node.is_invincible += 1
+	SkinManager.replace_skin(player_node.PlayerSprite, player_node.player.skin_id, true)
+	InvincibilityTimer.start()
 
-func reset_player():
-	player_node.reset_object_invincibility(self)
+# @impure
+# @override
+func process_power(delta: float):
+	set_hud_progress(InvincibilityTimer.time_left / InvincibilityTimer.wait_time)
+	return InvincibilityTimer.is_stopped()
+
+# @override
+# @impure
+func finish_power():
+	player_node.has_trail -= 1
+	player_node.is_invincible -= 1
+	SkinManager.replace_skin(player_node.PlayerSprite, player_node.player.skin_id, false)

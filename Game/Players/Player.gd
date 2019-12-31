@@ -1,6 +1,10 @@
 extends KinematicBody2D
 class_name PlayerNode
 
+signal grab_power(power_id)
+signal start_power(power_id)
+signal finish_power(power_id)
+
 const SpriteTrail := preload("res://Game/Effects/Sprites/SpriteTrail.tscn")
 const GroundDustFX := preload("res://Game/Effects/Particles/GroundDust.tscn")
 
@@ -100,11 +104,11 @@ var wallslide_cancelled := false # reset on stand or walljump
 var current_door_to: DoorNode
 var current_door_from: DoorNode
 
-var has_trail := false
-var active_power: Node
-var current_power: Node
-var is_invincible := false
-var current_power_index: int
+var has_trail := 0 # stacked
+var is_invincible := 0 # stacked
+
+var power_node: Node
+var power_hud_node: Node
 
 # @impure
 func _ready():
@@ -129,6 +133,7 @@ func _process(delta):
 func _physics_process(delta: float):
 	process_input(delta)
 	process_death(delta)
+	process_powers(delta)
 	process_effects(delta)
 	process_velocity(delta)
 	fsm.process_state_machine(delta)
@@ -197,6 +202,24 @@ func process_input(delta: float):
 func process_death(delta: float):
 	if fsm.current_state_node != fsm.states.death and position.y > Game.map_node.killY:
 		return fsm.set_state_node(fsm.states.death)
+
+# process_powers checks if a power is active and updates it.
+# @impure
+func process_powers(delta: float):
+	if power_node and power_node.on:
+		if power_node.process_power(delta):
+			power_node.finish_power()
+			power_node.on = false
+			#
+			emit_signal("finish_power", power_node.power_id)
+			#
+			get_parent().remove_child(power_node)
+			#
+			power_node.queue_free()
+			power_hud_node.queue_free()
+			#
+			power_node = null
+			power_hud_node = null
 
 # process_effects plays all sprite effects applied to the player.
 # @impure
@@ -278,22 +301,6 @@ func is_animation_playing(animation: String) -> bool:
 # @pure
 func is_animation_finished() -> bool:
 	return not PlayerAnimationPlayer.is_playing()
-
-###
-# Powers
-###
-
-# @impure
-func grab_power():
-	pass
-
-# @impure
-func start_using_power():
-	pass
-
-# @impure
-func finish_using_power():
-	pass
 
 ###
 # Movement helpers
@@ -413,9 +420,36 @@ func has_same_direction(dir1: float, dir2: float) -> bool:
 func has_invert_direction(dir1: float, dir2: float) -> bool:
 	return dir1 != 0 and dir2 != 0 and sign(dir1) != sign(dir2)
 
+# start_timer starts a timer for the given duration in seconds.
+# @impure
+func start_timer(duration: float):
+	PlayerTimer.wait_time = duration
+	PlayerTimer.start()
+
+# is_timer_finished returns true if the timer is finished.
+# @pure
+func is_timer_finished() -> bool:
+	return PlayerTimer.is_stopped()
+
 ###
 # Events
 ###
+
+# grab_power is called externally when the player should grab the given power.
+# @impure
+func grab_power(power_id: int):
+	# create power (and hud) node
+	power_node = PowersManager.Powers[power_id].scene.instance()
+	power_hud_node = PowersManager.Powers[power_id].hud.instance()
+	# link power to hud/player
+	power_node.power_id = power_id
+	power_node.player_node = self
+	power_node.power_hud_node = power_hud_node
+	power_node.global_position = $Sprite/PowerSpawn.global_position
+	# emit signal for hud to be attached to the game mode UI
+	emit_signal("grab_power", power_id)
+	# attach power to player
+	get_parent().add_child(power_node)
 
 # apply_death is called externally when the player should meet a fatal fate.
 # @impure
@@ -433,21 +467,6 @@ func apply_death(death_origin: Vector2):
 func apply_expulse(expulse_dir: Vector2):
 	expulse_direction = expulse_dir
 	fsm.set_state_node(fsm.states.expulse)
-
-###
-# General purpose timer
-###
-
-# start_timer starts a timer for the given duration in seconds.
-# @impure
-func start_timer(duration: float):
-	PlayerTimer.wait_time = duration
-	PlayerTimer.start()
-
-# is_timer_finished returns true if the timer is finished.
-# @pure
-func is_timer_finished() -> bool:
-	return PlayerTimer.is_stopped()
 
 ###
 # Sound

@@ -1,7 +1,7 @@
 extends FiniteStateMachineStateNode
 
 func start_state():
-	context.has_trail = true
+	context.has_trail += 1
 	context.start_timer(0.14)
 	context.set_animation("jump")
 	context.handle_expulse(context.EXPULSE_STRENGTH)
@@ -31,4 +31,4 @@ func process_state(delta: float):
 		return fsm.states.jump
 
 func finish_state():
-	context.has_trail = false
+	context.has_trail -= 1

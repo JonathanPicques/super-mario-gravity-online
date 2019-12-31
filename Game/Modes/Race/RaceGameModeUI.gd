@@ -32,18 +32,19 @@ func _ready():
 func _process(delta: float):
 	if ui_player:
 		$Ranking.text = "#%d" % (ui_player.rank + 1)
-		ui_player_node = MultiplayerManager.get_player_node(ui_player.id) # TODO: find a better way to assign only once
+		if not ui_player_node:
+			ui_player_node = MultiplayerManager.get_player_node(ui_player.id)
 		display_power_hud()
 
+# @impure
 func display_power_hud():
-	# if ui_player_node and ui_player_node.current_object_index != null:
-		# var texture_rect = PowersManager.Powers[ui_player_node.current_object_index]["hud"].instance()
-		# if PowerContainer.get_child_count() == 0:
-			# PowerContainer.add_child(texture_rect)
-	# else:
-		# if PowerContainer.get_child_count() == 1:
-			# PowerContainer.remove_child(PowerContainer.get_child(0))
-	pass
+	if ui_player_node and ui_player_node.power_node:
+		var texture_rect = ui_player_node.power_hud_node
+		if PowerContainer.get_child_count() == 0:
+			PowerContainer.add_child(texture_rect)
+	else:
+		if PowerContainer.get_child_count() == 1:
+			PowerContainer.remove_child(PowerContainer.get_child(0))
 
 # @impure
 # @signal
