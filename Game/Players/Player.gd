@@ -74,6 +74,9 @@ var WALL_JUMP_STRENGTH := -330.0
 var WALL_JUMP_PUSH_STRENGTH := 55.0
 var WALL_SLIDE_STICK_WALL_JUMP := 0.18
 
+var ANIMATION_PLAYER_PLAYBACK_SPEED := 0.8
+var ANIMATION_PLAYER_PLAYBACK_VELOCITY := RUN_MAX_SPEED
+
 var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
 
@@ -226,25 +229,31 @@ func process_effects(delta: float):
 # @impure
 var _was_on_floor := false
 func process_velocity(delta: float):
+	# decrement snapping time if applicable
 	if disable_snap > 0:
 		disable_snap = max(disable_snap - delta, 0)
+	# save old position
 	var old_position := position
+	# stop movement to avoid sloppy stutters in kinematic body
 	if not _was_on_floor and is_on_floor():
 		for i in get_slide_count():
 			var collision := get_slide_collision(i)
 			if is_nearly(velocity_prev.x, 0) and is_nearly(input_velocity.x, 0) and collision.normal != FLOOR:
 				velocity = Vector2()
-	if is_on_floor():
-		_was_on_floor = true
-	else:
-		_was_on_floor = false
+	# save last frame floor status
+	_was_on_floor = is_on_floor()
+	# save last frame velocity
 	velocity_prev = velocity
+	# apply movement (and disable snap for jumping)
 	velocity = move_and_slide_with_snap(velocity, FLOOR_SNAP if disable_snap == 0 else FLOOR_SNAP_DISABLED, FLOOR)
+	# compute real velocity offset without taking too small values into account
 	var offset := position - old_position
 	velocity_offset = Vector2(
 		0.0 if is_nearly(offset.x, 0) else velocity.x,
 		0.0 if is_nearly(offset.y, 0) else velocity.y
 	)
+	# scale animation player playback speed to velocity
+	PlayerAnimationPlayer.playback_speed = max((velocity.length() / ANIMATION_PLAYER_PLAYBACK_VELOCITY) * ANIMATION_PLAYER_PLAYBACK_SPEED, ANIMATION_PLAYER_PLAYBACK_SPEED)
 
 # set_class changes the current class (animations, properties...) of the player
 # @impure
