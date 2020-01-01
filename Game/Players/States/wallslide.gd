@@ -1,12 +1,15 @@
 extends FiniteStateMachineStateNode
 
+var _direction := 0
 var _stick_wall := 0.0
 
 func start_state():
+	_direction = context.direction
+	_stick_wall = 0.0
+	context.PlayerSprite.position.x += _direction * 2
 	context.velocity.x = 0
 	context.velocity.y = context.velocity.y * 0.1
 	context.jumps_remaining = context.MAX_JUMPS - 1
-	_stick_wall = 0
 	context.fx_hit_wall()
 	context.set_animation("wallslide")
 
@@ -27,3 +30,6 @@ func process_state(delta: float):
 		if _stick_wall > context.WALL_SLIDE_STICK_WALL_JUMP:
 			context.set_direction(-context.direction)
 			return fsm.states.fall
+
+func finish_state():
+	context.PlayerSprite.position.x -= _direction * 2
