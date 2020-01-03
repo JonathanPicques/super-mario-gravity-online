@@ -1,10 +1,22 @@
-extends Node2D
+extends PowerNode
 class_name ObjectWaveDistortNode
 
-var player_node = null
+onready var PowerTimer: Timer = $Timer
 
-func _ready():
-	player_node.apply_object_wave_distort(self)
+# @impure
+# @override
+func start_power():
+	PowerTimer.start()
+	Game.game_mode_node.apply_split_screen_effect(player_node.player.id, true)
 
-func reset_player():
-	player_node.reset_object_wave_distort(self)
+# @impure
+# @override
+func process_power(delta: float):
+	set_hud_progress(PowerTimer.time_left / PowerTimer.wait_time)
+	return PowerTimer.is_stopped()
+
+# @impure
+# @override
+func finish_power():
+	Game.game_mode_node.apply_split_screen_effect(player_node.player.id, false)
+

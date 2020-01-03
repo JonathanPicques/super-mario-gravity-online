@@ -6,9 +6,7 @@ onready var InvincibilityTimer: Timer = $Timer
 # @impure
 # @override
 func start_power():
-	player_node.has_trail += 1
 	player_node.is_invincible += 1
-	player_node.speed_multiplier = 1.2
 	SkinManager.replace_skin(player_node.PlayerSprite, player_node.player.skin_id, true)
 	InvincibilityTimer.start()
 
@@ -21,7 +19,5 @@ func process_power(delta: float):
 # @impure
 # @override
 func finish_power():
-	player_node.has_trail -= 1
 	player_node.is_invincible -= 1
-	player_node.speed_multiplier = 1.0
 	SkinManager.replace_skin(player_node.PlayerSprite, player_node.player.skin_id, false)

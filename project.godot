@@ -64,7 +64,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Powers/Prince.gd"
 }, {
-"base": "Node2D",
+"base": "PowerNode",
 "class": "ObjectWaveDistortNode",
 "language": "GDScript",
 "path": "res://Game/Powers/WaveDistort.gd"

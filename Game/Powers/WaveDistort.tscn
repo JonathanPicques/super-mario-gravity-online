@@ -10,3 +10,7 @@ script = ExtResource( 2 )
 visible = false
 texture = ExtResource( 1 )
 centered = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
