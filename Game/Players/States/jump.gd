@@ -3,7 +3,7 @@ extends FiniteStateMachineStateNode
 func start_state():
 	context.jumps_remaining -= 1
 	context.start_timer(0.14)
-	context.handle_jump(context.JUMP_STRENGTH)
+	context.handle_jump(context.STICKY_JUMP_STRENGTH if context.is_on_sticky() else context.JUMP_STRENGTH)
 	context.set_animation("jump" if context.jumps_remaining == 1 else "double_jump")
 	context.play_sound_effect(context.JumpSFX)
 	if context.input_velocity.x != 0:

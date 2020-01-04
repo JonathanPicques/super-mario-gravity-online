@@ -18,7 +18,7 @@ func process_state(delta: float):
 		return fsm.states.enter_door
 	if context.is_on_wall():
 		return fsm.states.push_wall
-	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive() and not context.is_on_sticky():
+	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
 		return fsm.states.jump
 	if context.input_velocity.x != 0 and context.has_invert_direction(context.direction, context.input_velocity.x):
 		return fsm.states.move_turn
