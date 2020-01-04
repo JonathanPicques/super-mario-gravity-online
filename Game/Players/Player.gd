@@ -65,6 +65,10 @@ var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
 var RUN_DECELERATION := 690.0
 
+var STICKY_MAX_SPEED := RUN_MAX_SPEED / 2.0
+var STICKY_ACCELERATION := RUN_ACCELERATION / 2.0
+var STICKY_DECELERATION := RUN_DECELERATION / 2.0
+
 var MAX_JUMPS := 2
 var JUMP_STRENGTH := -350.0
 var FALL_JUMP_GRACE := 0.08
@@ -389,6 +393,17 @@ func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 func is_on_door() -> bool:
 	for collider in PlayerArea2D.get_overlapping_areas():
 		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_DOOR):
+			return true
+	return false
+
+func is_on_sticky() -> bool:
+	if PlayerLeftFootChecker.is_colliding():
+		var collider = PlayerLeftFootChecker.get_collider()
+		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_STICKY):
+			return true
+	if PlayerRightFootChecker.is_colliding():
+		var collider = PlayerRightFootChecker.get_collider()
+		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_STICKY):
 			return true
 	return false
 

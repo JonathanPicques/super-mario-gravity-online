@@ -7,6 +7,7 @@ onready var PowerTimer: Timer = $Timer
 # @override
 func start_power():
 	PowerTimer.start()
+	# TODO: apply this to other players instead (then, handle network)
 	Game.game_mode_node.apply_split_screen_effect(player_node.player.id, true)
 
 # @impure

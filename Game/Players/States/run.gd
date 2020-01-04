@@ -6,7 +6,10 @@ func start_state():
 
 func process_state(delta: float):
 	context.handle_gravity(delta, context.GRAVITY_MAX_SPEED, context.GRAVITY_ACCELERATION)
-	context.handle_floor_move(delta, context.RUN_MAX_SPEED, context.RUN_ACCELERATION, context.RUN_DECELERATION)
+	context.handle_floor_move(delta,
+		context.STICKY_MAX_SPEED if context.is_on_sticky() else context.RUN_MAX_SPEED,
+		context.STICKY_ACCELERATION if context.is_on_sticky() else context.RUN_ACCELERATION,
+		context.STICKY_DECELERATION if context.is_on_sticky() else context.RUN_DECELERATION)
 	context.handle_last_safe_position()
 	if not context.is_on_floor():
 		context.fall_jump_grace = context.FALL_JUMP_GRACE
@@ -15,7 +18,7 @@ func process_state(delta: float):
 		return fsm.states.enter_door
 	if context.is_on_wall():
 		return fsm.states.push_wall
-	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
+	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive() and not context.is_on_sticky():
 		return fsm.states.jump
 	if context.input_velocity.x != 0 and context.has_invert_direction(context.direction, context.input_velocity.x):
 		return fsm.states.move_turn
