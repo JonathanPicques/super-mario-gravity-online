@@ -21,6 +21,7 @@ onready var PlayerSwimChecker: RayCast2D = $SwimChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
+onready var PlayerInvincibilityEffect: AnimatedSprite = $InvincibilityEffect
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream

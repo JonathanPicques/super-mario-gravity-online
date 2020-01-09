@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
@@ -19,6 +19,87 @@
 [ext_resource path="res://Game/Players/States/use_power.gd" type="Script" id=17]
 [ext_resource path="res://Game/Players/States/death.gd" type="Script" id=18]
 [ext_resource path="res://Game/Players/States/swim.gd" type="Script" id=19]
+[ext_resource path="res://Game/Players/Classes/Frog/Textures/Invincibility.png" type="Texture" id=20]
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 20 )
+region = Rect2( 38, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 20 )
+region = Rect2( 76, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 20 )
+region = Rect2( 114, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 20 )
+region = Rect2( 152, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 20 )
+region = Rect2( 190, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 20 )
+region = Rect2( 228, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 20 )
+region = Rect2( 266, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 20 )
+region = Rect2( 304, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 20 )
+region = Rect2( 342, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 20 )
+region = Rect2( 380, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 20 )
+region = Rect2( 418, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 20 )
+region = Rect2( 456, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 20 )
+region = Rect2( 494, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 20 )
+region = Rect2( 532, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 20 )
+region = Rect2( 570, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 20 )
+region = Rect2( 608, 0, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 20 )
+region = Rect2( 646, 0, 38, 32 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 10 )
@@ -44,6 +125,14 @@ centered = false
 
 [node name="PowerSpawn" type="Node2D" parent="Sprite"]
 position = Vector2( 16, -2 )
+
+[node name="InvincibilityEffect" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( -2, -16 )
+frames = SubResource( 21 )
+frame = 1
+speed_scale = 5.0
+playing = true
 
 [node name="Dialog" type="Sprite" parent="."]
 position = Vector2( 0, -40 )
