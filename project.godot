@@ -401,6 +401,7 @@ device_4_cancel={
 2d_physics/layer_6="Object"
 2d_physics/layer_7="Damage"
 2d_physics/layer_8="Sticky"
+2d_physics/layer_9="Water"
 
 [rendering]
 

@@ -19,6 +19,8 @@ format = 1
 [node name="Sticky" type="TileMap" parent="."]
 tile_set = ExtResource( 12 )
 cell_size = Vector2( 16, 16 )
+collision_layer = 128
+collision_mask = 0
 format = 1
 
 [node name="Map" type="TileMap" parent="."]
@@ -45,6 +47,13 @@ position = Vector2( 64, 256 )
 [node name="ObjectSlot" type="Node2D" parent="."]
 
 [node name="ParticleSlot" type="Node2D" parent="."]
+
+[node name="Water" type="TileMap" parent="."]
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 256
+collision_mask = 0
+format = 1
 
 [node name="DecorFront" type="TileMap" parent="."]
 tile_set = ExtResource( 12 )

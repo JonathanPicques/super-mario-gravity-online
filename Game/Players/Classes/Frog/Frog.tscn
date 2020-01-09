@@ -472,10 +472,9 @@ script = ExtResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 material = SubResource( 1 )
-texture = ExtResource( 8 )
+texture = ExtResource( 4 )
 centered = true
-hframes = 12
-frame = 8
+hframes = 21
 
 [node name="Dialog" parent="." index="2"]
 visible = false
@@ -495,7 +494,7 @@ visible = false
 [node name="RightFootChecker" parent="." index="12"]
 visible = false
 
-[node name="AnimationPlayer" parent="." index="13"]
+[node name="AnimationPlayer" parent="." index="14"]
 autoplay = "stand"
 playback_speed = 0.8
 anims/death = SubResource( 3 )

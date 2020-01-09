@@ -120,6 +120,7 @@ const COLLISION_LAYER_PLAYER := 1 << 1
 const COLLISION_LAYER_DOOR := 1 << 3
 const COLLISION_LAYER_DAMAGE := 1 << 6
 const COLLISION_LAYER_STICKY := 1 << 7
+const COLLISION_LAYER_WATER := 1 << 8
 
 # has_collision_layer_bit returns true if collision_layer has the given collision_layer_bit.
 # @pure

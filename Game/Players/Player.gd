@@ -17,6 +17,7 @@ onready var PlayerCollisionBody: CollisionShape2D = $CollisionBody
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
 onready var PlayerLeftFootChecker: RayCast2D = $LeftFootChecker
 onready var PlayerRightFootChecker: RayCast2D = $RightFootChecker
+onready var PlayerSwimChecker: RayCast2D = $SwimChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
@@ -64,6 +65,10 @@ var input_jump_once := false
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
 var RUN_DECELERATION := 690.0
+
+var SWIM_MAX_SPEED := 120.0
+var SWIM_ACCELERATION := 630.0
+var SWIM_DECELERATION := 690.0
 
 var MAX_JUMPS := 2
 var JUMP_STRENGTH := -350.0
@@ -368,6 +373,18 @@ func handle_airborne_move(delta: float, max_speed: float, acceleration: float, d
 		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier, input_velocity.x)
 	else:
 		handle_deceleration_move(delta, deceleration * speed_multiplier)
+		
+# handle_airborne_move applies acceleration or deceleration depending on the input_velocity while airborne.
+# @impure
+func handle_swim_move(delta: float, max_speed: float, acceleration: float, deceleration: float):
+	if input_velocity.x != 0:
+		velocity.x = get_acceleration(delta, velocity.x, max_speed * speed_multiplier, acceleration * speed_multiplier, input_velocity.x)
+	else:
+		velocity.x = get_deceleration(delta, velocity.x, deceleration)
+	if input_velocity.y != 0:
+		velocity.y = get_acceleration(delta, velocity.y, max_speed * speed_multiplier, acceleration * speed_multiplier, input_velocity.y)
+	else:
+		velocity.y = get_deceleration(delta, velocity.y, deceleration)
 
 # handle_deceleration_move applies deceleration.
 # @impure
@@ -405,6 +422,13 @@ func is_on_sticky() -> bool:
 	if PlayerRightFootChecker.is_colliding():
 		var collider = PlayerRightFootChecker.get_collider()
 		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_STICKY):
+			return true
+	return false
+
+func is_in_water() -> bool:
+	if PlayerSwimChecker.is_colliding():
+		var collider = PlayerSwimChecker.get_collider()
+		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_WATER):
 			return true
 	return false
 
