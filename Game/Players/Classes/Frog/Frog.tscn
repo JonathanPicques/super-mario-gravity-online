@@ -476,25 +476,28 @@ texture = ExtResource( 8 )
 centered = true
 hframes = 12
 
-[node name="Dialog" parent="." index="2"]
+[node name="InvincibilityEffect" parent="." index="2"]
+frame = 10
+
+[node name="Dialog" parent="." index="3"]
 visible = false
 
-[node name="Area2D" parent="." index="4"]
+[node name="Area2D" parent="." index="5"]
 visible = false
 
-[node name="CollisionBody" parent="." index="9"]
+[node name="CollisionBody" parent="." index="10"]
 visible = false
 
-[node name="CeilingChecker" parent="." index="10"]
+[node name="CeilingChecker" parent="." index="11"]
 visible = false
 
-[node name="LeftFootChecker" parent="." index="11"]
+[node name="LeftFootChecker" parent="." index="12"]
 visible = false
 
-[node name="RightFootChecker" parent="." index="12"]
+[node name="RightFootChecker" parent="." index="13"]
 visible = false
 
-[node name="AnimationPlayer" parent="." index="14"]
+[node name="AnimationPlayer" parent="." index="15"]
 autoplay = "stand"
 playback_speed = 0.8
 anims/death = SubResource( 3 )
