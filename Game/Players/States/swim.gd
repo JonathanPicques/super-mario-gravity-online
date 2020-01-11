@@ -1,8 +1,7 @@
 extends FiniteStateMachineStateNode
 
 func start_state():
-	if not context.is_animation_playing("swim"):
-		context.set_animation("swim")
+	context.set_animation("swim")
 
 func process_state(delta: float):
 	context.disable_snap = 1.0

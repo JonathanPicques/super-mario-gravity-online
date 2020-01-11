@@ -14,7 +14,9 @@ func process_state(delta: float):
 		return fsm.states.enter_door
 	if context.has_same_direction(context.direction, context.input_velocity.x):
 		return fsm.states.run
-	if context.input_jump_once and not context.is_on_ceiling_passive():
+	if context.input_use and context.has_unused_power():
+			return fsm.states.use_power
+	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
 		context.set_direction(-context.direction)
 		return fsm.states.jump
 	if context.velocity.x == 0:

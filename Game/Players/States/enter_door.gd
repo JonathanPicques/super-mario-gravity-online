@@ -17,7 +17,6 @@ func start_state():
 	return fsm.states.stand
 
 func process_state(delta: float):
-	# TODO: fix stuck
 	if context.velocity.x > 0 and context.position.x >= context.current_door_from.Target.global_position.x or \
 		context.velocity.x < 0 and context.position.x <= context.current_door_from.Target.global_position.x:
 		context.velocity.x = 0

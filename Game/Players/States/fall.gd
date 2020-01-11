@@ -23,6 +23,8 @@ func process_state(delta: float):
 		return fsm.states.wallslide
 	if context.fall_jump_grace == 0 and context.jumps_remaining == context.MAX_JUMPS:
 		context.jumps_remaining -= 1
+	if context.input_use and context.has_unused_power():
+		return fsm.states.use_power
 	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
 		context.fall_jump_grace = 0.0
 		return fsm.states.jump

@@ -297,9 +297,9 @@ func set_direction(new_direction: int):
 
 # set_animation changes the Player animation.
 # @impure
-func set_animation(new_animation: String, animation_position = 0.0):
-	PlayerAnimationPlayer.play(new_animation)
-	PlayerAnimationPlayer.seek(animation_position)
+func set_animation(new_animation: String, force_play_from_beginning := false):
+	if not is_animation_playing(new_animation) or force_play_from_beginning:
+		PlayerAnimationPlayer.play(new_animation)
 
 # is_animation_playing returns true if the given animation is playing.
 # @impure
@@ -452,6 +452,11 @@ func is_on_ceiling_passive() -> bool:
 			return false
 		return false
 	return false
+
+# has_unused_power returns true if the player is holding an unused power.
+# @pure
+func has_unused_power() -> bool:
+	return power_node and not power_node.on
 
 # has_same_direction returns true if the two given numbers are non-zero and of the same sign.
 # @pure

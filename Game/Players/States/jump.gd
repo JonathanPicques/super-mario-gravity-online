@@ -21,5 +21,7 @@ func process_state(delta: float):
 		return fsm.states.fall
 	if context.velocity.y > 0:
 		return fsm.states.fall
+	if context.input_use and context.has_unused_power():
+		return fsm.states.use_power
 	if context.input_jump_once and context.jumps_remaining > 0 and context.is_timer_finished() and not context.is_on_ceiling_passive():
 		return fsm.states.jump

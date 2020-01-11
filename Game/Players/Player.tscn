@@ -19,7 +19,8 @@
 [ext_resource path="res://Game/Players/States/use_power.gd" type="Script" id=17]
 [ext_resource path="res://Game/Players/States/death.gd" type="Script" id=18]
 [ext_resource path="res://Game/Players/States/swim.gd" type="Script" id=19]
-[ext_resource path="res://Game/Players/enter_swim.gd" type="Script" id=20]
+[ext_resource path="res://Game/Players/States/enter_swim.gd" type="Script" id=20]
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
