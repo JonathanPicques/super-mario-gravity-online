@@ -408,13 +408,15 @@ func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 	return abs(value1 - value2) < epsilon
 
 # is_on_door returns true if there is a door behind.
-# @impure
+# @pure
 func is_on_door() -> bool:
 	for collider in PlayerArea2D.get_overlapping_areas():
 		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_DOOR):
 			return true
 	return false
 
+# is_on_sticky returns true if there is a stick on our feet.
+# @pure
 func is_on_sticky() -> bool:
 	if PlayerLeftFootChecker.is_colliding():
 		var collider = PlayerLeftFootChecker.get_collider()
@@ -426,6 +428,8 @@ func is_on_sticky() -> bool:
 			return true
 	return false
 
+# is_on_sticky returns true if there is a water surrounding us.
+# @pure
 func is_in_water() -> bool:
 	if PlayerSwimChecker.is_colliding():
 		var collider = PlayerSwimChecker.get_collider()

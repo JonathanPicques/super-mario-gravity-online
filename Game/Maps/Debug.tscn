@@ -24,7 +24,7 @@ tile_data = PoolIntArray( -3407895, 12, 0, -3407894, 12, 1, -3407893, 12, 1, -34
 position = Vector2( 176, 160 )
 
 [node name="FlagStart" parent="." index="4"]
-position = Vector2( 0, 160 )
+position = Vector2( -672, 112 )
 
 [node name="EnterColorBlock" parent="DoorSlot" index="0" instance=ExtResource( 11 )]
 position = Vector2( -64, 160 )

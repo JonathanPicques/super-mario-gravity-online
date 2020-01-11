@@ -15,6 +15,8 @@ func start_state():
 
 func process_state(delta: float):
 	context.handle_gravity(delta, context.GRAVITY_MAX_SPEED * 0.5, context.GRAVITY_ACCELERATION * 0.25)
+	if context.is_in_water():
+		return fsm.states.enter_swim
 	if context.is_on_floor():
 		context.fx_hit_ground()
 		return fsm.states.stand
