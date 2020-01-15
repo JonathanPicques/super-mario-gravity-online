@@ -26,6 +26,7 @@ func process_state(delta: float):
 		context.wallslide_cancelled = true
 		return fsm.states.fall
 	if context.input_jump_once:
+		context.set_animation("wallslide_to_walljump")
 		return fsm.states.walljump
 	if context.has_invert_direction(context.input_velocity.x, context.direction):
 		_stick_wall += delta
