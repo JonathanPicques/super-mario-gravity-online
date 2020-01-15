@@ -1,10 +1,11 @@
 extends FiniteStateMachineStateNode
 
 func start_state():
-	context.set_animation("run")
+	play_animation_run(true)
 	context.jumps_remaining = context.MAX_JUMPS
 
 func process_state(delta: float):
+	play_animation_run(false)
 	context.handle_gravity(delta, context.GRAVITY_MAX_SPEED, context.GRAVITY_ACCELERATION)
 	context.handle_floor_move(delta,
 		context.STICKY_MAX_SPEED if context.is_on_sticky() else context.RUN_MAX_SPEED,
@@ -25,4 +26,12 @@ func process_state(delta: float):
 	if context.input_velocity.x != 0 and context.has_invert_direction(context.direction, context.input_velocity.x):
 		return fsm.states.move_turn
 	if context.input_velocity.x == 0 and context.velocity.x == 0:
+		if context.is_animation_playing("run"):
+			context.set_animation("run_to_stand")
 		return fsm.states.stand
+
+func play_animation_run(from_beginning: bool):
+	if not context.is_animation_playing("run") and \
+		not context.is_animation_playing("fall_to_stand") and \
+		not context.is_animation_playing("stand_to_run"):
+		context.set_animation("run", -1 if from_beginning else 4)

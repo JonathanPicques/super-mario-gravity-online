@@ -15,9 +15,11 @@ func process_state(delta: float):
 		return fsm.states.stand
 	if context.is_on_ceiling():
 		context.velocity.y = context.CEILING_KNOCKDOWN
+		context.set_animation("jump_to_fall")
 		context.play_sound_effect(context.BumpSFX)
 		return fsm.states.fall
 	if context.velocity.y > 0:
+		context.set_animation("jump_to_fall")
 		return fsm.states.fall
 	if context.input_use and context.has_unused_power():
 			return fsm.states.use_power

@@ -1,4 +1,4 @@
-extends "res://Game/Players/Player.gd"
+extends PlayerNode
 
 # @impure
 func _ready():

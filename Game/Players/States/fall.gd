@@ -1,9 +1,10 @@
 extends FiniteStateMachineStateNode
 
 func start_state():
-	context.set_animation("fall")
+	play_animation_fall()
 
 func process_state(delta: float):
+	play_animation_fall()
 	context.fall_jump_grace = max(context.fall_jump_grace - delta, 0.0)
 	context.handle_gravity(delta, context.GRAVITY_MAX_SPEED, context.GRAVITY_ACCELERATION)
 	context.handle_direction()
@@ -12,6 +13,7 @@ func process_state(delta: float):
 		return fsm.states.enter_swim
 	if context.is_on_floor():
 		context.fx_hit_ground()
+		context.set_animation("fall_to_stand")
 		context.fall_jump_grace = 0.0
 		return fsm.states.stand
 	if context.is_on_wall_passive() and not context.input_down and (\
@@ -28,3 +30,8 @@ func process_state(delta: float):
 	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
 		context.fall_jump_grace = 0.0
 		return fsm.states.jump
+
+func play_animation_fall():
+	if not context.is_animation_playing("fall") and \
+		not context.is_animation_playing("jump_to_fall"):
+		context.set_animation("fall")

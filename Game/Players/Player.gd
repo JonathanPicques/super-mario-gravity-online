@@ -12,16 +12,16 @@ onready var PlayerTimer: Timer = $Timer
 onready var PlayerSprite: Sprite = $Sprite
 onready var PlayerArea2D: Area2D = $Area2D
 onready var PlayerObjectTimer: Timer = $ObjectTimer
+onready var PlayerSwimChecker: RayCast2D = $SwimChecker
 onready var PlayerLifetimeTimer: Timer = $LifetimeTimer
 onready var PlayerCollisionBody: CollisionShape2D = $CollisionBody
 onready var PlayerCeilingChecker: RayCast2D = $CeilingChecker
 onready var PlayerLeftFootChecker: RayCast2D = $LeftFootChecker
 onready var PlayerRightFootChecker: RayCast2D = $RightFootChecker
-onready var PlayerSwimChecker: RayCast2D = $SwimChecker
 onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
-onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
 onready var PlayerInvincibilityEffect: AnimatedSprite = $InvincibilityEffect
+onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
 
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
@@ -297,10 +297,15 @@ func set_direction(new_direction: int):
 
 # set_animation changes the Player animation.
 # @impure
-func set_animation(new_animation: String, force_play_from_beginning := false):
-	if not is_animation_playing(new_animation) or force_play_from_beginning:
+func set_animation(new_animation: String, play_from_frame := -1):
+	if not is_animation_playing(new_animation):
 		PlayerAnimationPlayer.play(new_animation)
-
+	if play_from_frame != -1:
+		var animation := PlayerAnimationPlayer.get_animation(PlayerAnimationPlayer.current_animation)
+		var track_time := animation.track_get_key_time(animation.find_track("Sprite:frame"), play_from_frame)
+		PlayerAnimationPlayer.play(new_animation)
+		PlayerAnimationPlayer.seek(track_time, true)
+		
 # is_animation_playing returns true if the given animation is playing.
 # @impure
 func is_animation_playing(animation: String) -> bool:
