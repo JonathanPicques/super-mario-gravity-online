@@ -13,7 +13,7 @@ onready var GameTransitionCanvasLayer: CanvasLayer = $TransitionCanvasLayer
 
 var is_over := false
 var map_node: MapNode
-var scene_node: Node2D
+var scene_node: Node
 var game_mode_node: GameModeNode
 var transition_nodes := []
 

@@ -16,8 +16,6 @@ func process_state(delta: float):
 	if context.input_up_once and context.is_on_door():
 		return fsm.states.enter_door
 	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
-		if context.is_animation_playing("stand"):
-			context.set_animation("stand_to_jump")
 		return fsm.states.jump
 	if context.input_use and context.has_unused_power():
 		return fsm.states.use_power
