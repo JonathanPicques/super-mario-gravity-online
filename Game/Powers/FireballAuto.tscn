@@ -6,9 +6,6 @@
 
 [sub_resource type="StreamTexture" id=1]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 7, 5 )
-
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 14, 10 )
@@ -29,9 +26,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="FireballAuto" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 5 )
+
+[node name="FireballAuto" type="KinematicBody2D"]
 script = ExtResource( 2 )
-use_target = true
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
@@ -39,22 +38,11 @@ material = ExtResource( 3 )
 texture = SubResource( 1 )
 centered = false
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 48
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 15.0
-autostart = true
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 3 )
 frames = SubResource( 6 )
-frame = 2
 speed_scale = 3.0
 playing = true
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
