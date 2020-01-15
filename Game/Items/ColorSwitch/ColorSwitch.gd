@@ -27,3 +27,9 @@ func on_trigger(switch_color: int):
 	else:
 		is_on = false
 		$Sprite.texture = OffTexture
+
+func get_map_data() -> Dictionary:
+	return {
+		"type": "ColorSwitch",
+		"color": SkinManager.get_map_data(color)
+	}

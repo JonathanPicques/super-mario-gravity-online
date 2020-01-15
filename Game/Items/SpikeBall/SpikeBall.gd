@@ -38,3 +38,12 @@ func _on_Area2D_body_entered(body):
 		body.apply_death(position + ball_node.position)
 	else:
 		current_direction *= -1
+
+func get_map_data() -> Dictionary:
+	return {
+		"type": "SpikeBall",
+		"x": position.x,
+		"y": position.y,
+		"length": length,
+		"clockwise": clockwise
+	}

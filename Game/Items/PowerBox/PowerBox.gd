@@ -15,3 +15,10 @@ func _on_Area2D_body_entered(player_node):
 
 func _on_Timer_timeout():
 	visible = true
+
+func get_map_data() -> Dictionary:
+	return {
+		"type": "PowerBox",
+		"x": position.x,
+		"y": position.y
+	}

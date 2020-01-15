@@ -21,3 +21,11 @@ func on_trigger(switch_color: int):
 	else:
 		$Sprite.texture = OffTexture
 		$StaticBody2D.collision_layer &= ~Game.COLLISION_LAYER_SOLID
+
+func get_map_data() -> Dictionary:
+	return {
+		"type": "ColorBlock",
+		"color": SkinManager.get_map_data(color),
+		"x": position.x,
+		"y": position.y
+	}

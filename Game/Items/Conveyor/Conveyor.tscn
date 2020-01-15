@@ -132,37 +132,31 @@ constant_linear_velocity = Vector2( -24, 0 )
 [node name="left" type="AnimatedSprite" parent="."]
 position = Vector2( 6.5, 8 )
 frames = SubResource( 9 )
-frame = 1
 playing = true
 
 [node name="center1" type="AnimatedSprite" parent="."]
 position = Vector2( 22.5, 8 )
 frames = SubResource( 18 )
-frame = 1
 playing = true
 
 [node name="center2" type="AnimatedSprite" parent="."]
 position = Vector2( 38.5, 8 )
 frames = SubResource( 18 )
-frame = 1
 playing = true
 
 [node name="center3" type="AnimatedSprite" parent="."]
 position = Vector2( 54.5, 8 )
 frames = SubResource( 18 )
-frame = 1
 playing = true
 
 [node name="center4" type="AnimatedSprite" parent="."]
 position = Vector2( 70.5, 8 )
 frames = SubResource( 18 )
-frame = 1
 playing = true
 
 [node name="right" type="AnimatedSprite" parent="."]
 position = Vector2( 86, 8 )
 frames = SubResource( 27 )
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

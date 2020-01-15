@@ -10,6 +10,22 @@ enum SkinColor {
 	purple,
 }
 
+func get_map_data(color: int) -> String:
+	match color:
+		SkinColor.aqua:
+			return "aqua"
+		SkinColor.blue:
+			return "blue"
+		SkinColor.pink:
+			return "pink"
+		SkinColor.orange:
+			return "orange"
+		SkinColor.yellow:
+			return "yellow"
+		SkinColor.purple:
+			return "purple"
+	return "unknown"
+
 const Steel = [
 	Color("#46455b"),
 	Color("#62677b"),
