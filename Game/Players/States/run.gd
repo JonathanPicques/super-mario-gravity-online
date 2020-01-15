@@ -24,7 +24,7 @@ func process_state(delta: float):
 	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
 		return fsm.states.jump
 	if context.input_velocity.x != 0 and context.has_invert_direction(context.direction, context.input_velocity.x):
-		return fsm.states.move_turn
+		return fsm.states.floor_turn
 	if context.input_velocity.x == 0 and context.velocity.x == 0:
 		if context.is_animation_playing("run"):
 			context.set_animation("run_to_stand")
@@ -32,6 +32,7 @@ func process_state(delta: float):
 
 func play_animation_run(from_beginning: bool):
 	if not context.is_animation_playing("run") and \
+		not context.is_animation_playing("floor_turn") and \
 		not context.is_animation_playing("fall_to_stand") and \
 		not context.is_animation_playing("stand_to_run"):
 		context.set_animation("run", -1 if from_beginning else 4)

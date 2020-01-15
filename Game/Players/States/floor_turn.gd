@@ -1,6 +1,8 @@
 extends FiniteStateMachineStateNode
 
 func start_state():
+	context.set_animation("floor_turn")
+	context.set_direction(-context.direction)
 	context.jumps_remaining = context.MAX_JUMPS
 
 func process_state(delta: float):
@@ -15,10 +17,8 @@ func process_state(delta: float):
 	if context.has_same_direction(context.direction, context.input_velocity.x):
 		return fsm.states.run
 	if context.input_use and context.has_unused_power():
-			return fsm.states.use_power
+		return fsm.states.use_power
 	if context.input_jump_once and context.jumps_remaining > 0 and not context.is_on_ceiling_passive():
-		context.set_direction(-context.direction)
 		return fsm.states.jump
 	if context.velocity.x == 0:
-		context.set_direction(-context.direction)
 		return fsm.states.run

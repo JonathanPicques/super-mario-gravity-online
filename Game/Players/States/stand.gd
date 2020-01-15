@@ -24,10 +24,11 @@ func process_state(delta: float):
 			context.set_animation("stand_to_run")
 		return fsm.states.run
 	elif context.input_velocity.x != 0 and not context.has_same_direction(context.direction, context.input_velocity.x):
-		return fsm.states.move_turn
+		return fsm.states.floor_turn
 
 func play_animation_stand():
 	if not context.is_animation_playing("stand") and \
+		not context.is_animation_playing("floor_turn") and \
 		not context.is_animation_playing("run_to_stand") and \
 		not context.is_animation_playing("fall_to_stand"):
 		context.set_animation("stand")

@@ -11,7 +11,7 @@
 [ext_resource path="res://Game/Players/States/expulse.gd" type="Script" id=9]
 [ext_resource path="res://Game/Players/States/push_wall.gd" type="Script" id=10]
 [ext_resource path="res://Game/Players/States/fall.gd" type="Script" id=11]
-[ext_resource path="res://Game/Players/States/move_turn.gd" type="Script" id=12]
+[ext_resource path="res://Game/Players/States/floor_turn.gd" type="Script" id=12]
 [ext_resource path="res://Game/Players/States/jump.gd" type="Script" id=13]
 [ext_resource path="res://Game/Players/States/wallslide.gd" type="Script" id=14]
 [ext_resource path="res://Game/Players/States/enter_door_fade.gd" type="Script" id=15]
@@ -152,7 +152,7 @@ visible = false
 material = SubResource( 2 )
 position = Vector2( -2, -16 )
 frames = SubResource( 21 )
-frame = 8
+frame = 12
 speed_scale = 5.0
 playing = true
 
@@ -251,9 +251,6 @@ script = ExtResource( 20 )
 [node name="Tween" type="Tween" parent="StateMachine/enter_swim"]
 playback_process_mode = 0
 
-[node name="move_turn" type="Node" parent="StateMachine"]
-script = ExtResource( 12 )
-
 [node name="push_wall" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 
@@ -286,3 +283,6 @@ script = ExtResource( 18 )
 
 [node name="respawn" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
+
+[node name="floor_turn" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
