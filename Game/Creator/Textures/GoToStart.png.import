@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Idle.png-cd1684c1b6eeb40e5f4d8f5d3eb7a5a6.stex"
+path="res://.import/GoToStart.png-65ef943307ccc560c428abad480c5e8d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/Spikes/Textures/Idle.png"
-dest_files=[ "res://.import/Idle.png-cd1684c1b6eeb40e5f4d8f5d3eb7a5a6.stex" ]
+source_file="res://Game/Creator/Textures/GoToStart.png"
+dest_files=[ "res://.import/GoToStart.png-65ef943307ccc560c428abad480c5e8d.stex" ]
 
 [params]
 

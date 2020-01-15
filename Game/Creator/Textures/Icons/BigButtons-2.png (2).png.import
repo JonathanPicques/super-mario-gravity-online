@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spiked Ball.png-d9a046fc6b49b291d6b28dfec046629e.stex"
+path="res://.import/BigButtons-2.png (2).png-94ddd9434e6406b8a37a2b8d39e462a2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/SpikeBall/Textures/Spiked Ball.png"
-dest_files=[ "res://.import/Spiked Ball.png-d9a046fc6b49b291d6b28dfec046629e.stex" ]
+source_file="res://Game/Creator/Textures/Icons/BigButtons-2.png (2).png"
+dest_files=[ "res://.import/BigButtons-2.png (2).png-94ddd9434e6406b8a37a2b8d39e462a2.stex" ]
 
 [params]
 
