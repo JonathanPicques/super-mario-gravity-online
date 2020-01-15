@@ -15,5 +15,10 @@ func _ready():
 func get_map_data() -> Dictionary:
 	return {
 		"type": "Door",
+		"position": [position.x, position.y],
 		"door_to": "TODO"
 	}
+
+func load_map_data(item_data):
+	position.x = item_data["position"][0]
+	position.y = item_data["position"][1]

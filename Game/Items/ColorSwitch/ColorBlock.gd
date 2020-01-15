@@ -26,6 +26,11 @@ func get_map_data() -> Dictionary:
 	return {
 		"type": "ColorBlock",
 		"color": SkinManager.get_map_data(color),
-		"x": position.x,
-		"y": position.y
+		"position": [position.x, position.y]
 	}
+
+func load_map_data(item_data):
+	color = SkinManager.load_map_data(item_data["color"])
+	position.x = item_data["position"][0]
+	position.y = item_data["position"][1]
+

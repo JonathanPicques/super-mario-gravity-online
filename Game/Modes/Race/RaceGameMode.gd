@@ -5,10 +5,48 @@ var flag_end_pos := Vector2()
 var flag_distance := 0
 var flag_start_pos := Vector2()
 
+func load_map_data(map_data: Dictionary):
+	return
+	var item_scenes = {
+		"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
+		"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
+		"Door": preload("res://Game/Items/Door/Door.tscn"),
+		"PowerBox": preload("res://Game/Items/PowerBox/PowerBox.tscn"),
+		"SolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
+		"HSolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
+		"VSolidBlock": preload("res://Game/Items/SolidBlock/VSolidBlock.tscn"),
+		"BigSolidBlock": preload("res://Game/Items/SolidBlock/BigSolidBlock.tscn"),
+		"SpikeBall": preload("res://Game/Items/SpikeBall/SpikeBall.tscn"),
+		"Spikes": preload("res://Game/Items/Spikes/Spike.tscn"),
+		"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn")
+	}
+
+	map_node.FlagStart.position.x = map_data["flag_start"]["position"][0]
+	map_node.FlagStart.position.y = map_data["flag_start"]["position"][1]
+	map_node.FlagEnd.position.x = map_data["flag_end"]["position"][0]
+	map_node.FlagEnd.position.y = map_data["flag_end"]["position"][1]
+	
+#	for item_data in map_data["item_slot"]:
+#		var item = item_scenes[item_data["type"]].instance()
+#		item.load_map_data()
+#		print(item_data)
+	
+	
+func load_map():
+	var file = File.new()
+	if not file.file_exists("res://Maps/debug.json"):
+		print("Map debug doesn't exists'")
+		return
+	file.open("res://Maps/debug.json", File.READ)
+	load_map_data(parse_json(file.get_line()))
+	file.close()
+
 # _ready is called when this node is ready
 # @impure
 func _ready():
 	map_node = load(options.map).instance()
+#	map_node = load("res://Game/Maps/Map.tscn").instance()
+#	load_map()
 	MapSlot.add_child(map_node)
 	flag_end_pos = map_node.FlagEnd.position
 	flag_distance = 0.0

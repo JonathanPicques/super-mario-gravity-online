@@ -11,6 +11,9 @@ func _on_Area2D_body_entered(player_node: PlayerNode):
 func get_map_data() -> Dictionary:
 	return {
 		"type": "FlagEnd",
-		"x": position.x,
-		"y": position.y
+		"position": [position.x, position.y]
 	}
+
+func load_map_data(item_data):
+	position.x = item_data["position"][0]
+	position.y = item_data["position"][1]

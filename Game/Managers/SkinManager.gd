@@ -25,6 +25,21 @@ func get_map_data(color: int) -> String:
 		SkinColor.purple:
 			return "purple"
 	return "unknown"
+	
+func load_map_data(color_data: String) -> int:
+	if color_data == "aqua":
+		return SkinColor.aqua
+	if color_data == "blue":
+		return SkinColor.blue
+	if color_data == "pink":
+		return SkinColor.pink
+	if color_data == "orange":
+		return SkinColor.orange
+	if color_data == "yellow":
+		return SkinColor.yellow
+	if color_data == "purple":
+		return SkinColor.purple
+	return -1
 
 const Steel = [
 	Color("#46455b"),
