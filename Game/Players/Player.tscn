@@ -21,7 +21,6 @@
 [ext_resource path="res://Game/Players/States/swim.gd" type="Script" id=19]
 [ext_resource path="res://Game/Players/States/enter_swim.gd" type="Script" id=20]
 
-
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
@@ -134,7 +133,7 @@ visible = false
 material = SubResource( 2 )
 position = Vector2( -2, -16 )
 frames = SubResource( 21 )
-frame = 2
+frame = 5
 speed_scale = 5.0
 playing = true
 
@@ -231,6 +230,7 @@ script = ExtResource( 19 )
 script = ExtResource( 20 )
 
 [node name="Tween" type="Tween" parent="StateMachine/enter_swim"]
+playback_process_mode = 0
 
 [node name="move_turn" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )

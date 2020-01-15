@@ -403,10 +403,6 @@ device_4_cancel={
 2d_physics/layer_8="Sticky"
 2d_physics/layer_9="Water"
 
-[physics]
-
-common/physics_fps=144
-
 [rendering]
 
 quality/2d/gles2_use_nvidia_rect_flicker_workaround=true
