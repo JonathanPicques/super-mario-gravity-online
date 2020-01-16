@@ -11,14 +11,21 @@ func select_item(item_type):
 
 func create_item(item_type, mouse_position):
 	if item_type == "Tileset":
-		var x = round((mouse_position[0] - 8) / 16)
-		var y = round((mouse_position[1] - 8) / 16)
-		$Map.set_cell(x, y, 13)
-		$Map.update_bitmask_area(Vector2(x, y))
+		var cell_position = $Map.world_to_map(mouse_position)
+		$Map.set_cell(cell_position.x, cell_position.y, 13)
+		$Map.update_bitmask_area(cell_position)
 	else:
 		var item = MapManager.create_item(item_type)
 		item.position = current_item.position
 		$ObjectSlot.add_child(item)
+
+func remove_item(item_type, mouse_position):
+	if item_type == "Tileset":
+		var cell_position = $Map.world_to_map(mouse_position)
+		$Map.set_cell(cell_position.x, cell_position.y, -1)
+		$Map.update_bitmask_area(cell_position)
+	else:
+		return
 
 func _ready():
 	$GUI/Items/ItemButton.grab_focus()
@@ -31,3 +38,5 @@ func _process(delta):
 		current_item.position.y = round((mouse_position[1] - 8)/ 16) * 16
 	if Input.is_action_pressed("ui_click"):
 		create_item("Tileset", mouse_position)
+	if Input.is_action_pressed("ui_click_bis"):
+		remove_item("Tileset", mouse_position)
