@@ -7,19 +7,6 @@ var flag_start_pos := Vector2()
 
 func load_map_data(map_data: Dictionary):
 	return
-	var item_scenes = {
-		"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
-		"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
-		"Door": preload("res://Game/Items/Door/Door.tscn"),
-		"PowerBox": preload("res://Game/Items/PowerBox/PowerBox.tscn"),
-		"SolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
-		"HSolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
-		"VSolidBlock": preload("res://Game/Items/SolidBlock/VSolidBlock.tscn"),
-		"BigSolidBlock": preload("res://Game/Items/SolidBlock/BigSolidBlock.tscn"),
-		"SpikeBall": preload("res://Game/Items/SpikeBall/SpikeBall.tscn"),
-		"Spikes": preload("res://Game/Items/Spikes/Spike.tscn"),
-		"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn")
-	}
 
 	map_node.FlagStart.position.x = map_data["flag_start"]["position"][0]
 	map_node.FlagStart.position.y = map_data["flag_start"]["position"][1]
@@ -27,7 +14,7 @@ func load_map_data(map_data: Dictionary):
 	map_node.FlagEnd.position.y = map_data["flag_end"]["position"][1]
 	
 #	for item_data in map_data["item_slot"]:
-#		var item = item_scenes[item_data["type"]].instance()
+#		var item = MapManager.create_item(item_data["type"])
 #		item.load_map_data()
 #		print(item_data)
 	
