@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GardenTilesetIcon.png-c529f09e57abda949660d4424c3f86f4.stex"
+path="res://.import/RedoDisabled.png-9150a984e8bb1bf0dba6cdc4ff80cf57.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/GardenTilesetIcon.png"
-dest_files=[ "res://.import/GardenTilesetIcon.png-c529f09e57abda949660d4424c3f86f4.stex" ]
+source_file="res://Game/Creator/Textures/RedoDisabled.png"
+dest_files=[ "res://.import/RedoDisabled.png-9150a984e8bb1bf0dba6cdc4ff80cf57.stex" ]
 
 [params]
 

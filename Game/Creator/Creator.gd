@@ -5,9 +5,9 @@ onready var CurrentItemSlot := $CurrentItemSlot
 onready var ObjectSlot := $ObjectSlot
 
 onready var tilesets = {
-	"Wall": [$Map, 13],
-	"Sticky": [$Sticky, 8],
-	"Oneway": [$Map, 9]
+	"Wall": [$Map, 13, preload("res://Game/Creator/Textures/Icons/WallIcon.png")],
+	"Sticky": [$Sticky, 8, preload("res://Game/Creator/Textures/Icons/StickyIcon.png")],
+	"Oneway": [$Map, 9, preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")]
 }
 
 var element_index = 0

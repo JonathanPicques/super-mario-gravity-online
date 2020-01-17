@@ -2,34 +2,32 @@ extends Node
 
 export var item_type := "ColorSwitch"
 
-var current_item: Node2D = null
+var placeholder: Node2D = null
 var creator: Node2D = null
+
+func _ready():
+	placeholder = MapManager.create_item(item_type)
+	placeholder.modulate = Color(1, 1, 1, 0.5)
 
 func attach_creator(obj):
 	creator = obj
 
 func select_item():
-	current_item = MapManager.create_item(item_type)
-	current_item.modulate = Color(1, 1, 1, 0.5)
-	creator.CurrentItemSlot.add_child(current_item)
+	creator.CurrentItemSlot.add_child(placeholder)
 
 func unselect_item():
-	creator.CurrentItemSlot.remove_child(current_item)
-	current_item.queue_free()
+	creator.CurrentItemSlot.remove_child(placeholder)
 
 func update_item_placeholder(mouse_position):
-	if current_item:
-		current_item.position.x = MapManager.snap_value(mouse_position[0])
-		current_item.position.y = MapManager.snap_value(mouse_position[1])
-	if mouse_position.y < 32 || mouse_position.y > 256:
-		current_item.visible = false
-	else:
-		current_item.visible = true
+	if placeholder:
+		placeholder.position.x = MapManager.snap_value(mouse_position[0])
+		placeholder.position.y = MapManager.snap_value(mouse_position[1])
+		placeholder.visible = mouse_position.y > 32 && mouse_position.y < 256
 
 func create_item(mouse_position):
-	if current_item.visible:
+	if placeholder.visible:
 		var item = MapManager.create_item(item_type)
-		item.position = current_item.position
+		item.position = placeholder.position
 		creator.ObjectSlot.add_child(item)
 
 func remove_item(mouse_position):

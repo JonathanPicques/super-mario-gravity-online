@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/Menu.png" type="Texture" id=2]
@@ -26,7 +26,7 @@
 [ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
 [ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
 [ext_resource path="res://Game/Creator/Textures/Icons/SpikeBallIcon.png" type="Texture" id=26]
-[ext_resource path="res://Game/Creator/Textures/Icons/GardenTilesetIcon.png" type="Texture" id=27]
+[ext_resource path="res://Game/Creator/Textures/Icons/WallIcon.png" type="Texture" id=27]
 [ext_resource path="res://Game/Creator/Textures/Icons/OnewayIcon.png" type="Texture" id=28]
 [ext_resource path="res://Game/Creator/Textures/Icons/DoorIcon.png" type="Texture" id=29]
 [ext_resource path="res://Game/Creator/Textures/Icons/StickyIcon.png" type="Texture" id=30]
@@ -41,14 +41,16 @@
 [ext_resource path="res://Game/Creator/Textures/RedoPressed.png" type="Texture" id=39]
 [ext_resource path="res://Game/Creator/Textures/Info.png" type="Texture" id=40]
 [ext_resource path="res://Game/Creator/Textures/BubbleBottom.png" type="Texture" id=41]
+[ext_resource path="res://Game/Creator/Textures/UndoDisabled.png" type="Texture" id=42]
+[ext_resource path="res://Game/Creator/Textures/RedoDisabled.png" type="Texture" id=43]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 33 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 12
 use_filter = true
 font_data = ExtResource( 32 )
@@ -121,8 +123,10 @@ margin_left = 412.0
 margin_top = 9.0
 margin_right = 436.0
 margin_bottom = 33.0
+disabled = true
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 39 )
+texture_disabled = ExtResource( 43 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -132,8 +136,10 @@ margin_left = 384.0
 margin_top = 9.0
 margin_right = 408.0
 margin_bottom = 33.0
+disabled = true
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 38 )
+texture_disabled = ExtResource( 42 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -356,7 +362,7 @@ texture = ExtResource( 30 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 266.0
-margin_right = 283.2
+margin_right = 239.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -364,6 +370,7 @@ script = ExtResource( 34 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+tileset_type = "Oneway"
 
 [node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton11" index="0"]
 position = Vector2( 11, 11 )
@@ -492,7 +499,7 @@ margin_left = 117.0
 margin_top = 17.0
 margin_right = 185.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Keyboard"
 __meta__ = {
@@ -504,7 +511,7 @@ margin_left = 117.0
 margin_top = 118.0
 margin_right = 182.0
 margin_bottom = 133.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+z - undo"
 __meta__ = {
@@ -516,7 +523,7 @@ margin_left = 117.0
 margin_top = 106.0
 margin_right = 212.0
 margin_bottom = 121.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+shift+z - redo"
 __meta__ = {
@@ -528,7 +535,7 @@ margin_left = 117.0
 margin_top = 95.0
 margin_right = 217.0
 margin_bottom = 110.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+b - go to begin"
 __meta__ = {
@@ -540,7 +547,7 @@ margin_left = 117.0
 margin_top = 82.0
 margin_right = 207.0
 margin_bottom = 97.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+e - go to end"
 __meta__ = {
@@ -552,7 +559,7 @@ margin_left = 117.0
 margin_top = 69.0
 margin_right = 197.0
 margin_bottom = 84.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "leftclick - draw"
 __meta__ = {
@@ -564,7 +571,7 @@ margin_left = 116.0
 margin_top = 46.0
 margin_right = 186.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "enter - play"
 __meta__ = {
@@ -576,7 +583,7 @@ margin_left = 116.0
 margin_top = 57.0
 margin_right = 206.0
 margin_bottom = 72.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "rightclick - erase"
 __meta__ = {
@@ -588,7 +595,7 @@ margin_left = 116.0
 margin_top = 35.0
 margin_right = 186.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "esc - menu"
 __meta__ = {
@@ -600,7 +607,7 @@ margin_left = 12.0
 margin_top = 118.0
 margin_right = 77.0
 margin_bottom = 133.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "L - undo"
 __meta__ = {
@@ -612,7 +619,7 @@ margin_left = 12.0
 margin_top = 106.0
 margin_right = 107.0
 margin_bottom = 121.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "R - redo"
 __meta__ = {
@@ -624,7 +631,7 @@ margin_left = 12.0
 margin_top = 95.0
 margin_right = 112.0
 margin_bottom = 110.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ZL - go to begin"
 __meta__ = {
@@ -636,7 +643,7 @@ margin_left = 12.0
 margin_top = 82.0
 margin_right = 102.0
 margin_bottom = 97.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ZR - go to end"
 __meta__ = {
@@ -648,7 +655,7 @@ margin_left = 12.0
 margin_top = 69.0
 margin_right = 92.0
 margin_bottom = 84.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "A - draw"
 __meta__ = {
@@ -660,7 +667,7 @@ margin_left = 11.0
 margin_top = 46.0
 margin_right = 81.0
 margin_bottom = 61.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "START - play"
 __meta__ = {
@@ -672,7 +679,7 @@ margin_left = 11.0
 margin_top = 57.0
 margin_right = 101.0
 margin_bottom = 72.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "B - erase"
 __meta__ = {
@@ -684,7 +691,7 @@ margin_left = 11.0
 margin_top = 35.0
 margin_right = 81.0
 margin_bottom = 50.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "SELECT - menu"
 __meta__ = {
@@ -696,7 +703,7 @@ margin_left = 11.0
 margin_top = 17.0
 margin_right = 79.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Gamepad"
 __meta__ = {
