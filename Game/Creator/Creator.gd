@@ -44,3 +44,7 @@ func _on_ItemButton9_pressed(): select_item(8)
 func _on_ItemButton10_pressed(): select_item(9)
 func _on_ItemButton11_pressed(): select_item(10)
 func _on_ItemButton12_pressed(): select_item(11)
+
+
+func _on_InfoButton_pressed():
+	$GUI/InfoBubble.visible = !$GUI/InfoBubble.visible
