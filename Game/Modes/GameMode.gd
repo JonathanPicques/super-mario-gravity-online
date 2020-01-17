@@ -11,17 +11,21 @@ onready var Viewport4: Viewport = $GridContainer/Control4/ViewportContainer4/Vie
 
 signal item_color_switch_trigger(color)
 
-# options available in _ready.
-# warning-ignore:unused_class_variable
-export var options = {}
-
-# map node
+var started := false
+var options := {}
 var map_node: MapNode
+
+# init is called to init the game mode.
+# @async
+# @abstract
+func init():
+	yield()
 
 # start is called when the game mode starts.
 # @abstract
 func start():
-	pass
+	started = true
+	options.clear()
 
 # @impure
 func set_pixel_ratio(pixel_ratio: float):

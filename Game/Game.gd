@@ -42,7 +42,7 @@ func set_scene(_scene_node: Node):
 	get_tree().get_root().add_child(_scene_node)
 	scene_node = _scene_node
 	if _scene_node is GameModeNode:
-		map_node = _scene_node.map_node
+		map_node = null
 		game_mode_node = _scene_node
 
 # @impure
@@ -58,6 +58,8 @@ func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
 	game_mode_node.options = options
 	yield(screen_transition_start(), "completed")
 	set_scene(game_mode_node)
+	yield(game_mode_node.init(), "completed")
+	map_node = game_mode_node.map_node
 	game_mode_node.start()
 	yield(screen_transition_finish(), "completed")
 

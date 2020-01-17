@@ -5,33 +5,41 @@ const maps := [
 		"title": "Debug",
 		"score": 0,
 		"author": "rootkernel",
+		"preview": "res://Game/Maps/Textures/DebugPreview.png",
 		"difficulty": "easy",
 		"map_scene_path": "res://Game/Maps/Debug.tscn",
-		"preview": "res://Game/Maps/Textures/DebugPreview.png",
 	},
 	{
 		"title": "Rainbow garden",
 		"score": 6,
 		"author": "jeremtab",
+		"preview": "res://Game/Maps/Textures/RainbowGardenPreview.png",
 		"difficulty": "easy",
 		"map_scene_path": "res://Game/Maps/RainbowGarden.tscn",
-		"preview": "res://Game/Maps/Textures/RainbowGardenPreview.png",
 	},
 	{
 		"title": "Crazy tower",
 		"score": 7,
 		"author": "jeremtab",
+		"preview": "res://Game/Maps/Textures/CrazyTowerPreview.png",
 		"difficulty": "medium",
 		"map_scene_path": "res://Game/Maps/CrazyTower.tscn",
-		"preview": "res://Game/Maps/Textures/CrazyTowerPreview.png",
 	},
 	{
 		"title": "Spike Corridor",
 		"score": 8,
 		"author": "jeremtab",
+		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
 		"difficulty": "hard",
 		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
+	},
+	{
+		"title": "Custom Map",
+		"score": 42,
+		"author": "rootkernel & the world",
 		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
+		"difficulty": "inferno",
+		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
 	}
 ]
 
@@ -53,6 +61,10 @@ func _process(delta):
 # @impure
 func start_game(map_scene_path: String):
 	Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map = map_scene_path })
+
+# @impure
+func start_game_alt(map_path: String):
+	Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map_path = map_path })
 
 # @impure
 func set_map_infos(index):
@@ -113,3 +125,15 @@ func _on_MapButton4_pressed():
 # @impure
 func _on_MapButton4_focus_entered():
 	set_map_infos(3)
+
+# @signal
+# @impure
+func _on_MapButton5_pressed():
+	if not block_input:
+		block_input = true
+		start_game_alt("res://Maps/debug.json")
+
+# @signal
+# @impure
+func _on_MapButton5_focus_entered():
+	set_map_infos(4)

@@ -7,12 +7,12 @@ onready var MiniTween: Tween = $MiniMap/MiniTween
 onready var MiniMapLeft: Node2D = $MiniMap/MiniMapLeft
 onready var MiniMapRight: Node2D = $MiniMap/MiniMapRight
 onready var MiniMapTimer: Timer = $MiniMap/MiniMapTimer
+onready var PowerContainer: Control = $PowerHUD/PowerContainer
 
-onready var PowerContainer = $PowerHUD/PowerContainer
+export var ui_player_id := 0 # player id for whom this UI belongs
 
-var ui_player # player for whom this UI belongs
+var ui_player
 var ui_player_node
-export var ui_player_id := 0
 
 # @impure
 func _ready():
@@ -30,7 +30,7 @@ func _ready():
 
 # @impure
 func _process(delta: float):
-	if ui_player:
+	if ui_player and Game.game_mode_node.started:
 		$Ranking.text = "#%d" % (ui_player.rank + 1)
 		if not ui_player_node:
 			ui_player_node = MultiplayerManager.get_player_node(ui_player.id)

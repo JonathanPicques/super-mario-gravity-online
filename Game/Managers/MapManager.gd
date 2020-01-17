@@ -3,7 +3,7 @@ class_name MapManagerNode
 
 const ceil_size := 16.0
 
-const item_scenes = {
+const item_scenes := {
 	"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
 	"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
