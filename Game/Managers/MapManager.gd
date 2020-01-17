@@ -1,7 +1,9 @@
 extends Node
 class_name MapManagerNode
 
-var item_scenes = {
+const ceil_size := 16.0
+
+const item_scenes = {
 	"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
 	"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
@@ -17,3 +19,6 @@ var item_scenes = {
 
 func create_item(item_type: String) -> Node2D:
 	return item_scenes[item_type].instance()
+
+func snap_value(value: int) -> int:
+	return int(round((value - ceil_size / 2) / ceil_size) * ceil_size)

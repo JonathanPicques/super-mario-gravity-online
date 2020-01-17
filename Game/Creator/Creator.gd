@@ -1,42 +1,46 @@
 extends Navigation2D
 
-var current_item = null
+onready var elements := $GUI/Elements.get_children()
+onready var CurrentItemSlot := $CurrentItemSlot
+onready var ObjectSlot := $ObjectSlot
 
-func select_item(item_type):
-	if item_type == "Tileset":
-		return
-	current_item = MapManager.create_item(item_type)
-	current_item.modulate = Color(1, 1, 1, 0.5)
-	$CurrentItemSlot.add_child(current_item)	
+onready var tilesets = {
+	"Wall": [$Map, 13],
+	"Sticky": [$Sticky, 8],
+	"Oneway": [$Map, 9]
+}
 
-func create_item(item_type, mouse_position):
-	if item_type == "Tileset":
-		var cell_position = $Map.world_to_map(mouse_position)
-		$Map.set_cell(cell_position.x, cell_position.y, 13)
-		$Map.update_bitmask_area(cell_position)
-	else:
-		var item = MapManager.create_item(item_type)
-		item.position = current_item.position
-		$ObjectSlot.add_child(item)
-
-func remove_item(item_type, mouse_position):
-	if item_type == "Tileset":
-		var cell_position = $Map.world_to_map(mouse_position)
-		$Map.set_cell(cell_position.x, cell_position.y, -1)
-		$Map.update_bitmask_area(cell_position)
-	else:
-		return
+var element_index = 0
 
 func _ready():
-	$GUI/Items/ItemButton.grab_focus()
-	select_item("Tileset")
+	$GUI/Elements/ItemButton.grab_focus()
+	elements[element_index].attach_creator(self)
+	elements[element_index].select_item()
+
 
 func _process(delta):
 	var mouse_position = get_viewport().get_mouse_position()
-	if current_item:
-		current_item.position.x = round((mouse_position[0] - 8) / 16) * 16
-		current_item.position.y = round((mouse_position[1] - 8)/ 16) * 16
+	elements[element_index].update_item_placeholder(mouse_position)
 	if Input.is_action_pressed("ui_click"):
-		create_item("Tileset", mouse_position)
+		elements[element_index].create_item(mouse_position)
 	if Input.is_action_pressed("ui_click_bis"):
-		remove_item("Tileset", mouse_position)
+		elements[element_index].remove_item(mouse_position)
+
+func select_item(index):
+	elements[element_index].unselect_item()
+	element_index = index
+	elements[element_index].attach_creator(self)
+	elements[element_index].select_item()
+
+func _on_ItemButton_pressed(): select_item(0)
+func _on_ItemButton2_pressed(): select_item(1)
+func _on_ItemButton3_pressed(): select_item(2)
+func _on_ItemButton4_pressed(): select_item(3)
+func _on_ItemButton5_pressed(): select_item(4)
+func _on_ItemButton6_pressed(): select_item(5)
+func _on_ItemButton7_pressed(): select_item(6)
+func _on_ItemButton8_pressed(): select_item(7)
+func _on_ItemButton9_pressed(): select_item(8)
+func _on_ItemButton10_pressed(): select_item(9)
+func _on_ItemButton11_pressed(): select_item(10)
+func _on_ItemButton12_pressed(): select_item(11)
