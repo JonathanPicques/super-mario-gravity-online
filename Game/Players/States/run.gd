@@ -13,6 +13,7 @@ func process_state(delta: float):
 		context.STICKY_DECELERATION if context.is_on_sticky() else context.RUN_DECELERATION)
 	context.handle_last_safe_position()
 	if not context.is_on_floor():
+		context.set_animation("jump_to_fall")
 		context.fall_jump_grace = context.FALL_JUMP_GRACE
 		return fsm.states.fall
 	if context.input_up_once and context.is_on_door():
