@@ -5,6 +5,8 @@ export(SkinManagerNode.SkinColor) var color: int = SkinManagerNode.SkinColor.aqu
 const OnTexture := preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOn.png")
 const OffTexture := preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOff.png")
 
+onready var ItemSprite = $Sprite
+
 # @impure
 func _ready():
 	$Sprite.texture = OffTexture

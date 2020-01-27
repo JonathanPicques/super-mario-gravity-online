@@ -6,12 +6,14 @@ var is_on = false
 const OnTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOn.png")
 const OffTexture = preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOff.png")
 
+onready var Sprite = $Sprite
+
 # @impure
 func _ready():
-	$Sprite.texture = OnTexture if is_on else OffTexture
+	Sprite.texture = OnTexture if is_on else OffTexture
 	if Game.game_mode_node:
 		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
-	SkinManager.replace_skin($Sprite, color)
+	SkinManager.replace_skin(Sprite, color)
 
 # @impure
 func _on_Area2D_body_entered(player_node: PlayerNode):
@@ -23,10 +25,10 @@ func _on_Area2D_body_entered(player_node: PlayerNode):
 func on_trigger(switch_color: int):
 	if switch_color == color:
 		is_on = true
-		$Sprite.texture = OnTexture
+		Sprite.texture = OnTexture
 	else:
 		is_on = false
-		$Sprite.texture = OffTexture
+		Sprite.texture = OffTexture
 
 func get_map_data() -> Dictionary:
 	return {

@@ -18,7 +18,7 @@
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=16]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden1.png" type="Texture" id=17]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden3.png" type="Texture" id=18]
-[ext_resource path="res://Game/Creator/Textures/Grid.png" type="Texture" id=19]
+[ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorSwitchIcon.png" type="Texture" id=20]
 [ext_resource path="res://Game/Creator/Textures/Icons/PowerBoxIcon.png" type="Texture" id=21]
 [ext_resource path="res://Game/Creator/Textures/Icons/SpikeIcon.png" type="Texture" id=22]
@@ -55,37 +55,45 @@ size = 12
 use_filter = true
 font_data = ExtResource( 32 )
 
-[node name="Map" instance=ExtResource( 1 )]
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 31 )
 
-[node name="Grid" type="Sprite" parent="." index="0"]
-position = Vector2( 256, 144 )
-texture = ExtResource( 19 )
-
-[node name="Map" parent="." index="3"]
+[node name="Map" parent="." index="2"]
 tile_data = PoolIntArray( 720902, 13, 0, 720903, 13, 1, 720904, 13, 1, 720905, 13, 1, 720906, 13, 1, 720907, 13, 1, 720908, 13, 1, 720909, 13, 1, 720910, 13, 1, 720911, 13, 1, 720912, 13, 1, 720913, 13, 1, 720914, 13, 1, 720915, 13, 1, 720916, 13, 1, 720917, 13, 1, 720918, 13, 1, 720919, 13, 1, 720920, 13, 1, 720921, 13, 2, 786438, 13, 131072, 786439, 13, 131073, 786440, 13, 131073, 786441, 13, 131073, 786442, 13, 131073, 786443, 13, 131073, 786444, 13, 131073, 786445, 13, 131073, 786446, 13, 131073, 786447, 13, 131073, 786448, 13, 131073, 786449, 13, 131073, 786450, 13, 131073, 786451, 13, 131073, 786452, 13, 131073, 786453, 13, 131073, 786454, 13, 131073, 786455, 13, 131073, 786456, 13, 131073, 786457, 13, 131074 )
 
-[node name="FlagEnd" parent="." index="4"]
+[node name="FlagEnd" parent="." index="3"]
 position = Vector2( 384, 176 )
 
-[node name="FlagStart" parent="." index="5"]
+[node name="FlagStart" parent="." index="4"]
 position = Vector2( 112, 176 )
 
-[node name="GUI" type="Control" parent="." index="9"]
+[node name="GridLayer" type="CanvasLayer" parent="." index="11"]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="GridLayer" index="0"]
+self_modulate = Color( 0, 0, 0, 0.196078 )
+texture = ExtResource( 19 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 288 )
+
+[node name="GUILayer" type="CanvasLayer" parent="." index="12"]
+
+[node name="GUI" type="Control" parent="GUILayer" index="0"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopBar" type="Control" parent="GUI" index="0"]
+[node name="TopBar" type="Control" parent="GUILayer/GUI" index="0"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="TextureButton" parent="GUI/TopBar" index="0"]
+[node name="PlayButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="0"]
 margin_left = 7.0
 margin_top = 5.0
 margin_right = 39.0
@@ -96,7 +104,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MenuButton" type="TextureButton" parent="GUI/TopBar" index="1"]
+[node name="MenuButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="1"]
 margin_left = 473.0
 margin_top = 5.0
 margin_right = 505.0
@@ -107,7 +115,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InfoButton" type="TextureButton" parent="GUI/TopBar" index="2"]
+[node name="InfoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="2"]
 margin_left = 441.0
 margin_top = 9.0
 margin_right = 465.0
@@ -118,7 +126,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RedoButton" type="TextureButton" parent="GUI/TopBar" index="3"]
+[node name="RedoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="3"]
 margin_left = 412.0
 margin_top = 9.0
 margin_right = 436.0
@@ -131,7 +139,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UndoButton" type="TextureButton" parent="GUI/TopBar" index="4"]
+[node name="UndoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="4"]
 margin_left = 384.0
 margin_top = 9.0
 margin_right = 408.0
@@ -144,7 +152,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoToEndButton" type="TextureButton" parent="GUI/TopBar" index="5"]
+[node name="GoToEndButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="5"]
 margin_left = 354.0
 margin_top = 9.0
 margin_right = 378.0
@@ -155,7 +163,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoToStartButton" type="TextureButton" parent="GUI/TopBar" index="6"]
+[node name="GoToStartButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="6"]
 margin_left = 326.0
 margin_top = 9.0
 margin_right = 350.0
@@ -166,11 +174,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ElementsBar" type="Sprite" parent="GUI" index="1"]
+[node name="ElementsBar" type="Sprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
 
-[node name="Elements" type="Control" parent="GUI" index="2"]
+[node name="Elements" type="Control" parent="GUILayer/GUI" index="2"]
 margin_left = 102.0
 margin_top = 261.0
 margin_right = 433.0
@@ -179,7 +187,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemButton" type="TextureButton" parent="GUI/Elements" index="0"]
+[node name="ItemButton" type="TextureButton" parent="GUILayer/GUI/Elements" index="0"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = -10.0
@@ -192,11 +200,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 27 )
 
-[node name="ItemButton2" type="TextureButton" parent="GUI/Elements" index="1"]
+[node name="ItemButton2" type="TextureButton" parent="GUILayer/GUI/Elements" index="1"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 17.0
@@ -209,11 +217,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton2" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton2" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 20 )
 
-[node name="ItemButton3" type="TextureButton" parent="GUI/Elements" index="2"]
+[node name="ItemButton3" type="TextureButton" parent="GUILayer/GUI/Elements" index="2"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 44.0
@@ -227,11 +235,11 @@ __meta__ = {
 }
 item_type = "ColorBlock"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton3" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton3" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 13 )
 
-[node name="ItemButton4" type="TextureButton" parent="GUI/Elements" index="3"]
+[node name="ItemButton4" type="TextureButton" parent="GUILayer/GUI/Elements" index="3"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 71.0
@@ -245,12 +253,12 @@ __meta__ = {
 }
 item_type = "PowerBox"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton4" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton4" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.791667, 0.791667 )
 texture = ExtResource( 21 )
 
-[node name="ItemButton5" type="TextureButton" parent="GUI/Elements" index="4"]
+[node name="ItemButton5" type="TextureButton" parent="GUILayer/GUI/Elements" index="4"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 98.0
@@ -264,11 +272,11 @@ __meta__ = {
 }
 item_type = "SolidBlock"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton5" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton5" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 25 )
 
-[node name="ItemButton6" type="TextureButton" parent="GUI/Elements" index="5"]
+[node name="ItemButton6" type="TextureButton" parent="GUILayer/GUI/Elements" index="5"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 126.0
@@ -281,12 +289,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton6" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton6" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.714286, 0.714286 )
 texture = ExtResource( 26 )
 
-[node name="ItemButton7" type="TextureButton" parent="GUI/Elements" index="6"]
+[node name="ItemButton7" type="TextureButton" parent="GUILayer/GUI/Elements" index="6"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 154.0
@@ -300,11 +308,11 @@ __meta__ = {
 }
 item_type = "Spikes"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton7" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton7" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 22 )
 
-[node name="ItemButton8" type="TextureButton" parent="GUI/Elements" index="7"]
+[node name="ItemButton8" type="TextureButton" parent="GUILayer/GUI/Elements" index="7"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 182.0
@@ -318,12 +326,12 @@ __meta__ = {
 }
 item_type = "Trampoline"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton8" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton8" index="0"]
 position = Vector2( 11, 7 )
 scale = Vector2( 0.642857, 0.642857 )
 texture = ExtResource( 23 )
 
-[node name="ItemButton9" type="TextureButton" parent="GUI/Elements" index="8"]
+[node name="ItemButton9" type="TextureButton" parent="GUILayer/GUI/Elements" index="8"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 210.0
@@ -335,12 +343,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton9" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton9" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.874999, 0.874999 )
 texture = ExtResource( 24 )
 
-[node name="ItemButton10" type="TextureButton" parent="GUI/Elements" index="9"]
+[node name="ItemButton10" type="TextureButton" parent="GUILayer/GUI/Elements" index="9"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 238.0
@@ -354,11 +362,11 @@ __meta__ = {
 }
 tileset_type = "Sticky"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton10" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton10" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 30 )
 
-[node name="ItemButton11" type="TextureButton" parent="GUI/Elements" index="10"]
+[node name="ItemButton11" type="TextureButton" parent="GUILayer/GUI/Elements" index="10"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 266.0
@@ -372,11 +380,11 @@ __meta__ = {
 }
 tileset_type = "Oneway"
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton11" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton11" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 28 )
 
-[node name="ItemButton12" type="TextureButton" parent="GUI/Elements" index="11"]
+[node name="ItemButton12" type="TextureButton" parent="GUILayer/GUI/Elements" index="11"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 295.0
@@ -388,16 +396,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Elements/ItemButton12" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton12" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 29 )
 
-[node name="Bubble" type="NinePatchRect" parent="GUI" index="3"]
+[node name="Bubble" type="NinePatchRect" parent="GUILayer/GUI" index="3"]
 visible = false
-margin_left = 258.0
+margin_left = 250.0
 margin_top = 211.0
-margin_right = 367.0
+margin_right = 359.0
 margin_bottom = 251.0
 texture = ExtResource( 4 )
 patch_margin_left = 24
@@ -408,7 +416,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemButton7-1" type="TextureButton" parent="GUI/Bubble" index="0"]
+[node name="ItemButton7-1" type="TextureButton" parent="GUILayer/GUI/Bubble" index="0"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 6.0
@@ -421,11 +429,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Bubble/ItemButton7-1" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-1" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 22 )
 
-[node name="ItemButton7-2" type="TextureButton" parent="GUI/Bubble" index="1"]
+[node name="ItemButton7-2" type="TextureButton" parent="GUILayer/GUI/Bubble" index="1"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 31.0
@@ -438,12 +446,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Bubble/ItemButton7-2" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-2" index="0"]
 position = Vector2( 11, 11 )
 rotation = 1.5708
 texture = ExtResource( 22 )
 
-[node name="ItemButton7-3" type="TextureButton" parent="GUI/Bubble" index="2"]
+[node name="ItemButton7-3" type="TextureButton" parent="GUILayer/GUI/Bubble" index="2"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 56.0
@@ -456,12 +464,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Bubble/ItemButton7-3" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-3" index="0"]
 position = Vector2( 11, 11 )
 rotation = 3.14159
 texture = ExtResource( 22 )
 
-[node name="ItemButton7-4" type="TextureButton" parent="GUI/Bubble" index="3"]
+[node name="ItemButton7-4" type="TextureButton" parent="GUILayer/GUI/Bubble" index="3"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 81.0
@@ -474,13 +482,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUI/Bubble/ItemButton7-4" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-4" index="0"]
 position = Vector2( 11, 11 )
 rotation = -1.5708
 texture = ExtResource( 22 )
 
-[node name="InfoBubble" type="NinePatchRect" parent="GUI" index="4"]
-visible = false
+[node name="InfoBubble" type="NinePatchRect" parent="GUILayer/GUI" index="4"]
 margin_left = 238.0
 margin_top = 40.0
 margin_right = 473.0
@@ -494,11 +501,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLeft" type="Label" parent="GUI/InfoBubble" index="0"]
+[node name="TitleLeft" type="Label" parent="GUILayer/GUI/InfoBubble" index="0"]
 margin_left = 117.0
-margin_top = 17.0
+margin_top = 13.0
 margin_right = 185.0
-margin_bottom = 32.0
+margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Keyboard"
@@ -506,11 +513,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GUI/InfoBubble" index="1"]
+[node name="Label" type="Label" parent="GUILayer/GUI/InfoBubble" index="1"]
 margin_left = 117.0
-margin_top = 118.0
+margin_top = 114.0
 margin_right = 182.0
-margin_bottom = 133.0
+margin_bottom = 129.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+z - undo"
@@ -518,11 +525,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="GUI/InfoBubble" index="2"]
+[node name="Label16" type="Label" parent="GUILayer/GUI/InfoBubble" index="2"]
 margin_left = 117.0
-margin_top = 106.0
+margin_top = 126.0
+margin_right = 182.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+text = "space - map/tools"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="GUILayer/GUI/InfoBubble" index="3"]
+margin_left = 117.0
+margin_top = 102.0
 margin_right = 212.0
-margin_bottom = 121.0
+margin_bottom = 117.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+shift+z - redo"
@@ -530,11 +549,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="GUI/InfoBubble" index="3"]
+[node name="Label3" type="Label" parent="GUILayer/GUI/InfoBubble" index="4"]
 margin_left = 117.0
-margin_top = 95.0
+margin_top = 91.0
 margin_right = 217.0
-margin_bottom = 110.0
+margin_bottom = 106.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+b - go to begin"
@@ -542,11 +561,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label4" type="Label" parent="GUI/InfoBubble" index="4"]
+[node name="Label4" type="Label" parent="GUILayer/GUI/InfoBubble" index="5"]
 margin_left = 117.0
-margin_top = 82.0
+margin_top = 78.0
 margin_right = 207.0
-margin_bottom = 97.0
+margin_bottom = 93.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+e - go to end"
@@ -554,11 +573,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label5" type="Label" parent="GUI/InfoBubble" index="5"]
+[node name="Label5" type="Label" parent="GUILayer/GUI/InfoBubble" index="6"]
 margin_left = 117.0
-margin_top = 69.0
+margin_top = 65.0
 margin_right = 197.0
-margin_bottom = 84.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "leftclick - draw"
@@ -566,11 +585,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label6" type="Label" parent="GUI/InfoBubble" index="6"]
+[node name="Label6" type="Label" parent="GUILayer/GUI/InfoBubble" index="7"]
 margin_left = 116.0
-margin_top = 46.0
+margin_top = 42.0
 margin_right = 186.0
-margin_bottom = 61.0
+margin_bottom = 57.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "enter - play"
@@ -578,11 +597,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label17" type="Label" parent="GUI/InfoBubble" index="7"]
+[node name="Label17" type="Label" parent="GUILayer/GUI/InfoBubble" index="8"]
 margin_left = 116.0
-margin_top = 57.0
+margin_top = 53.0
 margin_right = 206.0
-margin_bottom = 72.0
+margin_bottom = 68.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "rightclick - erase"
@@ -590,11 +609,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label7" type="Label" parent="GUI/InfoBubble" index="8"]
+[node name="Label7" type="Label" parent="GUILayer/GUI/InfoBubble" index="9"]
 margin_left = 116.0
-margin_top = 35.0
+margin_top = 31.0
 margin_right = 186.0
-margin_bottom = 50.0
+margin_bottom = 46.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "esc - menu"
@@ -602,11 +621,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label14" type="Label" parent="GUI/InfoBubble" index="9"]
+[node name="Label14" type="Label" parent="GUILayer/GUI/InfoBubble" index="10"]
 margin_left = 12.0
-margin_top = 118.0
+margin_top = 114.0
 margin_right = 77.0
-margin_bottom = 133.0
+margin_bottom = 129.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "L - undo"
@@ -614,11 +633,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label13" type="Label" parent="GUI/InfoBubble" index="10"]
+[node name="Label15" type="Label" parent="GUILayer/GUI/InfoBubble" index="11"]
 margin_left = 12.0
-margin_top = 106.0
+margin_top = 126.0
+margin_right = 77.0
+margin_bottom = 141.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+text = "X - map/tools"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label13" type="Label" parent="GUILayer/GUI/InfoBubble" index="12"]
+margin_left = 12.0
+margin_top = 102.0
 margin_right = 107.0
-margin_bottom = 121.0
+margin_bottom = 117.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "R - redo"
@@ -626,11 +657,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label12" type="Label" parent="GUI/InfoBubble" index="11"]
+[node name="Label12" type="Label" parent="GUILayer/GUI/InfoBubble" index="13"]
 margin_left = 12.0
-margin_top = 95.0
+margin_top = 91.0
 margin_right = 112.0
-margin_bottom = 110.0
+margin_bottom = 106.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ZL - go to begin"
@@ -638,11 +669,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label11" type="Label" parent="GUI/InfoBubble" index="12"]
+[node name="Label11" type="Label" parent="GUILayer/GUI/InfoBubble" index="14"]
 margin_left = 12.0
-margin_top = 82.0
+margin_top = 78.0
 margin_right = 102.0
-margin_bottom = 97.0
+margin_bottom = 93.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ZR - go to end"
@@ -650,11 +681,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label10" type="Label" parent="GUI/InfoBubble" index="13"]
+[node name="Label10" type="Label" parent="GUILayer/GUI/InfoBubble" index="15"]
 margin_left = 12.0
-margin_top = 69.0
+margin_top = 65.0
 margin_right = 92.0
-margin_bottom = 84.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "A - draw"
@@ -662,11 +693,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label9" type="Label" parent="GUI/InfoBubble" index="14"]
+[node name="Label9" type="Label" parent="GUILayer/GUI/InfoBubble" index="16"]
 margin_left = 11.0
-margin_top = 46.0
+margin_top = 42.0
 margin_right = 81.0
-margin_bottom = 61.0
+margin_bottom = 57.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "START - play"
@@ -674,11 +705,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label18" type="Label" parent="GUI/InfoBubble" index="15"]
+[node name="Label18" type="Label" parent="GUILayer/GUI/InfoBubble" index="17"]
 margin_left = 11.0
-margin_top = 57.0
+margin_top = 53.0
 margin_right = 101.0
-margin_bottom = 72.0
+margin_bottom = 68.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "B - erase"
@@ -686,11 +717,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label8" type="Label" parent="GUI/InfoBubble" index="16"]
+[node name="Label8" type="Label" parent="GUILayer/GUI/InfoBubble" index="18"]
 margin_left = 11.0
-margin_top = 35.0
+margin_top = 31.0
 margin_right = 81.0
-margin_bottom = 50.0
+margin_bottom = 46.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "SELECT - menu"
@@ -698,17 +729,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleRight" type="Label" parent="GUI/InfoBubble" index="17"]
+[node name="TitleRight" type="Label" parent="GUILayer/GUI/InfoBubble" index="19"]
 margin_left = 11.0
-margin_top = 17.0
+margin_top = 13.0
 margin_right = 79.0
-margin_bottom = 32.0
+margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Gamepad"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GridBackground" type="ParallaxBackground" parent="." index="13"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="GridBackground" index="0"]
+visible = false
+position = Vector2( 1, 0 )
+motion_mirroring = Vector2( 16, 16 )
+
+[node name="Sprite" type="Sprite" parent="GridBackground/ParallaxLayer" index="0"]
+self_modulate = Color( 0, 0, 0, 0.0313726 )
+texture = ExtResource( 19 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, -16, 528, 304 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 18 )
@@ -725,18 +770,29 @@ visible = true
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = ExtResource( 17 )
 
-[node name="CurrentItemSlot" type="Node2D" parent="." index="14"]
+[node name="CurrentItemSlot" type="Node2D" parent="." index="15"]
+
+[node name="Camera2D" type="Camera2D" parent="." index="16"]
+anchor_mode = 0
+current = true
+process_mode = 0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 [connection signal="tree_exited" from="." to="." method="_on_Map_tree_exited"]
-[connection signal="pressed" from="GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton" to="." method="_on_ItemButton_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton2" to="." method="_on_ItemButton2_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton3" to="." method="_on_ItemButton3_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton4" to="." method="_on_ItemButton4_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton5" to="." method="_on_ItemButton5_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton6" to="." method="_on_ItemButton6_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton7" to="." method="_on_ItemButton7_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton8" to="." method="_on_ItemButton8_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton9" to="." method="_on_ItemButton9_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton10" to="." method="_on_ItemButton10_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton11" to="." method="_on_ItemButton11_pressed"]
-[connection signal="pressed" from="GUI/Elements/ItemButton12" to="." method="_on_ItemButton12_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/GoToStartButton" to="." method="_on_GoToStartButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton" to="." method="_on_ItemButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton2" to="." method="_on_ItemButton2_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton3" to="." method="_on_ItemButton3_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton4" to="." method="_on_ItemButton4_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton5" to="." method="_on_ItemButton5_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton6" to="." method="_on_ItemButton6_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton7" to="." method="_on_ItemButton7_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton8" to="." method="_on_ItemButton8_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton9" to="." method="_on_ItemButton9_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton10" to="." method="_on_ItemButton10_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton11" to="." method="_on_ItemButton11_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton12" to="." method="_on_ItemButton12_pressed"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grid.png-95be94b844828e2302e22bc1eecc1cf6.stex"
+path="res://.import/GridPattern.png-93eec465673b89051bef4b0ecf09a58c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Grid.png"
-dest_files=[ "res://.import/Grid.png-95be94b844828e2302e22bc1eecc1cf6.stex" ]
+source_file="res://Game/Creator/Textures/GridPattern.png"
+dest_files=[ "res://.import/GridPattern.png-93eec465673b89051bef4b0ecf09a58c.stex" ]
 
 [params]
 

@@ -29,6 +29,7 @@ func create_item(mouse_position):
 		var item = MapManager.create_item(item_type)
 		item.position = placeholder.position
 		creator.ObjectSlot.add_child(item)
+		creator.quadtree_append(item)
 
 func remove_item(mouse_position):
 	var item = get_item(mouse_position)
