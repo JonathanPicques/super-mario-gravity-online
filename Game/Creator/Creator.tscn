@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Game/Creator/Textures/Menu.png" type="Texture" id=2]
+[ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
 [ext_resource path="res://Game/Creator/Textures/InfoPressed.png" type="Texture" id=3]
 [ext_resource path="res://Game/Creator/Textures/ItemBubble.png" type="Texture" id=4]
 [ext_resource path="res://Game/Creator/Textures/Undo.png" type="Texture" id=5]
@@ -11,7 +11,7 @@
 [ext_resource path="res://Game/Creator/Textures/Play.png" type="Texture" id=9]
 [ext_resource path="res://Game/Creator/Textures/Icons/ItemsBar-1.png (2).png" type="Texture" id=10]
 [ext_resource path="res://Game/Creator/Textures/PlayPressed.png" type="Texture" id=11]
-[ext_resource path="res://Game/Creator/Textures/MenuPressed.png" type="Texture" id=12]
+[ext_resource path="res://Game/Creator/Textures/Settings.png" type="Texture" id=12]
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorBlockIcon.png" type="Texture" id=13]
 [ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
@@ -109,8 +109,8 @@ margin_left = 473.0
 margin_top = 5.0
 margin_right = 505.0
 margin_bottom = 37.0
-texture_normal = ExtResource( 2 )
-texture_pressed = ExtResource( 12 )
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -488,6 +488,7 @@ rotation = -1.5708
 texture = ExtResource( 22 )
 
 [node name="InfoBubble" type="NinePatchRect" parent="GUILayer/GUI" index="4"]
+visible = false
 margin_left = 238.0
 margin_top = 40.0
 margin_right = 473.0
@@ -760,12 +761,14 @@ texture = ExtResource( 18 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 visible = true
+motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2" index="0"]
 texture = ExtResource( 16 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 visible = true
+motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = ExtResource( 17 )

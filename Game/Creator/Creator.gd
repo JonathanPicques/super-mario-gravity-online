@@ -29,10 +29,10 @@ func quadtree_append(item):
 
 func quadtree_get_item_at_position(position):
 	for item in items_quadtree:
-		print(item.name, " == ", item.get_child("Sprite").get_rect())
+		print(item.name, " == ", item.ItemSprite.get_rect())
 
 func _process(delta):
-	var mouse_position = get_viewport().get_mouse_position()
+	var mouse_position = get_global_mouse_position()
 	Elements[element_index].update_item_placeholder(mouse_position)
 	if Input.is_action_pressed("ui_click"):
 		Elements[element_index].create_item(mouse_position)
@@ -46,7 +46,7 @@ func _process(delta):
 		$Camera2D.translate(Vector2(16, 0))
 	if Input.is_action_pressed("ui_up"):
 		$Camera2D.translate(Vector2(0, -16))
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down") and $Camera2D.position.y < 0:
 		$Camera2D.translate(Vector2(0, 16))
 
 func select_item(index):
@@ -76,8 +76,12 @@ func _on_GoToStartButton_pressed():
 	$Camera2D.position = $FlagStart.position
 	$Camera2D.position.x -= 256
 	$Camera2D.position.y -= 144
+	if $Camera2D.position.y > 0:
+		$Camera2D.position.y = 0
 
 func _on_GoToEndButton_pressed():
 	$Camera2D.position = $FlagEnd.position
 	$Camera2D.position.x -= 256
 	$Camera2D.position.y -= 144
+	if $Camera2D.position.y > 0:
+		$Camera2D.position.y = 0
