@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=16]
-[ext_resource path="res://Game/Maps/Textures/GardenBackground.png" type="Texture" id=17]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden3.png" type="Texture" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorSwitchIcon.png" type="Texture" id=20]
@@ -26,6 +25,7 @@
 [ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
 [ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
 [ext_resource path="res://Game/Creator/Textures/Icons/SpikeBallIcon.png" type="Texture" id=26]
+[ext_resource path="res://Game/Creator/LiquidDrawer.gd" type="Script" id=27]
 [ext_resource path="res://Game/Creator/Textures/Icons/OnewayIcon.png" type="Texture" id=28]
 [ext_resource path="res://Game/Creator/Textures/Icons/DoorIcon.png" type="Texture" id=29]
 [ext_resource path="res://Game/Creator/Textures/Icons/StickyIcon.png" type="Texture" id=30]
@@ -56,6 +56,9 @@ font_data = ExtResource( 33 )
 size = 12
 use_filter = true
 font_data = ExtResource( 32 )
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/GardenBackground.png-4cc6709bb708995a884cc4be8ad3f2ff.stex"
 
 [node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 31 )
@@ -341,9 +344,11 @@ margin_right = 227.2
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
+script = ExtResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+tileset_type = "Water"
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton9" index="0"]
 position = Vector2( 11, 11 )
@@ -746,6 +751,7 @@ __meta__ = {
 
 [node name="Background" parent="ParallaxSlot/ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 512, 288 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 18 )
@@ -761,7 +767,7 @@ visible = true
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
-texture = ExtResource( 17 )
+texture = SubResource( 5 )
 
 [node name="CurrentItemSlot" type="Node2D" parent="." index="14"]
 

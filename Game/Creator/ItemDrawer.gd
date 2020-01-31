@@ -25,11 +25,14 @@ func update_item_placeholder(mouse_position):
 		placeholder.visible = mouse_position.y > 32 && mouse_position.y < 256
 
 func create_item(mouse_position):
-	if placeholder.visible:
+	if !has_item(mouse_position) and placeholder.visible:
 		var item = MapManager.create_item(item_type)
 		item.position = placeholder.position
 		creator.ObjectSlot.add_child(item)
 		creator.quadtree_append(item)
+
+func has_item(mouse_position):
+	return false # TODO: Use quadtree
 
 func remove_item(mouse_position):
 	var item = get_item(mouse_position)
