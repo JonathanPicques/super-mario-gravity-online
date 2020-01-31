@@ -7,6 +7,7 @@
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadConfirm.png" type="Texture" id=5]
 [ext_resource path="res://Game/Menus/Textures/KeyKeyboardJump.png" type="Texture" id=6]
 [ext_resource path="res://Game/Utilities/AutoCreatePlayers.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Maps/Textures/GardenBackground.png" type="Texture" id=8]
 [ext_resource path="res://Game/Items/PowerBox/PowerBox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadAlt2.png" type="Texture" id=11]
@@ -14,7 +15,6 @@
 [ext_resource path="res://Game/Menus/Textures/KeyUp.png" type="Texture" id=13]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadUp.png" type="Texture" id=14]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=15]
-[ext_resource path="res://Game/Maps/Textures/BackgroundGarden1.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -54,7 +54,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
 
-[node name="Map" index="0" instance=ExtResource( 1 )]
+[node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="DecorBack" parent="." index="0"]
@@ -259,6 +259,7 @@ motion_scale = Vector2( 0.6, 1 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2" index="0"]
+visible = false
 texture = ExtResource( 15 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
@@ -267,4 +268,4 @@ motion_scale = Vector2( 0.8, 1 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
-texture = ExtResource( 16 )
+texture = ExtResource( 8 )

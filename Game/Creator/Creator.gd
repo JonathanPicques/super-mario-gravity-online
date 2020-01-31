@@ -4,7 +4,7 @@ onready var Elements := $GUILayer/GUI/Elements.get_children()
 onready var CurrentItemSlot := $CurrentItemSlot
 
 onready var tilesets = {
-	"Wall": [$Map, 13, preload("res://Game/Creator/Textures/Icons/WallIcon.png")],
+	"Wall": [$Map, 15, preload("res://Game/Creator/Textures/Icons/WallIcon.png")],
 	"Sticky": [$Sticky, 8, preload("res://Game/Creator/Textures/Icons/StickyIcon.png")],
 	"Oneway": [$Map, 9, preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")]
 }

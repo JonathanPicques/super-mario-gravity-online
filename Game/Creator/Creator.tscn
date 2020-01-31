@@ -16,7 +16,7 @@
 [ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=16]
-[ext_resource path="res://Game/Maps/Textures/BackgroundGarden1.png" type="Texture" id=17]
+[ext_resource path="res://Game/Maps/Textures/GardenBackground.png" type="Texture" id=17]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden3.png" type="Texture" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorSwitchIcon.png" type="Texture" id=20]
@@ -26,7 +26,6 @@
 [ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
 [ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
 [ext_resource path="res://Game/Creator/Textures/Icons/SpikeBallIcon.png" type="Texture" id=26]
-[ext_resource path="res://Game/Creator/Textures/Icons/WallIcon.png" type="Texture" id=27]
 [ext_resource path="res://Game/Creator/Textures/Icons/OnewayIcon.png" type="Texture" id=28]
 [ext_resource path="res://Game/Creator/Textures/Icons/DoorIcon.png" type="Texture" id=29]
 [ext_resource path="res://Game/Creator/Textures/Icons/StickyIcon.png" type="Texture" id=30]
@@ -47,25 +46,28 @@
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
 
-[sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 33 )
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex"
 
 [sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 33 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 12
 use_filter = true
 font_data = ExtResource( 32 )
 
-[node name="Map" instance=ExtResource( 1 )]
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 31 )
 
 [node name="Map" parent="." index="2"]
-tile_data = PoolIntArray( 720902, 13, 0, 720903, 13, 1, 720904, 13, 1, 720905, 13, 1, 720906, 13, 1, 720907, 13, 1, 720908, 13, 1, 720909, 13, 1, 720910, 13, 1, 720911, 13, 1, 720912, 13, 1, 720913, 13, 1, 720914, 13, 1, 720915, 13, 1, 720916, 13, 1, 720917, 13, 1, 720918, 13, 1, 720919, 13, 1, 720920, 13, 1, 720921, 13, 2, 786438, 13, 131072, 786439, 13, 131073, 786440, 13, 131073, 786441, 13, 131073, 786442, 13, 131073, 786443, 13, 131073, 786444, 13, 131073, 786445, 13, 131073, 786446, 13, 131073, 786447, 13, 131073, 786448, 13, 131073, 786449, 13, 131073, 786450, 13, 131073, 786451, 13, 131073, 786452, 13, 131073, 786453, 13, 131073, 786454, 13, 131073, 786455, 13, 131073, 786456, 13, 131073, 786457, 13, 131074 )
+tile_data = PoolIntArray( 917507, 15, 0, 917508, 15, 1, 917509, 15, 1, 917510, 15, 1, 917511, 15, 1, 917512, 15, 1, 917513, 15, 1, 917514, 15, 1, 917515, 15, 1, 917516, 15, 1, 917517, 15, 1, 917518, 15, 1, 917519, 15, 1, 917520, 15, 1, 917521, 15, 1, 917522, 15, 1, 917523, 15, 1, 917524, 15, 1, 917525, 15, 1, 917526, 15, 1, 917527, 15, 1, 917528, 15, 1, 917529, 15, 1, 917530, 15, 1, 917531, 15, 1, 917532, 15, 2, 983043, 15, 131072, 983044, 15, 131073, 983045, 15, 131073, 983046, 15, 131073, 983047, 15, 131073, 983048, 15, 131073, 983049, 15, 131073, 983050, 15, 131073, 983051, 15, 131073, 983052, 15, 131073, 983053, 15, 131073, 983054, 15, 131073, 983055, 15, 131073, 983056, 15, 131073, 983057, 15, 131073, 983058, 15, 131073, 983059, 15, 131073, 983060, 15, 131073, 983061, 15, 131073, 983062, 15, 131073, 983063, 15, 131073, 983064, 15, 131073, 983065, 15, 131073, 983066, 15, 131073, 983067, 15, 131073, 983068, 15, 131074 )
 
 [node name="FlagEnd" parent="." index="3"]
-position = Vector2( 384, 176 )
+position = Vector2( 384, 224 )
 
 [node name="FlagStart" parent="." index="4"]
-position = Vector2( 112, 176 )
+position = Vector2( 128, 224 )
 
 [node name="GridLayer" type="CanvasLayer" parent="." index="11"]
 layer = -1
@@ -202,7 +204,7 @@ __meta__ = {
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton" index="0"]
 position = Vector2( 11, 11 )
-texture = ExtResource( 27 )
+texture = SubResource( 2 )
 
 [node name="ItemButton2" type="TextureButton" parent="GUILayer/GUI/Elements" index="1"]
 anchor_right = 0.15
@@ -507,7 +509,7 @@ margin_left = 117.0
 margin_top = 13.0
 margin_right = 185.0
 margin_bottom = 28.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Keyboard"
 __meta__ = {
@@ -519,7 +521,7 @@ margin_left = 117.0
 margin_top = 114.0
 margin_right = 182.0
 margin_bottom = 129.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+z - undo"
 __meta__ = {
@@ -531,7 +533,7 @@ margin_left = 117.0
 margin_top = 126.0
 margin_right = 182.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "space - map/tools"
 __meta__ = {
@@ -543,7 +545,7 @@ margin_left = 117.0
 margin_top = 102.0
 margin_right = 212.0
 margin_bottom = 117.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+shift+z - redo"
 __meta__ = {
@@ -555,7 +557,7 @@ margin_left = 117.0
 margin_top = 91.0
 margin_right = 217.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+b - go to begin"
 __meta__ = {
@@ -567,7 +569,7 @@ margin_left = 117.0
 margin_top = 78.0
 margin_right = 207.0
 margin_bottom = 93.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ctrl+e - go to end"
 __meta__ = {
@@ -579,7 +581,7 @@ margin_left = 117.0
 margin_top = 65.0
 margin_right = 197.0
 margin_bottom = 80.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "leftclick - draw"
 __meta__ = {
@@ -591,7 +593,7 @@ margin_left = 116.0
 margin_top = 42.0
 margin_right = 186.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "enter - play"
 __meta__ = {
@@ -603,7 +605,7 @@ margin_left = 116.0
 margin_top = 53.0
 margin_right = 206.0
 margin_bottom = 68.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "rightclick - erase"
 __meta__ = {
@@ -615,7 +617,7 @@ margin_left = 116.0
 margin_top = 31.0
 margin_right = 186.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "esc - menu"
 __meta__ = {
@@ -627,7 +629,7 @@ margin_left = 12.0
 margin_top = 114.0
 margin_right = 77.0
 margin_bottom = 129.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "L - undo"
 __meta__ = {
@@ -639,7 +641,7 @@ margin_left = 12.0
 margin_top = 126.0
 margin_right = 77.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "X - map/tools"
 __meta__ = {
@@ -651,7 +653,7 @@ margin_left = 12.0
 margin_top = 102.0
 margin_right = 107.0
 margin_bottom = 117.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "R - redo"
 __meta__ = {
@@ -663,7 +665,7 @@ margin_left = 12.0
 margin_top = 91.0
 margin_right = 112.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ZL - go to begin"
 __meta__ = {
@@ -675,7 +677,7 @@ margin_left = 12.0
 margin_top = 78.0
 margin_right = 102.0
 margin_bottom = 93.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "ZR - go to end"
 __meta__ = {
@@ -687,7 +689,7 @@ margin_left = 12.0
 margin_top = 65.0
 margin_right = 92.0
 margin_bottom = 80.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "A - draw"
 __meta__ = {
@@ -699,7 +701,7 @@ margin_left = 11.0
 margin_top = 42.0
 margin_right = 81.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "START - play"
 __meta__ = {
@@ -711,7 +713,7 @@ margin_left = 11.0
 margin_top = 53.0
 margin_right = 101.0
 margin_bottom = 68.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "B - erase"
 __meta__ = {
@@ -723,7 +725,7 @@ margin_left = 11.0
 margin_top = 31.0
 margin_right = 81.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "SELECT - menu"
 __meta__ = {
@@ -735,32 +737,20 @@ margin_left = 11.0
 margin_top = 13.0
 margin_right = 79.0
 margin_bottom = 28.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Gamepad"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridBackground" type="ParallaxBackground" parent="." index="13"]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="GridBackground" index="0"]
-visible = false
-position = Vector2( 1, 0 )
-motion_mirroring = Vector2( 16, 16 )
-
-[node name="Sprite" type="Sprite" parent="GridBackground/ParallaxLayer" index="0"]
-self_modulate = Color( 0, 0, 0, 0.0313726 )
-texture = ExtResource( 19 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, -16, 528, 304 )
+[node name="Background" parent="ParallaxSlot/ParallaxBackground" index="0"]
+motion_scale = Vector2( 0.2, 1 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 18 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
-visible = true
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2" index="0"]
@@ -773,9 +763,9 @@ motion_mirroring = Vector2( 512, 0 )
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = ExtResource( 17 )
 
-[node name="CurrentItemSlot" type="Node2D" parent="." index="15"]
+[node name="CurrentItemSlot" type="Node2D" parent="." index="14"]
 
-[node name="Camera2D" type="Camera2D" parent="." index="16"]
+[node name="Camera2D" type="Camera2D" parent="." index="15"]
 anchor_mode = 0
 current = true
 process_mode = 0
