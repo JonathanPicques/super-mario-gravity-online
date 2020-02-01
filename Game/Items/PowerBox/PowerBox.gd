@@ -25,3 +25,6 @@ func get_map_data() -> Dictionary:
 func load_map_data(item_data):
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
+
+func quadtree_item_rect():
+	return Rect2(position, $Sprite.get_rect().size)

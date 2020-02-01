@@ -24,7 +24,7 @@ func update_item_placeholder(mouse_position):
 		placeholder.position.y = MapManager.snap_value(mouse_position[1])
 		
 		var local_mouse_position = get_viewport().get_mouse_position()
-		placeholder.visible = creator.HUDQuadtree.get_item(local_mouse_position) != null
+		placeholder.visible = creator.HUDQuadtree.get_item(local_mouse_position) == null
 
 func create_item(mouse_position):
 	if !has_item(mouse_position) and placeholder.visible:
