@@ -22,26 +22,26 @@ func update_item_placeholder(mouse_position):
 	if placeholder:
 		placeholder.position.x = MapManager.snap_value(mouse_position[0])
 		placeholder.position.y = MapManager.snap_value(mouse_position[1])
-		placeholder.visible = mouse_position.y > 32 && mouse_position.y < 256
+		
+		var local_mouse_position = get_viewport().get_mouse_position()
+		placeholder.visible = creator.HUDQuadtree.get_item(local_mouse_position) != null
 
 func create_item(mouse_position):
 	if !has_item(mouse_position) and placeholder.visible:
 		var item = MapManager.create_item(item_type)
 		item.position = placeholder.position
 		creator.ObjectSlot.add_child(item)
-		creator.quadtree_append(item)
+		creator.Quadtree.add_item(item)
 
 func has_item(mouse_position):
 	return false # TODO: Use quadtree
 
 func remove_item(mouse_position):
-	var item = get_item(mouse_position)
+	var item = creator.Quadtree.erase_item(mouse_position)
 	if item:
 		print("item = ", item)
+		yield(get_tree(), "idle_frame")
+		item.queue_free() # is it actually working???
 
 func get_item(mouse_position):
-	var space_state = creator.get_world_2d().direct_space_state
-	var result = space_state.intersect_ray(Vector2(0, 0), mouse_position)
-	if result.has("collider"):
-		return result.collider
-	return null
+	return creator.Quadtree.get_item(mouse_position)

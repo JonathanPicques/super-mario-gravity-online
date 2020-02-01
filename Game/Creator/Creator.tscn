@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=16]
+[ext_resource path="res://Game/Creator/Quadtree.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Game/Maps/Textures/BackgroundGarden3.png" type="Texture" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorSwitchIcon.png" type="Texture" id=20]
@@ -25,15 +26,15 @@
 [ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
 [ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
 [ext_resource path="res://Game/Creator/Textures/Icons/SpikeBallIcon.png" type="Texture" id=26]
-[ext_resource path="res://Game/Creator/LiquidDrawer.gd" type="Script" id=27]
+[ext_resource path="res://Game/Creator/Drawers/LiquidDrawer.gd" type="Script" id=27]
 [ext_resource path="res://Game/Creator/Textures/Icons/OnewayIcon.png" type="Texture" id=28]
 [ext_resource path="res://Game/Creator/Textures/Icons/DoorIcon.png" type="Texture" id=29]
 [ext_resource path="res://Game/Creator/Textures/Icons/StickyIcon.png" type="Texture" id=30]
 [ext_resource path="res://Game/Creator/Creator.gd" type="Script" id=31]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=32]
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=33]
-[ext_resource path="res://Game/Creator/TilemapDrawer.gd" type="Script" id=34]
-[ext_resource path="res://Game/Creator/ItemDrawer.gd" type="Script" id=35]
+[ext_resource path="res://Game/Creator/Drawers/TilemapDrawer.gd" type="Script" id=34]
+[ext_resource path="res://Game/Creator/Drawers/ItemDrawer.gd" type="Script" id=35]
 [ext_resource path="res://Game/Creator/Textures/GoToBeginPressed.png" type="Texture" id=36]
 [ext_resource path="res://Game/Creator/Textures/GoToEndPressed.png" type="Texture" id=37]
 [ext_resource path="res://Game/Creator/Textures/UndoPressed.png" type="Texture" id=38]
@@ -42,6 +43,8 @@
 [ext_resource path="res://Game/Creator/Textures/BubbleBottom.png" type="Texture" id=41]
 [ext_resource path="res://Game/Creator/Textures/UndoDisabled.png" type="Texture" id=42]
 [ext_resource path="res://Game/Creator/Textures/RedoDisabled.png" type="Texture" id=43]
+[ext_resource path="res://Game/Creator/CreatorButton.gd" type="Script" id=44]
+[ext_resource path="res://Game/Creator/ElementsBar.gd" type="Script" id=45]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
@@ -57,22 +60,32 @@ size = 12
 use_filter = true
 font_data = ExtResource( 32 )
 
+[sub_resource type="DynamicFont" id=6]
+outline_size = 1
+outline_color = Color( 0.2, 0.2, 0.2, 1 )
+use_mipmaps = true
+font_data = ExtResource( 32 )
+
 [sub_resource type="StreamTexture" id=5]
 load_path = "res://.import/GardenBackground.png-4cc6709bb708995a884cc4be8ad3f2ff.stex"
 
 [node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 31 )
 
-[node name="Map" parent="." index="2"]
+[node name="Quadtree" parent="." index="0" instance=ExtResource( 17 )]
+
+[node name="HUDQuadtree" parent="." index="1" instance=ExtResource( 17 )]
+
+[node name="Map" parent="." index="4"]
 tile_data = PoolIntArray( 917507, 15, 0, 917508, 15, 1, 917509, 15, 1, 917510, 15, 1, 917511, 15, 1, 917512, 15, 1, 917513, 15, 1, 917514, 15, 1, 917515, 15, 1, 917516, 15, 1, 917517, 15, 1, 917518, 15, 1, 917519, 15, 1, 917520, 15, 1, 917521, 15, 1, 917522, 15, 1, 917523, 15, 1, 917524, 15, 1, 917525, 15, 1, 917526, 15, 1, 917527, 15, 1, 917528, 15, 1, 917529, 15, 1, 917530, 15, 1, 917531, 15, 1, 917532, 15, 2, 983043, 15, 131072, 983044, 15, 131073, 983045, 15, 131073, 983046, 15, 131073, 983047, 15, 131073, 983048, 15, 131073, 983049, 15, 131073, 983050, 15, 131073, 983051, 15, 131073, 983052, 15, 131073, 983053, 15, 131073, 983054, 15, 131073, 983055, 15, 131073, 983056, 15, 131073, 983057, 15, 131073, 983058, 15, 131073, 983059, 15, 131073, 983060, 15, 131073, 983061, 15, 131073, 983062, 15, 131073, 983063, 15, 131073, 983064, 15, 131073, 983065, 15, 131073, 983066, 15, 131073, 983067, 15, 131073, 983068, 15, 131074 )
 
-[node name="FlagEnd" parent="." index="3"]
+[node name="FlagEnd" parent="." index="5"]
 position = Vector2( 384, 224 )
 
-[node name="FlagStart" parent="." index="4"]
+[node name="FlagStart" parent="." index="6"]
 position = Vector2( 128, 224 )
 
-[node name="GridLayer" type="CanvasLayer" parent="." index="11"]
+[node name="GridLayer" type="CanvasLayer" parent="." index="13"]
 layer = -1
 
 [node name="Sprite" type="Sprite" parent="GridLayer" index="0"]
@@ -82,7 +95,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 512, 288 )
 
-[node name="GUILayer" type="CanvasLayer" parent="." index="12"]
+[node name="GUILayer" type="CanvasLayer" parent="." index="14"]
 
 [node name="GUI" type="Control" parent="GUILayer" index="0"]
 margin_right = 40.0
@@ -105,6 +118,7 @@ margin_right = 39.0
 margin_bottom = 37.0
 texture_normal = ExtResource( 9 )
 texture_pressed = ExtResource( 11 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -116,6 +130,7 @@ margin_right = 505.0
 margin_bottom = 37.0
 texture_normal = ExtResource( 12 )
 texture_pressed = ExtResource( 2 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -127,6 +142,7 @@ margin_right = 465.0
 margin_bottom = 33.0
 texture_normal = ExtResource( 40 )
 texture_pressed = ExtResource( 3 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -140,6 +156,7 @@ disabled = true
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 39 )
 texture_disabled = ExtResource( 43 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -153,6 +170,7 @@ disabled = true
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 38 )
 texture_disabled = ExtResource( 42 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -164,6 +182,7 @@ margin_right = 378.0
 margin_bottom = 33.0
 texture_normal = ExtResource( 7 )
 texture_pressed = ExtResource( 37 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -175,6 +194,7 @@ margin_right = 350.0
 margin_bottom = 33.0
 texture_normal = ExtResource( 8 )
 texture_pressed = ExtResource( 36 )
+script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -182,6 +202,7 @@ __meta__ = {
 [node name="ElementsBar" type="Sprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
+script = ExtResource( 45 )
 
 [node name="Elements" type="Control" parent="GUILayer/GUI" index="2"]
 margin_left = 102.0
@@ -196,7 +217,7 @@ __meta__ = {
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = -10.0
-margin_right = 7.2
+margin_right = -37.65
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -213,7 +234,7 @@ texture = SubResource( 2 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 17.0
-margin_right = 34.2
+margin_right = -10.65
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -230,7 +251,7 @@ texture = ExtResource( 20 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 44.0
-margin_right = 61.2
+margin_right = 16.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -248,7 +269,7 @@ texture = ExtResource( 13 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 71.0
-margin_right = 88.2
+margin_right = 43.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -267,7 +288,7 @@ texture = ExtResource( 21 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 98.0
-margin_right = 115.2
+margin_right = 70.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -285,7 +306,7 @@ texture = ExtResource( 25 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 126.0
-margin_right = 143.2
+margin_right = 98.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -303,7 +324,7 @@ texture = ExtResource( 26 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 154.0
-margin_right = 171.2
+margin_right = 126.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -321,7 +342,7 @@ texture = ExtResource( 22 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 182.0
-margin_right = 199.2
+margin_right = 154.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -340,7 +361,7 @@ texture = ExtResource( 23 )
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 210.0
-margin_right = 227.2
+margin_right = 182.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
@@ -749,6 +770,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ModeLabel" type="Label" parent="GUILayer/GUI" index="5"]
+anchor_right = 0.7
+margin_left = 7.0
+margin_top = 235.0
+margin_right = 105.0
+margin_bottom = 252.0
+custom_fonts/font = SubResource( 6 )
+text = "(ESC) move map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Background" parent="ParallaxSlot/ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.2, 1 )
 motion_mirroring = Vector2( 512, 288 )
@@ -769,9 +802,9 @@ motion_mirroring = Vector2( 512, 0 )
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = SubResource( 5 )
 
-[node name="CurrentItemSlot" type="Node2D" parent="." index="14"]
+[node name="CurrentItemSlot" type="Node2D" parent="." index="16"]
 
-[node name="Camera2D" type="Camera2D" parent="." index="15"]
+[node name="Camera2D" type="Camera2D" parent="." index="17"]
 anchor_mode = 0
 current = true
 process_mode = 0

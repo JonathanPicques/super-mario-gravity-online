@@ -9,19 +9,19 @@ onready var ItemSprite = $Sprite
 
 # @impure
 func _ready():
-	$Sprite.texture = OffTexture
+	ItemSprite.texture = OffTexture
 	if Game.game_mode_node:
 		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
-	SkinManager.replace_skin($Sprite, color)
+	SkinManager.replace_skin(ItemSprite, color)
 	$StaticBody2D.collision_layer &= ~Game.COLLISION_LAYER_SOLID
 
 # @impure
 func on_trigger(switch_color: int):
 	if switch_color == color:
-		$Sprite.texture = OnTexture
+		ItemSprite.texture = OnTexture
 		$StaticBody2D.collision_layer |= Game.COLLISION_LAYER_SOLID
 	else:
-		$Sprite.texture = OffTexture
+		ItemSprite.texture = OffTexture
 		$StaticBody2D.collision_layer &= ~Game.COLLISION_LAYER_SOLID
 
 func get_map_data() -> Dictionary:
@@ -36,3 +36,5 @@ func load_map_data(item_data):
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
 
+func quadtree_item_rect():
+	return Rect2(position, ItemSprite.get_rect().size)

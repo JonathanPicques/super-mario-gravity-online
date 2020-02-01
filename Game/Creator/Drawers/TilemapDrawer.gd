@@ -33,7 +33,8 @@ func update_item_placeholder(mouse_position):
 	if placeholder:
 		placeholder.position.x = MapManager.snap_value(mouse_position[0]) + MapManager.ceil_size / 2
 		placeholder.position.y = MapManager.snap_value(mouse_position[1]) + MapManager.ceil_size / 2
-		placeholder.visible = mouse_position.y > 32 && mouse_position.y < 256
+		var local_mouse_position = get_viewport().get_mouse_position()
+		placeholder.visible = creator.HUDQuadtree.get_item(local_mouse_position) == null
 
 func remove_item(mouse_position):
 	var ts = creator.tilesets[tileset_type]
