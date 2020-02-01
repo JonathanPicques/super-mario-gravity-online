@@ -90,6 +90,16 @@ func set_focus_neighbours():
 		top_button.set("focus_neighbour_bottom", ItemButtons[0].get_path())
 		i += 1
 
+func change_select_mode(mode):
+	is_select_mode = mode
+	$GUILayer/GUI/ModeLabel.text = "(ESC) select items" if !is_select_mode else "(ESC) move map"
+	if !is_select_mode:
+		for btn in ItemButtons:
+			btn.release_focus()
+		for btn in TopButtons:
+			btn.release_focus()
+	else:
+		ItemButtons[element_index].grab_focus()
 
 func _process(delta):
 	var mouse_position = get_global_mouse_position()
@@ -99,15 +109,7 @@ func _process(delta):
 	if Input.is_action_pressed("ui_click_bis"):
 		Elements[element_index].remove_item(mouse_position)
 	if Input.is_action_just_pressed("ui_cancel"):
-		is_select_mode = !is_select_mode
-		$GUILayer/GUI/ModeLabel.text = "(ESC) select items" if !is_select_mode else "(ESC) move map"
-		if !is_select_mode:
-			for btn in ItemButtons:
-				btn.release_focus()
-			for btn in TopButtons:
-				btn.release_focus()
-		else:
-			ItemButtons[0].grab_focus()
+		change_select_mode(!is_select_mode)
 
 	if !is_select_mode:
 		if Input.is_action_pressed("ui_left"):
