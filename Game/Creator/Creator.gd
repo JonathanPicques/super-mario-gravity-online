@@ -25,7 +25,7 @@ onready var TopButtons := [
 	$GUILayer/GUI/TopBar/UndoButton,
 	$GUILayer/GUI/TopBar/RedoButton,
 	$GUILayer/GUI/TopBar/InfoButton,
-	$GUILayer/GUI/TopBar/MenuButton
+	$GUILayer/GUI/TopBar/SettingsButton
 ]
 onready var ItemButtons := $GUILayer/GUI/Elements.get_children()
 
@@ -35,13 +35,8 @@ func _ready():
 	Elements[element_index].select_item()
 	
 	Quadtree.add_items($ObjectSlot.get_children())
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/PlayButton)
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/MenuButton)
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/InfoButton)
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/RedoButton)
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/UndoButton)
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/GoToEndButton)
-	HUDQuadtree.add_item($GUILayer/GUI/TopBar/GoToStartButton)
+	for btn in TopButtons:
+		HUDQuadtree.add_item(btn)
 	HUDQuadtree.add_item($GUILayer/GUI/ElementsBar) # FIXME not working
 	
 	set_focus_neighbours()
@@ -122,13 +117,11 @@ func _process(delta):
 			$Camera2D.translate(Vector2(0, 16))
 
 func select_item(index):
+	change_select_mode(true)
 	Elements[element_index].unselect_item()
 	element_index = index
 	Elements[element_index].attach_creator(self)
 	Elements[element_index].select_item()
-
-func _on_InfoButton_pressed():
-	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
 
 func _on_ItemButton_pressed(): select_item(0)
 func _on_ItemButton2_pressed(): select_item(1)
@@ -143,8 +136,12 @@ func _on_ItemButton10_pressed(): select_item(9)
 func _on_ItemButton11_pressed(): select_item(10)
 func _on_ItemButton12_pressed(): select_item(11)
 
+func _on_PlayButton_pressed():
+	change_select_mode(true)
+	print("Play!!!")
 
 func _on_GoToStartButton_pressed():
+	change_select_mode(true)
 	$Camera2D.position = $FlagStart.position
 	$Camera2D.position.x -= 256
 	$Camera2D.position.y -= 144
@@ -152,8 +149,26 @@ func _on_GoToStartButton_pressed():
 		$Camera2D.position.y = 0
 
 func _on_GoToEndButton_pressed():
+	change_select_mode(true)
 	$Camera2D.position = $FlagEnd.position
 	$Camera2D.position.x -= 256
 	$Camera2D.position.y -= 144
 	if $Camera2D.position.y > 0:
 		$Camera2D.position.y = 0
+
+func _on_UndoButton_pressed():
+	change_select_mode(true)
+	print("Undo")
+
+func _on_RedoButton_pressed():
+	change_select_mode(true)
+	print("Redo")
+
+func _on_InfoButton_pressed():
+	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
+	change_select_mode(true)
+
+func _on_SettingsButton_pressed():
+	change_select_mode(true)
+	print("Open settings...")
+
