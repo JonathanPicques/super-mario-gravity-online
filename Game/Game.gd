@@ -64,6 +64,10 @@ func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
 	yield(screen_transition_finish(), "completed")
 
 # @impure
+func goto_creator_scene():
+	goto_game_mode_scene("res://Game/Creator/Creator.tscn", {})
+
+# @impure
 func goto_lobby_menu_scene():
 	yield(screen_transition_start(), "completed")
 	set_scene(LobbyMenu.instance())
@@ -86,10 +90,6 @@ func goto_settings_menu_scene():
 	yield(screen_transition_start(), "completed")
 	set_scene(SettingsMenu.instance())
 	yield(screen_transition_finish(), "completed")
-
-# @impure
-func goto_creator_scene():
-	goto_game_mode_scene("res://Game/Creator/Creator.tscn", {})
 
 ##
 # Transition

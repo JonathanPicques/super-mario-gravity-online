@@ -1,8 +1,8 @@
 extends GameModeNode
 
 onready var Elements := $GUILayer/GUI/Elements.get_children()
-onready var CurrentItemSlot := $CurrentItemSlot
 onready var CreatorCamera := $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
+onready var CurrentItemSlot := $CurrentItemSlot
 
 onready var tilesets = {}
 
@@ -150,28 +150,29 @@ func _on_ItemButton11_pressed(): select_item(10)
 func _on_ItemButton12_pressed(): select_item(11)
 
 func _on_PlayButton_pressed():
-	change_select_mode(true)
-	var p = MultiplayerManager.add_player("", true, 0)
-	var pn = MultiplayerManager.spawn_player_node(p, map_node.PlayerSlot)
-	pn.position = map_node.FlagStart.position
 	$GUILayer/GUI.visible = false
-	print("Play!!!")
+	change_select_mode(true)
+	var player := MultiplayerManager.add_player("creator", true, 0)
+	var player_node := MultiplayerManager.spawn_player_node(player, map_node.PlayerSlot)
+	var player_camera_node := add_player_screen_camera(player.id, player_node.get_path())
+	player_node.position = map_node.FlagStart.position
+	player_camera_node.current = true
 
 func _on_GoToStartButton_pressed():
 	change_select_mode(true)
-	$Camera2D.position = $FlagStart.position
-	$Camera2D.position.x -= 256
-	$Camera2D.position.y -= 144
-	if $Camera2D.position.y > 0:
-		$Camera2D.position.y = 0
+	CreatorCamera.position = map_node.FlagStart.position
+	CreatorCamera.position.x -= 256
+	CreatorCamera.position.y -= 144
+	if CreatorCamera.position.y > 0:
+		CreatorCamera.position.y = 0
 
 func _on_GoToEndButton_pressed():
 	change_select_mode(true)
-	$Camera2D.position = $FlagEnd.position
-	$Camera2D.position.x -= 256
-	$Camera2D.position.y -= 144
-	if $Camera2D.position.y > 0:
-		$Camera2D.position.y = 0
+	CreatorCamera.position = map_node.FlagEnd.position
+	CreatorCamera.position.x -= 256
+	CreatorCamera.position.y -= 144
+	if CreatorCamera.position.y > 0:
+		CreatorCamera.position.y = 0
 
 func _on_UndoButton_pressed():
 	change_select_mode(true)

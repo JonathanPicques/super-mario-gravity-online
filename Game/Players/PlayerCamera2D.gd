@@ -1,4 +1,5 @@
 extends Camera2D
+class_name PlayerCameraNode
 
 export var player_node_path: NodePath
 export var tile_map_node_path: NodePath

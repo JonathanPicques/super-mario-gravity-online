@@ -120,7 +120,7 @@ func get_player_screen_camera(player_id: int):
 
 # add a camera compatible with split screen for the given player.
 # @impure
-func add_player_screen_camera(player_id: int, player_node_path: NodePath):
+func add_player_screen_camera(player_id: int, player_node_path: NodePath) -> PlayerCameraNode:
 	var player_camera_scene = PlayerCamera.instance()
 	player_camera_scene.player_node_path = player_node_path
 	player_camera_scene.tile_map_node_path = MapSlot.get_node("Map").Map.get_path()
@@ -129,6 +129,7 @@ func add_player_screen_camera(player_id: int, player_node_path: NodePath):
 		1: Viewport2.add_child(player_camera_scene)
 		2: Viewport3.add_child(player_camera_scene)
 		3: Viewport4.add_child(player_camera_scene)
+	return player_camera_scene
 
 # add a camera compatible with split screen for the given player.
 # @impure
