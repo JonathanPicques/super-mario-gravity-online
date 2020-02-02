@@ -267,6 +267,8 @@ position = Vector2( -128, 0 )
 [node name="PowerBox4" parent="ObjectSlot" index="3" instance=ExtResource( 9 )]
 position = Vector2( -96, 0 )
 
+[node name="AutoCreatePlayers" parent="." index="9" instance=ExtResource( 7 )]
+
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = SubResource( 7 )
 
@@ -275,9 +277,7 @@ autoplay = "move_clouds"
 anims/move_clouds = SubResource( 8 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
-visible = true
 motion_scale = Vector2( 0.6, 1 )
-motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2" index="0"]
 visible = false
@@ -290,5 +290,4 @@ motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = SubResource( 9 )
-
-[node name="AutoCreatePlayers" parent="." index="13" instance=ExtResource( 7 )]
+region_rect = Rect2( 0, 0, 512, 288 )
