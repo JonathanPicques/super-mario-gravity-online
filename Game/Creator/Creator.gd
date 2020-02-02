@@ -110,7 +110,7 @@ func change_select_mode(mode):
 		ItemButtons[element_index].grab_focus()
 
 func _process(delta):
-	var mouse_position = get_global_mouse_position()
+	var mouse_position = get_viewport().get_mouse_position()
 	Elements[element_index].update_item_placeholder(mouse_position)
 	if Input.is_action_pressed("ui_click"):
 		Elements[element_index].create_item(mouse_position)

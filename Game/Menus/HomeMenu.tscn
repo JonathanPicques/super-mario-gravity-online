@@ -20,6 +20,8 @@ size = 30
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="StreamTexture" id=3]
@@ -27,6 +29,8 @@ font_data = ExtResource( 4 )
 [sub_resource type="StreamTexture" id=4]
 
 [sub_resource type="DynamicFont" id=5]
+outline_size = 1
+outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="StreamTexture" id=6]
@@ -102,7 +106,7 @@ margin_top = 64.0
 margin_right = 352.0
 margin_bottom = 81.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press     /    to join "
 align = 1
 __meta__ = {
@@ -123,7 +127,7 @@ margin_top = 192.0
 margin_right = -448.0
 margin_bottom = 209.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press    to jump"
 align = 1
 __meta__ = {
@@ -145,7 +149,7 @@ margin_top = 192.0
 margin_right = -240.0
 margin_bottom = 229.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Also, you can
 Double Jump"
 align = 1
@@ -159,7 +163,7 @@ margin_top = 128.0
 margin_right = -176.0
 margin_bottom = 149.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "And Wall Jump !"
 align = 1
 __meta__ = {
@@ -172,7 +176,7 @@ margin_top = -32.0
 margin_right = -10.0
 margin_bottom = -15.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press    to use an object!"
 align = 1
 __meta__ = {
@@ -189,12 +193,13 @@ position = Vector2( 50, 9 )
 texture = ExtResource( 11 )
 
 [node name="SettingsLabel" type="Label" parent="GUI" index="6"]
-margin_left = 32.0
+anchor_right = 0.5
+margin_left = 16.0
 margin_top = 256.0
-margin_right = 96.0
+margin_right = 80.0
 margin_bottom = 273.0
 custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "(Y) settings"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -210,12 +215,12 @@ position = Vector2( -13, 9 )
 texture = ExtResource( 12 )
 
 [node name="SettingsLabel2" type="Label" parent="GUI" index="7"]
-margin_left = 128.0
+margin_left = 416.0
 margin_top = 256.0
-margin_right = 212.0
+margin_right = 500.0
 margin_bottom = 273.0
 custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "(C) creator"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -238,7 +243,7 @@ margin_top = 256.0
 margin_right = 293.0
 margin_bottom = 273.0
 custom_fonts/font = SubResource( 5 )
-custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "    open the door"
 __meta__ = {
 "_edit_use_anchors_": false
