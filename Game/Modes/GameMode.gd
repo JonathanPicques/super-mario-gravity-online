@@ -45,7 +45,7 @@ func setup_split_screen():
 	Game.map_node.remove_child(parallax_node)
 	# adjust split screen layout
 	match player_count:
-		1:
+		0, 1:
 			Viewport1.add_child(parallax_node.duplicate())
 			$GridContainer/Control2.visible = false
 			$GridContainer/Control3.visible = false

@@ -195,7 +195,7 @@ margin_right = 96.0
 margin_bottom = 273.0
 custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
-text = "settings"
+text = "(Y) settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -209,7 +209,28 @@ visible = false
 position = Vector2( -13, 9 )
 texture = ExtResource( 12 )
 
-[node name="OpenDoorLabel" type="Label" parent="GUI" index="7"]
+[node name="SettingsLabel2" type="Label" parent="GUI" index="7"]
+margin_left = 128.0
+margin_top = 256.0
+margin_right = 212.0
+margin_bottom = 273.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.223529, 0.188235, 0.227451, 1 )
+text = "(C) creator"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyKeyboardSettings" type="Sprite" parent="GUI/SettingsLabel2" index="0"]
+position = Vector2( -13, 9 )
+texture = SubResource( 6 )
+
+[node name="KeyGamepadSettings" type="Sprite" parent="GUI/SettingsLabel2" index="1"]
+visible = false
+position = Vector2( -13, 9 )
+texture = ExtResource( 12 )
+
+[node name="OpenDoorLabel" type="Label" parent="GUI" index="8"]
 visible = false
 anchor_right = 0.675
 margin_left = 192.0

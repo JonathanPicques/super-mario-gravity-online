@@ -30,7 +30,7 @@ func create_item(mouse_position):
 	if !has_item(mouse_position) and placeholder.visible:
 		var item = MapManager.create_item(item_type)
 		item.position = placeholder.position
-		creator.map_node.ObjectSlot.add_child(item)
+		creator.ObjectSlot.add_child(item)
 		creator.Quadtree.add_item(item)
 
 func has_item(mouse_position):

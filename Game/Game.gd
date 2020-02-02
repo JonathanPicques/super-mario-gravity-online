@@ -87,6 +87,10 @@ func goto_settings_menu_scene():
 	set_scene(SettingsMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
+# @impure
+func goto_creator_scene():
+	goto_game_mode_scene("res://Game/Creator/Creator.tscn", {})
+
 ##
 # Transition
 ##

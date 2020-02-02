@@ -31,6 +31,8 @@ func _process(delta: float):
 		return Game.goto_lobby_menu_scene()
 	if Input.is_action_just_pressed("ui_toggle_room_status"):
 		Game.goto_settings_menu_scene()
+	if Input.is_action_just_pressed("device_0_use"):
+		Game.goto_creator_scene()
 	# add a local player
 	if not lead_player:
 		for input_device_id in range(0, 5):

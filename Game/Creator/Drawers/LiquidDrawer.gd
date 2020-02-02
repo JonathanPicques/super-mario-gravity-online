@@ -7,7 +7,7 @@ export var tileset_type := "Wall"
 
 onready var placeholder = Sprite.new()
 
-var creator: Node2D = null
+var creator: GameModeNode = null
 
 func attach_creator(obj):
 	creator = obj
@@ -45,7 +45,7 @@ func remove_item(mouse_position):
 	ts[0].update_bitmask_area(cell_position)
 
 func fill_area(ts, cell_position):
-	var wall_cell = creator.Map.get_cell(cell_position.x, cell_position.y)
+	var wall_cell = creator.tilesets.Wall[0].get_cell(cell_position.x, cell_position.y)
 	var water_cell = ts[0].get_cell(cell_position.x, cell_position.y)
 	if wall_cell != -1 or water_cell != -1 or count < 0:
 		return

@@ -4,7 +4,7 @@ export var tileset_type := "Wall"
 
 onready var placeholder = Sprite.new()
 
-var creator: Node2D = null
+var creator: GameModeNode = null
 
 func attach_creator(obj):
 	creator = obj
