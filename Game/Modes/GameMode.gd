@@ -4,6 +4,7 @@ class_name GameModeNode
 const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
 
 onready var MapSlot: MapNode = $GridContainer/Control1/ViewportContainer1/Viewport1/MapSlot
+onready var GamePopup: Control = $Popup
 onready var Viewport1: Viewport = $GridContainer/Control1/ViewportContainer1/Viewport1
 onready var Viewport2: Viewport = $GridContainer/Control2/ViewportContainer2/Viewport2
 onready var Viewport3: Viewport = $GridContainer/Control3/ViewportContainer3/Viewport3
@@ -27,11 +28,30 @@ func start():
 	started = true
 	options.clear()
 
+# load_map loads the given map into the game mode.
+# @impure
+func load_map(map_path: String):
+	map_node = load("res://Game/Maps/Map.tscn").instance()
+	# add map to game mode tree
+	MapSlot.add_child(map_node)
+	# wait for map to be ready
+	yield(get_tree(), "idle_frame")
+	# load map data
+	var file := File.new()
+	var open_result := file.open(map_path, File.READ)
+	if open_result != OK:
+		print("failed to load map %s" % map_path)
+		return
+	# fill map
+	MapManager.fill_map_from_data(map_node, parse_json(file.get_line()))
+	file.close()
+
 # @impure
 func set_pixel_ratio(pixel_ratio: float):
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
 	Game.GameTransitionCanvasLayer.scale = Vector2(pixel_ratio, pixel_ratio)
-	$Popup.rect_scale = Vector2(pixel_ratio, pixel_ratio)
+	if is_instance_valid(GamePopup):
+		GamePopup.rect_scale = Vector2(pixel_ratio, pixel_ratio)
 
 # setup_split_screen splits the screen between local players.
 # @impure
@@ -41,8 +61,8 @@ func setup_split_screen():
 	if player_count > 1:
 		set_pixel_ratio(2.0)
 	# clone parallax for each screen
-	var parallax_node = Game.map_node.ParallaxSlot
-	Game.map_node.remove_child(parallax_node)
+	var parallax_node = map_node.ParallaxSlot
+	map_node.remove_child(parallax_node)
 	# adjust split screen layout
 	match player_count:
 		0, 1:
@@ -145,18 +165,21 @@ func _on_GameMode_tree_exiting():
 ##
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		toggle_popup(!$Popup.visible)
+	if is_instance_valid(GamePopup):
+		if Input.is_action_just_pressed("ui_cancel"):
+			toggle_popup(!GamePopup.visible)
 
 func toggle_popup(is_open):
-	$Popup/ContinueButton.grab_focus()
-	$Popup.visible = is_open
+	if is_instance_valid(GamePopup):
+		GamePopup.visible = is_open
+		$Popup/ContinueButton.grab_focus()
 
 # block_input is used to avoid calling finish_playing multiple times.
 var block_input := false
-	
+
 func _on_ContinueButton_pressed():
-	$Popup.visible = false
+	if is_instance_valid(GamePopup):
+		GamePopup.visible = false
 
 func _on_HomeButton_pressed():
 	if not block_input:

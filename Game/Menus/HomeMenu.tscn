@@ -56,7 +56,7 @@ tracks/0/keys = {
 [sub_resource type="StreamTexture" id=9]
 load_path = "res://.import/GardenBackground.png-4cc6709bb708995a884cc4be8ad3f2ff.stex"
 
-[node name="Map" instance=ExtResource( 1 )]
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="DecorBack" parent="." index="0"]
@@ -267,8 +267,6 @@ position = Vector2( -128, 0 )
 [node name="PowerBox4" parent="ObjectSlot" index="3" instance=ExtResource( 9 )]
 position = Vector2( -96, 0 )
 
-[node name="AutoCreatePlayers" parent="." index="9" instance=ExtResource( 7 )]
-
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = SubResource( 7 )
 
@@ -292,3 +290,5 @@ motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = SubResource( 9 )
+
+[node name="AutoCreatePlayers" parent="." index="13" instance=ExtResource( 7 )]

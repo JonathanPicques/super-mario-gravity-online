@@ -16,14 +16,8 @@ func init():
 		# wait for map to be ready
 		yield(get_tree(), "idle_frame")
 	elif options.has("map_path"):
-		# load map node from file
-		map_node = load("res://Game/Maps/Map.tscn").instance()
-		# add map to game mode tree
-		MapSlot.add_child(map_node)
-		# wait for map to be ready
-		yield(get_tree(), "idle_frame")
 		# load map from file
-		load_map(options.map_path)
+		yield(load_map(options.map_path), "completed")
 	else:
 		print("game mode init has no map")
 		assert(false)
@@ -65,31 +59,6 @@ func end_race(winner_player_id: int):
 	compute_players_ranking()
 	# goto end game scene.
 	Game.goto_end_game_menu_scene()
-
-# load_map loads a map given a map path.
-# @impure
-func load_map(map_path: String):
-	var file := File.new()
-	var open_result := file.open(map_path, File.READ)
-	if open_result != OK:
-		print("failed to load map %s" % map_path)
-		return
-	load_map_data(parse_json(file.get_line()))
-	file.close()
-
-# load_map loads a map given a map_data dictionary.
-# @impure
-func load_map_data(map_data: Dictionary):
-	map_node.FlagEnd.position.x = map_data["flag_end"]["position"][0]
-	map_node.FlagEnd.position.y = map_data["flag_end"]["position"][1]
-	map_node.FlagStart.position.x = map_data["flag_start"]["position"][0]
-	map_node.FlagStart.position.y = map_data["flag_start"]["position"][1]
-	for tile in map_data["map"]:
-		pass
-		# map_node.Map.set_cell(tile[0], tile[1])
-	for item_data in map_data["item_slot"]:
-		MapManager.create_item(item_data["type"]).load_map_data(item_data)
-
 
 # compute_flag_distance computes the distance between the start and end flag.
 # @impure

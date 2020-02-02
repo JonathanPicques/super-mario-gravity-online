@@ -27,13 +27,11 @@ func _ready():
 	set_process(false)
 
 func init():
-	map_node = load("res://Game/Maps/Map.tscn").instance()
-	MapSlot.add_child(map_node)
-	# wait for map to be ready
-	yield(get_tree(), "idle_frame")
+	# load map
+	yield(load_map(""), "completed")
 	# remove popup
+	$Popup.queue_free()
 	remove_child($Popup)
-	#$Popup.queue_free()
 	#
 	tilesets = {
 		"Wall": [map_node.Map, 15, preload("res://Game/Creator/Textures/Icons/WallIcon.png")],

@@ -17,8 +17,23 @@ const item_scenes := {
 	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn")
 }
 
+# @pure
+func snap_value(value: int) -> int:
+	return int(round((value - ceil_size / 2) / ceil_size) * ceil_size)
+
+# @impure
 func create_item(item_type: String) -> Node2D:
 	return item_scenes[item_type].instance()
 
-func snap_value(value: int) -> int:
-	return int(round((value - ceil_size / 2) / ceil_size) * ceil_size)
+# fill_map_from_data fills the map given a map_data dictionary.
+# @impure
+func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
+	map_node.FlagEnd.position.x = map_data["flag_end"]["position"][0]
+	map_node.FlagEnd.position.y = map_data["flag_end"]["position"][1]
+	map_node.FlagStart.position.x = map_data["flag_start"]["position"][0]
+	map_node.FlagStart.position.y = map_data["flag_start"]["position"][1]
+	for tile in map_data["map"]:
+		pass
+		# map_node.Map.set_cell(tile[0], tile[1])
+	for item_data in map_data["item_slot"]:
+		MapManager.create_item(item_data["type"]).load_map_data(item_data)
