@@ -18,18 +18,10 @@ func select_item():
 func unselect_item():
 	creator.CurrentItemSlot.remove_child(placeholder)
 
-func update_item_placeholder(mouse_position):
-	if placeholder:
-		placeholder.position.x = MapManager.snap_value(mouse_position[0])
-		placeholder.position.y = MapManager.snap_value(mouse_position[1])
-		
-		var local_mouse_position = get_viewport().get_mouse_position()
-		placeholder.visible = creator.HUDQuadtree.get_item(local_mouse_position) == null
-
 func create_item(mouse_position):
-	if !has_item(mouse_position) and placeholder.visible:
+	if placeholder.visible:
 		var item = MapManager.create_item(item_type)
-		item.position = placeholder.position
+		item.position = placeholder.position - creator.CreatorCamera.position
 		creator.map_node.ObjectSlot.add_child(item)
 		creator.Quadtree.add_item(item)
 
@@ -39,9 +31,8 @@ func has_item(mouse_position):
 func remove_item(mouse_position):
 	var item = creator.Quadtree.erase_item(mouse_position)
 	if item:
-		print("item = ", item)
-		yield(get_tree(), "idle_frame")
-		item.queue_free() # is it actually working???
+		item.get_parent().remove_child(item)
+		item.queue_free()
 
 func get_item(mouse_position):
 	return creator.Quadtree.get_item(mouse_position)

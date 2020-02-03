@@ -109,9 +109,19 @@ func change_select_mode(mode):
 	else:
 		ItemButtons[element_index].grab_focus()
 
+func update_item_placeholder(mouse_position):
+	var position = mouse_position - CreatorCamera.position
+	var placeholder = Elements[element_index].placeholder
+	if placeholder:
+		placeholder.position.x = MapManager.snap_value(position[0]) + MapManager.ceil_size / 2
+		placeholder.position.y = MapManager.snap_value(position[1]) + MapManager.ceil_size / 2
+		placeholder.visible = HUDQuadtree.get_item(position) == null # TODO: has item on every possible item
+		
+
 func _process(delta):
-	var mouse_position = get_viewport().get_mouse_position()
-	Elements[element_index].update_item_placeholder(mouse_position)
+	var mouse_position = get_viewport().get_mouse_position() + CreatorCamera.position
+#	Elements[element_index].update_item_placeholder(mouse_position)
+	update_item_placeholder(mouse_position)
 	if Input.is_action_pressed("ui_click"):
 		Elements[element_index].create_item(mouse_position)
 	if Input.is_action_pressed("ui_click_bis"):
