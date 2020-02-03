@@ -153,7 +153,7 @@ func _on_PlayButton_pressed():
 	$GUILayer/GUI.visible = false
 	change_select_mode(true)
 	var player := MultiplayerManager.add_player("creator", true, 0)
-	var player_node := MultiplayerManager.spawn_player_node(player, map_node.PlayerSlot)
+	var player_node := MultiplayerManager.spawn_player_node(player)
 	var player_camera_node := add_player_screen_camera(player.id, player_node.get_path())
 	player_node.position = map_node.FlagStart.position
 	player_camera_node.current = true

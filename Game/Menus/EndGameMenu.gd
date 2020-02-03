@@ -7,7 +7,7 @@ func _ready():
 	# music
 	AudioManager.play_music("res://Game/Menus/Musics/Hand-in-Hand-in-Pixel-Land.ogg")
 	# spawn player
-	MultiplayerManager.spawn_player_nodes(PlayerSlot)
+	MultiplayerManager.spawn_player_nodes()
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)
 	# put first player on top
 	print("IN END GAME ", players[0].id)

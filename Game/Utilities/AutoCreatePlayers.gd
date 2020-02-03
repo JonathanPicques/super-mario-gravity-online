@@ -18,14 +18,14 @@ func _ready():
 	MultiplayerManager.connect("player_set_ready", self, "on_player_set_ready")
 	MultiplayerManager.connect("player_set_peer_id", self, "on_player_set_peer_id")
 
-# on_player_added is called when a player joins by pressing accept.
+# on_player_added is called when a player joins.
 # @signal
 # @impure
 func on_player_added(player: Dictionary):
-	var player_node := MultiplayerManager.spawn_player_node(player, Game.map_node.PlayerSlot)
+	var player_node := MultiplayerManager.spawn_player_node(player)
 	set_player_node_position(player, player_node)
 
-# on_player_added is called when a player leaves be pressing cancel.
+# on_player_removed is called when a player leaves.
 # @signal
 # @impure
 func on_player_removed(player: Dictionary):

@@ -265,15 +265,19 @@ func create_player_node(player: Dictionary, player_class: int = PlayerClasses.FR
 	return player_node
 
 # @impure
-func spawn_player_node(player: Dictionary, parent_node: Node, player_class: int = 0) -> PlayerNode:
+func spawn_player_node(player: Dictionary, player_class: int = 0) -> PlayerNode:
 	var player_node := create_player_node(player, player_class)
-	parent_node.add_child(player_node)
+	Game.map_node.PlayerSlot.add_child(player_node)
 	return player_node
 
 # @impure
-func spawn_player_nodes(parent_node: Node):
+func spawn_player_nodes():
 	for player in players:
-		spawn_player_node(player, parent_node)
+		spawn_player_node(player)
+
+# @impure
+func replace_player_node(player: Dictionary, new_player_node: Node):
+	pass
 
 ##########
 # Nakama #

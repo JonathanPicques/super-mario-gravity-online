@@ -111,12 +111,12 @@ func apply_split_screen_effect(player_id: int, wave: bool):
 
 # get_player_screen_camera returns 
 # @pure
-func get_player_screen_camera(player_id: int):
+func get_player_screen_camera(player_id: int) -> PlayerCameraNode:
 	match player_id:
-		0: return Viewport1.get_node("PlayerCamera2D")
-		1: return Viewport2.get_node("PlayerCamera2D")
-		2: return Viewport3.get_node("PlayerCamera2D")
-		3: return Viewport4.get_node("PlayerCamera2D")
+		1: return Viewport2.get_node("PlayerCamera2D") as PlayerCameraNode
+		2: return Viewport3.get_node("PlayerCamera2D") as PlayerCameraNode
+		3: return Viewport4.get_node("PlayerCamera2D") as PlayerCameraNode
+		_: return Viewport1.get_node("PlayerCamera2D") as PlayerCameraNode
 
 # add a camera compatible with split screen for the given player.
 # @impure
@@ -165,11 +165,13 @@ func _on_GameMode_tree_exiting():
 # Popup
 ##
 
+# @impure
 func _process(delta):
 	if is_instance_valid(GamePopup):
 		if Input.is_action_just_pressed("ui_cancel"):
 			toggle_popup(!GamePopup.visible)
 
+# @impure
 func toggle_popup(is_open):
 	if is_instance_valid(GamePopup):
 		GamePopup.visible = is_open
@@ -178,12 +180,16 @@ func toggle_popup(is_open):
 # block_input is used to avoid calling finish_playing multiple times.
 var block_input := false
 
-func _on_ContinueButton_pressed():
-	if is_instance_valid(GamePopup):
-		GamePopup.visible = false
-
+# @signal
+# @impure
 func _on_HomeButton_pressed():
 	if not block_input:
 		block_input = true
 		MultiplayerManager.finish_playing()
 		Game.goto_home_menu_scene()
+
+# @signal
+# @impure
+func _on_ContinueButton_pressed():
+	if is_instance_valid(GamePopup):
+		GamePopup.visible = false

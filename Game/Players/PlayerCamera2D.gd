@@ -4,14 +4,15 @@ class_name PlayerCameraNode
 export var player_node_path: NodePath
 export var tile_map_node_path: NodePath
 
-var player_node: PlayerNode
+var player_id: int
+var player_node: Node
 var tile_map_node: TileMap
 var tile_map_node_rect: Rect2
 
 # _ready is called to restrict the camera bounds to the tilemap bounds.
 # @impure
 func _ready():
-	player_node = get_node(player_node_path)
+	player_node = MultiplayerManager.get_player_node(player_id)
 	tile_map_node = get_node(tile_map_node_path)
 	if tile_map_node:
 		tile_map_node_rect = tile_map_node.get_used_rect()

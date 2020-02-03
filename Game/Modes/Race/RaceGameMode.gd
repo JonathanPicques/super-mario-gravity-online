@@ -2,7 +2,7 @@ extends "res://Game/Modes/GameMode.gd"
 class_name RaceGameModeNode
 
 var flag_end_pos := Vector2()
-var flag_distance := 0
+var flag_distance := 0.0
 var flag_start_pos := Vector2()
 
 # @async
@@ -35,7 +35,7 @@ func start():
 	# setup split screen
 	setup_split_screen()
 	# create all players
-	MultiplayerManager.spawn_player_nodes(map_node.PlayerSlot)
+	MultiplayerManager.spawn_player_nodes()
 	# position players close to the flag
 	for player in MultiplayerManager.get_players():
 		var player_node: Node2D = MultiplayerManager.get_player_node(player.id)

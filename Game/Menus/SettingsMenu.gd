@@ -40,11 +40,9 @@ func _process(delta):
 
 # @impure
 func refresh_labels_color():
-	var i = 0
 	for i in range(0, labels.size()):
 		labels[i].set("custom_colors/font_color", Color("#1B192C" if i != current_row else "#2CB274"))
 		values[i].set("custom_colors/font_color", Color("#1B192C" if i != current_row else "#2CB274"))
-		i += 1
 
 # @impure
 func update_value():
