@@ -21,7 +21,7 @@ func unselect_item():
 func create_item(mouse_position):
 	if placeholder.visible:
 		var item = MapManager.create_item(item_type)
-		item.position = placeholder.position - creator.CreatorCamera.position
+		item.position = placeholder.position + creator.CreatorCamera.position
 		creator.map_node.ObjectSlot.add_child(item)
 		creator.Quadtree.add_item(item)
 
