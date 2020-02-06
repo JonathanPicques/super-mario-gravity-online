@@ -1,25 +1,15 @@
-extends Node
-
-var placeholder: Node2D = null
-var creator: CreatorGameModeNode = null
+extends DrawerNode
 
 func _ready():
 	placeholder = MapManager.create_item("Door")
 	placeholder.modulate = Color(1, 1, 1, 0.5)
 
-func attach_creator(obj):
-	creator = obj
+# @override
+func has_item(mouse_position: Vector2):
+	return creator.Quadtree.get_item(mouse_position) != null
 
-func select_item():
-	creator.CurrentItemSlot.add_child(placeholder)
-
-func unselect_item():
-	creator.CurrentItemSlot.remove_child(placeholder)
-
-func get_offset():
-	return 0
-
-func create_item(mouse_position):
+# @override
+func create_item(mouse_position: Vector2):
 	if !has_item(mouse_position) and placeholder.visible:
 		var first_door: DoorNode = MapManager.create_item("Door")
 		first_door.position = placeholder.position
@@ -35,15 +25,8 @@ func create_item(mouse_position):
 		creator.Quadtree.add_item(second_door)
 
 
-func has_item(mouse_position):
-	return false # TODO: Use quadtree
-
-func remove_item(mouse_position):
+# @override
+func remove_item(mouse_position: Vector2):
 	var item = creator.Quadtree.erase_item(mouse_position)
 	if item:
-		print("item = ", item)
-		yield(get_tree(), "idle_frame")
-		item.queue_free() # is it actually working???
-
-func get_item(mouse_position):
-	return creator.Quadtree.get_item(mouse_position)
+		item.queue_free()

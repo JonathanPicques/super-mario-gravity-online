@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Items/Door/Door.gd"
 }, {
+"base": "Control",
+"class": "DrawerNode",
+"language": "GDScript",
+"path": "res://Game/Creator/Drawers/Drawer.gd"
+}, {
 "base": "Object",
 "class": "FiniteStateMachine",
 "language": "GDScript",
@@ -123,6 +128,7 @@ _global_script_class_icons={
 "AudioManagerNode": "",
 "CreatorGameModeNode": "",
 "DoorNode": "",
+"DrawerNode": "",
 "FiniteStateMachine": "",
 "FiniteStateMachineStateNode": "",
 "GameModeNode": "",

@@ -132,51 +132,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SettingsButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="1"]
-margin_left = 473.0
-margin_top = 5.0
-margin_right = 505.0
-margin_bottom = 37.0
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 52 )
-texture_focused = ExtResource( 52 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="InfoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="2"]
-margin_left = 441.0
+[node name="GoToStartButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="1"]
+margin_left = 326.0
 margin_top = 9.0
-margin_right = 465.0
+margin_right = 350.0
 margin_bottom = 33.0
-texture_normal = ExtResource( 40 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 51 )
-texture_focused = ExtResource( 51 )
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 36 )
+texture_hover = ExtResource( 47 )
+texture_focused = ExtResource( 47 )
 script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RedoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="3"]
-margin_left = 412.0
+[node name="GoToEndButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="2"]
+margin_left = 354.0
 margin_top = 9.0
-margin_right = 436.0
+margin_right = 378.0
 margin_bottom = 33.0
-disabled = true
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 39 )
-texture_hover = ExtResource( 50 )
-texture_disabled = ExtResource( 43 )
-texture_focused = ExtResource( 50 )
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 37 )
+texture_hover = ExtResource( 48 )
+texture_focused = ExtResource( 48 )
 script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UndoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="4"]
+[node name="UndoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="3"]
 margin_left = 384.0
 margin_top = 9.0
 margin_right = 408.0
@@ -192,29 +176,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoToEndButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="5"]
-margin_left = 354.0
+[node name="RedoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="4"]
+margin_left = 412.0
 margin_top = 9.0
-margin_right = 378.0
+margin_right = 436.0
 margin_bottom = 33.0
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 37 )
-texture_hover = ExtResource( 48 )
-texture_focused = ExtResource( 48 )
+disabled = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 39 )
+texture_hover = ExtResource( 50 )
+texture_disabled = ExtResource( 43 )
+texture_focused = ExtResource( 50 )
 script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoToStartButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="6"]
-margin_left = 326.0
+[node name="InfoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="5"]
+margin_left = 441.0
 margin_top = 9.0
-margin_right = 350.0
+margin_right = 465.0
 margin_bottom = 33.0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 36 )
-texture_hover = ExtResource( 47 )
-texture_focused = ExtResource( 47 )
+texture_normal = ExtResource( 40 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 51 )
+texture_focused = ExtResource( 51 )
+script = ExtResource( 44 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="6"]
+margin_left = 473.0
+margin_top = 5.0
+margin_right = 505.0
+margin_bottom = 37.0
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 52 )
+texture_focused = ExtResource( 52 )
 script = ExtResource( 44 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -225,7 +225,7 @@ position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
 script = ExtResource( 45 )
 
-[node name="Elements" type="Control" parent="GUILayer/GUI" index="3"]
+[node name="Drawers" type="Control" parent="GUILayer/GUI" index="3"]
 margin_left = 102.0
 margin_top = 261.0
 margin_right = 433.0
@@ -234,7 +234,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ItemButton" type="TextureButton" parent="GUILayer/GUI/Elements" index="0"]
+[node name="ItemButton" type="TextureButton" parent="GUILayer/GUI/Drawers" index="0"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = -10.0
@@ -247,11 +247,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton" index="0"]
 position = Vector2( 11, 11 )
 texture = SubResource( 2 )
 
-[node name="ItemButton2" type="TextureButton" parent="GUILayer/GUI/Elements" index="1"]
+[node name="ItemButton2" type="TextureButton" parent="GUILayer/GUI/Drawers" index="1"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 17.0
@@ -264,11 +264,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton2" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton2" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 20 )
 
-[node name="ItemButton3" type="TextureButton" parent="GUILayer/GUI/Elements" index="2"]
+[node name="ItemButton3" type="TextureButton" parent="GUILayer/GUI/Drawers" index="2"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 44.0
@@ -282,11 +282,11 @@ __meta__ = {
 }
 item_type = "ColorBlock"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton3" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton3" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 13 )
 
-[node name="ItemButton4" type="TextureButton" parent="GUILayer/GUI/Elements" index="3"]
+[node name="ItemButton4" type="TextureButton" parent="GUILayer/GUI/Drawers" index="3"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 71.0
@@ -300,12 +300,12 @@ __meta__ = {
 }
 item_type = "PowerBox"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton4" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton4" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.791667, 0.791667 )
 texture = ExtResource( 21 )
 
-[node name="ItemButton5" type="TextureButton" parent="GUILayer/GUI/Elements" index="4"]
+[node name="ItemButton5" type="TextureButton" parent="GUILayer/GUI/Drawers" index="4"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 98.0
@@ -319,11 +319,11 @@ __meta__ = {
 }
 item_type = "SolidBlock"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton5" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton5" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 25 )
 
-[node name="ItemButton6" type="TextureButton" parent="GUILayer/GUI/Elements" index="5"]
+[node name="ItemButton6" type="TextureButton" parent="GUILayer/GUI/Drawers" index="5"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 126.0
@@ -336,12 +336,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton6" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton6" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.714286, 0.714286 )
 texture = ExtResource( 26 )
 
-[node name="ItemButton7" type="TextureButton" parent="GUILayer/GUI/Elements" index="6"]
+[node name="ItemButton7" type="TextureButton" parent="GUILayer/GUI/Drawers" index="6"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 154.0
@@ -355,11 +355,11 @@ __meta__ = {
 }
 item_type = "Spikes"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton7" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton7" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 22 )
 
-[node name="ItemButton8" type="TextureButton" parent="GUILayer/GUI/Elements" index="7"]
+[node name="ItemButton8" type="TextureButton" parent="GUILayer/GUI/Drawers" index="7"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 182.0
@@ -373,12 +373,12 @@ __meta__ = {
 }
 item_type = "Trampoline"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton8" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton8" index="0"]
 position = Vector2( 11, 7 )
 scale = Vector2( 0.642857, 0.642857 )
 texture = ExtResource( 23 )
 
-[node name="ItemButton9" type="TextureButton" parent="GUILayer/GUI/Elements" index="8"]
+[node name="ItemButton9" type="TextureButton" parent="GUILayer/GUI/Drawers" index="8"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 210.0
@@ -390,14 +390,13 @@ script = ExtResource( 27 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-tileset_type = "Water"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton9" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton9" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.874999, 0.874999 )
 texture = ExtResource( 24 )
 
-[node name="ItemButton10" type="TextureButton" parent="GUILayer/GUI/Elements" index="9"]
+[node name="ItemButton10" type="TextureButton" parent="GUILayer/GUI/Drawers" index="9"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 238.0
@@ -411,11 +410,11 @@ __meta__ = {
 }
 tileset_type = "Sticky"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton10" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton10" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 30 )
 
-[node name="ItemButton11" type="TextureButton" parent="GUILayer/GUI/Elements" index="10"]
+[node name="ItemButton11" type="TextureButton" parent="GUILayer/GUI/Drawers" index="10"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 266.0
@@ -429,11 +428,11 @@ __meta__ = {
 }
 tileset_type = "Oneway"
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton11" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton11" index="0"]
 position = Vector2( 11, 11 )
 texture = ExtResource( 28 )
 
-[node name="ItemButton12" type="TextureButton" parent="GUILayer/GUI/Elements" index="11"]
+[node name="ItemButton12" type="TextureButton" parent="GUILayer/GUI/Drawers" index="11"]
 anchor_right = 0.15
 anchor_bottom = 0.15
 margin_left = 295.0
@@ -446,7 +445,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Elements/ItemButton12" index="0"]
+[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton12" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 29 )
@@ -806,21 +805,21 @@ __meta__ = {
 
 [node name="CurrentItemSlot" type="Node2D" parent="." index="6"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToStartButton" to="." method="_on_GoToStartButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton" to="." method="_on_ItemButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton2" to="." method="_on_ItemButton2_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton3" to="." method="_on_ItemButton3_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton4" to="." method="_on_ItemButton4_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton5" to="." method="_on_ItemButton5_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton6" to="." method="_on_ItemButton6_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton7" to="." method="_on_ItemButton7_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton8" to="." method="_on_ItemButton8_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton9" to="." method="_on_ItemButton9_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton10" to="." method="_on_ItemButton10_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton11" to="." method="_on_ItemButton11_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Elements/ItemButton12" to="." method="_on_ItemButton12_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton" to="." method="_on_ItemButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton2" to="." method="_on_ItemButton2_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton3" to="." method="_on_ItemButton3_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton4" to="." method="_on_ItemButton4_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton5" to="." method="_on_ItemButton5_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton6" to="." method="_on_ItemButton6_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton7" to="." method="_on_ItemButton7_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton8" to="." method="_on_ItemButton8_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton9" to="." method="_on_ItemButton9_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton10" to="." method="_on_ItemButton10_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton11" to="." method="_on_ItemButton11_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton12" to="." method="_on_ItemButton12_pressed"]
