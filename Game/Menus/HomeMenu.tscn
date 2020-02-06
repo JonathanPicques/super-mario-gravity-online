@@ -15,7 +15,6 @@
 [ext_resource path="res://Game/Menus/Textures/KeyUp.png" type="Texture" id=13]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadUp.png" type="Texture" id=14]
 [ext_resource path="res://Game/Maps/Textures/bg3.png" type="Texture" id=15]
-[ext_resource path="res://Game/Maps/Textures/bg1.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -55,6 +54,9 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
+
+[sub_resource type="StreamTexture" id=8]
+load_path = "res://.import/bg1.png-3678d24279c8abdf5e7e289f7ab026c5.stex"
 
 [node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -289,5 +291,5 @@ motion_scale = Vector2( 0.7, 1 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
-texture = ExtResource( 16 )
+texture = SubResource( 8 )
 region_rect = Rect2( 0, 0, 512, 288 )

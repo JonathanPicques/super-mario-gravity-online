@@ -2,22 +2,22 @@
 
 [ext_resource path="res://Game/Items/Door/Door.gd" type="Script" id=2]
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/DoorOpen.png-c0804f1ee1ecfb43930d244e21beceb6.stex"
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = SubResource( 4 )
+[sub_resource type="AtlasTexture" id=2]
+atlas = SubResource( 1 )
 region = Rect2( 0, 0, 32, 48 )
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 2 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 22 )
 
 [node name="Door" type="Node2D" groups=[
@@ -29,7 +29,7 @@ script = ExtResource( 2 )
 "Door",
 ]]
 position = Vector2( -16, -48 )
-frames = SubResource( 2 )
+frames = SubResource( 3 )
 speed_scale = 4.0
 playing = true
 centered = false
@@ -44,7 +44,7 @@ collision_mask = 0
 "Door",
 ]]
 position = Vector2( 16, 26 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="Target" type="Node2D" parent="." groups=[
 "Door",
