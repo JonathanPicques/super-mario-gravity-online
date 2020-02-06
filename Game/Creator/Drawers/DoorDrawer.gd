@@ -21,10 +21,19 @@ func get_offset():
 
 func create_item(mouse_position):
 	if !has_item(mouse_position) and placeholder.visible:
-		var item = MapManager.create_item("Door")
-		item.position = placeholder.position
-		creator.map_node.ObjectSlot.add_child(item)
-		creator.Quadtree.add_item(item)
+		var first_door: DoorNode = MapManager.create_item("Door")
+		first_door.position = placeholder.position
+		var second_door: DoorNode = MapManager.create_item("Door")
+		second_door.position = placeholder.position + Vector2(32, 32)
+		
+		first_door.door_to_node_path = second_door.get_path()
+		second_door.door_to_node_path = first_door.get_path()
+
+		creator.map_node.ObjectSlot.add_child(first_door)
+		creator.Quadtree.add_item(first_door)		
+		creator.map_node.ObjectSlot.add_child(second_door)
+		creator.Quadtree.add_item(second_door)
+
 
 func has_item(mouse_position):
 	return false # TODO: Use quadtree
