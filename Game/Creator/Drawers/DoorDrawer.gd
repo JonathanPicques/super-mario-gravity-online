@@ -16,6 +16,9 @@ func select_item():
 func unselect_item():
 	creator.CurrentItemSlot.remove_child(placeholder)
 
+func get_offset():
+	return 0
+
 func create_item(mouse_position):
 	if !has_item(mouse_position) and placeholder.visible:
 		var item = MapManager.create_item("Door")

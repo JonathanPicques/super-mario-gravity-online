@@ -18,20 +18,25 @@ func select_item():
 func unselect_item():
 	creator.CurrentItemSlot.remove_child(placeholder)
 
+func get_offset():
+	return 0
+
 func create_item(mouse_position):
-	if placeholder.visible:
+	print("Before ", creator.Quadtree.get_item(mouse_position) == null)
+	if creator.Quadtree.get_item(mouse_position) == null and placeholder.visible:
 		var item = MapManager.create_item(item_type)
-		item.position = placeholder.position + creator.CreatorCamera.position
+		print("Create ", item_type, " ", creator.Quadtree.items.size(), " ", creator.Quadtree.get_item(mouse_position) == null)
+		item.position.x = MapManager.snap_value(mouse_position.x)
+		item.position.y = MapManager.snap_value(mouse_position.y)
 		creator.map_node.ObjectSlot.add_child(item)
 		creator.Quadtree.add_item(item)
 
 func has_item(mouse_position):
-	return false # TODO: Use quadtree
+	return get_item(mouse_position) != null
 
 func remove_item(mouse_position):
 	var item = creator.Quadtree.erase_item(mouse_position)
 	if item:
-		item.get_parent().remove_child(item)
 		item.queue_free()
 
 func get_item(mouse_position):

@@ -113,9 +113,10 @@ func update_item_placeholder(mouse_position):
 	var position = mouse_position - CreatorCamera.position
 	var placeholder = Elements[element_index].placeholder
 	if placeholder:
-		placeholder.position.x = MapManager.snap_value(position[0]) + MapManager.ceil_size / 2
-		placeholder.position.y = MapManager.snap_value(position[1]) + MapManager.ceil_size / 2
-		placeholder.visible = HUDQuadtree.get_item(position) == null # TODO: has item on every possible item
+		var offset = Elements[element_index].get_offset()
+		placeholder.position.x = MapManager.snap_value(position[0]) + offset
+		placeholder.position.y = MapManager.snap_value(position[1]) + offset
+		placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
 		
 
 func _process(delta):

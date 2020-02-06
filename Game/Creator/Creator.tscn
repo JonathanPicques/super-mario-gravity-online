@@ -95,13 +95,6 @@ margin_bottom = 5.0
 [node name="GridLayer" type="CanvasLayer" parent="." index="4"]
 layer = -1
 
-[node name="Sprite" type="Sprite" parent="GridLayer" index="0"]
-self_modulate = Color( 0, 0, 0, 0.196078 )
-texture = ExtResource( 19 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 512, 288 )
-
 [node name="GUILayer" type="CanvasLayer" parent="." index="5"]
 
 [node name="GUI" type="Control" parent="GUILayer" index="0"]
@@ -111,7 +104,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TopBar" type="Control" parent="GUILayer/GUI" index="0"]
+[node name="Sprite" type="Sprite" parent="GUILayer/GUI" index="0"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+texture = ExtResource( 19 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 512, 288 )
+
+[node name="TopBar" type="Control" parent="GUILayer/GUI" index="1"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -220,12 +220,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ElementsBar" type="Sprite" parent="GUILayer/GUI" index="1"]
+[node name="ElementsBar" type="Sprite" parent="GUILayer/GUI" index="2"]
 position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
 script = ExtResource( 45 )
 
-[node name="Elements" type="Control" parent="GUILayer/GUI" index="2"]
+[node name="Elements" type="Control" parent="GUILayer/GUI" index="3"]
 margin_left = 102.0
 margin_top = 261.0
 margin_right = 433.0
@@ -451,7 +451,7 @@ position = Vector2( 11, 11 )
 scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 29 )
 
-[node name="Bubble" type="NinePatchRect" parent="GUILayer/GUI" index="3"]
+[node name="Bubble" type="NinePatchRect" parent="GUILayer/GUI" index="4"]
 visible = false
 margin_left = 250.0
 margin_top = 211.0
@@ -537,7 +537,7 @@ position = Vector2( 11, 11 )
 rotation = -1.5708
 texture = ExtResource( 22 )
 
-[node name="InfoBubble" type="NinePatchRect" parent="GUILayer/GUI" index="4"]
+[node name="InfoBubble" type="NinePatchRect" parent="GUILayer/GUI" index="5"]
 visible = false
 margin_left = 238.0
 margin_top = 40.0
@@ -792,7 +792,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ModeLabel" type="Label" parent="GUILayer/GUI" index="5"]
+[node name="ModeLabel" type="Label" parent="GUILayer/GUI" index="6"]
 anchor_right = 0.7
 margin_left = 7.0
 margin_top = 235.0
