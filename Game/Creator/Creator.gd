@@ -1,4 +1,5 @@
 extends GameModeNode
+class_name CreatorGameModeNode
 
 onready var Elements := $GUILayer/GUI/Elements.get_children()
 onready var CreatorCamera := $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
@@ -9,8 +10,8 @@ onready var tilesets = {}
 var element_index = 0
 var is_select_mode = true
 
-onready var Quadtree = $Quadtree
-onready var HUDQuadtree = $HUDQuadtree
+onready var Quadtree: QuadtreeNode = $Quadtree
+onready var HUDQuadtree: QuadtreeNode = $HUDQuadtree
 
 onready var TopButtons := [
 	$GUILayer/GUI/TopBar/PlayButton,

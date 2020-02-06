@@ -1,7 +1,7 @@
 extends Node
 
 var placeholder: Node2D = null
-var creator: GameModeNode = null
+var creator: CreatorGameModeNode = null
 
 func _ready():
 	placeholder = MapManager.create_item("Door")

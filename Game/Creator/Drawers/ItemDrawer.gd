@@ -3,7 +3,7 @@ extends Node
 export var item_type := "ColorSwitch"
 
 var placeholder: Node2D = null
-var creator: GameModeNode = null
+var creator: CreatorGameModeNode = null
 
 func _ready():
 	placeholder = MapManager.create_item(item_type)
