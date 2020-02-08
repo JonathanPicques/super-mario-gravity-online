@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
@@ -7,15 +7,12 @@
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadConfirm.png" type="Texture" id=5]
 [ext_resource path="res://Game/Menus/Textures/KeyKeyboardJump.png" type="Texture" id=6]
 [ext_resource path="res://Game/Utilities/AutoCreatePlayers.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Game/Maps/Textures/bg2.png" type="Texture" id=8]
 [ext_resource path="res://Game/Items/PowerBox/PowerBox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadAlt2.png" type="Texture" id=11]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadAlt1.png" type="Texture" id=12]
 [ext_resource path="res://Game/Menus/Textures/KeyUp.png" type="Texture" id=13]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadUp.png" type="Texture" id=14]
-[ext_resource path="res://Game/Maps/Textures/bg3.png" type="Texture" id=15]
-[ext_resource path="res://Game/Maps/Textures/bg1.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -56,7 +53,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
 
-[node name="Map" instance=ExtResource( 1 )]
+[node name="Map" index="0" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="DecorBack" parent="." index="0"]
@@ -273,21 +270,9 @@ position = Vector2( -96, 0 )
 [node name="Background" parent="ParallaxSlot/ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.3, 1 )
 
-[node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
-texture = ExtResource( 15 )
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
 autoplay = "move_clouds"
 anims/move_clouds = SubResource( 7 )
 
-[node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2" index="0"]
-texture = ExtResource( 8 )
-
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
-visible = true
 motion_scale = Vector2( 0.7, 1 )
-motion_mirroring = Vector2( 512, 0 )
-
-[node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
-texture = ExtResource( 16 )
-region_rect = Rect2( 0, 0, 512, 288 )
