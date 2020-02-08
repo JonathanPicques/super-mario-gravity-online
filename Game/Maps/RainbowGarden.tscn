@@ -4,20 +4,15 @@
 [ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorBlock.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorSwitch.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/Maps/Textures/BackgroundGarden2.png" type="Texture" id=5]
+[ext_resource path="res://Game/Maps/Textures/bg1.png" type="Texture" id=5]
 [ext_resource path="res://Game/Maps/RainbowGarden.gd" type="Script" id=6]
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Items/PowerBox/PowerBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Items/SolidBlock/SolidBlock.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Items/SolidBlock/BigSolidBlock.tscn" type="PackedScene" id=11]
-
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/BackgroundGarden3.png-3106e693710b819f6add1a95c7ac6595.stex"
-
-[sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/GardenBackground.png-4cc6709bb708995a884cc4be8ad3f2ff.stex"
+[ext_resource path="res://Game/Maps/Textures/bg2.png" type="Texture" id=12]
+[ext_resource path="res://Game/Maps/Textures/bg3.png" type="Texture" id=13]
 
 [node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 6 )
@@ -298,13 +293,13 @@ position = Vector2( 2720, -80 )
 rotation = 3.14159
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
-texture = SubResource( 1 )
+texture = ExtResource( 13 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 motion_scale = Vector2( 0.6, 1 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background2" index="0"]
-texture = ExtResource( 5 )
+texture = ExtResource( 12 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 visible = true
@@ -312,4 +307,5 @@ motion_scale = Vector2( 0.8, 1 )
 motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
-texture = SubResource( 2 )
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 512, 288 )

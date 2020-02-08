@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Game/Maps/Textures/BackgroundCastle.png" type="Texture" id=1]
-[ext_resource path="res://Game/Maps/Textures/GardenBackground.png" type="Texture" id=2]
-[ext_resource path="res://Game/Maps/Textures/BackgroundGarden3.png" type="Texture" id=3]
+[ext_resource path="res://Game/Maps/Textures/bg1.png" type="Texture" id=1]
+[ext_resource path="res://Game/Maps/Textures/bg2.png" type="Texture" id=2]
+[ext_resource path="res://Game/Maps/Textures/bg3.png" type="Texture" id=3]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Tilesets/Tileset.tres" type="TileSet" id=12]
@@ -95,15 +95,14 @@ __meta__ = {
 }
 
 [node name="Background3" type="ParallaxLayer" parent="ParallaxSlot/ParallaxBackground"]
-visible = false
 motion_scale = Vector2( 0.5, 1 )
-motion_mirroring = Vector2( 512, 512 )
+motion_mirroring = Vector2( 512, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3"]
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 512, 512 )
+region_rect = Rect2( 0, 0, 512, 288 )
 __meta__ = {
 "_edit_lock_": true
 }
