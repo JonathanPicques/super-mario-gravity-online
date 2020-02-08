@@ -183,6 +183,5 @@ func _on_InfoButton_pressed():
 	change_select_mode(true)
 
 func _on_SettingsButton_pressed():
-	change_select_mode(true)
-	print("Open settings...")
+	Game.goto_home_menu_scene()
 

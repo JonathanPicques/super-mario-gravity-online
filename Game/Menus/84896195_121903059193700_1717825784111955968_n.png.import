@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GardenTilesetNew.png-018701689c39586714e8d54c04eaf878.stex"
+path="res://.import/84896195_121903059193700_1717825784111955968_n.png-18ae00b801e6bcc7abed71684fe6d1bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Tilesets/Textures/GardenTilesetNew.png"
-dest_files=[ "res://.import/GardenTilesetNew.png-018701689c39586714e8d54c04eaf878.stex" ]
+source_file="res://Game/Menus/84896195_121903059193700_1717825784111955968_n.png"
+dest_files=[ "res://.import/84896195_121903059193700_1717825784111955968_n.png-18ae00b801e6bcc7abed71684fe6d1bb.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
