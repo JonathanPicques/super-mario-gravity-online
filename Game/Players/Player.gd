@@ -571,7 +571,7 @@ func fx_hit_ground():
 	fx_spawn_dust_particles(Vector2(position.x + 5, position.y))
 
 func fx_shake_screen():
-	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
+	var camera =  Game.game_mode_node.get_player_screen_camera(player.id)
 	camera.get_node("ScreenShake").start_shake()
 
 func fx_spawn_dust_particles(position: Vector2):
