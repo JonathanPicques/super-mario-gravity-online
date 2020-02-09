@@ -213,4 +213,4 @@ tile_data = PoolIntArray( 720846, 14, 0, 720847, 14, 0, 720848, 14, 0, 720849, 1
 texture = ExtResource( 5 )
 
 [node name="Princess" parent="." index="12" instance=ExtResource( 8 )]
-position = Vector2( -624, 112 )
+position = Vector2( -528, 160 )
