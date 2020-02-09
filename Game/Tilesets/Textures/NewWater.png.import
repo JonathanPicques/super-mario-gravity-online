@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/84617669_183363046236101_639706692652630016_n.png-bd459dfe55e0b0d0d0303fe6d0dd8906.stex"
+path="res://.import/NewWater.png-6791a620f209d42425f7ed8353f40967.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/84617669_183363046236101_639706692652630016_n.png"
-dest_files=[ "res://.import/84617669_183363046236101_639706692652630016_n.png-bd459dfe55e0b0d0d0303fe6d0dd8906.stex" ]
+source_file="res://Game/Tilesets/Textures/NewWater.png"
+dest_files=[ "res://.import/NewWater.png-6791a620f209d42425f7ed8353f40967.stex" ]
 
 [params]
 
