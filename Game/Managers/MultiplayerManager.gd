@@ -1,14 +1,14 @@
 extends Node
 class_name MultiplayerManagerNode
 
-enum PlayerClass {
-	Frog,
-	Prince
+enum PlayerTransformationType {
+	Frog = 0,
+	Prince = 1
 }
 
-onready var PlayerClasses = {
-	PlayerClass.Frog: preload("res://Game/Players/Classes/Frog/Frog.tscn"),
-	PlayerClass.Prince: preload("res://Game/Players/Classes/Prince/Prince.tscn")
+onready var PlayerTransformations = {
+	PlayerTransformationType.Frog: preload("res://Game/Players/Classes/Frog/Frog.tscn"),
+	PlayerTransformationType.Prince: preload("res://Game/Players/Classes/Prince/Prince.tscn")
 }
 
 signal player_added(player)
@@ -16,6 +16,7 @@ signal player_removed(player)
 signal player_set_skin(player, skin_id)
 signal player_set_ready(player, ready)
 signal player_set_peer_id(player, peer_id, local_id)
+signal player_replaced_node(player, new_player_node, old_player_node)
 
 signal online()
 signal offline()
@@ -257,16 +258,16 @@ func get_player_node_name(player_id: int):
 	return "player_%d_%d" % [player.peer_id, player.local_id] # peer_id and local_id are the same on all peers
 
 # @impure
-func create_player_node(player: Dictionary, player_class: int = PlayerClasses.FROG) -> PlayerNode:
-	var player_node: PlayerNode = PlayerClasses[player_class].instance()
+func create_player_node(player: Dictionary, player_transformation: int = 0) -> PlayerNode:
+	var player_node: PlayerNode = PlayerTransformations[player_transformation].instance()
 	player_node.name = get_player_node_name(player.id)
 	player_node.player = player
 	player_node.set_network_master(player.peer_id)
 	return player_node
 
 # @impure
-func spawn_player_node(player: Dictionary, player_class: int = 0) -> PlayerNode:
-	var player_node := create_player_node(player, player_class)
+func spawn_player_node(player: Dictionary, player_transformation: int = 0) -> PlayerNode:
+	var player_node := create_player_node(player, player_transformation)
 	Game.map_node.PlayerSlot.add_child(player_node)
 	return player_node
 
@@ -275,9 +276,19 @@ func spawn_player_nodes():
 	for player in players:
 		spawn_player_node(player)
 
+# @async
 # @impure
-func replace_player_node(player: Dictionary, new_player_node: Node):
-	pass
+func replace_player_node(player: Dictionary, new_player_node: PlayerNode) -> PlayerNode:
+	var old_player_node: PlayerNode = get_player_node(player.id)
+	new_player_node.name = old_player_node.name
+	new_player_node.player = old_player_node.player
+	new_player_node.position = old_player_node.position
+	new_player_node.velocity = old_player_node.velocity
+	yield(get_tree(), "idle_frame")
+	Game.map_node.PlayerSlot.remove_child(old_player_node)
+	Game.map_node.PlayerSlot.add_child(new_player_node)
+	emit_signal("player_replaced_node", player, new_player_node, old_player_node)
+	return new_player_node
 
 ##########
 # Nakama #

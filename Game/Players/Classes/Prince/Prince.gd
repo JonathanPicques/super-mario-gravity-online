@@ -1,4 +1,4 @@
-extends "res://Game/Players/Player.gd"
+extends PlayerNode
 
 # @impure
 func _ready():
@@ -9,9 +9,8 @@ func _ready():
 	Step_01_SFX = preload("res://Game/Players/Classes/Prince/Sounds/step_01.ogg")
 	Step_02_SFX = preload("res://Game/Players/Classes/Prince/Sounds/step_02.ogg")
 	
-	has_trail = true
-	# has_lifetime = true
-	is_invincible = true
+	has_trail += 1
+	is_invincible += 1
 	speed_multiplier = 2.0
 	PlayerLifetimeTimer.wait_time = 8.0
 	PlayerLifetimeTimer.start()

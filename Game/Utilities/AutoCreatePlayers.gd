@@ -6,12 +6,12 @@ export var spawn_players_node_format := "Player%dPosition"
 # @impure
 func _ready():
 	yield(get_tree(), "idle_frame")
-	# Spawn players
+	# spawn players
 	for player in MultiplayerManager.get_players():
 		on_player_added(player)
 		on_player_set_skin(player, player.skin_id)
 		on_player_set_ready(player, player.ready)
-	# Connect listeners
+	# connect listeners
 	MultiplayerManager.connect("player_added", self, "on_player_added")
 	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	MultiplayerManager.connect("player_set_skin", self, "on_player_set_skin")
@@ -55,7 +55,7 @@ func on_player_set_ready(player: Dictionary, ready: bool):
 # @impure
 func on_player_set_peer_id(player: Dictionary, peer_id: int, local_id: int):
 	# TODO: clean up this mess
-	# This is used to migrate a local player to a network player
+	# this is used to migrate a local player to a network player
 	for i in range(0, Game.map_node.PlayerSlot.get_child_count()):
 		var player_node: PlayerNode = Game.map_node.PlayerSlot.get_child(i)
 		if player_node is PlayerNode and player_node.player.id == player.id:

@@ -25,6 +25,7 @@ func _ready():
 	MultiplayerManager.connect("player_added", self, "on_player_added")
 	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	MultiplayerManager.connect("player_set_skin", self, "on_player_set_skin")
+	MultiplayerManager.connect("player_replaced_node", self, "on_player_replaced_node")
 	# Show/hide minimap
 	$MiniMap.visible = SettingsManager.values["minimap"]
 
@@ -32,8 +33,6 @@ func _ready():
 func _process(delta: float):
 	if ui_player and Game.game_mode_node.started:
 		$Ranking.text = "#%d" % (ui_player.rank + 1)
-		if not ui_player_node:
-			ui_player_node = MultiplayerManager.get_player_node(ui_player.id)
 		display_power_hud()
 
 # @impure
@@ -42,9 +41,8 @@ func display_power_hud():
 		var texture_rect = ui_player_node.power_hud_node
 		if PowerContainer.get_child_count() == 0:
 			PowerContainer.add_child(texture_rect)
-	else:
-		if PowerContainer.get_child_count() == 1:
-			PowerContainer.remove_child(PowerContainer.get_child(0))
+	elif PowerContainer.get_child_count() == 1:
+		PowerContainer.remove_child(PowerContainer.get_child(0))
 
 # @impure
 # @signal
@@ -86,3 +84,10 @@ func on_player_set_skin(player: Dictionary, skin_id: int):
 	var mini_frog_node: Sprite = MiniMap.get_node(MultiplayerManager.get_player_node_name(player.id))
 	if mini_frog_node:
 		SkinManager.replace_skin(mini_frog_node, skin_id)
+
+# on_player_replaced_node is called when a player changes its node (frog to prince, ...)
+# @signal
+# @impure
+func on_player_replaced_node(player: Dictionary, new_player_node: PlayerNode, old_player_node: PlayerNode):
+	if player.id == ui_player_id:
+		ui_player_node = new_player_node

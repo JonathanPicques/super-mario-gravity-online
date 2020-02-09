@@ -266,20 +266,12 @@ func process_velocity(delta: float):
 	# scale animation player playback speed to velocity
 	PlayerAnimationPlayer.playback_speed = max((velocity.length() / ANIMATION_PLAYER_PLAYBACK_VELOCITY) * ANIMATION_PLAYER_PLAYBACK_SPEED, ANIMATION_PLAYER_PLAYBACK_SPEED)
 
-# set_class changes the current class (animations, properties...) of the player
+# set_transformation changes the current transformation of the player.
+# @async
 # @impure
-func set_class(player_class: int):
-	var player_node = MultiplayerManager.create_player_node(player, player_class)
-	var player_camera = Game.game_mode_node.get_player_screen_camera(player.id) if Game.game_mode_node else null
-	player_node.position = position
-	player_node.velocity = Vector2()
-	get_parent().call_deferred("remove_child", self)
-	get_parent().call_deferred("add_child", player_node)
-	player_node.call_deferred("set_direction", direction)
-	if player_camera:
-		player_camera.set_deferred("player_node", player_node)
-	call_deferred("queue_free")
-	return player_node
+func set_transformation(transformation_type: int) -> PlayerNode:
+	var new_player_node: PlayerNode = MultiplayerManager.PlayerTransformations[transformation_type].instance()
+	return MultiplayerManager.replace_player_node(player, new_player_node)
 
 # set_dialog changes the dialog bubble displayed by the player.
 # @impure

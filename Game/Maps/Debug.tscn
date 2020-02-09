@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorSwitch.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Game/Maps/Textures/BackgroundSewer.png" type="Texture" id=5]
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Menus/Princess/Princess.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Maps/Debug.gd" type="Script" id=9]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=12]
@@ -210,3 +211,6 @@ tile_data = PoolIntArray( 720846, 14, 0, 720847, 14, 0, 720848, 14, 0, 720849, 1
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 5 )
+
+[node name="Princess" parent="." index="12" instance=ExtResource( 8 )]
+position = Vector2( -624, 112 )

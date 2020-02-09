@@ -1,13 +1,12 @@
 extends Node2D
 
+# @async
 # @impure
 # @signal
 var _transformed_in_prince := false
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(player_node):
 	if not _transformed_in_prince:
 		_transformed_in_prince = true
-		var player_node = MultiplayerManager.get_player_node(MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)[0].id)
-		var new_player_node = player_node.set_class(MultiplayerManager.PlayerClass.Prince)
-		new_player_node.set_deferred("has_trail", false)
-		new_player_node.set_deferred("has_lifetime", false)
-		new_player_node.set_deferred("speed_multiplier", 1.0)
+		var new_player_node = yield(player_node.set_transformation(MultiplayerManager.PlayerTransformationType.Prince), "completed")
+		new_player_node.has_trail = 0
+		new_player_node.speed_multiplier = 1.0
