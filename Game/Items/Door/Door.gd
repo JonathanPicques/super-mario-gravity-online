@@ -6,6 +6,7 @@ onready var Target = $Target
 export var door_to_node_path: NodePath
 
 var door_to_node = null
+var door_pivot_offset := 6
 
 # @impure
 func _ready():

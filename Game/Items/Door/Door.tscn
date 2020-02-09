@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 24 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "close_door"
 length = 0.78
 step = 0.06
@@ -92,6 +92,6 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
-anims/close_door = SubResource( 5 )
+anims/close_door = SubResource( 2 )
 anims/default = SubResource( 3 )
 anims/open_door = SubResource( 4 )

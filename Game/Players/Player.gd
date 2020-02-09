@@ -92,8 +92,8 @@ var GRAVITY_MAX_SPEED := 1200.0
 var GRAVITY_ACCELERATION := 1300.0
 
 const DOOR_RUN_SPEED = 40.0
-const DOOR_PLAYER_FADE_DURATION = 0.5
-const DOOR_SCREEN_FADE_DURATION = 0.5
+const DOOR_PLAYER_EXIT_WAIT = 0.6
+const DOOR_PLAYER_ENTER_WAIT = 0.15
 
 var velocity := Vector2()
 var direction := 1

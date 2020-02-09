@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Game/Players/States/swim.gd" type="Script" id=19]
 [ext_resource path="res://Game/Players/States/enter_swim.gd" type="Script" id=20]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Invincibility.png" type="Texture" id=21]
+[ext_resource path="res://Game/Players/States/exit_door_fade.gd" type="Script" id=22]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -274,6 +275,9 @@ script = ExtResource( 7 )
 
 [node name="enter_door_fade" type="Node" parent="StateMachine"]
 script = ExtResource( 15 )
+
+[node name="exit_door_fade" type="Node" parent="StateMachine"]
+script = ExtResource( 22 )
 
 [node name="use_power" type="Node" parent="StateMachine"]
 script = ExtResource( 17 )
