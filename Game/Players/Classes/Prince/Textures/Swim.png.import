@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Appearing.png-5b477de04bfe39956da39eac14c4c1dd.stex"
+path="res://.import/Swim.png-5594ed16eb26b9b790bf3e9c61a1e2cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Players/Classes/Prince/Textures/Appearing.png"
-dest_files=[ "res://.import/Appearing.png-5b477de04bfe39956da39eac14c4c1dd.stex" ]
+source_file="res://Game/Players/Classes/Prince/Textures/Swim.png"
+dest_files=[ "res://.import/Swim.png-5594ed16eb26b9b790bf3e9c61a1e2cd.stex" ]
 
 [params]
 

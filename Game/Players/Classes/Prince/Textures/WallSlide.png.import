@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Walljump.png-48d93ccee2d21fd4c80eda11af1787d9.stex"
+path="res://.import/WallSlide.png-540fab182a51240ba7f2f6e07e565244.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Players/Classes/Prince/Textures/Walljump.png"
-dest_files=[ "res://.import/Walljump.png-48d93ccee2d21fd4c80eda11af1787d9.stex" ]
+source_file="res://Game/Players/Classes/Prince/Textures/WallSlide.png"
+dest_files=[ "res://.import/WallSlide.png-540fab182a51240ba7f2f6e07e565244.stex" ]
 
 [params]
 
