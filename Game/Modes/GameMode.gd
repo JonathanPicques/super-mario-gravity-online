@@ -48,7 +48,7 @@ func load_map(map_path: String):
 
 # @impure
 func set_pixel_ratio(pixel_ratio: float):
-	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP_WIDTH, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
+	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)
 	Game.GameTransitionCanvasLayer.scale = Vector2(pixel_ratio, pixel_ratio)
 	if is_instance_valid(GamePopup):
 		GamePopup.rect_scale = Vector2(pixel_ratio, pixel_ratio)
