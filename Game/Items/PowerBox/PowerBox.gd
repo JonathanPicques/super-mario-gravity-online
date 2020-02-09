@@ -3,18 +3,37 @@ extends Node2D
 onready var Effect = preload("res://Game/Items/PowerBox/CollectedEffect.tscn")
 onready var RespawnTimer = $Timer
 
+func _ready():
+	randomize()
+	var offset := rand_range(0, 3)
+	$AnimatedSprite.flip_v = rand_range(0, 1) > 0.5
+	$AnimatedSprite.flip_h = rand_range(0, 1) > 0.5
+	$AnimatedSprite.set_frame(offset)
+	$AnimatedSprite.play("Appear")
+
+func _process(delta):
+	if $AnimatedSprite.animation == "Appear" and animation_finished("Appear"):
+		$AnimatedSprite.play("Idle")
+	if visible and $AnimatedSprite.animation == "Disappear" and animation_finished("Disappear"):
+		visible = false
+		RespawnTimer.start()
+
 func _on_Area2D_body_entered(player_node):
 	if not player_node.power_node:
 		player_node.grab_power(4)
 		var effect_node = Effect.instance()
 		effect_node.position = $EffectPosition.global_position
 		get_parent().add_child(effect_node)
-		visible = false
-		RespawnTimer.start()
-	pass
+		$AnimatedSprite.play("Disappear")
 
 func _on_Timer_timeout():
 	visible = true
+	print("Reappear")
+	$AnimatedSprite.play("Appear")
+
+func animation_finished(name):
+	#print(name, ": ", $AnimatedSprite.frame, ", ", $AnimatedSprite.get_sprite_frames().get_frame_count(name) - 1)
+	return $AnimatedSprite.frame == $AnimatedSprite.get_sprite_frames().get_frame_count(name) - 1
 
 func get_map_data() -> Dictionary:
 	return {
