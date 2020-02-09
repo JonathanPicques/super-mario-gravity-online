@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Appearing.png-c62339220906da1147046632d1c33e06.stex"
+path="res://.import/Respawn.png-6b49cc35ebc47fc94a7cfa2622c10f1d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Players/Classes/Frog/Textures/Appearing.png"
-dest_files=[ "res://.import/Appearing.png-c62339220906da1147046632d1c33e06.stex" ]
+source_file="res://Game/Players/Classes/Frog/Textures/Respawn.png"
+dest_files=[ "res://.import/Respawn.png-6b49cc35ebc47fc94a7cfa2622c10f1d.stex" ]
 
 [params]
 

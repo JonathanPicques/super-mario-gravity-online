@@ -44,6 +44,42 @@ func start():
 	#
 	set_focus_neighbours()
 
+func _process(delta: float):
+	var mouse_position = get_viewport().get_mouse_position() + CreatorCamera.position
+	if !is_playing:
+		update_item_placeholder(mouse_position)
+		if Input.is_action_pressed("ui_click"):
+			Drawers[drawer_index].create_item(mouse_position)
+		if Input.is_action_pressed("ui_click_bis"):
+			remove_item(mouse_position)
+	if Input.is_action_just_pressed("ui_cancel"):
+		if is_playing == false:
+			change_select_mode(!is_select_mode)
+		else:
+			$GUILayer/GUI.visible = true
+			remove_player_screen_camera(0)
+			MultiplayerManager.get_player_node(0).queue_free()
+			MultiplayerManager.remove_player(0)
+			is_playing = false
+
+	if !is_select_mode:
+		if Input.is_action_pressed("ui_left"):
+			CreatorCamera.translate(Vector2(-16, 0))
+		if Input.is_action_pressed("ui_right"):
+			CreatorCamera.translate(Vector2(16, 0))
+		if Input.is_action_pressed("ui_up"):
+			CreatorCamera.translate(Vector2(0, -16))
+		if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
+			CreatorCamera.translate(Vector2(0, 16))
+
+func update_item_placeholder(mouse_position: Vector2):
+	var position = mouse_position - CreatorCamera.position
+	var placeholder = Drawers[drawer_index].placeholder
+	var pivot: Vector2 = Drawers[drawer_index].get_item_pivot()
+	placeholder.position.x = MapManager.snap_value(position[0]) + pivot.x
+	placeholder.position.y = MapManager.snap_value(position[1]) + pivot.y
+	placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
+
 func set_focus_neighbours():
 	var i := 0
 	for drawer_node in Drawers:
@@ -99,41 +135,8 @@ func change_select_mode(mode: bool):
 	else:
 		Drawers[drawer_index].grab_focus()
 
-func update_item_placeholder(mouse_position: Vector2):
-	var position = mouse_position - CreatorCamera.position
-	var placeholder = Drawers[drawer_index].placeholder
-	var pivot: Vector2 = Drawers[drawer_index].get_item_pivot()
-	placeholder.position.x = MapManager.snap_value(position[0]) + pivot.x
-	placeholder.position.y = MapManager.snap_value(position[1]) + pivot.y
-	placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
-
-func _process(delta: float):
-	var mouse_position = get_viewport().get_mouse_position() + CreatorCamera.position
-	if !is_playing:
-		update_item_placeholder(mouse_position)
-		if Input.is_action_pressed("ui_click"):
-			Drawers[drawer_index].create_item(mouse_position)
-		if Input.is_action_pressed("ui_click_bis"):
-			Drawers[drawer_index].remove_item(mouse_position)
-	if Input.is_action_just_pressed("ui_cancel"):
-		if is_playing == false:
-			change_select_mode(!is_select_mode)
-		else:
-			$GUILayer/GUI.visible = true
-			remove_player_screen_camera(0)
-			MultiplayerManager.get_player_node(0).queue_free()
-			MultiplayerManager.remove_player(0)
-			is_playing = false
-
-	if !is_select_mode:
-		if Input.is_action_pressed("ui_left"):
-			CreatorCamera.translate(Vector2(-16, 0))
-		if Input.is_action_pressed("ui_right"):
-			CreatorCamera.translate(Vector2(16, 0))
-		if Input.is_action_pressed("ui_up"):
-			CreatorCamera.translate(Vector2(0, -16))
-		if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
-			CreatorCamera.translate(Vector2(0, 16))
+func remove_item(mouse_position: Vector2):
+	Drawers[drawer_index].remove_item(mouse_position)
 
 func select_drawer(index: int):
 	change_select_mode(true)
