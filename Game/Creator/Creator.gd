@@ -28,7 +28,7 @@ func init():
 		"Wall": [map_node.Map, 15, preload("res://Game/Creator/Textures/Icons/WallIcon.png")],
 		"Sticky": [map_node.Sticky, 8, preload("res://Game/Creator/Textures/Icons/StickyIcon.png")],
 		"Oneway": [map_node.Map, 9, preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")],
-		"Water": [map_node.Water, 14, preload("res://Game/Creator/Textures/Icons/WaterIcon.png")]
+		"Water": [map_node.Water, 16, preload("res://Game/Creator/Textures/Icons/WaterIcon.png")]
 	}
 
 func start():
@@ -136,7 +136,8 @@ func change_select_mode(mode: bool):
 		Drawers[drawer_index].grab_focus()
 
 func remove_item(mouse_position: Vector2):
-	Drawers[drawer_index].remove_item(mouse_position)
+	for i in range(0, Drawers.size()):
+		Drawers[i].remove_item(mouse_position)
 
 func select_drawer(index: int):
 	change_select_mode(true)

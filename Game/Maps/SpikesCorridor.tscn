@@ -24,7 +24,7 @@ tile_data = PoolIntArray( -2031534, 11, 0, -2031533, 11, 1, -2031532, 11, 1, -20
 position = Vector2( 2576, -368 )
 
 [node name="FlagStart" parent="." index="4"]
-position = Vector2( 32, 160 )
+position = Vector2( 48, 160 )
 
 [node name="Spikes" type="Node" parent="ObjectSlot" index="0"]
 

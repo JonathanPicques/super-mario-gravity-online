@@ -21,14 +21,14 @@ func create_item(mouse_position: Vector2):
 		var ts = creator.tilesets[tileset_type]
 		var cell_position = ts[0].world_to_map(mouse_position)
 		count = MAX_WATER_CELLS
-		fill_area(ts, cell_position)
+		fill_area(ts, cell_position, ts[1], cell_position.y)
 
 # @override
 func remove_item(mouse_position: Vector2):
 	var ts = creator.tilesets[tileset_type]
 	var cell_position = ts[0].world_to_map(mouse_position)
-	ts[0].set_cell(cell_position.x, cell_position.y, -1)
-	ts[0].update_bitmask_area(cell_position)
+	count = MAX_WATER_CELLS
+	fill_area(ts, cell_position, -1, cell_position.y)
 
 # @override
 func get_item_pivot():
@@ -41,14 +41,13 @@ func select_drawer():
 	.select_drawer()
 
 # @impure
-func fill_area(ts, cell_position: Vector2):
+func fill_area(ts, cell_position: Vector2, value: int, top_position: int):
 	var wall_cell = creator.tilesets.Wall[0].get_cell(cell_position.x, cell_position.y)
 	var water_cell = ts[0].get_cell(cell_position.x, cell_position.y)
 	if wall_cell != -1 or water_cell != -1 or count < 0:
 		return
-	ts[0].set_cell(cell_position.x, cell_position.y, ts[1])
-#	ts[0].update_bitmask_area(cell_position)
+	ts[0].set_cell(cell_position.x, cell_position.y, value, false, false, false, Vector2(0, 0 if cell_position.y == top_position else 1))
 	count -= 1
-	fill_area(ts, Vector2(cell_position.x + 1, cell_position.y))
-	fill_area(ts, Vector2(cell_position.x - 1, cell_position.y))
-	fill_area(ts, Vector2(cell_position.x, cell_position.y + 1))
+	fill_area(ts, Vector2(cell_position.x + 1, cell_position.y), value, top_position)
+	fill_area(ts, Vector2(cell_position.x - 1, cell_position.y), value, top_position)
+	fill_area(ts, Vector2(cell_position.x, cell_position.y + 1), value, top_position)
