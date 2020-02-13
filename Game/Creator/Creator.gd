@@ -25,10 +25,10 @@ func init():
 	remove_child($Popup)
 	# load tilesets (with hard coded)
 	tilesets = {
-		"Wall": [map_node.Map, 15, preload("res://Game/Creator/Textures/Icons/WallIcon.png")],
-		"Sticky": [map_node.Sticky, 8, preload("res://Game/Creator/Textures/Icons/StickyIcon.png")],
-		"Oneway": [map_node.Map, 9, preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")],
-		"Water": [map_node.Water, 16, preload("res://Game/Creator/Textures/Icons/WaterIcon.png")]
+		"Wall": {"tilemap": map_node.Map, "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png")},
+		"Sticky": {"tilemap": map_node.Sticky, "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png")},
+		"Oneway": {"tilemap": map_node.Map, "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")},
+		"Water": {"tilemap": map_node.Water, "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png")}
 	}
 
 func start():
