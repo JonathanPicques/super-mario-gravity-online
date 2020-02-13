@@ -114,3 +114,9 @@ tile_data = PoolIntArray( -1179648, 16, 0, -1179647, 16, 0, -1179646, 16, 0, -11
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 5 )
+
+[node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
+visible = false
+
+[node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
+visible = false

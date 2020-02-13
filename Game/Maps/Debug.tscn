@@ -212,5 +212,11 @@ tile_data = PoolIntArray( 720846, 16, 0, 720847, 16, 0, 720848, 16, 0, 720849, 1
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 5 )
 
+[node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
+visible = false
+
+[node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
+visible = false
+
 [node name="Princess" parent="." index="12" instance=ExtResource( 8 )]
 position = Vector2( -528, 160 )
