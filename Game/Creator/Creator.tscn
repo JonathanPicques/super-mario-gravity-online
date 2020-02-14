@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
 [ext_resource path="res://Game/Creator/Drawers/DoorDrawer.gd" type="Script" id=16]
 [ext_resource path="res://Game/Creator/Quadtree.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Game/Creator/History.gd" type="Script" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorSwitchIcon.png" type="Texture" id=20]
 [ext_resource path="res://Game/Creator/Textures/Icons/PowerBoxIcon.png" type="Texture" id=21]
@@ -165,7 +166,6 @@ margin_left = 384.0
 margin_top = 9.0
 margin_right = 408.0
 margin_bottom = 33.0
-disabled = true
 texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 38 )
 texture_hover = ExtResource( 49 )
@@ -181,7 +181,6 @@ margin_left = 412.0
 margin_top = 9.0
 margin_right = 436.0
 margin_bottom = 33.0
-disabled = true
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 39 )
 texture_hover = ExtResource( 50 )
@@ -804,11 +803,14 @@ __meta__ = {
 }
 
 [node name="CurrentItemSlot" type="Node2D" parent="." index="6"]
+
+[node name="History" type="Node" parent="." index="7"]
+script = ExtResource( 18 )
 [connection signal="pressed" from="GUILayer/GUI/TopBar/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToStartButton" to="." method="_on_GoToStartButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_pressed"]
+[connection signal="button_down" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_button_down"]
+[connection signal="button_down" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_button_down"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton" to="." method="_on_ItemButton_pressed"]

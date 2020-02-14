@@ -9,14 +9,22 @@ onready var CurrentItemSlot := $CurrentItemSlot
 onready var Quadtree: QuadtreeNode = $Quadtree
 onready var HUDQuadtree: QuadtreeNode = $HUDQuadtree
 
+onready var History: HistoryNode = $History
+
 var tilesets := {}
 var drawer_index := 0
 var is_select_mode := true
 var is_playing = false
+var previous_cell_position = Vector2(-1, -1)
+
+var is_placeholder_updated = false
+
+var transactions := []
 
 func _ready():
 	set_process(false)
 
+# @impure
 func init():
 	# load map
 	yield(load_map(""), "completed")
@@ -31,6 +39,7 @@ func init():
 		"Water": {"tilemap": map_node.Water, "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png")}
 	}
 
+# @impure
 func start():
 	set_process(true)
 	setup_split_screen()
@@ -44,14 +53,8 @@ func start():
 	#
 	set_focus_neighbours()
 
+# @impure
 func _process(delta: float):
-	var mouse_position = get_viewport().get_mouse_position() + CreatorCamera.position
-	if !is_playing:
-		update_item_placeholder(mouse_position)
-		if Input.is_action_pressed("ui_click"):
-			Drawers[drawer_index].create_item(mouse_position)
-		if Input.is_action_pressed("ui_click_bis"):
-			remove_item(mouse_position)
 	if Input.is_action_just_pressed("ui_cancel"):
 		if is_playing == false:
 			change_select_mode(!is_select_mode)
@@ -61,17 +64,45 @@ func _process(delta: float):
 			MultiplayerManager.get_player_node(0).queue_free()
 			MultiplayerManager.remove_player(0)
 			is_playing = false
+	if is_playing:	
+		return
+	
+	var mouse_position = get_viewport().get_mouse_position() + CreatorCamera.position
+	var new_cell_position = Vector2(
+		MapManager.snap_value(mouse_position.x),
+		MapManager.snap_value(mouse_position.y)
+	)
+	
+	if new_cell_position != previous_cell_position:
+		previous_cell_position = new_cell_position
+		update_item_placeholder(mouse_position)
 
+	if is_placeholder_updated:
+		if Input.is_action_pressed("ui_click"):
+			History.add_transaction({
+				"type": "create",
+				"mouse_position": mouse_position,
+				"drawer": drawer_index
+			})
+			is_placeholder_updated = false
+		if Input.is_action_pressed("ui_click_bis"):
+			History.add_transaction({
+				"type": "remove",
+				"mouse_position": mouse_position,
+				"drawer": drawer_index
+			})
+			is_placeholder_updated = false
 	if !is_select_mode:
 		if Input.is_action_pressed("ui_left"):
-			CreatorCamera.translate(Vector2(-16, 0))
+			CreatorCamera.translate(Vector2(-MapManager.ceil_size, 0))
 		if Input.is_action_pressed("ui_right"):
-			CreatorCamera.translate(Vector2(16, 0))
+			CreatorCamera.translate(Vector2(MapManager.ceil_size, 0))
 		if Input.is_action_pressed("ui_up"):
-			CreatorCamera.translate(Vector2(0, -16))
+			CreatorCamera.translate(Vector2(0, -MapManager.ceil_size))
 		if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
-			CreatorCamera.translate(Vector2(0, 16))
+			CreatorCamera.translate(Vector2(0, MapManager.ceil_size))
 
+# @impure
 func update_item_placeholder(mouse_position: Vector2):
 	var position = mouse_position - CreatorCamera.position
 	var placeholder = Drawers[drawer_index].placeholder
@@ -79,7 +110,9 @@ func update_item_placeholder(mouse_position: Vector2):
 	placeholder.position.x = MapManager.snap_value(position[0]) + pivot.x
 	placeholder.position.y = MapManager.snap_value(position[1]) + pivot.y
 	placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
+	is_placeholder_updated = true
 
+# @impure
 func set_focus_neighbours():
 	var i := 0
 	for drawer_node in Drawers:
@@ -184,13 +217,13 @@ func _on_GoToEndButton_pressed():
 	if CreatorCamera.position.y > 0:
 		CreatorCamera.position.y = 0
 
-func _on_UndoButton_pressed():
+func _on_UndoButton_button_down():
 	change_select_mode(true)
-	print("Undo")
+	History.undo()
 
-func _on_RedoButton_pressed():
+func _on_RedoButton_button_down():
 	change_select_mode(true)
-	print("Redo")
+	History.redo()
 
 func _on_InfoButton_pressed():
 	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible

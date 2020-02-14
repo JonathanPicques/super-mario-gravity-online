@@ -50,6 +50,11 @@ _global_script_classes=[ {
 "path": "res://Game/Game.gd"
 }, {
 "base": "Node",
+"class": "HistoryNode",
+"language": "GDScript",
+"path": "res://Game/Creator/History.gd"
+}, {
+"base": "Node",
 "class": "InputManagerNode",
 "language": "GDScript",
 "path": "res://Game/Managers/InputManager.gd"
@@ -133,6 +138,7 @@ _global_script_class_icons={
 "FiniteStateMachineStateNode": "",
 "GameModeNode": "",
 "GameNode": "",
+"HistoryNode": "",
 "InputManagerNode": "",
 "InvincibilityPowerNodeNode": "",
 "MapManagerNode": "",
