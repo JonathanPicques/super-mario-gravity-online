@@ -230,6 +230,14 @@ func _on_InfoButton_pressed():
 	change_select_mode(true)
 
 func _on_SettingsButton_pressed():
+	$GUILayer/GUI/SettingsPopup.visible = true
+	$GUILayer/GUI/SettingsPopup/CloseButton.grab_focus()
+
+func _on_CloseButton_button_up():
+	$GUILayer/GUI/SettingsPopup.visible = false
+
+func _on_SaveButton_button_up():
+	print('save')
+
+func _on_HomeButton_button_up():
 	Game.goto_home_menu_scene()
-	$GUILayer/GUI/Popup.visible = true
-	

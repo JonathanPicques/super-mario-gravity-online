@@ -872,7 +872,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Popup" type="ColorRect" parent="GUILayer/GUI" index="7"]
+[node name="SettingsPopup" type="ColorRect" parent="GUILayer/GUI" index="7"]
+visible = false
 margin_right = 512.0
 margin_bottom = 288.0
 color = Color( 0, 0, 0, 0.470588 )
@@ -880,7 +881,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="GUILayer/GUI/Popup" index="0"]
+[node name="ColorRect2" type="ColorRect" parent="GUILayer/GUI/SettingsPopup" index="0"]
 margin_left = 312.0
 margin_right = 512.0
 margin_bottom = 288.0
@@ -889,11 +890,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LineEdit" type="LineEdit" parent="GUILayer/GUI/Popup" index="1"]
+[node name="NameInput" type="LineEdit" parent="GUILayer/GUI/SettingsPopup" index="1"]
 margin_left = 336.0
 margin_top = 64.0
 margin_right = 488.0
 margin_bottom = 88.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../CloseButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../DescriptionInput")
+focus_next = NodePath("../DescriptionInput")
+focus_previous = NodePath("../CloseButton")
 custom_styles/focus = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 8 )
@@ -907,7 +914,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GUILayer/GUI/Popup" index="2"]
+[node name="Label" type="Label" parent="GUILayer/GUI/SettingsPopup" index="2"]
 margin_left = 336.0
 margin_top = 16.0
 margin_right = 424.0
@@ -919,7 +926,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="GUILayer/GUI/Popup" index="3"]
+[node name="Label2" type="Label" parent="GUILayer/GUI/SettingsPopup" index="3"]
 margin_left = 336.0
 margin_top = 48.0
 margin_right = 424.0
@@ -931,7 +938,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="GUILayer/GUI/Popup" index="4"]
+[node name="Label3" type="Label" parent="GUILayer/GUI/SettingsPopup" index="4"]
 margin_left = 336.0
 margin_top = 96.0
 margin_right = 424.0
@@ -943,11 +950,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit" type="TextEdit" parent="GUILayer/GUI/Popup" index="5"]
+[node name="DescriptionInput" type="TextEdit" parent="GUILayer/GUI/SettingsPopup" index="5"]
 margin_left = 336.0
 margin_top = 112.0
 margin_right = 488.0
 margin_bottom = 232.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../NameInput")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../SaveButton")
+focus_next = NodePath("../SaveButton")
+focus_previous = NodePath("../NameInput")
 custom_styles/focus = SubResource( 11 )
 custom_styles/normal = SubResource( 12 )
 custom_fonts/font = SubResource( 13 )
@@ -961,11 +974,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloseButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="6"]
+[node name="CloseButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="6"]
 margin_left = 464.0
 margin_top = 16.0
 margin_right = 488.0
 margin_bottom = 40.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../NameInput")
+focus_neighbour_bottom = NodePath("../NameInput")
+focus_next = NodePath("../NameInput")
+focus_previous = NodePath(".")
 texture_normal = ExtResource( 60 )
 texture_pressed = ExtResource( 61 )
 texture_hover = ExtResource( 58 )
@@ -974,11 +993,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="7"]
+[node name="SaveButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="7"]
 margin_left = 336.0
 margin_top = 240.0
 margin_right = 368.0
 margin_bottom = 272.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../DescriptionInput")
+focus_neighbour_right = NodePath("../OpenButton")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../OpenButton")
+focus_previous = NodePath("../DescriptionInput")
 texture_normal = ExtResource( 62 )
 texture_pressed = ExtResource( 63 )
 texture_hover = ExtResource( 56 )
@@ -987,11 +1012,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OpenButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="8"]
+[node name="OpenButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="8"]
 margin_left = 376.0
 margin_top = 240.0
 margin_right = 408.0
 margin_bottom = 272.0
+focus_neighbour_left = NodePath("../SaveButton")
+focus_neighbour_top = NodePath("../DescriptionInput")
+focus_neighbour_right = NodePath("../DeleteButton")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../DeleteButton")
+focus_previous = NodePath("../SaveButton")
 texture_normal = ExtResource( 69 )
 texture_pressed = ExtResource( 67 )
 texture_hover = ExtResource( 55 )
@@ -1000,11 +1031,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DeleteButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="9"]
+[node name="DeleteButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="9"]
 margin_left = 416.0
 margin_top = 240.0
 margin_right = 448.0
 margin_bottom = 272.0
+focus_neighbour_left = NodePath("../OpenButton")
+focus_neighbour_top = NodePath("../DescriptionInput")
+focus_neighbour_right = NodePath("../HomeButton")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../HomeButton")
+focus_previous = NodePath("../OpenButton")
 texture_normal = ExtResource( 68 )
 texture_pressed = ExtResource( 66 )
 texture_hover = ExtResource( 54 )
@@ -1013,11 +1050,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HomeButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="10"]
+[node name="HomeButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="10"]
 margin_left = 456.0
 margin_top = 240.0
 margin_right = 488.0
 margin_bottom = 272.0
+focus_neighbour_left = NodePath("../DeleteButton")
+focus_neighbour_top = NodePath("../DescriptionInput")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../DeleteButton")
 texture_normal = ExtResource( 64 )
 texture_pressed = ExtResource( 65 )
 texture_hover = ExtResource( 57 )
@@ -1049,3 +1092,6 @@ script = ExtResource( 18 )
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton10" to="." method="_on_ItemButton10_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton11" to="." method="_on_ItemButton11_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton12" to="." method="_on_ItemButton12_pressed"]
+[connection signal="button_up" from="GUILayer/GUI/SettingsPopup/CloseButton" to="." method="_on_CloseButton_button_up"]
+[connection signal="button_up" from="GUILayer/GUI/SettingsPopup/SaveButton" to="." method="_on_SaveButton_button_up"]
+[connection signal="button_up" from="GUILayer/GUI/SettingsPopup/HomeButton" to="." method="_on_HomeButton_button_up"]
