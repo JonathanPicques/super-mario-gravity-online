@@ -8,8 +8,6 @@ const SKIP_START_POSITION := Vector2(96, 240)
 
 onready var KeyGamepadJump := $GUI/JumpHintLabel/KeyGamepadJump
 onready var KeyKeyboardJump := $GUI/JumpHintLabel/KeyKeyboardJump
-onready var KeyGamepadOpenDoor := $GUI/OpenDoorLabel/KeyGamepadOpenDoor
-onready var KeyKeyboardOpenDoor := $GUI/OpenDoorLabel/KeyKeyboardOpenDoor
 onready var KeyGamepadUseObject := $GUI/ObjectHintLabel/KeyGamepadUseObject
 onready var KeyKeyboardUseObject := $GUI/ObjectHintLabel/KeyKeyboardUseObject
 
@@ -46,12 +44,9 @@ func _process(delta: float):
 	if !player_camera_node and lead_player:
 		$GUI/TitleLabel.visible = false
 		$GUI/SubtitleLabel.visible = false
-		$GUI/OpenDoorLabel.visible = true
 		
 		KeyKeyboardJump.visible = lead_player.input_device_id == 0
 		KeyGamepadJump.visible = lead_player.input_device_id == 1
-		KeyKeyboardOpenDoor.visible = lead_player.input_device_id == 0
-		KeyGamepadOpenDoor.visible = lead_player.input_device_id == 1
 		KeyKeyboardUseObject.visible = lead_player.input_device_id == 0
 		KeyGamepadUseObject.visible = lead_player.input_device_id == 1
 		

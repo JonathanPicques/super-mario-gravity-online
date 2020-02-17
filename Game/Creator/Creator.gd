@@ -231,4 +231,5 @@ func _on_InfoButton_pressed():
 
 func _on_SettingsButton_pressed():
 	Game.goto_home_menu_scene()
-
+	$GUILayer/GUI/Popup.visible = true
+	

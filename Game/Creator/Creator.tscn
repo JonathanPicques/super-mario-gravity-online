@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -57,8 +57,18 @@
 [ext_resource path="res://Game/Creator/Textures/OpenButtonFocused.png" type="Texture" id=55]
 [ext_resource path="res://Game/Creator/Textures/SaveButtonFocused.png" type="Texture" id=56]
 [ext_resource path="res://Game/Creator/Textures/HomeButtonFocused.png" type="Texture" id=57]
-[ext_resource path="res://Game/Creator/Textures/CloseButton.png" type="Texture" id=58]
+[ext_resource path="res://Game/Creator/Textures/CloseButtonFocused.png" type="Texture" id=58]
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=59]
+[ext_resource path="res://Game/Creator/Textures/CloseButton.png" type="Texture" id=60]
+[ext_resource path="res://Game/Creator/Textures/CloseButtonPressed.png" type="Texture" id=61]
+[ext_resource path="res://Game/Creator/Textures/SaveButton.png" type="Texture" id=62]
+[ext_resource path="res://Game/Creator/Textures/SaveButtonPressed.png" type="Texture" id=63]
+[ext_resource path="res://Game/Creator/Textures/HomeButton.png" type="Texture" id=64]
+[ext_resource path="res://Game/Creator/Textures/HomeButtonPressed.png" type="Texture" id=65]
+[ext_resource path="res://Game/Creator/Textures/DeleteButtonPressed.png" type="Texture" id=66]
+[ext_resource path="res://Game/Creator/Textures/OpenButtonPressed.png" type="Texture" id=67]
+[ext_resource path="res://Game/Creator/Textures/DeleteButton.png" type="Texture" id=68]
+[ext_resource path="res://Game/Creator/Textures/OpenButton.png" type="Texture" id=69]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
@@ -81,7 +91,7 @@ outline_color = Color( 0.2, 0.2, 0.2, 1 )
 use_mipmaps = true
 font_data = ExtResource( 59 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -89,39 +99,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-
-[sub_resource type="DynamicFont" id=13]
-size = 12
-font_data = ExtResource( 59 )
-
-[sub_resource type="DynamicFont" id=6]
-size = 26
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 59 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 14
-outline_size = 1
-outline_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-font_data = ExtResource( 59 )
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -130,6 +108,38 @@ border_width_bottom = 1
 border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 
 [sub_resource type="DynamicFont" id=8]
+size = 12
+font_data = ExtResource( 59 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 26
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 14
+outline_size = 1
+outline_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="DynamicFont" id=13]
 size = 12
 font_data = ExtResource( 59 )
 
@@ -863,7 +873,6 @@ __meta__ = {
 }
 
 [node name="Popup" type="ColorRect" parent="GUILayer/GUI" index="7"]
-visible = false
 margin_right = 512.0
 margin_bottom = 288.0
 color = Color( 0, 0, 0, 0.470588 )
@@ -880,30 +889,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OpenButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="1"]
-position = Vector2( 392, 256 )
-texture = ExtResource( 55 )
-
-[node name="SaveButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="2"]
-position = Vector2( 352, 256 )
-texture = ExtResource( 56 )
-
-[node name="HomeButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="3"]
-position = Vector2( 472, 256 )
-texture = ExtResource( 57 )
-
-[node name="DeleteButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="4"]
-position = Vector2( 432, 256 )
-texture = ExtResource( 54 )
-
-[node name="LineEdit" type="LineEdit" parent="GUILayer/GUI/Popup" index="5"]
+[node name="LineEdit" type="LineEdit" parent="GUILayer/GUI/Popup" index="1"]
 margin_left = 336.0
 margin_top = 64.0
 margin_right = 488.0
 margin_bottom = 88.0
-custom_styles/focus = SubResource( 10 )
-custom_styles/normal = SubResource( 11 )
-custom_fonts/font = SubResource( 13 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/selection_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 custom_colors/cursor_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
@@ -914,60 +907,121 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloseButton" type="Sprite" parent="GUILayer/GUI/Popup/LineEdit" index="2"]
-position = Vector2( 140, -40 )
-texture = ExtResource( 58 )
-
-[node name="Label" type="Label" parent="GUILayer/GUI/Popup" index="6"]
+[node name="Label" type="Label" parent="GUILayer/GUI/Popup" index="2"]
 margin_left = 336.0
 margin_top = 16.0
 margin_right = 424.0
 margin_bottom = 41.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Options"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="GUILayer/GUI/Popup" index="7"]
+[node name="Label2" type="Label" parent="GUILayer/GUI/Popup" index="3"]
 margin_left = 336.0
 margin_top = 48.0
 margin_right = 424.0
 margin_bottom = 65.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Name"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label3" type="Label" parent="GUILayer/GUI/Popup" index="8"]
+[node name="Label3" type="Label" parent="GUILayer/GUI/Popup" index="4"]
 margin_left = 336.0
 margin_top = 96.0
 margin_right = 424.0
 margin_bottom = 113.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Description"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEdit" type="TextEdit" parent="GUILayer/GUI/Popup" index="9"]
+[node name="TextEdit" type="TextEdit" parent="GUILayer/GUI/Popup" index="5"]
 margin_left = 336.0
 margin_top = 112.0
 margin_right = 488.0
 margin_bottom = 232.0
-custom_styles/focus = SubResource( 12 )
-custom_styles/normal = SubResource( 9 )
-custom_fonts/font = SubResource( 8 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/selection_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 custom_colors/caret_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "This is a pretty straight forward level, just go from start to finish without dying to much!"
 wrap_enabled = true
 caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="6"]
+margin_left = 464.0
+margin_top = 16.0
+margin_right = 488.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 60 )
+texture_pressed = ExtResource( 61 )
+texture_hover = ExtResource( 58 )
+texture_focused = ExtResource( 58 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="7"]
+margin_left = 336.0
+margin_top = 240.0
+margin_right = 368.0
+margin_bottom = 272.0
+texture_normal = ExtResource( 62 )
+texture_pressed = ExtResource( 63 )
+texture_hover = ExtResource( 56 )
+texture_focused = ExtResource( 56 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="8"]
+margin_left = 376.0
+margin_top = 240.0
+margin_right = 408.0
+margin_bottom = 272.0
+texture_normal = ExtResource( 69 )
+texture_pressed = ExtResource( 67 )
+texture_hover = ExtResource( 55 )
+texture_focused = ExtResource( 55 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DeleteButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="9"]
+margin_left = 416.0
+margin_top = 240.0
+margin_right = 448.0
+margin_bottom = 272.0
+texture_normal = ExtResource( 68 )
+texture_pressed = ExtResource( 66 )
+texture_hover = ExtResource( 54 )
+texture_focused = ExtResource( 54 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HomeButton" type="TextureButton" parent="GUILayer/GUI/Popup" index="10"]
+margin_left = 456.0
+margin_top = 240.0
+margin_right = 488.0
+margin_bottom = 272.0
+texture_normal = ExtResource( 64 )
+texture_pressed = ExtResource( 65 )
+texture_hover = ExtResource( 57 )
+texture_focused = ExtResource( 57 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

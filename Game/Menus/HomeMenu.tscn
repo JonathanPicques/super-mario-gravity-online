@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
@@ -12,8 +12,6 @@
 [ext_resource path="res://Game/Menus/Textures/Settings.png" type="Texture" id=10]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadAlt2.png" type="Texture" id=11]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadAlt1.png" type="Texture" id=12]
-[ext_resource path="res://Game/Menus/Textures/KeyUp.png" type="Texture" id=13]
-[ext_resource path="res://Game/Menus/Textures/KeyGamepadUp.png" type="Texture" id=14]
 [ext_resource path="res://Game/Menus/Textures/Blacksmith.png" type="Texture" id=15]
 [ext_resource path="res://Game/Menus/Textures/KeyKeyboardAlt2.png" type="Texture" id=16]
 
@@ -123,6 +121,7 @@ animations = [ {
 
 [sub_resource type="DynamicFont" id=26]
 size = 30
+outline_size = 1
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 3 )
 
@@ -134,21 +133,14 @@ font_data = ExtResource( 3 )
 [sub_resource type="StreamTexture" id=28]
 
 [sub_resource type="StreamTexture" id=29]
-
-[sub_resource type="StreamTexture" id=30]
 load_path = "res://.import/BubbleTop.png-246915b377db2920f8737ec5211d3be3.stex"
 
-[sub_resource type="DynamicFont" id=31]
+[sub_resource type="DynamicFont" id=30]
 size = 12
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=32]
-outline_size = 1
-outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
-font_data = ExtResource( 3 )
-
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=31]
 length = 30.0
 loop = true
 step = 30.0
@@ -175,14 +167,14 @@ tile_data = PoolIntArray( 983046, 13, 196608, 983047, 13, 196610, 1114120, 13, 1
 position = Vector2( 256, 120 )
 texture = ExtResource( 8 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
+[node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
 frames = SubResource( 25 )
-frame = 9
+frame = 4
 speed_scale = 5.0
 playing = true
 
-[node name="BlackSmith" type="Sprite" parent="." index="3"]
+[node name="Alchemist" type="Sprite" parent="." index="3"]
 position = Vector2( -248, 192 )
 texture = ExtResource( 10 )
 
@@ -208,9 +200,9 @@ anchor_bottom = 0.00860252
 margin_left = 128.0
 margin_top = 111.656
 margin_right = 384.0
-margin_bottom = 140.656
+margin_bottom = 142.656
 custom_fonts/font = SubResource( 26 )
-custom_colors/font_color = Color( 0.286275, 0.266667, 0.329412, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Once upon a frog"
 align = 1
 __meta__ = {
@@ -294,15 +286,15 @@ margin_right = -330.0
 margin_bottom = -15.0
 custom_fonts/font = SubResource( 27 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
-text = "Press    to use an object!"
+text = "Press      to use an object!"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="KeyKeyboardUseObject" type="Sprite" parent="GUI/ObjectHintLabel" index="0"]
-position = Vector2( 50, 9 )
-texture = SubResource( 29 )
+position = Vector2( 56, 7 )
+texture = ExtResource( 4 )
 
 [node name="KeyGamepadUseObject" type="Sprite" parent="GUI/ObjectHintLabel" index="1"]
 visible = false
@@ -314,7 +306,7 @@ margin_left = -90.0
 margin_top = 56.0
 margin_right = 24.0
 margin_bottom = 176.0
-texture = SubResource( 30 )
+texture = SubResource( 29 )
 patch_margin_left = 24
 patch_margin_top = 10
 patch_margin_right = 10
@@ -328,12 +320,12 @@ margin_left = 10.0
 margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 30 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Hello my lord,
 do you want to
 create some
-maps today?
+levels today?
 
 Press     ."
 align = 1
@@ -351,12 +343,12 @@ visible = false
 position = Vector2( 68, 80 )
 texture = ExtResource( 12 )
 
-[node name="CreatorBubble2" type="NinePatchRect" parent="GUI" index="7"]
+[node name="SettingsBubble" type="NinePatchRect" parent="GUI" index="7"]
 margin_left = -272.0
 margin_top = 56.0
 margin_right = -158.0
 margin_bottom = 176.0
-texture = SubResource( 30 )
+texture = SubResource( 29 )
 patch_margin_left = 24
 patch_margin_top = 10
 patch_margin_right = 10
@@ -365,12 +357,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="GUI/CreatorBubble2" index="0"]
+[node name="Label" type="Label" parent="GUI/SettingsBubble" index="0"]
 margin_left = 10.0
 margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 30 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Hello my lord,
 do you want to
@@ -384,37 +376,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="KeyKeyboardSettings" type="Sprite" parent="GUI/CreatorBubble2/Label" index="0"]
+[node name="KeyKeyboardSettings" type="Sprite" parent="GUI/SettingsBubble/Label" index="0"]
 position = Vector2( 68, 80 )
 texture = ExtResource( 16 )
 
-[node name="KeyGamepadSettings" type="Sprite" parent="GUI/CreatorBubble2/Label" index="1"]
+[node name="KeyGamepadSettings" type="Sprite" parent="GUI/SettingsBubble/Label" index="1"]
 visible = false
 position = Vector2( 68, 80 )
 texture = ExtResource( 12 )
-
-[node name="OpenDoorLabel" type="Label" parent="GUI" index="8"]
-anchor_right = 0.675
-margin_left = 192.0
-margin_top = 256.0
-margin_right = 293.0
-margin_bottom = 273.0
-custom_fonts/font = SubResource( 32 )
-custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
-text = "    open the door"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KeyKeyboardOpenDoor" type="Sprite" parent="GUI/OpenDoorLabel" index="0"]
-texture = ExtResource( 13 )
-centered = false
-
-[node name="KeyGamepadOpenDoor" type="Sprite" parent="GUI/OpenDoorLabel" index="1"]
-visible = false
-position = Vector2( 7, 1 )
-texture = ExtResource( 14 )
-centered = false
 
 [node name="PowerBox" parent="ObjectSlot" index="0" instance=ExtResource( 9 )]
 position = Vector2( -448, 48 )
@@ -436,7 +405,7 @@ motion_scale = Vector2( 0.3, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
 autoplay = "move_clouds"
 playback_speed = 0.5
-anims/move_clouds = SubResource( 33 )
+anims/move_clouds = SubResource( 31 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 motion_scale = Vector2( 0.7, 1 )
