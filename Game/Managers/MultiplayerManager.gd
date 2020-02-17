@@ -1,6 +1,8 @@
 extends Node
 class_name MultiplayerManagerNode
 
+const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
+
 enum PlayerTransformationType {
 	Frog = 0,
 	Prince = 1
@@ -289,6 +291,18 @@ func replace_player_node(player: Dictionary, new_player_node: PlayerNode) -> Pla
 	Game.map_node.PlayerSlot.add_child(new_player_node)
 	emit_signal("player_replaced_node", player, new_player_node, old_player_node)
 	return new_player_node
+
+##########################
+# Player camera node API #
+##########################
+
+# @pure
+func create_player_camera(player_id: int, player_node = null) -> PlayerCameraNode:
+	var player_camera: PlayerCameraNode = PlayerCamera.instance()
+	player_camera.player_id = player_id
+	player_camera.player_node = player_node if not null else get_player_node(player_id)
+	player_camera.tile_map_node = Game.map_node.Map
+	return player_camera
 
 ##########
 # Nakama #

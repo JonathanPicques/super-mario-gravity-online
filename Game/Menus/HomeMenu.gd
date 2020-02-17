@@ -1,7 +1,5 @@
 extends "res://Game/Maps/Map.gd"
 
-const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
-
 var player_camera_node = null
 
 const SKIP_START_POSITION := Vector2(96, 240)
@@ -50,10 +48,8 @@ func _process(delta: float):
 		KeyKeyboardUseObject.visible = lead_player.input_device_id == 0
 		KeyGamepadUseObject.visible = lead_player.input_device_id == 1
 		
-		var player_node = MultiplayerManager.get_player_node(lead_player.id)
-		if player_node:
-			player_camera_node = PlayerCamera.instance()
-			player_camera_node.player_node_path = player_node.get_path()
-			player_camera_node.tile_map_node_path = $Map.get_path()
+		var lead_player_node = MultiplayerManager.get_player_node(lead_player.id)
+		if lead_player_node:
+			player_camera_node = MultiplayerManager.create_player_camera(lead_player.id, lead_player_node)
 			add_child(player_camera_node)
 	

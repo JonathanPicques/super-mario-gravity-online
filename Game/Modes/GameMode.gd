@@ -1,8 +1,6 @@
 extends Control
 class_name GameModeNode
 
-const PlayerCamera := preload("res://Game/Players/PlayerCamera2D.tscn")
-
 onready var MapSlot: MapNode = $GridContainer/Control1/ViewportContainer1/Viewport1/MapSlot
 onready var GamePopup: Control = $Popup
 onready var Viewport1: Viewport = $GridContainer/Control1/ViewportContainer1/Viewport1
@@ -120,37 +118,35 @@ func get_player_screen_camera(player_id: int) -> PlayerCameraNode:
 
 # add a camera compatible with split screen for the given player.
 # @impure
-func add_player_screen_camera(player_id: int, player_node_path: NodePath) -> PlayerCameraNode:
-	var player_camera_scene = PlayerCamera.instance()
-	player_camera_scene.player_node_path = player_node_path
-	player_camera_scene.tile_map_node_path = MapSlot.get_node("Map").Map.get_path()
+func add_player_screen_camera(player_id: int, player_node: PlayerNode) -> PlayerCameraNode:
+	var player_camera_node := MultiplayerManager.create_player_camera(player_id, player_node)
 	match player_id:
-		0: Viewport1.add_child(player_camera_scene)
-		1: Viewport2.add_child(player_camera_scene)
-		2: Viewport3.add_child(player_camera_scene)
-		3: Viewport4.add_child(player_camera_scene)
-	return player_camera_scene
+		0: Viewport1.add_child(player_camera_node)
+		1: Viewport2.add_child(player_camera_node)
+		2: Viewport3.add_child(player_camera_node)
+		3: Viewport4.add_child(player_camera_node)
+	return player_camera_node
 
 # add a camera compatible with split screen for the given player.
 # @impure
 func remove_player_screen_camera(player_id: int):
 	match player_id:
 		0:
-			var camera_node = Viewport1.get_node("PlayerCamera2D")
-			if camera_node:
-				camera_node.queue_free()
+			var player_camera_node = Viewport1.get_node("PlayerCamera2D")
+			if player_camera_node:
+				player_camera_node.queue_free()
 		1:
-			var camera_node = Viewport2.get_node("PlayerCamera2D")
-			if camera_node:
-				camera_node.queue_free()
+			var player_camera_node = Viewport2.get_node("PlayerCamera2D")
+			if player_camera_node:
+				player_camera_node.queue_free()
 		2:
-			var camera_node = Viewport3.get_node("PlayerCamera2D")
-			if camera_node:
-				camera_node.queue_free()
+			var player_camera_node = Viewport3.get_node("PlayerCamera2D")
+			if player_camera_node:
+				player_camera_node.queue_free()
 		3:
-			var camera_node = Viewport4.get_node("PlayerCamera2D")
-			if camera_node:
-				camera_node.queue_free()
+			var player_camera_node = Viewport4.get_node("PlayerCamera2D")
+			if player_camera_node:
+				player_camera_node.queue_free()
 
 # trigger color switch for the given color.
 # @impure

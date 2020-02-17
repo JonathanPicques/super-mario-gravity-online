@@ -196,7 +196,7 @@ func _on_PlayButton_pressed():
 	var player := MultiplayerManager.add_player("creator", true, 0)
 	var player_node := MultiplayerManager.spawn_player_node(player)
 	yield(get_tree(), "idle_frame")
-	var player_camera_node := add_player_screen_camera(player.id, player_node.get_path())
+	var player_camera_node := add_player_screen_camera(player.id, player_node)
 	player_node.position = map_node.FlagStart.position
 	player_camera_node.current = true
 	is_playing = true

@@ -41,7 +41,7 @@ func start():
 		var player_node: Node2D = MultiplayerManager.get_player_node(player.id)
 		player_node.position = flag_start_pos
 		player_node.position.x += max(player.peer_id - 1, 0) * 16 + player.local_id * 4
-		add_player_screen_camera(player.id, player_node.get_path())
+		add_player_screen_camera(player.id, player_node)
 	# connect multiplayer signals
 	MultiplayerManager.connect("player_removed", self, "on_player_removed")
 	# compute player ranking locally
