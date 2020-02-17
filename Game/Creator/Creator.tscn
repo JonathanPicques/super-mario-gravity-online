@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -52,6 +52,13 @@
 [ext_resource path="res://Game/Creator/Textures/RedoFocused.png" type="Texture" id=50]
 [ext_resource path="res://Game/Creator/Textures/InfoFocused.png" type="Texture" id=51]
 [ext_resource path="res://Game/Creator/Textures/SettingsFocused.png" type="Texture" id=52]
+[ext_resource path="res://Game/Creator/Drawers/SpikeballDrawer.gd" type="Script" id=53]
+[ext_resource path="res://Game/Creator/Textures/DeleteButtonFocused.png" type="Texture" id=54]
+[ext_resource path="res://Game/Creator/Textures/OpenButtonFocused.png" type="Texture" id=55]
+[ext_resource path="res://Game/Creator/Textures/SaveButtonFocused.png" type="Texture" id=56]
+[ext_resource path="res://Game/Creator/Textures/HomeButtonFocused.png" type="Texture" id=57]
+[ext_resource path="res://Game/Creator/Textures/CloseButton.png" type="Texture" id=58]
+[ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=59]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
@@ -68,10 +75,63 @@ use_filter = true
 font_data = ExtResource( 32 )
 
 [sub_resource type="DynamicFont" id=5]
+size = 14
 outline_size = 1
 outline_color = Color( 0.2, 0.2, 0.2, 1 )
 use_mipmaps = true
-font_data = ExtResource( 32 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 12
+font_data = ExtResource( 59 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 26
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 14
+outline_size = 1
+outline_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 12
+font_data = ExtResource( 59 )
 
 [node name="Creator" instance=ExtResource( 1 )]
 script = ExtResource( 31 )
@@ -330,7 +390,7 @@ margin_right = 98.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
+script = ExtResource( 53 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -798,6 +858,116 @@ margin_right = 105.0
 margin_bottom = 252.0
 custom_fonts/font = SubResource( 5 )
 text = "(ESC) move map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="ColorRect" parent="GUILayer/GUI" index="7"]
+visible = false
+margin_right = 512.0
+margin_bottom = 288.0
+color = Color( 0, 0, 0, 0.470588 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="GUILayer/GUI/Popup" index="0"]
+margin_left = 312.0
+margin_right = 512.0
+margin_bottom = 288.0
+color = Color( 0.815686, 0.623529, 0.431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="1"]
+position = Vector2( 392, 256 )
+texture = ExtResource( 55 )
+
+[node name="SaveButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="2"]
+position = Vector2( 352, 256 )
+texture = ExtResource( 56 )
+
+[node name="HomeButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="3"]
+position = Vector2( 472, 256 )
+texture = ExtResource( 57 )
+
+[node name="DeleteButtonFocused" type="Sprite" parent="GUILayer/GUI/Popup" index="4"]
+position = Vector2( 432, 256 )
+texture = ExtResource( 54 )
+
+[node name="LineEdit" type="LineEdit" parent="GUILayer/GUI/Popup" index="5"]
+margin_left = 336.0
+margin_top = 64.0
+margin_right = 488.0
+margin_bottom = 88.0
+custom_styles/focus = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
+custom_colors/selection_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+custom_colors/cursor_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+text = "Simple race"
+max_length = 50
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Sprite" parent="GUILayer/GUI/Popup/LineEdit" index="2"]
+position = Vector2( 140, -40 )
+texture = ExtResource( 58 )
+
+[node name="Label" type="Label" parent="GUILayer/GUI/Popup" index="6"]
+margin_left = 336.0
+margin_top = 16.0
+margin_right = 424.0
+margin_bottom = 41.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="GUILayer/GUI/Popup" index="7"]
+margin_left = 336.0
+margin_top = 48.0
+margin_right = 424.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="GUILayer/GUI/Popup" index="8"]
+margin_left = 336.0
+margin_top = 96.0
+margin_right = 424.0
+margin_bottom = 113.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Description"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="GUILayer/GUI/Popup" index="9"]
+margin_left = 336.0
+margin_top = 112.0
+margin_right = 488.0
+margin_bottom = 232.0
+custom_styles/focus = SubResource( 12 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 8 )
+custom_colors/selection_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+custom_colors/caret_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+text = "This is a pretty straight forward level, just go from start to finish without dying to much!"
+wrap_enabled = true
+caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
