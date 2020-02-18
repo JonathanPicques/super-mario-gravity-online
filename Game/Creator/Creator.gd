@@ -14,12 +14,11 @@ onready var History: HistoryNode = $History
 var tilesets := {}
 var drawer_index := 0
 var is_select_mode := true
-var is_playing = false
-var previous_cell_position = Vector2(-1, -1)
-
-var is_placeholder_updated = false
+var is_playing := false
+var previous_cell_position := Vector2(-1, -1)
 
 var transactions := []
+var is_placeholder_updated := false
 
 func _ready():
 	set_process(false)
@@ -44,13 +43,13 @@ func start():
 	set_process(true)
 	setup_split_screen()
 	Drawers[0].grab_focus()
-	Drawers[drawer_index].select_drawer()
-	#
+	# construct quadtree from existing items
 	Quadtree.add_items(map_node.ObjectSlot.get_children())
+	# construct hud quadtree
 	for btn in TopButtons:
 		HUDQuadtree.add_item(btn)
 	HUDQuadtree.add_item($GUILayer/GUI/ElementsBar) # FIXME not working
-	#
+	# set keyboard/gamepad gui navigation
 	set_focus_neighbours()
 
 # @impure
@@ -64,11 +63,11 @@ func _process(delta: float):
 			MultiplayerManager.get_player_node(0).queue_free()
 			MultiplayerManager.remove_player(0)
 			is_playing = false
-	if is_playing:	
+	if is_playing:
 		return
 	
-	var mouse_position = get_viewport().get_mouse_position() + CreatorCamera.position
-	var new_cell_position = Vector2(
+	var mouse_position := get_viewport().get_mouse_position() + CreatorCamera.position
+	var new_cell_position := Vector2(
 		MapManager.snap_value(mouse_position.x),
 		MapManager.snap_value(mouse_position.y)
 	)
@@ -76,22 +75,28 @@ func _process(delta: float):
 	if new_cell_position != previous_cell_position:
 		previous_cell_position = new_cell_position
 		update_item_placeholder(mouse_position)
+	
+	if Input.is_action_just_pressed("ui_click") and HUDQuadtree.get_item(mouse_position) == null:
+		History.start()
+	
+	if is_placeholder_updated and Input.is_action_pressed("ui_click") and HUDQuadtree.get_item(mouse_position) == null:
+		if is_cell_free(new_cell_position):
+			History.push_step({"type": "fill_cell", "pos": new_cell_position, "drawer_index": drawer_index}, {"type": "clear_cell", "pos": new_cell_position, "drawer_index": drawer_index})
+			is_placeholder_updated = false
 
-	if is_placeholder_updated:
-		if Input.is_action_pressed("ui_click"):
-			History.add_transaction({
-				"type": "create",
-				"mouse_position": mouse_position,
-				"drawer": drawer_index
-			})
-			is_placeholder_updated = false
-		if Input.is_action_pressed("ui_click_bis"):
-			History.add_transaction({
-				"type": "remove",
-				"mouse_position": mouse_position,
-				"drawer": drawer_index
-			})
-			is_placeholder_updated = false
+	if Input.is_action_just_released("ui_click") and HUDQuadtree.get_item(mouse_position) == null:
+		History.commit()
+
+	if Input.is_action_just_pressed("ui_click_bis") and HUDQuadtree.get_item(mouse_position) == null:
+		History.start()
+	
+	if is_placeholder_updated and Input.is_action_pressed("ui_click_bis") and HUDQuadtree.get_item(mouse_position) == null:
+		clear_cell(new_cell_position)
+		is_placeholder_updated = false
+
+	if Input.is_action_just_released("ui_click_bis") and HUDQuadtree.get_item(mouse_position) == null:
+		History.commit()
+
 	if !is_select_mode:
 		if Input.is_action_pressed("ui_left"):
 			CreatorCamera.translate(Vector2(-MapManager.ceil_size, 0))
@@ -105,12 +110,12 @@ func _process(delta: float):
 # @impure
 func update_item_placeholder(mouse_position: Vector2):
 	var position = mouse_position - CreatorCamera.position
-	var placeholder = Drawers[drawer_index].placeholder
-	var pivot: Vector2 = Drawers[drawer_index].get_item_pivot()
-	placeholder.position.x = MapManager.snap_value(position[0]) + pivot.x
-	placeholder.position.y = MapManager.snap_value(position[1]) + pivot.y
-	placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
 	is_placeholder_updated = true
+	#var placeholder = Drawers[drawer_index].placeholder
+	#var pivot: Vector2 = Drawers[drawer_index].get_item_pivot()
+	#placeholder.position.x = MapManager.snap_value(position[0]) + pivot.x
+	#placeholder.position.y = MapManager.snap_value(position[1]) + pivot.y
+	#placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
 
 # @impure
 func set_focus_neighbours():
@@ -168,14 +173,19 @@ func change_select_mode(mode: bool):
 	else:
 		Drawers[drawer_index].grab_focus()
 
-func remove_item(mouse_position: Vector2):
+func is_cell_free(pos: Vector2):
+	for drawer in Drawers:
+		if not drawer.is_cell_free(pos):
+			return false
+	return true
+
+func clear_cell(pos: Vector2):
 	for i in range(0, Drawers.size()):
-		Drawers[i].remove_item(mouse_position)
+		if not Drawers[i].is_cell_free(pos):
+			History.push_step({"type": "clear_cell", "pos": pos, "drawer_index": i}, {"type": "fill_cell", "pos": pos, "drawer_index": i})
 
 func select_drawer(index: int):
 	change_select_mode(true)
-	Drawers[drawer_index].unselect_drawer()
-	Drawers[index].select_drawer()
 	drawer_index = index
 
 func _on_ItemButton_pressed(): select_drawer(0)
@@ -219,11 +229,13 @@ func _on_GoToEndButton_pressed():
 
 func _on_UndoButton_button_down():
 	change_select_mode(true)
-	History.undo()
+	if History.can_undo():
+		History.undo()
 
 func _on_RedoButton_button_down():
 	change_select_mode(true)
-	History.redo()
+	if History.can_redo():
+		History.redo()
 
 func _on_InfoButton_pressed():
 	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
