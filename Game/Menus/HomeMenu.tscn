@@ -131,15 +131,15 @@ outline_size = 1
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="StreamTexture" id=29]
+[sub_resource type="StreamTexture" id=28]
 load_path = "res://.import/BubbleTop.png-246915b377db2920f8737ec5211d3be3.stex"
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=29]
 size = 12
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=30]
 length = 30.0
 loop = true
 step = 30.0
@@ -169,7 +169,7 @@ texture = ExtResource( 8 )
 [node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
 frames = SubResource( 25 )
-frame = 11
+frame = 8
 speed_scale = 5.0
 playing = true
 
@@ -305,7 +305,7 @@ margin_left = -90.0
 margin_top = 56.0
 margin_right = 24.0
 margin_bottom = 176.0
-texture = SubResource( 29 )
+texture = SubResource( 28 )
 patch_margin_left = 24
 patch_margin_top = 10
 patch_margin_right = 10
@@ -319,7 +319,7 @@ margin_left = 10.0
 margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 29 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Hello my lord,
 do you want to
@@ -347,7 +347,7 @@ margin_left = -272.0
 margin_top = 56.0
 margin_right = -158.0
 margin_bottom = 176.0
-texture = SubResource( 29 )
+texture = SubResource( 28 )
 patch_margin_left = 24
 patch_margin_top = 10
 patch_margin_right = 10
@@ -361,7 +361,7 @@ margin_left = 10.0
 margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 29 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Hello my lord,
 do you want to
@@ -404,7 +404,7 @@ motion_scale = Vector2( 0.3, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
 autoplay = "move_clouds"
 playback_speed = 0.5
-anims/move_clouds = SubResource( 31 )
+anims/move_clouds = SubResource( 30 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 motion_scale = Vector2( 0.7, 1 )

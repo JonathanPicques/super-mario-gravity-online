@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game/Menus/Textures/ButtonFocused.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Textures/Button.png" type="Texture" id=4]
-[ext_resource path="res://Game/Effects/Materials/WaveScreenMaterial.tres" type="Material" id=5]
 
 [node name="GameMode" type="Control"]
 anchor_right = 1.0
@@ -28,7 +27,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer1" type="ViewportContainer" parent="GridContainer/Control1"]
-material = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -56,7 +54,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer2" type="ViewportContainer" parent="GridContainer/Control2"]
-material = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 0.857361
@@ -86,7 +83,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer3" type="ViewportContainer" parent="GridContainer/Control3"]
-material = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -114,7 +110,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer4" type="ViewportContainer" parent="GridContainer/Control4"]
-material = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
