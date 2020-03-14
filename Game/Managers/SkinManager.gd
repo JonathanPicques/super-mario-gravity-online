@@ -1,6 +1,15 @@
 extends Node
 class_name SkinManagerNode
 
+enum BlockColor {
+	amber,
+	amethyst,
+	diamond,
+	emerald,
+	quartz,
+	ruby
+}
+
 enum SkinColor {
 	aqua,
 	blue,
