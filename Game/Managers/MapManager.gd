@@ -17,6 +17,13 @@ const item_scenes := {
 	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn")
 }
 
+#const tilesets_ids := {
+#	"Wall":  15,
+#	"Sticky": 8,
+#	"Oneway":  9,
+#	"Water": 16
+#}
+
 # @pure
 func snap_value(value: int) -> int:
 	return int(round((value - ceil_size / 2) / ceil_size) * ceil_size)
@@ -32,8 +39,18 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 	map_node.FlagEnd.position.y = map_data["flag_end"]["position"][1]
 	map_node.FlagStart.position.x = map_data["flag_start"]["position"][0]
 	map_node.FlagStart.position.y = map_data["flag_start"]["position"][1]
+	# TODO: handle oneway (use its own tilemap?)
 	for tile in map_data["map"]:
-		pass
-		# map_node.Map.set_cell(tile[0], tile[1])
+		map_node.Map.set_cell(tile[0], tile[1], 15)
+		map_node.Map.update_bitmask_area(Vector2(tile[0], tile[1]))
+	for tile in map_data["sticky"]:
+		map_node.Sticky.set_cell(tile[0], tile[1], 8)
+		map_node.Sticky.update_bitmask_area(Vector2(tile[0], tile[1]))
+	for tile in map_data["water"]:
+		map_node.Water.set_cell(tile[0], tile[1], 16)
+		map_node.Water.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for item_data in map_data["item_slot"]:
-		MapManager.create_item(item_data["type"]).load_map_data(item_data)
+		var item = MapManager.create_item(item_data["type"])
+		item.load_map_data(item_data)
+		print("item created! ", item)
+		map_node.ObjectSlot.add_child(item)

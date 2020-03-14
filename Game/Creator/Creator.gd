@@ -26,7 +26,7 @@ func _ready():
 # @impure
 func init():
 	# load map
-	yield(load_map(""), "completed")
+	yield(load_map("test_map"), "completed")
 	# remove popup
 	$Popup.queue_free()
 	remove_child($Popup)
@@ -249,7 +249,7 @@ func _on_CloseButton_button_up():
 	$GUILayer/GUI/SettingsPopup.visible = false
 
 func _on_SaveButton_button_up():
-	print('save')
+	map_node.save_map("test_map", "Blablabla..", "garden")
 
 func _on_HomeButton_button_up():
 	Game.goto_home_menu_scene()

@@ -14,6 +14,37 @@ onready var ParallaxSlot: Node2D = $ParallaxSlot
 
 var killY := 3000.0
 
+func get_tilemap_data(tilemap_node):
+	var tilemap = []
+	for tile in tilemap_node.get_used_cells():
+		tilemap.append([tile[0], tile[1]])
+	return tilemap
+
+func get_map_data(name, description, theme) -> Dictionary:
+	var items = []
+	for item in $ObjectSlot.get_children():
+		items.append(item.get_map_data())
+
+	return {
+		"name": name,
+		"description": description,
+		"theme": theme,
+		"flag_start": $FlagStart.get_map_data(),
+		"flag_end": $FlagEnd.get_map_data(),
+		"item_slot": items,
+		"map": get_tilemap_data($Map),
+		"sticky": get_tilemap_data($Sticky),
+		"decor_back": get_tilemap_data($DecorBack),
+		"decor_front": get_tilemap_data($DecorFront),
+		"water": get_tilemap_data($Water)
+	}
+
+func save_map(name, description, theme):
+	var file = File.new()
+	file.open("res://Maps/" + name + ".json", File.WRITE)
+	file.store_line(to_json(get_map_data(name, description, theme)))
+	file.close()
+
 # _ready fills the empty map cells with navigable tiles.
 # @impure
 func _ready():

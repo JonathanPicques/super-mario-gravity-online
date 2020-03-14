@@ -28,7 +28,7 @@ func start():
 
 # load_map loads the given map into the game mode.
 # @impure
-func load_map(map_path: String):
+func load_map(map_name: String):
 	map_node = load("res://Game/Maps/Map.tscn").instance()
 	# add map to game mode tree
 	MapSlot.add_child(map_node)
@@ -36,6 +36,7 @@ func load_map(map_path: String):
 	yield(get_tree(), "idle_frame")
 	# load map data
 	var file := File.new()
+	var map_path = "res://Maps/" + map_name + ".json"
 	var open_result := file.open(map_path, File.READ)
 	if open_result != OK:
 		print("failed to load map %s" % map_path)
