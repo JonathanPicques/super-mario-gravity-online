@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ColorBlockOffAmethyst.png-4e5663b826d563e58fde9561b0767e1a.stex"
+path="res://.import/ColorSwitchOnQuartz.png-e5a1b4942bf83ccce477c3a7f833e832.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/ColorSwitch/Textures/ColorBlockOffAmethyst.png"
-dest_files=[ "res://.import/ColorBlockOffAmethyst.png-4e5663b826d563e58fde9561b0767e1a.stex" ]
+source_file="res://Game/Items/ColorSwitch/Textures/ColorSwitchOnQuartz.png"
+dest_files=[ "res://.import/ColorSwitchOnQuartz.png-e5a1b4942bf83ccce477c3a7f833e832.stex" ]
 
 [params]
 

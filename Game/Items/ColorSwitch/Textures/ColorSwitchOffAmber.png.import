@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ColorSwitchOn.png-259c03d0c0d020df24ce854405f060b8.stex"
+path="res://.import/ColorSwitchOffAmber.png-5014945028a596ad17796400b04764b4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/ColorSwitch/Textures/ColorSwitchOn.png"
-dest_files=[ "res://.import/ColorSwitchOn.png-259c03d0c0d020df24ce854405f060b8.stex" ]
+source_file="res://Game/Items/ColorSwitch/Textures/ColorSwitchOffAmber.png"
+dest_files=[ "res://.import/ColorSwitchOffAmber.png-5014945028a596ad17796400b04764b4.stex" ]
 
 [params]
 

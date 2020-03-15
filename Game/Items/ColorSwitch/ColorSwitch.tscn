@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorSwitchOff.png" type="Texture" id=1]
+[ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorSwitchOffDiamond.png" type="Texture" id=1]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorSwitch.gd" type="Script" id=2]
 [ext_resource path="res://Game/Effects/Materials/SkinMaterial.tres" type="Material" id=4]
 

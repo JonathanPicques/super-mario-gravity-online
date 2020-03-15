@@ -2,9 +2,6 @@ extends Node2D
 
 export(SkinManagerNode.BlockColor) var color: int = SkinManagerNode.BlockColor.amber
 
-const OnTexture := preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOn.png")
-const OffTexture := preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOff.png")
-
 const OnTextures := [
 	preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnAmber.png"),
 	preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnAmethyst.png"),
@@ -30,7 +27,6 @@ func _ready():
 	if Game.game_mode_node:
 		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
 	ItemSprite.texture = OffTextures[color]
-#	SkinManager.replace_skin(ItemSprite, color)
 	$StaticBody2D.collision_layer &= ~Game.COLLISION_LAYER_SOLID
 
 # @impure
