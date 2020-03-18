@@ -31,7 +31,7 @@ shader_param/skin_color1 = Color( 0.156863, 0.52549, 0.0588235, 1 )
 shader_param/skin_color2 = Color( 0.447059, 0.631373, 0.113725, 1 )
 shader_param/skin_color3 = Color( 0.643137, 0.8, 0.258824, 1 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 0.68
 step = 0.04
 tracks/0/type = "value"
@@ -71,7 +71,7 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.42
 step = 0.06
 tracks/0/type = "value"
@@ -111,7 +111,7 @@ tracks/2/keys = {
 "values": [ 6, 8 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "enter_door"
 step = 0.04
 tracks/0/type = "value"
@@ -151,7 +151,7 @@ tracks/2/keys = {
 "values": [ 25 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "exit_door"
 step = 0.04
 tracks/0/type = "value"
@@ -191,7 +191,7 @@ tracks/2/keys = {
 "values": [ 25 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.32
 loop = true
 step = 0.04
@@ -232,7 +232,7 @@ tracks/2/keys = {
 "values": [ 8 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -272,7 +272,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 0.08
 step = 0.04
 tracks/0/type = "value"
@@ -312,7 +312,7 @@ tracks/2/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 0.2
 loop = true
 step = 0.04
@@ -353,7 +353,7 @@ tracks/2/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -393,7 +393,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 length = 0.99
 step = 0.03
 tracks/0/type = "value"
@@ -433,7 +433,7 @@ tracks/2/keys = {
 "values": [ 33 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 length = 0.48
 loop = true
 step = 0.04
@@ -491,7 +491,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=13]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -531,7 +531,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 length = 0.8
 loop = true
 step = 0.04
@@ -572,7 +572,7 @@ tracks/2/keys = {
 "values": [ 20 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -612,7 +612,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=16]
 length = 0.84
 loop = true
 step = 0.04
@@ -653,7 +653,7 @@ tracks/2/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=17]
 length = 0.16
 loop = true
 step = 0.04
@@ -694,7 +694,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=18]
 length = 0.08
 step = 0.04
 tracks/0/type = "value"
@@ -739,49 +739,51 @@ script = ExtResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 material = SubResource( 1 )
-texture = ExtResource( 19 )
+texture = ExtResource( 4 )
 centered = true
-hframes = 17
-frame = 16
+hframes = 21
 
-[node name="InvincibilityEffect" parent="." index="2"]
-frame = 10
+[node name="BubbleSpawn" parent="Sprite" index="1"]
+position = Vector2( 10, 1 )
 
-[node name="Dialog" parent="." index="3"]
+[node name="Dialog" parent="." index="2"]
 visible = false
 
-[node name="Area2D" parent="." index="5"]
+[node name="Area2D" parent="." index="4"]
 visible = false
 
-[node name="CollisionBody" parent="." index="10"]
+[node name="CollisionBody" parent="." index="8"]
 visible = false
 
-[node name="CeilingChecker" parent="." index="12"]
+[node name="CeilingChecker" parent="." index="10"]
 visible = false
 
-[node name="LeftFootChecker" parent="." index="13"]
+[node name="LeftFootChecker" parent="." index="11"]
 visible = false
 
-[node name="RightFootChecker" parent="." index="14"]
+[node name="RightFootChecker" parent="." index="12"]
 visible = false
 
-[node name="AnimationPlayer" parent="." index="15"]
+[node name="InvincibilityEffect" parent="." index="13"]
+frame = 9
+
+[node name="AnimationPlayer" parent="." index="17"]
 autoplay = "stand"
 playback_speed = 0.8
-anims/death = SubResource( 3 )
-anims/double_jump = SubResource( 4 )
-anims/enter_door = SubResource( 5 )
-anims/exit_door = SubResource( 6 )
-anims/fall = SubResource( 7 )
-anims/fall_to_stand = SubResource( 8 )
-anims/floor_turn = SubResource( 9 )
-anims/jump = SubResource( 10 )
-anims/jump_to_fall = SubResource( 11 )
-anims/respawn = SubResource( 12 )
-anims/run = SubResource( 13 )
-anims/run_to_stand = SubResource( 14 )
-anims/stand = SubResource( 15 )
-anims/stand_to_run = SubResource( 16 )
-anims/swim = SubResource( 17 )
-anims/wallslide = SubResource( 18 )
-anims/wallslide_to_walljump = SubResource( 19 )
+anims/death = SubResource( 2 )
+anims/double_jump = SubResource( 3 )
+anims/enter_door = SubResource( 4 )
+anims/exit_door = SubResource( 5 )
+anims/fall = SubResource( 6 )
+anims/fall_to_stand = SubResource( 7 )
+anims/floor_turn = SubResource( 8 )
+anims/jump = SubResource( 9 )
+anims/jump_to_fall = SubResource( 10 )
+anims/respawn = SubResource( 11 )
+anims/run = SubResource( 12 )
+anims/run_to_stand = SubResource( 13 )
+anims/stand = SubResource( 14 )
+anims/stand_to_run = SubResource( 15 )
+anims/swim = SubResource( 16 )
+anims/wallslide = SubResource( 17 )
+anims/wallslide_to_walljump = SubResource( 18 )

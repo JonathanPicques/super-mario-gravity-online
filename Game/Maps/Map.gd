@@ -2,8 +2,8 @@ extends Navigation2D
 class_name MapNode
 
 onready var Map: TileMap = $Map
-onready var Water: TileMap = $Map
-onready var Sticky: TileMap = $Map
+onready var Water: TileMap = $Water
+onready var Sticky: TileMap = $Sticky
 
 onready var FlagEnd: Node2D = $FlagEnd
 onready var FlagStart: Node2D = $FlagStart

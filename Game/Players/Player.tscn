@@ -23,6 +23,12 @@
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Invincibility.png" type="Texture" id=21]
 [ext_resource path="res://Game/Players/States/exit_door_fade.gd" type="Script" id=22]
 
+[sub_resource type="RectangleShape2D" id=22]
+extents = Vector2( 9, 10 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 7, 10 )
+
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
@@ -123,12 +129,6 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 9, 10 )
-
-[sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 7, 10 )
-
 [node name="Player" type="KinematicBody2D" groups=[
 "PlayerNode",
 ]]
@@ -148,14 +148,8 @@ centered = false
 [node name="PowerSpawn" type="Node2D" parent="Sprite"]
 position = Vector2( 16, -2 )
 
-[node name="InvincibilityEffect" type="AnimatedSprite" parent="."]
-visible = false
-material = SubResource( 2 )
-position = Vector2( -2, -16 )
-frames = SubResource( 21 )
-frame = 14
-speed_scale = 5.0
-playing = true
+[node name="BubbleSpawn" type="Node2D" parent="Sprite"]
+position = Vector2( 2, 16 )
 
 [node name="Dialog" type="Sprite" parent="."]
 position = Vector2( 0, -40 )
@@ -183,20 +177,6 @@ one_shot = true
 
 [node name="LifetimeTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="SoundEffects" type="Node" parent="."]
-
-[node name="SFX1" type="AudioStreamPlayer" parent="SoundEffects"]
-bus = "SFX"
-
-[node name="SFX2" type="AudioStreamPlayer" parent="SoundEffects"]
-bus = "SFX"
-
-[node name="SFX3" type="AudioStreamPlayer" parent="SoundEffects"]
-bus = "SFX"
-
-[node name="SFX4" type="AudioStreamPlayer" parent="SoundEffects"]
-bus = "SFX"
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
 position = Vector2( -2, -10 )
@@ -226,14 +206,31 @@ enabled = true
 cast_to = Vector2( 0, 5 )
 collision_mask = 129
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-[node name="NetworkDeadReckoning" type="Tween" parent="."]
-repeat = true
-playback/repeat = true
+[node name="InvincibilityEffect" type="AnimatedSprite" parent="."]
+visible = false
+material = SubResource( 2 )
+position = Vector2( -2, -16 )
+frames = SubResource( 21 )
+frame = 16
+speed_scale = 5.0
+playing = true
 
 [node name="GroundDust" parent="." instance=ExtResource( 3 )]
 position = Vector2( -2, 0 )
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="SFX1" type="AudioStreamPlayer" parent="SoundEffects"]
+bus = "SFX"
+
+[node name="SFX2" type="AudioStreamPlayer" parent="SoundEffects"]
+bus = "SFX"
+
+[node name="SFX3" type="AudioStreamPlayer" parent="SoundEffects"]
+bus = "SFX"
+
+[node name="SFX4" type="AudioStreamPlayer" parent="SoundEffects"]
+bus = "SFX"
 
 [node name="StateMachine" type="Node2D" parent="."]
 
@@ -245,6 +242,9 @@ script = ExtResource( 6 )
 
 [node name="swim" type="Node" parent="StateMachine"]
 script = ExtResource( 19 )
+
+[node name="Timer" type="Timer" parent="StateMachine/swim"]
+autostart = true
 
 [node name="enter_swim" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )
@@ -290,3 +290,10 @@ script = ExtResource( 16 )
 
 [node name="floor_turn" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="NetworkDeadReckoning" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
+[connection signal="timeout" from="StateMachine/swim/Timer" to="StateMachine/swim" method="on_timer_timeout"]
