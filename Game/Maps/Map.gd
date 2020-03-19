@@ -56,4 +56,4 @@ func _ready():
 		for y in range (0, rect.size.y):
 			var pos := Vector2(x + rect.position.x, y + rect.position.y)
 			if Map.get_cell(int(pos.x), int(pos.y)) == TileMap.INVALID_CELL:
-				pass # Map.set_cell(int(pos.x), int(pos.y), 5, false, false, false, Vector2(3, 2))
+				Map.set_cell(int(pos.x), int(pos.y), 5, false, false, false, Vector2(3, 2)) # TODO: FIND ANOTHER WAY FOR PERFORMANCE

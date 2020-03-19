@@ -85,11 +85,16 @@ _global_script_classes=[ {
 "path": "res://Game/Players/Player.gd"
 }, {
 "base": "PowerNode",
+"class": "PowerFireballNode",
+"language": "GDScript",
+"path": "res://Game/Powers/PowerFireball.gd"
+}, {
+"base": "PowerNode",
 "class": "PowerInvincibilityNode",
 "language": "GDScript",
 "path": "res://Game/Powers/PowerInvincibility.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "PowerNode",
 "language": "GDScript",
 "path": "res://Game/Powers/Power.gd"
@@ -140,6 +145,7 @@ _global_script_class_icons={
 "MultiplayerManagerNode": "",
 "PlayerCameraNode": "",
 "PlayerNode": "",
+"PowerFireballNode": "",
 "PowerInvincibilityNode": "",
 "PowerNode": "",
 "PowerSpeedNode": "",
