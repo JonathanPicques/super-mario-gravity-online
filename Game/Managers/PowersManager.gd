@@ -3,31 +3,15 @@ class_name PowersManagerNode
 
 onready var Powers := [
 	{
-		"hud": preload("res://Game/Powers/FireballDumbHUD.tscn"),
-		"scene": preload("res://Game/Powers/FireballDumb.tscn"),
+		"scene": preload("res://Game/Powers/PowerWaveDistort.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerWaveDistortHUD.tscn"),
 	},
 	{
-		"hud": preload("res://Game/Powers/WaveDistortHUD.tscn"),
-		"scene": preload("res://Game/Powers/WaveDistort.tscn"),
+		"scene": preload("res://Game/Powers/PowerSpeed.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerSpeedHUD.tscn"),
 	},
 	{
-		"hud": preload("res://Game/Powers/SpeedHUD.tscn"),
-		"scene": preload("res://Game/Powers/Speed.tscn"),
-	},
-	{
-		"hud": preload("res://Game/Powers/FireballAutoHUD.tscn"),
-		"scene": preload("res://Game/Powers/FireballAuto.tscn"),
-	},
-	{
-		"hud": preload("res://Game/Powers/InvincibilityHUD.tscn"),
-		"scene": preload("res://Game/Powers/Invincibility.tscn"),
-	},
-	{
-		"hud": preload("res://Game/Powers/PrinceHUD.tscn"),
-		"scene": preload("res://Game/Powers/Prince.tscn"),
-	},
-	{
-		"hud": preload("res://Game/Powers/FireballGhostHUD.tscn"),
-		"scene": preload("res://Game/Powers/FireballGhost.tscn"),
+		"scene": preload("res://Game/Powers/PowerInvincibility.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerInvincibilityHUD.tscn"),
 	},
 ]

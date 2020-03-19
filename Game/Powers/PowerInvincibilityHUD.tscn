@@ -38,7 +38,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="Invincibility" type="Node2D"]
+[node name="PowerInvincibilityHUD" type="Node2D"]
 
 [node name="ProgressColorRect" type="ColorRect" parent="."]
 margin_right = 32.0
@@ -51,7 +51,7 @@ __meta__ = {
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "shine"
-frame = 6
+frame = 4
 playing = true
 centered = false
 

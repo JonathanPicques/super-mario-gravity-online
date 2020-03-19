@@ -1,5 +1,5 @@
 extends PowerNode
-class_name SpeedPowerNode
+class_name PowerSpeedNode
 
 onready var SpeedTimer: Timer = $Timer
 

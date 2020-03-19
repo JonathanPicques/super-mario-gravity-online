@@ -10,16 +10,16 @@ func _ready():
 	$AnimatedSprite.set_frame(offset)
 	$AnimatedSprite.play("Appear")
 
-func _process(delta):
+func _process(delta: float):
 	if $AnimatedSprite.animation == "Appear" and animation_finished("Appear"):
 		$AnimatedSprite.play("Idle")
 	if visible and $AnimatedSprite.animation == "Disappear" and animation_finished("Disappear"):
 		visible = false
 		RespawnTimer.start()
 
-func _on_Area2D_body_entered(player_node):
+func _on_Area2D_body_entered(player_node: PlayerNode):
 	if not player_node.power_node:
-		player_node.grab_power(4)
+		player_node.grab_power(randi() % PowersManager.Powers.size())
 		$AnimatedSprite.play("Disappear")
 
 func _on_Timer_timeout():
@@ -27,7 +27,7 @@ func _on_Timer_timeout():
 	print("Reappear")
 	$AnimatedSprite.play("Appear")
 
-func animation_finished(name):
+func animation_finished(name: String):
 	return $AnimatedSprite.frame == $AnimatedSprite.get_sprite_frames().get_frame_count(name) - 1
 
 func get_map_data() -> Dictionary:

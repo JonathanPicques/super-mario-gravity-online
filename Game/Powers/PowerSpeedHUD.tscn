@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Powers/Textures/SpeedHUD.png" type="Texture" id=1]
 
-[node name="Speed" type="Node2D"]
+[node name="PowerSpeedHUD" type="Node2D"]
 
 [node name="ProgressColorRect" type="ColorRect" parent="."]
 margin_right = 32.0

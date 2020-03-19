@@ -485,7 +485,7 @@ func is_timer_finished() -> bool:
 func grab_power(power_id: int):
 	# create power (and hud) node
 	power_node = PowersManager.Powers[power_id].scene.instance()
-	power_hud_node = PowersManager.Powers[power_id].hud.instance()
+	power_hud_node = PowersManager.Powers[power_id].hud_scene.instance()
 	# link power to hud/player
 	power_node.power_id = power_id
 	power_node.player_node = self

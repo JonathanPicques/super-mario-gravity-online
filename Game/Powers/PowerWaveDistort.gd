@@ -1,5 +1,5 @@
 extends PowerNode
-class_name ObjectWaveDistortNode
+class_name PowerWaveDistortNode
 
 onready var PowerTimer: Timer = $Timer
 
@@ -19,5 +19,5 @@ func process_power(delta: float):
 # @impure
 # @override
 func finish_power():
+	# TODO: apply this to other players instead (then, handle network)
 	Game.game_mode_node.apply_split_screen_effect(player_node.player.id, false)
-
