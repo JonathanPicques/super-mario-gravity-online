@@ -17,7 +17,7 @@ func _ready():
 		limit_right = int(tile_map_node_rect.end.x * tile_map_node.cell_size.x)
 		limit_bottom = int(tile_map_node_rect.end.y * tile_map_node.cell_size.y)
 	# connect listeners
-	MultiplayerManager.connect("player_replaced_node", self, "on_player_replaced_node")
+	MultiplayerManager.connect("player_node_replaced", self, "on_player_node_replaced")
 
 # _process is called on every tick to center the camera on the player.
 # @impure
@@ -25,9 +25,9 @@ func _process(delta):
 	if player_node.fsm.current_state_node != player_node.fsm.states.death:
 		position = player_node.position
 
-# on_player_replaced_node is called when a player changes its node (frog to prince, ...)
+# on_player_node_replaced is called when a player changes its node (frog to prince, ...)
 # @signal
 # @impure
-func on_player_replaced_node(player: Dictionary, new_player_node: PlayerNode, old_player_node: PlayerNode):
+func on_player_node_replaced(player: Dictionary, new_player_node: PlayerNode, old_player_node: PlayerNode):
 	if player.id == player_id:
 		player_node = new_player_node

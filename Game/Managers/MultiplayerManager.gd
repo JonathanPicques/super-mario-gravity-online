@@ -18,7 +18,9 @@ signal player_removed(player)
 signal player_set_skin(player, skin_id)
 signal player_set_ready(player, ready)
 signal player_set_peer_id(player, peer_id, local_id)
-signal player_replaced_node(player, new_player_node, old_player_node)
+
+signal player_node_spawned(player, player_node)
+signal player_node_replaced(player, new_player_node, old_player_node)
 
 signal online()
 signal offline()
@@ -271,6 +273,7 @@ func create_player_node(player: Dictionary, player_transformation: int = 0) -> P
 func spawn_player_node(player: Dictionary, player_transformation: int = 0) -> PlayerNode:
 	var player_node := create_player_node(player, player_transformation)
 	Game.map_node.PlayerSlot.add_child(player_node)
+	emit_signal("player_node_spawned", player, player_node)
 	return player_node
 
 # @impure
@@ -289,7 +292,7 @@ func replace_player_node(player: Dictionary, new_player_node: PlayerNode) -> Pla
 	yield(get_tree(), "idle_frame")
 	Game.map_node.PlayerSlot.remove_child(old_player_node)
 	Game.map_node.PlayerSlot.add_child(new_player_node)
-	emit_signal("player_replaced_node", player, new_player_node, old_player_node)
+	emit_signal("player_node_replaced", player, new_player_node, old_player_node)
 	return new_player_node
 
 ##########################
