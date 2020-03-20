@@ -34,7 +34,7 @@ func _process(delta):
 	offset_node.rotate(rotation_delta)
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("PlayerNode"):
+	if body is PlayerNode:
 		body.apply_death(position + ball_node.position)
 	else:
 		current_direction *= -1

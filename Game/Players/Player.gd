@@ -482,6 +482,7 @@ func is_timer_finished() -> bool:
 
 # grab_power is called externally when the player should grab the given power.
 # @impure
+# @async
 func grab_power(power_id: int):
 	# create power (and hud) node
 	power_node = PowersManager.Powers[power_id].scene.instance()
@@ -494,7 +495,8 @@ func grab_power(power_id: int):
 	# emit signal for hud to be attached to the game mode UI
 	emit_signal("grab_power", power_id)
 	# attach power to player
-	get_parent().add_child(power_node)
+	get_parent().call_deferred("add_child", power_node)
+	yield(get_tree(), "idle_frame")
 
 # apply_death is called externally when the player should meet a fatal fate.
 # @impure

@@ -14,11 +14,20 @@ var target_player_node: PlayerNode
 
 # @impure
 func _ready():
-	this.position = Vector2(-1000, -1000)
+	this.position = Vector2(-100000, -100000) # TODO: clean this
 	this.add_collision_exception_with(player_node)
-	# disable collisions if ghost
-	if type == FireballType.follow_ghost:
-		this.set_collision_mask_bit(0, type != FireballType.follow_ghost) # 0 -> Game.PHYSICS_LAYER_SOLID */
+	# set fireball color and disable collisions with map if ghost
+	match type:
+		FireballType.normal:
+			SkinManager.replace_skin(FireballSprite, SkinManager.SkinColor.pink)
+			SkinManager.replace_skin(power_hud_node.get_node("Sprite"), SkinManager.SkinColor.pink)
+		FireballType.follow:
+			SkinManager.replace_skin(FireballSprite, SkinManager.SkinColor.orange)
+			SkinManager.replace_skin(power_hud_node.get_node("Sprite"), SkinManager.SkinColor.orange)
+		FireballType.follow_ghost:
+			this.set_collision_mask_bit(Game.PHYSICS_LAYER_SOLID, false)
+			SkinManager.replace_skin(FireballSprite, SkinManager.SkinColor.blue)
+			SkinManager.replace_skin(power_hud_node.get_node("Sprite"), SkinManager.SkinColor.blue)
 
 # @impure
 # @override
@@ -26,13 +35,10 @@ func start_power():
 	# start timer
 	FireballTimer.start()
 	# detach from player
-	rotation = PI if player_node.direction == -1 else 0
+	rotation = PI if player_node.direction == -1 else 0.0
 	position = player_node.PlayerSprite.get_node("PowerSpawn").global_position
 	get_parent().remove_child(self)
 	Game.map_node.ObjectSlot.add_child(self)
-	# get fireball direction from player direction
-	# apply player skin to fireball
-	SkinManager.replace_skin(FireballSprite, player_node.player.skin_id, true)
 	# find best target (previous player for following fireball, or 1st player for ghost following fireball)
 	var target_player: Dictionary
 	match type:
@@ -48,16 +54,22 @@ func process_power(delta: float):
 	set_hud_progress(FireballTimer.time_left / FireballTimer.wait_time)
 	# move the fireball towards its target (or straight if no target)
 	var velocity := ((target_player_node.position - position).normalized() * SPEED * delta) if is_instance_valid(target_player_node) else Vector2(SPEED * delta * cos(rotation), SPEED * delta * sin(rotation))
-	var collision := this.move_and_collide(Vector2(SPEED * delta * cos(rotation), SPEED * delta * sin(rotation)))
+	var collision := this.move_and_collide(velocity)
+	rotation = velocity.angle()
 	if collision:
 		if collision.collider is PlayerNode:
 			collision.collider.apply_death(global_position)
+			if collision.collider == target_player_node:
+				# TODO: explosion FX
+				return true
 		if type != FireballType.follow_ghost: # if we hit something, destroy the fireball
-			# TODO: play explosion GFX
+			# TODO: explosion FX
 			return true
+	# TODO: fizzle FX
 	return FireballTimer.is_stopped()
 
 # @impure
 # @override
 func finish_power():
+	# TODO: reattach to player to clear warning (revert detach from player) from Player process_powers
 	FireballTimer.stop()
