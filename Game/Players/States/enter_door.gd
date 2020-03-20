@@ -2,7 +2,7 @@ extends FiniteStateMachineStateNode
 
 func start_state():
 	for collider in context.PlayerArea2D.get_overlapping_areas():
-		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_DOOR):
+		if collider.get_collision_layer_bit(Game.PHYSICS_LAYER_DOOR):
 			context.current_door_from = collider.get_parent()
 			context.current_door_to = context.current_door_from.door_to_node
 			if context.current_door_to and context.current_door_from:

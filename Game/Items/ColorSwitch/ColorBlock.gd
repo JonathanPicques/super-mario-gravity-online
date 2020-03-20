@@ -27,16 +27,16 @@ func _ready():
 	if Game.game_mode_node:
 		Game.game_mode_node.connect("item_color_switch_trigger", self, "on_trigger")
 	ItemSprite.texture = OffTextures[color]
-	$StaticBody2D.collision_layer &= ~Game.COLLISION_LAYER_SOLID
+	$StaticBody2D.set_collision_layer_bit(Game.PHYSICS_LAYER_SOLID, false)
 
 # @impure
 func on_trigger(switch_color: int):
 	if switch_color == color:
 		ItemSprite.texture = OnTextures[color]
-		$StaticBody2D.collision_layer |= Game.COLLISION_LAYER_SOLID
+		$StaticBody2D.set_collision_layer_bit(Game.PHYSICS_LAYER_SOLID, true)
 	else:
 		ItemSprite.texture = OffTextures[color]
-		$StaticBody2D.collision_layer &= ~Game.COLLISION_LAYER_SOLID
+		$StaticBody2D.set_collision_layer_bit(Game.PHYSICS_LAYER_SOLID, false)
 
 func get_map_data() -> Dictionary:
 	return {

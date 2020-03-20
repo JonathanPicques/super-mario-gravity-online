@@ -352,7 +352,7 @@ func handle_direction():
 func handle_last_safe_position():
 	if PlayerLeftFootChecker.is_colliding() and PlayerRightFootChecker.is_colliding():
 		for area in PlayerArea2D.get_overlapping_areas():
-			if Game.has_collision_layer_bit(area.collision_layer, Game.COLLISION_LAYER_DAMAGE):
+			if area.get_collision_layer_bit(Game.PHYSICS_LAYER_DAMAGE):
 				return
 		last_safe_position = position
 
@@ -408,7 +408,7 @@ func is_nearly(value1: float, value2: float, epsilon = 0.001) -> bool:
 # @pure
 func is_on_door() -> bool:
 	for collider in PlayerArea2D.get_overlapping_areas():
-		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_DOOR):
+		if collider.get_collision_layer_bit(Game.PHYSICS_LAYER_DOOR):
 			return true
 	return false
 
@@ -417,11 +417,11 @@ func is_on_door() -> bool:
 func is_on_sticky() -> bool:
 	if PlayerLeftFootChecker.is_colliding():
 		var collider = PlayerLeftFootChecker.get_collider()
-		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_STICKY):
+		if collider.get_collision_layer_bit(Game.PHYSICS_LAYER_STICKY):
 			return true
 	if PlayerRightFootChecker.is_colliding():
 		var collider = PlayerRightFootChecker.get_collider()
-		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_STICKY):
+		if collider.get_collision_layer_bit(Game.PHYSICS_LAYER_STICKY):
 			return true
 	return false
 
@@ -430,7 +430,7 @@ func is_on_sticky() -> bool:
 func is_in_water() -> bool:
 	if PlayerSwimChecker.is_colliding():
 		var collider = PlayerSwimChecker.get_collider()
-		if Game.has_collision_layer_bit(collider.collision_layer, Game.COLLISION_LAYER_WATER):
+		if collider.get_collision_layer_bit(Game.PHYSICS_LAYER_WATER):
 			return true
 	return false
 

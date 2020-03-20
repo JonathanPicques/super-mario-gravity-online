@@ -118,17 +118,15 @@ func screen_transition_finish():
 	yield(GameTween, "tween_all_completed")
 
 ##
-# Collision layers
+# Physics layers
 ##
 
-const COLLISION_LAYER_SOLID := 1 << 0
-const COLLISION_LAYER_PLAYER := 1 << 1
-const COLLISION_LAYER_DOOR := 1 << 3
-const COLLISION_LAYER_DAMAGE := 1 << 6
-const COLLISION_LAYER_STICKY := 1 << 7
-const COLLISION_LAYER_WATER := 1 << 8
-
-# has_collision_layer_bit returns true if collision_layer has the given collision_layer_bit.
-# @pure
-func has_collision_layer_bit(collision_layer: int, collision_layer_bit: int) -> bool:
-	return (collision_layer_bit & collision_layer) == collision_layer_bit
+const PHYSICS_LAYER_SOLID := 0
+const PHYSICS_LAYER_PLAYER := 1
+const PHYSICS_LAYER_ENEMY := 2
+const PHYSICS_LAYER_DOOR := 3
+const PHYSICS_LAYER_POWER := 4
+const PHYSICS_LAYER_OBJECT := 5
+const PHYSICS_LAYER_DAMAGE := 6
+const PHYSICS_LAYER_STICKY := 7
+const PHYSICS_LAYER_WATER := 8

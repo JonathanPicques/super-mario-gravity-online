@@ -18,7 +18,7 @@ func _ready():
 	this.add_collision_exception_with(player_node)
 	# disable collisions if ghost
 	if type == FireballType.follow_ghost:
-		this.set_collision_mask_bit(0, type != FireballType.follow_ghost) # 0 -> Game.COLLISION_LAYER_SOLID */
+		this.set_collision_mask_bit(0, type != FireballType.follow_ghost) # 0 -> Game.PHYSICS_LAYER_SOLID */
 
 # @impure
 # @override
