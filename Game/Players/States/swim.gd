@@ -1,6 +1,7 @@
 extends FiniteStateMachineStateNode
 
 onready var SwimTimer: Timer = $Timer
+onready var WaterTilemap: TileMap = Game.map_node.Water
 
 const BubbleScene := preload("res://Game/Effects/Particles/Bubble.tscn")
 
@@ -22,9 +23,12 @@ func finish_state():
 	SwimTimer.stop()
 
 func on_timer_timeout():
-	# create a bubble sfx
-	var bubble_node := BubbleScene.instance()
-	bubble_node.position = context.PlayerSprite.get_node("BubbleSpawn").global_position
-	Game.map_node.ParticleSlot.add_child(bubble_node)
+	var bubble_spawn: Vector2 = context.PlayerSprite.get_node("BubbleSpawn").global_position
+	var bubble_in_water_pos := WaterTilemap.world_to_map(Vector2(bubble_spawn.x, bubble_spawn.y - 24.0))
+	if WaterTilemap.get_cell(bubble_in_water_pos.x, bubble_in_water_pos.y) != TileMap.INVALID_CELL:
+		# create a bubble sfx if the player is deep enough in the water
+		var bubble_node := BubbleScene.instance()
+		bubble_node.position = context.PlayerSprite.get_node("BubbleSpawn").global_position
+		Game.map_node.ParticleSlot.add_child(bubble_node)
 	# randomize bubble spawn
-	SwimTimer.wait_time = rand_range(0.8, 1.2)
+	SwimTimer.wait_time = rand_range(0.4, 0.6)

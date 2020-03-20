@@ -594,7 +594,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 load_path = "res://.import/GardenTilesetNew.png-018701689c39586714e8d54c04eaf878.stex"
 
 [sub_resource type="ConvexPolygonShape2D" id=195]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+points = PoolVector2Array( 0, 5, 16, 5, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=196]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -904,6 +904,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 3/autotile/z_index_map = [  ]
 3/occluder_offset = Vector2( 0, 0 )
 3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 205 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
 3/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1001,6 +1006,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 4/autotile/z_index_map = [  ]
 4/occluder_offset = Vector2( 0, 0 )
 4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape = SubResource( 218 )
+4/shape_one_way = false
+4/shape_one_way_margin = 1.0
 4/shapes = [ {
 "autotile_coord": Vector2( 3, 0 ),
 "one_way": false,
@@ -1098,6 +1108,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 5/autotile/z_index_map = [  ]
 5/occluder_offset = Vector2( 0, 0 )
 5/navigation_offset = Vector2( 0, 0 )
+5/shape_offset = Vector2( 0, 0 )
+5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+5/shape = SubResource( 232 )
+5/shape_one_way = false
+5/shape_one_way_margin = 1.0
 5/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1201,6 +1216,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 6/autotile/z_index_map = [  ]
 6/occluder_offset = Vector2( 0, 0 )
 6/navigation_offset = Vector2( 0, 0 )
+6/shape_offset = Vector2( 0, 0 )
+6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+6/shape = SubResource( 247 )
+6/shape_one_way = false
+6/shape_one_way_margin = 1.0
 6/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1298,6 +1318,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 7/autotile/z_index_map = [  ]
 7/occluder_offset = Vector2( 0, 0 )
 7/navigation_offset = Vector2( 0, 0 )
+7/shape_offset = Vector2( 0, 0 )
+7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+7/shape = SubResource( 260 )
+7/shape_one_way = false
+7/shape_one_way_margin = 1.0
 7/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1395,6 +1420,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 8/autotile/z_index_map = [  ]
 8/occluder_offset = Vector2( 0, 0 )
 8/navigation_offset = Vector2( 0, 0 )
+8/shape_offset = Vector2( 0, 0 )
+8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+8/shape = SubResource( 273 )
+8/shape_one_way = false
+8/shape_one_way_margin = 1.0
 8/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1492,6 +1522,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 9/autotile/z_index_map = [  ]
 9/occluder_offset = Vector2( 0, 0 )
 9/navigation_offset = Vector2( 0, 0 )
+9/shape_offset = Vector2( 0, 0 )
+9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+9/shape = SubResource( 286 )
+9/shape_one_way = true
+9/shape_one_way_margin = 1.0
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": true,
@@ -1529,6 +1564,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 11/autotile/z_index_map = [  ]
 11/occluder_offset = Vector2( 0, 0 )
 11/navigation_offset = Vector2( 0, 0 )
+11/shape_offset = Vector2( 0, 0 )
+11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+11/shape = SubResource( 1 )
+11/shape_one_way = false
+11/shape_one_way_margin = 1.0
 11/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -1830,6 +1870,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 12/autotile/z_index_map = [  ]
 12/occluder_offset = Vector2( 0, 0 )
 12/navigation_offset = Vector2( 0, 0 )
+12/shape_offset = Vector2( 0, 0 )
+12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+12/shape = SubResource( 49 )
+12/shape_one_way = false
+12/shape_one_way_margin = 1.0
 12/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -2131,6 +2176,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 13/autotile/z_index_map = [  ]
 13/occluder_offset = Vector2( 0, 0 )
 13/navigation_offset = Vector2( 0, 0 )
+13/shape_offset = Vector2( 0, 0 )
+13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+13/shape = SubResource( 96 )
+13/shape_one_way = false
+13/shape_one_way_margin = 1.0
 13/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -2432,6 +2482,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 15/autotile/z_index_map = [  ]
 15/occluder_offset = Vector2( 0, 0 )
 15/navigation_offset = Vector2( 0, 0 )
+15/shape_offset = Vector2( 0, 0 )
+15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+15/shape = SubResource( 144 )
+15/shape_one_way = false
+15/shape_one_way_margin = 1.0
 15/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
@@ -2749,6 +2804,11 @@ load_path = "res://.import/Oneway.png-599a0d1226f9cb11a005a00b53d38170.stex"
 16/autotile/z_index_map = [  ]
 16/occluder_offset = Vector2( 0, 0 )
 16/navigation_offset = Vector2( 0, 0 )
+16/shape_offset = Vector2( 0, 0 )
+16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+16/shape = SubResource( 195 )
+16/shape_one_way = false
+16/shape_one_way_margin = 1.0
 16/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,

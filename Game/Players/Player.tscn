@@ -23,13 +23,13 @@
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Invincibility.png" type="Texture" id=21]
 [ext_resource path="res://Game/Players/States/exit_door_fade.gd" type="Script" id=22]
 
-[sub_resource type="RectangleShape2D" id=22]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 10 )
 
-[sub_resource type="RectangleShape2D" id=23]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7, 10 )
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
 
 uniform sampler2D mask_texture;
@@ -44,86 +44,86 @@ void fragment() {
     COLOR = result;
 }"
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 shader_param/mask_offset = null
 shader_param/mask_flip = null
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 21 )
 region = Rect2( 0, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 21 )
 region = Rect2( 38, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 21 )
 region = Rect2( 76, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 21 )
 region = Rect2( 114, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 21 )
 region = Rect2( 152, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 21 )
 region = Rect2( 190, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 21 )
 region = Rect2( 228, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 21 )
 region = Rect2( 266, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 21 )
 region = Rect2( 304, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 21 )
 region = Rect2( 342, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 21 )
 region = Rect2( 380, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 21 )
 region = Rect2( 418, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 21 )
 region = Rect2( 456, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 21 )
 region = Rect2( 494, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 21 )
 region = Rect2( 532, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 21 )
 region = Rect2( 570, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 21 )
 region = Rect2( 608, 0, 38, 32 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 21 )
 region = Rect2( 646, 0, 38, 32 )
 
-[sub_resource type="SpriteFrames" id=21]
+[sub_resource type="SpriteFrames" id=23]
 animations = [ {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -166,7 +166,7 @@ collision_mask = 124
 
 [node name="CollisionBody" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -2, -10 )
-shape = SubResource( 22 )
+shape = SubResource( 1 )
 
 [node name="EveryTimer" type="Timer" parent="."]
 process_mode = 0
@@ -180,7 +180,7 @@ one_shot = true
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
 position = Vector2( -2, -10 )
-shape = SubResource( 23 )
+shape = SubResource( 2 )
 
 [node name="SwimChecker" type="RayCast2D" parent="."]
 position = Vector2( -13, -10 )
@@ -208,10 +208,10 @@ collision_mask = 129
 
 [node name="InvincibilityEffect" type="AnimatedSprite" parent="."]
 visible = false
-material = SubResource( 2 )
+material = SubResource( 4 )
 position = Vector2( -2, -16 )
-frames = SubResource( 21 )
-frame = 16
+frames = SubResource( 23 )
+frame = 13
 speed_scale = 5.0
 playing = true
 
@@ -244,7 +244,6 @@ script = ExtResource( 6 )
 script = ExtResource( 19 )
 
 [node name="Timer" type="Timer" parent="StateMachine/swim"]
-autostart = true
 
 [node name="enter_swim" type="Node" parent="StateMachine"]
 script = ExtResource( 20 )
