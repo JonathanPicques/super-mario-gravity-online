@@ -16,18 +16,8 @@ var target_player_node: PlayerNode
 func _ready():
 	this.position = Vector2(-100000, -100000) # TODO: clean this
 	this.add_collision_exception_with(player_node)
-	# set fireball color and disable collisions with map if ghost
-	match type:
-		FireballType.normal:
-			SkinManager.replace_skin(FireballSprite, SkinManager.SkinColor.pink)
-			SkinManager.replace_skin(power_hud_node.get_node("Sprite"), SkinManager.SkinColor.pink)
-		FireballType.follow:
-			SkinManager.replace_skin(FireballSprite, SkinManager.SkinColor.orange)
-			SkinManager.replace_skin(power_hud_node.get_node("Sprite"), SkinManager.SkinColor.orange)
-		FireballType.follow_ghost:
-			this.set_collision_mask_bit(Game.PHYSICS_LAYER_SOLID, false)
-			SkinManager.replace_skin(FireballSprite, SkinManager.SkinColor.blue)
-			SkinManager.replace_skin(power_hud_node.get_node("Sprite"), SkinManager.SkinColor.blue)
+	if type == FireballType.follow_ghost:
+		this.set_collision_mask_bit(Game.PHYSICS_LAYER_SOLID, false)
 
 # @impure
 # @override
@@ -41,11 +31,13 @@ func start_power():
 	Game.map_node.ObjectSlot.add_child(self)
 	# find best target (previous player for following fireball, or 1st player for ghost following fireball)
 	var target_player: Dictionary
-	match type:
-		FireballType.follow: target_player = MultiplayerManager.get_closest_player(player_node.player.id)
-		FireballType.follow_ghost: target_player = MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)[0]
-	if target_player and target_player.id != player_node.player.id:
-		target_player_node = MultiplayerManager.get_player_node(target_player.id)
+	
+	if MultiplayerManager.players.size() > 1:
+		match type:
+			FireballType.follow: target_player = MultiplayerManager.get_closest_player(player_node.player.id)
+			FireballType.follow_ghost: target_player = MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)[0]
+		if target_player and target_player.id != player_node.player.id:
+			target_player_node = MultiplayerManager.get_player_node(target_player.id)
 
 # @impure
 # @override
