@@ -1,13 +1,15 @@
 extends PowerNode
 class_name PowerFireballNode
 
-enum FireballType { normal, follow, follow_ghost }
-const SPEED := 120.0
+const FireballExplosionScene := preload("res://Game/Effects/Particles/FireballExplosion.tscn")
+
+enum FireballType { basic, follow, follow_ghost }
+const SPEED := 220.0
 
 onready var FireballTimer: Timer = $Timer
-onready var FireballSprite: Sprite = $Sprite
+onready var FireballSprite: AnimatedSprite = $AnimatedSprite
 
-export(FireballType) var type = FireballType.follow_ghost
+export(FireballType) var type = FireballType.basic
 
 var this: KinematicBody2D = self as Object
 var target_player_node: PlayerNode
@@ -30,9 +32,8 @@ func start_power():
 	get_parent().remove_child(self)
 	Game.map_node.ObjectSlot.add_child(self)
 	# find best target (previous player for following fireball, or 1st player for ghost following fireball)
-	var target_player: Dictionary
-	
 	if MultiplayerManager.players.size() > 1:
+		var target_player
 		match type:
 			FireballType.follow: target_player = MultiplayerManager.get_closest_player(player_node.player.id)
 			FireballType.follow_ghost: target_player = MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)[0]
@@ -52,16 +53,24 @@ func process_power(delta: float):
 		if collision.collider is PlayerNode:
 			collision.collider.apply_death(global_position)
 			if collision.collider == target_player_node:
-				# TODO: explosion FX
+				play_explosion()
 				return true
 		if type != FireballType.follow_ghost: # if we hit something, destroy the fireball
-			# TODO: explosion FX
+			play_explosion()
 			return true
-	# TODO: fizzle FX
-	return FireballTimer.is_stopped()
+	if FireballTimer.is_stopped():
+		play_explosion()
+		return true
+	return false
 
 # @impure
 # @override
 func finish_power():
 	# TODO: reattach to player to clear warning (revert detach from player) from Player process_powers
 	FireballTimer.stop()
+
+# @impure
+func play_explosion():
+	var fireball_explosion_node := FireballExplosionScene.instance()
+	fireball_explosion_node.position = position
+	Game.map_node.ParticleSlot.add_child(fireball_explosion_node)

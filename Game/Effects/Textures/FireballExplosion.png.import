@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FireballFollowGhost.png-4b72bfed98bcdd1d13a9b13ef3695580.stex"
+path="res://.import/FireballExplosion.png-5dc4d0b2d006fcd772b1488a88dc1612.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Powers/Textures/FireballFollowGhost.png"
-dest_files=[ "res://.import/FireballFollowGhost.png-4b72bfed98bcdd1d13a9b13ef3695580.stex" ]
+source_file="res://Game/Effects/Textures/FireballExplosion.png"
+dest_files=[ "res://.import/FireballExplosion.png-5dc4d0b2d006fcd772b1488a88dc1612.stex" ]
 
 [params]
 

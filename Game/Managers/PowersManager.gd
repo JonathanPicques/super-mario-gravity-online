@@ -7,7 +7,7 @@ onready var Powers := [
 		"hud_scene": preload("res://Game/Powers/PowerSpeedHUD.tscn"),
 	},
 	{
-		"scene": preload("res://Game/Powers/PowerFireball.tscn"),
+		"scene": preload("res://Game/Powers/PowerFireballBasic.tscn"),
 		"hud_scene": preload("res://Game/Powers/PowerFireballHUD.tscn"),
 	},
 	{
