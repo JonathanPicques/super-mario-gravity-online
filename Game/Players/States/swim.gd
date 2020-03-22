@@ -28,7 +28,7 @@ func on_timer_timeout():
 	if WaterTilemap.get_cell(bubble_in_water_pos.x, bubble_in_water_pos.y) != TileMap.INVALID_CELL:
 		# create a bubble sfx if the player is deep enough in the water
 		var bubble_node := BubbleScene.instance()
-		bubble_node.position = context.PlayerSprite.get_node("BubbleSpawn").global_position
+		bubble_node.position = context.PlayerBubblePoint.global_position
 		Game.map_node.ParticleSlot.add_child(bubble_node)
 	# randomize bubble spawn
 	SwimTimer.wait_time = rand_range(0.4, 0.6)
