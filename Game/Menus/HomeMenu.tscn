@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
-[ext_resource path="res://Game/Menus/Textures/Castle.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Textures/Blacksmith.png" type="Texture" id=4]
 [ext_resource path="res://Game/Menus/Textures/Settings.png" type="Texture" id=5]
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=6]
@@ -16,130 +15,133 @@
 [ext_resource path="res://Game/Items/PowerBox/PowerBox.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Game/Utilities/AutoCreatePlayers.tscn" type="PackedScene" id=15]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 114, 96 )
+[sub_resource type="StreamTexture" id=1]
+load_path = "res://.import/Castle.png-6fdacdc67507724500fa66276ea9370f.stex"
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 4 )
-region = Rect2( 114, 0, 114, 96 )
+region = Rect2( 0, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 4 )
-region = Rect2( 228, 0, 114, 96 )
+region = Rect2( 114, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 4 )
-region = Rect2( 342, 0, 114, 96 )
+region = Rect2( 228, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 4 )
-region = Rect2( 456, 0, 114, 96 )
+region = Rect2( 342, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 4 )
-region = Rect2( 570, 0, 114, 96 )
+region = Rect2( 456, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 4 )
-region = Rect2( 684, 0, 114, 96 )
+region = Rect2( 570, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 4 )
-region = Rect2( 798, 0, 114, 96 )
+region = Rect2( 684, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 4 )
-region = Rect2( 912, 0, 114, 96 )
+region = Rect2( 798, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 4 )
-region = Rect2( 1026, 0, 114, 96 )
+region = Rect2( 912, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 96, 114, 96 )
+region = Rect2( 1026, 0, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 4 )
-region = Rect2( 114, 96, 114, 96 )
+region = Rect2( 0, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 4 )
-region = Rect2( 228, 96, 114, 96 )
+region = Rect2( 114, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 4 )
-region = Rect2( 342, 96, 114, 96 )
+region = Rect2( 228, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 4 )
-region = Rect2( 456, 96, 114, 96 )
+region = Rect2( 342, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 4 )
-region = Rect2( 570, 96, 114, 96 )
+region = Rect2( 456, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 4 )
-region = Rect2( 684, 96, 114, 96 )
+region = Rect2( 570, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=18]
 atlas = ExtResource( 4 )
-region = Rect2( 798, 96, 114, 96 )
+region = Rect2( 684, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 4 )
-region = Rect2( 912, 96, 114, 96 )
+region = Rect2( 798, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=20]
 atlas = ExtResource( 4 )
-region = Rect2( 1026, 96, 114, 96 )
+region = Rect2( 912, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 4 )
-region = Rect2( 0, 192, 114, 96 )
+region = Rect2( 1026, 96, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=22]
 atlas = ExtResource( 4 )
-region = Rect2( 114, 192, 114, 96 )
+region = Rect2( 0, 192, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=23]
 atlas = ExtResource( 4 )
-region = Rect2( 228, 192, 114, 96 )
+region = Rect2( 114, 192, 114, 96 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 4 )
+region = Rect2( 228, 192, 114, 96 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 4 )
 region = Rect2( 342, 192, 114, 96 )
 
-[sub_resource type="SpriteFrames" id=25]
+[sub_resource type="SpriteFrames" id=26]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=26]
+[sub_resource type="DynamicFont" id=27]
 size = 30
 outline_size = 2
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=27]
+[sub_resource type="DynamicFont" id=28]
 outline_size = 1
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="StreamTexture" id=28]
+[sub_resource type="StreamTexture" id=29]
 load_path = "res://.import/BubbleTop.png-246915b377db2920f8737ec5211d3be3.stex"
 
-[sub_resource type="DynamicFont" id=29]
+[sub_resource type="DynamicFont" id=30]
 size = 12
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=31]
 length = 30.0
 loop = true
 step = 30.0
@@ -164,12 +166,12 @@ tile_data = PoolIntArray( 983046, 13, 196608, 983047, 13, 196610, 1114120, 13, 1
 
 [node name="Castle" type="Sprite" parent="." index="1"]
 position = Vector2( 256, 120 )
-texture = ExtResource( 3 )
+texture = SubResource( 1 )
 
 [node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
-frames = SubResource( 25 )
-frame = 23
+frames = SubResource( 26 )
+frame = 6
 speed_scale = 5.0
 playing = true
 
@@ -200,7 +202,7 @@ margin_left = 128.0
 margin_top = 77.6559
 margin_right = 384.0
 margin_bottom = 108.656
-custom_fonts/font = SubResource( 26 )
+custom_fonts/font = SubResource( 27 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Once upon a frog"
 align = 1
@@ -213,7 +215,7 @@ margin_left = 162.0
 margin_top = 119.0
 margin_right = 354.0
 margin_bottom = 136.0
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 28 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press       /      to join "
 align = 1
@@ -234,7 +236,7 @@ margin_left = -1024.0
 margin_top = 192.0
 margin_right = -896.0
 margin_bottom = 209.0
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 28 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press      to jump"
 align = 1
@@ -256,7 +258,7 @@ margin_left = -800.0
 margin_top = 176.0
 margin_right = -656.0
 margin_bottom = 213.0
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 28 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Also, you can
 Double Jump"
@@ -270,7 +272,7 @@ margin_left = -608.0
 margin_top = 144.0
 margin_right = -496.0
 margin_bottom = 165.0
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 28 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "And Wall Jump !"
 align = 1
@@ -283,7 +285,7 @@ margin_left = -512.0
 margin_top = -32.0
 margin_right = -330.0
 margin_bottom = -15.0
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 28 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press      to use an object!"
 align = 1
@@ -305,7 +307,7 @@ margin_left = -90.0
 margin_top = 56.0
 margin_right = 24.0
 margin_bottom = 176.0
-texture = SubResource( 28 )
+texture = SubResource( 29 )
 patch_margin_left = 24
 patch_margin_top = 10
 patch_margin_right = 10
@@ -319,7 +321,7 @@ margin_left = 10.0
 margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 29 )
+custom_fonts/font = SubResource( 30 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Hello my lord,
 do you want to
@@ -347,7 +349,7 @@ margin_left = -272.0
 margin_top = 56.0
 margin_right = -158.0
 margin_bottom = 176.0
-texture = SubResource( 28 )
+texture = SubResource( 29 )
 patch_margin_left = 24
 patch_margin_top = 10
 patch_margin_right = 10
@@ -361,7 +363,7 @@ margin_left = 10.0
 margin_top = 14.0
 margin_right = 106.0
 margin_bottom = 101.0
-custom_fonts/font = SubResource( 29 )
+custom_fonts/font = SubResource( 30 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 text = "Hello my lord,
 do you want to
@@ -404,7 +406,7 @@ motion_scale = Vector2( 0.3, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
 autoplay = "move_clouds"
 playback_speed = 0.5
-anims/move_clouds = SubResource( 30 )
+anims/move_clouds = SubResource( 31 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 motion_scale = Vector2( 0.7, 1 )
