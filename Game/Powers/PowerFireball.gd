@@ -8,6 +8,7 @@ const SPEED := 220.0
 
 onready var FireballTimer: Timer = $Timer
 onready var FireballSprite: AnimatedSprite = $AnimatedSprite
+onready var FireballExplosionPoint: Node2D = $ExplosionPoint
 
 export(FireballType) var type = FireballType.basic
 
@@ -28,7 +29,7 @@ func start_power():
 	FireballTimer.start()
 	# detach from player
 	rotation = PI if player_node.direction == -1 else 0.0
-	position = player_node.PlayerSprite.get_node("PowerSpawn").global_position
+	position = player_node.PlayerPowerPoint.global_position
 	get_parent().remove_child(self)
 	Game.map_node.ObjectSlot.add_child(self)
 	# find best target (previous player for following fireball, or 1st player for ghost following fireball)
@@ -72,5 +73,5 @@ func finish_power():
 # @impure
 func play_explosion():
 	var fireball_explosion_node := FireballExplosionScene.instance()
-	fireball_explosion_node.position = position
+	fireball_explosion_node.position = FireballExplosionPoint.global_position
 	Game.map_node.ParticleSlot.add_child(fireball_explosion_node)

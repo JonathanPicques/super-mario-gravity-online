@@ -145,10 +145,16 @@ one_shot = true
 position = Vector2( -2, -16 )
 centered = false
 
-[node name="PowerSpawn" type="Node2D" parent="Sprite"]
+[node name="PowerPoint" type="Node2D" parent="Sprite"]
+visible = false
 position = Vector2( 16, -2 )
 
-[node name="BubbleSpawn" type="Node2D" parent="Sprite"]
+[node name="CenterPoint" type="Node2D" parent="Sprite"]
+visible = false
+position = Vector2( 16, -2 )
+
+[node name="BubblePoint" type="Node2D" parent="Sprite"]
+visible = false
 position = Vector2( 2, 16 )
 
 [node name="Dialog" type="Sprite" parent="."]
@@ -211,7 +217,7 @@ visible = false
 material = SubResource( 4 )
 position = Vector2( -2, -16 )
 frames = SubResource( 23 )
-frame = 13
+frame = 9
 speed_scale = 5.0
 playing = true
 

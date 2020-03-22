@@ -23,7 +23,7 @@ func finish_state():
 	SwimTimer.stop()
 
 func on_timer_timeout():
-	var bubble_spawn: Vector2 = context.PlayerSprite.get_node("BubbleSpawn").global_position
+	var bubble_spawn: Vector2 = context.PlayerBubblePoint.global_position
 	var bubble_in_water_pos := WaterTilemap.world_to_map(Vector2(bubble_spawn.x, bubble_spawn.y - 24.0))
 	if WaterTilemap.get_cell(bubble_in_water_pos.x, bubble_in_water_pos.y) != TileMap.INVALID_CELL:
 		# create a bubble sfx if the player is deep enough in the water

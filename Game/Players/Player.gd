@@ -23,6 +23,10 @@ onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2,
 onready var PlayerInvincibilityEffect: AnimatedSprite = $InvincibilityEffect
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
 
+onready var PlayerPowerPoint := $Sprite/PowerPoint
+onready var PlayerCenterPoint := $Sprite/CenterPoint
+onready var PlayerBubblePoint := $Sprite/BubblePoint
+
 onready var BumpSFX: AudioStream
 onready var JumpSFX: AudioStream
 onready var DeathSFX: AudioStream
@@ -46,7 +50,7 @@ const NET_VIEW_INPUT_INDEX := 0
 const NET_VIEW_POSITION_INDEX := 1
 const NET_VIEW_VELOCITY_INDEX := 2
 
-var player = null # player reference.
+var player: Dictionary # player reference.
 
 var input_up := false
 var input_down := false
@@ -491,7 +495,7 @@ func grab_power(power_id: int):
 	power_node.power_id = power_id
 	power_node.player_node = self
 	power_node.power_hud_node = power_hud_node
-	power_node.global_position = $Sprite/PowerSpawn.global_position
+	power_node.global_position = PlayerPowerPoint.global_position
 	# emit signal for hud to be attached to the game mode UI
 	emit_signal("grab_power", power_id)
 	# attach power to player
@@ -547,27 +551,33 @@ func get_sound_effect_player() -> AudioStreamPlayer2D:
 # FX / Animation driven
 ###
 
+# @impure
 func fx_step_01():
 	play_sound_effect(Step_01_SFX)
 	fx_spawn_dust_particles(Vector2(position.x + 5 * direction, position.y))
 
+# @impure
 func fx_step_02():
 	play_sound_effect(Step_02_SFX)
 	fx_spawn_dust_particles(Vector2(position.x - 5 * direction, position.y))
 
+# @impure
 func fx_hit_wall():
 	play_sound_effect(Step_02_SFX)
 	fx_spawn_dust_particles(Vector2(position.x + 7 * direction, position.y - 12))
 
+# @impure
 func fx_hit_ground():
 	play_sound_effect(Step_01_SFX)
 	fx_spawn_dust_particles(Vector2(position.x - 5, position.y))
 	fx_spawn_dust_particles(Vector2(position.x + 5, position.y))
 
+# @impure
 func fx_shake_screen():
 	var camera =  Game.game_mode_node.get_player_screen_camera(player.id)
 	camera.get_node("ScreenShake").start_shake()
 
+# @impure
 func fx_spawn_dust_particles(position: Vector2):
 	var ground_dust_node := GroundDustFX.instance()
 	ground_dust_node.position = position

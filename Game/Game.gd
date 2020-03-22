@@ -21,15 +21,19 @@ var transition_nodes := []
 # @impure
 func _ready():
 	scene_node = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
-	map_node = scene_node
+	# load transition nodes
 	for i in range(1, 22):
 		transition_nodes.append(get_node("TransitionCanvasLayer/TextureRect%d" % i))
+	# if the opened scene is a map
+	if scene_node is MapNode:
+		map_node = scene_node
 
 ##########
 # Scenes #
 ##########
 
 # set_scene sets the current scene and frees the previous one.
+# _scene_node can either be a map, menu or game mode
 # @impure
 func set_scene(_scene_node: Node):
 	if scene_node:

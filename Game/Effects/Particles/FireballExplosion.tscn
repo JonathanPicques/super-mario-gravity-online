@@ -85,7 +85,7 @@ animations = [ {
 [node name="FireballExplosion" type="Node2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -11 )
 frames = SubResource( 1 )
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="queue_free"]
+position = Vector2( 0, -11 )
 [connection signal="ready" from="AnimatedSprite" to="AnimatedSprite" method="play"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="queue_free"]
