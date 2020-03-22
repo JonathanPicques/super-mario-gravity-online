@@ -3,6 +3,13 @@ extends DrawerNode
 export var tileset_type := "Wall"
 
 # @override
+func action(pos: Vector2, drawer_index: int):
+	return {
+		"redo": [{"type": "fill_cell", "position": pos, "drawer_index": drawer_index}],
+		"undo": [{"type": "clear_cell", "position": pos, "drawer_index": drawer_index}]
+	}
+
+# @override
 func fill_cell(pos: Vector2):
 	var ts = creator.tilesets[tileset_type]
 	var cell_position = ts.tilemap.world_to_map(pos)

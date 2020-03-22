@@ -4,6 +4,10 @@ class_name DrawerNode
 onready var creator: CreatorGameModeNode = Game.game_mode_node
 
 # @abstract
+func action(pos: Vector2, drawer_index: int) -> Dictionary:
+	return {"undo": [], "redo": []}
+
+# @abstract
 func fill_cell(pos: Vector2) -> void:
 	pass
 

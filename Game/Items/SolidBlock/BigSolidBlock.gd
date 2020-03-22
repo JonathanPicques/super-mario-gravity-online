@@ -11,4 +11,4 @@ func load_map_data(item_data):
 	position.y = item_data["position"][1]
 
 func quadtree_item_rect():
-	return Rect2(position, $Sprite.get_rect().size)
+	return Rect2(position, Vector2(32, 32))

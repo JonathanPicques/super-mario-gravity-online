@@ -7,17 +7,18 @@ var undos := []
 var redos := []
 var transactions := []
 
-func exec(step):
-	match step.type:
-		"fill_cell": creator.Drawers[step.drawer_index].fill_cell(step.pos)
-		"clear_cell": creator.Drawers[step.drawer_index].clear_cell(step.pos)
+func exec(steps: Array):
+	for step in steps:
+		match step.type:
+			"fill_cell": creator.Drawers[step.drawer_index].fill_cell(step.position)
+			"clear_cell": creator.Drawers[step.drawer_index].clear_cell(step.position)
 
 func start():
 	transactions.append([])
 
-func push_step(redo, undo):
-	exec(redo)
-	transactions[transactions.size() - 1].append({"redo": redo, "undo": undo})
+func push_step(action: Dictionary):
+	exec(action.redo)
+	transactions[transactions.size() - 1].append(action)
 
 func commit():
 	var last_transaction: Array = transactions.pop_back()
@@ -35,6 +36,13 @@ func commit():
 	else:
 		redos.clear()
 		undos.append(command)
+
+func rollback():
+	var last_transaction: Array = transactions.pop_back()
+	if last_transaction.empty():
+		return
+	for step in last_transaction:
+		exec(step.undo)
 
 func undo():
 	assert(transactions.empty())

@@ -16,4 +16,7 @@ func clear_cell(pos: Vector2):
 
 # @override
 func is_cell_free(pos: Vector2):
-	return creator.Quadtree.get_item(pos) == null
+	var item := MapManager.create_item(item_type)
+	var item_rect: Rect2 = item.quadtree_item_rect()
+	item.queue_free()
+	return creator.Quadtree.get_item(Rect2(pos, item_rect.size)) == null

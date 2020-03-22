@@ -2,7 +2,7 @@ extends GameModeNode
 class_name CreatorGameModeNode
 
 onready var Drawers: Array = $GUILayer/GUI/Drawers.get_children()
-onready var TopButtons :=  $GUILayer/GUI/TopBar.get_children()
+onready var TopButtons: Array =  $GUILayer/GUI/TopBar.get_children()
 onready var CreatorCamera: Camera2D = $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
 onready var CurrentItemSlot := $CurrentItemSlot
 
@@ -12,12 +12,11 @@ onready var HUDQuadtree: QuadtreeNode = $HUDQuadtree
 onready var History: HistoryNode = $History
 
 var tilesets := {}
+var is_playing := false
 var drawer_index := 0
 var is_select_mode := true
-var is_playing := false
 var previous_cell_position := Vector2(-1, -1)
 
-var transactions := []
 var is_placeholder_updated := false
 
 func _ready():
@@ -51,9 +50,22 @@ func start():
 	HUDQuadtree.add_item($GUILayer/GUI/ElementsBar) # FIXME not working
 	# set keyboard/gamepad gui navigation
 	set_focus_neighbours()
+	# Start history
+	History.start()
 
 # @impure
 func _process(delta: float):
+	# move camera around
+	if !is_select_mode:
+		if Input.is_action_pressed("ui_left"):
+			CreatorCamera.translate(Vector2(-MapManager.ceil_size, 0))
+		if Input.is_action_pressed("ui_right"):
+			CreatorCamera.translate(Vector2(MapManager.ceil_size, 0))
+		if Input.is_action_pressed("ui_up"):
+			CreatorCamera.translate(Vector2(0, -MapManager.ceil_size))
+		if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
+			CreatorCamera.translate(Vector2(0, MapManager.ceil_size))
+	# quit playing mode
 	if Input.is_action_just_pressed("ui_cancel"):
 		if is_playing == false:
 			change_select_mode(!is_select_mode)
@@ -72,50 +84,17 @@ func _process(delta: float):
 		MapManager.snap_value(mouse_position.y)
 	)
 	
+	if Input.is_action_just_released("ui_click"):
+		History.commit()
+		History.start()
+	
 	if new_cell_position != previous_cell_position:
 		previous_cell_position = new_cell_position
-		update_item_placeholder(mouse_position)
-	
-	if Input.is_action_just_pressed("ui_click") and HUDQuadtree.get_item(mouse_position) == null:
-		History.start()
-	
-	if is_placeholder_updated and Input.is_action_pressed("ui_click") and HUDQuadtree.get_item(mouse_position) == null:
-		if is_cell_free(new_cell_position):
-			History.push_step({"type": "fill_cell", "pos": new_cell_position, "drawer_index": drawer_index}, {"type": "clear_cell", "pos": new_cell_position, "drawer_index": drawer_index})
-			is_placeholder_updated = false
-
-	if Input.is_action_just_released("ui_click") and HUDQuadtree.get_item(mouse_position) == null:
-		History.commit()
-
-	if Input.is_action_just_pressed("ui_click_bis") and HUDQuadtree.get_item(mouse_position) == null:
-		History.start()
-	
-	if is_placeholder_updated and Input.is_action_pressed("ui_click_bis") and HUDQuadtree.get_item(mouse_position) == null:
-		clear_cell(new_cell_position)
-		is_placeholder_updated = false
-
-	if Input.is_action_just_released("ui_click_bis") and HUDQuadtree.get_item(mouse_position) == null:
-		History.commit()
-
-	if !is_select_mode:
-		if Input.is_action_pressed("ui_left"):
-			CreatorCamera.translate(Vector2(-MapManager.ceil_size, 0))
-		if Input.is_action_pressed("ui_right"):
-			CreatorCamera.translate(Vector2(MapManager.ceil_size, 0))
-		if Input.is_action_pressed("ui_up"):
-			CreatorCamera.translate(Vector2(0, -MapManager.ceil_size))
-		if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
-			CreatorCamera.translate(Vector2(0, MapManager.ceil_size))
-
-# @impure
-func update_item_placeholder(mouse_position: Vector2):
-	var position = mouse_position - CreatorCamera.position
-	is_placeholder_updated = true
-	#var placeholder = Drawers[drawer_index].placeholder
-	#var pivot: Vector2 = Drawers[drawer_index].get_item_pivot()
-	#placeholder.position.x = MapManager.snap_value(position[0]) + pivot.x
-	#placeholder.position.y = MapManager.snap_value(position[1]) + pivot.y
-	#placeholder.visible = HUDQuadtree.get_item(position) == null and Quadtree.get_item(position) == null
+		if not Input.is_action_pressed("ui_click"):
+			History.rollback()
+			History.start()
+		if Drawers[drawer_index].is_cell_free(new_cell_position):
+			History.push_step(Drawers[drawer_index].action(new_cell_position, drawer_index))
 
 # @impure
 func set_focus_neighbours():
@@ -182,24 +161,12 @@ func is_cell_free(pos: Vector2):
 func clear_cell(pos: Vector2):
 	for i in range(0, Drawers.size()):
 		if not Drawers[i].is_cell_free(pos):
-			History.push_step({"type": "clear_cell", "pos": pos, "drawer_index": i}, {"type": "fill_cell", "pos": pos, "drawer_index": i})
+			var action: Dictionary = Drawers[i].action(pos, i)
+			History.push_step({"undo": action.redo, "redo": action.undo})
 
 func select_drawer(index: int):
 	change_select_mode(true)
 	drawer_index = index
-
-func _on_ItemButton_pressed(): select_drawer(0)
-func _on_ItemButton2_pressed(): select_drawer(1)
-func _on_ItemButton3_pressed(): select_drawer(2)
-func _on_ItemButton4_pressed(): select_drawer(3)
-func _on_ItemButton5_pressed(): select_drawer(4)
-func _on_ItemButton6_pressed(): select_drawer(5)
-func _on_ItemButton7_pressed(): select_drawer(6)
-func _on_ItemButton8_pressed(): select_drawer(7)
-func _on_ItemButton9_pressed(): select_drawer(8)
-func _on_ItemButton10_pressed(): select_drawer(9)
-func _on_ItemButton11_pressed(): select_drawer(10)
-func _on_ItemButton12_pressed(): select_drawer(11)
 
 func _on_PlayButton_pressed():
 	$GUILayer/GUI.visible = false
@@ -229,13 +196,17 @@ func _on_GoToEndButton_pressed():
 
 func _on_UndoButton_button_down():
 	change_select_mode(true)
+	History.rollback()
 	if History.can_undo():
 		History.undo()
+	History.start()
 
 func _on_RedoButton_button_down():
 	change_select_mode(true)
+	History.rollback()
 	if History.can_redo():
 		History.redo()
+	History.start()
 
 func _on_InfoButton_pressed():
 	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
@@ -253,3 +224,16 @@ func _on_SaveButton_button_up():
 
 func _on_HomeButton_button_up():
 	Game.goto_home_menu_scene()
+
+func _on_ItemButton_pressed(): select_drawer(0)
+func _on_ItemButton2_pressed(): select_drawer(1)
+func _on_ItemButton3_pressed(): select_drawer(2)
+func _on_ItemButton4_pressed(): select_drawer(3)
+func _on_ItemButton5_pressed(): select_drawer(4)
+func _on_ItemButton6_pressed(): select_drawer(5)
+func _on_ItemButton7_pressed(): select_drawer(6)
+func _on_ItemButton8_pressed(): select_drawer(7)
+func _on_ItemButton9_pressed(): select_drawer(8)
+func _on_ItemButton10_pressed(): select_drawer(9)
+func _on_ItemButton11_pressed(): select_drawer(10)
+func _on_ItemButton12_pressed(): select_drawer(11)
