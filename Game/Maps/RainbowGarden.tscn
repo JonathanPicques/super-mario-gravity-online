@@ -300,3 +300,12 @@ motion_scale = Vector2( 0.6, 1 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 motion_scale = Vector2( 0.8, 1 )
+
+[node name="Spike" parent="." index="12" instance=ExtResource( 2 )]
+position = Vector2( 224, 224 )
+
+[node name="Spike2" parent="." index="13" instance=ExtResource( 2 )]
+position = Vector2( 240, 224 )
+
+[node name="Spike3" parent="." index="14" instance=ExtResource( 2 )]
+position = Vector2( 256, 224 )
