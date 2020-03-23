@@ -44,6 +44,8 @@ position = Vector2( 70, 240 )
 
 [node name="DoorSlot" type="Node2D" parent="."]
 
+[node name="DecorSlot" type="Node2D" parent="."]
+
 [node name="PlayerSlot" type="Node2D" parent="."]
 
 [node name="ObjectSlot" type="Node2D" parent="."]
