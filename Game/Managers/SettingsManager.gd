@@ -11,7 +11,8 @@ var values := {
 }
 var config_file := ConfigFile.new()
 
-var DB_FOR_VALUE = [-80, -45, -35, -25, -15, 0] # converts volume into decibels
+var DB_SFX_FOR_VALUE = [-80, -35, -25, -15, -5, 0] # converts volume into decibels
+var DB_MUSIC_FOR_VALUE = [-85, -50, -40, -30, -20, -10] # converts volume into decibels
 
 # @impure
 func _ready():
@@ -35,5 +36,5 @@ func save_settings():
 	config_file.save(SAVE_PATH)
 
 func apply_settings():
-	AudioServer.set_bus_volume_db(1, DB_FOR_VALUE[values["music"]])
-	AudioServer.set_bus_volume_db(2, DB_FOR_VALUE[values["sfx"]])
+	AudioServer.set_bus_volume_db(2, DB_SFX_FOR_VALUE[values["sfx"]])
+	AudioServer.set_bus_volume_db(1, DB_MUSIC_FOR_VALUE[values["music"]])

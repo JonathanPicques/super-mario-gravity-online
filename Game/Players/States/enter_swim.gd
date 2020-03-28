@@ -2,6 +2,7 @@ extends FiniteStateMachineStateNode
 
 func start_state():
 	context.set_animation("swim")
+	context.fx_enter_water()
 	context.PlayerSprite.z_index = -1
 	context.jumps_remaining = context.MAX_JUMPS
 	$Tween.stop_all()

@@ -33,6 +33,8 @@ onready var DeathSFX: AudioStream
 onready var WalljumpSFX: AudioStream
 onready var Step_01_SFX: AudioStream
 onready var Step_02_SFX: AudioStream
+onready var Enterwater_SFX: AudioStream
+onready var Underwater_SFX: AudioStream
 
 onready var fsm := FiniteStateMachine.new(self, $StateMachine, $StateMachine/stand)
 
@@ -531,6 +533,13 @@ func play_sound_effect(stream: AudioStream):
 		sound_effect_player.stream = stream
 		sound_effect_player.play()
 
+# stop_sound_effect stops the given sound effect.
+# @impure
+func stop_sound_effect(stream: AudioStream):
+	for sound_effect_player in PlayerSoundEffectPlayers:
+		if sound_effect_player.stream == stream and sound_effect_player.is_playing():
+			sound_effect_player.stop()
+
 # is_sound_effect_playing returns true if the given stream is playing.
 # @pure
 func is_sound_effect_playing(stream: AudioStream) -> bool:
@@ -571,6 +580,16 @@ func fx_hit_ground():
 	play_sound_effect(Step_01_SFX)
 	fx_spawn_dust_particles(Vector2(position.x - 5, position.y))
 	fx_spawn_dust_particles(Vector2(position.x + 5, position.y))
+
+# @impure
+func fx_enter_water(on = true):
+	play_sound_effect(Enterwater_SFX)
+
+# @impure
+func fx_under_water(on = true):
+	match on:
+		true: play_sound_effect(Underwater_SFX)
+		false: stop_sound_effect(Underwater_SFX)
 
 # @impure
 func fx_shake_screen():

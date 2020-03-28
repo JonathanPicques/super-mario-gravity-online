@@ -8,3 +8,5 @@ func _ready():
 	WalljumpSFX = preload("res://Game/Players/Classes/Frog/Sounds/jump.ogg")
 	Step_01_SFX = preload("res://Game/Players/Classes/Frog/Sounds/step_01.ogg")
 	Step_02_SFX = preload("res://Game/Players/Classes/Frog/Sounds/step_02.ogg")
+	Enterwater_SFX = preload("res://Game/Players/Classes/Frog/Sounds/enter_water.ogg")
+	Underwater_SFX = preload("res://Game/Players/Classes/Frog/Sounds/under_water.ogg")

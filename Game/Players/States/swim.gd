@@ -7,6 +7,7 @@ const BubbleScene := preload("res://Game/Effects/Particles/Bubble.tscn")
 
 func start_state():
 	context.set_animation("swim")
+	context.fx_under_water(true)
 	context.PlayerSprite.z_index = -1
 	SwimTimer.start()
 
@@ -19,8 +20,10 @@ func process_state(delta: float):
 		return fsm.states.jump
 
 func finish_state():
-	context.PlayerSprite.z_index = 0
 	SwimTimer.stop()
+	context.PlayerSprite.z_index = 0
+	context.fx_enter_water()
+	context.fx_under_water(false)
 
 func on_timer_timeout():
 	var bubble_spawn: Vector2 = context.PlayerBubblePoint.global_position

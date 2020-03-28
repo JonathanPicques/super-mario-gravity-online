@@ -171,7 +171,7 @@ texture = SubResource( 1 )
 [node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
 frames = SubResource( 26 )
-frame = 14
+frame = 19
 speed_scale = 5.0
 playing = true
 
@@ -386,6 +386,8 @@ visible = false
 position = Vector2( 68, 80 )
 texture = ExtResource( 12 )
 
+[node name="AutoCreatePlayers" parent="." index="12" instance=ExtResource( 15 )]
+
 [node name="PowerBox" parent="ObjectSlot" index="0" instance=ExtResource( 14 )]
 position = Vector2( -448, 48 )
 
@@ -397,8 +399,6 @@ position = Vector2( -448, 16 )
 
 [node name="PowerBox4" parent="ObjectSlot" index="3" instance=ExtResource( 14 )]
 position = Vector2( -416, 16 )
-
-[node name="AutoCreatePlayers" parent="." index="12" instance=ExtResource( 15 )]
 
 [node name="Background" parent="ParallaxSlot/ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.3, 1 )
