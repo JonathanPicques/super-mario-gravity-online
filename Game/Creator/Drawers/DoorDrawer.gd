@@ -19,4 +19,4 @@ func is_cell_free(pos: Vector2):
 	var item := MapManager.create_item(item_type)
 	var item_rect: Rect2 = item.quadtree_item_rect()
 	item.queue_free()
-	return creator.Quadtree.get_item(Rect2(pos, item_rect.size)) == null
+	return not creator.Quadtree.has_item(Rect2(pos, item_rect.size))

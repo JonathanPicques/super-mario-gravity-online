@@ -159,12 +159,12 @@ drag_margin_bottom = 0.0
 margin_top = 5.0
 margin_bottom = 5.0
 
-[node name="Quadtree" parent="." index="2" instance=ExtResource( 17 )]
+[node name="History" type="Node" parent="." index="2"]
+script = ExtResource( 18 )
 
-[node name="HUDQuadtree" parent="." index="3" instance=ExtResource( 17 )]
+[node name="Quadtree" parent="." index="3" instance=ExtResource( 17 )]
 
-[node name="GridLayer" type="CanvasLayer" parent="." index="4"]
-layer = -1
+[node name="HUDQuadtree" parent="." index="4" instance=ExtResource( 17 )]
 
 [node name="GUILayer" type="CanvasLayer" parent="." index="5"]
 
@@ -175,7 +175,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="GUILayer/GUI" index="0"]
+[node name="Grid" type="Sprite" parent="GUILayer/GUI" index="0"]
 self_modulate = Color( 0, 0, 0, 0.156863 )
 texture = ExtResource( 19 )
 centered = false
@@ -289,7 +289,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ElementsBar" type="Sprite" parent="GUILayer/GUI" index="2"]
+[node name="DrawersBar" type="Sprite" parent="GUILayer/GUI" index="2"]
 position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
 script = ExtResource( 45 )
@@ -1068,16 +1068,11 @@ texture_focused = ExtResource( 57 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="CurrentItemSlot" type="Node2D" parent="." index="6"]
-
-[node name="History" type="Node" parent="." index="7"]
-script = ExtResource( 18 )
 [connection signal="pressed" from="GUILayer/GUI/TopBar/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToStartButton" to="." method="_on_GoToStartButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]
-[connection signal="button_down" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_button_down"]
-[connection signal="button_down" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_button_down"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton" to="." method="_on_ItemButton_pressed"]
@@ -1092,6 +1087,6 @@ script = ExtResource( 18 )
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton10" to="." method="_on_ItemButton10_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton11" to="." method="_on_ItemButton11_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton12" to="." method="_on_ItemButton12_pressed"]
-[connection signal="button_up" from="GUILayer/GUI/SettingsPopup/CloseButton" to="." method="_on_CloseButton_button_up"]
-[connection signal="button_up" from="GUILayer/GUI/SettingsPopup/SaveButton" to="." method="_on_SaveButton_button_up"]
-[connection signal="button_up" from="GUILayer/GUI/SettingsPopup/HomeButton" to="." method="_on_HomeButton_button_up"]
+[connection signal="pressed" from="GUILayer/GUI/SettingsPopup/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/SettingsPopup/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/SettingsPopup/HomeButton" to="." method="_on_HomeButton_pressed"]

@@ -1,7 +1,7 @@
 extends Node
 class_name MapManagerNode
 
-const ceil_size := 16.0
+const cell_size := 16.0
 
 const item_scenes := {
 	"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
@@ -17,16 +17,9 @@ const item_scenes := {
 	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn")
 }
 
-#const tilesets_ids := {
-#	"Wall":  15,
-#	"Sticky": 8,
-#	"Oneway":  9,
-#	"Water": 16
-#}
-
 # @pure
-func snap_value(value: int) -> int:
-	return int(round((value - ceil_size / 2) / ceil_size) * ceil_size)
+func snap_value(value: float) -> int:
+	return int(round((value - cell_size / 2) / cell_size) * cell_size)
 
 # @impure
 func create_item(item_type: String) -> Node2D:

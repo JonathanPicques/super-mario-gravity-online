@@ -25,4 +25,4 @@ func change_cell(pos: Vector2, variation: int) -> void:
 
 # @abstract
 func is_cell_free(pos: Vector2) -> bool:
-	return false
+	return true

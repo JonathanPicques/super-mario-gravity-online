@@ -1,229 +1,262 @@
 extends GameModeNode
 class_name CreatorGameModeNode
 
-onready var Drawers: Array = $GUILayer/GUI/Drawers.get_children()
-onready var TopButtons: Array =  $GUILayer/GUI/TopBar.get_children()
-onready var CreatorCamera: Camera2D = $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
-onready var CurrentItemSlot := $CurrentItemSlot
+enum State { moving, drawing, playing }
 
+onready var History: HistoryNode = $History
 onready var Quadtree: QuadtreeNode = $Quadtree
 onready var HUDQuadtree: QuadtreeNode = $HUDQuadtree
 
-onready var History: HistoryNode = $History
+onready var Drawers: Array = $GUILayer/GUI/Drawers.get_children()
+onready var TopButtons: Array = $GUILayer/GUI/TopBar.get_children()
+onready var DrawersBar: Sprite = $GUILayer/GUI/DrawersBar
+onready var CreatorCamera: Camera2D = $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
 
-var tilesets := {}
-var is_playing := false
-var drawer_index := 0
-var is_select_mode := true
-var previous_cell_position := Vector2(-1, -1)
+onready var Gui: Control = $GUILayer/GUI
+onready var GuiModeLabel: Control = $GUILayer/GUI/ModeLabel
 
-var is_placeholder_updated := false
+onready var Tilesets := {}
+onready var tilesets := Tilesets # TODO: refactor
 
-func _ready():
-	set_process(false)
+var state: int = State.drawing
+var current_drawer_index := 0
+var current_cell_position := Vector2(0, 0)
 
 # @impure
+func _ready():
+	set_process(false)
+	set_focus_neighbors()
+
+# @impure
+func _process(delta: float):
+	match state:
+		State.moving: 
+			move_map()
+			draw_map()
+		State.drawing:
+			draw_map()
+	if Input.is_action_just_pressed("ui_cancel"):
+		match state:
+			State.moving: set_state(State.drawing)
+			State.drawing: set_state(State.moving)
+			State.playing: set_state(State.drawing)
+
+# @async
+# @impure
+# @override
 func init():
 	# load map
 	yield(load_map("test_map"), "completed")
 	# remove popup
-	$Popup.queue_free()
-	remove_child($Popup)
-	# load tilesets (with hard coded)
-	tilesets = {
-		"Wall": {"tilemap": map_node.Map, "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png")},
-		"Sticky": {"tilemap": map_node.Sticky, "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png")},
-		"Oneway": {"tilemap": map_node.Map, "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")},
-		"Water": {"tilemap": map_node.Water, "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png")}
-	}
+	remove_child(GamePopup)
+	GamePopup.queue_free()
+	GamePopup = null
+	# load tilesets
+	Tilesets["Wall"] = {"tilemap": map_node.Map, "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png")}
+	Tilesets["Water"] = {"tilemap": map_node.Water, "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png")}
+	Tilesets["Oneway"] = {"tilemap": map_node.Map, "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")}
+	Tilesets["Sticky"] = {"tilemap": map_node.Sticky, "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png")}
+	# construct quadtree from existing items
+	for object in map_node.ObjectSlot.get_children():
+		Quadtree.add_node(object)
+	# construct quadtree from existing tiles in tilemaps
+	for tileset in Tilesets.values():
+		var tiles = tileset.tilemap.get_used_cells()
+		for tile in tiles:
+			Quadtree.add_tile(tileset.tilemap.map_to_world(tile))
+	# construct hud quadtree from drawers and top buttons
+	HUDQuadtree.add_node(DrawersBar)
+	for top_button in TopButtons:
+		HUDQuadtree.add_node(top_button)
 
 # @impure
+# @override
 func start():
+	History.start()
 	set_process(true)
 	setup_split_screen()
-	Drawers[0].grab_focus()
-	# construct quadtree from existing items
-	Quadtree.add_items(map_node.ObjectSlot.get_children())
-	# construct hud quadtree
-	for btn in TopButtons:
-		HUDQuadtree.add_item(btn)
-	HUDQuadtree.add_item($GUILayer/GUI/ElementsBar) # FIXME not working
-	# set keyboard/gamepad gui navigation
-	set_focus_neighbours()
-	# Start history
-	History.start()
 
+# set_state changes the creator state between moving/drawing and playing.
 # @impure
-func _process(delta: float):
-	# move camera around
-	if !is_select_mode:
-		if Input.is_action_pressed("ui_left"):
-			CreatorCamera.translate(Vector2(-MapManager.ceil_size, 0))
-		if Input.is_action_pressed("ui_right"):
-			CreatorCamera.translate(Vector2(MapManager.ceil_size, 0))
-		if Input.is_action_pressed("ui_up"):
-			CreatorCamera.translate(Vector2(0, -MapManager.ceil_size))
-		if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
-			CreatorCamera.translate(Vector2(0, MapManager.ceil_size))
-	# quit playing mode
-	if Input.is_action_just_pressed("ui_cancel"):
-		if is_playing == false:
-			change_select_mode(!is_select_mode)
-		else:
-			$GUILayer/GUI.visible = true
+func set_state(new_state: int):
+	# early exit
+	if state == new_state:
+		return
+	# clear previous state
+	match state:
+		State.playing:
+			Gui.visible = true
+			CreatorCamera.current = true
 			remove_player_screen_camera(0)
 			MultiplayerManager.get_player_node(0).queue_free()
 			MultiplayerManager.remove_player(0)
-			is_playing = false
-	if is_playing:
+	# setup new state
+	state = new_state
+	match new_state:
+		State.moving:
+			for drawer in Drawers:
+				drawer.release_focus()
+			for top_button in TopButtons:
+				top_button.release_focus()
+			GuiModeLabel.text = "(ESC) move map"
+		State.drawing:
+			select_drawer(current_drawer_index)
+			GuiModeLabel.text = "(ESC) draw map"
+		State.playing:
+			Gui.visible = false
+			var player := MultiplayerManager.add_player("creator", true, 0)
+			var player_node := MultiplayerManager.spawn_player_node(player)
+			yield(get_tree(), "idle_frame")
+			var player_camera_node := add_player_screen_camera(player.id, player_node)
+			player_node.position = map_node.FlagStart.position
+			player_camera_node.current = true
+
+# select_drawer selects the given drawer and focuses it.
+# @impure
+func select_drawer(drawer_index: int):
+	set_state(State.drawing)
+	Drawers[drawer_index].grab_focus()
+	current_drawer_index = drawer_index
+
+# set_focus_neighbors set the GUI buttons focus neighbors.
+# @impure
+func set_focus_neighbors():
+	var drawer_i := 0
+	var top_button_i := 0
+	# set neighbors for top buttons
+	for top_button_node in TopButtons:
+		if top_button_i == 0:
+			top_button_node.set("focus_neighbour_left", Drawers[Drawers.size() - 1].get_path())
+			top_button_node.set("focus_neighbour_previous", Drawers[Drawers.size() - 1].get_path())
+			top_button_node.set("focus_neighbour_right", TopButtons[top_button_i + 1].get_path())
+			top_button_node.set("focus_neighbour_next", TopButtons[top_button_i + 1].get_path())
+		elif top_button_i == TopButtons.size() - 1:
+			top_button_node.set("focus_neighbour_left", TopButtons[top_button_i - 1].get_path())
+			top_button_node.set("focus_neighbour_previous", TopButtons[top_button_i - 1].get_path())
+			top_button_node.set("focus_neighbour_right", Drawers[0].get_path())
+			top_button_node.set("focus_neighbour_next", Drawers[0].get_path())
+		else:
+			top_button_node.set("focus_neighbour_left", TopButtons[top_button_i - 1].get_path())
+			top_button_node.set("focus_neighbour_previous", TopButtons[top_button_i - 1].get_path())
+			top_button_node.set("focus_neighbour_right", TopButtons[top_button_i + 1].get_path())
+			top_button_node.set("focus_neighbour_next", TopButtons[top_button_i + 1].get_path())
+		top_button_node.set("focus_neighbour_top", top_button_node.get_path())
+		top_button_node.set("focus_neighbour_bottom", Drawers[0].get_path())
+		top_button_i += 1
+	# set neighbors for drawers (bottom bar)
+	for drawer_node in Drawers:
+		if drawer_i == 0:
+			drawer_node.set("focus_neighbour_left", TopButtons[TopButtons.size() - 1].get_path())
+			drawer_node.set("focus_neighbour_previous", TopButtons[TopButtons.size() - 1].get_path())
+			drawer_node.set("focus_neighbour_right", Drawers[drawer_i + 1].get_path())
+			drawer_node.set("focus_neighbour_next", Drawers[drawer_i + 1].get_path())
+		elif drawer_i == Drawers.size() - 1:
+			drawer_node.set("focus_neighbour_left", Drawers[drawer_i - 1].get_path())
+			drawer_node.set("focus_neighbour_previous", Drawers[drawer_i - 1].get_path())
+			drawer_node.set("focus_neighbour_right", TopButtons[0].get_path())
+			drawer_node.set("focus_neighbour_next", TopButtons[0].get_path())
+		else:
+			drawer_node.set("focus_neighbour_left", Drawers[drawer_i - 1].get_path())
+			drawer_node.set("focus_neighbour_previous", Drawers[drawer_i - 1].get_path())
+			drawer_node.set("focus_neighbour_right", Drawers[drawer_i + 1].get_path())
+			drawer_node.set("focus_neighbour_next", Drawers[drawer_i + 1].get_path())
+		drawer_node.set("focus_neighbour_top", TopButtons[0].get_path())
+		drawer_node.set("focus_neighbour_bottom", drawer_node.get_path())
+		drawer_i += 1
+
+# move_map moves the camera with up/down/left/right.
+# @impure
+func move_map():
+	if Input.is_action_pressed("ui_left"):
+		CreatorCamera.translate(Vector2(-MapManager.cell_size, 0))
+	if Input.is_action_pressed("ui_right"):
+		CreatorCamera.translate(Vector2(MapManager.cell_size, 0))
+	if Input.is_action_pressed("ui_up"):
+		CreatorCamera.translate(Vector2(0, -MapManager.cell_size))
+	if Input.is_action_pressed("ui_down") and CreatorCamera.position.y < 32: # toolbar size
+		CreatorCamera.translate(Vector2(0, MapManager.cell_size))
+
+# draw_map draws cells on the mouse.
+# @impure
+func draw_map():
+	# compute mouse position
+	var mouse_pos := get_viewport().get_mouse_position()
+	# early return if the mouse is over the HUD
+	if HUDQuadtree.get_item(Rect2(mouse_pos, Vector2(MapManager.cell_size, MapManager.cell_size))):
 		return
+	# compute cell position (aligned to cell_size grid)
+	var cell_position := Vector2(MapManager.snap_value(mouse_pos.x + CreatorCamera.position.x), MapManager.snap_value(mouse_pos.y + CreatorCamera.position.y))
 	
-	var mouse_position := get_viewport().get_mouse_position() + CreatorCamera.position
-	var new_cell_position := Vector2(
-		MapManager.snap_value(mouse_position.x),
-		MapManager.snap_value(mouse_position.y)
-	)
-	
+	# If mouse left is just released commit placeholder(s)
 	if Input.is_action_just_released("ui_click"):
 		History.commit()
 		History.start()
 	
-	if new_cell_position != previous_cell_position:
-		previous_cell_position = new_cell_position
+	# draw one or multiple placeholders
+	if cell_position != current_cell_position:
+		# if cell changed and mouse left was not pressed, destroy the previous placeholder
 		if not Input.is_action_pressed("ui_click"):
 			History.rollback()
 			History.start()
-		if Drawers[drawer_index].is_cell_free(new_cell_position):
-			History.push_step(Drawers[drawer_index].action(new_cell_position, drawer_index))
+		# if the cell is free, fill it with the drawer as a placeholder
+		if is_cell_free(cell_position) and Drawers[current_drawer_index].is_cell_free(cell_position):
+			History.push_step(Drawers[current_drawer_index].action(cell_position, current_drawer_index))
+	
+	# save the currently drawn cell position
+	current_cell_position = cell_position
 
-# @impure
-func set_focus_neighbours():
-	var i := 0
-	for drawer_node in Drawers:
-		if i == 0:
-			drawer_node.set("focus_neighbour_left", TopButtons[TopButtons.size() - 1].get_path())
-			drawer_node.set("focus_neighbour_previous", TopButtons[TopButtons.size() - 1].get_path())
-			drawer_node.set("focus_neighbour_right", Drawers[i + 1].get_path())
-			drawer_node.set("focus_neighbour_next", Drawers[i + 1].get_path())
-		elif i == Drawers.size() - 1:
-			drawer_node.set("focus_neighbour_left", Drawers[i - 1].get_path())
-			drawer_node.set("focus_neighbour_previous", Drawers[i - 1].get_path())
-			drawer_node.set("focus_neighbour_right", TopButtons[0].get_path())
-			drawer_node.set("focus_neighbour_next", TopButtons[0].get_path())
-		else:
-			drawer_node.set("focus_neighbour_left", Drawers[i - 1].get_path())
-			drawer_node.set("focus_neighbour_previous", Drawers[i - 1].get_path())
-			drawer_node.set("focus_neighbour_right", Drawers[i + 1].get_path())
-			drawer_node.set("focus_neighbour_next", Drawers[i + 1].get_path())
-		drawer_node.set("focus_neighbour_top", TopButtons[0].get_path())
-		drawer_node.set("focus_neighbour_bottom", drawer_node.get_path())
-		i += 1
-	i = 0
-	for top_button_node in TopButtons:
-		if i == 0:
-			top_button_node.set("focus_neighbour_left", Drawers[Drawers.size() - 1].get_path())
-			top_button_node.set("focus_neighbour_previous", Drawers[Drawers.size() - 1].get_path())
-			top_button_node.set("focus_neighbour_right", TopButtons[i + 1].get_path())
-			top_button_node.set("focus_neighbour_next", TopButtons[i + 1].get_path())
-		elif i == TopButtons.size() - 1:
-			top_button_node.set("focus_neighbour_left", TopButtons[i - 1].get_path())
-			top_button_node.set("focus_neighbour_previous", TopButtons[i - 1].get_path())
-			top_button_node.set("focus_neighbour_right", Drawers[0].get_path())
-			top_button_node.set("focus_neighbour_next", Drawers[0].get_path())
-		else:
-			top_button_node.set("focus_neighbour_left", TopButtons[i - 1].get_path())
-			top_button_node.set("focus_neighbour_previous", TopButtons[i - 1].get_path())
-			top_button_node.set("focus_neighbour_right", TopButtons[i + 1].get_path())
-			top_button_node.set("focus_neighbour_next", TopButtons[i + 1].get_path())
-		top_button_node.set("focus_neighbour_top", top_button_node.get_path())
-		top_button_node.set("focus_neighbour_bottom", Drawers[0].get_path())
-		i += 1
+# is_cell_free returns true if the cell is free at the given position.
+# @pure
+func is_cell_free(pos: Vector2) -> bool:
+	return Quadtree.get_item(Rect2(pos, Vector2(MapManager.cell_size, MapManager.cell_size))) == null
 
-func change_select_mode(mode: bool):
-	if mode == is_select_mode:
-		return
-	is_select_mode = mode
-	$GUILayer/GUI/ModeLabel.text = "(ESC) select items" if !is_select_mode else "(ESC) move map"
-	if !is_select_mode:
-		for btn in Drawers:
-			btn.release_focus()
-		for btn in TopButtons:
-			btn.release_focus()
-	else:
-		Drawers[drawer_index].grab_focus()
+# @signal
+func _on_HomeButton_pressed():
+	Game.goto_home_menu_scene()
 
-func is_cell_free(pos: Vector2):
-	for drawer in Drawers:
-		if not drawer.is_cell_free(pos):
-			return false
-	return true
-
-func clear_cell(pos: Vector2):
-	for i in range(0, Drawers.size()):
-		if not Drawers[i].is_cell_free(pos):
-			var action: Dictionary = Drawers[i].action(pos, i)
-			History.push_step({"undo": action.redo, "redo": action.undo})
-
-func select_drawer(index: int):
-	change_select_mode(true)
-	drawer_index = index
-
+# @signal
 func _on_PlayButton_pressed():
-	$GUILayer/GUI.visible = false
-	var player := MultiplayerManager.add_player("creator", true, 0)
-	var player_node := MultiplayerManager.spawn_player_node(player)
-	yield(get_tree(), "idle_frame")
-	var player_camera_node := add_player_screen_camera(player.id, player_node)
-	player_node.position = map_node.FlagStart.position
-	player_camera_node.current = true
-	is_playing = true
+	History.rollback()
+	History.start()
+	set_state(State.playing)
 
+# @signal
+func _on_UndoButton_pressed():
+	set_state(State.drawing)
+	History.rollback()
+	if History.can_undo():
+		History.undo()
+	History.start()
+
+# @signal
+func _on_RedoButton_pressed():
+	set_state(State.drawing)
+	History.rollback()
+	if History.can_redo():
+		History.redo()
+	History.start()
+
+# @signal
 func _on_GoToStartButton_pressed():
-	change_select_mode(true)
+	History.rollback()
+	History.start()
+	set_state(State.drawing)
 	CreatorCamera.position = map_node.FlagStart.position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:
 		CreatorCamera.position.y = 0
 
+# @signal
 func _on_GoToEndButton_pressed():
-	change_select_mode(true)
+	History.rollback()
+	History.start()
+	set_state(State.drawing)
 	CreatorCamera.position = map_node.FlagEnd.position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:
 		CreatorCamera.position.y = 0
-
-func _on_UndoButton_button_down():
-	change_select_mode(true)
-	History.rollback()
-	if History.can_undo():
-		History.undo()
-	History.start()
-
-func _on_RedoButton_button_down():
-	change_select_mode(true)
-	History.rollback()
-	if History.can_redo():
-		History.redo()
-	History.start()
-
-func _on_InfoButton_pressed():
-	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
-	change_select_mode(true)
-
-func _on_SettingsButton_pressed():
-	$GUILayer/GUI/SettingsPopup.visible = true
-	$GUILayer/GUI/SettingsPopup/CloseButton.grab_focus()
-
-func _on_CloseButton_button_up():
-	$GUILayer/GUI/SettingsPopup.visible = false
-
-func _on_SaveButton_button_up():
-	map_node.save_map("test_map", "Blablabla..", "garden")
-
-func _on_HomeButton_button_up():
-	Game.goto_home_menu_scene()
 
 func _on_ItemButton_pressed(): select_drawer(0)
 func _on_ItemButton2_pressed(): select_drawer(1)

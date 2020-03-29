@@ -4,9 +4,10 @@ export var tileset_type := "Water"
 
 # @override
 func action(pos: Vector2, drawer_index: int):
+	var cell_positions := []
 	var redo_fill_cell := []
 	var undo_clear_cells := []
-	var cell_positions := get_filled_cell_positions(pos)
+	fill_area(pos, cell_positions)
 	for cell_position in cell_positions:
 		redo_fill_cell.push_back({"type": "fill_cell", "position": cell_position, "drawer_index": drawer_index})
 		undo_clear_cells.push_back({"type": "clear_cell", "position": cell_position, "drawer_index": drawer_index})
@@ -16,13 +17,15 @@ func action(pos: Vector2, drawer_index: int):
 func fill_cell(pos: Vector2):
 	var ts = creator.tilesets[tileset_type]
 	var cell_position = ts.tilemap.world_to_map(pos)
-	ts.tilemap.set_cell(cell_position.x, cell_position.y, ts.tile, false, false, false, Vector2(0, 0))
+	ts.tilemap.set_cell(cell_position.x, cell_position.y, ts.tile, false, false, false, Vector2(0, 1))
+	ts.tilemap.update_bitmask_area(cell_position)
 
 # @override
 func clear_cell(pos: Vector2):
 	var ts = creator.tilesets[tileset_type]
 	var cell_position = ts.tilemap.world_to_map(pos)
-	ts.tilemap.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL, false, false, false, Vector2(0, 0))
+	ts.tilemap.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
+	ts.tilemap.update_bitmask_area(cell_position)
 
 # @override
 func is_cell_free(pos: Vector2) -> bool:
@@ -31,31 +34,22 @@ func is_cell_free(pos: Vector2) -> bool:
 	return ts.tilemap.get_cellv(cell_position) == TileMap.INVALID_CELL
 
 # @pure
-func get_filled_cell_positions(cell_position: Vector2, count = 200) -> Array:
-	var cells := []
-	
-	# scan left and down to fill all tiles but walls
-	for x in range(cell_position.x, cell_position.x - 20, -1):
-		for y in range(cell_position.y, cell_position.y + 20):
-			if is_cell_free_of_wall(x, y) and is_cell_free_of_water(x, y):
-				cells.push_back(Vector2(x, y))
-			else:
-				y = cell_position.y + 20 # break
-				
-	# scan right and down to fill all tiles but walls
-	for x in range(cell_position.x, cell_position.x + 20):
-		for y in range(cell_position.y, cell_position.y + 20):
-			if is_cell_free_of_wall(x, y) and is_cell_free_of_water(x, y):
-				cells.push_back(Vector2(x, y))
-			else:
-				y = cell_position.y + 20 # break
-	
-	return cells
-
-# @pure
-func is_cell_free_of_wall(x: int, y: int) -> bool:
-	return creator.tilesets.Wall.tilemap.get_cell(x, y) == TileMap.INVALID_CELL
-
-# @pure
-func is_cell_free_of_water(x: int, y: int) -> bool:
-	return creator.tilesets.Water.tilemap.get_cell(x, y) == TileMap.INVALID_CELL
+func fill_area(cell_position: Vector2, cells: Array) -> bool:
+	if cells.size() > 50:
+		cells.clear()
+		return true
+	var pos = creator.tilesets.Wall.tilemap.world_to_map(cell_position)
+	var wall_cell = creator.tilesets.Wall.tilemap.get_cell(pos.x, pos.y)
+	if wall_cell != TileMap.INVALID_CELL:
+		return false
+	for cell in cells:
+		if cell == cell_position:
+			return false
+	cells.push_back(cell_position)
+	if fill_area(Vector2(cell_position.x + 16, cell_position.y), cells):
+		return true
+	if fill_area(Vector2(cell_position.x - 16, cell_position.y), cells):
+		return true
+	if fill_area(Vector2(cell_position.x, cell_position.y + 16), cells):
+		return true
+	return false

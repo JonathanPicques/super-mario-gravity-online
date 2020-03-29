@@ -102,8 +102,9 @@ func setup_split_screen():
 # apply_split_screen_effect toggles the wave distort effect for the given player.
 # @impure
 func apply_split_screen_effect(player_id: int, wave: bool):
-	print("debug apply_split_screen_effect")
-	return
+	if true:
+		print("debug apply_split_screen_effect")
+		return
 	match player_id:
 		0: Viewport1.get_parent().material.set_shader_param("enabled", 1 if wave else 0)
 		1: Viewport2.get_parent().material.set_shader_param("enabled", 1 if wave else 0)

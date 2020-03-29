@@ -12,9 +12,9 @@ func get_map_data() -> Dictionary:
 	}
 
 func load_map_data(item_data):
+	rotation = item_data["rotation"]
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
-	rotation = item_data["rotation"]
 
 func quadtree_item_rect():
-	return Rect2(position, $Sprite.get_rect().size)
+	return Rect2(position, Vector2(16, 16))

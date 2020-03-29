@@ -90,9 +90,8 @@ extents = Vector2( 6.5, 3 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -16 )
 frames = SubResource( 19 )
-frame = 15
+frame = 9
 speed_scale = 4.0
 playing = true
 centered = false
@@ -107,5 +106,5 @@ position = Vector2( 7.5, -3 )
 shape = SubResource( 20 )
 
 [node name="DamageOrigin" type="Node2D" parent="."]
-position = Vector2( 7.5, -3 )
+position = Vector2( 7.5, 10 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
