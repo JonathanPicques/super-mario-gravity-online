@@ -270,3 +270,7 @@ func _on_ItemButton9_pressed(): select_drawer(8)
 func _on_ItemButton10_pressed(): select_drawer(9)
 func _on_ItemButton11_pressed(): select_drawer(10)
 func _on_ItemButton12_pressed(): select_drawer(11)
+
+
+func _on_SettingsButton_pressed():
+	$GUILayer/GUI/SettingsPopup.visible = true
