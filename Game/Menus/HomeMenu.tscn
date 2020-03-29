@@ -171,7 +171,7 @@ texture = SubResource( 1 )
 [node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
 frames = SubResource( 26 )
-frame = 13
+frame = 15
 speed_scale = 5.0
 playing = true
 
