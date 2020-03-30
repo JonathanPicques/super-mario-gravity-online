@@ -9,7 +9,7 @@ func action(pos: Vector2, drawer_index: int):
 	var cell_positions := []
 	var redo_fill_cell := []
 	var undo_clear_cells := []
-	fill_area(pos, cell_positions)
+	fill_area(pos, cell_positions, pos)
 	for cell_position in cell_positions:
 		redo_fill_cell.push_back({"type": "fill_cell", "position": cell_position, "drawer_index": drawer_index})
 		undo_clear_cells.push_back({"type": "clear_cell", "position": cell_position, "drawer_index": drawer_index})
@@ -46,10 +46,12 @@ func is_cell_free(pos: Vector2) -> bool:
 	return ts.tilemap.get_cellv(cell_position) == TileMap.INVALID_CELL
 
 # @pure
-func fill_area(cell_position: Vector2, cells: Array) -> bool:
+func fill_area(cell_position: Vector2, cells: Array, top_position: Vector2) -> bool:
 	if cells.size() >= MAX_WATER_CELLS:
 		cells.clear()
 		return true
+	if cell_position.y < top_position.y:
+		return false
 	var pos = creator.tilesets.Wall.tilemap.world_to_map(cell_position)
 	var wall_cell = creator.tilesets.Wall.tilemap.get_cell(pos.x, pos.y)
 	var water_cell = creator.tilesets.Water.tilemap.get_cell(pos.x, pos.y)
@@ -59,10 +61,12 @@ func fill_area(cell_position: Vector2, cells: Array) -> bool:
 		if cell == cell_position:
 			return false
 	cells.push_back(cell_position)
-	if fill_area(Vector2(cell_position.x + 16, cell_position.y), cells):
+	if fill_area(Vector2(cell_position.x + 16, cell_position.y), cells, top_position):
 		return true
-	if fill_area(Vector2(cell_position.x - 16, cell_position.y), cells):
+	if fill_area(Vector2(cell_position.x - 16, cell_position.y), cells, top_position):
 		return true
-	if fill_area(Vector2(cell_position.x, cell_position.y + 16), cells):
+	if fill_area(Vector2(cell_position.x, cell_position.y + 16), cells, top_position):
+		return true
+	if fill_area(Vector2(cell_position.x, cell_position.y - 16), cells, top_position):
 		return true
 	return false
