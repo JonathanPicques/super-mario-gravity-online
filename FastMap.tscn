@@ -6,11 +6,8 @@
 [node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Map" parent="." index="2"]
-tile_data = PoolIntArray(  )
-
-[node name="FlagEnd" parent="." index="3"]
+[node name="FlagEnd" parent="." index="4"]
 position = Vector2( 16, 80 )
 
-[node name="FlagStart" parent="." index="4"]
+[node name="FlagStart" parent="." index="5"]
 position = Vector2( 64, 80 )

@@ -304,7 +304,7 @@ func create_player_camera(player_id: int, player_node = null) -> PlayerCameraNod
 	var player_camera: PlayerCameraNode = PlayerCamera.instance()
 	player_camera.player_id = player_id
 	player_camera.player_node = player_node if not null else get_player_node(player_id)
-	player_camera.tile_map_node = Game.map_node.Map
+	player_camera.tile_map_node = Game.map_node.Wall
 	return player_camera
 
 ##########

@@ -1,20 +1,27 @@
 extends Node
 class_name QuadtreeNode
 
-enum Types { node, tile }
+enum Types { node, tile, map_item }
 
-var items := [] # either a tile or an object
+var items := [] # collections of nodes, tiles or map_items
 
 # add_node adds a node in the quadtree.
 # the given node must override quadtree_item_rect() -> Rect2
 # @impure
 func add_node(node: Node):
-	items.push_back({type = Types.node, node = node, rect = node.quadtree_item_rect()})
+	items.push_back({type = Types.node, rect = node.quadtree_item_rect(), node = node})
 
 # add_tile adds a tile at the given position in the quadtree.
 # @impure
-func add_tile(pos: Vector2):
+func add_tile(pos: Vector2, tileset: Dictionary):
 	items.push_back({type = Types.tile, rect = Rect2(pos, Vector2(MapManager.cell_size, MapManager.cell_size))})
+
+# add_map_item adds a map item node in the quadtree.
+# the given map item node must override quadtree_item_rect() -> Rect2
+# @impure
+func add_map_item(map_item_node: Node, map_item_type: String):
+	print("add_map_item: ", map_item_node, " of type ", map_item_type, " at ", map_item_node.quadtree_item_rect())
+	items.push_back({type = Types.map_item, rect = map_item_node.quadtree_item_rect(), map_item_node = map_item_node, map_item_type = map_item_type})
 
 # get_item returns an item if found in the given rect, or null otherwise.
 # @pure
@@ -36,6 +43,7 @@ func has_item(rect: Rect2) -> bool:
 
 # @impure
 func erase_item(position: Vector2):
+	print("erase_item at ", position)
 	var item = get_item(Rect2(position, Vector2(16, 16)))
 	if item == null:
 		return null

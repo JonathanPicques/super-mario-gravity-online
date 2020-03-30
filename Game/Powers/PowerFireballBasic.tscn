@@ -92,7 +92,7 @@ one_shot = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -8, 3 )
 frames = SubResource( 17 )
-frame = 13
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

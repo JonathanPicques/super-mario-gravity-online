@@ -4,3 +4,6 @@
 
 [node name="PowerFireballFollow" instance=ExtResource( 1 )]
 type = 1
+
+[node name="AnimatedSprite" parent="." index="2"]
+frame = 8

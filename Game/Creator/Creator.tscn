@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://Game/Creator/Textures/Icons/ColorBlockIcon.png" type="Texture" id=13]
 [ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
-[ext_resource path="res://Game/Creator/Drawers/DoorDrawer.gd" type="Script" id=16]
 [ext_resource path="res://Game/Creator/Quadtree.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Game/Creator/History.gd" type="Script" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
@@ -52,7 +51,6 @@
 [ext_resource path="res://Game/Creator/Textures/RedoFocused.png" type="Texture" id=50]
 [ext_resource path="res://Game/Creator/Textures/InfoFocused.png" type="Texture" id=51]
 [ext_resource path="res://Game/Creator/Textures/SettingsFocused.png" type="Texture" id=52]
-[ext_resource path="res://Game/Creator/Drawers/SpikeballDrawer.gd" type="Script" id=53]
 [ext_resource path="res://Game/Creator/Textures/DeleteButtonFocused.png" type="Texture" id=54]
 [ext_resource path="res://Game/Creator/Textures/OpenButtonFocused.png" type="Texture" id=55]
 [ext_resource path="res://Game/Creator/Textures/SaveButtonFocused.png" type="Texture" id=56]
@@ -400,10 +398,11 @@ margin_right = 98.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
-script = ExtResource( 53 )
+script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+item_type = "SpikeBall"
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton6" index="0"]
 position = Vector2( 11, 11 )
@@ -509,10 +508,11 @@ margin_right = 267.35
 margin_bottom = 18.7
 texture_normal = SubResource( 1 )
 texture_focused = ExtResource( 14 )
-script = ExtResource( 16 )
+script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+item_type = "Door"
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton12" index="0"]
 position = Vector2( 11, 11 )

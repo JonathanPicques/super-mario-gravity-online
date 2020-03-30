@@ -1,8 +1,9 @@
 extends Navigation2D
 class_name MapNode
 
-onready var Map: TileMap = $Map
+onready var Wall: TileMap = $Wall
 onready var Water: TileMap = $Water
+onready var Oneway: TileMap = $Oneway
 onready var Sticky: TileMap = $Sticky
 
 onready var FlagEnd: Node2D = $FlagEnd
@@ -48,12 +49,12 @@ func save_map(name, description, theme):
 # _ready fills the empty map cells with navigable tiles.
 # @impure
 func _ready():
-	var rect := Map.get_used_rect()
+	var rect := Wall.get_used_rect()
 	# compute map kill-Y
-	killY = rect.position.y * Map.cell_size.y + rect.size.y * Map.cell_size.y + 64.0
+	killY = rect.position.y * Wall.cell_size.y + rect.size.y * Wall.cell_size.y + 64.0
 	# fill tilemap with navigable cells.
 	for x in range (0, rect.size.x):
 		for y in range (0, rect.size.y):
 			var pos := Vector2(x + rect.position.x, y + rect.position.y)
-			if Map.get_cell(int(pos.x), int(pos.y)) == TileMap.INVALID_CELL:
+			if Wall.get_cell(int(pos.x), int(pos.y)) == TileMap.INVALID_CELL:
 				pass # Map.set_cell(int(pos.x), int(pos.y), 5, false, false, false, Vector2(3, 2)) # TODO: FIND ANOTHER WAY FOR PERFORMANCE

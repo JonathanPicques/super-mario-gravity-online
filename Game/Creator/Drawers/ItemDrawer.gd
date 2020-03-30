@@ -3,27 +3,43 @@ extends DrawerNode
 export var item_type := "ColorSwitch"
 
 # @override
-func action(pos: Vector2, drawer_index: int):
-	return {
-		"redo": [{"type": "fill_cell", "position": pos, "drawer_index": drawer_index}],
-		"undo": [{"type": "clear_cell", "position": pos, "drawer_index": drawer_index}]
-	}
+func action(type: int, pos: Vector2, drawer_index: int):
+	match type:
+		ActionType.fill:
+			return {
+				"redo": [{"type": "fill_cell", "position": pos, "drawer_index": drawer_index}],
+				"undo": [{"type": "clear_cell", "position": pos, "drawer_index": drawer_index}],
+			}
+		ActionType.clear:
+			return {
+				"redo": [{"type": "clear_cell", "position": pos, "drawer_index": drawer_index}],
+				"undo": [{"type": "fill_cell", "position": pos, "drawer_index": drawer_index}],
+			}
+	return .action(type, pos, drawer_index)
 
 # @override
 func fill_cell(pos: Vector2):
-	var item := MapManager.create_item(item_type)
-	item.position.x = pos.x
-	item.position.y = pos.y
-	creator.Quadtree.add_node(item)
-	creator.map_node.ObjectSlot.add_child(item)
+	var map_item_node := MapManager.create_item_node(item_type)
+	map_item_node.position.x = pos.x
+	map_item_node.position.y = pos.y
+	creator.Quadtree.add_map_item(map_item_node, item_type)
+	creator.map_node.ObjectSlot.add_child(map_item_node)
 
 # @override
 func clear_cell(pos: Vector2):
-	creator.Quadtree.erase_item(pos).node.queue_free()
+	creator.Quadtree.erase_item(pos).map_item_node.queue_free()
 
 # @override
 func is_cell_free(pos: Vector2):
-	var item := MapManager.create_item(item_type)
-	var item_rect: Rect2 = item.quadtree_item_rect()
-	item.queue_free()
-	return not creator.Quadtree.has_item(Rect2(pos, item_rect.size))
+	var map_item_node := MapManager.create_item_node(item_type)
+	var map_item_node_rect: Rect2 = map_item_node.quadtree_item_rect()
+	map_item_node.queue_free()
+	var item = creator.Quadtree.get_item(Rect2(pos, map_item_node_rect.size))
+	return not item or item.type != QuadtreeNode.Types.map_item or item.map_item_type != item_type
+
+# @override
+func can_draw_cell(pos: Vector2) -> bool:
+	var map_item_node := MapManager.create_item_node(item_type)
+	var map_item_node_rect: Rect2 = map_item_node.quadtree_item_rect()
+	map_item_node.queue_free()
+	return not creator.Quadtree.has_item(Rect2(pos, map_item_node_rect.size))

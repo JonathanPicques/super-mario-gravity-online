@@ -51,18 +51,18 @@ func init():
 	GamePopup.queue_free()
 	GamePopup = null
 	# load tilesets
-	Tilesets["Wall"] = {"tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": map_node.Map}
-	Tilesets["Water"] = {"tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": map_node.Water}
-	Tilesets["Oneway"] = {"tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": map_node.Map}
-	Tilesets["Sticky"] = {"tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": map_node.Sticky}
+	Tilesets["Wall"] = {"name": "Wall", "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": map_node.Wall}
+	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": map_node.Water}
+	Tilesets["Oneway"] = {"name": "Oneway", "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": map_node.Oneway}
+	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": map_node.Sticky}
 	# construct quadtree from existing items
-	for object in map_node.ObjectSlot.get_children():
-		Quadtree.add_node(object)
+	for map_item_node in map_node.ObjectSlot.get_children():
+		Quadtree.add_map_item(map_item_node, map_item_node.get_map_data().type)
 	# construct quadtree from existing tiles in tilemaps
 	for tileset in Tilesets.values():
 		var tiles = tileset.tilemap_node.get_used_cells()
 		for tile in tiles:
-			Quadtree.add_tile(tileset.tilemap_node.map_to_world(tile))
+			Quadtree.add_tile(tileset.tilemap_node.map_to_world(tile), tileset)
 	# construct hud quadtree from drawers and top buttons
 	HUDQuadtree.add_node(DrawersBar)
 	for top_button in TopButtons:
@@ -186,20 +186,36 @@ func draw_map():
 	# compute cell position (aligned to cell_size grid)
 	var cell_position := Vector2(MapManager.snap_value(mouse_pos.x + CreatorCamera.position.x), MapManager.snap_value(mouse_pos.y + CreatorCamera.position.y))
 	
-	# If mouse left is just released commit placeholder(s)
+	# If mouse right is just pressed: rollback placeholder(s)
+	if Input.is_action_just_pressed("ui_click_bis"):
+		History.rollback()
+		History.start()
+	# If mouse left is just released: commit placeholder(s)
 	if Input.is_action_just_released("ui_click"):
 		History.commit()
 		History.start()
+	# If mouse right is just released: commit cleared cell(s)
+	if Input.is_action_just_released("ui_click_bis"):
+		History.commit()
+		History.start()
 	
-	# draw one or multiple placeholders
-	if cell_position != current_cell_position:
-		# if cell changed and mouse left was not pressed, destroy the previous placeholder
-		if not Input.is_action_pressed("ui_click"):
-			History.rollback()
-			History.start()
-		# if the cell is free, fill it with the drawer as a placeholder
-		if is_cell_free(cell_position) and Drawers[current_drawer_index].is_cell_free(cell_position):
-			History.push_step(Drawers[current_drawer_index].action(cell_position, current_drawer_index))
+	# remove cells if mouse right is pressed
+	if Input.is_action_pressed("ui_click_bis"):
+		var drawer_index := 0
+		for drawer in Drawers:
+			if not Drawers[drawer_index].is_cell_free(cell_position):
+				History.push_step(Drawers[drawer_index].action(Drawers[drawer_index].ActionType.clear, cell_position, drawer_index))
+			drawer_index += 1
+	
+	if cell_position != current_cell_position or Input.is_action_just_released("ui_click_bis"):
+		if not Input.is_action_pressed("ui_click_bis"):
+			# if cell changed and mouse left was not pressed, destroy the previous placeholder
+			if not Input.is_action_pressed("ui_click"):
+				History.rollback()
+				History.start()
+			# if the cell is free, fill it with the drawer as a placeholder
+			if is_cell_free(cell_position) and Drawers[current_drawer_index].can_draw_cell(cell_position):
+				History.push_step(Drawers[current_drawer_index].action(Drawers[current_drawer_index].ActionType.fill, cell_position, current_drawer_index))
 	
 	# save the currently drawn cell position
 	current_cell_position = cell_position
@@ -207,6 +223,7 @@ func draw_map():
 # is_cell_free returns true if the cell is free at the given position.
 # @pure
 func is_cell_free(pos: Vector2) -> bool:
+	# TODO: water is not in quadtree, nor decors
 	return Quadtree.get_item(Rect2(pos, Vector2(MapManager.cell_size, MapManager.cell_size))) == null
 
 # @signal

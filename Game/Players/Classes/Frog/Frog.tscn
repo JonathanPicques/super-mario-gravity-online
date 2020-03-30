@@ -767,7 +767,7 @@ visible = false
 visible = false
 
 [node name="InvincibilityEffect" parent="." index="13"]
-frame = 16
+frame = 10
 
 [node name="AnimationPlayer" parent="." index="17"]
 autoplay = "stand"

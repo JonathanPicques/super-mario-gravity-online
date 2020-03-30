@@ -31,7 +31,6 @@ shader_param/skin_color2 = Color( 0.447059, 0.631373, 0.113725, 1 )
 shader_param/skin_color3 = Color( 0.643137, 0.8, 0.258824, 1 )
 
 [sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/Hit.png-d6e0c5909fbb2a90220c246595b9ebfb.stex"
 
 [sub_resource type="Animation" id=3]
 length = 0.68
@@ -724,28 +723,28 @@ texture = ExtResource( 5 )
 centered = true
 hframes = 33
 
-[node name="InvincibilityEffect" parent="." index="2"]
-frame = 8
-
-[node name="Dialog" parent="." index="3"]
+[node name="Dialog" parent="." index="2"]
 visible = false
 
-[node name="Area2D" parent="." index="5"]
+[node name="Area2D" parent="." index="4"]
 visible = false
 
-[node name="CollisionBody" parent="." index="10"]
+[node name="CollisionBody" parent="." index="8"]
 visible = false
 
-[node name="CeilingChecker" parent="." index="12"]
+[node name="CeilingChecker" parent="." index="10"]
 visible = false
 
-[node name="LeftFootChecker" parent="." index="13"]
+[node name="LeftFootChecker" parent="." index="11"]
 visible = false
 
-[node name="RightFootChecker" parent="." index="14"]
+[node name="RightFootChecker" parent="." index="12"]
 visible = false
 
-[node name="AnimationPlayer" parent="." index="15"]
+[node name="InvincibilityEffect" parent="." index="13"]
+frame = 5
+
+[node name="AnimationPlayer" parent="." index="17"]
 autoplay = "stand"
 playback_speed = 0.8
 anims/death = SubResource( 3 )
