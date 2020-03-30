@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Princess.png-65b2a631d437d3cb25af89135dda24c7.stex"
+path="res://.import/Princess.png-b0be2bd4d00ccc8d06958375bd5e8015.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/Princess.png"
-dest_files=[ "res://.import/Princess.png-65b2a631d437d3cb25af89135dda24c7.stex" ]
+source_file="res://Game/Menus/NPC/Textures/Princess.png"
+dest_files=[ "res://.import/Princess.png-b0be2bd4d00ccc8d06958375bd5e8015.stex" ]
 
 [params]
 

@@ -7,10 +7,11 @@
 [ext_resource path="res://Game/Maps/Textures/BackgroundSewer.png" type="Texture" id=5]
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Game/Menus/Princess/Princess.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/Menus/NPC/Princess.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Maps/Debug.gd" type="Script" id=9]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=12]
+
 
 [node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 9 )

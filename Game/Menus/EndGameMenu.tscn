@@ -4,11 +4,12 @@
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Game/Menus/EndGameMenu.gd" type="Script" id=5]
-[ext_resource path="res://Game/Menus/Princess/Princess.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Menus/NPC/Princess.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Menus/Textures/ScoreDecor.png" type="Texture" id=7]
 [ext_resource path="res://Game/Menus/Textures/ButtonFocused.png" type="Texture" id=9]
 [ext_resource path="res://Game/Menus/Textures/Button.png" type="Texture" id=10]
 [ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=11]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 24

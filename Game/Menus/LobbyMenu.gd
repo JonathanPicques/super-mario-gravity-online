@@ -71,9 +71,9 @@ func set_state(new_state: int):
 		State.public:
 			$GUI/CodeLabel.text = ""
 			$GUI/StatusLabel.text = "Public"
-			$GUI/WaitingPublicLabel.visible = true
-			$GUI/WaitingPrivateLabel.visible = false
-			$GUI/WaitingOfflineLabel.visible = false
+#			$GUI/WaitingPublicLabel.visible = true
+#			$GUI/WaitingPrivateLabel.visible = false
+#			$GUI/WaitingOfflineLabel.visible = false
 			$Icons/Key.visible = false
 			$Icons/Lock.visible = false
 			$Icons/Unlock.visible = true
@@ -82,9 +82,9 @@ func set_state(new_state: int):
 		State.private:
 			$GUI/CodeLabel.text = "join_code"
 			$GUI/StatusLabel.text = "Private"
-			$GUI/WaitingPublicLabel.visible = false
-			$GUI/WaitingPrivateLabel.visible = true
-			$GUI/WaitingOfflineLabel.visible = false
+#			$GUI/WaitingPublicLabel.visible = false
+#			$GUI/WaitingPrivateLabel.visible = true
+#			$GUI/WaitingOfflineLabel.visible = false
 			$Icons/Key.visible = true
 			$Icons/Lock.visible = true
 			$Icons/Unlock.visible = false
@@ -93,9 +93,9 @@ func set_state(new_state: int):
 		State.offline:
 			$GUI/CodeLabel.text = ""
 			$GUI/StatusLabel.text = "Offline"
-			$GUI/WaitingPublicLabel.visible = false
-			$GUI/WaitingPrivateLabel.visible = false
-			$GUI/WaitingOfflineLabel.visible = true
+#			$GUI/WaitingPublicLabel.visible = false
+#			$GUI/WaitingPrivateLabel.visible = false
+#			$GUI/WaitingOfflineLabel.visible = true
 			$Icons/Key.visible = false
 			$Icons/Lock.visible = false
 			$Icons/Unlock.visible = false
