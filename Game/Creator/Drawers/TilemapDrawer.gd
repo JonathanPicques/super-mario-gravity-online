@@ -11,16 +11,16 @@ func action(pos: Vector2, drawer_index: int):
 
 # @override
 func fill_cell(pos: Vector2):
-	var ts = creator.Tilesets[tileset_type]
-	var cell_position = ts.tilemap.world_to_map(pos)
-	ts.tilemap.set_cell(cell_position.x, cell_position.y, ts.tile)
-	ts.tilemap.update_bitmask_area(cell_position)
+	var tileset = creator.Tilesets[tileset_type]
+	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	creator.Quadtree.add_tile(pos)
+	tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, tileset.tile)
+	tileset.tilemap_node.update_bitmask_area(cell_position)
 
 # @override
 func clear_cell(pos: Vector2):
-	var ts = creator.Tilesets[tileset_type]
-	var cell_position = ts.tilemap.world_to_map(pos)
-	ts.tilemap.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
-	ts.tilemap.update_bitmask_area(cell_position)
+	var tileset = creator.Tilesets[tileset_type]
+	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	creator.Quadtree.erase_item(pos)
+	tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
+	tileset.tilemap_node.update_bitmask_area(cell_position)

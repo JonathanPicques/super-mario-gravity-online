@@ -16,7 +16,6 @@ onready var Gui: Control = $GUILayer/GUI
 onready var GuiModeLabel: Control = $GUILayer/GUI/ModeLabel
 
 onready var Tilesets := {}
-onready var tilesets := Tilesets # TODO: refactor
 
 var state: int = State.drawing
 var current_drawer_index := 0
@@ -52,18 +51,18 @@ func init():
 	GamePopup.queue_free()
 	GamePopup = null
 	# load tilesets
-	Tilesets["Wall"] = {"tilemap": map_node.Map, "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png")}
-	Tilesets["Water"] = {"tilemap": map_node.Water, "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png")}
-	Tilesets["Oneway"] = {"tilemap": map_node.Map, "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png")}
-	Tilesets["Sticky"] = {"tilemap": map_node.Sticky, "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png")}
+	Tilesets["Wall"] = {"tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": map_node.Map}
+	Tilesets["Water"] = {"tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": map_node.Water}
+	Tilesets["Oneway"] = {"tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": map_node.Map}
+	Tilesets["Sticky"] = {"tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": map_node.Sticky}
 	# construct quadtree from existing items
 	for object in map_node.ObjectSlot.get_children():
 		Quadtree.add_node(object)
 	# construct quadtree from existing tiles in tilemaps
 	for tileset in Tilesets.values():
-		var tiles = tileset.tilemap.get_used_cells()
+		var tiles = tileset.tilemap_node.get_used_cells()
 		for tile in tiles:
-			Quadtree.add_tile(tileset.tilemap.map_to_world(tile))
+			Quadtree.add_tile(tileset.tilemap_node.map_to_world(tile))
 	# construct hud quadtree from drawers and top buttons
 	HUDQuadtree.add_node(DrawersBar)
 	for top_button in TopButtons:
@@ -258,6 +257,9 @@ func _on_GoToEndButton_pressed():
 	if CreatorCamera.position.y > 0:
 		CreatorCamera.position.y = 0
 
+func _on_SettingsButton_pressed():
+	$GUILayer/GUI/SettingsPopup.visible = true
+
 func _on_ItemButton_pressed(): select_drawer(0)
 func _on_ItemButton2_pressed(): select_drawer(1)
 func _on_ItemButton3_pressed(): select_drawer(2)
@@ -270,7 +272,3 @@ func _on_ItemButton9_pressed(): select_drawer(8)
 func _on_ItemButton10_pressed(): select_drawer(9)
 func _on_ItemButton11_pressed(): select_drawer(10)
 func _on_ItemButton12_pressed(): select_drawer(11)
-
-
-func _on_SettingsButton_pressed():
-	$GUILayer/GUI/SettingsPopup.visible = true

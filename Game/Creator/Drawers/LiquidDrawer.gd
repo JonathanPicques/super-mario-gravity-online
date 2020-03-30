@@ -15,35 +15,34 @@ func action(pos: Vector2, drawer_index: int):
 		undo_clear_cells.push_back({"type": "clear_cell", "position": cell_position, "drawer_index": drawer_index})
 	return {"undo": undo_clear_cells, "redo": redo_fill_cell}
 
-func get_autotile(ts, x, y) -> Vector2: 
-	return Vector2(0, 0 if ts.tilemap.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
-
 # @override
 func fill_cell(pos: Vector2):
-	var ts = creator.tilesets[tileset_type]
-	var cell_position = ts.tilemap.world_to_map(pos)
+	var tileset = creator.Tilesets[tileset_type]
+	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	var x = cell_position.x
 	var y = cell_position.y
-	ts.tilemap.set_cell(x, y, ts.tile, false, false, false, get_autotile(ts, cell_position.x, cell_position.y))
-	if ts.tilemap.get_cell(x - 1, y) != TileMap.INVALID_CELL:
-		ts.tilemap.set_cell(x - 1, y, ts.tile, false, false, false, get_autotile(ts, x - 1, y))
-	if ts.tilemap.get_cell(x + 1, y) != TileMap.INVALID_CELL:
-		ts.tilemap.set_cell(x + 1, y, ts.tile, false, false, false, get_autotile(ts, x + 1, y))
-	if ts.tilemap.get_cell(x, y + 1) != TileMap.INVALID_CELL:
-		ts.tilemap.set_cell(x, y + 1, ts.tile, false, false, false, get_autotile(ts, x, y + 1))
+	# creator.Quadtree.add_tile(pos)
+	tileset.tilemap_node.set_cell(x, y, tileset.tile, false, false, false, get_autotile(tileset, cell_position.x, cell_position.y))
+	if tileset.tilemap_node.get_cell(x - 1, y) != TileMap.INVALID_CELL:
+		tileset.tilemap_node.set_cell(x - 1, y, tileset.tile, false, false, false, get_autotile(tileset, x - 1, y))
+	if tileset.tilemap_node.get_cell(x + 1, y) != TileMap.INVALID_CELL:
+		tileset.tilemap_node.set_cell(x + 1, y, tileset.tile, false, false, false, get_autotile(tileset, x + 1, y))
+	if tileset.tilemap_node.get_cell(x, y + 1) != TileMap.INVALID_CELL:
+		tileset.tilemap_node.set_cell(x, y + 1, tileset.tile, false, false, false, get_autotile(tileset, x, y + 1))
+	
 
 # @override
 func clear_cell(pos: Vector2):
-	var ts = creator.tilesets[tileset_type]
-	var cell_position = ts.tilemap.world_to_map(pos)
-	ts.tilemap.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
-	ts.tilemap.update_bitmask_area(cell_position)
+	var tileset = creator.Tilesets[tileset_type]
+	var cell_position = tileset.tilemap_node.world_to_map(pos)
+	# creator.Quadtree.erase_item(pos)
+	tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
 
 # @override
 func is_cell_free(pos: Vector2) -> bool:
-	var ts = creator.tilesets[tileset_type]
-	var cell_position = ts.tilemap.world_to_map(pos)
-	return ts.tilemap.get_cellv(cell_position) == TileMap.INVALID_CELL
+	var tileset = creator.Tilesets[tileset_type]
+	var cell_position = tileset.tilemap_node.world_to_map(pos)
+	return tileset.tilemap_node.get_cellv(cell_position) == TileMap.INVALID_CELL
 
 # @pure
 func fill_area(cell_position: Vector2, cells: Array, top_position: Vector2) -> bool:
@@ -52,9 +51,9 @@ func fill_area(cell_position: Vector2, cells: Array, top_position: Vector2) -> b
 		return true
 	if cell_position.y < top_position.y:
 		return false
-	var pos = creator.tilesets.Wall.tilemap.world_to_map(cell_position)
-	var wall_cell = creator.tilesets.Wall.tilemap.get_cell(pos.x, pos.y)
-	var water_cell = creator.tilesets.Water.tilemap.get_cell(pos.x, pos.y)
+	var pos = creator.Tilesets.Wall.tilemap_node.world_to_map(cell_position)
+	var wall_cell = creator.Tilesets.Wall.tilemap_node.get_cell(pos.x, pos.y)
+	var water_cell = creator.Tilesets.Water.tilemap_node.get_cell(pos.x, pos.y)
 	if wall_cell != TileMap.INVALID_CELL or water_cell != TileMap.INVALID_CELL:
 		return false
 	for cell in cells:
@@ -70,3 +69,7 @@ func fill_area(cell_position: Vector2, cells: Array, top_position: Vector2) -> b
 	if fill_area(Vector2(cell_position.x, cell_position.y - 16), cells, top_position):
 		return true
 	return false
+
+# @pure
+func get_autotile(tileset: Dictionary, x: int, y: int) -> Vector2: 
+	return Vector2(0, 0 if tileset.tilemap_node.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
