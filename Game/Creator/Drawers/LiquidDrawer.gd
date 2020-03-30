@@ -2,7 +2,7 @@ extends DrawerNode
 
 export var tileset_type := "Water"
 
-const MAX_WATER_CELLS := 60
+const MAX_WATER_CELLS := 1000
 
 # @override
 func action(pos: Vector2, drawer_index: int):
@@ -15,13 +15,22 @@ func action(pos: Vector2, drawer_index: int):
 		undo_clear_cells.push_back({"type": "clear_cell", "position": cell_position, "drawer_index": drawer_index})
 	return {"undo": undo_clear_cells, "redo": redo_fill_cell}
 
+func get_autotile(ts, x, y) -> Vector2: 
+	return Vector2(0, 0 if ts.tilemap.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
+
 # @override
 func fill_cell(pos: Vector2):
 	var ts = creator.tilesets[tileset_type]
 	var cell_position = ts.tilemap.world_to_map(pos)
-	ts.tilemap.set_cell(cell_position.x, cell_position.y, ts.tile, false, false, false, Vector2(0, 1))
-	for cell in ts.tilemap.get_used_cells():
-		ts.tilemap.set_cell(cell[0], cell[1], ts.tile, false, false, false, Vector2(0, 0 if ts.tilemap.get_cell(cell[0], cell[1] - 1) == TileMap.INVALID_CELL else 1))
+	var x = cell_position.x
+	var y = cell_position.y
+	ts.tilemap.set_cell(x, y, ts.tile, false, false, false, get_autotile(ts, cell_position.x, cell_position.y))
+	if ts.tilemap.get_cell(x - 1, y) != TileMap.INVALID_CELL:
+		ts.tilemap.set_cell(x - 1, y, ts.tile, false, false, false, get_autotile(ts, x - 1, y))
+	if ts.tilemap.get_cell(x + 1, y) != TileMap.INVALID_CELL:
+		ts.tilemap.set_cell(x + 1, y, ts.tile, false, false, false, get_autotile(ts, x + 1, y))
+	if ts.tilemap.get_cell(x, y + 1) != TileMap.INVALID_CELL:
+		ts.tilemap.set_cell(x, y + 1, ts.tile, false, false, false, get_autotile(ts, x, y + 1))
 
 # @override
 func clear_cell(pos: Vector2):
