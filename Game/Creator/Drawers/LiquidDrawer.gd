@@ -20,7 +20,10 @@ func fill_cell(pos: Vector2):
 	var ts = creator.tilesets[tileset_type]
 	var cell_position = ts.tilemap.world_to_map(pos)
 	ts.tilemap.set_cell(cell_position.x, cell_position.y, ts.tile, false, false, false, Vector2(0, 1))
-	ts.tilemap.update_bitmask_area(cell_position)
+	print("Start autotiling")
+	for cell in ts.tilemap.get_used_cells():
+		ts.tilemap.set_cell(cell[0], cell[1], ts.tile, false, false, false, Vector2(0, 0 if ts.tilemap.get_cell(cell[0], cell[1] - 1) == TileMap.INVALID_CELL else 1))
+	print("End autotiling")
 
 # @override
 func clear_cell(pos: Vector2):
