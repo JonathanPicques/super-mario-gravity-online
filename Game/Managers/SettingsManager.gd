@@ -4,8 +4,8 @@ const SAVE_PATH := "user://settings.cfg"
 const RESET_CONFIG_FILE_TO_DEFAULT := false
 
 var values := {
-	"music": 0,
-	"sfx": 0,
+	"music": 5,
+	"sfx": 5,
 	"minimap": true,
 	"show_tuto": true
 }
