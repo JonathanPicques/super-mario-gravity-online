@@ -30,775 +30,775 @@ position = Vector2( 48, 160 )
 [node name="Spikes" type="Node" parent="ObjectSlot" index="0"]
 
 [node name="Spike" parent="ObjectSlot/Spikes" index="0" instance=ExtResource( 4 )]
-position = Vector2( 144, 176 )
+position = Vector2( 144, 160 )
 
 [node name="Spike2" parent="ObjectSlot/Spikes" index="1" instance=ExtResource( 4 )]
-position = Vector2( 160, 176 )
+position = Vector2( 160, 160 )
 
 [node name="Spike3" parent="ObjectSlot/Spikes" index="2" instance=ExtResource( 4 )]
-position = Vector2( 176, 176 )
+position = Vector2( 176, 160 )
 
 [node name="Spike4" parent="ObjectSlot/Spikes" index="3" instance=ExtResource( 4 )]
-position = Vector2( 192, 176 )
+position = Vector2( 192, 160 )
 
 [node name="Spike5" parent="ObjectSlot/Spikes" index="4" instance=ExtResource( 4 )]
-position = Vector2( 352, 160 )
+position = Vector2( 352, 144 )
 
 [node name="Spike6" parent="ObjectSlot/Spikes" index="5" instance=ExtResource( 4 )]
-position = Vector2( 368, 160 )
+position = Vector2( 368, 144 )
 
 [node name="Spike7" parent="ObjectSlot/Spikes" index="6" instance=ExtResource( 4 )]
-position = Vector2( 384, 160 )
+position = Vector2( 384, 144 )
 
 [node name="Spike8" parent="ObjectSlot/Spikes" index="7" instance=ExtResource( 4 )]
-position = Vector2( 400, 160 )
+position = Vector2( 400, 144 )
 
 [node name="Spike9" parent="ObjectSlot/Spikes" index="8" instance=ExtResource( 4 )]
-position = Vector2( 416, 160 )
+position = Vector2( 416, 144 )
 
 [node name="Spike10" parent="ObjectSlot/Spikes" index="9" instance=ExtResource( 4 )]
-position = Vector2( 432, 160 )
+position = Vector2( 432, 144 )
 
 [node name="Spike11" parent="ObjectSlot/Spikes" index="10" instance=ExtResource( 4 )]
-position = Vector2( 560, 160 )
+position = Vector2( 560, 144 )
 
 [node name="Spike12" parent="ObjectSlot/Spikes" index="11" instance=ExtResource( 4 )]
-position = Vector2( 576, 160 )
+position = Vector2( 576, 144 )
 
 [node name="Spike13" parent="ObjectSlot/Spikes" index="12" instance=ExtResource( 4 )]
-position = Vector2( 592, 160 )
+position = Vector2( 592, 144 )
 
 [node name="Spike14" parent="ObjectSlot/Spikes" index="13" instance=ExtResource( 4 )]
-position = Vector2( 608, 160 )
+position = Vector2( 608, 144 )
 
 [node name="Spike15" parent="ObjectSlot/Spikes" index="14" instance=ExtResource( 4 )]
-position = Vector2( 624, 160 )
+position = Vector2( 624, 144 )
 
 [node name="Spike16" parent="ObjectSlot/Spikes" index="15" instance=ExtResource( 4 )]
-position = Vector2( 448, -32 )
+position = Vector2( 448, -48 )
 
 [node name="Spike85" parent="ObjectSlot/Spikes" index="16" instance=ExtResource( 4 )]
-position = Vector2( 880, 176 )
+position = Vector2( 880, 160 )
 
 [node name="Spike86" parent="ObjectSlot/Spikes" index="17" instance=ExtResource( 4 )]
-position = Vector2( 864, 176 )
+position = Vector2( 864, 160 )
 
 [node name="Spike87" parent="ObjectSlot/Spikes" index="18" instance=ExtResource( 4 )]
-position = Vector2( 848, 176 )
+position = Vector2( 848, 160 )
 
 [node name="Spike88" parent="ObjectSlot/Spikes" index="19" instance=ExtResource( 4 )]
-position = Vector2( 832, 176 )
+position = Vector2( 832, 160 )
 
 [node name="Spike89" parent="ObjectSlot/Spikes" index="20" instance=ExtResource( 4 )]
-position = Vector2( 816, 176 )
+position = Vector2( 816, 160 )
 
 [node name="Spike97" parent="ObjectSlot/Spikes" index="21" instance=ExtResource( 4 )]
-position = Vector2( 816, 288 )
+position = Vector2( 816, 272 )
 
 [node name="Spike98" parent="ObjectSlot/Spikes" index="22" instance=ExtResource( 4 )]
-position = Vector2( 832, 288 )
+position = Vector2( 832, 272 )
 
 [node name="Spike107" parent="ObjectSlot/Spikes" index="23" instance=ExtResource( 4 )]
-position = Vector2( 848, 288 )
+position = Vector2( 848, 272 )
 
 [node name="Spike108" parent="ObjectSlot/Spikes" index="24" instance=ExtResource( 4 )]
-position = Vector2( 928, 288 )
+position = Vector2( 928, 272 )
 
 [node name="Spike109" parent="ObjectSlot/Spikes" index="25" instance=ExtResource( 4 )]
-position = Vector2( 944, 288 )
+position = Vector2( 944, 272 )
 
 [node name="Spike110" parent="ObjectSlot/Spikes" index="26" instance=ExtResource( 4 )]
-position = Vector2( 960, 288 )
+position = Vector2( 960, 272 )
 
 [node name="Spike111" parent="ObjectSlot/Spikes" index="27" instance=ExtResource( 4 )]
-position = Vector2( 976, 288 )
+position = Vector2( 976, 272 )
 
 [node name="Spike112" parent="ObjectSlot/Spikes" index="28" instance=ExtResource( 4 )]
-position = Vector2( 992, 288 )
+position = Vector2( 992, 272 )
 
 [node name="Spike113" parent="ObjectSlot/Spikes" index="29" instance=ExtResource( 4 )]
-position = Vector2( 1008, 288 )
+position = Vector2( 1008, 272 )
 
 [node name="Spike114" parent="ObjectSlot/Spikes" index="30" instance=ExtResource( 4 )]
-position = Vector2( 1024, 144 )
+position = Vector2( 1024, 128 )
 
 [node name="Spike115" parent="ObjectSlot/Spikes" index="31" instance=ExtResource( 4 )]
-position = Vector2( 1008, 144 )
+position = Vector2( 1008, 128 )
 
 [node name="Spike117" parent="ObjectSlot/Spikes" index="32" instance=ExtResource( 4 )]
-position = Vector2( 928, 48 )
+position = Vector2( 928, 32 )
 
 [node name="Spike118" parent="ObjectSlot/Spikes" index="33" instance=ExtResource( 4 )]
-position = Vector2( 944, 48 )
+position = Vector2( 944, 32 )
 
 [node name="Spike121" parent="ObjectSlot/Spikes" index="34" instance=ExtResource( 4 )]
-position = Vector2( 1008, -48 )
+position = Vector2( 1008, -64 )
 
 [node name="Spike122" parent="ObjectSlot/Spikes" index="35" instance=ExtResource( 4 )]
-position = Vector2( 1024, -48 )
+position = Vector2( 1024, -64 )
 
 [node name="Spike126" parent="ObjectSlot/Spikes" index="36" instance=ExtResource( 4 )]
-position = Vector2( 1152, 0 )
+position = Vector2( 1152, -16 )
 
 [node name="Spike127" parent="ObjectSlot/Spikes" index="37" instance=ExtResource( 4 )]
-position = Vector2( 1168, 0 )
+position = Vector2( 1168, -16 )
 
 [node name="Spike128" parent="ObjectSlot/Spikes" index="38" instance=ExtResource( 4 )]
-position = Vector2( 1184, 0 )
+position = Vector2( 1184, -16 )
 
 [node name="Spike129" parent="ObjectSlot/Spikes" index="39" instance=ExtResource( 4 )]
-position = Vector2( 1248, 0 )
+position = Vector2( 1248, -16 )
 
 [node name="Spike130" parent="ObjectSlot/Spikes" index="40" instance=ExtResource( 4 )]
-position = Vector2( 1264, 0 )
+position = Vector2( 1264, -16 )
 
 [node name="Spike131" parent="ObjectSlot/Spikes" index="41" instance=ExtResource( 4 )]
-position = Vector2( 1296, 0 )
+position = Vector2( 1296, -16 )
 
 [node name="Spike133" parent="ObjectSlot/Spikes" index="42" instance=ExtResource( 4 )]
-position = Vector2( 1360, -96 )
+position = Vector2( 1360, -112 )
 
 [node name="Spike134" parent="ObjectSlot/Spikes" index="43" instance=ExtResource( 4 )]
-position = Vector2( 1376, -96 )
+position = Vector2( 1376, -112 )
 
 [node name="Spike135" parent="ObjectSlot/Spikes" index="44" instance=ExtResource( 4 )]
-position = Vector2( 1392, -96 )
+position = Vector2( 1392, -112 )
 
 [node name="Spike136" parent="ObjectSlot/Spikes" index="45" instance=ExtResource( 4 )]
-position = Vector2( 1408, -96 )
+position = Vector2( 1408, -112 )
 
 [node name="Spike137" parent="ObjectSlot/Spikes" index="46" instance=ExtResource( 4 )]
-position = Vector2( 1440, -96 )
+position = Vector2( 1440, -112 )
 
 [node name="Spike138" parent="ObjectSlot/Spikes" index="47" instance=ExtResource( 4 )]
-position = Vector2( 1456, -96 )
+position = Vector2( 1456, -112 )
 
 [node name="Spike139" parent="ObjectSlot/Spikes" index="48" instance=ExtResource( 4 )]
-position = Vector2( 1472, -96 )
+position = Vector2( 1472, -112 )
 
 [node name="Spike140" parent="ObjectSlot/Spikes" index="49" instance=ExtResource( 4 )]
-position = Vector2( 1504, -96 )
+position = Vector2( 1504, -112 )
 
 [node name="Spike141" parent="ObjectSlot/Spikes" index="50" instance=ExtResource( 4 )]
-position = Vector2( 1520, -96 )
+position = Vector2( 1520, -112 )
 
 [node name="Spike142" parent="ObjectSlot/Spikes" index="51" instance=ExtResource( 4 )]
-position = Vector2( 1536, -96 )
+position = Vector2( 1536, -112 )
 
 [node name="Spike143" parent="ObjectSlot/Spikes" index="52" instance=ExtResource( 4 )]
-position = Vector2( 1568, -96 )
+position = Vector2( 1568, -112 )
 
 [node name="Spike144" parent="ObjectSlot/Spikes" index="53" instance=ExtResource( 4 )]
-position = Vector2( 1584, -96 )
+position = Vector2( 1584, -112 )
 
 [node name="Spike145" parent="ObjectSlot/Spikes" index="54" instance=ExtResource( 4 )]
-position = Vector2( 1600, -96 )
+position = Vector2( 1600, -112 )
 
 [node name="Spike146" parent="ObjectSlot/Spikes" index="55" instance=ExtResource( 4 )]
-position = Vector2( 1616, -96 )
+position = Vector2( 1616, -112 )
 
 [node name="Spike147" parent="ObjectSlot/Spikes" index="56" instance=ExtResource( 4 )]
-position = Vector2( 1744, 224 )
+position = Vector2( 1744, 208 )
 
 [node name="Spike186" parent="ObjectSlot/Spikes" index="57" instance=ExtResource( 4 )]
-position = Vector2( 1392, 192 )
+position = Vector2( 1392, 176 )
 
 [node name="Spike187" parent="ObjectSlot/Spikes" index="58" instance=ExtResource( 4 )]
-position = Vector2( 1408, 192 )
+position = Vector2( 1408, 176 )
 
 [node name="Spike188" parent="ObjectSlot/Spikes" index="59" instance=ExtResource( 4 )]
-position = Vector2( 1424, 192 )
+position = Vector2( 1424, 176 )
 
 [node name="Spike158" parent="ObjectSlot/Spikes" index="60" instance=ExtResource( 4 )]
-position = Vector2( 1472, -288 )
+position = Vector2( 1472, -304 )
 
 [node name="Spike159" parent="ObjectSlot/Spikes" index="61" instance=ExtResource( 4 )]
-position = Vector2( 1488, -288 )
+position = Vector2( 1488, -304 )
 
 [node name="Spike160" parent="ObjectSlot/Spikes" index="62" instance=ExtResource( 4 )]
-position = Vector2( 1504, -288 )
+position = Vector2( 1504, -304 )
 
 [node name="Spike161" parent="ObjectSlot/Spikes" index="63" instance=ExtResource( 4 )]
-position = Vector2( 1520, -288 )
+position = Vector2( 1520, -304 )
 
 [node name="Spike162" parent="ObjectSlot/Spikes" index="64" instance=ExtResource( 4 )]
-position = Vector2( 1536, -288 )
+position = Vector2( 1536, -304 )
 
 [node name="Spike163" parent="ObjectSlot/Spikes" index="65" instance=ExtResource( 4 )]
-position = Vector2( 1584, -288 )
+position = Vector2( 1584, -304 )
 
 [node name="Spike164" parent="ObjectSlot/Spikes" index="66" instance=ExtResource( 4 )]
-position = Vector2( 1600, -288 )
+position = Vector2( 1600, -304 )
 
 [node name="Spike165" parent="ObjectSlot/Spikes" index="67" instance=ExtResource( 4 )]
-position = Vector2( 1616, -288 )
+position = Vector2( 1616, -304 )
 
 [node name="Spike166" parent="ObjectSlot/Spikes" index="68" instance=ExtResource( 4 )]
-position = Vector2( 1632, -288 )
+position = Vector2( 1632, -304 )
 
 [node name="Spike167" parent="ObjectSlot/Spikes" index="69" instance=ExtResource( 4 )]
-position = Vector2( 1648, -288 )
+position = Vector2( 1648, -304 )
 
 [node name="Spike168" parent="ObjectSlot/Spikes" index="70" instance=ExtResource( 4 )]
-position = Vector2( 1696, -288 )
+position = Vector2( 1696, -304 )
 
 [node name="Spike169" parent="ObjectSlot/Spikes" index="71" instance=ExtResource( 4 )]
-position = Vector2( 1712, -288 )
+position = Vector2( 1712, -304 )
 
 [node name="Spike170" parent="ObjectSlot/Spikes" index="72" instance=ExtResource( 4 )]
-position = Vector2( 1728, -288 )
+position = Vector2( 1728, -304 )
 
 [node name="Spike171" parent="ObjectSlot/Spikes" index="73" instance=ExtResource( 4 )]
-position = Vector2( 1744, -288 )
+position = Vector2( 1744, -304 )
 
 [node name="Spike172" parent="ObjectSlot/Spikes" index="74" instance=ExtResource( 4 )]
-position = Vector2( 1760, -288 )
+position = Vector2( 1760, -304 )
 
 [node name="Spike173" parent="ObjectSlot/Spikes" index="75" instance=ExtResource( 4 )]
-position = Vector2( 1776, -288 )
+position = Vector2( 1776, -304 )
 
 [node name="Spike174" parent="ObjectSlot/Spikes" index="76" instance=ExtResource( 4 )]
-position = Vector2( 1792, -288 )
+position = Vector2( 1792, -304 )
 
 [node name="Spike175" parent="ObjectSlot/Spikes" index="77" instance=ExtResource( 4 )]
-position = Vector2( 1808, -288 )
+position = Vector2( 1808, -304 )
 
 [node name="Spike176" parent="ObjectSlot/Spikes" index="78" instance=ExtResource( 4 )]
-position = Vector2( 1824, -288 )
+position = Vector2( 1824, -304 )
 
 [node name="Spike177" parent="ObjectSlot/Spikes" index="79" instance=ExtResource( 4 )]
-position = Vector2( 1840, -288 )
+position = Vector2( 1840, -304 )
 
 [node name="Spike178" parent="ObjectSlot/Spikes" index="80" instance=ExtResource( 4 )]
-position = Vector2( 1904, -288 )
+position = Vector2( 1904, -304 )
 
 [node name="Spike179" parent="ObjectSlot/Spikes" index="81" instance=ExtResource( 4 )]
-position = Vector2( 1920, -288 )
+position = Vector2( 1920, -304 )
 
 [node name="Spike180" parent="ObjectSlot/Spikes" index="82" instance=ExtResource( 4 )]
-position = Vector2( 1936, -288 )
+position = Vector2( 1936, -304 )
 
 [node name="Spike181" parent="ObjectSlot/Spikes" index="83" instance=ExtResource( 4 )]
-position = Vector2( 1952, -288 )
+position = Vector2( 1952, -304 )
 
 [node name="Spike182" parent="ObjectSlot/Spikes" index="84" instance=ExtResource( 4 )]
-position = Vector2( 1968, -288 )
+position = Vector2( 1968, -304 )
 
 [node name="Spike183" parent="ObjectSlot/Spikes" index="85" instance=ExtResource( 4 )]
-position = Vector2( 1984, -288 )
+position = Vector2( 1984, -304 )
 
 [node name="Spike184" parent="ObjectSlot/Spikes" index="86" instance=ExtResource( 4 )]
-position = Vector2( 2000, -288 )
+position = Vector2( 2000, -304 )
 
 [node name="Spike185" parent="ObjectSlot/Spikes" index="87" instance=ExtResource( 4 )]
-position = Vector2( 2016, -288 )
+position = Vector2( 2016, -304 )
 
 [node name="Spike189" parent="ObjectSlot/Spikes" index="88" instance=ExtResource( 4 )]
-position = Vector2( 2128, -288 )
+position = Vector2( 2128, -304 )
 
 [node name="Spike190" parent="ObjectSlot/Spikes" index="89" instance=ExtResource( 4 )]
-position = Vector2( 2144, -288 )
+position = Vector2( 2144, -304 )
 
 [node name="Spike191" parent="ObjectSlot/Spikes" index="90" instance=ExtResource( 4 )]
-position = Vector2( 2160, -288 )
+position = Vector2( 2160, -304 )
 
 [node name="Spike192" parent="ObjectSlot/Spikes" index="91" instance=ExtResource( 4 )]
-position = Vector2( 2176, -288 )
+position = Vector2( 2176, -304 )
 
 [node name="Spike193" parent="ObjectSlot/Spikes" index="92" instance=ExtResource( 4 )]
-position = Vector2( 2192, -288 )
+position = Vector2( 2192, -304 )
 
 [node name="Spike194" parent="ObjectSlot/Spikes" index="93" instance=ExtResource( 4 )]
-position = Vector2( 2208, -288 )
+position = Vector2( 2208, -304 )
 
 [node name="Spike195" parent="ObjectSlot/Spikes" index="94" instance=ExtResource( 4 )]
-position = Vector2( 2224, -288 )
+position = Vector2( 2224, -304 )
 
 [node name="Spike196" parent="ObjectSlot/Spikes" index="95" instance=ExtResource( 4 )]
-position = Vector2( 2240, -288 )
+position = Vector2( 2240, -304 )
 
 [node name="Spike197" parent="ObjectSlot/Spikes" index="96" instance=ExtResource( 4 )]
-position = Vector2( 2064, -48 )
+position = Vector2( 2064, -64 )
 
 [node name="Spike198" parent="ObjectSlot/Spikes" index="97" instance=ExtResource( 4 )]
-position = Vector2( 2080, -48 )
+position = Vector2( 2080, -64 )
 
 [node name="Spike199" parent="ObjectSlot/Spikes" index="98" instance=ExtResource( 4 )]
-position = Vector2( 2096, -48 )
+position = Vector2( 2096, -64 )
 
 [node name="Spike200" parent="ObjectSlot/Spikes" index="99" instance=ExtResource( 4 )]
-position = Vector2( 2112, -48 )
+position = Vector2( 2112, -64 )
 
 [node name="Spike201" parent="ObjectSlot/Spikes" index="100" instance=ExtResource( 4 )]
-position = Vector2( 2128, -48 )
+position = Vector2( 2128, -64 )
 
 [node name="Spike202" parent="ObjectSlot/Spikes" index="101" instance=ExtResource( 4 )]
-position = Vector2( 2144, -48 )
+position = Vector2( 2144, -64 )
 
 [node name="Spike203" parent="ObjectSlot/Spikes" index="102" instance=ExtResource( 4 )]
-position = Vector2( 2160, -48 )
+position = Vector2( 2160, -64 )
 
 [node name="Spike204" parent="ObjectSlot/Spikes" index="103" instance=ExtResource( 4 )]
-position = Vector2( 2176, -48 )
+position = Vector2( 2176, -64 )
 
 [node name="Spike205" parent="ObjectSlot/Spikes" index="104" instance=ExtResource( 4 )]
-position = Vector2( 2192, -48 )
+position = Vector2( 2192, -64 )
 
 [node name="Spike206" parent="ObjectSlot/Spikes" index="105" instance=ExtResource( 4 )]
-position = Vector2( 2208, -48 )
+position = Vector2( 2208, -64 )
 
 [node name="Spike207" parent="ObjectSlot/Spikes" index="106" instance=ExtResource( 4 )]
-position = Vector2( 2224, -48 )
+position = Vector2( 2224, -64 )
 
 [node name="Spike208" parent="ObjectSlot/Spikes" index="107" instance=ExtResource( 4 )]
-position = Vector2( 2240, -48 )
+position = Vector2( 2240, -64 )
 
 [node name="Spike209" parent="ObjectSlot/Spikes" index="108" instance=ExtResource( 4 )]
-position = Vector2( 2256, -48 )
+position = Vector2( 2256, -64 )
 
 [node name="Spike210" parent="ObjectSlot/Spikes" index="109" instance=ExtResource( 4 )]
-position = Vector2( 2288, -48 )
+position = Vector2( 2288, -64 )
 
 [node name="Spike211" parent="ObjectSlot/Spikes" index="110" instance=ExtResource( 4 )]
-position = Vector2( 2304, -48 )
+position = Vector2( 2304, -64 )
 
 [node name="Spike213" parent="ObjectSlot/Spikes" index="111" instance=ExtResource( 4 )]
-position = Vector2( 2320, -48 )
+position = Vector2( 2320, -64 )
 
 [node name="Spike214" parent="ObjectSlot/Spikes" index="112" instance=ExtResource( 4 )]
-position = Vector2( 2336, -48 )
+position = Vector2( 2336, -64 )
 
 [node name="Spike215" parent="ObjectSlot/Spikes" index="113" instance=ExtResource( 4 )]
-position = Vector2( 2352, -48 )
+position = Vector2( 2352, -64 )
 
 [node name="Spike216" parent="ObjectSlot/Spikes" index="114" instance=ExtResource( 4 )]
-position = Vector2( 2368, -48 )
+position = Vector2( 2368, -64 )
 
 [node name="Spike217" parent="ObjectSlot/Spikes" index="115" instance=ExtResource( 4 )]
-position = Vector2( 2384, -48 )
+position = Vector2( 2384, -64 )
 
 [node name="Spike218" parent="ObjectSlot/Spikes" index="116" instance=ExtResource( 4 )]
-position = Vector2( 2400, -48 )
+position = Vector2( 2400, -64 )
 
 [node name="Spike219" parent="ObjectSlot/Spikes" index="117" instance=ExtResource( 4 )]
-position = Vector2( 2464, 48 )
+position = Vector2( 2464, 32 )
 
 [node name="Spike236" parent="ObjectSlot/Spikes" index="118" instance=ExtResource( 4 )]
-position = Vector2( 2512, -224 )
+position = Vector2( 2512, -240 )
 
 [node name="Spike237" parent="ObjectSlot/Spikes" index="119" instance=ExtResource( 4 )]
-position = Vector2( 2512, -48 )
+position = Vector2( 2512, -64 )
 
 [node name="Spike238" parent="ObjectSlot/Spikes" index="120" instance=ExtResource( 4 )]
-position = Vector2( 2512, 128 )
+position = Vector2( 2512, 112 )
 
 [node name="Spike221" parent="ObjectSlot/Spikes" index="121" instance=ExtResource( 4 )]
-position = Vector2( 2768, 272 )
+position = Vector2( 2768, 256 )
 
 [node name="Spike222" parent="ObjectSlot/Spikes" index="122" instance=ExtResource( 4 )]
-position = Vector2( 2784, 288 )
+position = Vector2( 2784, 272 )
 
 [node name="Spike223" parent="ObjectSlot/Spikes" index="123" instance=ExtResource( 4 )]
-position = Vector2( 2800, 304 )
+position = Vector2( 2800, 288 )
 
 [node name="Spike224" parent="ObjectSlot/Spikes" index="124" instance=ExtResource( 4 )]
-position = Vector2( 2816, 320 )
+position = Vector2( 2816, 304 )
 
 [node name="Spike225" parent="ObjectSlot/Spikes" index="125" instance=ExtResource( 4 )]
-position = Vector2( 2832, 320 )
+position = Vector2( 2832, 304 )
 
 [node name="Spike226" parent="ObjectSlot/Spikes" index="126" instance=ExtResource( 4 )]
-position = Vector2( 2848, 320 )
+position = Vector2( 2848, 304 )
 
 [node name="Spike227" parent="ObjectSlot/Spikes" index="127" instance=ExtResource( 4 )]
-position = Vector2( 2864, 304 )
+position = Vector2( 2864, 288 )
 
 [node name="Spike228" parent="ObjectSlot/Spikes" index="128" instance=ExtResource( 4 )]
-position = Vector2( 2880, 288 )
+position = Vector2( 2880, 272 )
 
 [node name="Spike229" parent="ObjectSlot/Spikes" index="129" instance=ExtResource( 4 )]
-position = Vector2( 2896, 272 )
+position = Vector2( 2896, 256 )
 
 [node name="Spike230" parent="ObjectSlot/Spikes" index="130" instance=ExtResource( 4 )]
-position = Vector2( 2912, 256 )
+position = Vector2( 2912, 240 )
 
 [node name="Spike231" parent="ObjectSlot/Spikes" index="131" instance=ExtResource( 4 )]
-position = Vector2( 2928, 240 )
+position = Vector2( 2928, 224 )
 
 [node name="Spike232" parent="ObjectSlot/Spikes" index="132" instance=ExtResource( 4 )]
-position = Vector2( 2944, 224 )
+position = Vector2( 2944, 208 )
 
 [node name="Spike233" parent="ObjectSlot/Spikes" index="133" instance=ExtResource( 4 )]
-position = Vector2( 2960, 208 )
+position = Vector2( 2960, 192 )
 
 [node name="Spike234" parent="ObjectSlot/Spikes" index="134" instance=ExtResource( 4 )]
-position = Vector2( 2976, 192 )
+position = Vector2( 2976, 176 )
 
 [node name="Spike235" parent="ObjectSlot/Spikes" index="135" instance=ExtResource( 4 )]
-position = Vector2( 2992, 176 )
+position = Vector2( 2992, 160 )
 
 [node name="Spike220" parent="ObjectSlot/Spikes" index="136" instance=ExtResource( 4 )]
-position = Vector2( 2416, 176 )
+position = Vector2( 2416, 160 )
 
 [node name="Spike212" parent="ObjectSlot/Spikes" index="137" instance=ExtResource( 4 )]
-position = Vector2( 2272, -48 )
+position = Vector2( 2272, -64 )
 
 [node name="Spike148" parent="ObjectSlot/Spikes" index="138" instance=ExtResource( 4 )]
-position = Vector2( 1760, 224 )
+position = Vector2( 1760, 208 )
 
 [node name="Spike149" parent="ObjectSlot/Spikes" index="139" instance=ExtResource( 4 )]
-position = Vector2( 1776, 224 )
+position = Vector2( 1776, 208 )
 
 [node name="Spike150" parent="ObjectSlot/Spikes" index="140" instance=ExtResource( 4 )]
-position = Vector2( 1792, 224 )
+position = Vector2( 1792, 208 )
 
 [node name="Spike151" parent="ObjectSlot/Spikes" index="141" instance=ExtResource( 4 )]
-position = Vector2( 1808, 224 )
+position = Vector2( 1808, 208 )
 
 [node name="Spike152" parent="ObjectSlot/Spikes" index="142" instance=ExtResource( 4 )]
-position = Vector2( 1824, 224 )
+position = Vector2( 1824, 208 )
 
 [node name="Spike153" parent="ObjectSlot/Spikes" index="143" instance=ExtResource( 4 )]
-position = Vector2( 1840, 224 )
+position = Vector2( 1840, 208 )
 
 [node name="Spike154" parent="ObjectSlot/Spikes" index="144" instance=ExtResource( 4 )]
-position = Vector2( 1856, 224 )
+position = Vector2( 1856, 208 )
 
 [node name="Spike155" parent="ObjectSlot/Spikes" index="145" instance=ExtResource( 4 )]
-position = Vector2( 1872, 224 )
+position = Vector2( 1872, 208 )
 
 [node name="Spike156" parent="ObjectSlot/Spikes" index="146" instance=ExtResource( 4 )]
-position = Vector2( 1888, 224 )
+position = Vector2( 1888, 208 )
 
 [node name="Spike157" parent="ObjectSlot/Spikes" index="147" instance=ExtResource( 4 )]
-position = Vector2( 1904, 224 )
+position = Vector2( 1904, 208 )
 
 [node name="Spike132" parent="ObjectSlot/Spikes" index="148" instance=ExtResource( 4 )]
-position = Vector2( 1280, 0 )
+position = Vector2( 1280, -16 )
 
 [node name="Spike17" parent="ObjectSlot/Spikes" index="149" instance=ExtResource( 4 )]
-position = Vector2( 432, -32 )
+position = Vector2( 432, -48 )
 
 [node name="Spike18" parent="ObjectSlot/Spikes" index="150" instance=ExtResource( 4 )]
-position = Vector2( 416, -32 )
+position = Vector2( 416, -48 )
 
 [node name="Spike19" parent="ObjectSlot/Spikes" index="151" instance=ExtResource( 4 )]
-position = Vector2( 400, -32 )
+position = Vector2( 400, -48 )
 
 [node name="Spike99" parent="ObjectSlot/Spikes" index="152" instance=ExtResource( 4 )]
-position = Vector2( 736, 16 )
+position = Vector2( 736, 0 )
 
 [node name="Spike100" parent="ObjectSlot/Spikes" index="153" instance=ExtResource( 4 )]
-position = Vector2( 752, 16 )
+position = Vector2( 752, 0 )
 
 [node name="Spike101" parent="ObjectSlot/Spikes" index="154" instance=ExtResource( 4 )]
-position = Vector2( 768, 16 )
+position = Vector2( 768, 0 )
 
 [node name="Spike102" parent="ObjectSlot/Spikes" index="155" instance=ExtResource( 4 )]
-position = Vector2( 784, 16 )
+position = Vector2( 784, 0 )
 
 [node name="Spike103" parent="ObjectSlot/Spikes" index="156" instance=ExtResource( 4 )]
-position = Vector2( 800, 16 )
+position = Vector2( 800, 0 )
 
 [node name="Spike104" parent="ObjectSlot/Spikes" index="157" instance=ExtResource( 4 )]
-position = Vector2( 816, 16 )
+position = Vector2( 816, 0 )
 
 [node name="Spike105" parent="ObjectSlot/Spikes" index="158" instance=ExtResource( 4 )]
-position = Vector2( 832, 16 )
+position = Vector2( 832, 0 )
 
 [node name="Spike106" parent="ObjectSlot/Spikes" index="159" instance=ExtResource( 4 )]
-position = Vector2( 848, 16 )
+position = Vector2( 848, 0 )
 
 [node name="Spike20" parent="ObjectSlot/Spikes" index="160" instance=ExtResource( 4 )]
-position = Vector2( 352, -32 )
+position = Vector2( 352, -48 )
 
 [node name="Spike21" parent="ObjectSlot/Spikes" index="161" instance=ExtResource( 4 )]
-position = Vector2( 336, -32 )
+position = Vector2( 336, -48 )
 
 [node name="Spike22" parent="ObjectSlot/Spikes" index="162" instance=ExtResource( 4 )]
-position = Vector2( 320, -32 )
+position = Vector2( 320, -48 )
 
 [node name="Spike23" parent="ObjectSlot/Spikes" index="163" instance=ExtResource( 4 )]
-position = Vector2( 304, -32 )
+position = Vector2( 304, -48 )
 
 [node name="Spike24" parent="ObjectSlot/Spikes" index="164" instance=ExtResource( 4 )]
-position = Vector2( 256, -32 )
+position = Vector2( 256, -48 )
 
 [node name="Spike25" parent="ObjectSlot/Spikes" index="165" instance=ExtResource( 4 )]
-position = Vector2( 240, -32 )
+position = Vector2( 240, -48 )
 
 [node name="Spike26" parent="ObjectSlot/Spikes" index="166" instance=ExtResource( 4 )]
-position = Vector2( 224, -32 )
+position = Vector2( 224, -48 )
 
 [node name="Spike27" parent="ObjectSlot/Spikes" index="167" instance=ExtResource( 4 )]
-position = Vector2( 208, -32 )
+position = Vector2( 208, -48 )
 
 [node name="Spike73" parent="ObjectSlot/Spikes" index="168" instance=ExtResource( 4 )]
-position = Vector2( 208, -192 )
+position = Vector2( 208, -208 )
 
 [node name="Spike74" parent="ObjectSlot/Spikes" index="169" instance=ExtResource( 4 )]
-position = Vector2( 224, -192 )
+position = Vector2( 224, -208 )
 
 [node name="Spike75" parent="ObjectSlot/Spikes" index="170" instance=ExtResource( 4 )]
-position = Vector2( 240, -192 )
+position = Vector2( 240, -208 )
 
 [node name="Spike76" parent="ObjectSlot/Spikes" index="171" instance=ExtResource( 4 )]
-position = Vector2( 256, -192 )
+position = Vector2( 256, -208 )
 
 [node name="Spike28" parent="ObjectSlot/Spikes" index="172" instance=ExtResource( 4 )]
-position = Vector2( 160, -32 )
+position = Vector2( 160, -48 )
 
 [node name="Spike29" parent="ObjectSlot/Spikes" index="173" instance=ExtResource( 4 )]
-position = Vector2( 144, -32 )
+position = Vector2( 144, -48 )
 
 [node name="Spike30" parent="ObjectSlot/Spikes" index="174" instance=ExtResource( 4 )]
-position = Vector2( 128, -32 )
+position = Vector2( 128, -48 )
 
 [node name="Spike31" parent="ObjectSlot/Spikes" index="175" instance=ExtResource( 4 )]
-position = Vector2( 112, -32 )
+position = Vector2( 112, -48 )
 
 [node name="Spike32" parent="ObjectSlot/Spikes" index="176" instance=ExtResource( 4 )]
-position = Vector2( 96, -32 )
+position = Vector2( 96, -48 )
 
 [node name="Spike33" parent="ObjectSlot/Spikes" index="177" instance=ExtResource( 4 )]
-position = Vector2( 80, -32 )
+position = Vector2( 80, -48 )
 
 [node name="Spike34" parent="ObjectSlot/Spikes" index="178" instance=ExtResource( 4 )]
-position = Vector2( 64, -32 )
+position = Vector2( 64, -48 )
 
 [node name="Spike35" parent="ObjectSlot/Spikes" index="179" instance=ExtResource( 4 )]
-position = Vector2( 48, -32 )
+position = Vector2( 48, -48 )
 
 [node name="Spike36" parent="ObjectSlot/Spikes" index="180" instance=ExtResource( 4 )]
-position = Vector2( 176, -160 )
+position = Vector2( 176, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike37" parent="ObjectSlot/Spikes" index="181" instance=ExtResource( 4 )]
-position = Vector2( 192, -160 )
+position = Vector2( 192, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike38" parent="ObjectSlot/Spikes" index="182" instance=ExtResource( 4 )]
-position = Vector2( 208, -160 )
+position = Vector2( 208, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike39" parent="ObjectSlot/Spikes" index="183" instance=ExtResource( 4 )]
-position = Vector2( 224, -160 )
+position = Vector2( 224, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike40" parent="ObjectSlot/Spikes" index="184" instance=ExtResource( 4 )]
-position = Vector2( 240, -160 )
+position = Vector2( 240, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike41" parent="ObjectSlot/Spikes" index="185" instance=ExtResource( 4 )]
-position = Vector2( 256, -160 )
+position = Vector2( 256, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike42" parent="ObjectSlot/Spikes" index="186" instance=ExtResource( 4 )]
-position = Vector2( 272, -160 )
+position = Vector2( 272, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike43" parent="ObjectSlot/Spikes" index="187" instance=ExtResource( 4 )]
-position = Vector2( 288, -160 )
+position = Vector2( 288, -144 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike44" parent="ObjectSlot/Spikes" index="188" instance=ExtResource( 4 )]
-position = Vector2( 96, -144 )
+position = Vector2( 112, -128 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike45" parent="ObjectSlot/Spikes" index="189" instance=ExtResource( 4 )]
-position = Vector2( 112, -144 )
+position = Vector2( 96, -128 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike46" parent="ObjectSlot/Spikes" index="190" instance=ExtResource( 4 )]
-position = Vector2( 656, -192 )
+position = Vector2( 656, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike47" parent="ObjectSlot/Spikes" index="191" instance=ExtResource( 4 )]
-position = Vector2( 640, -192 )
+position = Vector2( 640, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike48" parent="ObjectSlot/Spikes" index="192" instance=ExtResource( 4 )]
-position = Vector2( 624, -192 )
+position = Vector2( 624, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike49" parent="ObjectSlot/Spikes" index="193" instance=ExtResource( 4 )]
-position = Vector2( 608, -192 )
+position = Vector2( 608, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike50" parent="ObjectSlot/Spikes" index="194" instance=ExtResource( 4 )]
-position = Vector2( 592, -192 )
+position = Vector2( 592, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike51" parent="ObjectSlot/Spikes" index="195" instance=ExtResource( 4 )]
-position = Vector2( 576, -192 )
+position = Vector2( 576, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike52" parent="ObjectSlot/Spikes" index="196" instance=ExtResource( 4 )]
-position = Vector2( 560, -192 )
+position = Vector2( 560, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike53" parent="ObjectSlot/Spikes" index="197" instance=ExtResource( 4 )]
-position = Vector2( 544, -192 )
+position = Vector2( 544, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike93" parent="ObjectSlot/Spikes" index="198" instance=ExtResource( 4 )]
-position = Vector2( 528, -288 )
+position = Vector2( 528, -272 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike94" parent="ObjectSlot/Spikes" index="199" instance=ExtResource( 4 )]
-position = Vector2( 544, -288 )
+position = Vector2( 544, -272 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike95" parent="ObjectSlot/Spikes" index="200" instance=ExtResource( 4 )]
-position = Vector2( 656, -288 )
+position = Vector2( 656, -272 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike116" parent="ObjectSlot/Spikes" index="201" instance=ExtResource( 4 )]
-position = Vector2( 1120, -208 )
+position = Vector2( 1120, -192 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike119" parent="ObjectSlot/Spikes" index="202" instance=ExtResource( 4 )]
-position = Vector2( 1136, -208 )
+position = Vector2( 1136, -192 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike120" parent="ObjectSlot/Spikes" index="203" instance=ExtResource( 4 )]
-position = Vector2( 1200, -320 )
+position = Vector2( 1200, -304 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike123" parent="ObjectSlot/Spikes" index="204" instance=ExtResource( 4 )]
-position = Vector2( 1216, -320 )
+position = Vector2( 1216, -304 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike124" parent="ObjectSlot/Spikes" index="205" instance=ExtResource( 4 )]
-position = Vector2( 1232, -320 )
+position = Vector2( 1232, -304 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike125" parent="ObjectSlot/Spikes" index="206" instance=ExtResource( 4 )]
-position = Vector2( 1248, -320 )
+position = Vector2( 1248, -304 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike96" parent="ObjectSlot/Spikes" index="207" instance=ExtResource( 4 )]
-position = Vector2( 672, -288 )
+position = Vector2( 672, -272 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike54" parent="ObjectSlot/Spikes" index="208" instance=ExtResource( 4 )]
-position = Vector2( 528, -192 )
+position = Vector2( 528, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike55" parent="ObjectSlot/Spikes" index="209" instance=ExtResource( 4 )]
-position = Vector2( 512, -192 )
+position = Vector2( 512, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike56" parent="ObjectSlot/Spikes" index="210" instance=ExtResource( 4 )]
-position = Vector2( 496, -192 )
+position = Vector2( 496, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike57" parent="ObjectSlot/Spikes" index="211" instance=ExtResource( 4 )]
-position = Vector2( 480, -192 )
+position = Vector2( 480, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike58" parent="ObjectSlot/Spikes" index="212" instance=ExtResource( 4 )]
-position = Vector2( 464, -192 )
+position = Vector2( 464, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike59" parent="ObjectSlot/Spikes" index="213" instance=ExtResource( 4 )]
-position = Vector2( 448, -192 )
+position = Vector2( 448, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike60" parent="ObjectSlot/Spikes" index="214" instance=ExtResource( 4 )]
-position = Vector2( 432, -192 )
+position = Vector2( 432, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike61" parent="ObjectSlot/Spikes" index="215" instance=ExtResource( 4 )]
-position = Vector2( 416, -192 )
+position = Vector2( 416, -176 )
 scale = Vector2( 1, -1 )
 
 [node name="Spike62" parent="ObjectSlot/Spikes" index="216" instance=ExtResource( 4 )]
-position = Vector2( 304, -176 )
+position = Vector2( 320, -208 )
 rotation = 1.5708
 
 [node name="Spike63" parent="ObjectSlot/Spikes" index="217" instance=ExtResource( 4 )]
-position = Vector2( 304, -192 )
+position = Vector2( 320, -176 )
 rotation = 1.5708
 
 [node name="Spike64" parent="ObjectSlot/Spikes" index="218" instance=ExtResource( 4 )]
-position = Vector2( 304, -208 )
+position = Vector2( 320, -192 )
 rotation = 1.5708
 
 [node name="Spike65" parent="ObjectSlot/Spikes" index="219" instance=ExtResource( 4 )]
-position = Vector2( 128, -160 )
+position = Vector2( 144, -160 )
 rotation = 1.5708
 
 [node name="Spike66" parent="ObjectSlot/Spikes" index="220" instance=ExtResource( 4 )]
-position = Vector2( 128, -176 )
+position = Vector2( 144, -176 )
 rotation = 1.5708
 
 [node name="Spike77" parent="ObjectSlot/Spikes" index="221" instance=ExtResource( 4 )]
-position = Vector2( 176, -160 )
+position = Vector2( 160, -176 )
 rotation = -1.5708
 
 [node name="Spike78" parent="ObjectSlot/Spikes" index="222" instance=ExtResource( 4 )]
-position = Vector2( 176, -176 )
+position = Vector2( 160, -192 )
 rotation = -1.5708
 
 [node name="Spike79" parent="ObjectSlot/Spikes" index="223" instance=ExtResource( 4 )]
-position = Vector2( 176, -192 )
+position = Vector2( 160, -160 )
 rotation = -1.5708
 
 [node name="Spike82" parent="ObjectSlot/Spikes" index="224" instance=ExtResource( 4 )]
-position = Vector2( 416, -192 )
+position = Vector2( 400, -192 )
 rotation = -1.5708
 
 [node name="Spike83" parent="ObjectSlot/Spikes" index="225" instance=ExtResource( 4 )]
-position = Vector2( 416, -208 )
+position = Vector2( 400, -208 )
 rotation = -1.5708
 
 [node name="Spike84" parent="ObjectSlot/Spikes" index="226" instance=ExtResource( 4 )]
-position = Vector2( 416, -224 )
+position = Vector2( 400, -224 )
 rotation = -1.5708
 
 [node name="Spike80" parent="ObjectSlot/Spikes" index="227" instance=ExtResource( 4 )]
-position = Vector2( 96, -144 )
+position = Vector2( 80, -160 )
 rotation = -1.5708
 
 [node name="Spike81" parent="ObjectSlot/Spikes" index="228" instance=ExtResource( 4 )]
-position = Vector2( 96, -160 )
+position = Vector2( 80, -144 )
 rotation = -1.5708
 
 [node name="Spike67" parent="ObjectSlot/Spikes" index="229" instance=ExtResource( 4 )]
-position = Vector2( 720, -240 )
+position = Vector2( 736, -240 )
 rotation = 1.5708
 
 [node name="Spike68" parent="ObjectSlot/Spikes" index="230" instance=ExtResource( 4 )]
-position = Vector2( 720, -224 )
+position = Vector2( 736, -224 )
 rotation = 1.5708
 
 [node name="Spike69" parent="ObjectSlot/Spikes" index="231" instance=ExtResource( 4 )]
-position = Vector2( 720, -208 )
+position = Vector2( 736, -208 )
 rotation = 1.5708
 
 [node name="Spike70" parent="ObjectSlot/Spikes" index="232" instance=ExtResource( 4 )]
-position = Vector2( 720, -192 )
+position = Vector2( 736, -192 )
 rotation = 1.5708
 
 [node name="Spike71" parent="ObjectSlot/Spikes" index="233" instance=ExtResource( 4 )]
-position = Vector2( 720, -176 )
+position = Vector2( 736, -176 )
 rotation = 1.5708
 
 [node name="Spike72" parent="ObjectSlot/Spikes" index="234" instance=ExtResource( 4 )]
-position = Vector2( 720, -160 )
+position = Vector2( 736, -160 )
 rotation = 1.5708
 
 [node name="Spike90" parent="ObjectSlot/Spikes" index="235" instance=ExtResource( 4 )]
-position = Vector2( 720, -144 )
+position = Vector2( 736, -144 )
 rotation = 1.5708
 
 [node name="Spike91" parent="ObjectSlot/Spikes" index="236" instance=ExtResource( 4 )]
-position = Vector2( 720, -128 )
+position = Vector2( 736, -128 )
 rotation = 1.5708
 
 [node name="Spike92" parent="ObjectSlot/Spikes" index="237" instance=ExtResource( 4 )]
-position = Vector2( 720, -112 )
+position = Vector2( 736, -112 )
 rotation = 1.5708
 
 [node name="SolidBlocks" type="Node" parent="ObjectSlot" index="1"]
