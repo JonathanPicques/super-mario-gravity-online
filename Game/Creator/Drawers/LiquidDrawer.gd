@@ -2,6 +2,8 @@ extends DrawerNode
 
 export var tileset_type := "Water"
 
+const MAX_WATER_CELLS := 60
+
 # @override
 func action(pos: Vector2, drawer_index: int):
 	var cell_positions := []
@@ -35,12 +37,13 @@ func is_cell_free(pos: Vector2) -> bool:
 
 # @pure
 func fill_area(cell_position: Vector2, cells: Array) -> bool:
-	if cells.size() > 50:
+	if cells.size() >= MAX_WATER_CELLS:
 		cells.clear()
 		return true
 	var pos = creator.tilesets.Wall.tilemap.world_to_map(cell_position)
 	var wall_cell = creator.tilesets.Wall.tilemap.get_cell(pos.x, pos.y)
-	if wall_cell != TileMap.INVALID_CELL:
+	var water_cell = creator.tilesets.Water.tilemap.get_cell(pos.x, pos.y)
+	if wall_cell != TileMap.INVALID_CELL or water_cell != TileMap.INVALID_CELL:
 		return false
 	for cell in cells:
 		if cell == cell_position:
