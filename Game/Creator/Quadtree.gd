@@ -20,7 +20,6 @@ func add_tile(pos: Vector2, tileset: Dictionary):
 # the given map item node must override quadtree_item_rect() -> Rect2
 # @impure
 func add_map_item(map_item_node: Node, map_item_type: String):
-	print("add_map_item: ", map_item_node, " of type ", map_item_type, " at ", map_item_node.quadtree_item_rect())
 	items.push_back({type = Types.map_item, rect = map_item_node.quadtree_item_rect(), map_item_node = map_item_node, map_item_type = map_item_type})
 
 # get_item returns an item if found in the given rect, or null otherwise.
@@ -43,7 +42,6 @@ func has_item(rect: Rect2) -> bool:
 
 # @impure
 func erase_item(position: Vector2):
-	print("erase_item at ", position)
 	var item = get_item(Rect2(position, Vector2(16, 16)))
 	if item == null:
 		return null

@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "path": "../"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "Build": true,
+      ".import": true
+    },
+    // Editor
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    // Git lens
+    "gitlens.codeLens.enabled": false,
+    // Terminal
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
+  },
+  "extensions": {
+    "recommendations": ["geequlim.godot-tools"]
+  }
+}
