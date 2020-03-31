@@ -111,7 +111,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=26]
-extents = Vector2( 46, 25 )
+extents = Vector2( 32, 51 )
 
 [sub_resource type="DynamicFont" id=27]
 size = 12
@@ -125,7 +125,7 @@ script = ExtResource( 1 )
 position = Vector2( -57, -93 )
 scale = Vector2( 1, 0.969697 )
 frames = SubResource( 25 )
-frame = 15
+frame = 23
 speed_scale = 6.0
 playing = true
 centered = false
@@ -136,7 +136,7 @@ collision_layer = 32
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -25 )
+position = Vector2( 0, -50 )
 shape = SubResource( 26 )
 
 [node name="Bubble" type="NinePatchRect" parent="."]
