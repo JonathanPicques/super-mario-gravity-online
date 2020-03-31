@@ -75,7 +75,7 @@ _global_script_classes=[ {
 "path": "res://Game/Managers/MultiplayerManager.gd"
 }, {
 "base": "Node2D",
-"class": "NPC",
+"class": "NPCNode",
 "language": "GDScript",
 "path": "res://Game/Menus/NPC/NPC.gd"
 }, {
@@ -148,7 +148,7 @@ _global_script_class_icons={
 "MapManagerNode": "",
 "MapNode": "",
 "MultiplayerManagerNode": "",
-"NPC": "",
+"NPCNode": "",
 "PlayerCameraNode": "",
 "PlayerNode": "",
 "PowerFireballNode": "",

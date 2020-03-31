@@ -1,5 +1,5 @@
 extends Node2D
-class_name NPC
+class_name NPCNode
 
 func on_talk():
 	Game.goto_creator_scene()
@@ -13,7 +13,6 @@ func _process(delta):
 
 func _on_Area2D_body_entered(body):
 	$Bubble.visible = true
-
 
 func _on_Area2D_body_exited(body):
 	$Bubble.visible = false
