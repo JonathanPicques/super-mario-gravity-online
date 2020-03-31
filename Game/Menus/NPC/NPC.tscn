@@ -125,7 +125,7 @@ script = ExtResource( 1 )
 position = Vector2( -57, -93 )
 scale = Vector2( 1, 0.969697 )
 frames = SubResource( 25 )
-frame = 23
+frame = 20
 speed_scale = 6.0
 playing = true
 centered = false
@@ -136,7 +136,7 @@ collision_layer = 32
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -50 )
+position = Vector2( 0, -51 )
 shape = SubResource( 26 )
 
 [node name="Bubble" type="NinePatchRect" parent="."]

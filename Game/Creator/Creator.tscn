@@ -1089,4 +1089,6 @@ __meta__ = {
 [connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton12" to="." method="_on_ItemButton12_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/SettingsPopup/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/SettingsPopup/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/SettingsPopup/OpenButton" to="." method="_on_OpenButton_pressed"]
+[connection signal="pressed" from="GUILayer/GUI/SettingsPopup/DeleteButton" to="." method="_on_DeleteButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/SettingsPopup/HomeButton" to="." method="_on_HomeButton_pressed"]

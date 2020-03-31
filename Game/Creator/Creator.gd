@@ -227,10 +227,6 @@ func is_cell_free(pos: Vector2) -> bool:
 	return Quadtree.get_item(Rect2(pos, Vector2(MapManager.cell_size, MapManager.cell_size))) == null
 
 # @signal
-func _on_HomeButton_pressed():
-	Game.goto_home_menu_scene()
-
-# @signal
 func _on_PlayButton_pressed():
 	History.rollback()
 	History.start()
@@ -277,6 +273,22 @@ func _on_GoToEndButton_pressed():
 func _on_SettingsButton_pressed():
 	$GUILayer/GUI/SettingsPopup.visible = true
 
+func _on_CloseButton_pressed():
+	$GUILayer/GUI/SettingsPopup.visible = false
+
+# @signal
+func _on_HomeButton_pressed():
+	Game.goto_home_menu_scene()
+	
+func _on_SaveButton_pressed():
+	print("Save map")
+
+func _on_OpenButton_pressed():
+	print("Open map")
+
+func _on_DeleteButton_pressed():
+	print("Delete map: TODO, confirm popup")
+
 func _on_ItemButton_pressed(): select_drawer(0)
 func _on_ItemButton2_pressed(): select_drawer(1)
 func _on_ItemButton3_pressed(): select_drawer(2)
@@ -289,3 +301,4 @@ func _on_ItemButton9_pressed(): select_drawer(8)
 func _on_ItemButton10_pressed(): select_drawer(9)
 func _on_ItemButton11_pressed(): select_drawer(10)
 func _on_ItemButton12_pressed(): select_drawer(11)
+
