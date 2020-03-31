@@ -23,8 +23,11 @@ func _ready():
 # @impure
 func _process(delta: float):
 	if InputManager.is_player_action_just_pressed(0, "cancel"):
-		toggle_popup(!$GUI/Popup.visible)
-
+#		toggle_popup(!$GUI/Popup.visible)
+		if not block_input:
+			block_input = true
+			MultiplayerManager.finish_playing()
+			Game.goto_lobby_menu_scene()
 # @impure
 func toggle_popup(is_open):
 	$GUI/Popup.visible = is_open
