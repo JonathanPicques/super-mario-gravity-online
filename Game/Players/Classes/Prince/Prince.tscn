@@ -8,12 +8,10 @@
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Jump.png" type="Texture" id=6]
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Run.png" type="Texture" id=8]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/Fall.png" type="Texture" id=9]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/EnterDoor.png" type="Texture" id=10]
 [ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=11]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/WallSlide.png" type="Texture" id=12]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Fall2Run.png" type="Texture" id=13]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/Jump2Fall.png" type="Texture" id=14]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Run2Stand.png" type="Texture" id=15]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Stand2Run.png" type="Texture" id=16]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/WallSlide2WallJump.png" type="Texture" id=17]
@@ -72,7 +70,10 @@ tracks/2/keys = {
 "values": [ 17 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="StreamTexture" id=4]
+load_path = "res://.import/Fall.png-7b73d350d92eca80e156ea11c45e05c9.stex"
+
+[sub_resource type="Animation" id=5]
 length = 0.42
 step = 0.06
 tracks/0/type = "value"
@@ -97,7 +98,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.36 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ), ExtResource( 9 ) ]
+"values": [ ExtResource( 3 ), SubResource( 4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -112,8 +113,7 @@ tracks/2/keys = {
 "values": [ 6, 8 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "enter_door"
+[sub_resource type="Animation" id=6]
 length = 0.68
 loop = true
 step = 0.04
@@ -154,7 +154,7 @@ tracks/2/keys = {
 "values": [ 18 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.32
 loop = true
 step = 0.04
@@ -180,7 +180,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 9 ) ]
+"values": [ SubResource( 4 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -195,8 +195,7 @@ tracks/2/keys = {
 "values": [ 8 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "fall_to_stand"
+[sub_resource type="Animation" id=8]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -236,8 +235,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "floor_turn"
+[sub_resource type="Animation" id=9]
 length = 0.08
 step = 0.04
 tracks/0/type = "value"
@@ -277,7 +275,7 @@ tracks/2/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.2
 loop = true
 step = 0.04
@@ -318,8 +316,10 @@ tracks/2/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "jump_to_fall"
+[sub_resource type="StreamTexture" id=11]
+load_path = "res://.import/Jump2Fall.png-9aee1e90228dc9cc17a1f8a3cc0d4648.stex"
+
+[sub_resource type="Animation" id=12]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -344,7 +344,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 14 ) ]
+"values": [ SubResource( 11 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -359,7 +359,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=13]
 length = 0.99
 step = 0.03
 tracks/0/type = "value"
@@ -411,7 +411,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0.0392157 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=14]
 length = 0.48
 loop = true
 step = 0.04
@@ -469,8 +469,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "run_to_stand"
+[sub_resource type="Animation" id=15]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -510,7 +509,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 length = 0.8
 loop = true
 step = 0.04
@@ -551,8 +550,7 @@ tracks/2/keys = {
 "values": [ 20 ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "stand_to_run"
+[sub_resource type="Animation" id=17]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -592,7 +590,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
 length = 0.84
 loop = true
 step = 0.04
@@ -633,7 +631,7 @@ tracks/2/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=19]
 length = 0.16
 loop = true
 step = 0.04
@@ -674,7 +672,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=20]
 length = 0.08
 step = 0.04
 tracks/0/type = "value"
@@ -742,24 +740,24 @@ visible = false
 visible = false
 
 [node name="InvincibilityEffect" parent="." index="13"]
-frame = 5
+frame = 15
 
 [node name="AnimationPlayer" parent="." index="17"]
 autoplay = "stand"
 playback_speed = 0.8
 anims/death = SubResource( 3 )
-anims/double_jump = SubResource( 4 )
-anims/enter_door = SubResource( 5 )
-anims/fall = SubResource( 6 )
-anims/fall_to_stand = SubResource( 7 )
-anims/floor_turn = SubResource( 8 )
-anims/jump = SubResource( 9 )
-anims/jump_to_fall = SubResource( 10 )
-anims/respawn = SubResource( 11 )
-anims/run = SubResource( 12 )
-anims/run_to_stand = SubResource( 13 )
-anims/stand = SubResource( 14 )
-anims/stand_to_run = SubResource( 15 )
-anims/swim = SubResource( 16 )
-anims/wallslide = SubResource( 17 )
-anims/wallslide_to_walljump = SubResource( 18 )
+anims/double_jump = SubResource( 5 )
+anims/enter_door = SubResource( 6 )
+anims/fall = SubResource( 7 )
+anims/fall_to_stand = SubResource( 8 )
+anims/floor_turn = SubResource( 9 )
+anims/jump = SubResource( 10 )
+anims/jump_to_fall = SubResource( 12 )
+anims/respawn = SubResource( 13 )
+anims/run = SubResource( 14 )
+anims/run_to_stand = SubResource( 15 )
+anims/stand = SubResource( 16 )
+anims/stand_to_run = SubResource( 17 )
+anims/swim = SubResource( 18 )
+anims/wallslide = SubResource( 19 )
+anims/wallslide_to_walljump = SubResource( 20 )
