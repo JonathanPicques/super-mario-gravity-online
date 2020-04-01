@@ -138,6 +138,7 @@ texture = SubResource( 1 )
 [node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
 frames = SubResource( 26 )
+frame = 10
 speed_scale = 5.0
 playing = true
 
@@ -148,6 +149,7 @@ tile_data = PoolIntArray( -1310625, 13, 196611, -589886, 13, 196608, -589885, 13
 position = Vector2( -976, -160 )
 
 [node name="FlagStart" parent="." index="7"]
+visible = false
 position = Vector2( -1120, 240 )
 
 [node name="GUI" type="Control" parent="." index="8"]

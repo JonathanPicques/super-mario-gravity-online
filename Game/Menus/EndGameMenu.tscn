@@ -17,17 +17,17 @@ outline_size = 1
 outline_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 18
 outline_size = 1
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 14
 outline_size = 1
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 13
 font_data = ExtResource( 4 )
 
@@ -48,6 +48,7 @@ position = Vector2( 0, -48 )
 position = Vector2( 384, 128 )
 
 [node name="FlagStart" parent="." index="6"]
+visible = false
 position = Vector2( 240, 128 )
 
 [node name="GUI" type="Control" parent="." index="7"]
@@ -78,7 +79,7 @@ margin_left = 32.0
 margin_top = 72.0
 margin_right = 208.0
 margin_bottom = 91.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#1 P2 (level 12)"
 __meta__ = {
@@ -92,7 +93,7 @@ margin_left = 32.0
 margin_top = 96.0
 margin_right = 208.0
 margin_bottom = 115.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#2 P3 (level 7)"
 __meta__ = {
@@ -106,7 +107,7 @@ margin_left = 32.0
 margin_top = 120.0
 margin_right = 208.0
 margin_bottom = 139.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#3 P1 (level 8)"
 __meta__ = {
@@ -120,7 +121,7 @@ margin_left = 32.0
 margin_top = 144.0
 margin_right = 208.0
 margin_bottom = 163.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#4 P4 (level 5)"
 __meta__ = {
@@ -134,7 +135,7 @@ margin_left = 32.0
 margin_top = 248.0
 margin_right = 192.0
 margin_bottom = 267.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "(ESC) back to lobby"
 __meta__ = {
@@ -228,7 +229,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#2"
 align = 1
@@ -248,7 +249,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#3"
 align = 1
@@ -268,7 +269,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#4"
 align = 1
