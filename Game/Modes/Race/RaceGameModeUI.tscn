@@ -4,13 +4,13 @@
 [ext_resource path="res://Game/Menus/Fonts/HUDFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Game/Modes/Race/Textures/HUDBackground.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Textures/MiniMap.png" type="Texture" id=4]
-[ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Game/Modes/Race/TimerLabel.gd" type="Script" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 20
 outline_size = 1
-font_data = ExtResource( 6 )
+outline_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+font_data = ExtResource( 5 )
 
 [node name="RaceGameModeUI" type="Control"]
 anchor_right = 1.0
@@ -95,7 +95,7 @@ margin_left = 16.0
 margin_top = -40.0
 margin_right = 88.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "00:00:00"
 valign = 1
 script = ExtResource( 7 )

@@ -3,6 +3,7 @@ class_name GameNode
 
 const Map := preload("res://Game/Maps/Map.tscn")
 const MapsMenu := preload("res://Game/Menus/MapsMenu.tscn")
+const YourMapsMenu := preload("res://Game/Menus/YourMapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
@@ -75,6 +76,12 @@ func goto_creator_scene():
 func goto_lobby_menu_scene():
 	yield(screen_transition_start(), "completed")
 	set_scene(LobbyMenu.instance())
+	yield(screen_transition_finish(), "completed")
+
+# @impure
+func goto_select_map_scene():
+	yield(screen_transition_start(), "completed")
+	set_scene(YourMapsMenu.instance())
 	yield(screen_transition_finish(), "completed")
 
 # @impure
