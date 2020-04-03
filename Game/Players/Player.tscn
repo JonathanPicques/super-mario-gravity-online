@@ -217,7 +217,7 @@ visible = false
 material = SubResource( 4 )
 position = Vector2( -2, -16 )
 frames = SubResource( 23 )
-frame = 17
+frame = 0
 speed_scale = 5.0
 playing = true
 
@@ -293,6 +293,9 @@ script = ExtResource( 18 )
 [node name="respawn" type="Node" parent="StateMachine"]
 script = ExtResource( 16 )
 
+[node name="Timer" type="Timer" parent="StateMachine/respawn"]
+one_shot = true
+
 [node name="floor_turn" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
 
@@ -302,3 +305,4 @@ script = ExtResource( 12 )
 repeat = true
 playback/repeat = true
 [connection signal="timeout" from="StateMachine/swim/Timer" to="StateMachine/swim" method="on_timer_timeout"]
+[connection signal="timeout" from="StateMachine/respawn/Timer" to="StateMachine/respawn" method="on_timer_timeout"]
