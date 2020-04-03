@@ -22,9 +22,9 @@ func init():
 		print("game mode init has no map")
 		assert(false)
 	# assign flag positions
-	flag_end_pos = map_node.FlagEnd.position
+	flag_end_pos = map_node.ObjectSlot.get_node("FlagEnd").position
 	flag_distance = 0.0
-	flag_start_pos = map_node.StartCage.get_node("Spawn1").position
+	flag_start_pos = map_node.ObjectSlot.get_node("FlagStart").position
 	# compute flag start to flag end distance
 	compute_flag_distance()
 
@@ -39,7 +39,7 @@ func start():
 	# position players close to the flag
 	for player in MultiplayerManager.get_players():
 		var player_node: Node2D = MultiplayerManager.get_player_node(player.id)
-		player_node.position = map_node.StartCage.position + map_node.StartCage.get_node("Spawn1").position # TODO: use all spawns
+		player_node.position = flag_start_pos # TODO: use all spawns
 		player_node.position.x += max(player.peer_id - 1, 0) * 16 + player.local_id * 4
 		add_player_screen_camera(player.id, player_node)
 	# connect multiplayer signals

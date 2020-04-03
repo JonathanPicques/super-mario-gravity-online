@@ -69,7 +69,7 @@ func on_player_set_peer_id(player: Dictionary, peer_id: int, local_id: int):
 # @impure
 func set_player_node_position(player: Dictionary, player_node: PlayerNode):
 	if spawn_players_flag:
-		player_node.position = Game.map_node.FlagStart.position
+		player_node.position = Game.map_node.ObjectSlot.get_node("FlagStart").position
 	else:
 		var node := get_parent().get_node(spawn_players_node_format % (player.id + 1))
 		if node:

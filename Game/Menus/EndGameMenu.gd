@@ -13,7 +13,7 @@ func _ready():
 	print("IN END GAME ", players[0].id)
 	var first_player_node = MultiplayerManager.get_player_node(players[0].id)
 	if first_player_node:
-		first_player_node.position = $FlagStart.position
+		first_player_node.position = $ObjectSlot/FlagStart.position
 	# put other players on the bottom
 	for player_id in range(1, players.size()):
 		var player_node = MultiplayerManager.get_player_node(players[player_id].id)

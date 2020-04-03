@@ -12,7 +12,7 @@ onready var KeyKeyboardUseObject := $GUI/ObjectHintLabel/KeyKeyboardUseObject
 # @impure
 func _ready():
 	if !SettingsManager.values["show_tuto"]:
-		$FlagStart.position = SKIP_START_POSITION
+		$ObjectSlot/FlagStart.position = SKIP_START_POSITION
 	else:
 		SettingsManager.values["show_tuto"] = false # TODO: check if launch at least one game
 		SettingsManager.save_settings()
