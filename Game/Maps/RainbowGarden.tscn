@@ -10,10 +10,9 @@
 [ext_resource path="res://Game/Items/PowerBox/PowerBox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Game/Items/StartCage/StartCage.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Game/Items/GardenDecor/Textures/Rock.png" type="Texture" id=12]
 [ext_resource path="res://Game/Items/GardenDecor/Textures/Tree.png" type="Texture" id=13]
-
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 13 )
@@ -240,251 +239,251 @@ texture = ExtResource( 12 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="DecorSlot" index="1"]
 position = Vector2( 713, 184 )
 frames = SubResource( 50 )
-frame = 23
+frame = 15
 speed_scale = 4.0
 playing = true
 
-[node name="FlagStart" parent="ObjectSlot" index="0" instance=ExtResource( 11 )]
-position = Vector2( 32, 208 )
-
-[node name="FlagEnd" parent="ObjectSlot" index="1" instance=ExtResource( 10 )]
+[node name="FlagEnd" parent="ObjectSlot" index="0" instance=ExtResource( 10 )]
 position = Vector2( 3248, 0 )
 
-[node name="Spike3" parent="ObjectSlot" index="2" instance=ExtResource( 2 )]
+[node name="Spike3" parent="ObjectSlot" index="1" instance=ExtResource( 2 )]
 position = Vector2( 3136, -256 )
 
-[node name="Spike4" parent="ObjectSlot" index="3" instance=ExtResource( 2 )]
+[node name="Spike4" parent="ObjectSlot" index="2" instance=ExtResource( 2 )]
 position = Vector2( 3184, -256 )
 
-[node name="Spike5" parent="ObjectSlot" index="4" instance=ExtResource( 2 )]
+[node name="Spike5" parent="ObjectSlot" index="3" instance=ExtResource( 2 )]
 position = Vector2( 3232, -256 )
 
-[node name="Spike6" parent="ObjectSlot" index="5" instance=ExtResource( 2 )]
+[node name="Spike6" parent="ObjectSlot" index="4" instance=ExtResource( 2 )]
 position = Vector2( 3280, -256 )
 
-[node name="ColorBlock5" parent="ObjectSlot" index="6" instance=ExtResource( 3 )]
+[node name="ColorBlock5" parent="ObjectSlot" index="5" instance=ExtResource( 3 )]
 position = Vector2( 480, 208 )
 
-[node name="ColorBlock" parent="ObjectSlot" index="7" instance=ExtResource( 3 )]
+[node name="ColorBlock" parent="ObjectSlot" index="6" instance=ExtResource( 3 )]
 position = Vector2( 496, 208 )
 
-[node name="ColorBlock2" parent="ObjectSlot" index="8" instance=ExtResource( 3 )]
+[node name="ColorBlock2" parent="ObjectSlot" index="7" instance=ExtResource( 3 )]
 position = Vector2( 528, 208 )
 
-[node name="ColorBlock3" parent="ObjectSlot" index="9" instance=ExtResource( 3 )]
+[node name="ColorBlock3" parent="ObjectSlot" index="8" instance=ExtResource( 3 )]
 position = Vector2( 512, 208 )
 
-[node name="ColorBlock4" parent="ObjectSlot" index="10" instance=ExtResource( 3 )]
+[node name="ColorBlock4" parent="ObjectSlot" index="9" instance=ExtResource( 3 )]
 position = Vector2( 544, 208 )
 
-[node name="ColorSwitch" parent="ObjectSlot" index="11" instance=ExtResource( 4 )]
+[node name="ColorSwitch" parent="ObjectSlot" index="10" instance=ExtResource( 4 )]
 position = Vector2( 336, 208 )
 
-[node name="Trampoline" parent="ObjectSlot" index="12" instance=ExtResource( 7 )]
+[node name="Trampoline" parent="ObjectSlot" index="11" instance=ExtResource( 7 )]
 position = Vector2( 1696, 16 )
 rotation = -1.5708
 
-[node name="Trampoline3" parent="ObjectSlot" index="13" instance=ExtResource( 7 )]
+[node name="Trampoline3" parent="ObjectSlot" index="12" instance=ExtResource( 7 )]
 position = Vector2( 2704, 0 )
 rotation = -1.5708
 
-[node name="Trampoline7" parent="ObjectSlot" index="14" instance=ExtResource( 7 )]
+[node name="Trampoline7" parent="ObjectSlot" index="13" instance=ExtResource( 7 )]
 position = Vector2( 2992, 192 )
 rotation = -1.5708
 
-[node name="Trampoline4" parent="ObjectSlot" index="15" instance=ExtResource( 7 )]
+[node name="Trampoline4" parent="ObjectSlot" index="14" instance=ExtResource( 7 )]
 position = Vector2( 2752, -128 )
 rotation = 3.14159
 
-[node name="Trampoline8" parent="ObjectSlot" index="16" instance=ExtResource( 7 )]
+[node name="Trampoline8" parent="ObjectSlot" index="15" instance=ExtResource( 7 )]
 position = Vector2( 2928, -64 )
 rotation = -0.785398
 
-[node name="Trampoline9" parent="ObjectSlot" index="17" instance=ExtResource( 7 )]
+[node name="Trampoline9" parent="ObjectSlot" index="16" instance=ExtResource( 7 )]
 position = Vector2( 3024, -112 )
 rotation = -3.14159
 
-[node name="Trampoline13" parent="ObjectSlot" index="18" instance=ExtResource( 7 )]
+[node name="Trampoline13" parent="ObjectSlot" index="17" instance=ExtResource( 7 )]
 position = Vector2( 2912, -128 )
 rotation = -2.35619
 
-[node name="Trampoline14" parent="ObjectSlot" index="19" instance=ExtResource( 7 )]
+[node name="Trampoline14" parent="ObjectSlot" index="18" instance=ExtResource( 7 )]
 position = Vector2( 2800, -128 )
 rotation = -1.5708
 
-[node name="Trampoline15" parent="ObjectSlot" index="20" instance=ExtResource( 7 )]
+[node name="Trampoline15" parent="ObjectSlot" index="19" instance=ExtResource( 7 )]
 position = Vector2( 2800, -256 )
 
-[node name="Trampoline16" parent="ObjectSlot" index="21" instance=ExtResource( 7 )]
+[node name="Trampoline16" parent="ObjectSlot" index="20" instance=ExtResource( 7 )]
 position = Vector2( 3104, -240 )
 rotation = -1.5708
 
-[node name="Trampoline11" parent="ObjectSlot" index="22" instance=ExtResource( 7 )]
+[node name="Trampoline11" parent="ObjectSlot" index="21" instance=ExtResource( 7 )]
 position = Vector2( 3024, -192 )
 rotation = -3.14159
 
-[node name="Trampoline12" parent="ObjectSlot" index="23" instance=ExtResource( 7 )]
+[node name="Trampoline12" parent="ObjectSlot" index="22" instance=ExtResource( 7 )]
 position = Vector2( 2864, -208 )
 rotation = 2.35619
 
-[node name="Trampoline10" parent="ObjectSlot" index="24" instance=ExtResource( 7 )]
+[node name="Trampoline10" parent="ObjectSlot" index="23" instance=ExtResource( 7 )]
 position = Vector2( 2928, -112 )
 rotation = -0.785398
 
-[node name="Trampoline5" parent="ObjectSlot" index="25" instance=ExtResource( 7 )]
+[node name="Trampoline5" parent="ObjectSlot" index="24" instance=ExtResource( 7 )]
 position = Vector2( 2864, 64 )
 rotation = 3.14159
 
-[node name="Trampoline6" parent="ObjectSlot" index="26" instance=ExtResource( 7 )]
+[node name="Trampoline6" parent="ObjectSlot" index="25" instance=ExtResource( 7 )]
 position = Vector2( 2864, 96 )
 rotation = 3.14159
 
-[node name="ColorBlock6" parent="ObjectSlot" index="27" instance=ExtResource( 3 )]
+[node name="ColorBlock6" parent="ObjectSlot" index="26" instance=ExtResource( 3 )]
 position = Vector2( 1392, 48 )
 color = 1
 
-[node name="ColorBlock7" parent="ObjectSlot" index="28" instance=ExtResource( 3 )]
+[node name="ColorBlock7" parent="ObjectSlot" index="27" instance=ExtResource( 3 )]
 position = Vector2( 1408, 48 )
 color = 1
 
-[node name="ColorBlock14" parent="ObjectSlot" index="29" instance=ExtResource( 3 )]
+[node name="ColorBlock14" parent="ObjectSlot" index="28" instance=ExtResource( 3 )]
 position = Vector2( 2528, 144 )
 color = 4
 
-[node name="ColorBlock13" parent="ObjectSlot" index="30" instance=ExtResource( 3 )]
+[node name="ColorBlock13" parent="ObjectSlot" index="29" instance=ExtResource( 3 )]
 position = Vector2( 2544, 144 )
 color = 4
 
-[node name="ColorBlock17" parent="ObjectSlot" index="31" instance=ExtResource( 3 )]
+[node name="ColorBlock17" parent="ObjectSlot" index="30" instance=ExtResource( 3 )]
 position = Vector2( 3408, -320 )
 color = 2
 
-[node name="ColorBlock16" parent="ObjectSlot" index="32" instance=ExtResource( 3 )]
+[node name="ColorBlock16" parent="ObjectSlot" index="31" instance=ExtResource( 3 )]
 position = Vector2( 3408, -256 )
 color = 2
 
-[node name="ColorBlock20" parent="ObjectSlot" index="33" instance=ExtResource( 3 )]
+[node name="ColorBlock20" parent="ObjectSlot" index="32" instance=ExtResource( 3 )]
 position = Vector2( 3408, -336 )
 color = 2
 
-[node name="ColorBlock19" parent="ObjectSlot" index="34" instance=ExtResource( 3 )]
+[node name="ColorBlock19" parent="ObjectSlot" index="33" instance=ExtResource( 3 )]
 position = Vector2( 3408, -288 )
 color = 2
 
-[node name="ColorBlock21" parent="ObjectSlot" index="35" instance=ExtResource( 3 )]
+[node name="ColorBlock21" parent="ObjectSlot" index="34" instance=ExtResource( 3 )]
 position = Vector2( 3408, -272 )
 color = 2
 
-[node name="ColorBlock9" parent="ObjectSlot" index="36" instance=ExtResource( 3 )]
+[node name="ColorBlock9" parent="ObjectSlot" index="35" instance=ExtResource( 3 )]
 position = Vector2( 1424, 48 )
 color = 1
 
-[node name="ColorBlock10" parent="ObjectSlot" index="37" instance=ExtResource( 3 )]
+[node name="ColorBlock10" parent="ObjectSlot" index="36" instance=ExtResource( 3 )]
 position = Vector2( 1440, 48 )
 color = 1
 
-[node name="ColorBlock11" parent="ObjectSlot" index="38" instance=ExtResource( 3 )]
+[node name="ColorBlock11" parent="ObjectSlot" index="37" instance=ExtResource( 3 )]
 position = Vector2( 1456, 48 )
 color = 1
 
-[node name="ColorBlock8" parent="ObjectSlot" index="39" instance=ExtResource( 3 )]
+[node name="ColorBlock8" parent="ObjectSlot" index="38" instance=ExtResource( 3 )]
 position = Vector2( 1376, 48 )
 color = 1
 
-[node name="ColorSwitch2" parent="ObjectSlot" index="40" instance=ExtResource( 4 )]
+[node name="ColorSwitch2" parent="ObjectSlot" index="39" instance=ExtResource( 4 )]
 position = Vector2( 1360, 96 )
 color = 1
 
-[node name="ColorBlock12" parent="ObjectSlot" index="41" instance=ExtResource( 3 )]
+[node name="ColorBlock12" parent="ObjectSlot" index="40" instance=ExtResource( 3 )]
 position = Vector2( 2512, 144 )
 color = 4
 
-[node name="ColorBlock15" parent="ObjectSlot" index="42" instance=ExtResource( 3 )]
+[node name="ColorBlock15" parent="ObjectSlot" index="41" instance=ExtResource( 3 )]
 position = Vector2( 3408, -304 )
 color = 2
 
-[node name="ColorBlock18" parent="ObjectSlot" index="43" instance=ExtResource( 3 )]
+[node name="ColorBlock18" parent="ObjectSlot" index="42" instance=ExtResource( 3 )]
 position = Vector2( 3408, -352 )
 color = 2
 
-[node name="ColorSwitch4" parent="ObjectSlot" index="44" instance=ExtResource( 4 )]
+[node name="ColorSwitch4" parent="ObjectSlot" index="43" instance=ExtResource( 4 )]
 position = Vector2( 2528, 64 )
 color = 5
 
-[node name="ColorSwitch5" parent="ObjectSlot" index="45" instance=ExtResource( 4 )]
+[node name="ColorSwitch5" parent="ObjectSlot" index="44" instance=ExtResource( 4 )]
 position = Vector2( 2640, -256 )
 color = 4
 
-[node name="ColorSwitch6" parent="ObjectSlot" index="46" instance=ExtResource( 4 )]
+[node name="ColorSwitch6" parent="ObjectSlot" index="45" instance=ExtResource( 4 )]
 position = Vector2( 3360, -384 )
 color = 2
 
-[node name="ColorSwitch3" parent="ObjectSlot" index="47" instance=ExtResource( 4 )]
+[node name="ColorSwitch3" parent="ObjectSlot" index="46" instance=ExtResource( 4 )]
 position = Vector2( 1248, -112 )
 
-[node name="ObjectBox" parent="ObjectSlot" index="48" instance=ExtResource( 8 )]
+[node name="ObjectBox" parent="ObjectSlot" index="47" instance=ExtResource( 8 )]
 position = Vector2( 1072, -144 )
 
-[node name="ObjectBox2" parent="ObjectSlot" index="49" instance=ExtResource( 8 )]
+[node name="ObjectBox2" parent="ObjectSlot" index="48" instance=ExtResource( 8 )]
 position = Vector2( 1104, -144 )
 
-[node name="ObjectBox3" parent="ObjectSlot" index="50" instance=ExtResource( 8 )]
+[node name="ObjectBox3" parent="ObjectSlot" index="49" instance=ExtResource( 8 )]
 position = Vector2( 1104, -176 )
 
-[node name="ObjectBox4" parent="ObjectSlot" index="51" instance=ExtResource( 8 )]
+[node name="ObjectBox4" parent="ObjectSlot" index="50" instance=ExtResource( 8 )]
 position = Vector2( 1072, -176 )
 
-[node name="ObjectBox7" parent="ObjectSlot" index="52" instance=ExtResource( 8 )]
+[node name="ObjectBox7" parent="ObjectSlot" index="51" instance=ExtResource( 8 )]
 position = Vector2( 2496, -272 )
 
-[node name="ObjectBox11" parent="ObjectSlot" index="53" instance=ExtResource( 8 )]
+[node name="ObjectBox11" parent="ObjectSlot" index="52" instance=ExtResource( 8 )]
 position = Vector2( 1568, -208 )
 
-[node name="ObjectBox12" parent="ObjectSlot" index="54" instance=ExtResource( 8 )]
+[node name="ObjectBox12" parent="ObjectSlot" index="53" instance=ExtResource( 8 )]
 position = Vector2( 1568, -240 )
 
-[node name="ObjectBox8" parent="ObjectSlot" index="55" instance=ExtResource( 8 )]
+[node name="ObjectBox8" parent="ObjectSlot" index="54" instance=ExtResource( 8 )]
 position = Vector2( 2496, -304 )
 
-[node name="ObjectBox9" parent="ObjectSlot" index="56" instance=ExtResource( 8 )]
+[node name="ObjectBox9" parent="ObjectSlot" index="55" instance=ExtResource( 8 )]
 position = Vector2( 2528, -304 )
 
-[node name="ObjectBox10" parent="ObjectSlot" index="57" instance=ExtResource( 8 )]
+[node name="ObjectBox10" parent="ObjectSlot" index="56" instance=ExtResource( 8 )]
 position = Vector2( 2528, -272 )
 
-[node name="SpikeBall" parent="ObjectSlot" index="58" instance=ExtResource( 9 )]
+[node name="SpikeBall" parent="ObjectSlot" index="57" instance=ExtResource( 9 )]
 position = Vector2( 1648, 112 )
 length = 12
 
-[node name="SpikeBall2" parent="ObjectSlot" index="59" instance=ExtResource( 9 )]
+[node name="SpikeBall2" parent="ObjectSlot" index="58" instance=ExtResource( 9 )]
 position = Vector2( 1808, 112 )
 length = 12
 clockwise = false
 
-[node name="SpikeBall3" parent="ObjectSlot" index="60" instance=ExtResource( 9 )]
+[node name="SpikeBall3" parent="ObjectSlot" index="59" instance=ExtResource( 9 )]
 position = Vector2( 2336, -224 )
 clockwise = false
 
-[node name="Trampoline2" parent="ObjectSlot" index="61" instance=ExtResource( 7 )]
+[node name="Trampoline2" parent="ObjectSlot" index="60" instance=ExtResource( 7 )]
 position = Vector2( 944, 208 )
 rotation = -1.57079
 
-[node name="Spike" parent="ObjectSlot" index="62" instance=ExtResource( 2 )]
+[node name="Spike" parent="ObjectSlot" index="61" instance=ExtResource( 2 )]
 position = Vector2( 2704, -64 )
 rotation = 3.14159
 
-[node name="Spike2" parent="ObjectSlot" index="63" instance=ExtResource( 2 )]
+[node name="Spike2" parent="ObjectSlot" index="62" instance=ExtResource( 2 )]
 position = Vector2( 2720, -64 )
 rotation = 3.14159
 
-[node name="Spike7" parent="ObjectSlot" index="64" instance=ExtResource( 2 )]
+[node name="Spike7" parent="ObjectSlot" index="63" instance=ExtResource( 2 )]
 position = Vector2( 224, 208 )
 
-[node name="Spike8" parent="ObjectSlot" index="65" instance=ExtResource( 2 )]
+[node name="Spike8" parent="ObjectSlot" index="64" instance=ExtResource( 2 )]
 position = Vector2( 240, 208 )
 
-[node name="Spike9" parent="ObjectSlot" index="66" instance=ExtResource( 2 )]
+[node name="Spike9" parent="ObjectSlot" index="65" instance=ExtResource( 2 )]
 position = Vector2( 256, 208 )
+
+[node name="StartCage" parent="ObjectSlot" index="66" instance=ExtResource( 11 )]
+position = Vector2( 16, 68 )
 
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 motion_scale = Vector2( 0.6, 1 )
