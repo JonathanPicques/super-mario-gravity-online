@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Game/Items/StartCage/Textures/Cage.png" type="Texture" id=1]
+[ext_resource path="res://Game/Items/StartCage/StartCage.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 96, 144 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 96, 144 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 96, 144 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 288, 0, 96, 144 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "open",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 2, 29.8286 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 45, 3.08571 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 2, 31.8857 )
+
+[node name="StartCage" type="AnimatedSprite"]
+scale = Vector2( 1, 0.972222 )
+frames = SubResource( 5 )
+animation = "open"
+speed_scale = 4.0
+centered = false
+script = ExtResource( 2 )
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2( 3, 114.171 )
+shape = SubResource( 6 )
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2( 50, 87.4286 )
+shape = SubResource( 7 )
+
+[node name="Door" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+position = Vector2( 93, 112 )
+shape = SubResource( 8 )
+
+[node name="Spawn1" type="Node2D" parent="."]
+position = Vector2( 20, 144 )
+
+[node name="Spawn2" type="Node2D" parent="."]
+position = Vector2( 40, 144 )
+
+[node name="Spawn3" type="Node2D" parent="."]
+position = Vector2( 60, 144 )
+
+[node name="Spawn4" type="Node2D" parent="."]
+position = Vector2( 80, 144 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -8,6 +8,7 @@ onready var Sticky: TileMap = $Sticky
 
 onready var FlagEnd: Node2D = $FlagEnd
 onready var FlagStart: Node2D = $FlagStart
+onready var StartCage: Node2D = $StartCage
 onready var ObjectSlot: Node2D = $ObjectSlot
 onready var PlayerSlot: Node2D = $PlayerSlot
 onready var ParticleSlot: Node2D = $ParticleSlot

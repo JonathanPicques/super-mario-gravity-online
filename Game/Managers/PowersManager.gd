@@ -1,6 +1,13 @@
 extends Node
 class_name PowersManagerNode
 
+const Prince = [
+	{
+		"scene": preload("res://Game/Powers/PowerPrince.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerPrinceHUD.tscn"),
+	},
+]
+
 onready var Powers := [
 	{
 		"scene": preload("res://Game/Powers/PowerSpeed.tscn"),

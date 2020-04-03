@@ -241,9 +241,9 @@ position = Vector2( 179, 201 )
 texture = ExtResource( 12 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="DecorSlot" index="1"]
-position = Vector2( 83, 184 )
+position = Vector2( 713, 184 )
 frames = SubResource( 50 )
-frame = 35
+frame = 46
 speed_scale = 4.0
 playing = true
 
@@ -483,11 +483,12 @@ position = Vector2( 240, 208 )
 [node name="Spike9" parent="ObjectSlot" index="64" instance=ExtResource( 2 )]
 position = Vector2( 256, 208 )
 
-[node name="Water" parent="." index="11"]
-tile_data = PoolIntArray(  )
-
 [node name="Background2" parent="ParallaxSlot/ParallaxBackground" index="1"]
 motion_scale = Vector2( 0.6, 1 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 motion_scale = Vector2( 0.8, 1 )
+
+[node name="StartCage" parent="." index="14"]
+position = Vector2( 32, 64 )
+scale = Vector2( 1, 1 )

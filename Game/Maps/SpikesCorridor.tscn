@@ -873,8 +873,8 @@ rotation = 1.5708
 position = Vector2( 2736, 192 )
 rotation = -1.5708
 
-[node name="Water" parent="." index="11"]
-tile_data = PoolIntArray(  )
+[node name="StartCage" parent="." index="11"]
+position = Vector2( 24, 20 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background" index="0"]
 texture = ExtResource( 10 )

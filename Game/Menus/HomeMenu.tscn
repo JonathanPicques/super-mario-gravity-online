@@ -138,7 +138,7 @@ texture = SubResource( 1 )
 [node name="Blacksmith" type="AnimatedSprite" parent="." index="2"]
 position = Vector2( -71, 192 )
 frames = SubResource( 26 )
-frame = 20
+frame = 8
 speed_scale = 5.0
 playing = true
 
@@ -149,7 +149,6 @@ tile_data = PoolIntArray( -1310625, 13, 196611, -589886, 13, 196608, -589885, 13
 position = Vector2( -976, -160 )
 
 [node name="FlagStart" parent="." index="7"]
-visible = false
 position = Vector2( -1120, 240 )
 
 [node name="GUI" type="Control" parent="." index="8"]
@@ -288,9 +287,6 @@ position = Vector2( -448, 16 )
 
 [node name="PowerBox4" parent="ObjectSlot" index="3" instance=ExtResource( 14 )]
 position = Vector2( -416, 16 )
-
-[node name="Water" parent="." index="18"]
-tile_data = PoolIntArray(  )
 
 [node name="Background" parent="ParallaxSlot/ParallaxBackground" index="0"]
 motion_scale = Vector2( 0.3, 1 )

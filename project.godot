@@ -105,6 +105,11 @@ _global_script_classes=[ {
 "path": "res://Game/Powers/Power.gd"
 }, {
 "base": "PowerNode",
+"class": "PowerPrinceNode",
+"language": "GDScript",
+"path": "res://Game/Powers/PowerPrince.gd"
+}, {
+"base": "PowerNode",
 "class": "PowerSpeedNode",
 "language": "GDScript",
 "path": "res://Game/Powers/PowerSpeed.gd"
@@ -154,6 +159,7 @@ _global_script_class_icons={
 "PowerFireballNode": "",
 "PowerInvincibilityNode": "",
 "PowerNode": "",
+"PowerPrinceNode": "",
 "PowerSpeedNode": "",
 "PowerWaveDistortNode": "",
 "PowersManagerNode": "",

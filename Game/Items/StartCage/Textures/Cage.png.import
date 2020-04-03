@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FireballHUD.png-ff9d59b8922732e8d4d3418c3904322e.stex"
+path="res://.import/Cage.png-088c35c2d742d9a963ce71c98836010c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Powers/Textures/FireballHUD.png"
-dest_files=[ "res://.import/FireballHUD.png-ff9d59b8922732e8d4d3418c3904322e.stex" ]
+source_file="res://Game/Items/StartCage/Textures/Cage.png"
+dest_files=[ "res://.import/Cage.png-088c35c2d742d9a963ce71c98836010c.stex" ]
 
 [params]
 

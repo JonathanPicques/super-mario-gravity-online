@@ -114,16 +114,16 @@ texture = ExtResource( 16 )
 
 [node name="Lock" type="Sprite" parent="Icons" index="1"]
 visible = false
-position = Vector2( 77.6812, 24.9518 )
+position = Vector2( 72, 16 )
 texture = ExtResource( 15 )
 
 [node name="Unlock" type="Sprite" parent="Icons" index="2"]
 visible = false
-position = Vector2( 78, 25 )
+position = Vector2( 72, 16 )
 texture = ExtResource( 17 )
 
 [node name="Offline" type="Sprite" parent="Icons" index="3"]
-position = Vector2( 70.5, 19 )
+position = Vector2( 72, 16 )
 texture = ExtResource( 18 )
 
 [node name="KeyGamepadAlt1" type="Sprite" parent="Icons" index="4"]
@@ -334,11 +334,8 @@ position = Vector2( 368, 176 )
 [node name="AutoCreatePlayers" parent="." index="17" instance=ExtResource( 19 )]
 spawn_players_flag = false
 
-[node name="Water" parent="." index="21"]
-tile_data = PoolIntArray(  )
+[node name="NPC" parent="." index="24" instance=ExtResource( 20 )]
+position = Vector2( 256, 224 )
 
 [node name="Sprite" parent="ParallaxSlot/ParallaxBackground/Background3" index="0"]
 texture = ExtResource( 4 )
-
-[node name="NPC" parent="." index="24" instance=ExtResource( 20 )]
-position = Vector2( 256, 224 )

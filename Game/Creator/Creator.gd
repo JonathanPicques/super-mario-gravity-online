@@ -253,7 +253,7 @@ func _on_GoToStartButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = map_node.FlagStart.position
+	CreatorCamera.position = map_node.StartCage.position + map_node.StartCage.get_node("Spawn1").position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:
