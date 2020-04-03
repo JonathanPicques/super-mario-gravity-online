@@ -15,15 +15,15 @@ onready var Powers := [
 	},
 	{
 		"scene": preload("res://Game/Powers/PowerFireballBasic.tscn"),
-		"hud_scene": preload("res://Game/Powers/PowerFireballHUD.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerFireballBasicHUD.tscn"),
 	},
 	{
 		"scene": preload("res://Game/Powers/PowerFireballFollow.tscn"),
-		"hud_scene": preload("res://Game/Powers/PowerFireballHUD.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerFireballFollowHUD.tscn"),
 	},
 	{
 		"scene": preload("res://Game/Powers/PowerFireballFollowGhost.tscn"),
-		"hud_scene": preload("res://Game/Powers/PowerFireballHUD.tscn"),
+		"hud_scene": preload("res://Game/Powers/PowerFireballFollowGhostHUD.tscn"),
 	},
 	{
 		"scene": preload("res://Game/Powers/PowerWaveDistort.tscn"),
