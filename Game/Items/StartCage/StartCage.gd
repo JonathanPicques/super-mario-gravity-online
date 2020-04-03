@@ -1,7 +1,7 @@
-extends AnimatedSprite
+extends Node2D
 
 func _on_Timer_timeout():
-	play("open")
+	$AnimatedSprite.play("open")
 	$Door/CollisionShape2D.position.y = 62
 
 func get_map_data() -> Dictionary:
