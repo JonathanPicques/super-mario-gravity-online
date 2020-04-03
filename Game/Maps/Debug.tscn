@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Items/ColorSwitch/ColorSwitch.tscn" type="PackedScene" id=2]
@@ -7,11 +7,10 @@
 [ext_resource path="res://Game/Maps/Textures/BackgroundSewer.png" type="Texture" id=5]
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Game/Menus/NPC/Princess.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Maps/Debug.gd" type="Script" id=9]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Game/Items/Spikes/Spike.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Game/Items/Spikes/Spikes.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=13]
 
 [node name="Map" instance=ExtResource( 1 )]
@@ -210,9 +209,6 @@ position = Vector2( -640, 32 )
 
 [node name="PowerBox4" parent="ObjectSlot" index="39" instance=ExtResource( 4 )]
 position = Vector2( -608, 32 )
-
-[node name="Princess" parent="ObjectSlot" index="40" instance=ExtResource( 8 )]
-position = Vector2( -256, -736 )
 
 [node name="Water" parent="." index="9"]
 tile_data = PoolIntArray( 720846, 16, 0, 720847, 16, 0, 720848, 16, 0, 720849, 16, 0, 720850, 16, 0, 720851, 16, 0, 720852, 16, 0, 720853, 16, 0, 720854, 16, 0, 720855, 16, 0, 720856, 16, 0, 720857, 16, 0, 720858, 16, 0, 720859, 16, 0, 720860, 16, 0, 720861, 16, 0, 786382, 16, 65536, 786383, 16, 65536, 786384, 16, 65536, 786385, 16, 65536, 786386, 16, 65536, 786387, 16, 65536, 786388, 16, 65536, 786389, 16, 65536, 786390, 16, 65536, 786391, 16, 65536, 786392, 16, 65536, 786393, 16, 65536, 786394, 16, 65536, 786395, 16, 65536, 786396, 16, 65536, 786397, 16, 65536, 851918, 16, 65536, 851919, 16, 65536, 851920, 16, 65536, 851921, 16, 65536, 851922, 16, 65536, 851923, 16, 65536, 851924, 16, 65536, 851925, 16, 65536, 851926, 16, 65536, 851927, 16, 65536, 851928, 16, 65536, 851929, 16, 65536, 851930, 16, 65536, 851931, 16, 65536, 851932, 16, 65536, 851933, 16, 65536, 917454, 16, 65536, 917455, 16, 65536, 917456, 16, 65536, 917457, 16, 65536, 917458, 16, 65536, 917459, 16, 65536, 917460, 16, 65536, 917461, 16, 65536, 917462, 16, 65536, 917463, 16, 65536, 917464, 16, 65536, 917465, 16, 65536, 917466, 16, 65536, 917467, 16, 65536, 917468, 16, 65536, 917469, 16, 65536, 982990, 16, 65536, 982991, 16, 65536, 982992, 16, 65536, 982993, 16, 65536, 982994, 16, 65536, 982995, 16, 65536, 982996, 16, 65536, 982997, 16, 65536, 982998, 16, 65536, 982999, 16, 65536, 983000, 16, 65536, 983001, 16, 65536, 983002, 16, 65536, 983003, 16, 65536, 983004, 16, 65536, 983005, 16, 65536, 1048526, 16, 65536, 1048527, 16, 65536, 1048528, 16, 65536, 1048529, 16, 65536, 1048530, 16, 65536, 1048531, 16, 65536, 1048532, 16, 65536, 1048533, 16, 65536, 1048534, 16, 65536, 1048535, 16, 65536, 1048536, 16, 65536, 1048537, 16, 65536, 1048538, 16, 65536, 1048539, 16, 65536, 1048540, 16, 65536, 1048541, 16, 65536, 1114062, 16, 65536, 1114063, 16, 65536, 1114064, 16, 65536, 1114065, 16, 65536, 1114066, 16, 65536, 1114067, 16, 65536, 1114068, 16, 65536, 1114069, 16, 65536, 1114070, 16, 65536, 1114071, 16, 65536, 1114072, 16, 65536, 1114073, 16, 65536, 1114074, 16, 65536, 1114075, 16, 65536, 1114076, 16, 65536, 1114077, 16, 65536 )

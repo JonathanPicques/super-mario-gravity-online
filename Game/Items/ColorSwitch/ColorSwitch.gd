@@ -53,7 +53,7 @@ func get_map_data() -> Dictionary:
 	}
 
 func load_map_data(item_data):
-	color = item_data["color"]
+	color = int(item_data["color"])
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
 

@@ -13,8 +13,11 @@ const item_scenes := {
 	"VSolidBlock": preload("res://Game/Items/SolidBlock/VSolidBlock.tscn"),
 	"BigSolidBlock": preload("res://Game/Items/SolidBlock/BigSolidBlock.tscn"),
 	"SpikeBall": preload("res://Game/Items/SpikeBall/SpikeBall.tscn"),
-	"Spikes": preload("res://Game/Items/Spikes/Spike.tscn"),
-	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn")
+	"Spikes": preload("res://Game/Items/Spikes/Spikes.tscn"),
+	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn"),
+	"FlagStart": preload("res://Game/Items/Flags/FlagStart.tscn"),
+	"FlagEnd": preload("res://Game/Items/Flags/FlagEnd.tscn"),
+	"StartCage": preload("res://Game/Items/StartCage/StartCage.tscn"),
 }
 
 # @pure
@@ -28,25 +31,33 @@ func create_item_node(item_type: String) -> Node2D:
 # fill_map_from_data fills the map given a map_data dictionary.
 # @impure
 func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
-	map_node.FlagEnd.position.x = map_data["flag_end"]["position"][0]
-	map_node.FlagEnd.position.y = map_data["flag_end"]["position"][1]
-	map_node.FlagStart.position.x = map_data["flag_start"]["position"][0]
-	map_node.FlagStart.position.y = map_data["flag_start"]["position"][1]
 	# TODO: handle oneway (use its own tilemap?)
 	for tile in map_data["wall"]:
 		map_node.Wall.set_cell(tile[0], tile[1], 15)
 		map_node.Wall.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["water"]:
+		var x = tile[0]
+		var y = tile[1]
 		map_node.Water.set_cell(tile[0], tile[1], 16)
+		if map_node.Water.get_cell(x - 1, y) != TileMap.INVALID_CELL:
+			map_node.Water.set_cell(x - 1, y, 16, false, false, false, get_autotile(map_node.Water, x - 1, y))
+		if map_node.Water.get_cell(x + 1, y) != TileMap.INVALID_CELL:
+			map_node.Water.set_cell(x + 1, y, 16, false, false, false, get_autotile(map_node.Water, x + 1, y))
+		if map_node.Water.get_cell(x, y + 1) != TileMap.INVALID_CELL:
+			map_node.Water.set_cell(x, y + 1, 16, false, false, false, get_autotile(map_node.Water, x, y + 1))
+
 		map_node.Water.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["sticky"]:
 		map_node.Sticky.set_cell(tile[0], tile[1], 8)
 		map_node.Sticky.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["oneway"]:
 		map_node.Oneway.set_cell(tile[0], tile[1], 9)
-		map_node.Oneway.update_bitmask_area(Vector2(tile[0], tile[1]))
+#		map_node.Oneway.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for item_data in map_data["item_slot"]:
 		var item = MapManager.create_item_node(item_data["type"])
 		item.load_map_data(item_data)
-		print("item created! ", item)
 		map_node.ObjectSlot.add_child(item)
+
+# TODO: generic code!!!
+func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2: 
+	return Vector2(0, 0 if tilemap.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)

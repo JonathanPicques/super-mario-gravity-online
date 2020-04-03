@@ -45,7 +45,7 @@ func _process(delta: float):
 # @override
 func init():
 	# load map
-	yield(load_map("test_map"), "completed")
+	yield(load_map("test"), "completed")
 	# remove popup
 	remove_child(GamePopup)
 	GamePopup.queue_free()
@@ -281,7 +281,7 @@ func _on_HomeButton_pressed():
 	Game.goto_home_menu_scene()
 	
 func _on_SaveButton_pressed():
-	print("Save map")
+	map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
 
 func _on_OpenButton_pressed():
 	print("Open map")

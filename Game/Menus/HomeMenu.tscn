@@ -18,7 +18,7 @@
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/Castle.png-6fdacdc67507724500fa66276ea9370f.stex"
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=2]
 length = 30.0
 loop = true
 step = 30.0
@@ -35,13 +35,13 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 512, 0 ) ]
 }
 
-[sub_resource type="DynamicFont" id=27]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 outline_size = 2
 outline_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=28]
+[sub_resource type="DynamicFont" id=4]
 outline_size = 1
 outline_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 font_data = ExtResource( 6 )
@@ -89,7 +89,7 @@ motion_scale = Vector2( 0.3, 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxSlot/ParallaxBackground/Background" index="1"]
 autoplay = "move_clouds"
 playback_speed = 0.5
-anims/move_clouds = SubResource( 29 )
+anims/move_clouds = SubResource( 2 )
 
 [node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
 motion_scale = Vector2( 0.7, 1 )
@@ -108,7 +108,7 @@ margin_left = 128.0
 margin_top = 77.6559
 margin_right = 384.0
 margin_bottom = 108.656
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Once upon a frog"
 align = 1
@@ -121,7 +121,7 @@ margin_left = 162.0
 margin_top = 119.0
 margin_right = 354.0
 margin_bottom = 136.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press       /      to join "
 align = 1
@@ -142,7 +142,7 @@ margin_left = -1024.0
 margin_top = 192.0
 margin_right = -896.0
 margin_bottom = 209.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press      to jump"
 align = 1
@@ -164,7 +164,7 @@ margin_left = -800.0
 margin_top = 176.0
 margin_right = -656.0
 margin_bottom = 213.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Also, you can
 Double Jump"
@@ -178,7 +178,7 @@ margin_left = -608.0
 margin_top = 144.0
 margin_right = -496.0
 margin_bottom = 165.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "And Wall Jump !"
 align = 1
@@ -191,7 +191,7 @@ margin_left = -512.0
 margin_top = -32.0
 margin_right = -330.0
 margin_bottom = -15.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.984314, 0.960784, 0.988235, 1 )
 text = "Press      to use an object!"
 align = 1

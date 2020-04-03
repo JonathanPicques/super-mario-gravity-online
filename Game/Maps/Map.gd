@@ -31,13 +31,12 @@ func get_map_data(name, description, theme) -> Dictionary:
 		"name": name,
 		"description": description,
 		"theme": theme,
-		"flag_start": $FlagStart.get_map_data(),
-		"flag_end": $FlagEnd.get_map_data(),
 		"item_slot": items,
-		"map": get_tilemap_data($Map),
+		"wall": get_tilemap_data($Wall),
 		"sticky": get_tilemap_data($Sticky),
 		"decor_back": get_tilemap_data($DecorBack),
 		"decor_front": get_tilemap_data($DecorFront),
+		"oneway": get_tilemap_data($Oneway),
 		"water": get_tilemap_data($Water)
 	}
 
