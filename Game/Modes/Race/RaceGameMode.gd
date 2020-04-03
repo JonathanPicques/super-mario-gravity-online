@@ -24,7 +24,7 @@ func init():
 	# assign flag positions
 	flag_end_pos = map_node.ObjectSlot.get_node("FlagEnd").position
 	flag_distance = 0.0
-	flag_start_pos = map_node.ObjectSlot.get_node("FlagStart").position
+	flag_start_pos = map_node.ObjectSlot.get_node("StartCage").position + map_node.ObjectSlot.get_node("StartCage").get_node("Spawn1").position
 	# compute flag start to flag end distance
 	compute_flag_distance()
 

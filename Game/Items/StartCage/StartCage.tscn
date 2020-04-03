@@ -36,46 +36,55 @@ extents = Vector2( 45, 3.08571 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 2, 31.8857 )
 
-[node name="StartCage" type="AnimatedSprite"]
+[node name="StartCage" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 1, 0.972222 )
 frames = SubResource( 5 )
 animation = "open"
 speed_scale = 4.0
 centered = false
-script = ExtResource( 2 )
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
+scale = Vector2( 1, 0.972222 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 position = Vector2( 3, 114.171 )
 shape = SubResource( 6 )
 
 [node name="TopWall" type="StaticBody2D" parent="."]
+scale = Vector2( 1, 0.972222 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
 position = Vector2( 50, 87.4286 )
 shape = SubResource( 7 )
 
 [node name="Door" type="StaticBody2D" parent="."]
+scale = Vector2( 1, 0.972222 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
 position = Vector2( 93, 112 )
 shape = SubResource( 8 )
 
 [node name="Spawn1" type="Node2D" parent="."]
-position = Vector2( 20, 144 )
+position = Vector2( 20, 140 )
+scale = Vector2( 1, 0.972222 )
 
 [node name="Spawn2" type="Node2D" parent="."]
-position = Vector2( 40, 144 )
+position = Vector2( 40, 140 )
+scale = Vector2( 1, 0.972222 )
 
 [node name="Spawn3" type="Node2D" parent="."]
-position = Vector2( 60, 144 )
+position = Vector2( 60, 140 )
+scale = Vector2( 1, 0.972222 )
 
 [node name="Spawn4" type="Node2D" parent="."]
-position = Vector2( 80, 144 )
+position = Vector2( 80, 140 )
+scale = Vector2( 1, 0.972222 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 autostart = true
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="AnimatedSprite" method="_on_Timer_timeout"]

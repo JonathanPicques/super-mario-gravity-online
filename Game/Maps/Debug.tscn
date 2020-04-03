@@ -7,11 +7,11 @@
 [ext_resource path="res://Game/Maps/Textures/BackgroundSewer.png" type="Texture" id=5]
 [ext_resource path="res://Game/Items/Trampoline/Trampoline.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Items/StartCage/StartCage.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Maps/Debug.gd" type="Script" id=9]
 [ext_resource path="res://Game/Items/Flags/FlagEnd.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/Items/Door/Door.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Game/Items/Spikes/Spikes.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=13]
 
 [node name="Map" instance=ExtResource( 1 )]
 script = ExtResource( 9 )
@@ -65,8 +65,8 @@ door_to_node_path = NodePath("../EnterTrampolines")
 position = Vector2( -288, -624 )
 door_to_node_path = NodePath("../EnterOneway")
 
-[node name="FlagStart" parent="ObjectSlot" index="0" instance=ExtResource( 13 )]
-position = Vector2( -736, 112 )
+[node name="StartCage" parent="ObjectSlot" index="0" instance=ExtResource( 8 )]
+position = Vector2( -768, -28 )
 
 [node name="FlagEnd" parent="ObjectSlot" index="1" instance=ExtResource( 10 )]
 position = Vector2( 160, 160 )
