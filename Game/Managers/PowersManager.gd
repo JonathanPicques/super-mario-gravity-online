@@ -1,14 +1,7 @@
 extends Node
 class_name PowersManagerNode
 
-onready var Powers = [
-	{
-		"scene": preload("res://Game/Powers/PowerFireballFollowGhost.tscn"),
-		"hud_scene": preload("res://Game/Powers/PowerFireballFollowGhostHUD.tscn"),
-	},
-]
-
-const TMP := [
+onready var Powers := [
 	{
 		"scene": preload("res://Game/Powers/PowerFireballBasic.tscn"),
 		"hud_scene": preload("res://Game/Powers/PowerFireballBasicHUD.tscn"),
