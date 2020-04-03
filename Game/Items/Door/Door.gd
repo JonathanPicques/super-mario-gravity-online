@@ -17,12 +17,15 @@ func get_map_data() -> Dictionary:
 	return {
 		"type": "Door",
 		"position": [position.x, position.y],
-		"door_to": "TODO"
+		"door_to": door_to_node_path
 	}
 
 func load_map_data(item_data):
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
+	door_to_node_path = item_data["door_to"]
+	if door_to_node_path:
+		door_to_node = get_node(door_to_node_path)
 
 func quadtree_item_rect():
 	return Rect2(position, Vector2(32, 48))
