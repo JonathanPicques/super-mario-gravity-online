@@ -10,6 +10,7 @@ onready var FlagEnd: Node2D = $FlagEnd
 onready var FlagStart: Node2D = $FlagStart
 onready var StartCage: Node2D = $StartCage
 onready var ObjectSlot: Node2D = $ObjectSlot
+onready var DoorSlot: Node2D = $DoorSlot
 onready var PlayerSlot: Node2D = $PlayerSlot
 onready var ParticleSlot: Node2D = $ParticleSlot
 onready var ParallaxSlot: Node2D = $ParallaxSlot
@@ -26,12 +27,16 @@ func get_map_data(name, description, theme) -> Dictionary:
 	var items = []
 	for item in $ObjectSlot.get_children():
 		items.append(item.get_map_data())
-
+	var doors = []
+	for door in $DoorSlot.get_children():
+		doors.append(door.get_map_data())
+	
 	return {
 		"name": name,
 		"description": description,
 		"theme": theme,
 		"item_slot": items,
+		"door_slot": doors,
 		"wall": get_tilemap_data($Wall),
 		"sticky": get_tilemap_data($Sticky),
 		"decor_back": get_tilemap_data($DecorBack),

@@ -52,11 +52,15 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		map_node.Sticky.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["oneway"]:
 		map_node.Oneway.set_cell(tile[0], tile[1], 9)
-#		map_node.Oneway.update_bitmask_area(Vector2(tile[0], tile[1]))
+		# TODO: oneway autotiling
 	for item_data in map_data["item_slot"]:
 		var item = MapManager.create_item_node(item_data["type"])
 		item.load_map_data(item_data)
 		map_node.ObjectSlot.add_child(item)
+	for door_data in map_data["door_slot"]:
+		var door = MapManager.create_item_node(door_data["type"])
+		door.load_map_data(door_data)
+		map_node.DoorSlot.add_child(door)
 
 # TODO: generic code!!!
 func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2: 
