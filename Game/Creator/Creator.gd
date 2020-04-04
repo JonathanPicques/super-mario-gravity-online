@@ -59,10 +59,10 @@ func init():
 	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": map_node.Water}
 	Tilesets["Oneway"] = {"name": "Oneway", "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": map_node.Oneway}
 	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": map_node.Sticky}
-    # construct quadtree from existing doors
+	# construct quadtree from existing doors
 	for map_door_node in map_node.DoorSlot.get_children():
 		Quadtree.add_map_item(map_door_node, map_door_node.get_map_data().type)
-    # construct quadtree from existing items
+	# construct quadtree from existing items
 	for map_item_node in map_node.ObjectSlot.get_children():
 		Quadtree.add_map_item(map_item_node, map_item_node.get_map_data().type)
 	# construct quadtree from existing tiles in tilemaps
