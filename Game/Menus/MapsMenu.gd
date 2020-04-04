@@ -99,7 +99,7 @@ func _on_MapButton2_focus_entered():
 func _on_MapButton3_pressed():
 	if not block_input:
 		block_input = true
-		start_game_alt(maps[2]["title"])
+		start_game(maps[2]["map_scene_path"])
 
 # @signal
 # @impure

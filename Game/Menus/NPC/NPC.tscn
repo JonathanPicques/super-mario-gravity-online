@@ -1,10 +1,11 @@
 [gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Game/Menus/NPC/NPC.gd" type="Script" id=1]
-[ext_resource path="res://Game/Menus/NPC/Textures/CreatorNPC.png" type="Texture" id=2]
+[ext_resource path="res://Game/Menus/NPC/Textures/Pig.png" type="Texture" id=2]
 [ext_resource path="res://Game/Menus/Textures/KeyUp.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Game/Creator/Textures/BubbleTop.png" type="Texture" id=5]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

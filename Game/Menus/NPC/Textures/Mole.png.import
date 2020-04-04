@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CreatorNPC.png-e78164a552756488c00909a308b147f1.stex"
+path="res://.import/Mole.png-16bb6f67e52abd8253110a3126860c0a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/NPC/Textures/CreatorNPC.png"
-dest_files=[ "res://.import/CreatorNPC.png-e78164a552756488c00909a308b147f1.stex" ]
+source_file="res://Game/Menus/NPC/Textures/Mole.png"
+dest_files=[ "res://.import/Mole.png-16bb6f67e52abd8253110a3126860c0a.stex" ]
 
 [params]
 
