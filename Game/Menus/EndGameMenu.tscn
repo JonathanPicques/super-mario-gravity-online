@@ -13,20 +13,20 @@
 [ext_resource path="res://Game/Menus/Fonts/ButtonFont.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Game/Items/Flags/FlagStart.tscn" type="PackedScene" id=12]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 13
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 outline_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 18
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 14
 outline_size = 1
 outline_color = Color( 0.133333, 0.133333, 0.133333, 1 )
@@ -46,13 +46,13 @@ tile_data = PoolIntArray( 65532, 11, 0, 65533, 11, 1, 65534, 11, 1, 65535, 11, 1
 position = Vector2( 448, 112 )
 texture = ExtResource( 3 )
 
+[node name="Princess" parent="." index="6" instance=ExtResource( 6 )]
+position = Vector2( 384, 128 )
+
 [node name="FlagStart" parent="ObjectSlot" index="0" instance=ExtResource( 12 )]
 position = Vector2( 256, 128 )
 
-[node name="Princess" parent="ObjectSlot" index="1" instance=ExtResource( 6 )]
-position = Vector2( 384, 128 )
-
-[node name="Score2" type="Sprite" parent="ObjectSlot" index="2"]
+[node name="Score2" type="Sprite" parent="ObjectSlot" index="1"]
 position = Vector2( 288, 240 )
 texture = ExtResource( 7 )
 centered = false
@@ -63,7 +63,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#2"
 align = 1
@@ -72,7 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Score3" type="Sprite" parent="ObjectSlot" index="3"]
+[node name="Score3" type="Sprite" parent="ObjectSlot" index="2"]
 position = Vector2( 352, 240 )
 texture = ExtResource( 7 )
 centered = false
@@ -83,7 +83,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#3"
 align = 1
@@ -92,7 +92,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Score4" type="Sprite" parent="ObjectSlot" index="4"]
+[node name="Score4" type="Sprite" parent="ObjectSlot" index="3"]
 position = Vector2( 416, 240 )
 texture = ExtResource( 7 )
 centered = false
@@ -103,7 +103,7 @@ anchor_right = 0.5
 margin_left = -8.0
 margin_right = 8.0
 margin_bottom = 16.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.129412, 0.121569, 0.188235, 1 )
 text = "#4"
 align = 1
@@ -112,7 +112,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GUI" type="Control" parent="." index="12"]
+[node name="GUI" type="Control" parent="." index="13"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -140,7 +140,7 @@ margin_left = 32.0
 margin_top = 48.0
 margin_right = 197.0
 margin_bottom = 73.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "Player 2 wins!"
 align = 1
@@ -155,7 +155,7 @@ margin_left = 32.0
 margin_top = 88.0
 margin_right = 200.0
 margin_bottom = 107.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#1 P2 (level 12)"
 __meta__ = {
@@ -169,7 +169,7 @@ margin_left = 32.0
 margin_top = 112.0
 margin_right = 200.0
 margin_bottom = 131.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#2 P3 (level 7)"
 __meta__ = {
@@ -183,7 +183,7 @@ margin_left = 32.0
 margin_top = 136.0
 margin_right = 200.0
 margin_bottom = 155.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#3 P1 (level 8)"
 __meta__ = {
@@ -197,7 +197,7 @@ margin_left = 32.0
 margin_top = 160.0
 margin_right = 200.0
 margin_bottom = 179.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
 text = "#4 P4 (level 5)"
 __meta__ = {
@@ -211,7 +211,7 @@ margin_left = 24.0
 margin_top = 264.0
 margin_right = 184.0
 margin_bottom = 280.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "(ESC) back to lobby"
 __meta__ = {
@@ -281,13 +281,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Player2Position" type="Node2D" parent="." index="13"]
+[node name="Player2Position" type="Node2D" parent="." index="14"]
 position = Vector2( 296, 240 )
 
-[node name="Player3Position" type="Node2D" parent="." index="14"]
+[node name="Player3Position" type="Node2D" parent="." index="15"]
 position = Vector2( 360, 240 )
 
-[node name="Player4Position" type="Node2D" parent="." index="15"]
+[node name="Player4Position" type="Node2D" parent="." index="16"]
 position = Vector2( 424, 240 )
 [connection signal="pressed" from="GUI/Popup/ReplayButton" to="." method="_on_ReplayButton_pressed"]
 [connection signal="pressed" from="GUI/Popup/HomeButton" to="." method="_on_HomeButton_pressed"]

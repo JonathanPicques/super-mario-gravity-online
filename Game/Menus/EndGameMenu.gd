@@ -10,7 +10,6 @@ func _ready():
 	MultiplayerManager.spawn_player_nodes()
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)
 	# put first player on top
-	print("IN END GAME ", players[0].id)
 	var first_player_node = MultiplayerManager.get_player_node(players[0].id)
 	if first_player_node:
 		first_player_node.position = $ObjectSlot/FlagStart.position

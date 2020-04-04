@@ -1,9 +1,7 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Game/Players/Classes/Prince/Prince.gd" type="Script" id=1]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Idle.png" type="Texture" id=2]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/DoubleJump.png" type="Texture" id=3]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/Swim.png" type="Texture" id=4]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Respawn.png" type="Texture" id=5]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Jump.png" type="Texture" id=6]
 [ext_resource path="res://Game/Players/Player.tscn" type="PackedScene" id=7]
@@ -11,11 +9,7 @@
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/EnterDoor.png" type="Texture" id=10]
 [ext_resource path="res://Game/Effects/Shaders/ReplaceColor.tres" type="Shader" id=11]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/WallSlide.png" type="Texture" id=12]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/Fall2Run.png" type="Texture" id=13]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/Run2Stand.png" type="Texture" id=15]
 [ext_resource path="res://Game/Players/Classes/Prince/Textures/Stand2Run.png" type="Texture" id=16]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/WallSlide2WallJump.png" type="Texture" id=17]
-[ext_resource path="res://Game/Players/Classes/Prince/Textures/FloorTurn.png" type="Texture" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 11 )
@@ -29,8 +23,11 @@ shader_param/skin_color2 = Color( 0.447059, 0.631373, 0.113725, 1 )
 shader_param/skin_color3 = Color( 0.643137, 0.8, 0.258824, 1 )
 
 [sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/EnterDoor.png-3eae827b042988175ae0465213d607b5.stex"
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="StreamTexture" id=3]
+
+[sub_resource type="Animation" id=4]
 length = 0.68
 step = 0.04
 tracks/0/type = "value"
@@ -55,7 +52,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 2 ) ]
+"values": [ SubResource( 3 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -70,10 +67,13 @@ tracks/2/keys = {
 "values": [ 17 ]
 }
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/DoubleJump.png-7d5e0c4add1108beedf5102b364ea10d.stex"
+
+[sub_resource type="StreamTexture" id=6]
 load_path = "res://.import/Fall.png-7b73d350d92eca80e156ea11c45e05c9.stex"
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.42
 step = 0.06
 tracks/0/type = "value"
@@ -98,7 +98,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.36 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 3 ), SubResource( 4 ) ]
+"values": [ SubResource( 5 ), SubResource( 6 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -113,24 +113,24 @@ tracks/2/keys = {
 "values": [ 6, 8 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=8]
 length = 0.68
 loop = true
 step = 0.04
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("Sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48, 0.52, 0.56, 0.6, 0.64 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1.31951 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+"values": [ ExtResource( 10 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:texture")
+tracks/1/path = NodePath("Sprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -139,22 +139,22 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 10 ) ]
+"values": [ 18 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:hframes")
+tracks/2/path = NodePath("Sprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
 "update": 1,
-"values": [ 18 ]
+"values": [  ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=9]
 length = 0.32
 loop = true
 step = 0.04
@@ -180,7 +180,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 4 ) ]
+"values": [ SubResource( 6 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -195,7 +195,10 @@ tracks/2/keys = {
 "values": [ 8 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="StreamTexture" id=10]
+load_path = "res://.import/Fall2Run.png-51f4ae5496d88bb55547018b7a25d898.stex"
+
+[sub_resource type="Animation" id=11]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -220,7 +223,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 13 ) ]
+"values": [ SubResource( 10 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -235,7 +238,10 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="StreamTexture" id=12]
+load_path = "res://.import/FloorTurn.png-13a387cf098a1462832847bc192939d0.stex"
+
+[sub_resource type="Animation" id=13]
 length = 0.08
 step = 0.04
 tracks/0/type = "value"
@@ -260,7 +266,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 18 ) ]
+"values": [ SubResource( 12 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -275,7 +281,7 @@ tracks/2/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=14]
 length = 0.2
 loop = true
 step = 0.04
@@ -316,10 +322,10 @@ tracks/2/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="StreamTexture" id=11]
+[sub_resource type="StreamTexture" id=15]
 load_path = "res://.import/Jump2Fall.png-9aee1e90228dc9cc17a1f8a3cc0d4648.stex"
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=16]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -344,7 +350,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 11 ) ]
+"values": [ SubResource( 15 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -359,7 +365,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=17]
 length = 0.99
 step = 0.03
 tracks/0/type = "value"
@@ -411,7 +417,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0.0392157 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=18]
 length = 0.48
 loop = true
 step = 0.04
@@ -469,7 +475,10 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="StreamTexture" id=19]
+load_path = "res://.import/Run2Stand.png-bf9d3ced901088df62f41ebf887d7481.stex"
+
+[sub_resource type="Animation" id=20]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -494,7 +503,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 15 ) ]
+"values": [ SubResource( 19 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -509,7 +518,7 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=21]
 length = 0.8
 loop = true
 step = 0.04
@@ -550,7 +559,7 @@ tracks/2/keys = {
 "values": [ 20 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=22]
 length = 0.16
 step = 0.04
 tracks/0/type = "value"
@@ -590,7 +599,10 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="StreamTexture" id=23]
+load_path = "res://.import/Swim.png-5594ed16eb26b9b790bf3e9c61a1e2cd.stex"
+
+[sub_resource type="Animation" id=24]
 length = 0.84
 loop = true
 step = 0.04
@@ -616,7 +628,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 294.067 ),
 "update": 1,
-"values": [ ExtResource( 4 ) ]
+"values": [ SubResource( 23 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -631,7 +643,7 @@ tracks/2/keys = {
 "values": [ 21 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=25]
 length = 0.16
 loop = true
 step = 0.04
@@ -672,7 +684,10 @@ tracks/2/keys = {
 "values": [ 4 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="StreamTexture" id=26]
+load_path = "res://.import/WallSlide2WallJump.png-21137bfcb6671aad35b10437390b4c2a.stex"
+
+[sub_resource type="Animation" id=27]
 length = 0.08
 step = 0.04
 tracks/0/type = "value"
@@ -697,7 +712,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 17 ) ]
+"values": [ SubResource( 26 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Sprite:hframes")
@@ -717,9 +732,9 @@ script = ExtResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 material = SubResource( 1 )
-texture = ExtResource( 5 )
+texture = SubResource( 2 )
 centered = true
-hframes = 33
+hframes = 18
 
 [node name="Dialog" parent="." index="2"]
 visible = false
@@ -740,24 +755,24 @@ visible = false
 visible = false
 
 [node name="InvincibilityEffect" parent="." index="13"]
-frame = 15
+frame = 2
 
 [node name="AnimationPlayer" parent="." index="17"]
 autoplay = "stand"
 playback_speed = 0.8
-anims/death = SubResource( 3 )
-anims/double_jump = SubResource( 5 )
-anims/enter_door = SubResource( 6 )
-anims/fall = SubResource( 7 )
-anims/fall_to_stand = SubResource( 8 )
-anims/floor_turn = SubResource( 9 )
-anims/jump = SubResource( 10 )
-anims/jump_to_fall = SubResource( 12 )
-anims/respawn = SubResource( 13 )
-anims/run = SubResource( 14 )
-anims/run_to_stand = SubResource( 15 )
-anims/stand = SubResource( 16 )
-anims/stand_to_run = SubResource( 17 )
-anims/swim = SubResource( 18 )
-anims/wallslide = SubResource( 19 )
-anims/wallslide_to_walljump = SubResource( 20 )
+anims/death = SubResource( 4 )
+anims/double_jump = SubResource( 7 )
+anims/enter_door = SubResource( 8 )
+anims/fall = SubResource( 9 )
+anims/fall_to_stand = SubResource( 11 )
+anims/floor_turn = SubResource( 13 )
+anims/jump = SubResource( 14 )
+anims/jump_to_fall = SubResource( 16 )
+anims/respawn = SubResource( 17 )
+anims/run = SubResource( 18 )
+anims/run_to_stand = SubResource( 20 )
+anims/stand = SubResource( 21 )
+anims/stand_to_run = SubResource( 22 )
+anims/swim = SubResource( 24 )
+anims/wallslide = SubResource( 25 )
+anims/wallslide_to_walljump = SubResource( 27 )
