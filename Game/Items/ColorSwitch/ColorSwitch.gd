@@ -57,5 +57,5 @@ func load_map_data(item_data):
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
 
-func quadtree_item_rect():
+func quadtree_item_rect() -> Rect2:
 	return Rect2(position, Vector2(16, 16))

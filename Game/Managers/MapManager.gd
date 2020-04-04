@@ -4,20 +4,20 @@ class_name MapManagerNode
 const cell_size := 16.0
 
 const item_scenes := {
-	"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
-	"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
+	"Spikes": preload("res://Game/Items/Spikes/Spikes.tscn"),
+	"FlagEnd": preload("res://Game/Items/Flags/FlagEnd.tscn"),
 	"PowerBox": preload("res://Game/Items/PowerBox/PowerBox.tscn"),
+	"SpikeBall": preload("res://Game/Items/SpikeBall/SpikeBall.tscn"),
+	"StartCage": preload("res://Game/Items/StartCage/StartCage.tscn"),
+	"FlagStart": preload("res://Game/Items/Flags/FlagStart.tscn"),
+	"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
 	"SolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
+	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn"),
+	"ColorSwitch": preload("res://Game/Items/ColorSwitch/ColorSwitch.tscn"),
 	"HSolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
 	"VSolidBlock": preload("res://Game/Items/SolidBlock/VSolidBlock.tscn"),
 	"BigSolidBlock": preload("res://Game/Items/SolidBlock/BigSolidBlock.tscn"),
-	"SpikeBall": preload("res://Game/Items/SpikeBall/SpikeBall.tscn"),
-	"Spikes": preload("res://Game/Items/Spikes/Spikes.tscn"),
-	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn"),
-	"FlagStart": preload("res://Game/Items/Flags/FlagStart.tscn"),
-	"FlagEnd": preload("res://Game/Items/Flags/FlagEnd.tscn"),
-	"StartCage": preload("res://Game/Items/StartCage/StartCage.tscn"),
 }
 
 # @pure
@@ -44,22 +44,21 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 			map_node.Water.set_cell(x + 1, y, 16, false, false, false, get_autotile(map_node.Water, x + 1, y))
 		if map_node.Water.get_cell(x, y + 1) != TileMap.INVALID_CELL:
 			map_node.Water.set_cell(x, y + 1, 16, false, false, false, get_autotile(map_node.Water, x, y + 1))
-
 		map_node.Water.update_bitmask_area(Vector2(tile[0], tile[1]))
+	for tile in map_data["oneway"]:
+		map_node.Oneway.set_cell(tile[0], tile[1], 9)
 	for tile in map_data["sticky"]:
 		map_node.Sticky.set_cell(tile[0], tile[1], 8)
 		map_node.Sticky.update_bitmask_area(Vector2(tile[0], tile[1]))
-	for tile in map_data["oneway"]:
-		map_node.Oneway.set_cell(tile[0], tile[1], 9)
 		# TODO: oneway autotiling
 	for item_data in map_data["item_slot"]:
-		var item = MapManager.create_item_node(item_data["type"])
-		item.load_map_data(item_data)
-		map_node.ObjectSlot.add_child(item)
+		var item_node := create_item_node(item_data["type"])
+		item_node.load_map_data(item_data)
+		map_node.ObjectSlot.add_child(item_node)
 	for door_data in map_data["door_slot"]:
-		var door = MapManager.create_item_node(door_data["type"])
-		door.load_map_data(door_data)
-		map_node.DoorSlot.add_child(door)
+		var door_node = create_item_node(door_data["type"])
+		door_node.load_map_data(door_data)
+		map_node.DoorSlot.add_child(door_node)
 
 # TODO: generic code!!!
 func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2: 

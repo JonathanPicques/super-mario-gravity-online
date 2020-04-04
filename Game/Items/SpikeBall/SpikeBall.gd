@@ -53,5 +53,5 @@ func load_map_data(item_data):
 	clockwise = item_data["clockwise"]
 	length = item_data["length"]
 
-func quadtree_item_rect():
+func quadtree_item_rect() -> Rect2:
 	return Rect2(position, $Offset/Ball.get_rect().size)

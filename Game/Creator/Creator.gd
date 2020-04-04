@@ -111,7 +111,7 @@ func set_state(new_state: int):
 			var player_node := MultiplayerManager.spawn_player_node(player)
 			yield(get_tree(), "idle_frame")
 			var player_camera_node := add_player_screen_camera(player.id, player_node)
-			player_node.position = map_node.ObjectSlot.get_node("StartCage").position + map_node.ObjectSlot.get_node("StartCage").get_node("Spawn1").position
+			player_node.position = map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
 			player_camera_node.current = true
 
 # select_drawer selects the given drawer and focuses it.
@@ -257,7 +257,7 @@ func _on_GoToStartButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = map_node.ObjectSlot.get_node("StartCage").position + map_node.ObjectSlot.get_node("StartCage").get_node("Spawn1").position
+	CreatorCamera.position = map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:

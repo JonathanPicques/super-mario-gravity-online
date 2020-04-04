@@ -9,12 +9,15 @@ var flag_start_pos := Vector2()
 # @impure
 func init():
 	if options.has("map"):
+		# TODO: this will disappear when all maps are json based.
 		# load map node from godot path
 		map_node = load(options.map).instance()
 		# add map to game mode tree
 		MapSlot.add_child(map_node)
 		# wait for map to be ready
 		yield(get_tree(), "idle_frame")
+		# init map
+		map_node.init()
 	elif options.has("map_path"):
 		# load map from file
 		yield(load_map(options.map_path), "completed")
@@ -24,8 +27,7 @@ func init():
 	# assign flag positions
 	flag_end_pos = map_node.ObjectSlot.get_node("FlagEnd").position
 	flag_distance = 0.0
-	flag_start_pos = map_node.ObjectSlot.get_node("StartCage").position + map_node.ObjectSlot.get_node("StartCage").get_node("Spawn1").position
-	print("START POS = ", flag_start_pos)
+	flag_start_pos = map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
 	# compute flag start to flag end distance
 	compute_flag_distance()
 

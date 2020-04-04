@@ -16,5 +16,5 @@ func load_map_data(item_data):
 	position.y = item_data["position"][1]
 	rotation_degrees = item_data["rotation"]
 
-func quadtree_item_rect():
+func quadtree_item_rect() -> Rect2:
 	return Rect2(position, $Sprite.get_rect().size)

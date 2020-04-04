@@ -19,5 +19,5 @@ func load_map_data(item_data):
 	scale.x = item_data["scale"][0]
 	scale.y = item_data["scale"][1]
 
-func quadtree_item_rect():
+func quadtree_item_rect() -> Rect2:
 	return Rect2(position, Vector2(16, 16))

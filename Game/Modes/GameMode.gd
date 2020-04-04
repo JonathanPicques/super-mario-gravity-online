@@ -44,6 +44,8 @@ func load_map(map_name: String):
 	# fill map
 	MapManager.fill_map_from_data(map_node, parse_json(file.get_line()))
 	file.close()
+	# init map
+	map_node.init()
 
 # @impure
 func set_pixel_ratio(pixel_ratio: float):
