@@ -46,6 +46,10 @@ func _process(delta: float):
 func init():
 	# load map
 	yield(load_map("Debug"), "completed")
+	# remove players
+	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.inverted)
+	for player in players:
+		MultiplayerManager.remove_player(player.id)
 	# remove popup
 	remove_child(GamePopup)
 	GamePopup.queue_free()
@@ -301,4 +305,3 @@ func _on_ItemButton9_pressed(): select_drawer(8)
 func _on_ItemButton10_pressed(): select_drawer(9)
 func _on_ItemButton11_pressed(): select_drawer(10)
 func _on_ItemButton12_pressed(): select_drawer(11)
-

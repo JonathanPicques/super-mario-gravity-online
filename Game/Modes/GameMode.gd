@@ -123,7 +123,7 @@ func get_player_screen_camera(player_id: int) -> PlayerCameraNode:
 # add a camera compatible with split screen for the given player.
 # @impure
 func add_player_screen_camera(player_id: int, player_node: PlayerNode) -> PlayerCameraNode:
-	var player_camera_node := MultiplayerManager.create_player_camera(player_id, player_node)
+	var player_camera_node := MultiplayerManager.create_player_camera_node(player_id, player_node)
 	match player_id:
 		0: Viewport1.add_child(player_camera_node)
 		1: Viewport2.add_child(player_camera_node)

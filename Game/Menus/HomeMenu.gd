@@ -46,5 +46,5 @@ func _process(delta: float):
 		
 		var lead_player_node = MultiplayerManager.get_player_node(lead_player.id)
 		if lead_player_node:
-			player_camera_node = MultiplayerManager.create_player_camera(lead_player.id, lead_player_node)
+			player_camera_node = MultiplayerManager.create_player_camera_node(lead_player.id, lead_player_node)
 			add_child(player_camera_node)

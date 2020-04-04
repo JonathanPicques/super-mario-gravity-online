@@ -300,7 +300,7 @@ func replace_player_node(player: Dictionary, new_player_node: PlayerNode) -> Pla
 ##########################
 
 # @pure
-func create_player_camera(player_id: int, player_node = null) -> PlayerCameraNode:
+func create_player_camera_node(player_id: int, player_node = null) -> PlayerCameraNode:
 	var player_camera: PlayerCameraNode = PlayerCamera.instance()
 	player_camera.player_id = player_id
 	player_camera.player_node = player_node if not null else get_player_node(player_id)
