@@ -75,7 +75,7 @@ var block_input := false
 func _on_MapButton1_pressed(): 
 	if not block_input:
 		block_input = true
-		start_game(maps[0]["map_scene_path"])
+		start_game_alt(maps[0]["title"])
 
 # @signal
 # @impure
@@ -87,8 +87,7 @@ func _on_MapButton1_focus_entered():
 func _on_MapButton2_pressed():
 	if not block_input:
 		block_input = true
-		#start_game_alt(maps[1]["title"])
-		start_game(maps[1]["map_scene_path"])
+		start_game_alt(maps[1]["title"])
 
 # @signal
 # @impure
@@ -100,7 +99,7 @@ func _on_MapButton2_focus_entered():
 func _on_MapButton3_pressed():
 	if not block_input:
 		block_input = true
-		start_game(maps[2]["map_scene_path"])
+		start_game_alt(maps[2]["title"])
 
 # @signal
 # @impure
@@ -112,8 +111,7 @@ func _on_MapButton3_focus_entered():
 func _on_MapButton4_pressed():
 	if not block_input:
 		block_input = true
-		#start_game_alt(maps[3]["title"])
-		start_game(maps[3]["map_scene_path"])
+		start_game_alt(maps[3]["title"])
 # @signal
 # @impure
 func _on_MapButton4_focus_entered():
