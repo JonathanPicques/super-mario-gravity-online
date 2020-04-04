@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
@@ -9,25 +9,26 @@
 [ext_resource path="res://Game/Creator/Textures/GoToEnd.png" type="Texture" id=7]
 [ext_resource path="res://Game/Creator/Textures/GoToBegin.png" type="Texture" id=8]
 [ext_resource path="res://Game/Creator/Textures/Play.png" type="Texture" id=9]
-[ext_resource path="res://Game/Creator/Textures/Icons/ItemsBar-1.png (2).png" type="Texture" id=10]
+[ext_resource path="res://Game/Creator/Textures/ItemBar.png" type="Texture" id=10]
 [ext_resource path="res://Game/Creator/Textures/PlayPressed.png" type="Texture" id=11]
 [ext_resource path="res://Game/Creator/Textures/Settings.png" type="Texture" id=12]
-[ext_resource path="res://Game/Creator/Textures/Icons/ColorBlockIcon.png" type="Texture" id=13]
+[ext_resource path="res://Game/Items/PowerBox/Textures/Idle.png" type="Texture" id=13]
 [ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
+[ext_resource path="res://Game/Items/Door/Textures/Door.png" type="Texture" id=16]
 [ext_resource path="res://Game/Creator/Quadtree.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Game/Creator/History.gd" type="Script" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
-[ext_resource path="res://Game/Creator/Textures/Icons/ColorSwitchIcon.png" type="Texture" id=20]
-[ext_resource path="res://Game/Creator/Textures/Icons/PowerBoxIcon.png" type="Texture" id=21]
+[ext_resource path="res://Game/Items/Spikes/Textures/Spike.png" type="Texture" id=20]
+[ext_resource path="res://Game/Items/SpikeBall/Textures/SpikeBall.png" type="Texture" id=21]
 [ext_resource path="res://Game/Creator/Textures/Icons/SpikeIcon.png" type="Texture" id=22]
 [ext_resource path="res://Game/Creator/Textures/Icons/TrampolineIcon.png" type="Texture" id=23]
 [ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
 [ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
-[ext_resource path="res://Game/Creator/Textures/Icons/SpikeBallIcon.png" type="Texture" id=26]
+[ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorBlockOffAmber.png" type="Texture" id=26]
 [ext_resource path="res://Game/Creator/Drawers/LiquidDrawer.gd" type="Script" id=27]
 [ext_resource path="res://Game/Creator/Textures/Icons/OnewayIcon.png" type="Texture" id=28]
-[ext_resource path="res://Game/Creator/Textures/Icons/DoorIcon.png" type="Texture" id=29]
+[ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorSwitchOffAmber.png" type="Texture" id=29]
 [ext_resource path="res://Game/Creator/Textures/Icons/StickyIcon.png" type="Texture" id=30]
 [ext_resource path="res://Game/Creator/Creator.gd" type="Script" id=31]
 [ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=32]
@@ -333,7 +334,7 @@ __meta__ = {
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton2" index="0"]
 position = Vector2( 11, 11 )
-texture = ExtResource( 20 )
+texture = ExtResource( 29 )
 
 [node name="ItemButton3" type="TextureButton" parent="GUILayer/GUI/Drawers" index="2"]
 anchor_right = 0.15
@@ -351,7 +352,7 @@ item_type = "ColorBlock"
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton3" index="0"]
 position = Vector2( 11, 11 )
-texture = ExtResource( 13 )
+texture = ExtResource( 26 )
 
 [node name="ItemButton4" type="TextureButton" parent="GUILayer/GUI/Drawers" index="3"]
 anchor_right = 0.15
@@ -370,7 +371,8 @@ item_type = "PowerBox"
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton4" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.791667, 0.791667 )
-texture = ExtResource( 21 )
+texture = ExtResource( 13 )
+hframes = 27
 
 [node name="ItemButton5" type="TextureButton" parent="GUILayer/GUI/Drawers" index="4"]
 anchor_right = 0.15
@@ -407,7 +409,7 @@ item_type = "SpikeBall"
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton6" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.714286, 0.714286 )
-texture = ExtResource( 26 )
+texture = ExtResource( 21 )
 
 [node name="ItemButton7" type="TextureButton" parent="GUILayer/GUI/Drawers" index="6"]
 anchor_right = 0.15
@@ -425,7 +427,8 @@ item_type = "Spikes"
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton7" index="0"]
 position = Vector2( 11, 11 )
-texture = ExtResource( 22 )
+texture = ExtResource( 20 )
+hframes = 20
 
 [node name="ItemButton8" type="TextureButton" parent="GUILayer/GUI/Drawers" index="7"]
 anchor_right = 0.15
@@ -517,7 +520,8 @@ item_type = "Door"
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton12" index="0"]
 position = Vector2( 11, 11 )
 scale = Vector2( 0.3125, 0.3125 )
-texture = ExtResource( 29 )
+texture = ExtResource( 16 )
+hframes = 13
 
 [node name="Bubble" type="NinePatchRect" parent="GUILayer/GUI" index="4"]
 visible = false

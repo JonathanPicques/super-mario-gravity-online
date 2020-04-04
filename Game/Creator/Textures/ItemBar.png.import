@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ItemsBar.png-44d3fcf147ec116e15576dc145c1781f.stex"
+path="res://.import/ItemBar.png-0af2173d502b4551f70f5fe83cbb3303.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/ItemsBar.png"
-dest_files=[ "res://.import/ItemsBar.png-44d3fcf147ec116e15576dc145c1781f.stex" ]
+source_file="res://Game/Creator/Textures/ItemBar.png"
+dest_files=[ "res://.import/ItemBar.png-0af2173d502b4551f70f5fe83cbb3303.stex" ]
 
 [params]
 
