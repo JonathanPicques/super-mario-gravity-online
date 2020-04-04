@@ -31,7 +31,6 @@ func create_item_node(item_type: String) -> Node2D:
 # fill_map_from_data fills the map given a map_data dictionary.
 # @impure
 func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
-	# TODO: handle oneway (use its own tilemap?)
 	for tile in map_data["wall"]:
 		map_node.Wall.set_cell(tile[0], tile[1], 15)
 		map_node.Wall.update_bitmask_area(Vector2(tile[0], tile[1]))

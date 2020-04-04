@@ -45,7 +45,7 @@ func _process(delta: float):
 # @override
 func init():
 	# load map
-	yield(load_map("Spike corridor"), "completed")
+	yield(load_map("Debug"), "completed")
 	# remove popup
 	remove_child(GamePopup)
 	GamePopup.queue_free()

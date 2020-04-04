@@ -239,7 +239,7 @@ texture = ExtResource( 12 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="DecorSlot" index="1"]
 position = Vector2( 713, 184 )
 frames = SubResource( 50 )
-frame = 15
+frame = 21
 speed_scale = 4.0
 playing = true
 

@@ -26,7 +26,6 @@ func get_tilemap_data(tilemap_node):
 func get_map_data(name, description, theme) -> Dictionary:
 	var items = []
 	for item in $ObjectSlot.get_children():
-		print(item)
 		items.append(item.get_map_data())
 	var doors = []
 	for door in $DoorSlot.get_children():

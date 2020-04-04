@@ -154,34 +154,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MapButton5" type="TextureButton" parent="GUI" index="5"]
-margin_left = 48.0
-margin_top = 208.0
-margin_right = 208.0
-margin_bottom = 240.0
-focus_neighbour_top = NodePath("../MapButton3")
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 5 )
-texture_hover = ExtResource( 5 )
-texture_focused = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="GUI/MapButton5" index="0"]
-margin_right = 160.0
-margin_bottom = 32.0
-rect_pivot_offset = Vector2( 64, 16 )
-custom_fonts/font = ExtResource( 7 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-text = "Custom Map"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BackToLobbyLabel" type="Label" parent="GUI" index="6"]
+[node name="BackToLobbyLabel" type="Label" parent="GUI" index="5"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 54.0
@@ -195,7 +168,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="GUI" index="7"]
+[node name="TextureRect" type="TextureRect" parent="GUI" index="6"]
 margin_left = 240.0
 margin_top = 48.0
 margin_right = 448.0
@@ -222,5 +195,3 @@ texture = ExtResource( 4 )
 [connection signal="pressed" from="GUI/MapButton3" to="." method="_on_MapButton3_pressed"]
 [connection signal="focus_entered" from="GUI/MapButton4" to="." method="_on_MapButton4_focus_entered"]
 [connection signal="pressed" from="GUI/MapButton4" to="." method="_on_MapButton4_pressed"]
-[connection signal="focus_entered" from="GUI/MapButton5" to="." method="_on_MapButton5_focus_entered"]
-[connection signal="pressed" from="GUI/MapButton5" to="." method="_on_MapButton5_pressed"]

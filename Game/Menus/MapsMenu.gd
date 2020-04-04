@@ -26,19 +26,11 @@ const maps := [
 		"map_scene_path": "res://Game/Maps/CrazyTower.tscn",
 	},
 	{
-		"title": "Spike Corridor",
+		"title": "Spike corridor",
 		"score": 8,
 		"author": "jeremtab",
 		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
 		"difficulty": "hard",
-		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
-	},
-	{
-		"title": "Custom Map",
-		"score": 42,
-		"author": "rootkernel & the world",
-		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
-		"difficulty": "inferno",
 		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
 	}
 ]
@@ -95,7 +87,7 @@ func _on_MapButton1_focus_entered():
 func _on_MapButton2_pressed():
 	if not block_input:
 		block_input = true
-		start_game(maps[1]["map_scene_path"])
+		start_game_alt(maps[1]["title"])
 
 # @signal
 # @impure
@@ -107,7 +99,7 @@ func _on_MapButton2_focus_entered():
 func _on_MapButton3_pressed():
 	if not block_input:
 		block_input = true
-		start_game(maps[2]["map_scene_path"])
+		start_game_alt(maps[2]["title"])
 
 # @signal
 # @impure
@@ -119,21 +111,9 @@ func _on_MapButton3_focus_entered():
 func _on_MapButton4_pressed():
 	if not block_input:
 		block_input = true
-		start_game(maps[3]["map_scene_path"])
+		start_game_alt(maps[3]["title"])
 
 # @signal
 # @impure
 func _on_MapButton4_focus_entered():
 	set_map_infos(3)
-
-# @signal
-# @impure
-func _on_MapButton5_pressed():
-	if not block_input:
-		block_input = true
-		start_game_alt("res://Maps/debug.json")
-
-# @signal
-# @impure
-func _on_MapButton5_focus_entered():
-	set_map_infos(4)
