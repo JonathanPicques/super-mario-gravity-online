@@ -33,34 +33,29 @@ func _process(delta):
 		Game.goto_lobby_menu_scene()
 
 func _on_RandomMap_pressed():
-	MapManager.current_map = "RANDOM"
+	MapManager.current_map = "Random"
 	Game.goto_lobby_menu_scene()
 
 func _on_MapButton1_pressed():
-	print("Select " + map_infos[0]["filename"])
 	MapManager.current_map = map_infos[0]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 
 func _on_MapButton2_pressed():
-	print("Select " + map_infos[1]["filename"])
 	MapManager.current_map = map_infos[1]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 
 func _on_MapButton3_pressed():
-	print("Select " + map_infos[2]["filename"])
 	MapManager.current_map = map_infos[2]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 
 func _on_MapButton4_pressed():
-	print("Select " + map_infos[3]["filename"])
 	MapManager.current_map = map_infos[3]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 func _on_MapButton5_pressed():
-	print("Select " + map_infos[4]["filename"])
 	MapManager.current_map = map_infos[4]["filename"]
 	Game.goto_lobby_menu_scene()	
 	

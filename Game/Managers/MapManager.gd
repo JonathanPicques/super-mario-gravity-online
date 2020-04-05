@@ -34,7 +34,7 @@ func create_item_node(item_type: String) -> Node2D:
 # @impure
 # @async
 func load_current_map():
-	if current_map == "RANDOM":
+	if current_map == "Random":
 		print("TODO: Load random map")
 		return
 
