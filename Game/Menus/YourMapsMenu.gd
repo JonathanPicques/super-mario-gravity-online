@@ -16,24 +16,24 @@ func _ready():
 	# music
 	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# GUI
-	$GUI/RandomMap.grab_focus()
+	$GUI/RandomMapButton.grab_focus()
 	
 	map_infos = MapManager.get_maps_infos()
 	
 	for i in range(0, MapButtons.size() - 1):
 		if i < map_infos.size():
 			MapButtons[i].get_node("Label").text = map_infos[i].name
-			MapButtons[i].get_node("MapPreview").texture = load("res://Game/Maps/Textures/DebugPreview.png")
+			MapButtons[i].get_node("Preview").texture = load("res://Maps/" + map_infos[i]["filename"].get_basename() + ".png")
 		else:
 			MapButtons[i].get_node("Label").text = ""
-			MapButtons[i].get_node("MapPreview").texture = null
+			MapButtons[i].get_node("Preview").texture = null
 
 # @impure
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		Game.goto_lobby_menu_scene()
 
-func _on_RandomMap_pressed():
+func _on_RandomMapButton_pressed():
 	MapManager.current_map = "Random"
 	open_previous_scene()
 
@@ -70,3 +70,4 @@ func open_previous_scene():
 		Game.goto_creator_scene()
 	else:
 		print("Unsupported scene ", previous_scene)
+

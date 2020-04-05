@@ -21,10 +21,11 @@ func _ready():
 		$Icons/KeyKeyboardConfirm.visible = lead_player.input_device_id == 0
 	# Map
 	if MapManager.current_map == "Random":
-		$DecorSlot/Sprite/MapName.text = "Random"
+		$GUI/MapButton/Label.text = "Random"
 	else:
 		var map_info = MapManager.load_map_json(MapManager.current_map)
-		$DecorSlot/Sprite/MapName.text = map_info["name"]
+		$GUI/MapButton/Label.text = map_info["name"]
+		$GUI/MapButton/Preview.texture = load("res://Maps/" + MapManager.current_map.get_basename() + ".png")
 	# Set initial status
 	match MultiplayerManager.is_online():
 		true: set_state(State.public)
@@ -131,3 +132,7 @@ func on_online():
 # @impure
 func on_offline():
 	set_state(State.offline)
+
+
+func _on_MapButton_pressed():
+	Game.goto_select_map_scene()

@@ -234,11 +234,22 @@ func is_cell_free(pos: Vector2) -> bool:
 	# TODO: water is not in quadtree, nor decors
 	return Quadtree.get_item(Rect2(pos, Vector2(MapManager.cell_size, MapManager.cell_size))) == null
 
+func update_preview():
+	 # Wait for game to actually start
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	var img = get_viewport().get_texture()
+	img.get_data().save_png('res://Maps/' + MapManager.current_map.get_basename() + '.png')
+
 # @signal
 func _on_PlayButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.playing)
+	update_preview()	
 
 # @signal
 func _on_UndoButton_pressed():
