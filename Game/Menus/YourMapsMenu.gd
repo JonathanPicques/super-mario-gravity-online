@@ -43,23 +43,6 @@ onready var MapButtons := [
 	$GUI/MapButton5
 ]
 
-func list_files_in_directory(path):
-	var files = []
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin()
-
-	while true:
-		var file = dir.get_next()
-		if file == "":
-			break
-		elif not file.begins_with("."):
-			files.append(file)
-
-	dir.list_dir_end()
-
-	return files
-
 # @impure
 func _ready():
 	# music
@@ -67,7 +50,7 @@ func _ready():
 	# GUI
 	$GUI/RandomMap.grab_focus()
 	
-	var files = list_files_in_directory("res://Maps/")
+	var files = MapManager.get_maps_infos()
 	print(files)
 	
 	for i in range(0, MapButtons.size() - 1):

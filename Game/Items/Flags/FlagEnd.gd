@@ -15,6 +15,7 @@ func get_map_data() -> Dictionary:
 	}
 
 func load_map_data(item_data):
+	print("LOAD FLAG END")
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
 

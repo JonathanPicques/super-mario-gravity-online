@@ -26,26 +26,6 @@ func start():
 	started = true
 	options.clear()
 
-# load_map loads the given map into the game mode.
-# @impure
-# @async
-func load_map(map_name: String):
-	map_node = load("res://Game/Maps/Map.tscn").instance()
-	# add map to game mode tree
-	MapSlot.add_child(map_node)
-	# load map data
-	var file := File.new()
-	var map_path := "res://Maps/" + map_name + ".json"
-	var open_result := file.open(map_path, File.READ)
-	if open_result != OK:
-		print("failed to load map %s" % map_path)
-		return
-	# fill map
-	yield(MapManager.fill_map_from_data(map_node, parse_json(file.get_line())), "completed")
-	file.close()
-	# init map
-	map_node.init()
-
 # @impure
 func set_pixel_ratio(pixel_ratio: float):
 	get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(512 * pixel_ratio, 288 * pixel_ratio), 1)

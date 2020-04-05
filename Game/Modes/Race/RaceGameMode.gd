@@ -20,7 +20,7 @@ func init():
 		map_node.init()
 	elif options.has("map_path"):
 		# load map from file
-		yield(load_map(options.map_path), "completed")
+		yield(MapManager.load_current_map(), "completed")
 	else:
 		print("game mode init has no map")
 		assert(false)

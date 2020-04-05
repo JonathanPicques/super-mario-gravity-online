@@ -3,6 +3,8 @@ class_name MapManagerNode
 
 const cell_size := 16.0
 
+var current_map := "RANDOM"
+
 const item_scenes := {
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
 	"Spikes": preload("res://Game/Items/Spikes/Spikes.tscn"),
@@ -27,6 +29,36 @@ func snap_value(value: float) -> int:
 # @impure
 func create_item_node(item_type: String) -> Node2D:
 	return item_scenes[item_type].instance()
+
+# load_current_map loads the given map into the game mode.
+# @impure
+# @async
+func load_current_map():
+	if current_map == "RANDOM":
+		print("TODO: Load random map")
+		return
+
+	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
+	# add map to game mode tree
+	Game.game_mode_node.MapSlot.add_child(Game.map_node)
+	# load map data
+	var map_json = load_map_json(current_map)
+
+	# fill map
+	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
+	# init map
+	Game.map_node.init()
+
+func load_map_json(map_name: String) -> Dictionary:
+	var file := File.new()
+	var map_path := "res://Maps/" + map_name
+	var open_result := file.open(map_path, File.READ)
+	if open_result != OK:
+		print("failed to load map %s" % map_path) # TODO: find a better way to handle errors
+		assert(false)
+	var result = parse_json(file.get_line())
+	file.close()
+	return result
 
 # fill_map_from_data fills the map given a map_data dictionary.
 # @impure
@@ -66,6 +98,30 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		i += 1
 	yield(get_tree(), "idle_frame")
 
+
 # TODO: generic code!!!
 func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2: 
 	return Vector2(0, 0 if tilemap.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
+
+
+func get_maps_infos() -> Array:
+	var map_files = _list_files_in_directory("res://Maps/")
+	print(map_files)
+	return []
+
+# @private
+func _list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+	return files

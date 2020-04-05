@@ -26,7 +26,7 @@ const maps := [
 		"map_scene_path": "res://Game/Maps/CrazyTower.tscn",
 	},
 	{
-		"title": "Spike corridor",
+		"title": "Spikes corridor",
 		"score": 8,
 		"author": "jeremtab",
 		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
