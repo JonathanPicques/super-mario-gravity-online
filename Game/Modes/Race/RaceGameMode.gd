@@ -20,10 +20,12 @@ func init():
 		map_node.init()
 	elif options.has("map_path"):
 		# load map from file
+		MapManager.current_map = "Debug.json"
 		yield(MapManager.load_current_map(), "completed")
 	else:
 		print("game mode init has no map")
 		assert(false)
+	map_node = Game.map_node
 	# assign flag positions
 	flag_end_pos = map_node.ObjectSlot.get_node("FlagEnd").position
 	flag_distance = 0.0

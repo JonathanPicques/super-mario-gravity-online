@@ -45,7 +45,8 @@ func _process(delta: float):
 # @override
 func init():
 	# load map
-	yield(load_map("Debug"), "completed")
+	MapManager.current_map = "Debug.json"
+	yield(MapManager.load_current_map(), "completed")
 	# remove players
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.inverted)
 	for player in players:

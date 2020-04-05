@@ -46,6 +46,8 @@ func load_current_map():
 
 	# fill map
 	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
+	
+	print(Game.map_node)
 	# init map
 	Game.map_node.init()
 
