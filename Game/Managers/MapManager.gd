@@ -3,7 +3,7 @@ class_name MapManagerNode
 
 const cell_size := 16.0
 
-var current_map := "RANDOM"
+var current_map := "Debug.json" # TODO: random
 
 const item_scenes := {
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
@@ -47,7 +47,6 @@ func load_current_map():
 	# fill map
 	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
 	
-	print(Game.map_node)
 	# init map
 	Game.map_node.init()
 
@@ -107,9 +106,17 @@ func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2:
 
 
 func get_maps_infos() -> Array:
+	var result = []
 	var map_files = _list_files_in_directory("res://Maps/")
-	print(map_files)
-	return []
+	for map_file in map_files:
+		var map_json = load_map_json(map_file)
+		result.append({
+			"filename": map_file,
+			"name": map_json["name"],
+			"description": map_json["description"],
+			"theme": map_json["theme"],
+		})
+	return result
 
 # @private
 func _list_files_in_directory(path):

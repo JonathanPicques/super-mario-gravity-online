@@ -1,40 +1,5 @@
 extends Navigation2D
 
-const maps := [
-	{
-		"title": "Debug",
-		"score": 0,
-		"author": "rootkernel",
-		"preview": "res://Game/Maps/Textures/DebugPreview.png",
-		"difficulty": "easy",
-		"map_scene_path": "res://Game/Maps/Debug.tscn",
-	},
-	{
-		"title": "Rainbow garden",
-		"score": 6,
-		"author": "jeremtab",
-		"preview": "res://Game/Maps/Textures/RainbowGardenPreview.png",
-		"difficulty": "easy",
-		"map_scene_path": "res://Game/Maps/RainbowGarden.tscn",
-	},
-	{
-		"title": "Crazy tower",
-		"score": 7,
-		"author": "jeremtab",
-		"preview": "res://Game/Maps/Textures/CrazyTowerPreview.png",
-		"difficulty": "medium",
-		"map_scene_path": "res://Game/Maps/CrazyTower.tscn",
-	},
-	{
-		"title": "Spike Corridor",
-		"score": 8,
-		"author": "jeremtab",
-		"preview": "res://Game/Maps/Textures/SpikeCorridorPreview.png",
-		"difficulty": "hard",
-		"map_scene_path": "res://Game/Maps/SpikesCorridor.tscn",
-	}
-]
-
 onready var MapButtons := [
 	$GUI/MapButton1,
 	$GUI/MapButton2,
@@ -43,6 +8,8 @@ onready var MapButtons := [
 	$GUI/MapButton5
 ]
 
+var map_infos = []
+
 # @impure
 func _ready():
 	# music
@@ -50,13 +17,12 @@ func _ready():
 	# GUI
 	$GUI/RandomMap.grab_focus()
 	
-	var files = MapManager.get_maps_infos()
-	print(files)
+	map_infos = MapManager.get_maps_infos()
 	
 	for i in range(0, MapButtons.size() - 1):
-		if i < maps.size():
-			MapButtons[i].get_node("Label").text = maps[i].title
-			MapButtons[i].get_node("MapPreview").texture = load(maps[i].preview)
+		if i < map_infos.size():
+			MapButtons[i].get_node("Label").text = map_infos[i].name
+			MapButtons[i].get_node("MapPreview").texture = load("res://Game/Maps/Textures/DebugPreview.png")
 		else:
 			MapButtons[i].get_node("Label").text = ""
 			MapButtons[i].get_node("MapPreview").texture = null
@@ -67,30 +33,35 @@ func _process(delta):
 		Game.goto_lobby_menu_scene()
 
 func _on_RandomMap_pressed():
-	print("Select random map")
+	MapManager.current_map = "RANDOM"
 	Game.goto_lobby_menu_scene()
 
 func _on_MapButton1_pressed():
-	print("Select first map")
+	print("Select " + map_infos[0]["filename"])
+	MapManager.current_map = map_infos[0]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 
 func _on_MapButton2_pressed():
-	print("Select map 2")
+	print("Select " + map_infos[1]["filename"])
+	MapManager.current_map = map_infos[1]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 
 func _on_MapButton3_pressed():
-	print("Select map 3")
+	print("Select " + map_infos[2]["filename"])
+	MapManager.current_map = map_infos[2]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 
 func _on_MapButton4_pressed():
-	print("Select map 4")
+	print("Select " + map_infos[3]["filename"])
+	MapManager.current_map = map_infos[3]["filename"]
 	Game.goto_lobby_menu_scene()	
 
 func _on_MapButton5_pressed():
-	print("Select map 5")
+	print("Select " + map_infos[4]["filename"])
+	MapManager.current_map = map_infos[4]["filename"]
 	Game.goto_lobby_menu_scene()	
 	
 func _on_PreviousButton_pressed():

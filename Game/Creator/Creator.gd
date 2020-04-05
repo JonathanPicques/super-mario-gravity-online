@@ -45,8 +45,9 @@ func _process(delta: float):
 # @override
 func init():
 	# load map
-	MapManager.current_map = "Debug.json"
+	MapManager.current_map = "Debug.json" # TODO: Add a default creator map to load here or load the last edited map
 	yield(MapManager.load_current_map(), "completed")
+	map_node = Game.map_node
 	# remove players
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.inverted)
 	for player in players:

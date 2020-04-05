@@ -43,7 +43,8 @@ func _process(delta: float):
 		set_process(false)
 		# stop matchmaking
 		MultiplayerManager.finish_matchmaking()
-		return Game.goto_maps_menu_scene()
+#		return Game.goto_maps_menu_scene()
+		return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map_path = "osef" })
 	# add a local player
 	for input_device_id in range(0, 5):
 		if InputManager.is_device_action_just_pressed(input_device_id, "accept") and not InputManager.is_device_used_by_player(input_device_id):
