@@ -57,6 +57,7 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		map_node.ObjectSlot.add_child(item_node)
 	for door_data in map_data["door_slot"]:
 		var door_node = create_item_node(door_data["type"])
+		door_node.name = door_data["name"]
 		map_node.DoorSlot.add_child(door_node)
 	yield(get_tree(), "idle_frame")
 	var i = 0
