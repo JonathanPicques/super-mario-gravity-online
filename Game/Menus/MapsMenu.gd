@@ -112,6 +112,7 @@ func _on_MapButton4_pressed():
 	if not block_input:
 		block_input = true
 		start_game_alt(maps[3]["title"])
+
 # @signal
 # @impure
 func _on_MapButton4_focus_entered():
