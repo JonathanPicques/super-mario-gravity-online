@@ -6,7 +6,7 @@ var state = State.none
 
 # @impure
 func _ready():
-	# music
+	# Music
 	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# Set icons
 	var lead_player = MultiplayerManager.get_lead_player()
@@ -19,6 +19,12 @@ func _ready():
 		$Icons/KeyKeyboardAlt2.visible = lead_player.input_device_id == 0
 		$Icons/KeyKeyboardCancel.visible = lead_player.input_device_id == 0
 		$Icons/KeyKeyboardConfirm.visible = lead_player.input_device_id == 0
+	# Map
+	if MapManager.current_map == "Random":
+		$DecorSlot/Sprite/MapName.text = "Random"
+	else:
+		var map_info = MapManager.load_map_json(MapManager.current_map)
+		$DecorSlot/Sprite/MapName.text = map_info["name"]
 	# Set initial status
 	match MultiplayerManager.is_online():
 		true: set_state(State.public)
@@ -39,12 +45,12 @@ func _process(delta: float):
 		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
 	if lead_player and InputManager.is_player_action_just_pressed(lead_player.id, "accept") and MultiplayerManager.is_every_player_ready():
-		# disable process to avoid calling goto_maps_menu_scene multiple times.
+		# disable process to avoid calling goto_game_mode_scene multiple times.
 		set_process(false)
 		# stop matchmaking
 		MultiplayerManager.finish_matchmaking()
 #		return Game.goto_maps_menu_scene()
-		return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { map_path = "osef" })
+		return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", {})
 	# add a local player
 	for input_device_id in range(0, 5):
 		if InputManager.is_device_action_just_pressed(input_device_id, "accept") and not InputManager.is_device_used_by_player(input_device_id):

@@ -64,7 +64,6 @@ func goto_game_mode_scene(game_mode_scene_path: String, options: Dictionary):
 	yield(screen_transition_start(), "completed")
 	set_scene(game_mode_node)
 	yield(game_mode_node.init(), "completed")
-	map_node = game_mode_node.map_node
 	game_mode_node.start()
 	yield(screen_transition_finish(), "completed")
 

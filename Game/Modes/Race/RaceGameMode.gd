@@ -8,28 +8,12 @@ var flag_start_pos := Vector2()
 # @async
 # @impure
 func init():
-	if options.has("map"):
-		# TODO: this will disappear when all maps are json based.
-		# load map node from godot path
-		map_node = load(options.map).instance()
-		# add map to game mode tree
-		MapSlot.add_child(map_node)
-		# wait for map to be ready
-		yield(get_tree(), "idle_frame")
-		# init map
-		map_node.init()
-	elif options.has("map_path"):
-		# load map from file
-#		MapManager.current_map = "Debug.json"
-		yield(MapManager.load_current_map(), "completed")
-	else:
-		print("game mode init has no map")
-		assert(false)
-	map_node = Game.map_node
+	yield(MapManager.load_current_map(), "completed")
+
 	# assign flag positions
-	flag_end_pos = map_node.ObjectSlot.get_node("FlagEnd").position
+	flag_end_pos = Game.map_node.ObjectSlot.get_node("FlagEnd").position
 	flag_distance = 0.0
-	flag_start_pos = map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
+	flag_start_pos = Game.map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
 	# compute flag start to flag end distance
 	compute_flag_distance()
 
@@ -68,7 +52,7 @@ func end_race(winner_player_id: int):
 # compute_flag_distance computes the distance between the start and end flag.
 # @impure
 func compute_flag_distance():
-	var navigation_path := map_node.get_simple_path(Vector2(flag_start_pos.x, flag_start_pos.y - 10), Vector2(flag_end_pos.x, flag_end_pos.y - 10))
+	var navigation_path := Game.map_node.get_simple_path(Vector2(flag_start_pos.x, flag_start_pos.y - 10), Vector2(flag_end_pos.x, flag_end_pos.y - 10))
 	var navigation_size := navigation_path.size()
 	for i in range(0, navigation_size):
 			var next := i + 1
@@ -84,7 +68,7 @@ func compute_players_ranking():
 		var player_node = MultiplayerManager.get_player_node(player.id)
 		if player_node:
 			var distance := 0.0
-			var navigation_path := map_node.get_simple_path(player_node.position, flag_end_pos)
+			var navigation_path := Game.map_node.get_simple_path(player_node.position, flag_end_pos)
 			var navigation_size := navigation_path.size()
 			for i in range(0, navigation_size):
 				var next := i + 1

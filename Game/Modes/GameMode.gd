@@ -12,7 +12,6 @@ signal item_color_switch_trigger(color)
 
 var started := false
 var options := {}
-var map_node: MapNode
 
 # init is called to init the game mode.
 # @async
@@ -41,8 +40,8 @@ func setup_split_screen():
 	if player_count > 1:
 		set_pixel_ratio(2.0)
 	# clone parallax for each screen
-	var parallax_node = map_node.ParallaxSlot
-	map_node.remove_child(parallax_node)
+	var parallax_node = Game.map_node.ParallaxSlot
+	Game.map_node.remove_child(parallax_node)
 	# adjust split screen layout
 	match player_count:
 		0, 1:

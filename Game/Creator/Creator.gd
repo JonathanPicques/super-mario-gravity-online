@@ -47,7 +47,7 @@ func init():
 	# load map
 	MapManager.current_map = "Debug.json" # TODO: Add a default creator map to load here or load the last edited map
 	yield(MapManager.load_current_map(), "completed")
-	map_node = Game.map_node
+
 	# remove players
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.inverted)
 	for player in players:
@@ -57,15 +57,15 @@ func init():
 	GamePopup.queue_free()
 	GamePopup = null
 	# load tilesets
-	Tilesets["Wall"] = {"name": "Wall", "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": map_node.Wall}
-	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": map_node.Water}
-	Tilesets["Oneway"] = {"name": "Oneway", "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": map_node.Oneway}
-	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": map_node.Sticky}
+	Tilesets["Wall"] = {"name": "Wall", "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": Game.map_node.Wall}
+	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": Game.map_node.Water}
+	Tilesets["Oneway"] = {"name": "Oneway", "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": Game.map_node.Oneway}
+	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": Game.map_node.Sticky}
 	# construct quadtree from existing doors
-	for map_door_node in map_node.DoorSlot.get_children():
+	for map_door_node in Game.map_node.DoorSlot.get_children():
 		Quadtree.add_map_item(map_door_node, map_door_node.get_map_data().type)
 	# construct quadtree from existing items
-	for map_item_node in map_node.ObjectSlot.get_children():
+	for map_item_node in Game.map_node.ObjectSlot.get_children():
 		Quadtree.add_map_item(map_item_node, map_item_node.get_map_data().type)
 	# construct quadtree from existing tiles in tilemaps
 	for tileset in Tilesets.values():
@@ -116,7 +116,7 @@ func set_state(new_state: int):
 			var player_node := MultiplayerManager.spawn_player_node(player)
 			yield(get_tree(), "idle_frame")
 			var player_camera_node := add_player_screen_camera(player.id, player_node)
-			player_node.position = map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
+			player_node.position = Game.map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
 			player_camera_node.current = true
 
 # select_drawer selects the given drawer and focuses it.
@@ -262,7 +262,7 @@ func _on_GoToStartButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
+	CreatorCamera.position = Game.map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:
@@ -273,7 +273,7 @@ func _on_GoToEndButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = map_node.FlagEnd.position
+	CreatorCamera.position = Game.map_node.FlagEnd.position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:
@@ -290,7 +290,7 @@ func _on_HomeButton_pressed():
 	Game.goto_home_menu_scene()
 	
 func _on_SaveButton_pressed():
-	map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
+	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
 
 func _on_OpenButton_pressed():
 	print("Open map")

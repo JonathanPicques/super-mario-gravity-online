@@ -3,7 +3,7 @@ class_name MapManagerNode
 
 const cell_size := 16.0
 
-var current_map := "Debug.json" # TODO: random
+var current_map := "Random"
 
 const item_scenes := {
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
@@ -34,15 +34,15 @@ func create_item_node(item_type: String) -> Node2D:
 # @impure
 # @async
 func load_current_map():
+	var map_to_load = current_map
 	if current_map == "Random":
-		print("TODO: Load random map")
-		return
-
+		var map_files = _list_files_in_directory("res://Maps/")
+		map_to_load = map_files[randi() % map_files.size()]
 	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
 	# add map to game mode tree
 	Game.game_mode_node.MapSlot.add_child(Game.map_node)
 	# load map data
-	var map_json = load_map_json(current_map)
+	var map_json = load_map_json(map_to_load)
 
 	# fill map
 	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
