@@ -78,9 +78,11 @@ func goto_lobby_menu_scene():
 	yield(screen_transition_finish(), "completed")
 
 # @impure
-func goto_select_map_scene():
+func goto_select_map_scene(previous_scene = "Lobby"):
+	var menu = YourMapsMenu.instance()
+	menu.previous_scene = previous_scene
 	yield(screen_transition_start(), "completed")
-	set_scene(YourMapsMenu.instance())
+	set_scene(menu)
 	yield(screen_transition_finish(), "completed")
 
 # @impure

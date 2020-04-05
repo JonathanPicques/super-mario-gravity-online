@@ -45,7 +45,6 @@ func _process(delta: float):
 # @override
 func init():
 	# load map
-	MapManager.current_map = "Debug.json" # TODO: Add a default creator map to load here or load the last edited map
 	yield(MapManager.load_current_map(), "completed")
 
 	# remove players
@@ -293,7 +292,7 @@ func _on_SaveButton_pressed():
 	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
 
 func _on_OpenButton_pressed():
-	print("Open map")
+	Game.goto_select_map_scene("Creator")
 
 func _on_DeleteButton_pressed():
 	print("Delete map: TODO, confirm popup")
