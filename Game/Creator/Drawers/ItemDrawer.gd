@@ -23,7 +23,7 @@ func fill_cell(pos: Vector2):
 	map_item_node.position.x = pos.x
 	map_item_node.position.y = pos.y
 	creator.Quadtree.add_map_item(map_item_node, item_type)
-	creator.map_node.ObjectSlot.add_child(map_item_node)
+	Game.map_node.ObjectSlot.add_child(map_item_node)
 
 # @override
 func clear_cell(pos: Vector2):
