@@ -19,7 +19,7 @@ func _ready():
 	$GUI/RandomMapButton.grab_focus()
 	
 	map_infos = MapManager.get_maps_infos()
-	
+	$GUI/RandomMapButton/Label.text = "Random"
 	for i in range(0, MapButtons.size() - 1):
 		if i < map_infos.size():
 			MapButtons[i].get_node("Label").text = map_infos[i].name
@@ -38,22 +38,32 @@ func _on_RandomMapButton_pressed():
 	open_previous_scene()
 
 func _on_MapButton1_pressed():
+	if 0 > map_infos.size() - 1:
+		return
 	MapManager.current_map = map_infos[0]["filename"]
 	open_previous_scene()
 
 func _on_MapButton2_pressed():
+	if 1 > map_infos.size() - 1:
+		return
 	MapManager.current_map = map_infos[1]["filename"]
 	open_previous_scene()
 
 func _on_MapButton3_pressed():
+	if 2 > map_infos.size() - 1:
+		return
 	MapManager.current_map = map_infos[2]["filename"]
 	open_previous_scene()
 
 func _on_MapButton4_pressed():
+	if 3 > map_infos.size() - 1:
+		return
 	MapManager.current_map = map_infos[3]["filename"]
 	open_previous_scene()
 
 func _on_MapButton5_pressed():
+	if 4 > map_infos.size() - 1:
+		return
 	MapManager.current_map = map_infos[4]["filename"]
 	open_previous_scene()
 	
