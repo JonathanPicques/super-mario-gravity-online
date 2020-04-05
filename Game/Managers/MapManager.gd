@@ -30,6 +30,7 @@ func create_item_node(item_type: String) -> Node2D:
 
 # fill_map_from_data fills the map given a map_data dictionary.
 # @impure
+# @async
 func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 	for tile in map_data["wall"]:
 		map_node.Wall.set_cell(tile[0], tile[1], 15)
@@ -59,11 +60,11 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		var door_node = create_item_node(door_data["type"])
 		door_node.name = door_data["name"]
 		map_node.DoorSlot.add_child(door_node)
-	yield(get_tree(), "idle_frame")
-	var i = 0
+	var i := 0
 	for door_node in map_node.DoorSlot.get_children():
 		door_node.load_map_data(map_data["door_slot"][i])
 		i += 1
+	yield(get_tree(), "idle_frame")
 
 # TODO: generic code!!!
 func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2: 
