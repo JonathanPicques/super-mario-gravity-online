@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RandomMapBackground.png-3f3f248c0e1db3cd3243b0808a05423a.stex"
+path="res://.import/PreviousIcon.png-6a21b2dc7144d52f7d1eab31e6f801b2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/RandomMapBackground.png"
-dest_files=[ "res://.import/RandomMapBackground.png-3f3f248c0e1db3cd3243b0808a05423a.stex" ]
+source_file="res://Game/Menus/Textures/PreviousIcon.png"
+dest_files=[ "res://.import/PreviousIcon.png-6a21b2dc7144d52f7d1eab31e6f801b2.stex" ]
 
 [params]
 

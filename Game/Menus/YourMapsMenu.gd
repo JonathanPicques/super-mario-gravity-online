@@ -10,6 +10,7 @@ onready var MapButtons := [
 var previous_scene := "Lobby"
 
 var map_infos = []
+var page_index = 0
 
 # @impure
 func _ready():
@@ -20,10 +21,14 @@ func _ready():
 	
 	map_infos = MapManager.get_maps_infos()
 	$GUI/RandomMapButton/Label.text = "Random"
+	load_map_buttons()
+
+func load_map_buttons():
 	for i in range(0, MapButtons.size()):
-		if i < map_infos.size():
-			MapButtons[i].get_node("Label").text = map_infos[i].name
-			MapButtons[i].get_node("Preview").texture = load("res://Maps/" + map_infos[i]["filename"].get_basename() + ".png")
+		if i + page_index * 5 < map_infos.size():
+			var map_info = map_infos[i + page_index * 5]
+			MapButtons[i].get_node("Label").text = map_info.name
+			MapButtons[i].get_node("Preview").texture = load("res://Maps/" + map_info["filename"].get_basename() + ".png")
 		else:
 			MapButtons[i].get_node("Label").text = ""
 			MapButtons[i].get_node("Preview").texture = null
@@ -68,10 +73,20 @@ func _on_MapButton5_pressed():
 	open_previous_scene()
 	
 func _on_PreviousButton_pressed():
-	print("Load previous maps")
+	if page_index == 0:
+		print("No previous maps'")
+		return
+	page_index -= 1
+	print("loading previous maps...")
+	load_map_buttons()
 
 func _on_NextButton_pressed():
-	print("Load next maps")
+	if (page_index + 1) * 5 >= map_infos.size():
+		print("No next maps...")
+		return
+	print("Load next maps...")
+	page_index += 1
+	load_map_buttons()
 
 func open_previous_scene():
 	if previous_scene == "Lobby":

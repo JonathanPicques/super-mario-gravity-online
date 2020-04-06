@@ -10,6 +10,7 @@ margin_left = 192.0
 margin_top = 40.0
 margin_right = 320.0
 margin_bottom = 128.0
+rect_pivot_offset = Vector2( 64, 44 )
 focus_neighbour_left = NodePath("../RandomMap")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../MapButton2")
@@ -53,4 +54,8 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
 autostart = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="focus_entered" from="." to="." method="_on_MapButton_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_MapButton_focus_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Transition.png-be0309331decbbc994bafb99987181b4.stex"
+path="res://.import/NextIcon.png-dfc506a47b74c37a9c2a2fd959fce757.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Menus/Textures/Transition.png"
-dest_files=[ "res://.import/Transition.png-be0309331decbbc994bafb99987181b4.stex" ]
+source_file="res://Game/Menus/Textures/NextIcon.png"
+dest_files=[ "res://.import/NextIcon.png-dfc506a47b74c37a9c2a2fd959fce757.stex" ]
 
 [params]
 

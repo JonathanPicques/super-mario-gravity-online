@@ -9,6 +9,7 @@ margin_left = 7.0
 margin_top = 5.0
 margin_right = 39.0
 margin_bottom = 37.0
+rect_pivot_offset = Vector2( 16, 16 )
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 3 )
@@ -17,5 +18,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="focus_entered" from="." to="." method="_on_BigButton_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_BigButton_focus_exited"]

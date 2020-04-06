@@ -3,12 +3,12 @@
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsIcon.png" type="Texture" id=2]
 [ext_resource path="res://Game/Creator/Textures/UndoIcon.png" type="Texture" id=3]
-[ext_resource path="res://Game/Creator/Components/SmallButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Menus/Components/SmallButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Creator/Textures/RedoIcon.png" type="Texture" id=5]
 [ext_resource path="res://Game/Creator/Textures/InfoIcon.png" type="Texture" id=6]
 [ext_resource path="res://Game/Creator/Textures/GotoEndIcon.png" type="Texture" id=7]
 [ext_resource path="res://Game/Creator/Textures/GoToStartIcon.png" type="Texture" id=8]
-[ext_resource path="res://Game/Creator/Components/BigButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Game/Menus/Components/BigButton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Creator/Textures/DrawerBar.png" type="Texture" id=10]
 [ext_resource path="res://Game/Creator/Textures/PlayIcon.png" type="Texture" id=11]
 [ext_resource path="res://Game/Creator/Textures/CloseIcon.png" type="Texture" id=12]
@@ -216,6 +216,12 @@ drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 
+[node name="ViewportContainer2" parent="GridContainer/Control2" index="0"]
+margin_left = 0.0
+margin_top = -1.0
+margin_right = 0.0
+margin_bottom = -1.0
+
 [node name="ViewportContainer4" parent="GridContainer/Control4" index="0"]
 margin_top = 5.0
 margin_bottom = 5.0
@@ -246,7 +252,7 @@ region_rect = Rect2( 0, 0, 512, 288 )
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 32, 128 )
 frames = SubResource( 21 )
-frame = 11
+frame = 10
 speed_scale = 4.0
 playing = true
 centered = false

@@ -36,11 +36,10 @@ func create_item_node(item_type: String) -> Node2D:
 func load_current_map():
 	var map_to_load = current_map
 	if current_map == "Random":
-		var map_files = _list_files_in_directory("res://Maps/", ".json")
+		var map_files = _list_files_in_directory("res://Maps/", ".json", ["Default.json"])
 		map_to_load = map_files[randi() % map_files.size()]
 	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
 	# add map to game mode tree
-	print("Loading map ", map_to_load)
 	Game.game_mode_node.MapSlot.add_child(Game.map_node)
 	# load map data
 	var map_json = load_map_json(map_to_load)
@@ -108,7 +107,7 @@ func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2:
 
 func get_maps_infos() -> Array:
 	var result = []
-	var map_files = _list_files_in_directory("res://Maps/", ".json")
+	var map_files = _list_files_in_directory("res://Maps/", ".json", ["Default.json"])
 	for map_file in map_files:
 		var map_json = load_map_json(map_file)
 		result.append({
