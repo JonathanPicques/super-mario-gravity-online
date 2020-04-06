@@ -4,7 +4,7 @@ class_name PowerFireballNode
 const FireballExplosionScene := preload("res://Game/Effects/Particles/FireballExplosion.tscn")
 
 enum FireballType { basic, follow, follow_ghost }
-const SPEED := 220.0
+const SPEED := 300.0
 
 onready var FireballTimer: Timer = $Timer
 onready var FireballSprite: AnimatedSprite = $AnimatedSprite

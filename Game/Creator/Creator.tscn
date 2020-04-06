@@ -1,27 +1,27 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Game/Creator/Textures/SettingsPressed.png" type="Texture" id=2]
-[ext_resource path="res://Game/Creator/Textures/InfoPressed.png" type="Texture" id=3]
-[ext_resource path="res://Game/Creator/Textures/ItemBubble.png" type="Texture" id=4]
-[ext_resource path="res://Game/Creator/Textures/Undo.png" type="Texture" id=5]
-[ext_resource path="res://Game/Creator/Textures/Redo.png" type="Texture" id=6]
-[ext_resource path="res://Game/Creator/Textures/GoToEnd.png" type="Texture" id=7]
-[ext_resource path="res://Game/Creator/Textures/GoToBegin.png" type="Texture" id=8]
-[ext_resource path="res://Game/Creator/Textures/Play.png" type="Texture" id=9]
-[ext_resource path="res://Game/Creator/Textures/ItemBar.png" type="Texture" id=10]
-[ext_resource path="res://Game/Creator/Textures/PlayPressed.png" type="Texture" id=11]
-[ext_resource path="res://Game/Creator/Textures/Settings.png" type="Texture" id=12]
+[ext_resource path="res://Game/Creator/Textures/SettingsIcon.png" type="Texture" id=2]
+[ext_resource path="res://Game/Creator/Textures/UndoIcon.png" type="Texture" id=3]
+[ext_resource path="res://Game/Creator/Components/SmallButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Creator/Textures/RedoIcon.png" type="Texture" id=5]
+[ext_resource path="res://Game/Creator/Textures/InfoIcon.png" type="Texture" id=6]
+[ext_resource path="res://Game/Creator/Textures/GotoEndIcon.png" type="Texture" id=7]
+[ext_resource path="res://Game/Creator/Textures/GoToStartIcon.png" type="Texture" id=8]
+[ext_resource path="res://Game/Creator/Components/BigButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Game/Creator/Textures/DrawerBar.png" type="Texture" id=10]
+[ext_resource path="res://Game/Creator/Textures/PlayIcon.png" type="Texture" id=11]
+[ext_resource path="res://Game/Creator/Textures/CloseIcon.png" type="Texture" id=12]
 [ext_resource path="res://Game/Items/PowerBox/Textures/Idle.png" type="Texture" id=13]
-[ext_resource path="res://Game/Creator/Textures/ItemBoxSelected.png" type="Texture" id=14]
-[ext_resource path="res://Game/Creator/Textures/ItemBox.png" type="Texture" id=15]
+[ext_resource path="res://Game/Creator/Textures/DrawerBoxSelected.png" type="Texture" id=14]
+[ext_resource path="res://Game/Creator/Textures/OpenIcon.png" type="Texture" id=15]
 [ext_resource path="res://Game/Items/Door/Textures/Door.png" type="Texture" id=16]
 [ext_resource path="res://Game/Creator/Quadtree.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Game/Creator/History.gd" type="Script" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
 [ext_resource path="res://Game/Items/Spikes/Textures/Spike.png" type="Texture" id=20]
 [ext_resource path="res://Game/Items/SpikeBall/Textures/SpikeBall.png" type="Texture" id=21]
-[ext_resource path="res://Game/Creator/Textures/Icons/SpikeIcon.png" type="Texture" id=22]
+[ext_resource path="res://Game/Creator/Textures/SaveIcon.png" type="Texture" id=22]
 [ext_resource path="res://Game/Creator/Textures/Icons/TrampolineIcon.png" type="Texture" id=23]
 [ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
 [ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
@@ -35,113 +35,12 @@
 [ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=33]
 [ext_resource path="res://Game/Creator/Drawers/TilemapDrawer.gd" type="Script" id=34]
 [ext_resource path="res://Game/Creator/Drawers/ItemDrawer.gd" type="Script" id=35]
-[ext_resource path="res://Game/Creator/Textures/GoToBeginPressed.png" type="Texture" id=36]
-[ext_resource path="res://Game/Creator/Textures/GoToEndPressed.png" type="Texture" id=37]
-[ext_resource path="res://Game/Creator/Textures/UndoPressed.png" type="Texture" id=38]
-[ext_resource path="res://Game/Creator/Textures/RedoPressed.png" type="Texture" id=39]
-[ext_resource path="res://Game/Creator/Textures/Info.png" type="Texture" id=40]
+[ext_resource path="res://Game/Creator/Textures/DeleteIcon.png" type="Texture" id=36]
+[ext_resource path="res://Game/Creator/Textures/HomeIcon.png" type="Texture" id=37]
 [ext_resource path="res://Game/Creator/Textures/BubbleBottom.png" type="Texture" id=41]
-[ext_resource path="res://Game/Creator/Textures/UndoDisabled.png" type="Texture" id=42]
-[ext_resource path="res://Game/Creator/Textures/RedoDisabled.png" type="Texture" id=43]
-[ext_resource path="res://Game/Creator/CreatorButton.gd" type="Script" id=44]
 [ext_resource path="res://Game/Creator/ElementsBar.gd" type="Script" id=45]
-[ext_resource path="res://Game/Creator/Textures/PlayFocused.png" type="Texture" id=46]
-[ext_resource path="res://Game/Creator/Textures/GoToBeginFocused.png" type="Texture" id=47]
-[ext_resource path="res://Game/Creator/Textures/GoToEndFocused.png" type="Texture" id=48]
-[ext_resource path="res://Game/Creator/Textures/UndoFocused.png" type="Texture" id=49]
-[ext_resource path="res://Game/Creator/Textures/RedoFocused.png" type="Texture" id=50]
-[ext_resource path="res://Game/Creator/Textures/InfoFocused.png" type="Texture" id=51]
-[ext_resource path="res://Game/Creator/Textures/SettingsFocused.png" type="Texture" id=52]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Idle.png" type="Texture" id=53]
-[ext_resource path="res://Game/Creator/Textures/DeleteButtonFocused.png" type="Texture" id=54]
-[ext_resource path="res://Game/Creator/Textures/OpenButtonFocused.png" type="Texture" id=55]
-[ext_resource path="res://Game/Creator/Textures/SaveButtonFocused.png" type="Texture" id=56]
-[ext_resource path="res://Game/Creator/Textures/HomeButtonFocused.png" type="Texture" id=57]
-[ext_resource path="res://Game/Creator/Textures/CloseButtonFocused.png" type="Texture" id=58]
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=59]
-[ext_resource path="res://Game/Creator/Textures/CloseButton.png" type="Texture" id=60]
-[ext_resource path="res://Game/Creator/Textures/CloseButtonPressed.png" type="Texture" id=61]
-[ext_resource path="res://Game/Creator/Textures/SaveButton.png" type="Texture" id=62]
-[ext_resource path="res://Game/Creator/Textures/SaveButtonPressed.png" type="Texture" id=63]
-[ext_resource path="res://Game/Creator/Textures/HomeButton.png" type="Texture" id=64]
-[ext_resource path="res://Game/Creator/Textures/HomeButtonPressed.png" type="Texture" id=65]
-[ext_resource path="res://Game/Creator/Textures/DeleteButtonPressed.png" type="Texture" id=66]
-[ext_resource path="res://Game/Creator/Textures/OpenButtonPressed.png" type="Texture" id=67]
-[ext_resource path="res://Game/Creator/Textures/DeleteButton.png" type="Texture" id=68]
-[ext_resource path="res://Game/Creator/Textures/OpenButton.png" type="Texture" id=69]
-
-[sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
-
-[sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex"
-
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 33 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 12
-use_filter = true
-font_data = ExtResource( 32 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 14
-outline_size = 1
-outline_color = Color( 0.2, 0.2, 0.2, 1 )
-use_mipmaps = true
-font_data = ExtResource( 59 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 12
-font_data = ExtResource( 59 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 26
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 59 )
-
-[sub_resource type="DynamicFont" id=10]
-size = 14
-outline_size = 1
-outline_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-font_data = ExtResource( 59 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 1, 1, 1, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-
-[sub_resource type="StyleBoxFlat" id=12]
-bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
-
-[sub_resource type="DynamicFont" id=13]
-size = 12
-font_data = ExtResource( 59 )
 
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 53 )
@@ -231,6 +130,80 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex"
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 33 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 12
+use_filter = true
+font_data = ExtResource( 32 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 14
+outline_size = 1
+outline_color = Color( 0.2, 0.2, 0.2, 1 )
+use_mipmaps = true
+font_data = ExtResource( 59 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 12
+font_data = ExtResource( 59 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 26
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 14
+outline_size = 1
+outline_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+font_data = ExtResource( 59 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 12
+font_data = ExtResource( 59 )
+
 [node name="Creator" instance=ExtResource( 1 )]
 script = ExtResource( 31 )
 
@@ -270,119 +243,103 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 512, 288 )
 
-[node name="TopBar" type="Control" parent="GUILayer/GUI" index="1"]
+[node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
+position = Vector2( 32, 128 )
+frames = SubResource( 34 )
+frame = 14
+speed_scale = 4.0
+playing = true
+centered = false
+
+[node name="TopBar" type="Control" parent="GUILayer/GUI" index="2"]
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="0"]
-margin_left = 7.0
-margin_top = 5.0
-margin_right = 39.0
-margin_bottom = 37.0
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 11 )
-texture_hover = ExtResource( 46 )
-texture_focused = ExtResource( 46 )
-script = ExtResource( 44 )
+[node name="PlayButton" parent="GUILayer/GUI/TopBar" index="0" instance=ExtResource( 9 )]
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/PlayButton" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoToStartButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="1"]
-margin_left = 326.0
-margin_top = 9.0
-margin_right = 350.0
-margin_bottom = 33.0
-texture_normal = ExtResource( 8 )
-texture_pressed = ExtResource( 36 )
-texture_hover = ExtResource( 47 )
-texture_focused = ExtResource( 47 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GoToStartButton" parent="GUILayer/GUI/TopBar" index="1" instance=ExtResource( 4 )]
+margin_left = 312.0
+margin_top = 8.0
+margin_right = 336.0
+margin_bottom = 32.0
 
-[node name="GoToEndButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="2"]
-margin_left = 354.0
-margin_top = 9.0
-margin_right = 378.0
-margin_bottom = 33.0
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 37 )
-texture_hover = ExtResource( 48 )
-texture_focused = ExtResource( 48 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/GoToStartButton" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 8 )
 
-[node name="UndoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="3"]
-margin_left = 384.0
-margin_top = 9.0
-margin_right = 408.0
-margin_bottom = 33.0
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 38 )
-texture_hover = ExtResource( 49 )
-texture_disabled = ExtResource( 42 )
-texture_focused = ExtResource( 49 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GoToEndButton" parent="GUILayer/GUI/TopBar" index="2" instance=ExtResource( 4 )]
+margin_left = 344.0
+margin_top = 8.0
+margin_right = 368.0
+margin_bottom = 32.0
 
-[node name="RedoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="4"]
-margin_left = 412.0
-margin_top = 9.0
-margin_right = 436.0
-margin_bottom = 33.0
-texture_normal = ExtResource( 6 )
-texture_pressed = ExtResource( 39 )
-texture_hover = ExtResource( 50 )
-texture_disabled = ExtResource( 43 )
-texture_focused = ExtResource( 50 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/GoToEndButton" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 7 )
 
-[node name="InfoButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="5"]
-margin_left = 441.0
-margin_top = 9.0
-margin_right = 465.0
-margin_bottom = 33.0
-texture_normal = ExtResource( 40 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 51 )
-texture_focused = ExtResource( 51 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="UndoButton" parent="GUILayer/GUI/TopBar" index="3" instance=ExtResource( 4 )]
+margin_left = 376.0
+margin_top = 8.0
+margin_right = 400.0
+margin_bottom = 32.0
 
-[node name="SettingsButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="6"]
-margin_left = 473.0
-margin_top = 5.0
-margin_right = 505.0
-margin_bottom = 37.0
-texture_normal = ExtResource( 12 )
-texture_pressed = ExtResource( 2 )
-texture_hover = ExtResource( 52 )
-texture_focused = ExtResource( 52 )
-script = ExtResource( 44 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/UndoButton" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 3 )
 
-[node name="DrawersBar" type="Sprite" parent="GUILayer/GUI" index="2"]
+[node name="RedoButton" parent="GUILayer/GUI/TopBar" index="4" instance=ExtResource( 4 )]
+margin_left = 408.0
+margin_top = 8.0
+margin_right = 432.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/RedoButton" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 5 )
+
+[node name="InfoButton" parent="GUILayer/GUI/TopBar" index="5" instance=ExtResource( 4 )]
+margin_left = 440.0
+margin_top = 8.0
+margin_right = 464.0
+margin_bottom = 32.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/InfoButton" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 6 )
+
+[node name="SettingsButton" parent="GUILayer/GUI/TopBar" index="6" instance=ExtResource( 9 )]
+margin_left = 472.0
+margin_top = 8.0
+margin_right = 504.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/SettingsButton" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 2 )
+
+[node name="DrawersBar" type="Sprite" parent="GUILayer/GUI" index="3"]
 position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
 script = ExtResource( 45 )
 
-[node name="Drawers" type="Control" parent="GUILayer/GUI" index="3"]
+[node name="Drawers" type="Control" parent="GUILayer/GUI" index="4"]
 margin_left = 102.0
 margin_top = 261.0
 margin_right = 433.0
@@ -611,92 +568,6 @@ position = Vector2( 11, 11 )
 scale = Vector2( 0.3125, 0.3125 )
 texture = ExtResource( 16 )
 hframes = 13
-
-[node name="Bubble" type="NinePatchRect" parent="GUILayer/GUI" index="4"]
-visible = false
-margin_left = 250.0
-margin_top = 211.0
-margin_right = 359.0
-margin_bottom = 251.0
-texture = ExtResource( 4 )
-patch_margin_left = 24
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ItemButton7-1" type="TextureButton" parent="GUILayer/GUI/Bubble" index="0"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 6.0
-margin_top = 5.0
-margin_right = 11.5
-margin_bottom = 22.0
-texture_normal = ExtResource( 15 )
-texture_focused = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-1" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 22 )
-
-[node name="ItemButton7-2" type="TextureButton" parent="GUILayer/GUI/Bubble" index="1"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 31.0
-margin_top = 5.0
-margin_right = 36.5
-margin_bottom = 22.0
-texture_normal = ExtResource( 15 )
-texture_focused = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-2" index="0"]
-position = Vector2( 11, 11 )
-rotation = 1.5708
-texture = ExtResource( 22 )
-
-[node name="ItemButton7-3" type="TextureButton" parent="GUILayer/GUI/Bubble" index="2"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 56.0
-margin_top = 5.0
-margin_right = 61.5
-margin_bottom = 22.0
-texture_normal = ExtResource( 15 )
-texture_focused = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-3" index="0"]
-position = Vector2( 11, 11 )
-rotation = 3.14159
-texture = ExtResource( 22 )
-
-[node name="ItemButton7-4" type="TextureButton" parent="GUILayer/GUI/Bubble" index="3"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 81.0
-margin_top = 5.0
-margin_right = 86.5
-margin_bottom = 22.0
-texture_normal = ExtResource( 15 )
-texture_focused = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Bubble/ItemButton7-4" index="0"]
-position = Vector2( 11, 11 )
-rotation = -1.5708
-texture = ExtResource( 22 )
 
 [node name="InfoBubble" type="NinePatchRect" parent="GUILayer/GUI" index="5"]
 visible = false
@@ -974,20 +845,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="ColorRect" parent="GUILayer/GUI/SettingsPopup" index="0"]
-margin_left = 312.0
-margin_right = 512.0
-margin_bottom = 288.0
+[node name="Background" type="ColorRect" parent="GUILayer/GUI/SettingsPopup" index="0"]
+margin_left = 128.0
+margin_top = 24.0
+margin_right = 384.0
+margin_bottom = 248.0
 color = Color( 0.815686, 0.623529, 0.431373, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NameInput" type="LineEdit" parent="GUILayer/GUI/SettingsPopup" index="1"]
-margin_left = 336.0
-margin_top = 64.0
-margin_right = 488.0
-margin_bottom = 88.0
+margin_left = 144.0
+margin_top = 72.0
+margin_right = 368.0
+margin_bottom = 96.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../CloseButton")
 focus_neighbour_right = NodePath(".")
@@ -1008,10 +880,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="GUILayer/GUI/SettingsPopup" index="2"]
-margin_left = 336.0
-margin_top = 16.0
-margin_right = 424.0
-margin_bottom = 41.0
+margin_left = 216.0
+margin_top = 32.0
+margin_right = 304.0
+margin_bottom = 59.0
 custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Options"
@@ -1020,10 +892,10 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="GUILayer/GUI/SettingsPopup" index="3"]
-margin_left = 336.0
-margin_top = 48.0
-margin_right = 424.0
-margin_bottom = 65.0
+margin_left = 144.0
+margin_top = 56.0
+margin_right = 232.0
+margin_bottom = 73.0
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Name"
@@ -1032,10 +904,10 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="GUILayer/GUI/SettingsPopup" index="4"]
-margin_left = 336.0
-margin_top = 96.0
-margin_right = 424.0
-margin_bottom = 113.0
+margin_left = 144.0
+margin_top = 104.0
+margin_right = 232.0
+margin_bottom = 121.0
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Description"
@@ -1044,10 +916,10 @@ __meta__ = {
 }
 
 [node name="DescriptionInput" type="TextEdit" parent="GUILayer/GUI/SettingsPopup" index="5"]
-margin_left = 336.0
-margin_top = 112.0
-margin_right = 488.0
-margin_bottom = 232.0
+margin_left = 144.0
+margin_top = 120.0
+margin_right = 368.0
+margin_bottom = 200.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../NameInput")
 focus_neighbour_right = NodePath(".")
@@ -1067,108 +939,60 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CloseButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="6"]
-margin_left = 464.0
-margin_top = 16.0
-margin_right = 488.0
-margin_bottom = 40.0
-focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../NameInput")
-focus_neighbour_bottom = NodePath("../NameInput")
-focus_next = NodePath("../NameInput")
-focus_previous = NodePath(".")
-texture_normal = ExtResource( 60 )
-texture_pressed = ExtResource( 61 )
-texture_hover = ExtResource( 58 )
-texture_focused = ExtResource( 58 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SaveButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="7"]
-margin_left = 336.0
-margin_top = 240.0
+[node name="CloseButton" parent="GUILayer/GUI/SettingsPopup" index="6" instance=ExtResource( 4 )]
+margin_left = 344.0
+margin_top = 32.0
 margin_right = 368.0
-margin_bottom = 272.0
-focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../DescriptionInput")
-focus_neighbour_right = NodePath("../OpenButton")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../OpenButton")
-focus_previous = NodePath("../DescriptionInput")
-texture_normal = ExtResource( 62 )
-texture_pressed = ExtResource( 63 )
-texture_hover = ExtResource( 56 )
-texture_focused = ExtResource( 56 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 56.0
 
-[node name="OpenButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="8"]
-margin_left = 376.0
-margin_top = 240.0
-margin_right = 408.0
-margin_bottom = 272.0
-focus_neighbour_left = NodePath("../SaveButton")
-focus_neighbour_top = NodePath("../DescriptionInput")
-focus_neighbour_right = NodePath("../DeleteButton")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../DeleteButton")
-focus_previous = NodePath("../SaveButton")
-texture_normal = ExtResource( 69 )
-texture_pressed = ExtResource( 67 )
-texture_hover = ExtResource( 55 )
-texture_focused = ExtResource( 55 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/SettingsPopup/CloseButton" index="0"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 12 )
 
-[node name="DeleteButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="9"]
-margin_left = 416.0
-margin_top = 240.0
-margin_right = 448.0
-margin_bottom = 272.0
-focus_neighbour_left = NodePath("../OpenButton")
-focus_neighbour_top = NodePath("../DescriptionInput")
-focus_neighbour_right = NodePath("../HomeButton")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../HomeButton")
-focus_previous = NodePath("../OpenButton")
-texture_normal = ExtResource( 68 )
-texture_pressed = ExtResource( 66 )
-texture_hover = ExtResource( 54 )
-texture_focused = ExtResource( 54 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="SaveButton" parent="GUILayer/GUI/SettingsPopup" index="7" instance=ExtResource( 9 )]
+margin_left = 176.0
+margin_top = 208.0
+margin_right = 208.0
+margin_bottom = 240.0
 
-[node name="HomeButton" type="TextureButton" parent="GUILayer/GUI/SettingsPopup" index="10"]
-margin_left = 456.0
-margin_top = 240.0
-margin_right = 488.0
-margin_bottom = 272.0
-focus_neighbour_left = NodePath("../DeleteButton")
-focus_neighbour_top = NodePath("../DescriptionInput")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath("../DeleteButton")
-texture_normal = ExtResource( 64 )
-texture_pressed = ExtResource( 65 )
-texture_hover = ExtResource( 57 )
-texture_focused = ExtResource( 57 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/SettingsPopup/SaveButton" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 22 )
 
-[node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="8"]
-position = Vector2( 32, 128 )
-frames = SubResource( 34 )
-frame = 16
-speed_scale = 4.0
-playing = true
-centered = false
+[node name="OpenButton" parent="GUILayer/GUI/SettingsPopup" index="8" instance=ExtResource( 9 )]
+margin_left = 216.0
+margin_top = 208.0
+margin_right = 248.0
+margin_bottom = 240.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/SettingsPopup/OpenButton" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 15 )
+
+[node name="DeleteButton" parent="GUILayer/GUI/SettingsPopup" index="9" instance=ExtResource( 9 )]
+margin_left = 256.0
+margin_top = 208.0
+margin_right = 288.0
+margin_bottom = 240.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/SettingsPopup/DeleteButton" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 36 )
+
+[node name="HomeButton" parent="GUILayer/GUI/SettingsPopup" index="10" instance=ExtResource( 9 )]
+margin_left = 296.0
+margin_top = 208.0
+margin_right = 328.0
+margin_bottom = 240.0
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/SettingsPopup/HomeButton" index="0"]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 37 )
 [connection signal="pressed" from="GUILayer/GUI/TopBar/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToStartButton" to="." method="_on_GoToStartButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]

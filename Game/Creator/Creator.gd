@@ -289,7 +289,7 @@ func _on_GoToEndButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = Game.map_node.FlagEnd.position
+	CreatorCamera.position = Game.map_node.ObjectSlot.get_node("FlagEnd").position
 	CreatorCamera.position.x -= 256
 	CreatorCamera.position.y -= 144
 	if CreatorCamera.position.y > 0:
@@ -297,9 +297,11 @@ func _on_GoToEndButton_pressed():
 
 func _on_SettingsButton_pressed():
 	$GUILayer/GUI/SettingsPopup.visible = true
+	$GUILayer/GUI/SettingsPopup/CloseButton.grab_focus()
 
 func _on_CloseButton_pressed():
 	$GUILayer/GUI/SettingsPopup.visible = false
+	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()
 
 # @signal
 func _on_HomeButton_pressed():
@@ -326,3 +328,7 @@ func _on_ItemButton9_pressed(): select_drawer(8)
 func _on_ItemButton10_pressed(): select_drawer(9)
 func _on_ItemButton11_pressed(): select_drawer(10)
 func _on_ItemButton12_pressed(): select_drawer(11)
+
+
+func _on_InfoButton_pressed():
+	print("Show infos")
