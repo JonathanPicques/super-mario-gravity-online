@@ -1,6 +1,6 @@
 extends DrawerNode
 
-const MAX_WATER_CELLS := 1000
+const MAX_WATER_CELLS := 200
 
 export var tileset_type := "Water"
 

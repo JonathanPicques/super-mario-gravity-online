@@ -173,7 +173,11 @@ func set_focus_neighbors():
 
 # move_map moves the camera with up/down/left/right.
 # @impure
+var current_frame = 0
 func move_map():
+	current_frame += 1
+	if current_frame % 2 == 0: # slow down the moving
+		return
 	if Input.is_action_pressed("ui_left"):
 		CreatorCamera.translate(Vector2(-MapManager.cell_size, 0))
 	if Input.is_action_pressed("ui_right"):

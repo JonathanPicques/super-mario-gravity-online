@@ -1165,7 +1165,7 @@ __meta__ = {
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="8"]
 position = Vector2( 32, 128 )
 frames = SubResource( 34 )
-frame = 11
+frame = 14
 speed_scale = 4.0
 playing = true
 centered = false
