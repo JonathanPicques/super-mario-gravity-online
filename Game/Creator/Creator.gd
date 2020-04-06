@@ -108,7 +108,7 @@ func set_state(new_state: int):
 			GuiModeLabel.text = "(ESC) move map"
 		State.drawing:
 			select_drawer(current_drawer_index)
-			GuiModeLabel.text = "(ESC) draw map"
+			GuiModeLabel.text = "(ESC) select button"
 		State.playing:
 			Gui.visible = false
 			var player := MultiplayerManager.add_player("creator", true, 0)

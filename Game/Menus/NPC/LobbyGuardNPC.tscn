@@ -11,18 +11,22 @@ script = ExtResource( 3 )
 position = Vector2( -55, -96 )
 scale = Vector2( 1, 1 )
 frames = ExtResource( 2 )
-frame = 4
+frame = 7
 
 [node name="Bubble" parent="." index="2"]
-margin_left = -111.0
-margin_top = -126.0
-margin_right = 16.0
-margin_bottom = -43.0
+margin_left = -120.0
+margin_top = -120.0
+margin_right = 0.0
+margin_bottom = -47.0
 patch_margin_left = 10
 patch_margin_right = 24
 
+[node name="KeyUp" parent="Bubble" index="0"]
+position = Vector2( 62, 51 )
+
 [node name="Label" parent="Bubble" index="1"]
-margin_right = 126.0
-text = "Hello, my lord!
-Do you want to
-change the map?"
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 110.0
+margin_bottom = 43.0
+text = "What level do you want to try today?"

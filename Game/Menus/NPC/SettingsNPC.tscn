@@ -65,10 +65,22 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 frames = SubResource( 13 )
-frame = 8
+frame = 2
 speed_scale = 5.0
 
+[node name="Bubble" parent="." index="2"]
+margin_left = -50.0
+margin_top = -130.0
+margin_right = 100.0
+margin_bottom = -47.0
+
+[node name="KeyUp" parent="Bubble" index="0"]
+position = Vector2( 75, 63 )
+
 [node name="Label" parent="Bubble" index="1"]
-text = "Hello, my lord!
-Do you want to open
-the game settings?"
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 140.0
+margin_bottom = 52.0
+text = "Good day sir!
+Do you want to change  game settings?"
