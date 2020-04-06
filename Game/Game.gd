@@ -2,7 +2,8 @@ extends Control
 class_name GameNode
 
 const Map := preload("res://Game/Maps/Map.tscn")
-const YourMapsMenu := preload("res://Game/Menus/YourMapsMenu.tscn")
+const OpenMapsMenu := preload("res://Game/Menus/OpenMapsMenu.tscn")
+const SelectMapsMenu := preload("res://Game/Menus/SelectMapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
@@ -74,12 +75,17 @@ func goto_lobby_menu_scene():
 	yield(screen_transition_finish(), "completed")
 
 # @impure
-func goto_select_map_scene(previous_scene = "Lobby"):
-	var menu = YourMapsMenu.instance()
-	menu.previous_scene = previous_scene
+func goto_select_map_scene():
 	yield(screen_transition_start(), "completed")
-	set_scene(menu)
+	set_scene(SelectMapsMenu.instance())
 	yield(screen_transition_finish(), "completed")
+
+# @impure
+func goto_open_map_scene():
+	yield(screen_transition_start(), "completed")
+	set_scene(OpenMapsMenu.instance())
+	yield(screen_transition_finish(), "completed")
+
 
 # @impure
 func goto_end_game_menu_scene():

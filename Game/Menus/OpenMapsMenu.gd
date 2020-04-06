@@ -7,7 +7,6 @@ onready var MapButtons := [
 	$GUI/MapButton4,
 	$GUI/MapButton5
 ]
-var previous_scene := "Lobby"
 
 var map_infos = []
 var page_index = 0
@@ -40,37 +39,37 @@ func _process(delta):
 
 func _on_RandomMapButton_pressed():
 	MapManager.current_map = "Random"
-	open_previous_scene()
+	Game.goto_creator_scene()
 
 func _on_MapButton1_pressed():
 	if 0 > map_infos.size() - 1:
 		return
 	MapManager.current_map = map_infos[0]["filename"]
-	open_previous_scene()
+	Game.goto_creator_scene()
 
 func _on_MapButton2_pressed():
 	if 1 > map_infos.size() - 1:
 		return
 	MapManager.current_map = map_infos[1]["filename"]
-	open_previous_scene()
+	Game.goto_creator_scene()
 
 func _on_MapButton3_pressed():
 	if 2 > map_infos.size() - 1:
 		return
 	MapManager.current_map = map_infos[2]["filename"]
-	open_previous_scene()
+	Game.goto_creator_scene()
 
 func _on_MapButton4_pressed():
 	if 3 > map_infos.size() - 1:
 		return
 	MapManager.current_map = map_infos[3]["filename"]
-	open_previous_scene()
+	Game.goto_creator_scene()
 
 func _on_MapButton5_pressed():
 	if 4 > map_infos.size() - 1:
 		return
 	MapManager.current_map = map_infos[4]["filename"]
-	open_previous_scene()
+	Game.goto_creator_scene()
 	
 func _on_PreviousButton_pressed():
 	if page_index == 0:
@@ -87,12 +86,4 @@ func _on_NextButton_pressed():
 	print("Load next maps...")
 	page_index += 1
 	load_map_buttons()
-
-func open_previous_scene():
-	if previous_scene == "Lobby":
-		Game.goto_lobby_menu_scene()	
-	elif previous_scene == "Creator":
-		Game.goto_creator_scene()
-	else:
-		print("Unsupported scene ", previous_scene)
 

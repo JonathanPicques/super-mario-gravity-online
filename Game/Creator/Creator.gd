@@ -318,7 +318,7 @@ func _on_SaveButton_pressed():
 	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()
 
 func _on_OpenButton_pressed():
-	Game.goto_select_map_scene("Creator")
+	Game.goto_open_map_scene()
 
 func _on_DeleteButton_pressed():
 	print("Delete map: TODO, confirm popup")

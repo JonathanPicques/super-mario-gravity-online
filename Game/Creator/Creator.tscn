@@ -252,6 +252,7 @@ region_rect = Rect2( 0, 0, 512, 288 )
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 32, 128 )
 frames = SubResource( 21 )
+frame = 14
 speed_scale = 4.0
 playing = true
 centered = false

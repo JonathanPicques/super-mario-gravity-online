@@ -5,7 +5,7 @@ func quadtree_item_rect() -> Rect2:
 
 # Scale transition
 
-const MAX_SCALE := Vector2(1.05, 1.05)
+const MAX_SCALE := Vector2(1.1, 1.1)
 const ANIM_DURATION := 0.2
 onready var AnimTween = $Tween
 
