@@ -19,7 +19,6 @@ func _ready():
 	$GUI/RandomMapButton.grab_focus()
 	
 	map_infos = MapManager.get_maps_infos()
-	print(map_infos)
 	$GUI/RandomMapButton/Label.text = "Random"
 	for i in range(0, MapButtons.size()):
 		if i < map_infos.size():
