@@ -309,6 +309,8 @@ func _on_HomeButton_pressed():
 	
 func _on_SaveButton_pressed():
 	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
+	$GUILayer/GUI/SettingsPopup.visible = false
+	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()
 
 func _on_OpenButton_pressed():
 	Game.goto_select_map_scene("Creator")
