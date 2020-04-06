@@ -19,8 +19,9 @@ func _ready():
 	$GUI/RandomMapButton.grab_focus()
 	
 	map_infos = MapManager.get_maps_infos()
+	print(map_infos)
 	$GUI/RandomMapButton/Label.text = "Random"
-	for i in range(0, MapButtons.size() - 1):
+	for i in range(0, MapButtons.size()):
 		if i < map_infos.size():
 			MapButtons[i].get_node("Label").text = map_infos[i].name
 			MapButtons[i].get_node("Preview").texture = load("res://Maps/" + map_infos[i]["filename"].get_basename() + ".png")
