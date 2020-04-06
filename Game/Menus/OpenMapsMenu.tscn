@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/OpenMapsMenu.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadCancel.png" type="Texture" id=9]
 [ext_resource path="res://Game/Menus/Textures/PreviousIcon.png" type="Texture" id=10]
 [ext_resource path="res://Game/Menus/Textures/KeyGamepadUp.png" type="Texture" id=11]
+[ext_resource path="res://Game/Menus/Components/LargeButton.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -22,6 +23,9 @@ font_data = ExtResource( 8 )
 size = 26
 outline_size = 1
 outline_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 8 )
 
 [node name="Map" instance=ExtResource( 1 )]
@@ -40,13 +44,14 @@ __meta__ = {
 [node name="BackToLobbyLabel" type="Label" parent="GUI" index="0"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 47.3804
-margin_top = 248.0
-margin_right = 189.38
-margin_bottom = 264.0
+margin_left = 15.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "previous"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,9 +59,9 @@ __meta__ = {
 [node name="BackToLobbyLabel2" type="Label" parent="GUI" index="1"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 48.8804
+margin_left = 23.3804
 margin_top = 264.0
-margin_right = 190.88
+margin_right = 165.38
 margin_bottom = 280.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -68,13 +73,14 @@ __meta__ = {
 [node name="BackToLobbyLabel4" type="Label" parent="GUI" index="2"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 376.0
-margin_top = 248.0
-margin_right = 445.0
-margin_bottom = 264.0
+margin_left = 444.0
+margin_top = 8.0
+margin_right = 476.0
+margin_bottom = 24.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "next"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,9 +88,9 @@ __meta__ = {
 [node name="BackToLobbyLabel3" type="Label" parent="GUI" index="3"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 374.0
+margin_left = 396.5
 margin_top = 264.0
-margin_right = 445.0
+margin_right = 467.5
 margin_bottom = 280.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -94,18 +100,21 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="GUI" index="4"]
-margin_right = 512.0
-margin_bottom = 40.0
+margin_left = 80.0
+margin_top = 8.0
+margin_right = 432.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 2 )
-text = "Choose a map"
+text = "Open a level"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="RandomMapButton" parent="GUI" index="5" instance=ExtResource( 5 )]
-margin_left = 49.5
-margin_top = 32.0
-margin_right = 177.5
-margin_bottom = 120.0
+[node name="MapButton0" parent="GUI" index="5" instance=ExtResource( 5 )]
+margin_left = 48.0
+margin_right = 176.0
 focus_neighbour_left = NodePath("../PreviousButton")
 focus_neighbour_right = NodePath("../MapButton1")
 focus_neighbour_bottom = NodePath("../MapButton3")
@@ -113,16 +122,12 @@ focus_next = NodePath("../MapButton1")
 focus_previous = NodePath("../PreviousButton")
 
 [node name="MapButton1" parent="GUI" index="6" instance=ExtResource( 5 )]
-margin_top = 32.0
-margin_bottom = 120.0
-focus_neighbour_left = NodePath("../RandomMapButton")
-focus_previous = NodePath("../RandomMapButton")
+focus_neighbour_left = NodePath("../MapButton0")
+focus_previous = NodePath("../MapButton0")
 
 [node name="MapButton2" parent="GUI" index="7" instance=ExtResource( 5 )]
 margin_left = 336.0
-margin_top = 32.0
 margin_right = 464.0
-margin_bottom = 120.0
 focus_neighbour_left = NodePath("../MapButton1")
 focus_neighbour_right = NodePath("../NextButton")
 focus_neighbour_bottom = NodePath("../MapButton5")
@@ -130,84 +135,113 @@ focus_next = NodePath("../MapButton3")
 focus_previous = NodePath("../MapButton1")
 
 [node name="MapButton3" parent="GUI" index="8" instance=ExtResource( 5 )]
-margin_left = 49.5
-margin_top = 136.0
-margin_right = 177.5
-margin_bottom = 224.0
+margin_left = 48.0
+margin_top = 144.0
+margin_right = 176.0
+margin_bottom = 232.0
 focus_neighbour_left = NodePath("../PreviousButton")
-focus_neighbour_top = NodePath("../RandomMapButton")
+focus_neighbour_top = NodePath("../MapButton0")
 focus_neighbour_right = NodePath("../MapButton4")
-focus_neighbour_bottom = NodePath(".")
+focus_neighbour_bottom = NodePath("../NewButton")
 focus_next = NodePath("../MapButton4")
 focus_previous = NodePath("../MapButton2")
 
 [node name="MapButton4" parent="GUI" index="9" instance=ExtResource( 5 )]
-margin_top = 136.0
-margin_bottom = 224.0
+margin_top = 144.0
+margin_bottom = 232.0
 focus_neighbour_left = NodePath("../MapButton3")
 focus_neighbour_top = NodePath("../MapButton1")
 focus_neighbour_right = NodePath("../MapButton5")
-focus_neighbour_bottom = NodePath("../MapButton3")
+focus_neighbour_bottom = NodePath("../NewButton")
 focus_next = NodePath("../MapButton5")
 focus_previous = NodePath("../MapButton3")
 
 [node name="MapButton5" parent="GUI" index="10" instance=ExtResource( 5 )]
 margin_left = 336.0
-margin_top = 136.0
+margin_top = 144.0
 margin_right = 464.0
-margin_bottom = 224.0
+margin_bottom = 232.0
 focus_neighbour_left = NodePath("../MapButton4")
 focus_neighbour_top = NodePath("../MapButton2")
 focus_neighbour_right = NodePath("../NextButton")
-focus_neighbour_bottom = NodePath(".")
+focus_neighbour_bottom = NodePath("../NewButton")
 focus_next = NodePath("../NextButton")
 focus_previous = NodePath("../MapButton4")
 
 [node name="PreviousButton" parent="GUI" index="11" instance=ExtResource( 6 )]
 margin_left = 8.0
-margin_top = 112.0
+margin_top = 120.0
 margin_right = 40.0
-margin_bottom = 144.0
+margin_bottom = 152.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../MapButton0")
+focus_neighbour_right = NodePath("../MapButton0")
+focus_neighbour_bottom = NodePath("../MapButton3")
+focus_next = NodePath("../MapButton0")
+focus_previous = NodePath(".")
 
 [node name="TextureRect" type="TextureRect" parent="GUI/PreviousButton" index="0"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 32.0
+margin_bottom = 32.0
 texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NextButton" parent="GUI" index="12" instance=ExtResource( 6 )]
 margin_left = 472.0
-margin_top = 112.0
+margin_top = 120.0
 margin_right = 504.0
-margin_bottom = 144.0
+margin_bottom = 152.0
 
 [node name="TextureRect" type="TextureRect" parent="GUI/NextButton" index="0"]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 32.0
+margin_bottom = 32.0
 texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewButton" parent="GUI" index="13" instance=ExtResource( 12 )]
+focus_neighbour_left = NodePath("../MapButton3")
+focus_neighbour_top = NodePath("../MapButton4")
+focus_neighbour_right = NodePath("../MapButton5")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../MapButton5")
+focus_previous = NodePath("../MapButton3")
+
+[node name="Label" type="Label" parent="GUI/NewButton" index="0"]
+margin_right = 192.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.317647, 0.294118, 0.282353, 1 )
+text = "New level"
+align = 1
+valign = 1
 
 [node name="Icons" type="Node2D" parent="." index="13"]
 
 [node name="KeyGamepadCancel" type="Sprite" parent="Icons" index="0"]
-position = Vector2( 56, 256 )
+position = Vector2( 24, 16 )
 texture = ExtResource( 11 )
 
 [node name="KeyGamepadCancel2" type="Sprite" parent="Icons" index="1"]
-position = Vector2( 56, 272 )
+position = Vector2( 30.5, 272 )
 texture = ExtResource( 9 )
 
 [node name="KeyGamepadCancel4" type="Sprite" parent="Icons" index="2"]
-position = Vector2( 384, 256 )
+position = Vector2( 448, 16 )
 texture = ExtResource( 11 )
 
 [node name="KeyGamepadCancel3" type="Sprite" parent="Icons" index="3"]
-position = Vector2( 384, 272 )
+position = Vector2( 406.5, 272 )
 texture = ExtResource( 3 )
 
 [node name="KeyKeyboardCancel" type="Sprite" parent="Icons" index="4"]
 visible = false
 position = Vector2( 60, 264 )
 texture = ExtResource( 4 )
-[connection signal="pressed" from="GUI/RandomMapButton" to="." method="_on_RandomMapButton_pressed"]
+[connection signal="pressed" from="GUI/MapButton0" to="." method="_on_MapButton0_pressed"]
 [connection signal="pressed" from="GUI/MapButton1" to="." method="_on_MapButton1_pressed"]
 [connection signal="pressed" from="GUI/MapButton2" to="." method="_on_MapButton2_pressed"]
 [connection signal="pressed" from="GUI/MapButton3" to="." method="_on_MapButton3_pressed"]
@@ -215,3 +249,4 @@ texture = ExtResource( 4 )
 [connection signal="pressed" from="GUI/MapButton5" to="." method="_on_MapButton5_pressed"]
 [connection signal="pressed" from="GUI/PreviousButton" to="." method="_on_PreviousButton_pressed"]
 [connection signal="pressed" from="GUI/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="GUI/NewButton" to="." method="_on_NewButton_pressed"]
