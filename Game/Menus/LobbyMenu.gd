@@ -4,6 +4,8 @@ enum State { none, join, public, private, offline }
 
 var state = State.none
 
+var time_before_start = 120 # TODO: do this server side!
+
 # @impure
 func _ready():
 	# Music
@@ -46,12 +48,7 @@ func _process(delta: float):
 		set_state(State.public if state == State.private else State.private)
 	# start game if every player is ready
 	if lead_player and InputManager.is_player_action_just_pressed(lead_player.id, "accept") and MultiplayerManager.is_every_player_ready():
-		# disable process to avoid calling goto_game_mode_scene multiple times.
-		set_process(false)
-		# stop matchmaking
-		MultiplayerManager.finish_matchmaking()
-#		return Game.goto_maps_menu_scene()
-		return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", {})
+		return start_game()
 	# add a local player
 	for input_device_id in range(0, 5):
 		if InputManager.is_device_action_just_pressed(input_device_id, "accept") and not InputManager.is_device_used_by_player(input_device_id):
@@ -120,6 +117,13 @@ func start_waiting():
 func cancel_waiting():
 	MultiplayerManager.finish_playing()
 
+func start_game():
+		# disable process to avoid calling goto_game_mode_scene multiple times.
+	set_process(false)
+	# stop matchmaking
+	MultiplayerManager.finish_matchmaking()
+	return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", {})
+
 # on_online is called when the connection to the matchmaking is recovered.
 # @signal
 # @impure
@@ -136,3 +140,15 @@ func on_offline():
 
 func _on_MapButton_pressed():
 	Game.goto_select_map_scene()
+
+
+func pretty_time(value: int) -> String:
+	var minutes = value / 60
+	var seconds = value % 60
+	return "0" + String(minutes) + ":" + ("0" if seconds < 10 else "") + String(seconds)
+
+func _on_Timer_timeout():
+	time_before_start -= 1
+	$GUI/InfoLabel.text = "The game starts in " + pretty_time(time_before_start) + " or when everyone is ready"
+	if time_before_start == 0:
+		start_game()

@@ -318,4 +318,8 @@ position = Vector2( 368, 176 )
 
 [node name="AutoCreatePlayers" parent="." index="18" instance=ExtResource( 19 )]
 spawn_players_flag = false
+
+[node name="Timer" type="Timer" parent="." index="19"]
+autostart = true
 [connection signal="pressed" from="GUI/MapButton" to="." method="_on_MapButton_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
