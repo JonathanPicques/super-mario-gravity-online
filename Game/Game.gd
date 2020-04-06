@@ -109,6 +109,7 @@ const TRANSITION_DURATION = 0.5
 # @async
 # @impure
 func screen_transition_start():
+	$TransitionCanvasLayer/ColorRect.visible = true
 	GameTween.remove_all()
 	GameTween.interpolate_property($TransitionCanvasLayer/ColorRect, "color", Color(0, 0, 0, 0), Color(0, 0, 0, 1), TRANSITION_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	GameTween.start()
@@ -121,6 +122,7 @@ func screen_transition_finish():
 	GameTween.interpolate_property($TransitionCanvasLayer/ColorRect, "color", Color(0, 0, 0, 1), Color(0, 0, 0, 0), TRANSITION_DURATION, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	GameTween.start()
 	yield(GameTween, "tween_all_completed")
+	$TransitionCanvasLayer/ColorRect.visible = false
 
 ##
 # Physics layers
