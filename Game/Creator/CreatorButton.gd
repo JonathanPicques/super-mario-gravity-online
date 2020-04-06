@@ -29,3 +29,4 @@ func _on_SmallButton_focus_exited():
 	AnimTween.remove_all()
 	AnimTween.interpolate_property(self, "rect_scale", MAX_SCALE, Vector2.ONE, ANIM_DURATION, Tween.TRANS_CUBIC, Tween.EASE_OUT)
 	AnimTween.start()
+
