@@ -170,6 +170,8 @@ func set_focus_neighbors():
 		drawer_node.set("focus_neighbour_top", TopButtons[0].get_path())
 		drawer_node.set("focus_neighbour_bottom", drawer_node.get_path())
 		drawer_i += 1
+	
+	TopButtons[0].grab_focus()
 
 # move_map moves the camera with up/down/left/right.
 # @impure
