@@ -28,12 +28,13 @@ func _ready():
 
 # @impure
 func _process(delta: float):
-	match state:
-		State.moving: 
-			move_map()
-			draw_map()
-		State.drawing:
-			draw_map()
+	if $GUILayer/GUI/SettingsPopup.visible == false: # can't draw behind the popup
+		match state:
+			State.moving: 
+				move_map()
+				draw_map()
+			State.drawing:
+				draw_map()
 	if Input.is_action_just_pressed("ui_cancel"):
 		if $GUILayer/GUI/SettingsPopup.visible == true:
 			$GUILayer/GUI/SettingsPopup.visible = false

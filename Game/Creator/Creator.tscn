@@ -252,7 +252,6 @@ region_rect = Rect2( 0, 0, 512, 288 )
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 32, 128 )
 frames = SubResource( 21 )
-frame = 10
 speed_scale = 4.0
 playing = true
 centered = false
@@ -954,6 +953,13 @@ margin_bottom = 56.0
 [node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/SettingsPopup/CloseButton" index="0"]
 margin_right = 24.0
 margin_bottom = 24.0
+focus_neighbour_left = NodePath("../../NameInput")
+focus_neighbour_top = NodePath("..")
+focus_neighbour_right = NodePath("..")
+focus_neighbour_bottom = NodePath("../../NameInput")
+focus_next = NodePath("../../NameInput")
+focus_previous = NodePath("..")
+focus_mode = 2
 texture = ExtResource( 12 )
 
 [node name="SaveButton" parent="GUILayer/GUI/SettingsPopup" index="7" instance=ExtResource( 9 )]
