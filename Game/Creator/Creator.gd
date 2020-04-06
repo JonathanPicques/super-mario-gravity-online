@@ -35,6 +35,10 @@ func _process(delta: float):
 		State.drawing:
 			draw_map()
 	if Input.is_action_just_pressed("ui_cancel"):
+		if $GUILayer/GUI/SettingsPopup.visible == true:
+			$GUILayer/GUI/SettingsPopup.visible = false
+			set_state(State.moving)
+			return
 		match state:
 			State.moving: set_state(State.drawing)
 			State.drawing: set_state(State.moving)
@@ -301,7 +305,7 @@ func _on_SettingsButton_pressed():
 
 func _on_CloseButton_pressed():
 	$GUILayer/GUI/SettingsPopup.visible = false
-	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()
+	set_state(State.moving)
 
 # @signal
 func _on_HomeButton_pressed():
