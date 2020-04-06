@@ -22,9 +22,6 @@ var transition_nodes := []
 # @impure
 func _ready():
 	scene_node = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
-	# load transition nodes
-	for i in range(1, 22):
-		transition_nodes.append(get_node("TransitionCanvasLayer/TextureRect%d" % i))
 	# if the opened scene is a map
 	if scene_node is MapNode:
 		map_node = scene_node
@@ -107,14 +104,13 @@ func goto_settings_menu_scene():
 # Transition
 ##
 
+const TRANSITION_DURATION = 0.5
+
 # @async
 # @impure
 func screen_transition_start():
 	GameTween.remove_all()
-	var delay := 0.0
-	for node in transition_nodes:
-		GameTween.interpolate_property(node, "rect_scale", Vector2.ZERO, Vector2.ONE, 0.3, Tween.TRANS_LINEAR, Tween.EASE_OUT, delay)
-		delay += 0.02
+	GameTween.interpolate_property($TransitionCanvasLayer/ColorRect, "color", Color(0, 0, 0, 0), Color(0, 0, 0, 1), TRANSITION_DURATION, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	GameTween.start()
 	yield(GameTween, "tween_all_completed")
 
@@ -122,10 +118,7 @@ func screen_transition_start():
 # @impure
 func screen_transition_finish():
 	GameTween.remove_all()
-	var delay := 0.0
-	for node in transition_nodes:
-		GameTween.interpolate_property(node, "rect_scale", Vector2.ONE, Vector2.ZERO, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, delay)
-		delay += 0.02
+	GameTween.interpolate_property($TransitionCanvasLayer/ColorRect, "color", Color(0, 0, 0, 1), Color(0, 0, 0, 0), TRANSITION_DURATION, Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	GameTween.start()
 	yield(GameTween, "tween_all_completed")
 
