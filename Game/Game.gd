@@ -1,6 +1,8 @@
 extends Control
 class_name GameNode
 
+var ADMIN = false # Set to true to show and edit system map in creator
+
 const Map := preload("res://Game/Maps/Map.tscn")
 const OpenMapsMenu := preload("res://Game/Menus/OpenMapsMenu.tscn")
 const SelectMapsMenu := preload("res://Game/Menus/SelectMapsMenu.tscn")

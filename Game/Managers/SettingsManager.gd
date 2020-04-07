@@ -35,6 +35,16 @@ func save_settings():
 		config_file.set_value("config", key, values[key])
 	config_file.save(SAVE_PATH)
 
+# @impure
+func save_info(key, value):
+	config_file.set_value("info", key, value)
+	config_file.save(SAVE_PATH)
+
+# @impure
+func get_info(key):
+	return config_file.get_value("info", key)
+
+# @impure
 func apply_settings():
 	AudioServer.set_bus_volume_db(2, DB_SFX_FOR_VALUE[values["sfx"]])
 	AudioServer.set_bus_volume_db(1, DB_MUSIC_FOR_VALUE[values["music"]])

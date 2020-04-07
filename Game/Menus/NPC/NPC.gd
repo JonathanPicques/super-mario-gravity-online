@@ -2,6 +2,8 @@ extends Node2D
 class_name NPCNode
 
 func on_talk():
+	var creator_map = SettingsManager.get_info("creatorMap")
+	MapManager.current_map = "Default.json" if creator_map == null else creator_map
 	Game.goto_creator_scene()
 
 func _process(delta):
