@@ -18,7 +18,7 @@ func _ready():
 	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# GUI
 	MapButtons[0].grab_focus()
-	map_infos = MapManager.get_maps_infos()
+	map_infos = MapManager.get_maps_infos(Game.ADMIN)
 	load_map_buttons()
 
 func load_map_buttons():

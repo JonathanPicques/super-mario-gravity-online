@@ -24,6 +24,10 @@ func _ready():
 	# Map
 	if MapManager.current_map == "Random":
 		$GUI/MapButton/Label.text = "Random"
+		$GUI/MapButton.apply_random(true)
+	elif MapManager.current_map == "YourRandom":
+		$GUI/MapButton/Label.text = "Random"
+		$GUI/MapButton.apply_random(false)
 	else:
 		var map_info = MapManager.load_map_json(MapManager.current_map)
 		$GUI/MapButton/Label.text = map_info["name"]

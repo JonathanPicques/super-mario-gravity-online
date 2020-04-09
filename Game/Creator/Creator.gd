@@ -51,6 +51,10 @@ func _process(delta: float):
 func init():
 	# load map
 	yield(MapManager.load_current_map(), "completed")
+	var map_json = MapManager.load_map_json(MapManager.current_map)
+
+	$GUILayer/GUI/SettingsPopup/NameInput.text = map_json["name"]
+	$GUILayer/GUI/SettingsPopup/DescriptionInput.text = map_json["description"]
 
 	# remove players
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.inverted)

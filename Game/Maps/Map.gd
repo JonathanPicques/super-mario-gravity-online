@@ -29,7 +29,10 @@ func init():
 
 func save_map(name: String, description: String, theme: String):
 	var file = File.new()
-	file.open("res://Maps/" + name + ".json", File.WRITE)
+	if Game.ADMIN == true:
+		file.open("res://Maps/" + name + ".json", File.WRITE)
+	else:
+		file.open("user://Maps/" + name + ".json", File.WRITE)		
 	file.store_line(to_json(get_map_data(name, description, theme)))
 	file.close()
 

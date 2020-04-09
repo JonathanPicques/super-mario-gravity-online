@@ -38,6 +38,9 @@ func load_current_map():
 	if current_map == "Random":
 		var map_files = _list_files_in_directory("res://Maps/", ".json", ["Default.json"])
 		map_to_load = map_files[randi() % map_files.size()]
+	elif current_map == "YourRandom":
+		var map_files = _list_files_in_directory("user://Maps/", ".json")
+		map_to_load = map_files[randi() % map_files.size()]		
 	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
 	# add map to game mode tree
 	Game.game_mode_node.MapSlot.add_child(Game.map_node)
@@ -105,9 +108,10 @@ func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2:
 	return Vector2(0, 0 if tilemap.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
 
 
-func get_maps_infos() -> Array:
+func get_maps_infos(is_admin=true) -> Array:
 	var result = []
-	var map_files = _list_files_in_directory("res://Maps/", ".json", ["Default.json"])
+	var prefix = "res://Maps/" if is_admin else "user://Maps/"
+	var map_files = _list_files_in_directory(prefix, ".json", ["Default.json"])
 	for map_file in map_files:
 		var map_json = load_map_json(map_file)
 		result.append({

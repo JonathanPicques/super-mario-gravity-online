@@ -9,6 +9,7 @@ onready var MapButtons := [
 ]
 var map_infos = []
 var page_index = 0
+var current_tab = "Maps"
 
 # @impure
 func _ready():
@@ -16,9 +17,10 @@ func _ready():
 	AudioManager.play_music("res://Game/Menus/Musics/Awkward-Princesss-Day-Out.ogg")
 	# GUI
 	$GUI/RandomMapButton.grab_focus()
-	
-	map_infos = MapManager.get_maps_infos()
 	$GUI/RandomMapButton/Label.text = "Random"
+	$GUI/RandomMapButton.apply_random(true)
+	
+	map_infos = MapManager.get_maps_infos(true) # load admin maps
 	load_map_buttons()
 
 func load_map_buttons():
@@ -37,7 +39,7 @@ func _process(delta):
 		Game.goto_lobby_menu_scene()
 
 func _on_RandomMapButton_pressed():
-	MapManager.current_map = "Random"
+	MapManager.current_map = "Random" if current_tab == "Maps" else "YourRandom"
 	Game.goto_lobby_menu_scene()	
 
 func _on_MapButton1_pressed():
@@ -87,3 +89,18 @@ func _on_NextButton_pressed():
 	load_map_buttons()
 
 
+
+
+func _on_Tab_pressed():
+	current_tab = "Maps"
+	map_infos = MapManager.get_maps_infos(true) # load admin maps
+	$GUI/RandomMapButton.apply_random(true)
+	load_map_buttons()
+
+
+func _on_Tab2_pressed():
+	current_tab = "YourMaps"
+	map_infos = MapManager.get_maps_infos(false) # load user maps
+	$GUI/RandomMapButton.apply_random(false)
+	$GUI/RandomMapButton/Label.text = "Random" if map_infos.size() > 0 else ""
+	load_map_buttons()
