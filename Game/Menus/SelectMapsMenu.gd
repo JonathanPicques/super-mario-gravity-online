@@ -95,6 +95,7 @@ func _on_Tab_pressed():
 	current_tab = "Maps"
 	map_infos = MapManager.get_maps_infos(true) # load admin maps
 	$GUI/RandomMapButton.apply_random(true)
+	$GUI/RandomMapButton/Label.text = "Random" if map_infos.size() > 0 else ""
 	load_map_buttons()
 
 
