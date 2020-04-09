@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Items/SpikeBall/Textures/SpikeBall.png" type="Texture" id=1]
 [ext_resource path="res://Game/Items/SpikeBall/SpikeBall.gd" type="Script" id=2]
+[ext_resource path="res://Game/Items/SpikeBall/Textures/Base.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 8 )
 
 [node name="SpikeBall" type="Node2D"]
 script = ExtResource( 2 )
@@ -22,4 +26,14 @@ collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/Ball/Area2D"]
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
+position = Vector2( 8, 8 )
+shape = SubResource( 2 )
 [connection signal="body_entered" from="Offset/Ball/Area2D" to="." method="_on_Area2D_body_entered"]

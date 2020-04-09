@@ -65,9 +65,10 @@ func init():
 	GamePopup.queue_free()
 	GamePopup = null
 	# load tilesets
-	Tilesets["Wall"] = {"name": "Wall", "tile": 15, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": Game.map_node.Wall}
+	# TODO: handle theme
+	Tilesets["Wall"] = {"name": "Wall", "tile": 0, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": Game.map_node.Wall}
 	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": Game.map_node.Water}
-	Tilesets["Oneway"] = {"name": "Oneway", "tile": 9, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": Game.map_node.Oneway}
+	Tilesets["Oneway"] = {"name": "Oneway", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": Game.map_node.Oneway}
 	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": Game.map_node.Sticky}
 	# construct quadtree from existing doors
 	for map_door_node in Game.map_node.DoorSlot.get_children():
