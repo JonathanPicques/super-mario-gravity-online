@@ -41,7 +41,7 @@ func _process(delta):
 func open_map(index):
 	if index > map_infos.size() - 1:
 		return
-	MapManager.current_map = map_infos[index]["filename"]
+	MapManager.current_map = {"name": map_infos[index]["filename"], "admin": map_infos[index]["admin"]}
 	SettingsManager.save_info("creatorMap", MapManager.current_map)
 	Game.goto_creator_scene()
 
@@ -71,5 +71,5 @@ func _on_NextButton_pressed():
 
 
 func _on_NewButton_pressed():
-	MapManager.current_map = "Default.json"
+	MapManager.current_map = {"name": "Default.json", "admin": true}
 	Game.goto_creator_scene()

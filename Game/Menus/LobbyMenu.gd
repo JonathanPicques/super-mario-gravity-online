@@ -22,16 +22,16 @@ func _ready():
 		$Icons/KeyKeyboardCancel.visible = lead_player.input_device_id == 0
 		$Icons/KeyKeyboardConfirm.visible = lead_player.input_device_id == 0
 	# Map
-	if MapManager.current_map == "Random":
+	if MapManager.current_map["name"] == "Random":
 		$GUI/MapButton/Label.text = "Random"
 		$GUI/MapButton.apply_random(true)
-	elif MapManager.current_map == "YourRandom":
+	elif MapManager.current_map["name"] == "YourRandom":
 		$GUI/MapButton/Label.text = "Random"
 		$GUI/MapButton.apply_random(false)
 	else:
 		var map_info = MapManager.load_map_json(MapManager.current_map)
 		$GUI/MapButton/Label.text = map_info["name"]
-		$GUI/MapButton/Preview.texture = load("res://Maps/" + MapManager.current_map.get_basename() + ".png")
+		$GUI/MapButton/Preview.texture = load("res://Maps/" + MapManager.current_map["name"].get_basename() + ".png")
 	# Set initial status
 	match MultiplayerManager.is_online():
 		true: set_state(State.public)

@@ -29,7 +29,7 @@ func init():
 
 func save_map(name: String, description: String, theme: String):
 	var file = File.new()
-	if Game.ADMIN == true:
+	if MapManager.current_map["admin"] and MapManager.current_map["name"] != "Default.json":
 		file.open("res://Maps/" + name + ".json", File.WRITE)
 	else:
 		file.open("user://Maps/" + name + ".json", File.WRITE)		

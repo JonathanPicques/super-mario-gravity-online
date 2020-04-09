@@ -11,6 +11,7 @@ onready var KeyKeyboardUseObject := $GUI/ObjectHintLabel/KeyKeyboardUseObject
 
 # @impure
 func _ready():
+	SettingsManager.save_info("creatorMap", {"name": "Default.json", "admin": true})
 	if !SettingsManager.values["show_tuto"]:
 		$ObjectSlot/FlagStart.position = SKIP_START_POSITION
 	else:

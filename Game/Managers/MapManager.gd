@@ -3,7 +3,7 @@ class_name MapManagerNode
 
 const cell_size := 16.0
 
-var current_map := "Random"
+var current_map := {"name": "Random", "admin": true}
 
 const item_scenes := {
 	"Door": preload("res://Game/Items/Door/Door.tscn"),
@@ -30,17 +30,20 @@ func snap_value(value: float) -> int:
 func create_item_node(item_type: String) -> Node2D:
 	return item_scenes[item_type].instance()
 
+func is_default():
+	return current_map["name"] == "Default.json" and current_map["admin"] == true
+
 # load_current_map loads the given map into the game mode.
 # @impure
 # @async
 func load_current_map():
 	var map_to_load = current_map
-	if current_map == "Random":
+	if current_map["name"] == "Random":
 		var map_files = _list_files_in_directory("res://Maps/", ".json", ["Default.json"])
-		map_to_load = map_files[randi() % map_files.size()]
-	elif current_map == "YourRandom":
+		map_to_load = {"name": map_files[randi() % map_files.size()], "admin": true}
+	elif current_map["name"] == "YourRandom":
 		var map_files = _list_files_in_directory("user://Maps/", ".json")
-		map_to_load = map_files[randi() % map_files.size()]		
+		map_to_load = {"name": map_files[randi() % map_files.size()], "admin": true}		
 	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
 	# add map to game mode tree
 	Game.game_mode_node.MapSlot.add_child(Game.map_node)
@@ -53,9 +56,10 @@ func load_current_map():
 	# init map
 	Game.map_node.init()
 
-func load_map_json(map_name: String) -> Dictionary:
+func load_map_json(map_info: Dictionary) -> Dictionary:
+	var prefix := "res://Maps/" if map_info["admin"] == true else "user://Maps/"
+	var map_path: String = prefix + map_info["name"]
 	var file := File.new()
-	var map_path := "res://Maps/" + map_name
 	var open_result := file.open(map_path, File.READ)
 	if open_result != OK:
 		print("failed to load map %s" % map_path) # TODO: find a better way to handle errors
@@ -113,12 +117,16 @@ func get_maps_infos(is_admin=true) -> Array:
 	var prefix = "res://Maps/" if is_admin else "user://Maps/"
 	var map_files = _list_files_in_directory(prefix, ".json", ["Default.json"])
 	for map_file in map_files:
-		var map_json = load_map_json(map_file)
+		var map_json = load_map_json({
+			"name": map_file,
+			"admin": is_admin
+		})
 		result.append({
 			"filename": map_file,
 			"name": map_json["name"],
 			"description": map_json["description"],
 			"theme": map_json["theme"],
+			"admin": is_admin
 		})
 	return result
 

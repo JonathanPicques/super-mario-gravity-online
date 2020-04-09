@@ -3,7 +3,7 @@ class_name NPCNode
 
 func on_talk():
 	var creator_map = SettingsManager.get_info("creatorMap")
-	MapManager.current_map = "Default.json" if creator_map == null else creator_map
+	MapManager.current_map = {"name": "Default.json", "admin": true} if creator_map == null else creator_map
 	Game.goto_creator_scene()
 
 func _process(delta):

@@ -53,7 +53,7 @@ func init():
 	yield(MapManager.load_current_map(), "completed")
 	var map_json = MapManager.load_map_json(MapManager.current_map)
 
-	$GUILayer/GUI/SettingsPopup/NameInput.text = map_json["name"]
+	$GUILayer/GUI/SettingsPopup/NameInput.text = "" if MapManager.is_default() else map_json["name"]
 	$GUILayer/GUI/SettingsPopup/DescriptionInput.text = map_json["description"]
 
 	# remove players
@@ -257,7 +257,7 @@ func update_preview():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	var img = get_viewport().get_texture()
-	img.get_data().save_png('res://Maps/' + MapManager.current_map.get_basename() + '.png')
+	img.get_data().save_png('res://Maps/' + MapManager.current_map["name"].get_basename() + '.png')
 
 # @signal
 func _on_PlayButton_pressed():
@@ -317,6 +317,7 @@ func _on_HomeButton_pressed():
 	Game.goto_home_menu_scene()
 	
 func _on_SaveButton_pressed():
+	# TODO: error handling, save for admin/user depending on the map
 	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
 	$GUILayer/GUI/SettingsPopup.visible = false
 	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()

@@ -39,38 +39,28 @@ func _process(delta):
 		Game.goto_lobby_menu_scene()
 
 func _on_RandomMapButton_pressed():
-	MapManager.current_map = "Random" if current_tab == "Maps" else "YourRandom"
+	if current_tab == "YourMaps" and map_infos.size() == 0:
+		return
+	MapManager.current_map = {
+		"name": "Random" if current_tab == "Maps" else "YourRandom",
+		"admin": current_tab == "Maps"
+	}
 	Game.goto_lobby_menu_scene()	
 
-func _on_MapButton1_pressed():
-	if 0 > map_infos.size() - 1:
+func select_map(index):
+	if index > map_infos.size() - 1:
 		return
-	MapManager.current_map = map_infos[0]["filename"]
+	MapManager.current_map = {
+		"name": map_infos[index]["filename"],
+		"admin": map_infos[index]["admin"]
+	}
 	Game.goto_lobby_menu_scene()	
 
-func _on_MapButton2_pressed():
-	if 1 > map_infos.size() - 1:
-		return
-	MapManager.current_map = map_infos[1]["filename"]
-	Game.goto_lobby_menu_scene()	
-
-func _on_MapButton3_pressed():
-	if 2 > map_infos.size() - 1:
-		return
-	MapManager.current_map = map_infos[2]["filename"]
-	Game.goto_lobby_menu_scene()	
-
-func _on_MapButton4_pressed():
-	if 3 > map_infos.size() - 1:
-		return
-	MapManager.current_map = map_infos[3]["filename"]
-	Game.goto_lobby_menu_scene()	
-
-func _on_MapButton5_pressed():
-	if 4 > map_infos.size() - 1:
-		return
-	MapManager.current_map = map_infos[4]["filename"]
-	Game.goto_lobby_menu_scene()	
+func _on_MapButton1_pressed(): select_map(0)
+func _on_MapButton2_pressed(): select_map(1)
+func _on_MapButton3_pressed(): select_map(2)
+func _on_MapButton4_pressed(): select_map(3)
+func _on_MapButton5_pressed(): select_map(4)
 	
 func _on_PreviousButton_pressed():
 	if page_index == 0:
