@@ -72,8 +72,13 @@ func load_map_json(map_info: Dictionary) -> Dictionary:
 # @impure
 # @async
 func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
+	var tile_type = {
+		"garden": 0,
+		"castle": 1,
+		"sewer": 2
+	}
 	for tile in map_data["wall"]:
-		map_node.Wall.set_cell(tile[0], tile[1], 15)
+		map_node.Wall.set_cell(tile[0], tile[1], tile_type[map_data["theme"]]) # TODO: handle theme
 		map_node.Wall.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["water"]:
 		var x = tile[0]

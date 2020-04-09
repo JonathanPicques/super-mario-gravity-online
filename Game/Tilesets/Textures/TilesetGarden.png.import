@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SewerTilesetNew.png-5d0f24e7a3bb3ac04cfcf2767ed2bb94.stex"
+path="res://.import/TilesetGarden.png-67a10abedaae4cd08e79f1641d89bf04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Tilesets/Textures/SewerTilesetNew.png"
-dest_files=[ "res://.import/SewerTilesetNew.png-5d0f24e7a3bb3ac04cfcf2767ed2bb94.stex" ]
+source_file="res://Game/Tilesets/Textures/TilesetGarden.png"
+dest_files=[ "res://.import/TilesetGarden.png-67a10abedaae4cd08e79f1641d89bf04.stex" ]
 
 [params]
 

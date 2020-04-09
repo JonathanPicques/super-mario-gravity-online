@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GardenTilesetNew_.png-3283e3984c6220997be3b5d66d134290.stex"
+path="res://.import/TilesetCastle.png-26e23ad0e6aec93d46c0747d7957b465.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Tilesets/Textures/GardenTilesetNew_.png"
-dest_files=[ "res://.import/GardenTilesetNew_.png-3283e3984c6220997be3b5d66d134290.stex" ]
+source_file="res://Game/Tilesets/Textures/TilesetCastle.png"
+dest_files=[ "res://.import/TilesetCastle.png-26e23ad0e6aec93d46c0747d7957b465.stex" ]
 
 [params]
 
