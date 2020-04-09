@@ -77,8 +77,9 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		"castle": 1,
 		"sewer": 2
 	}
+	# TODO: handle decor back
 	for tile in map_data["wall"]:
-		map_node.Wall.set_cell(tile[0], tile[1], tile_type[map_data["theme"]]) # TODO: handle theme
+		map_node.Wall.set_cell(tile[0], tile[1], tile_type[map_data["theme"]])
 		map_node.Wall.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["water"]:
 		var x = tile[0]
