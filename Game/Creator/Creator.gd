@@ -322,7 +322,7 @@ func _on_HomeButton_pressed():
 	
 func _on_SaveButton_pressed():
 	# TODO: error handling, save for admin/user depending on the map
-	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, "garden")
+	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, ThemeLabel.text)
 	$GUILayer/GUI/SettingsPopup.visible = false
 	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()
 

@@ -558,7 +558,10 @@ func on_webrtc_peer_connected(peer_id: int):
 	for player in players:
 		print("player %d joined (local: %s) (peer_id: %s) (local_id: %s)" % [player.id, player.local, player.peer_id, player.local_id])
 	yield(get_tree().create_timer(3.0), "timeout")
-	MapManager.current_map = 'Spikes corridor.json' # TODO: synchronize the map selection between clients
+	MapManager.current_map = {
+		"name": 'Spikes corridor.json',
+		"admin": true
+	} # TODO: synchronize the map selection between clients
 	return Game.goto_game_mode_scene("res://Game/Modes/Race/RaceGameMode.tscn", { })
 
 # @impure
