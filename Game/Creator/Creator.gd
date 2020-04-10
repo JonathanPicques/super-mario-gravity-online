@@ -15,6 +15,8 @@ onready var CreatorCamera: Camera2D = $GridContainer/Control1/ViewportContainer1
 onready var Gui: Control = $GUILayer/GUI
 onready var GuiModeLabel: Control = $GUILayer/GUI/ModeLabel
 
+onready var ThemeLabel = $GUILayer/GUI/TopBar/ThemeButton/Label
+
 onready var Tilesets := {}
 
 var state: int = State.drawing
@@ -52,7 +54,8 @@ func init():
 	# load map
 	yield(MapManager.load_current_map(), "completed")
 	var map_json = MapManager.load_map_json(MapManager.current_map)
-
+	
+	ThemeLabel.text = map_json["theme"]
 	$GUILayer/GUI/SettingsPopup/NameInput.text = "" if MapManager.is_default() else map_json["name"]
 	$GUILayer/GUI/SettingsPopup/DescriptionInput.text = map_json["description"]
 
@@ -345,3 +348,19 @@ func _on_ItemButton12_pressed(): select_drawer(11)
 
 func _on_InfoButton_pressed():
 	print("Show infos")
+
+func _on_ThemeButton_pressed():
+	if ThemeLabel.text == "garden":
+		ThemeLabel.text = "castle"
+	elif ThemeLabel.text == "castle":
+		ThemeLabel.text = "sewer"
+	elif ThemeLabel.text == "sewer":
+		ThemeLabel.text = "garden"
+
+	# Reload the map
+#	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
+	var map_json = MapManager.load_map_json(MapManager.current_map)
+	map_json["theme"] = ThemeLabel.text
+	yield(get_tree(), "idle_frame")
+	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
+	Game.map_node.init()

@@ -37,6 +37,7 @@ __meta__ = {
 [node name="Oneway" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
 cell_size = Vector2( 16, 16 )
+cell_y_sort = true
 collision_use_kinematic = true
 collision_mask = 0
 format = 1
