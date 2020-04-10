@@ -34,13 +34,13 @@ func fill_cell(pos: Vector2):
 	var x = cell_position.x
 	var y = cell_position.y
 	# creator.Quadtree.add_tile(pos, tileset)
-	tileset.tilemap_node.set_cell(x, y, tileset.tile, false, false, false, get_autotile(tileset, cell_position.x, cell_position.y))
+	tileset.tilemap_node.set_cell(x, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, cell_position.x, cell_position.y))
 	if tileset.tilemap_node.get_cell(x - 1, y) != TileMap.INVALID_CELL:
-		tileset.tilemap_node.set_cell(x - 1, y, tileset.tile, false, false, false, get_autotile(tileset, x - 1, y))
+		tileset.tilemap_node.set_cell(x - 1, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x - 1, y))
 	if tileset.tilemap_node.get_cell(x + 1, y) != TileMap.INVALID_CELL:
-		tileset.tilemap_node.set_cell(x + 1, y, tileset.tile, false, false, false, get_autotile(tileset, x + 1, y))
+		tileset.tilemap_node.set_cell(x + 1, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x + 1, y))
 	if tileset.tilemap_node.get_cell(x, y + 1) != TileMap.INVALID_CELL:
-		tileset.tilemap_node.set_cell(x, y + 1, tileset.tile, false, false, false, get_autotile(tileset, x, y + 1))
+		tileset.tilemap_node.set_cell(x, y + 1, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x, y + 1))
 
 # @override
 func clear_cell(pos: Vector2):
@@ -101,7 +101,3 @@ func clear_area(cell_position: Vector2, cells: Array):
 	clear_area(Vector2(cell_position.x - 16, cell_position.y), cells)
 	clear_area(Vector2(cell_position.x, cell_position.y + 16), cells)
 	clear_area(Vector2(cell_position.x, cell_position.y - 16), cells)
-	
-# @pure
-func get_autotile(tileset: Dictionary, x: int, y: int) -> Vector2: 
-	return Vector2(0, 0 if tileset.tilemap_node.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)

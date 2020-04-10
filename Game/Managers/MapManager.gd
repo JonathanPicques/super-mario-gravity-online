@@ -84,7 +84,7 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 	for tile in map_data["water"]:
 		var x = tile[0]
 		var y = tile[1]
-		map_node.Water.set_cell(tile[0], tile[1], 16)
+		map_node.Water.set_cell(tile[0], tile[1], 16, false, false, false, get_autotile(map_node.Water, tile[0], tile[1]))
 		if map_node.Water.get_cell(x - 1, y) != TileMap.INVALID_CELL:
 			map_node.Water.set_cell(x - 1, y, 16, false, false, false, get_autotile(map_node.Water, x - 1, y))
 		if map_node.Water.get_cell(x + 1, y) != TileMap.INVALID_CELL:
