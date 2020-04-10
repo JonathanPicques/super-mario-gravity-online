@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StickyIcon.png-6e197912fd9931cefad890b26d248045.stex"
+path="res://.import/SpikeBallIcon.png-bf40981e6e29b35dbe418e60d90eed70.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/StickyIcon.png"
-dest_files=[ "res://.import/StickyIcon.png-6e197912fd9931cefad890b26d248045.stex" ]
+source_file="res://Game/Creator/Textures/Drawers/SpikeBallIcon.png"
+dest_files=[ "res://.import/SpikeBallIcon.png-bf40981e6e29b35dbe418e60d90eed70.stex" ]
 
 [params]
 

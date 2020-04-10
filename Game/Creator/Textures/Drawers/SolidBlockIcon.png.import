@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DoorIcon.png-80f83334d52742e3110887f09b4b3251.stex"
+path="res://.import/SolidBlockIcon.png-b7eed60070ca52ee3cf08c7b56202c30.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/DoorIcon.png"
-dest_files=[ "res://.import/DoorIcon.png-80f83334d52742e3110887f09b4b3251.stex" ]
+source_file="res://Game/Creator/Textures/Drawers/SolidBlockIcon.png"
+dest_files=[ "res://.import/SolidBlockIcon.png-b7eed60070ca52ee3cf08c7b56202c30.stex" ]
 
 [params]
 

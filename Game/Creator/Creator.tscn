@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsIcon.png" type="Texture" id=2]
@@ -22,17 +22,15 @@
 [ext_resource path="res://Game/Items/Spikes/Textures/Spike.png" type="Texture" id=20]
 [ext_resource path="res://Game/Items/SpikeBall/Textures/SpikeBall.png" type="Texture" id=21]
 [ext_resource path="res://Game/Creator/Textures/SaveIcon.png" type="Texture" id=22]
-[ext_resource path="res://Game/Creator/Textures/Icons/TrampolineIcon.png" type="Texture" id=23]
-[ext_resource path="res://Game/Creator/Textures/Icons/WaterIcon.png" type="Texture" id=24]
-[ext_resource path="res://Game/Creator/Textures/Icons/SolidBlockIcon.png" type="Texture" id=25]
+[ext_resource path="res://Game/Creator/Textures/Drawers/TrampolineIcon.png" type="Texture" id=23]
+[ext_resource path="res://Game/Creator/Textures/Drawers/WaterIcon.png" type="Texture" id=24]
+[ext_resource path="res://Game/Items/SpikeBall/Textures/Base.png" type="Texture" id=25]
 [ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorBlockOffAmber.png" type="Texture" id=26]
 [ext_resource path="res://Game/Creator/Drawers/LiquidDrawer.gd" type="Script" id=27]
-[ext_resource path="res://Game/Creator/Textures/Icons/OnewayIcon.png" type="Texture" id=28]
+[ext_resource path="res://Game/Creator/Textures/Drawers/OnewayIcon.png" type="Texture" id=28]
 [ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorSwitchOffAmber.png" type="Texture" id=29]
-[ext_resource path="res://Game/Creator/Textures/Icons/StickyIcon.png" type="Texture" id=30]
+[ext_resource path="res://Game/Creator/Textures/Drawers/StickyIcon.png" type="Texture" id=30]
 [ext_resource path="res://Game/Creator/Creator.gd" type="Script" id=31]
-[ext_resource path="res://Game/Menus/Fonts/chary___.ttf" type="DynamicFontData" id=32]
-[ext_resource path="res://Game/Menus/Fonts/alagard.ttf" type="DynamicFontData" id=33]
 [ext_resource path="res://Game/Creator/Drawers/TilemapDrawer.gd" type="Script" id=34]
 [ext_resource path="res://Game/Creator/Drawers/ItemDrawer.gd" type="Script" id=35]
 [ext_resource path="res://Game/Creator/Textures/DeleteIcon.png" type="Texture" id=36]
@@ -41,6 +39,9 @@
 [ext_resource path="res://Game/Creator/CreatorButton.gd" type="Script" id=39]
 [ext_resource path="res://Game/Menus/Textures/ThemeButton.png" type="Texture" id=40]
 [ext_resource path="res://Game/Creator/Textures/BubbleBottom.png" type="Texture" id=41]
+[ext_resource path="res://Game/Creator/Textures/MoveIcon.png" type="Texture" id=42]
+[ext_resource path="res://Game/Creator/Textures/DrawIcon.png" type="Texture" id=43]
+[ext_resource path="res://Game/Creator/Textures/EraseIcon.png" type="Texture" id=44]
 [ext_resource path="res://Game/Creator/ElementsBar.gd" type="Script" id=45]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Idle.png" type="Texture" id=53]
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=59]
@@ -133,32 +134,39 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="DynamicFont" id=35]
+[sub_resource type="DynamicFont" id=22]
 font_data = ExtResource( 59 )
 
-[sub_resource type="StreamTexture" id=22]
+[sub_resource type="StreamTexture" id=23]
+load_path = "res://.import/ModeButton.png-a53c52e48566005424e6187fa14a3f76.stex"
+
+[sub_resource type="StreamTexture" id=24]
+load_path = "res://.import/ModeButtonFocused.png-f6f3de1e2b8e51f0b31a515966b2f949.stex"
+
+[sub_resource type="StreamTexture" id=25]
 flags = 4
 load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
 
-[sub_resource type="StreamTexture" id=23]
+[sub_resource type="StreamTexture" id=26]
+flags = 4
 load_path = "res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex"
 
-[sub_resource type="DynamicFont" id=24]
-font_data = ExtResource( 33 )
+[sub_resource type="DynamicFont" id=27]
+font_data = ExtResource( 59 )
 
-[sub_resource type="DynamicFont" id=25]
-size = 12
+[sub_resource type="DynamicFont" id=28]
+size = 11
 use_filter = true
-font_data = ExtResource( 32 )
+font_data = ExtResource( 59 )
 
-[sub_resource type="DynamicFont" id=26]
+[sub_resource type="DynamicFont" id=29]
 size = 14
 outline_size = 1
 outline_color = Color( 0.2, 0.2, 0.2, 1 )
 use_mipmaps = true
 font_data = ExtResource( 59 )
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=30]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -166,7 +174,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=31]
 bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -174,23 +182,23 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 
-[sub_resource type="DynamicFont" id=29]
+[sub_resource type="DynamicFont" id=32]
 size = 12
 font_data = ExtResource( 59 )
 
-[sub_resource type="DynamicFont" id=30]
+[sub_resource type="DynamicFont" id=33]
 size = 26
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 59 )
 
-[sub_resource type="DynamicFont" id=31]
+[sub_resource type="DynamicFont" id=34]
 size = 14
 outline_size = 1
 outline_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 font_data = ExtResource( 59 )
 
-[sub_resource type="StyleBoxFlat" id=32]
+[sub_resource type="StyleBoxFlat" id=35]
 bg_color = Color( 1, 1, 1, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -198,7 +206,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 
-[sub_resource type="StyleBoxFlat" id=33]
+[sub_resource type="StyleBoxFlat" id=36]
 bg_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 border_width_left = 1
 border_width_top = 1
@@ -206,7 +214,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 
-[sub_resource type="DynamicFont" id=34]
+[sub_resource type="DynamicFont" id=37]
 size = 12
 font_data = ExtResource( 59 )
 
@@ -258,7 +266,7 @@ region_rect = Rect2( 0, 0, 512, 288 )
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 32, 128 )
 frames = SubResource( 21 )
-frame = 3
+frame = 17
 speed_scale = 4.0
 playing = true
 centered = false
@@ -300,7 +308,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="GUILayer/GUI/TopBar/ThemeButton" index="1"]
 margin_right = 112.0
 margin_bottom = 24.0
-custom_fonts/font = SubResource( 35 )
+custom_fonts/font = SubResource( 22 )
 custom_colors/font_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 text = "garden"
 align = 1
@@ -309,7 +317,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GoToStartButton" parent="GUILayer/GUI/TopBar" index="2" instance=ExtResource( 4 )]
+[node name="ModeButton" type="TextureButton" parent="GUILayer/GUI/TopBar" index="2"]
+margin_left = 232.0
+margin_top = 8.0
+margin_right = 304.0
+margin_bottom = 32.0
+rect_pivot_offset = Vector2( 16, 16 )
+texture_normal = SubResource( 23 )
+texture_pressed = SubResource( 24 )
+texture_hover = SubResource( 24 )
+texture_focused = SubResource( 24 )
+script = ExtResource( 39 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="GUILayer/GUI/TopBar/ModeButton" index="0"]
+
+[node name="TextureRect" type="TextureRect" parent="GUILayer/GUI/TopBar/ModeButton" index="1"]
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 43 )
+
+[node name="TextureRect2" type="TextureRect" parent="GUILayer/GUI/TopBar/ModeButton" index="2"]
+margin_left = 24.0
+margin_right = 48.0
+margin_bottom = 24.0
+texture = ExtResource( 44 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="GUILayer/GUI/TopBar/ModeButton" index="3"]
+margin_left = 48.0
+margin_right = 72.0
+margin_bottom = 24.0
+texture = ExtResource( 42 )
+
+[node name="GoToStartButton" parent="GUILayer/GUI/TopBar" index="3" instance=ExtResource( 4 )]
 margin_left = 312.0
 margin_top = 8.0
 margin_right = 336.0
@@ -320,7 +365,7 @@ margin_right = 24.0
 margin_bottom = 24.0
 texture = ExtResource( 8 )
 
-[node name="GoToEndButton" parent="GUILayer/GUI/TopBar" index="3" instance=ExtResource( 4 )]
+[node name="GoToEndButton" parent="GUILayer/GUI/TopBar" index="4" instance=ExtResource( 4 )]
 margin_left = 344.0
 margin_top = 8.0
 margin_right = 368.0
@@ -331,7 +376,7 @@ margin_right = 24.0
 margin_bottom = 24.0
 texture = ExtResource( 7 )
 
-[node name="UndoButton" parent="GUILayer/GUI/TopBar" index="4" instance=ExtResource( 4 )]
+[node name="UndoButton" parent="GUILayer/GUI/TopBar" index="5" instance=ExtResource( 4 )]
 margin_left = 376.0
 margin_top = 8.0
 margin_right = 400.0
@@ -342,7 +387,7 @@ margin_right = 24.0
 margin_bottom = 24.0
 texture = ExtResource( 3 )
 
-[node name="RedoButton" parent="GUILayer/GUI/TopBar" index="5" instance=ExtResource( 4 )]
+[node name="RedoButton" parent="GUILayer/GUI/TopBar" index="6" instance=ExtResource( 4 )]
 margin_left = 408.0
 margin_top = 8.0
 margin_right = 432.0
@@ -353,7 +398,7 @@ margin_right = 24.0
 margin_bottom = 24.0
 texture = ExtResource( 5 )
 
-[node name="InfoButton" parent="GUILayer/GUI/TopBar" index="6" instance=ExtResource( 4 )]
+[node name="InfoButton" parent="GUILayer/GUI/TopBar" index="7" instance=ExtResource( 4 )]
 margin_left = 440.0
 margin_top = 8.0
 margin_right = 464.0
@@ -364,7 +409,7 @@ margin_right = 24.0
 margin_bottom = 24.0
 texture = ExtResource( 6 )
 
-[node name="SettingsButton" parent="GUILayer/GUI/TopBar" index="7" instance=ExtResource( 9 )]
+[node name="SettingsButton" parent="GUILayer/GUI/TopBar" index="8" instance=ExtResource( 9 )]
 margin_left = 472.0
 margin_top = 8.0
 margin_right = 504.0
@@ -395,7 +440,7 @@ anchor_bottom = 0.15
 margin_left = -10.0
 margin_right = -37.65
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 34 )
 __meta__ = {
@@ -404,7 +449,7 @@ __meta__ = {
 
 [node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton" index="0"]
 position = Vector2( 11, 11 )
-texture = SubResource( 23 )
+texture = SubResource( 26 )
 
 [node name="ItemButton2" type="TextureButton" parent="GUILayer/GUI/Drawers" index="1"]
 anchor_right = 0.15
@@ -412,7 +457,7 @@ anchor_bottom = 0.15
 margin_left = 17.0
 margin_right = -10.65
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -429,7 +474,7 @@ anchor_bottom = 0.15
 margin_left = 44.0
 margin_right = 16.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -447,7 +492,7 @@ anchor_bottom = 0.15
 margin_left = 71.0
 margin_right = 43.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -467,7 +512,7 @@ anchor_bottom = 0.15
 margin_left = 98.0
 margin_right = 70.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -485,7 +530,7 @@ anchor_bottom = 0.15
 margin_left = 126.0
 margin_right = 98.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -504,7 +549,7 @@ anchor_bottom = 0.15
 margin_left = 154.0
 margin_right = 126.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -523,7 +568,7 @@ anchor_bottom = 0.15
 margin_left = 182.0
 margin_right = 154.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -542,7 +587,7 @@ anchor_bottom = 0.15
 margin_left = 210.0
 margin_right = 182.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 27 )
 __meta__ = {
@@ -560,7 +605,7 @@ anchor_bottom = 0.15
 margin_left = 238.0
 margin_right = 255.2
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 34 )
 __meta__ = {
@@ -578,7 +623,7 @@ anchor_bottom = 0.15
 margin_left = 266.0
 margin_right = 239.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 34 )
 __meta__ = {
@@ -596,7 +641,7 @@ anchor_bottom = 0.15
 margin_left = 295.0
 margin_right = 267.35
 margin_bottom = 18.7
-texture_normal = SubResource( 22 )
+texture_normal = SubResource( 25 )
 texture_focused = ExtResource( 14 )
 script = ExtResource( 35 )
 __meta__ = {
@@ -630,8 +675,8 @@ margin_left = 117.0
 margin_top = 13.0
 margin_right = 185.0
 margin_bottom = 28.0
-custom_fonts/font = SubResource( 24 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 27 )
+custom_colors/font_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 text = "Keyboard"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -642,8 +687,8 @@ margin_left = 117.0
 margin_top = 114.0
 margin_right = 182.0
 margin_bottom = 129.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "ctrl+z - undo"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -654,8 +699,8 @@ margin_left = 117.0
 margin_top = 126.0
 margin_right = 182.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "space - map/tools"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -666,8 +711,8 @@ margin_left = 117.0
 margin_top = 102.0
 margin_right = 212.0
 margin_bottom = 117.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "ctrl+shift+z - redo"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -678,8 +723,8 @@ margin_left = 117.0
 margin_top = 91.0
 margin_right = 217.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "ctrl+b - go to begin"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -690,8 +735,8 @@ margin_left = 117.0
 margin_top = 78.0
 margin_right = 207.0
 margin_bottom = 93.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "ctrl+e - go to end"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -702,8 +747,8 @@ margin_left = 117.0
 margin_top = 65.0
 margin_right = 197.0
 margin_bottom = 80.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "leftclick - draw"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -714,8 +759,8 @@ margin_left = 116.0
 margin_top = 42.0
 margin_right = 186.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "enter - play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -726,8 +771,8 @@ margin_left = 116.0
 margin_top = 53.0
 margin_right = 206.0
 margin_bottom = 68.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "rightclick - erase"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -738,8 +783,8 @@ margin_left = 116.0
 margin_top = 31.0
 margin_right = 186.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "esc - menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -750,8 +795,8 @@ margin_left = 12.0
 margin_top = 114.0
 margin_right = 77.0
 margin_bottom = 129.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "L - undo"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -762,8 +807,8 @@ margin_left = 12.0
 margin_top = 126.0
 margin_right = 77.0
 margin_bottom = 141.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "X - map/tools"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -774,8 +819,8 @@ margin_left = 12.0
 margin_top = 102.0
 margin_right = 107.0
 margin_bottom = 117.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "R - redo"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -786,8 +831,8 @@ margin_left = 12.0
 margin_top = 91.0
 margin_right = 112.0
 margin_bottom = 106.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "ZL - go to begin"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -798,8 +843,8 @@ margin_left = 12.0
 margin_top = 78.0
 margin_right = 102.0
 margin_bottom = 93.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "ZR - go to end"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -810,8 +855,8 @@ margin_left = 12.0
 margin_top = 65.0
 margin_right = 92.0
 margin_bottom = 80.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "A - draw"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -822,8 +867,8 @@ margin_left = 11.0
 margin_top = 42.0
 margin_right = 81.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "START - play"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -834,8 +879,8 @@ margin_left = 11.0
 margin_top = 53.0
 margin_right = 101.0
 margin_bottom = 68.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "B - erase"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -846,8 +891,8 @@ margin_left = 11.0
 margin_top = 31.0
 margin_right = 81.0
 margin_bottom = 46.0
-custom_fonts/font = SubResource( 25 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 28 )
+custom_colors/font_color = Color( 0.533333, 0.533333, 0.533333, 1 )
 text = "SELECT - menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -858,8 +903,8 @@ margin_left = 11.0
 margin_top = 13.0
 margin_right = 79.0
 margin_bottom = 28.0
-custom_fonts/font = SubResource( 24 )
-custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
+custom_fonts/font = SubResource( 27 )
+custom_colors/font_color = Color( 0.266667, 0.266667, 0.266667, 1 )
 text = "Gamepad"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -871,7 +916,7 @@ margin_left = 7.0
 margin_top = 235.0
 margin_right = 105.0
 margin_bottom = 252.0
-custom_fonts/font = SubResource( 26 )
+custom_fonts/font = SubResource( 29 )
 text = "(ESC) move map"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -907,9 +952,9 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../DescriptionInput")
 focus_next = NodePath("../DescriptionInput")
 focus_previous = NodePath("../CloseButton")
-custom_styles/focus = SubResource( 27 )
-custom_styles/normal = SubResource( 28 )
-custom_fonts/font = SubResource( 29 )
+custom_styles/focus = SubResource( 30 )
+custom_styles/normal = SubResource( 31 )
+custom_fonts/font = SubResource( 32 )
 custom_colors/selection_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 custom_colors/cursor_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
@@ -925,7 +970,7 @@ margin_left = 216.0
 margin_top = 32.0
 margin_right = 304.0
 margin_bottom = 59.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 33 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Options"
 __meta__ = {
@@ -937,7 +982,7 @@ margin_left = 144.0
 margin_top = 56.0
 margin_right = 232.0
 margin_bottom = 73.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 34 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Name"
 __meta__ = {
@@ -949,7 +994,7 @@ margin_left = 144.0
 margin_top = 104.0
 margin_right = 232.0
 margin_bottom = 121.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 34 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Description"
 __meta__ = {
@@ -967,9 +1012,9 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../SaveButton")
 focus_next = NodePath("../SaveButton")
 focus_previous = NodePath("../NameInput")
-custom_styles/focus = SubResource( 32 )
-custom_styles/normal = SubResource( 33 )
-custom_fonts/font = SubResource( 34 )
+custom_styles/focus = SubResource( 35 )
+custom_styles/normal = SubResource( 36 )
+custom_fonts/font = SubResource( 37 )
 custom_colors/selection_color = Color( 0.831373, 0.823529, 0.898039, 1 )
 custom_colors/caret_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
 custom_colors/font_color = Color( 0.105882, 0.0980392, 0.172549, 1 )
@@ -1045,6 +1090,9 @@ texture = ExtResource( 37 )
 [connection signal="focus_entered" from="GUILayer/GUI/TopBar/ThemeButton" to="GUILayer/GUI/TopBar/ThemeButton" method="_on_BigButton_focus_entered"]
 [connection signal="focus_exited" from="GUILayer/GUI/TopBar/ThemeButton" to="GUILayer/GUI/TopBar/ThemeButton" method="_on_BigButton_focus_exited"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/ThemeButton" to="." method="_on_ThemeButton_pressed"]
+[connection signal="focus_entered" from="GUILayer/GUI/TopBar/ModeButton" to="GUILayer/GUI/TopBar/ModeButton" method="_on_BigButton_focus_entered"]
+[connection signal="focus_exited" from="GUILayer/GUI/TopBar/ModeButton" to="GUILayer/GUI/TopBar/ModeButton" method="_on_BigButton_focus_exited"]
+[connection signal="pressed" from="GUILayer/GUI/TopBar/ModeButton" to="." method="_on_ModeButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToStartButton" to="." method="_on_GoToStartButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/GoToEndButton" to="." method="_on_GoToEndButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/UndoButton" to="." method="_on_UndoButton_pressed"]

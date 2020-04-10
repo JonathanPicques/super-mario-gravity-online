@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WaterIcon.png-4aade8eb8b77867ca09158a2b530c50a.stex"
+path="res://.import/ModeButton.png-a53c52e48566005424e6187fa14a3f76.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/WaterIcon.png"
-dest_files=[ "res://.import/WaterIcon.png-4aade8eb8b77867ca09158a2b530c50a.stex" ]
+source_file="res://Game/Creator/Textures/ModeButton.png"
+dest_files=[ "res://.import/ModeButton.png-a53c52e48566005424e6187fa14a3f76.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

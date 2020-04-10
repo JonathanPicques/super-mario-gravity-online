@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ItemsBar-1.png (2).png-e5cae76ea16263379776b8ba903ab7a1.stex"
+path="res://.import/StickyIcon.png-24e834a4a5f48e458ece92a9d836c16a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/ItemsBar-1.png (2).png"
-dest_files=[ "res://.import/ItemsBar-1.png (2).png-e5cae76ea16263379776b8ba903ab7a1.stex" ]
+source_file="res://Game/Creator/Textures/Drawers/StickyIcon.png"
+dest_files=[ "res://.import/StickyIcon.png-24e834a4a5f48e458ece92a9d836c16a.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PowerBoxIcon.png-72ccae827a16f14137a41422c84e0c7a.stex"
+path="res://.import/OnewayIcon.png-936922fcac09a415d92964db70ed8ae5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/PowerBoxIcon.png"
-dest_files=[ "res://.import/PowerBoxIcon.png-72ccae827a16f14137a41422c84e0c7a.stex" ]
+source_file="res://Game/Creator/Textures/Drawers/OnewayIcon.png"
+dest_files=[ "res://.import/OnewayIcon.png-936922fcac09a415d92964db70ed8ae5.stex" ]
 
 [params]
 

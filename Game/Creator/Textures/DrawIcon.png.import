@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/OnewayIcon.png-71e941973ee94bdddb683ca96b2a9027.stex"
+path="res://.import/DrawIcon.png-c21e4696479007b4ce8e0aa8f77f1624.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/OnewayIcon.png"
-dest_files=[ "res://.import/OnewayIcon.png-71e941973ee94bdddb683ca96b2a9027.stex" ]
+source_file="res://Game/Creator/Textures/DrawIcon.png"
+dest_files=[ "res://.import/DrawIcon.png-c21e4696479007b4ce8e0aa8f77f1624.stex" ]
 
 [params]
 

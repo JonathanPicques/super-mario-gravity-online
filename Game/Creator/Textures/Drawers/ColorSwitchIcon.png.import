@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SolidBlockIcon.png-e9c1a9f1f6f3128b4346acf6639bb6f5.stex"
+path="res://.import/ColorSwitchIcon.png-4e564950a5371629426af82445aeb202.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/SolidBlockIcon.png"
-dest_files=[ "res://.import/SolidBlockIcon.png-e9c1a9f1f6f3128b4346acf6639bb6f5.stex" ]
+source_file="res://Game/Creator/Textures/Drawers/ColorSwitchIcon.png"
+dest_files=[ "res://.import/ColorSwitchIcon.png-4e564950a5371629426af82445aeb202.stex" ]
 
 [params]
 

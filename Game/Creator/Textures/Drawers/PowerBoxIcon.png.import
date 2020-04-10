@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpikeBallIcon.png-98bb8889e90ba807f7ca6a41361f4c63.stex"
+path="res://.import/PowerBoxIcon.png-c51357a9b88b4b6b4ec70e8743baf072.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/SpikeBallIcon.png"
-dest_files=[ "res://.import/SpikeBallIcon.png-98bb8889e90ba807f7ca6a41361f4c63.stex" ]
+source_file="res://Game/Creator/Textures/Drawers/PowerBoxIcon.png"
+dest_files=[ "res://.import/PowerBoxIcon.png-c51357a9b88b4b6b4ec70e8743baf072.stex" ]
 
 [params]
 

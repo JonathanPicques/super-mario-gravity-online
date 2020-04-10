@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex"
+path="res://.import/MoveIcon.png-416a27227cd0d3769d075cd504ca4228.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Icons/WallIcon.png"
-dest_files=[ "res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex" ]
+source_file="res://Game/Creator/Textures/MoveIcon.png"
+dest_files=[ "res://.import/MoveIcon.png-416a27227cd0d3769d075cd504ca4228.stex" ]
 
 [params]
 

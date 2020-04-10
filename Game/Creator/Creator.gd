@@ -69,10 +69,10 @@ func init():
 	GamePopup = null
 	# load tilesets
 	# TODO: handle theme
-	Tilesets["Wall"] = {"name": "Wall", "tile": 0, "icon": preload("res://Game/Creator/Textures/Icons/WallIcon.png"), "tilemap_node": Game.map_node.Wall}
-	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Icons/WaterIcon.png"), "tilemap_node": Game.map_node.Water}
-	Tilesets["Oneway"] = {"name": "Oneway", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/OnewayIcon.png"), "tilemap_node": Game.map_node.Oneway}
-	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Icons/StickyIcon.png"), "tilemap_node": Game.map_node.Sticky}
+	Tilesets["Wall"] = {"name": "Wall", "tile": 0, "icon": preload("res://Game/Creator/Textures/Drawers/WallIcon.png"), "tilemap_node": Game.map_node.Wall}
+	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Drawers/WaterIcon.png"), "tilemap_node": Game.map_node.Water}
+	Tilesets["Oneway"] = {"name": "Oneway", "tile": 8, "icon": preload("res://Game/Creator/Textures/Drawers/OnewayIcon.png"), "tilemap_node": Game.map_node.Oneway}
+	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Drawers/StickyIcon.png"), "tilemap_node": Game.map_node.Sticky}
 	# construct quadtree from existing doors
 	for map_door_node in Game.map_node.DoorSlot.get_children():
 		Quadtree.add_map_item(map_door_node, map_door_node.get_map_data().type)
@@ -347,7 +347,7 @@ func _on_ItemButton12_pressed(): select_drawer(11)
 
 
 func _on_InfoButton_pressed():
-	print("Show infos")
+	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
 
 func _on_ThemeButton_pressed():
 	if ThemeLabel.text == "garden":
@@ -365,3 +365,7 @@ func _on_ThemeButton_pressed():
 		Game.map_node.ObjectSlot.remove_child(node)
 	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
 	Game.map_node.init()
+
+
+func _on_ModeButton_pressed():
+	print("Change mode")
