@@ -94,10 +94,10 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		map_node.Water.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["oneway"]:
 		map_node.Oneway.set_cell(tile[0], tile[1], 8 + tile_type[map_data["theme"]])
+		# TODO: oneway autotiling
 	for tile in map_data["sticky"]:
 		map_node.Sticky.set_cell(tile[0], tile[1], 8)
 		map_node.Sticky.update_bitmask_area(Vector2(tile[0], tile[1]))
-		# TODO: oneway autotiling
 	for item_data in map_data["item_slot"]:
 		var item_node := create_item_node(item_data["type"])
 		item_node.load_map_data(item_data)

@@ -361,6 +361,9 @@ func _on_ThemeButton_pressed():
 #	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
 	var map_json = MapManager.load_map_json(MapManager.current_map)
 	map_json["theme"] = ThemeLabel.text
-	yield(get_tree(), "idle_frame")
+	for node in Game.map_node.DoorSlot.get_children():
+		Game.map_node.DoorSlot.remove_child(node)
+	for node in Game.map_node.ObjectSlot.get_children():
+		Game.map_node.ObjectSlot.remove_child(node)
 	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
 	Game.map_node.init()

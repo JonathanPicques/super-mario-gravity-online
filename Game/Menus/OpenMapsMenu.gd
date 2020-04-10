@@ -42,6 +42,7 @@ func open_map(index):
 	if index > map_infos.size() - 1:
 		return
 	MapManager.current_map = {"name": map_infos[index]["filename"], "admin": map_infos[index]["admin"]}
+	print("Save map", MapManager.current_map)
 	SettingsManager.save_info("creatorMap", MapManager.current_map)
 	Game.goto_creator_scene()
 
