@@ -358,9 +358,7 @@ func _on_ThemeButton_pressed():
 		ThemeLabel.text = "garden"
 
 	# Reload the map
-#	Game.map_node = load("res://Game/Maps/Map.tscn").instance()
-	var map_json = MapManager.load_map_json(MapManager.current_map)
-	map_json["theme"] = ThemeLabel.text
+	var map_json = Game.map_node.get_map_data($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, ThemeLabel.text)
 	for node in Game.map_node.DoorSlot.get_children():
 		Game.map_node.DoorSlot.remove_child(node)
 	for node in Game.map_node.ObjectSlot.get_children():
