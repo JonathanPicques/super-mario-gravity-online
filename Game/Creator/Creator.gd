@@ -13,9 +13,9 @@ onready var DrawersBar: Sprite = $GUILayer/GUI/DrawersBar
 onready var CreatorCamera: Camera2D = $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
 
 onready var Gui: Control = $GUILayer/GUI
+onready var GuiThemeLabel: Label = $GUILayer/GUI/TopBar/ThemeButton/Label
 onready var GuiModeLabel: Control = $GUILayer/GUI/ModeLabel
-
-onready var ThemeLabel = $GUILayer/GUI/TopBar/ThemeButton/Label
+onready var GuiPlayerPosition : Node2D = $GUILayer/GUI/PlayerPosition
 
 onready var Tilesets := {}
 
@@ -54,11 +54,10 @@ func init():
 	# load map
 	yield(MapManager.load_current_map(), "completed")
 	var map_json = MapManager.load_map_json(MapManager.current_map)
-	
-	ThemeLabel.text = map_json["theme"]
+	# set theme
+	GuiThemeLabel.text = map_json["theme"]
 	$GUILayer/GUI/SettingsPopup/NameInput.text = "" if MapManager.is_default() else map_json["name"]
 	$GUILayer/GUI/SettingsPopup/DescriptionInput.text = map_json["description"]
-
 	# remove players
 	var players := MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.inverted)
 	for player in players:
@@ -98,6 +97,7 @@ func start():
 
 # set_state changes the creator state between moving/drawing and playing.
 # @impure
+# @async
 func set_state(new_state: int):
 	# early exit
 	if state == new_state:
@@ -124,6 +124,7 @@ func set_state(new_state: int):
 			GuiModeLabel.text = "(ESC) select button"
 		State.playing:
 			Gui.visible = false
+			Game.map_node.init()
 			var player := MultiplayerManager.add_player("creator", true, 0)
 			var player_node := MultiplayerManager.spawn_player_node(player)
 			yield(get_tree(), "idle_frame")
@@ -253,15 +254,12 @@ func is_cell_free(pos: Vector2) -> bool:
 	# TODO: water is not in quadtree, nor decors
 	return Quadtree.get_item(Rect2(pos, Vector2(MapManager.cell_size, MapManager.cell_size))) == null
 
+# update_preview takes a snapshot of the map and saves it as a png.
+# @pure
 func update_preview():
-	 # Wait for game to actually start
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	yield(get_tree(), "idle_frame")
-	var img = get_viewport().get_texture()
-	img.get_data().save_png('res://Maps/' + MapManager.current_map["name"].get_basename() + '.png')
+	var img_data := get_viewport().get_texture().get_data()
+	img_data.flip_y()
+	img_data.save_png("res://Maps/" + MapManager.current_map["name"].get_basename() + ".png")
 
 func get_theme():
 	if ThemeLabel.text == "castle":
@@ -274,8 +272,9 @@ func get_theme():
 func _on_PlayButton_pressed():
 	History.rollback()
 	History.start()
-	set_state(State.playing)
-	update_preview()	
+	yield(set_state(State.playing), "completed")
+	yield(get_tree(), "idle_frame")
+	update_preview()
 
 # @signal
 func _on_UndoButton_pressed():
@@ -298,27 +297,21 @@ func _on_GoToStartButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = Game.map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position
-	CreatorCamera.position.x -= 256
-	CreatorCamera.position.y -= 144
-	if CreatorCamera.position.y > 0:
-		CreatorCamera.position.y = 0
+	CreatorCamera.position = MapManager.snap_position(Game.map_node.ObjectSlot.get_node("StartCage").Spawn1.global_position + GuiPlayerPosition.position - Vector2(64, 272))
 
 # @signal
 func _on_GoToEndButton_pressed():
 	History.rollback()
 	History.start()
 	set_state(State.drawing)
-	CreatorCamera.position = Game.map_node.ObjectSlot.get_node("FlagEnd").position
-	CreatorCamera.position.x -= 256
-	CreatorCamera.position.y -= 144
-	if CreatorCamera.position.y > 0:
-		CreatorCamera.position.y = 0
+	CreatorCamera.position = MapManager.snap_position(Game.map_node.ObjectSlot.get_node("FlagEnd").global_position + GuiPlayerPosition.position - Vector2(80, 288))
 
+# @signal
 func _on_SettingsButton_pressed():
 	$GUILayer/GUI/SettingsPopup.visible = true
 	$GUILayer/GUI/SettingsPopup/CloseButton.grab_focus()
 
+# @signal
 func _on_CloseButton_pressed():
 	$GUILayer/GUI/SettingsPopup.visible = false
 	set_state(State.moving)
@@ -327,17 +320,46 @@ func _on_CloseButton_pressed():
 func _on_HomeButton_pressed():
 	Game.goto_home_menu_scene()
 	
+# @signal
 func _on_SaveButton_pressed():
 	# TODO: error handling, save for admin/user depending on the map
-	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, ThemeLabel.text)
+	Game.map_node.save_map($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, GuiThemeLabel.text)
 	$GUILayer/GUI/SettingsPopup.visible = false
 	$GUILayer/GUI/TopBar/SettingsButton.grab_focus()
 
+# @signal
 func _on_OpenButton_pressed():
 	Game.goto_open_map_scene()
 
+# @signal
 func _on_DeleteButton_pressed():
 	print("Delete map: TODO, confirm popup")
+
+# @signal
+func _on_InfoButton_pressed():
+	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
+
+# @signal
+func _on_ThemeButton_pressed():
+	if GuiThemeLabel.text == "garden":
+		GuiThemeLabel.text = "castle"
+	elif GuiThemeLabel.text == "castle":
+		GuiThemeLabel.text = "sewer"
+	elif GuiThemeLabel.text == "sewer":
+		GuiThemeLabel.text = "garden"
+
+	# Reload the map
+	var map_json = Game.map_node.get_map_data($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, GuiThemeLabel.text)
+	for node in Game.map_node.DoorSlot.get_children():
+		Game.map_node.DoorSlot.remove_child(node)
+	for node in Game.map_node.ObjectSlot.get_children():
+		Game.map_node.ObjectSlot.remove_child(node)
+	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
+	Game.map_node.init()
+
+# @signal
+func _on_ModeButton_pressed():
+	print("Change mode")
 
 func _on_ItemButton_pressed(): select_drawer(0)
 func _on_ItemButton2_pressed(): select_drawer(1)
@@ -351,28 +373,3 @@ func _on_ItemButton9_pressed(): select_drawer(8)
 func _on_ItemButton10_pressed(): select_drawer(9)
 func _on_ItemButton11_pressed(): select_drawer(10)
 func _on_ItemButton12_pressed(): select_drawer(11)
-
-
-func _on_InfoButton_pressed():
-	$GUILayer/GUI/InfoBubble.visible = !$GUILayer/GUI/InfoBubble.visible
-
-func _on_ThemeButton_pressed():
-	if ThemeLabel.text == "garden":
-		ThemeLabel.text = "castle"
-	elif ThemeLabel.text == "castle":
-		ThemeLabel.text = "sewer"
-	elif ThemeLabel.text == "sewer":
-		ThemeLabel.text = "garden"
-
-	# Reload the map
-	var map_json = Game.map_node.get_map_data($GUILayer/GUI/SettingsPopup/NameInput.text, $GUILayer/GUI/SettingsPopup/DescriptionInput.text, ThemeLabel.text)
-	for node in Game.map_node.DoorSlot.get_children():
-		Game.map_node.DoorSlot.remove_child(node)
-	for node in Game.map_node.ObjectSlot.get_children():
-		Game.map_node.ObjectSlot.remove_child(node)
-	yield(MapManager.fill_map_from_data(Game.map_node, map_json), "completed")
-	Game.map_node.init()
-
-
-func _on_ModeButton_pressed():
-	print("Change mode")

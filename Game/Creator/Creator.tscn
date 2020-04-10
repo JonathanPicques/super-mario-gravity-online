@@ -145,10 +145,8 @@ load_path = "res://.import/ModeButtonFocused.png-f6f3de1e2b8e51f0b31a515966b2f94
 
 [sub_resource type="StreamTexture" id=25]
 flags = 4
-load_path = "res://.import/ItemBox.png-f304998109e9f545116d5501e3378b67.stex"
 
 [sub_resource type="StreamTexture" id=26]
-flags = 4
 load_path = "res://.import/WallIcon.png-b8b000f86a9160589b07e1ab4a4545cb.stex"
 
 [sub_resource type="DynamicFont" id=27]
@@ -266,7 +264,7 @@ region_rect = Rect2( 0, 0, 512, 288 )
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 32, 128 )
 frames = SubResource( 21 )
-frame = 3
+frame = 16
 speed_scale = 4.0
 playing = true
 centered = false

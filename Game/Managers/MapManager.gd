@@ -44,6 +44,10 @@ onready var Backgrounds3 := [
 func snap_value(value: float) -> int:
 	return int(round((value - cell_size / 2) / cell_size) * cell_size)
 
+# @pure
+func snap_position(vec: Vector2) -> Vector2:
+	return Vector2(snap_value(vec.x), snap_value(vec.y))
+
 # @impure
 func create_item_node(item_type: String) -> Node2D:
 	return item_scenes[item_type].instance()

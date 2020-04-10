@@ -4,12 +4,12 @@ class_name GameNode
 var ADMIN = true # Set to true to show and edit system map in creator
 
 const Map := preload("res://Game/Maps/Map.tscn")
-const OpenMapsMenu := preload("res://Game/Menus/OpenMapsMenu.tscn")
-const SelectMapsMenu := preload("res://Game/Menus/SelectMapsMenu.tscn")
 const HomeMenu := preload("res://Game/Menus/HomeMenu.tscn")
 const LobbyMenu := preload("res://Game/Menus/LobbyMenu.tscn")
 const EndGameMenu := preload("res://Game/Menus/EndGameMenu.tscn")
 const SettingsMenu := preload("res://Game/Menus/SettingsMenu.tscn")
+const OpenMapsMenu := preload("res://Game/Menus/OpenMapsMenu.tscn")
+const SelectMapsMenu := preload("res://Game/Menus/SelectMapsMenu.tscn")
 
 onready var GameTween: Tween = $TransitionCanvasLayer/Tween
 onready var GameTransitionCanvasLayer: CanvasLayer = $TransitionCanvasLayer

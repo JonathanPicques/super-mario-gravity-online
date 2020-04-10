@@ -33,7 +33,6 @@ func _process(delta: float):
 				MultiplayerManager.add_player("Local player", true, input_device_id, MultiplayerManager.my_peer_id, MultiplayerManager.get_next_player_local_id(MultiplayerManager.my_peer_id))
 				$GUI/TitleLabel.visible = false
 				$GUI/SubtitleLabel.visible = false
-
 	# add camera to player
 	if !player_camera_node and lead_player:
 		$GUI/TitleLabel.visible = false
