@@ -33,14 +33,16 @@ func fill_cell(pos: Vector2):
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	var x = cell_position.x
 	var y = cell_position.y
+	# TODO: handle other liquid than water
+	MapManager.apply_water_autotile(Game.map_node, x, y)
 	# creator.Quadtree.add_tile(pos, tileset)
-	tileset.tilemap_node.set_cell(x, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, cell_position.x, cell_position.y))
-	if tileset.tilemap_node.get_cell(x - 1, y) != TileMap.INVALID_CELL:
-		tileset.tilemap_node.set_cell(x - 1, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x - 1, y))
-	if tileset.tilemap_node.get_cell(x + 1, y) != TileMap.INVALID_CELL:
-		tileset.tilemap_node.set_cell(x + 1, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x + 1, y))
-	if tileset.tilemap_node.get_cell(x, y + 1) != TileMap.INVALID_CELL:
-		tileset.tilemap_node.set_cell(x, y + 1, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x, y + 1))
+#	tileset.tilemap_node.set_cell(x, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, cell_position.x, cell_position.y))
+#	if tileset.tilemap_node.get_cell(x - 1, y) != TileMap.INVALID_CELL:
+#		tileset.tilemap_node.set_cell(x - 1, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x - 1, y))
+#	if tileset.tilemap_node.get_cell(x + 1, y) != TileMap.INVALID_CELL:
+#		tileset.tilemap_node.set_cell(x + 1, y, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x + 1, y))
+#	if tileset.tilemap_node.get_cell(x, y + 1) != TileMap.INVALID_CELL:
+#		tileset.tilemap_node.set_cell(x, y + 1, tileset.tile, false, false, false, MapManager.get_autotile(tileset.tilemap_node, x, y + 1))
 
 # @override
 func clear_cell(pos: Vector2):

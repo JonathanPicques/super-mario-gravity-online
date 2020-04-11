@@ -82,19 +82,9 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		map_node.Wall.set_cell(tile[0], tile[1], tile_type[map_data["theme"]])
 		map_node.Wall.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["water"]:
-		var x = tile[0]
-		var y = tile[1]
-		map_node.Water.set_cell(tile[0], tile[1], 16, false, false, false, get_autotile(map_node.Water, tile[0], tile[1]))
-		if map_node.Water.get_cell(x - 1, y) != TileMap.INVALID_CELL:
-			map_node.Water.set_cell(x - 1, y, 16, false, false, false, get_autotile(map_node.Water, x - 1, y))
-		if map_node.Water.get_cell(x + 1, y) != TileMap.INVALID_CELL:
-			map_node.Water.set_cell(x + 1, y, 16, false, false, false, get_autotile(map_node.Water, x + 1, y))
-		if map_node.Water.get_cell(x, y + 1) != TileMap.INVALID_CELL:
-			map_node.Water.set_cell(x, y + 1, 16, false, false, false, get_autotile(map_node.Water, x, y + 1))
-		map_node.Water.update_bitmask_area(Vector2(tile[0], tile[1]))
+		apply_water_autotile(map_node, tile[0], tile[1])
 	for tile in map_data["oneway"]:
-		map_node.Oneway.set_cell(tile[0], tile[1], 8 + tile_type[map_data["theme"]])
-		# TODO: oneway autotiling
+		apply_oneway_autotile(map_node, tile[0], tile[1], 8 + tile_type[map_data["theme"]])
 	for tile in map_data["sticky"]:
 		map_node.Sticky.set_cell(tile[0], tile[1], 8)
 		map_node.Sticky.update_bitmask_area(Vector2(tile[0], tile[1]))
@@ -113,9 +103,31 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 	yield(get_tree(), "idle_frame")
 
 
-# TODO: generic code!!!
-func get_autotile(tilemap: TileMap, x: int, y: int) -> Vector2: 
-	return Vector2(0, 0 if tilemap.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
+func apply_water_autotile(map_node, x, y):
+	map_node.Water.set_cell(x, y, 16, false, false, false, get_water_tile(map_node, x, y))
+	if map_node.Water.get_cell(x - 1, y) != TileMap.INVALID_CELL:
+		map_node.Water.set_cell(x - 1, y, 16, false, false, false, get_water_tile(map_node, x - 1, y))
+	if map_node.Water.get_cell(x + 1, y) != TileMap.INVALID_CELL:
+		map_node.Water.set_cell(x + 1, y, 16, false, false, false, get_water_tile(map_node, x + 1, y))
+	if map_node.Water.get_cell(x, y + 1) != TileMap.INVALID_CELL:
+		map_node.Water.set_cell(x, y + 1, 16, false, false, false, get_water_tile(map_node, x, y + 1))
+
+func get_water_tile(map_node: MapNode, x: int, y: int) -> Vector2: 
+	return Vector2(0, 0 if map_node.Water.get_cell(x, y - 1) == TileMap.INVALID_CELL else 1)
+
+func apply_oneway_autotile(map_node, x, y, tile_type):
+	map_node.Oneway.set_cell(x, y, tile_type, false, false, false, get_oneway_tile(map_node, x, y))
+	if map_node.Oneway.get_cell(x - 1, y) != TileMap.INVALID_CELL:
+		map_node.Oneway.set_cell(x - 1, y, tile_type, false, false, false, get_oneway_tile(map_node, x - 1, y))
+	if map_node.Oneway.get_cell(x + 1, y) != TileMap.INVALID_CELL:
+		map_node.Oneway.set_cell(x + 1, y, tile_type, false, false, false, get_oneway_tile(map_node, x + 1, y))
+
+func get_oneway_tile(map_node: MapNode, x: int, y: int) -> Vector2:
+	if map_node.Oneway.get_cell(x - 1, y) == TileMap.INVALID_CELL and map_node.Wall.get_cell(x - 1, y) == TileMap.INVALID_CELL:
+		return Vector2(0, 0)
+	if map_node.Oneway.get_cell(x + 1, y) == TileMap.INVALID_CELL and map_node.Wall.get_cell(x + 1, y) == TileMap.INVALID_CELL:
+		return Vector2(2, 0)
+	return Vector2(1, 0)
 
 
 func get_maps_infos(is_admin=true) -> Array:

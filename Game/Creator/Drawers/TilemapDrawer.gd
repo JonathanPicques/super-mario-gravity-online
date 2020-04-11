@@ -22,8 +22,11 @@ func fill_cell(pos: Vector2):
 	var tileset = creator.Tilesets[tileset_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	creator.Quadtree.add_tile(pos, tileset)
-	tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, tileset.tile)
-	tileset.tilemap_node.update_bitmask_area(cell_position)
+	if tileset_type == "Oneway":
+		MapManager.apply_oneway_autotile(Game.map_node, cell_position.x, cell_position.y, tileset.tile + creator.get_theme())
+	else:
+		tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, tileset.tile + creator.get_theme())
+		tileset.tilemap_node.update_bitmask_area(cell_position)
 
 # @override
 func clear_cell(pos: Vector2):

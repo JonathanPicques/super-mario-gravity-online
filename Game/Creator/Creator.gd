@@ -263,6 +263,13 @@ func update_preview():
 	var img = get_viewport().get_texture()
 	img.get_data().save_png('res://Maps/' + MapManager.current_map["name"].get_basename() + '.png')
 
+func get_theme():
+	if ThemeLabel.text == "castle":
+		return 1
+	elif ThemeLabel.text == "sewer":
+		return 2
+	return 0
+
 # @signal
 func _on_PlayButton_pressed():
 	History.rollback()
