@@ -117,6 +117,8 @@ var wallslide_cancelled := false # reset on stand or walljump
 var current_door_to: DoorNode
 var current_door_from: DoorNode
 
+var kiss_the_princess = false
+
 var has_trail := 0 # stacked
 var is_invincible := 0 # stacked
 

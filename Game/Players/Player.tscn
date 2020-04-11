@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://Game/Players/States/enter_swim.gd" type="Script" id=20]
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Invincibility.png" type="Texture" id=21]
 [ext_resource path="res://Game/Players/States/exit_door_fade.gd" type="Script" id=22]
+[ext_resource path="res://Game/Players/States/kiss_princess.gd" type="Script" id=23]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 10 )
@@ -217,7 +218,7 @@ visible = false
 material = SubResource( 4 )
 position = Vector2( -2, -16 )
 frames = SubResource( 23 )
-frame = 0
+frame = 16
 speed_scale = 5.0
 playing = true
 
@@ -298,6 +299,9 @@ one_shot = true
 
 [node name="floor_turn" type="Node" parent="StateMachine"]
 script = ExtResource( 12 )
+
+[node name="kiss_princess" type="Node" parent="StateMachine"]
+script = ExtResource( 23 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

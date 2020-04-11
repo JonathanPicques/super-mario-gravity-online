@@ -18,6 +18,8 @@ func process_state(delta: float):
 		return fsm.states.fall
 	if context.input_up_once and context.is_on_door():
 		return fsm.states.enter_door
+	if context.kiss_the_princess:
+		return fsm.states.kiss_princess
 	if context.is_on_wall():
 		return fsm.states.push_wall
 	if context.input_use and context.has_unused_power():
