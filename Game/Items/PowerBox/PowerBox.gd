@@ -24,7 +24,6 @@ func _on_Area2D_body_entered(player_node: PlayerNode):
 
 func _on_Timer_timeout():
 	visible = true
-	print("Reappear")
 	$AnimatedSprite.play("Appear")
 
 func animation_finished(name: String):

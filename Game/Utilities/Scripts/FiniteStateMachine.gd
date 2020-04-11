@@ -18,6 +18,8 @@ func _init(_context: Node, _parent_state_node: Node, _initial_state_node: Node):
 func set_state_node(state_node: Node):
 	if current_state_node:
 		current_state_node.finish_state()
+	if state_node == null:
+		return
 	current_state_node = state_node
 	var change_state_node = current_state_node.start_state()
 	if change_state_node:
