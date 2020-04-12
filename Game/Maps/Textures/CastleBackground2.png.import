@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BackgroundGarden1.png-a21fd6471c5896be7c0ede2986f03c87.stex"
+path="res://.import/CastleBackground2.png-150e33ac22da22d7d28d3e401a90df0c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Maps/Textures/BackgroundGarden1.png"
-dest_files=[ "res://.import/BackgroundGarden1.png-a21fd6471c5896be7c0ede2986f03c87.stex" ]
+source_file="res://Game/Maps/Textures/CastleBackground2.png"
+dest_files=[ "res://.import/CastleBackground2.png-150e33ac22da22d7d28d3e401a90df0c.stex" ]
 
 [params]
 

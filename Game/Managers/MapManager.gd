@@ -22,6 +22,24 @@ const item_scenes := {
 	"BigSolidBlock": preload("res://Game/Items/SolidBlock/BigSolidBlock.tscn"),
 }
 
+onready var Backgrounds1 := [
+	preload("res://Game/Maps/Textures/GardenBackground1.png"),
+	preload("res://Game/Maps/Textures/CastleBackground1.png"),
+	preload("res://Game/Maps/Textures/SewerBackground1.png"),
+]
+
+onready var Backgrounds2 := [
+	preload("res://Game/Maps/Textures/GardenBackground2.png"),
+	preload("res://Game/Maps/Textures/CastleBackground2.png"),
+	preload("res://Game/Maps/Textures/SewerBackground2.png"),
+]
+
+onready var Backgrounds3 := [
+	preload("res://Game/Maps/Textures/GardenBackground3.png"),
+	preload("res://Game/Maps/Textures/CastleBackground3.png"),
+	preload("res://Game/Maps/Textures/SewerBackground3.png"),
+]
+
 # @pure
 func snap_value(value: float) -> int:
 	return int(round((value - cell_size / 2) / cell_size) * cell_size)
@@ -77,7 +95,17 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		"castle": 1,
 		"sewer": 2
 	}
+	var parallax_node = map_node.get_node("ParallaxSlot")
+	if parallax_node == null: # If the game is already loaded, change parallax directly from viewport
+		parallax_node = Game.game_mode_node.get_node("GridContainer/Control1/ViewportContainer1/Viewport1/ParallaxSlot")
+	if parallax_node != null:
+		parallax_node.get_node("ParallaxBackground/Background/Sprite").texture = Backgrounds3[tile_type[map_data["theme"]]]
+		parallax_node.get_node("ParallaxBackground/Background2/Sprite").texture = Backgrounds2[tile_type[map_data["theme"]]]
+		parallax_node.get_node("ParallaxBackground/Background3/Sprite").texture = Backgrounds1[tile_type[map_data["theme"]]]
 	# TODO: handle decor back
+	for tile in map_data["decor_back"]:
+		map_node.DecorBack.set_cell(tile[0], tile[1], 5 + tile_type[map_data["theme"]])
+		map_node.DecorBack.update_bitmask_area(Vector2(tile[0], tile[1]))
 	for tile in map_data["wall"]:
 		map_node.Wall.set_cell(tile[0], tile[1], tile_type[map_data["theme"]])
 		map_node.Wall.update_bitmask_area(Vector2(tile[0], tile[1]))

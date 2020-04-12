@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpikeCorridorPreview.png-f44428acca25b085b36c911260326501.stex"
+path="res://.import/GardenBackground2.png-714e86ccb005835493c8412390d8d96a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Maps/Textures/SpikeCorridorPreview.png"
-dest_files=[ "res://.import/SpikeCorridorPreview.png-f44428acca25b085b36c911260326501.stex" ]
+source_file="res://Game/Maps/Textures/GardenBackground2.png"
+dest_files=[ "res://.import/GardenBackground2.png-714e86ccb005835493c8412390d8d96a.stex" ]
 
 [params]
 

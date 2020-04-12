@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bg1.png-3678d24279c8abdf5e7e289f7ab026c5.stex"
+path="res://.import/SewerBackground2.png-c9be466ffabc0c05f6979c8402eefe41.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Maps/Textures/bg1.png"
-dest_files=[ "res://.import/bg1.png-3678d24279c8abdf5e7e289f7ab026c5.stex" ]
+source_file="res://Game/Maps/Textures/SewerBackground2.png"
+dest_files=[ "res://.import/SewerBackground2.png-c9be466ffabc0c05f6979c8402eefe41.stex" ]
 
 [params]
 

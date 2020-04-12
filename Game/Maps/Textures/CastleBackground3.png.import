@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BackgroundGarden3.png-3106e693710b819f6add1a95c7ac6595.stex"
+path="res://.import/CastleBackground3.png-83fa38db88b1ba2a49c3857ec020393f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Maps/Textures/BackgroundGarden3.png"
-dest_files=[ "res://.import/BackgroundGarden3.png-3106e693710b819f6add1a95c7ac6595.stex" ]
+source_file="res://Game/Maps/Textures/CastleBackground3.png"
+dest_files=[ "res://.import/CastleBackground3.png-83fa38db88b1ba2a49c3857ec020393f.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

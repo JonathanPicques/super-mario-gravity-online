@@ -5,6 +5,7 @@ onready var Wall: TileMap = $Wall
 onready var Water: TileMap = $Water
 onready var Oneway: TileMap = $Oneway
 onready var Sticky: TileMap = $Sticky
+onready var DecorBack: TileMap = $DecorBack
 
 onready var DoorSlot: Node2D = $DoorSlot
 onready var ObjectSlot: Node2D = $ObjectSlot
