@@ -73,10 +73,10 @@ const FrogSkins = [
 
 const Palettes = {
 	SkinColor.aqua: [ # Red
-		Color("#4c1010"),
-		Color("#861010"),
-		Color("#a51515"),
-		Color("#e72f2f")
+		Color("#741633"),
+		Color("#c13245"),
+		Color("#e35a53"),
+		Color("#ec906f")
 	],
 	SkinColor.blue: [
 		Color("#352369"),
@@ -85,16 +85,16 @@ const Palettes = {
 		Color("#60b5f0")
 	],
 	SkinColor.pink: [
-		Color("#4a324a"),
-		Color("#874d89"),
-		Color("#c278bf"),
-		Color("#f084ae")
+		Color("#70358d"),
+		Color("#b65eaf"),
+		Color("#ec90c9"),
+		Color("#eeadcd")
 	],
-	SkinColor.orange: [ # Cyan
-		Color("#226a5d"),
-		Color("#62e4c6"),
-		Color("#91e2f3"),
-		Color("#9afaf6")
+	SkinColor.orange: [ # Gold
+		Color("#9a4e06"),
+		Color("#ca8f2e"),
+		Color("#fbb541"),
+		Color("#ffc86f")
 	],
 	SkinColor.purple: [ # white
 		Color("#695d51"),
