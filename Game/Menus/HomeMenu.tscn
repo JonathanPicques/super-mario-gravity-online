@@ -85,9 +85,6 @@ autoplay = "move_clouds"
 playback_speed = 0.5
 anims/move_clouds = SubResource( 2 )
 
-[node name="Background3" parent="ParallaxSlot/ParallaxBackground" index="2"]
-motion_scale = Vector2( 0.7, 1 )
-
 [node name="GUI" type="Control" parent="." index="12"]
 margin_right = 40.0
 margin_bottom = 40.0

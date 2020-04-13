@@ -102,6 +102,8 @@ func fill_map_from_data(map_node: MapNode, map_data: Dictionary):
 		parallax_node.get_node("ParallaxBackground/Background/Sprite").texture = Backgrounds3[tile_type[map_data["theme"]]]
 		parallax_node.get_node("ParallaxBackground/Background2/Sprite").texture = Backgrounds2[tile_type[map_data["theme"]]]
 		parallax_node.get_node("ParallaxBackground/Background3/Sprite").texture = Backgrounds1[tile_type[map_data["theme"]]]
+		if map_data["theme"] != "garden":
+			parallax_node.get_node("ParallaxBackground/Background3").visible = false
 	# TODO: handle decor back
 	for tile in map_data["decor_back"]:
 		map_node.DecorBack.set_cell(tile[0], tile[1], 5 + tile_type[map_data["theme"]])
