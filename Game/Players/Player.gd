@@ -595,7 +595,7 @@ func fx_under_water(on = true):
 
 # @impure
 func fx_shake_screen():
-	var camera =  Game.game_mode_node.get_player_screen_camera(player.id)
+	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
 	camera.get_node("ScreenShake").start_shake()
 
 # @impure

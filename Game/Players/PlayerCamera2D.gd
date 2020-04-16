@@ -16,6 +16,14 @@ func _ready():
 		limit_left = int(tile_map_node_rect.position.x * tile_map_node.cell_size.x)
 		limit_right = int(tile_map_node_rect.end.x * tile_map_node.cell_size.x)
 		limit_bottom = int(tile_map_node_rect.end.y * tile_map_node.cell_size.y)
+	# expand camera if the tile map is smaller than a screen
+	if limit_right - limit_left < ProjectSettings.get_setting("display/window/size/width") or limit_bottom - limit_top < ProjectSettings.get_setting("display/window/size/height"):
+		var start_cage_node = Game.map_node.ObjectSlot.get_node("StartCage")
+		if start_cage_node:
+			limit_top = start_cage_node.position.y - 512
+			limit_left = start_cage_node.position.x - 512
+			limit_right = start_cage_node.position.x + 512
+			limit_bottom = start_cage_node.position.y + 512
 	# connect listeners
 	MultiplayerManager.connect("player_node_replaced", self, "on_player_node_replaced")
 
