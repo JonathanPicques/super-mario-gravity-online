@@ -262,9 +262,9 @@ func update_preview():
 	img_data.save_png("res://Maps/" + MapManager.current_map["name"].get_basename() + ".png")
 
 func get_theme():
-	if ThemeLabel.text == "castle":
+	if GuiThemeLabel.text == "castle":
 		return 1
-	elif ThemeLabel.text == "sewer":
+	elif GuiThemeLabel.text == "sewer":
 		return 2
 	return 0
 
