@@ -89,10 +89,13 @@ one_shot = true
 
 [node name="ExplosionPoint" type="Node2D" parent="."]
 
+[node name="LaunchPoint" type="Node2D" parent="."]
+position = Vector2( 25, 0 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -8, 3 )
 frames = SubResource( 17 )
-frame = 9
+frame = 15
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

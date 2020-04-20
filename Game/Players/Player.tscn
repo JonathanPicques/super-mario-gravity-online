@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Game/Players/Player.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Textures/ReadyDialog.png" type="Texture" id=2]
@@ -23,6 +23,9 @@
 [ext_resource path="res://Game/Players/Classes/Frog/Textures/Invincibility.png" type="Texture" id=21]
 [ext_resource path="res://Game/Players/States/exit_door_fade.gd" type="Script" id=22]
 [ext_resource path="res://Game/Players/States/kiss_princess.gd" type="Script" id=23]
+[ext_resource path="res://Game/Players/States/tongue.gd" type="Script" id=24]
+[ext_resource path="res://Game/Players/Classes/Frog/Textures/Tongue.png" type="Texture" id=25]
+[ext_resource path="res://Game/Players/Classes/Frog/Textures/TongueEnd.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 10 )
@@ -146,6 +149,26 @@ one_shot = true
 position = Vector2( -2, -16 )
 centered = false
 
+[node name="Tongue" type="Node2D" parent="Sprite"]
+visible = false
+
+[node name="TongueChecker" type="RayCast2D" parent="Sprite/Tongue"]
+position = Vector2( 13, 0 )
+rotation = -1.5708
+cast_to = Vector2( 0, 87 )
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="TongueEnd" type="Sprite" parent="Sprite/Tongue"]
+position = Vector2( 102, 0 )
+texture = ExtResource( 26 )
+
+[node name="TongueBody" type="Sprite" parent="Sprite/Tongue"]
+position = Vector2( 13, -2 )
+scale = Vector2( 84, 1 )
+texture = ExtResource( 25 )
+centered = false
+
 [node name="PowerPoint" type="Node2D" parent="Sprite"]
 visible = false
 position = Vector2( 16, -2 )
@@ -218,7 +241,6 @@ visible = false
 material = SubResource( 4 )
 position = Vector2( -2, -16 )
 frames = SubResource( 23 )
-frame = 8
 speed_scale = 5.0
 playing = true
 
@@ -302,6 +324,9 @@ script = ExtResource( 12 )
 
 [node name="kiss_princess" type="Node" parent="StateMachine"]
 script = ExtResource( 23 )
+
+[node name="tongue" type="Node" parent="StateMachine"]
+script = ExtResource( 24 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

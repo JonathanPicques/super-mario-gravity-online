@@ -11,6 +11,8 @@ func process_state(delta: float):
 	context.handle_airborne_move(delta, context.RUN_MAX_SPEED, context.RUN_ACCELERATION, context.RUN_DECELERATION)
 	if context.is_in_water():
 		return fsm.states.enter_swim
+	if context.input_tongue:
+		return fsm.states.tongue
 	if context.is_on_floor():
 		context.fx_hit_ground()
 		context.set_animation("fall_to_stand")

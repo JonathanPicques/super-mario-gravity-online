@@ -22,6 +22,8 @@ onready var PlayerAnimationPlayer: AnimationPlayer = $AnimationPlayer
 onready var PlayerSoundEffectPlayers := [$SoundEffects/SFX1, $SoundEffects/SFX2, $SoundEffects/SFX3, $SoundEffects/SFX4]
 onready var PlayerInvincibilityEffect: AnimatedSprite = $InvincibilityEffect
 onready var PlayerNetworkDeadReckoning: Tween = $NetworkDeadReckoning
+onready var PlayerTongue: Node2D = $Sprite/Tongue
+onready var PlayerTongueChecker: RayCast2D = $Sprite/Tongue/TongueChecker
 
 onready var PlayerPowerPoint := $Sprite/PowerPoint
 onready var PlayerCenterPoint := $Sprite/CenterPoint
@@ -61,6 +63,7 @@ var input_right := false
 var input_run := false
 var input_use := false
 var input_jump := false
+var input_tongue := false
 var input_up_once := false
 var input_down_once := false
 var input_left_once := false
@@ -68,6 +71,7 @@ var input_right_once := false
 var input_run_once := false
 var input_use_once := false
 var input_jump_once := false
+var input_tongue_once := false
 
 var RUN_MAX_SPEED := 145.0
 var RUN_ACCELERATION := 630.0
@@ -173,7 +177,7 @@ remote func _process_network(delta: float, net_view: Array, net_view_index: int)
 # process_input updates player inputs from local inputs or network inputs.
 # @impure
 var _up := false; var _down := false; var _left := false; var _right := false
-var _run := false; var _use := false; var _jump := false
+var _run := false; var _use := false; var _jump := false; var _tongue := false
 func process_input(delta: float):
 	if player.local or is_network_master():
 		# get inputs from gamepad or keyboard
@@ -184,6 +188,7 @@ func process_input(delta: float):
 		input_run = InputManager.is_player_action_pressed(player.id, "run")
 		input_use = InputManager.is_player_action_pressed(player.id, "use")
 		input_jump = InputManager.is_player_action_pressed(player.id, "jump")
+		input_tongue = InputManager.is_player_action_pressed(player.id, "tongue")
 	elif len(_last_net_view) > 0:
 		# get inputs from last net view
 		input_up = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 0))
@@ -193,6 +198,7 @@ func process_input(delta: float):
 		input_run = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 4))
 		input_use = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 5))
 		input_jump = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 6))
+		input_tongue = bool(_last_net_view[NET_VIEW_INPUT_INDEX] & (1 << 7))
 	# compute input just pressed
 	input_up_once = not _up and input_up
 	input_down_once = not _down and input_down
@@ -201,6 +207,7 @@ func process_input(delta: float):
 	input_run_once = not _run and input_run
 	input_use_once = not _use and input_use
 	input_jump_once = not _jump and input_jump
+	input_tongue_once = not _tongue and input_tongue
 	# remember we pressed these inputs last frame
 	_up = input_up
 	_down = input_down
@@ -209,6 +216,7 @@ func process_input(delta: float):
 	_run = input_run
 	_use = input_use
 	_jump = input_jump
+	_tongue = input_tongue
 	# compute input velocity
 	input_velocity = Vector2(int(input_right) - int(input_left), int(input_down) - int(input_up))
 
