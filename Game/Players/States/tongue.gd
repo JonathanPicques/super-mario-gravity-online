@@ -2,9 +2,10 @@ extends FiniteStateMachineStateNode
 
 func start_state():
 	context.velocity = Vector2.ZERO
-	context.start_timer(0.84)
-	context.set_animation("stand")
+	context.start_timer(0.3)
+	context.set_animation("fall")
 	context.PlayerTongue.visible = true
+	context.PlayerTongue.get_node("AnimationPlayer").play("extend_tongue")
 	if context.PlayerTongueChecker.is_colliding():
 		print("Tongue collided!")
 #	for area in PlayerArea2D.get_overlapping_areas():

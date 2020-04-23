@@ -7,8 +7,7 @@
 extents = Vector2( 16, 24 )
 
 [sub_resource type="Animation" id=2]
-resource_name = "close_door"
-length = 0.78
+length = 0.24
 step = 0.06
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -17,10 +16,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]
+"values": [ 3, 2, 1, 0 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -41,7 +40,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-length = 0.78
+length = 0.24
 step = 0.06
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -50,10 +49,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
+"values": [ 0, 1, 2, 3 ]
 }
 
 [node name="Door" type="Node2D" groups=[
@@ -67,8 +66,7 @@ script = ExtResource( 2 )
 position = Vector2( -16, -64 )
 texture = ExtResource( 1 )
 centered = false
-hframes = 13
-frame = 6
+hframes = 4
 
 [node name="Target" type="Node2D" parent="." groups=[
 "Door",

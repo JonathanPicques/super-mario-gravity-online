@@ -331,16 +331,16 @@ motion_scale = Vector2( 1, 1 )
 texture = SubResource( 6 )
 
 [node name="Player1Position" type="Node2D" parent="." index="14"]
-position = Vector2( 96, 224 )
+position = Vector2( 352, 224 )
 
 [node name="Player2Position" type="Node2D" parent="." index="15"]
-position = Vector2( 160, 224 )
+position = Vector2( 304, 224 )
 
 [node name="Player3Position" type="Node2D" parent="." index="16"]
-position = Vector2( 224, 224 )
+position = Vector2( 256, 224 )
 
 [node name="Player4Position" type="Node2D" parent="." index="17"]
-position = Vector2( 288, 224 )
+position = Vector2( 208, 224 )
 
 [node name="AutoCreatePlayers" parent="." index="18" instance=ExtResource( 19 )]
 spawn_players_flag = false
