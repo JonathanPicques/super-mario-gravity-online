@@ -46,7 +46,9 @@ func start_power():
 
 	# Check if there is a scarecrow to use as default target
 	if target_player_node == null and type != FireballType.basic:
-		target_player_node = Game.map_node.get_node("Scarecrow").Target
+		var scarecrow_node = Game.map_node.get_node("Scarecrow")
+		if scarecrow_node != null:
+			target_player_node = scarecrow_node.Target
 		
 	#play_launch()
 

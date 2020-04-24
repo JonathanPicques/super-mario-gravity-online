@@ -28,4 +28,4 @@ func load_map_data(item_data):
 	door_to_node = get_parent().get_node(door_to_node_path)
 
 func quadtree_item_rect() -> Rect2:
-	return Rect2(position, Vector2(32, 48))
+	return Rect2(position, Vector2(32, 64))

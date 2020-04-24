@@ -205,6 +205,8 @@ func move_map():
 
 # draw_map draws cells on the mouse.
 # @impure
+var filled = false
+var cleared = false
 func draw_map():
 	# compute mouse position
 	var mouse_pos := get_viewport().get_mouse_position()
@@ -220,10 +222,12 @@ func draw_map():
 		History.start()
 	# If mouse left is just released: commit placeholder(s)
 	if Input.is_action_just_released("ui_click"):
+		filled = true
 		History.commit()
 		History.start()
 	# If mouse right is just released: commit cleared cell(s)
 	if Input.is_action_just_released("ui_click_bis"):
+		cleared = true
 		History.commit()
 		History.start()
 	

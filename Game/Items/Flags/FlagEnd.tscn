@@ -9,7 +9,7 @@ atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 640, 64 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 15, 23 )
+extents = Vector2( 16, 24 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "Wave"
@@ -34,19 +34,19 @@ script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
 visible = true
-position = Vector2( -24, -64 )
+position = Vector2( -24, -16 )
 texture = SubResource( 1 )
 hframes = 10
 frame = 8
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
+position = Vector2( 8, 16 )
 monitorable = false
 collision_layer = 32
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-visible = false
-position = Vector2( 2, -23 )
+position = Vector2( 8, 8 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
