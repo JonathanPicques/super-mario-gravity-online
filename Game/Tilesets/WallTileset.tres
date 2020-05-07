@@ -2019,19 +2019,19 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 8/navigation_offset = Vector2( 0, 0 )
 8/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 209 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 210 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 211 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -2056,19 +2056,19 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 9/navigation_offset = Vector2( 0, 0 )
 9/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 212 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 213 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 214 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
@@ -2093,19 +2093,19 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 10/navigation_offset = Vector2( 0, 0 )
 10/shapes = [ {
 "autotile_coord": Vector2( 2, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 103 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 104 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 105 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )

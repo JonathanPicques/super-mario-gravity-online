@@ -12,7 +12,6 @@ const item_scenes := {
 	"PowerBox": preload("res://Game/Items/PowerBox/PowerBox.tscn"),
 	"SpikeBall": preload("res://Game/Items/SpikeBall/SpikeBall.tscn"),
 	"StartCage": preload("res://Game/Items/StartCage/StartCage.tscn"),
-	"FlagStart": preload("res://Game/Items/Flags/FlagStart.tscn"),
 	"ColorBlock": preload("res://Game/Items/ColorSwitch/ColorBlock.tscn"),
 	"SolidBlock": preload("res://Game/Items/SolidBlock/HSolidBlock.tscn"),
 	"Trampoline": preload("res://Game/Items/Trampoline/Trampoline.tscn"),
