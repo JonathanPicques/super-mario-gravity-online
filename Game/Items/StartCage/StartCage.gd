@@ -20,4 +20,4 @@ func quadtree_item_rect() -> Rect2:
 
 func _on_Timer_timeout():
 	$AnimatedSprite.play("open")
-	$Door.queue_free()
+	$Door/CollisionShape2D.disabled = true
