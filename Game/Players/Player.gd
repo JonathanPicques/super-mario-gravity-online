@@ -603,8 +603,11 @@ func fx_under_water(on = true):
 
 # @impure
 func fx_shake_screen():
-	var camera = Game.game_mode_node.get_player_screen_camera(player.id)
-	camera.get_node("ScreenShake").start_shake()
+	if Game.game_mode_node == null:
+		print("Can't apply screen shake outside of a game mode.'")
+	else:
+		var camera = Game.game_mode_node.get_player_screen_camera(player.id)
+		camera.get_node("ScreenShake").start_shake()
 
 # @impure
 func fx_spawn_dust_particles(position: Vector2):

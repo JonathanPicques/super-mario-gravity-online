@@ -25,7 +25,7 @@ const vec3 base_skin_color1 = vec3(0.35294117647, 0.5725490196, 0.26666666666);
 const vec3 base_skin_color2 = vec3(0.36470588235, 0.70980392156, 0.23137254902);
 const vec3 base_skin_color3 = vec3(0.49019607843, 0.80392156862, 0.2);
 
-const float TOLERANCE = 0.12; 
+const float TOLERANCE = 0.1; 
 
 bool almost_equal(vec3 a, vec3 b, float tolerance) {
 	vec3 result = abs(a - b);
