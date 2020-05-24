@@ -1,8 +1,9 @@
 extends PowerNode
 class_name PowerFireballNode
 
-const FireballExplosionScene := preload("res://Game/Effects/Particles/FireballExplosion.tscn")
-const FireballLaunchcene := preload("res://Game/Effects/Particles/FireballLaunch.tscn")
+const FireballExplosionScene := preload("res://Game/Effects/Particles/FireballBasicExplosion.tscn")
+const FireballFollowExplosionScene := preload("res://Game/Effects/Particles/FireballFollowExplosion.tscn")
+const FireballGhostExplosionScene := preload("res://Game/Effects/Particles/FireballGhostExplosion.tscn")
 
 enum FireballType { basic, follow, follow_ghost }
 const SPEED := 300.0
@@ -15,7 +16,7 @@ onready var FireballLaunchPoint: Node2D = $LaunchPoint
 export(FireballType) var type = FireballType.basic
 
 var this: KinematicBody2D = self as Object
-var target_player_node: PlayerNode
+var target_player_node: Node2D
 
 # @impure
 func _ready():
@@ -42,8 +43,13 @@ func start_power():
 			FireballType.follow_ghost: target_player = MultiplayerManager.get_players(MultiplayerManager.SortPlayerMethods.ranked)[0]
 		if target_player and target_player.id != player_node.player.id:
 			target_player_node = MultiplayerManager.get_player_node(target_player.id)
-	
-	play_launch()
+
+	# Check if there is a scarecrow to use as default target
+	if target_player_node == null and type != FireballType.basic:
+		target_player_node = Game.map_node.get_node("Scarecrow")
+		print("Target is " + target_player_node.name)
+		
+	#play_launch()
 
 # @impure
 # @override
@@ -60,9 +66,10 @@ func process_power(delta: float):
 			if collision.collider == target_player_node:
 				play_explosion()
 				return true
-		if type != FireballType.follow_ghost: # if we hit something, destroy the fireball
-			play_explosion()
-			return true
+#		if type != FireballType.follow_ghost: # if we hit something, destroy the fireball
+		# TODO: if not first player or not ghost
+		play_explosion()
+		return true
 	if FireballTimer.is_stopped():
 		play_explosion()
 		return true
@@ -74,14 +81,19 @@ func finish_power():
 	# TODO: reattach to player to clear warning (revert detach from player) from Player process_powers
 	FireballTimer.stop()
 
-func play_launch():
-	var node := FireballLaunchcene.instance()
-	node.position = FireballLaunchPoint.global_position
-	node.rotation = PI if player_node.direction == -1 else 0.0
-	Game.map_node.ParticleSlot.add_child(node)
+#func play_launch():
+#	var node := FireballLaunchcene.instance()
+#	node.position = FireballLaunchPoint.global_position
+#	node.rotation = PI if player_node.direction == -1 else 0.0
+#	Game.map_node.ParticleSlot.add_child(node)
 
 # @impure
 func play_explosion():
-	var fireball_explosion_node := FireballExplosionScene.instance()
-	fireball_explosion_node.position = FireballExplosionPoint.global_position
-	Game.map_node.ParticleSlot.add_child(fireball_explosion_node)
+	var fireball_explosion_node = null
+	match type:
+		FireballType.basic: fireball_explosion_node = FireballExplosionScene.instance()
+		FireballType.follow: fireball_explosion_node = FireballFollowExplosionScene.instance()
+		FireballType.follow_ghost: fireball_explosion_node = FireballGhostExplosionScene.instance()
+	if fireball_explosion_node != null:
+		fireball_explosion_node.position = FireballExplosionPoint.global_position
+		Game.map_node.ParticleSlot.add_child(fireball_explosion_node)

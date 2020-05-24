@@ -434,7 +434,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="StreamTexture" id=143]
-load_path = "res://.import/GardenTileset.png-d09d2aca3f7d06a5926d99683dc41f6d.stex"
 
 [sub_resource type="ConvexPolygonShape2D" id=144]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )

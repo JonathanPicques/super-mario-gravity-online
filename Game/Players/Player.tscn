@@ -271,7 +271,7 @@ visible = false
 material = SubResource( 5 )
 position = Vector2( -2, -16 )
 frames = SubResource( 24 )
-frame = 4
+frame = 15
 speed_scale = 5.0
 playing = true
 

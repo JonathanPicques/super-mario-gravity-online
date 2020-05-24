@@ -500,6 +500,9 @@ func is_timer_finished() -> bool:
 # @impure
 # @async
 func grab_power(power_id: int):
+	# debug
+	print("Grab power " + PowersManager.Powers[power_id].name)
+	
 	# create power (and hud) node
 	power_node = PowersManager.Powers[power_id].scene.instance()
 	power_hud_node = PowersManager.Powers[power_id].hud_scene.instance()

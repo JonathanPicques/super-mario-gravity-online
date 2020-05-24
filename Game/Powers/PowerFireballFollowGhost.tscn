@@ -120,15 +120,16 @@ animations = [ {
 } ]
 
 [node name="PowerFireballFollowGhost" instance=ExtResource( 1 )]
+collision_mask = 2
 type = 2
 
-[node name="AnimatedSprite" parent="." index="2"]
+[node name="AnimatedSprite" parent="." index="3"]
 visible = false
-frame = 2
+frame = 14
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="." index="4"]
 position = Vector2( 0, -48 )
 frames = SubResource( 28 )
-frame = 23
+frame = 22
 speed_scale = 6.0
 playing = true
