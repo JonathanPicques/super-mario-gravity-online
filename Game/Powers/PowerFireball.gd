@@ -46,8 +46,7 @@ func start_power():
 
 	# Check if there is a scarecrow to use as default target
 	if target_player_node == null and type != FireballType.basic:
-		target_player_node = Game.map_node.get_node("Scarecrow")
-		print("Target is " + target_player_node.name)
+		target_player_node = Game.map_node.get_node("Scarecrow").Target
 		
 	#play_launch()
 
@@ -57,7 +56,7 @@ func process_power(delta: float):
 	# update the hud
 	set_hud_progress(FireballTimer.time_left / FireballTimer.wait_time)
 	# move the fireball towards its target (or straight if no target)
-	var velocity := ((target_player_node.position - position).normalized() * SPEED * delta) if is_instance_valid(target_player_node) else Vector2(SPEED * delta * cos(rotation), SPEED * delta * sin(rotation))
+	var velocity := ((target_player_node.global_position - position).normalized() * SPEED * delta) if is_instance_valid(target_player_node) else Vector2(SPEED * delta * cos(rotation), SPEED * delta * sin(rotation))
 	var collision := this.move_and_collide(velocity)
 	rotation = velocity.angle()
 	if collision:
@@ -66,6 +65,9 @@ func process_power(delta: float):
 			if collision.collider == target_player_node:
 				play_explosion()
 				return true
+		if collision.collider.get_parent().get_parent() is ScarecrowNode:
+			var scarecrow_node = collision.collider.get_parent().get_parent()
+			scarecrow_node.apply_death(global_position)
 #		if type != FireballType.follow_ghost: # if we hit something, destroy the fireball
 		# TODO: if not first player or not ghost
 		play_explosion()

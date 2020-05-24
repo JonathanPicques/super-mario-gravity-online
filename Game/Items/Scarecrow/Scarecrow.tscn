@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game/Items/Scarecrow/Textures/Scarecrow.png" type="Texture" id=1]
+[ext_resource path="res://Game/Items/Scarecrow/Scarecrow.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -23,8 +24,12 @@ tracks/0/keys = {
 }
 
 [node name="Scarecrow" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="Body" type="Node2D" parent="."]
+
+[node name="Target" type="Node2D" parent="Body"]
+position = Vector2( 32, 32 )
 
 [node name="Sprite" type="Sprite" parent="Body"]
 position = Vector2( 32, 36 )
@@ -42,3 +47,8 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Move"
 anims/Move = SubResource( 2 )
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

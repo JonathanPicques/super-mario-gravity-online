@@ -248,7 +248,7 @@ position = Vector2( -230, 240 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="DecorSlot" index="13"]
 position = Vector2( -1214, 160 )
 frames = SubResource( 14 )
-frame = 2
+frame = 4
 speed_scale = 4.0
 playing = true
 
@@ -256,7 +256,7 @@ playing = true
 position = Vector2( 560, 184 )
 scale = Vector2( 0.70625, 0.70625 )
 frames = SubResource( 31 )
-frame = 1
+frame = 11
 speed_scale = 4.0
 playing = true
 flip_h = true
