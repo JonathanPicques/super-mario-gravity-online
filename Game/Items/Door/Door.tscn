@@ -71,6 +71,7 @@ hframes = 4
 [node name="Target" type="Node2D" parent="." groups=[
 "Door",
 ]]
+position = Vector2( 16, 64 )
 
 [node name="Area2D" type="Area2D" parent="." groups=[
 "Door",
