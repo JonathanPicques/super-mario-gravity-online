@@ -65,5 +65,5 @@ type = 1
 [node name="AnimatedSprite" parent="." index="3"]
 position = Vector2( 0, 0 )
 frames = SubResource( 13 )
-frame = 9
+frame = 0
 speed_scale = 6.0
