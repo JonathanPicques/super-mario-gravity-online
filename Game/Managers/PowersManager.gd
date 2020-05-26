@@ -3,19 +3,9 @@ class_name PowersManagerNode
 
 onready var Powers := [
 	{
-		"name": "fireball",
-		"scene": preload("res://Game/Powers/PowerFireballBasic.tscn"),
-		"hud_scene": preload("res://Game/Powers/PowerFireballBasicHUD.tscn"),
-	},
-	{
 		"name": "windblow",
 		"scene": preload("res://Game/Powers/PowerFireballFollow.tscn"),
 		"hud_scene": preload("res://Game/Powers/PowerFireballFollowHUD.tscn"),
-	},
-	{
-		"name": "thunderblast",
-		"scene": preload("res://Game/Powers/PowerFireballFollowGhost.tscn"),
-		"hud_scene": preload("res://Game/Powers/PowerFireballFollowGhostHUD.tscn"),
 	},
 ]
 

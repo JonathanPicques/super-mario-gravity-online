@@ -125,11 +125,11 @@ type = 2
 
 [node name="AnimatedSprite" parent="." index="3"]
 visible = false
-frame = 14
+frame = 7
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="." index="4"]
 position = Vector2( 0, -48 )
 frames = SubResource( 28 )
-frame = 22
+frame = 12
 speed_scale = 6.0
 playing = true
