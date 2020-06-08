@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Game/Modes/Race/Textures/HUDBackground.png" type="Texture" id=1]
+[ext_resource path="res://Game/Modes/Race/Textures/HudFlagBackground.png" type="Texture" id=1]
 
 [node name="PowerHUD" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
+modulate = Color( 0.890196, 0.352941, 0.32549, 1 )
 texture = ExtResource( 1 )
 centered = false
 
@@ -13,7 +14,7 @@ margin_left = 5.0
 margin_top = 30.0
 margin_right = 27.0
 margin_bottom = 32.0
-color = Color( 0.658824, 0.509804, 0.34902, 1 )
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -23,7 +24,6 @@ margin_left = 5.0
 margin_top = 30.0
 margin_right = 27.0
 margin_bottom = 32.0
-color = Color( 0.223529, 0.309804, 0.756863, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

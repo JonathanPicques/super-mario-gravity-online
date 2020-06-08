@@ -2,7 +2,11 @@ extends DrawerNode
 
 const MAX_WATER_CELLS := 200
 
-export var tileset_type := "Water"
+export var value_type := "Water"
+
+func _ready():
+	print("Liquid icon")
+#	$Icon.texture = MapManager.get_item_thumbnail(value_type, 0)
 
 # @override
 func action(type: int, pos: Vector2, drawer_index: int):
@@ -29,7 +33,7 @@ func action(type: int, pos: Vector2, drawer_index: int):
 
 # @override
 func fill_cell(pos: Vector2):
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	var x = cell_position.x
 	var y = cell_position.y
@@ -46,20 +50,20 @@ func fill_cell(pos: Vector2):
 
 # @override
 func clear_cell(pos: Vector2):
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	# creator.Quadtree.erase_item(pos)
 	tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
 
 # @override
 func is_cell_free(pos: Vector2) -> bool:
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	return tileset.tilemap_node.get_cellv(cell_position) == TileMap.INVALID_CELL
 
 # @override
 func can_draw_cell(pos: Vector2) -> bool:
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	return tileset.tilemap_node.get_cellv(cell_position) == TileMap.INVALID_CELL
 

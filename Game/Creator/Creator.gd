@@ -7,8 +7,20 @@ onready var History: HistoryNode = $History
 onready var Quadtree: QuadtreeNode = $Quadtree
 onready var HUDQuadtree: QuadtreeNode = $HUDQuadtree
 
-onready var Drawers: Array = $GUILayer/GUI/Drawers.get_children()
 onready var TopButtons: Array = $GUILayer/GUI/TopBar.get_children()
+
+var DrawersConfig = [
+	{"scene": "res://Game/Creator/Drawers/TilemapDrawer.tscn", "type": "Wall", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/ItemDrawer.tscn", "type": "ColorSwitch", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/ItemDrawer.tscn", "type": "ColorBlock", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/ItemDrawer.tscn", "type": "PowerBox", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/ItemDrawer.tscn", "type": "SpikeBall", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/ItemDrawer.tscn", "type": "Spikes", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/ItemDrawer.tscn", "type": "Trampoline", "variation": 0},
+	{"scene": "res://Game/Creator/Drawers/LiquidDrawer.tscn", "type": "Water", "variation": 0},
+]
+
+var Drawers = []
 onready var DrawersBar: Sprite = $GUILayer/GUI/DrawersBar
 onready var CreatorCamera: Camera2D = $GridContainer/Control1/ViewportContainer1/Viewport1/Camera2D
 
@@ -26,6 +38,17 @@ var current_cell_position := Vector2(0, 0)
 # @impure
 func _ready():
 	set_process(false)
+	var index = 1
+	$GUILayer/GUI/Drawers.columns = DrawersConfig.size()
+	for drawerConfig in DrawersConfig:
+		var drawer = load(drawerConfig["scene"]).instance()
+		drawer.value_type = drawerConfig["type"]
+		drawer.connect("pressed", self, "_on_ItemButton%d_pressed" % index)
+		
+		$GUILayer/GUI/Drawers.add_child(drawer)
+		Drawers.append(drawer)
+		index += 1
+
 	set_focus_neighbors()
 
 # @impure
@@ -71,7 +94,7 @@ func init():
 	Tilesets["Wall"] = {"name": "Wall", "tile": 0, "icon": preload("res://Game/Creator/Textures/Drawers/WallIcon.png"), "tilemap_node": Game.map_node.Wall}
 	Tilesets["Water"] = {"name": "Water", "tile": 16, "icon": preload("res://Game/Creator/Textures/Drawers/WaterIcon.png"), "tilemap_node": Game.map_node.Water}
 	Tilesets["Oneway"] = {"name": "Oneway", "tile": 8, "icon": preload("res://Game/Creator/Textures/Drawers/OnewayIcon.png"), "tilemap_node": Game.map_node.Oneway}
-	Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Drawers/StickyIcon.png"), "tilemap_node": Game.map_node.Sticky}
+	#Tilesets["Sticky"] = {"name": "Sticky", "tile": 8, "icon": preload("res://Game/Creator/Textures/Drawers/StickyIcon.png"), "tilemap_node": Game.map_node.Sticky}
 	# construct quadtree from existing doors
 	for map_door_node in Game.map_node.DoorSlot.get_children():
 		Quadtree.add_map_item(map_door_node, map_door_node.get_map_data().type)
@@ -137,6 +160,7 @@ func set_state(new_state: int):
 func select_drawer(drawer_index: int):
 	set_state(State.drawing)
 	Drawers[drawer_index].grab_focus()
+	print("Select drawer ", drawer_index, Drawers[drawer_index])
 	current_drawer_index = drawer_index
 
 # set_focus_neighbors set the GUI buttons focus neighbors.
@@ -365,7 +389,7 @@ func _on_ThemeButton_pressed():
 func _on_ModeButton_pressed():
 	print("Change mode")
 
-func _on_ItemButton_pressed(): select_drawer(0)
+func _on_ItemButton1_pressed(): select_drawer(0)
 func _on_ItemButton2_pressed(): select_drawer(1)
 func _on_ItemButton3_pressed(): select_drawer(2)
 func _on_ItemButton4_pressed(): select_drawer(3)

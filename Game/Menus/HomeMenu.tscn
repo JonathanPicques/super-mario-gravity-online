@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://Game/Maps/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Menus/HomeMenu.gd" type="Script" id=2]
@@ -26,7 +26,6 @@
 [ext_resource path="res://Game/Items/GardenDecor/Textures/Waterfall.png" type="Texture" id=25]
 [ext_resource path="res://Game/Items/GardenDecor/Textures/Cow.png" type="Texture" id=26]
 [ext_resource path="res://Game/Items/GardenDecor/Textures/Grass2.png" type="Texture" id=27]
-[ext_resource path="res://Game/Menus/Fonts/PixelFraktur.ttf" type="DynamicFontData" id=28]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/Castle.png-6fdacdc67507724500fa66276ea9370f.stex"
@@ -177,9 +176,10 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=33]
-size = 40
-outline_color = Color( 0.188235, 0.392157, 0.392157, 1 )
-font_data = ExtResource( 28 )
+size = 38
+outline_size = 2
+outline_color = Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=34]
 outline_size = 1
@@ -248,7 +248,7 @@ position = Vector2( -230, 240 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="DecorSlot" index="13"]
 position = Vector2( -1214, 160 )
 frames = SubResource( 14 )
-frame = 8
+frame = 9
 speed_scale = 4.0
 playing = true
 
@@ -256,7 +256,6 @@ playing = true
 position = Vector2( 560, 184 )
 scale = Vector2( 0.70625, 0.70625 )
 frames = SubResource( 31 )
-frame = 7
 speed_scale = 4.0
 playing = true
 flip_h = true
@@ -305,8 +304,8 @@ margin_top = 63.6559
 margin_right = 384.0
 margin_bottom = 103.656
 custom_fonts/font = SubResource( 33 )
-custom_colors/font_color = Color( 0.168627, 0.168627, 0.168627, 1 )
-text = "Frogkiss"
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "FROG KISS"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

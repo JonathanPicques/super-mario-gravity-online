@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Game/Modes/GameMode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Creator/Textures/SettingsIcon.png" type="Texture" id=2]
@@ -12,29 +12,12 @@
 [ext_resource path="res://Game/Creator/Textures/DrawerBar.png" type="Texture" id=10]
 [ext_resource path="res://Game/Creator/Textures/PlayIcon.png" type="Texture" id=11]
 [ext_resource path="res://Game/Creator/Textures/CloseIcon.png" type="Texture" id=12]
-[ext_resource path="res://Game/Items/PowerBox/Textures/Idle.png" type="Texture" id=13]
-[ext_resource path="res://Game/Creator/Textures/DrawerBoxSelected.png" type="Texture" id=14]
 [ext_resource path="res://Game/Creator/Textures/OpenIcon.png" type="Texture" id=15]
-[ext_resource path="res://Game/Items/Door/Textures/Door.png" type="Texture" id=16]
 [ext_resource path="res://Game/Creator/Quadtree.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Game/Creator/History.gd" type="Script" id=18]
 [ext_resource path="res://Game/Creator/Textures/GridPattern.png" type="Texture" id=19]
-[ext_resource path="res://Game/Items/Spikes/Textures/Spike.png" type="Texture" id=20]
-[ext_resource path="res://Game/Items/SpikeBall/Textures/SpikeBall.png" type="Texture" id=21]
 [ext_resource path="res://Game/Creator/Textures/SaveIcon.png" type="Texture" id=22]
-[ext_resource path="res://Game/Creator/Textures/Drawers/TrampolineIcon.png" type="Texture" id=23]
-[ext_resource path="res://Game/Creator/Textures/Drawers/WaterIcon.png" type="Texture" id=24]
-[ext_resource path="res://Game/Items/SpikeBall/Textures/Base.png" type="Texture" id=25]
-[ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorBlockOffAmber.png" type="Texture" id=26]
-[ext_resource path="res://Game/Creator/Drawers/LiquidDrawer.gd" type="Script" id=27]
-[ext_resource path="res://Game/Creator/Textures/Drawers/OnewayIcon.png" type="Texture" id=28]
-[ext_resource path="res://Game/Items/ColorSwitch/Textures/ColorSwitchOffAmber.png" type="Texture" id=29]
-[ext_resource path="res://Game/Creator/Textures/Drawers/StickyIcon.png" type="Texture" id=30]
 [ext_resource path="res://Game/Creator/Creator.gd" type="Script" id=31]
-[ext_resource path="res://Game/Creator/Textures/DrawerBox.png" type="Texture" id=32]
-[ext_resource path="res://Game/Creator/Textures/Drawers/WallIcon.png" type="Texture" id=33]
-[ext_resource path="res://Game/Creator/Drawers/TilemapDrawer.gd" type="Script" id=34]
-[ext_resource path="res://Game/Creator/Drawers/ItemDrawer.gd" type="Script" id=35]
 [ext_resource path="res://Game/Creator/Textures/DeleteIcon.png" type="Texture" id=36]
 [ext_resource path="res://Game/Creator/Textures/HomeIcon.png" type="Texture" id=37]
 [ext_resource path="res://Game/Menus/Textures/ThemeButtonFocused.png" type="Texture" id=38]
@@ -260,6 +243,7 @@ region_rect = Rect2( 0, 0, 512, 288 )
 [node name="PlayerPosition" type="AnimatedSprite" parent="GUILayer/GUI" index="1"]
 position = Vector2( 32, 128 )
 frames = SubResource( 21 )
+frame = 8
 speed_scale = 4.0
 playing = true
 centered = false
@@ -418,238 +402,19 @@ position = Vector2( 256, 272 )
 texture = ExtResource( 10 )
 script = ExtResource( 45 )
 
-[node name="Drawers" type="Control" parent="GUILayer/GUI" index="4"]
-margin_left = 102.0
-margin_top = 261.0
-margin_right = 433.0
-margin_bottom = 283.0
+[node name="Drawers" type="GridContainer" parent="GUILayer/GUI" index="4"]
+anchor_left = 6.4
+anchor_top = 7.125
+anchor_right = 6.4
+anchor_bottom = 7.125
+margin_left = -206.0
+margin_top = -25.0
+margin_right = 206.0
+margin_bottom = -3.05176e-05
+columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ItemButton" type="TextureButton" parent="GUILayer/GUI/Drawers" index="0"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = -10.0
-margin_right = -37.65
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 34 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 33 )
-
-[node name="ItemButton2" type="TextureButton" parent="GUILayer/GUI/Drawers" index="1"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 17.0
-margin_right = -10.65
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton2" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 29 )
-
-[node name="ItemButton3" type="TextureButton" parent="GUILayer/GUI/Drawers" index="2"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 44.0
-margin_right = 16.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "ColorBlock"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton3" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 26 )
-
-[node name="ItemButton4" type="TextureButton" parent="GUILayer/GUI/Drawers" index="3"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 71.0
-margin_right = 43.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "PowerBox"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton4" index="0"]
-position = Vector2( 11, 11 )
-scale = Vector2( 0.791667, 0.791667 )
-texture = ExtResource( 13 )
-hframes = 27
-
-[node name="ItemButton5" type="TextureButton" parent="GUILayer/GUI/Drawers" index="4"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 98.0
-margin_right = 70.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "SolidBlock"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton5" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 25 )
-
-[node name="ItemButton6" type="TextureButton" parent="GUILayer/GUI/Drawers" index="5"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 126.0
-margin_right = 98.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "SpikeBall"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton6" index="0"]
-position = Vector2( 11, 11 )
-scale = Vector2( 0.714286, 0.714286 )
-texture = ExtResource( 21 )
-
-[node name="ItemButton7" type="TextureButton" parent="GUILayer/GUI/Drawers" index="6"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 154.0
-margin_right = 126.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "Spikes"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton7" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 20 )
-hframes = 20
-
-[node name="ItemButton8" type="TextureButton" parent="GUILayer/GUI/Drawers" index="7"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 182.0
-margin_right = 154.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "Trampoline"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton8" index="0"]
-position = Vector2( 11, 7 )
-scale = Vector2( 0.642857, 0.642857 )
-texture = ExtResource( 23 )
-
-[node name="ItemButton9" type="TextureButton" parent="GUILayer/GUI/Drawers" index="8"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 210.0
-margin_right = 182.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 27 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton9" index="0"]
-position = Vector2( 11, 11 )
-scale = Vector2( 0.874999, 0.874999 )
-texture = ExtResource( 24 )
-
-[node name="ItemButton10" type="TextureButton" parent="GUILayer/GUI/Drawers" index="9"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 238.0
-margin_right = 255.2
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 34 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-tileset_type = "Sticky"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton10" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 30 )
-
-[node name="ItemButton11" type="TextureButton" parent="GUILayer/GUI/Drawers" index="10"]
-anchor_right = 0.15
-anchor_bottom = 0.15
-margin_left = 266.0
-margin_right = 239.35
-margin_bottom = 18.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 34 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-tileset_type = "Oneway"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton11" index="0"]
-position = Vector2( 11, 11 )
-texture = ExtResource( 28 )
-
-[node name="ItemButton12" type="TextureButton" parent="GUILayer/GUI/Drawers" index="11"]
-anchor_left = 0.00906344
-anchor_top = 0.136364
-anchor_right = 0.159063
-anchor_bottom = 0.286364
-margin_left = 291.0
-margin_top = -3.0
-margin_right = 263.35
-margin_bottom = 15.7
-texture_normal = ExtResource( 32 )
-texture_focused = ExtResource( 14 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-item_type = "Door"
-
-[node name="Icon" type="Sprite" parent="GUILayer/GUI/Drawers/ItemButton12" index="0"]
-position = Vector2( 11, 9 )
-scale = Vector2( 0.3125, 0.3125 )
-texture = ExtResource( 16 )
-hframes = 4
 
 [node name="InfoBubble" type="NinePatchRect" parent="GUILayer/GUI" index="5"]
 visible = false
@@ -1095,18 +860,6 @@ texture = ExtResource( 37 )
 [connection signal="pressed" from="GUILayer/GUI/TopBar/RedoButton" to="." method="_on_RedoButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/InfoButton" to="." method="_on_InfoButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/TopBar/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton" to="." method="_on_ItemButton_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton2" to="." method="_on_ItemButton2_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton3" to="." method="_on_ItemButton3_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton4" to="." method="_on_ItemButton4_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton5" to="." method="_on_ItemButton5_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton6" to="." method="_on_ItemButton6_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton7" to="." method="_on_ItemButton7_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton8" to="." method="_on_ItemButton8_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton9" to="." method="_on_ItemButton9_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton10" to="." method="_on_ItemButton10_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton11" to="." method="_on_ItemButton11_pressed"]
-[connection signal="pressed" from="GUILayer/GUI/Drawers/ItemButton12" to="." method="_on_ItemButton12_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/SettingsPopup/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/SettingsPopup/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="GUILayer/GUI/SettingsPopup/OpenButton" to="." method="_on_OpenButton_pressed"]

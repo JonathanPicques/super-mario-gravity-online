@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpikeBallIcon.png-bf40981e6e29b35dbe418e60d90eed70.stex"
+path="res://.import/HudFlagBackground.png-839926f6ed2e3b12abb4d8d0cd77179e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Drawers/SpikeBallIcon.png"
-dest_files=[ "res://.import/SpikeBallIcon.png-bf40981e6e29b35dbe418e60d90eed70.stex" ]
+source_file="res://Game/Modes/Race/Textures/HudFlagBackground.png"
+dest_files=[ "res://.import/HudFlagBackground.png-839926f6ed2e3b12abb4d8d0cd77179e.stex" ]
 
 [params]
 

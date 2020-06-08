@@ -1,6 +1,10 @@
 extends DrawerNode
 
-export var tileset_type := "Wall"
+export var value_type := "Wall"
+
+func _ready():
+	print("TODO: tilemap icon")
+#	$Icon.texture = MapManager.get_item_thumbnail(value_type, 0)
 
 # @override
 func action(type: int, pos: Vector2, drawer_index: int):
@@ -19,10 +23,10 @@ func action(type: int, pos: Vector2, drawer_index: int):
 
 # @override
 func fill_cell(pos: Vector2):
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	creator.Quadtree.add_tile(pos, tileset)
-	if tileset_type == "Oneway":
+	if value_type == "Oneway":
 		MapManager.apply_oneway_autotile(Game.map_node, cell_position.x, cell_position.y, tileset.tile + creator.get_theme())
 	else:
 		tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, tileset.tile + creator.get_theme())
@@ -30,7 +34,7 @@ func fill_cell(pos: Vector2):
 
 # @override
 func clear_cell(pos: Vector2):
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	creator.Quadtree.erase_item(pos)
 	tileset.tilemap_node.set_cell(cell_position.x, cell_position.y, TileMap.INVALID_CELL)
@@ -38,7 +42,7 @@ func clear_cell(pos: Vector2):
 
 # @override
 func is_cell_free(pos: Vector2):
-	var tileset = creator.Tilesets[tileset_type]
+	var tileset = creator.Tilesets[value_type]
 	var cell_position = tileset.tilemap_node.world_to_map(pos)
 	return tileset.tilemap_node.get_cellv(cell_position) == TileMap.INVALID_CELL
 

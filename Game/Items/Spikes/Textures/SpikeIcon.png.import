@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/StickyIcon.png-24e834a4a5f48e458ece92a9d836c16a.stex"
+path="res://.import/SpikeIcon.png-13abb4139178bc2a5ba9ee444c0c9a45.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Drawers/StickyIcon.png"
-dest_files=[ "res://.import/StickyIcon.png-24e834a4a5f48e458ece92a9d836c16a.stex" ]
+source_file="res://Game/Items/Spikes/Textures/SpikeIcon.png"
+dest_files=[ "res://.import/SpikeIcon.png-13abb4139178bc2a5ba9ee444c0c9a45.stex" ]
 
 [params]
 

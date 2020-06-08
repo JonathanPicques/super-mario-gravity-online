@@ -36,7 +36,7 @@ func _ready():
 # @impure
 func _process(delta: float):
 	if ui_player and Game.game_mode_node.started:
-		$Ranking.text = "#%d" % (ui_player.rank + 1)
+		$Ranking.text = "%d" % (ui_player.rank + 1)
 		display_power_hud()
 
 # @impure

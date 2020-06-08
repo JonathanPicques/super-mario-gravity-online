@@ -21,6 +21,41 @@ const item_scenes := {
 	"BigSolidBlock": preload("res://Game/Items/SolidBlock/BigSolidBlock.tscn"),
 }
 
+const item_thumbnails := {
+	"Spikes": [preload("res://Game/Items/Spikes/Textures/SpikeIcon.png")],
+	"PowerBox": [preload("res://Game/Items/PowerBox/Textures/PowerboxIcon.png")],
+	"SpikeBall": [preload("res://Game/Items/SpikeBall/Textures/SpikeBall.png")],
+	"ColorBlock": [
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOffAmber.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOffAmethyst.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOffDiamond.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOffEmerald.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOffQuartz.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOffRuby.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnAmber.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnAmethyst.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnDiamond.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnEmerald.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnQuartz.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorBlockOnRuby.png")
+	],
+	"ColorSwitch": [
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOffAmber.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOffAmethyst.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOffDiamond.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOffEmerald.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOffQuartz.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOffRuby.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOnAmber.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOnAmethyst.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOnDiamond.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOnEmerald.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOnQuartz.png"),
+		preload("res://Game/Items/ColorSwitch/Textures/ColorSwitchOnRuby.png")
+	],
+	"Trampoline": [preload("res://Game/Items/Spikes/Textures/SpikeIcon.png")],
+}
+
 onready var Backgrounds1 := [
 	preload("res://Game/Maps/Textures/GardenBackground1.png"),
 	preload("res://Game/Maps/Textures/CastleBackground1.png"),
@@ -50,6 +85,9 @@ func snap_position(vec: Vector2) -> Vector2:
 # @impure
 func create_item_node(item_type: String) -> Node2D:
 	return item_scenes[item_type].instance()
+
+func get_item_thumbnail(item_type: String, variation: int) -> Texture:
+	return item_thumbnails[item_type][variation]
 
 func is_default():
 	return current_map["name"] == "Default.json" and current_map["admin"] == true

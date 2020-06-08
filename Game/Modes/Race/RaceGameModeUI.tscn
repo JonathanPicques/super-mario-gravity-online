@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Modes/Race/RaceGameModeUI.gd" type="Script" id=1]
 [ext_resource path="res://Game/Menus/Fonts/HUDFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Game/Modes/Race/Textures/HUDBackground.png" type="Texture" id=3]
+[ext_resource path="res://Game/Modes/Race/Textures/HudFlagBackground.png" type="Texture" id=3]
 [ext_resource path="res://Game/Menus/Textures/MiniMap.png" type="Texture" id=4]
 [ext_resource path="res://Game/Menus/Fonts/Pixellari.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Game/Modes/Race/TimerLabel.gd" type="Script" id=7]
@@ -21,6 +21,7 @@ __meta__ = {
 }
 
 [node name="HUDBackground" type="Sprite" parent="."]
+modulate = Color( 0.890196, 0.352941, 0.32549, 1 )
 position = Vector2( 32, 24 )
 texture = ExtResource( 3 )
 
@@ -30,7 +31,7 @@ margin_top = 8.0
 margin_right = 48.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.133333, 0.133333, 0.133333, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_constants/shadow_offset_y = 2
 text = "1"
 align = 1

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SolidBlockIcon.png-b7eed60070ca52ee3cf08c7b56202c30.stex"
+path="res://.import/PowerboxIcon.png-6a28993a36454240dcf3b4a18d25039d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Creator/Textures/Drawers/SolidBlockIcon.png"
-dest_files=[ "res://.import/SolidBlockIcon.png-b7eed60070ca52ee3cf08c7b56202c30.stex" ]
+source_file="res://Game/Items/PowerBox/Textures/PowerboxIcon.png"
+dest_files=[ "res://.import/PowerboxIcon.png-6a28993a36454240dcf3b4a18d25039d.stex" ]
 
 [params]
 
