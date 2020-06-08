@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Idle.png-9ec23dc23b916a7c8f96b834a47c38e6.stex"
+path="res://.import/Trampoline.png-04e7c25507ae4594d18a4fabde7f009c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/Trampoline/Textures/Idle.png"
-dest_files=[ "res://.import/Idle.png-9ec23dc23b916a7c8f96b834a47c38e6.stex" ]
+source_file="res://Game/Items/Trampoline/Textures/Trampoline.png"
+dest_files=[ "res://.import/Trampoline.png-04e7c25507ae4594d18a4fabde7f009c.stex" ]
 
 [params]
 

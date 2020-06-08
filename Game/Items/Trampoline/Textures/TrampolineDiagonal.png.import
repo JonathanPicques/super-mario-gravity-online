@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Jump (28x28).png-269bd342ead806e05e70dfded101acea.stex"
+path="res://.import/TrampolineDiagonal.png-ea1b22f84b0d91be9336f54e185afb42.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Items/Trampoline/Textures/Jump (28x28).png"
-dest_files=[ "res://.import/Jump (28x28).png-269bd342ead806e05e70dfded101acea.stex" ]
+source_file="res://Game/Items/Trampoline/Textures/TrampolineDiagonal.png"
+dest_files=[ "res://.import/TrampolineDiagonal.png-ea1b22f84b0d91be9336f54e185afb42.stex" ]
 
 [params]
 
