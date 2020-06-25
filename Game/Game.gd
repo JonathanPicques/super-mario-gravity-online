@@ -23,6 +23,7 @@ var transition_nodes := []
 # _ready is called when the game node is ready.
 # @impure
 func _ready():
+#	Engine.time_scale = 0.2
 	scene_node = get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1)
 	# if the opened scene is a map
 	if scene_node is MapNode:
