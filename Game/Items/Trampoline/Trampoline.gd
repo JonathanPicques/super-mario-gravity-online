@@ -37,7 +37,9 @@ func load_map_data(item_data):
 	position.x = item_data["position"][0]
 	position.y = item_data["position"][1]
 	isDiagonal = false
-	if item_data["variation"] == 0:
+	if not ("variation" in item_data):
+		rotation_degrees = item_data["rotation"]
+	elif item_data["variation"] == 0:
 		#$Sprite.texture = Straight
 		rotation_degrees = 0
 	elif item_data["variation"] == 1:
