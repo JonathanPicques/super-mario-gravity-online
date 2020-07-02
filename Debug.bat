@@ -1,7 +1,7 @@
 @echo off
 
 :: Kill process
-TASKKILL.exe /F /IM "Super Mario Gravity Online.exe"
+TASKKILL.exe /F /IM "Frog.exe"
 
 :: Create build folder
 MKDIR "Build"
@@ -9,8 +9,8 @@ MKDIR "Build"
 :: Remove binaries
 DEL /Q "Build\*"
 
-:: Export new Super Mario Gravity Online binary
-"%GODOT_EXECUTABLE%" --export-debug "Windows Desktop" "Build\Super Mario Gravity Online.exe"
+:: Export new binary
+"%GODOT_EXECUTABLE%" --export-debug "Windows Desktop" "Build\Frog.exe"
 
 :: Run client/server
 Dedicated.bat
